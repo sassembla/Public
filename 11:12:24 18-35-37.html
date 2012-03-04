@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1138.23">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1">iOSでのテスト(全4回　各4pageほど)</p>
+<p class="p2"><br></p>
+<p class="p1">a.</p>
+<p class="p1"><span class="Apple-tab-span">	</span>５分でテスト</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>iOSのプロジェクトに組み込み済みのテストについて、解説と実行</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-tab-span">	</span>テストの効能と、自動化について</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>テストの効能は、</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>・今まで作ってきたものがいつ壊れたのかの発見を最速にする</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>・発見時点での改修を可能にする</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>という部分の話。</p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>また、発見速度や効率を上げる為に、Jenkinsでのテスト自動化を行います。</p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p1"><span class="Apple-tab-span">	</span>未来の時間を作り出す/バグを生まれなくする</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>開発で、一番時間を喰っているのは何でしょう、それにテストが効果を発揮します、という話。</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>時間を食うのは、制作の結果、下記が出る為でしょう。</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>・難しくて作れない</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>・作ったものがその意図通りに動かない</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>・意図通りに動くが、副作用でバグが出る</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>で、結局制作しながらのデバッグや、制作後の動作組み合わせによるバグの改修に時間をとられる事になります。</p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>テストを書いて、恒常的に回す事で、</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>バグに取りかかる優先順位を上げ、未来の深刻なバグを軽減できるはずです。</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>これは、やった場合とやらなかった場合で、絶大な差が出ます。</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>テストを書く→常に+xの時間がかかるが、未来のデバッグの時間を減らす</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>テストを書かない→常に未来のデバッグの時間がかかる</p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>テストを書かない利点は、テストを書く損点よりも大きくなり得るでしょうか？</p>
+<p class="p2"><br></p>
+<p class="p1">b.</p>
+<p class="p1"><span class="Apple-tab-span">	</span>むしろテストから書け的な話</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>テストは、仕様を理解していないと書けないという話。</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>→例えば、計算を行うメソッドがあったとして　的な話</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>計算結果を先に書いて、満たすようなものを作ればいい。</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>必要なのは、</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>・何が出来たら完成なのか知っている＝仕様がある事</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>つまりテストが書けない、あるいは書きにくい場合、</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>何をどうすれば完成なのか、定まっていないという可能性があります。</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>若しくは巨大すぎるものにそのまま挑んでいる、など。</p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>テストが書ければ、必ず終わります。</p>
+<p class="p2"><br></p>
+<p class="p1">c.</p>
+<p class="p1"><span class="Apple-tab-span">	</span>テストの勘所、特に通信系テストについて</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>iOSでのテストについて、</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>特に真っ先に作成しておいた方が良い、通信系のテストを扱います。</p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>なぜ通信系のテストを真っ先に行うべきなのか</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>→通信が関わると、原因特定の為の箇所が一気に増えるため</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>例えばTwitter。</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>作った→動かした→Tweet時にエラー。</p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>これは、何処の誰が悪いのか？</p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Twitterがくじらさんを出している？</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>それとも、そも通信がオフライン？</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>それとも使っている通信部分のロジックに穴が？</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>それとも表示部分のエラー？</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>APIのテストを書いておけば、問題が容易に切り分けられます　という話</p>
+<p class="p2"><br></p>
+<p class="p1">d.</p>
+<p class="p1"><span class="Apple-tab-span">	</span>まとめと、テストが大変な箇所について</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>UIのテスト</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Apple公式のInstrumentを使ったテストを行う</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>それ以外</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+</body>
+</html>

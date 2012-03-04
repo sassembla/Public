@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1138.23">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    span.s1 {text-decoration: underline}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>ViewAPIについて</b></p>
+<p class="p2"><br></p>
+<p class="p1"><b>概要</b></p>
+<p class="p1"><span class="Apple-tab-span">	</span>現在のブラウザ/クライアントサイドで行える、ビューを作る、という行為を、</p>
+<p class="p1"><span class="Apple-tab-span">	</span>簡単なAPIに纏める。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p1"><span class="Apple-tab-span">	</span>たとえば、下記の形で、どこからかトリガーが引ければOK、という形にしたい。</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="s1"><span class="Apple-tab-span">	</span>＊記法はまだ特定の言語を規定するものではない。</span></p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-tab-span">	</span><b>ViewController.show().dialog()</b></p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ダイアログを作成</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p1"><span class="Apple-tab-span">	</span><b>globalDialog.setStyle(http:style/classic)</b></p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ダイアログの表現処理をロードする</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p1"><b><span class="Apple-tab-span">	</span>→Viewが表示される</b></p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-tab-span">	</span>全てのViewの動作の根源は、それが<b>表示される</b>事。</p>
+<p class="p1"><span class="Apple-tab-span">	</span>なので、</p>
+<p class="p1"><span class="Apple-tab-span">	</span>そこを基礎として、クライアント上にViewが適当に構築される事を望む。</p>
+<p class="p1"><span class="Apple-tab-span">	</span>addされたら表示、overlayされたら表示、とか、判りやすい感じに出来るはず。</p>
+<p class="p1"><span class="Apple-tab-span">	</span>UIのControlも基本面積に依存する。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p1"><b>理由 だれの為のものなのか</b></p>
+<p class="p1"><span class="Apple-tab-span">	</span>Viewを作る際の現在のソリューションとしては、</p>
+<p class="p1"><span class="Apple-tab-span">	</span>js、css、Flash、image、movie、htmlなど、多種の要素がある。</p>
+<p class="p1"><span class="Apple-tab-span">	</span>これを、いちいち選び組み合わせるのが<b>面倒くさい。</b></p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-tab-span">	</span>こう感じる俺/あるいは誰か　のための、HTMLとその近辺にある描画技術から</p>
+<p class="p1"><span class="Apple-tab-span">	</span>Viewを切り離す為の試み。</p>
+<p class="p2"><br></p>
+<p class="p1"><b>理想</b></p>
+<p class="p1"><span class="Apple-tab-span">	</span>デザイン作業とHTML/他のリソース構築を切り離す</p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+</body>
+</html>

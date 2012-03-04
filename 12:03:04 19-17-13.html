@@ -1,0 +1,139 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1138.23">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Courier; color: #333233; background-color: #f8f8f8}
+    span.s1 {font: 12.0px 'Hiragino Kaku Gothic ProN'; color: #000000}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>Gradleを使ってみる</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Gradleを使って最低限のビルドとテストを行う</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Github</p>
+<p class="p3"><span class="Apple-tab-span">	</span>https://github.com/gradle/gradle</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>公式サイト</p>
+<p class="p3"><span class="Apple-tab-span">	</span>http://gradle.org/</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>たまたまタイミングだと思うけど、自分がDLできなかった(サーバエラーっぽい</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ので、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>GithubからのDL &gt; Buildと行った。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>構成</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Cloneして、そっからスタート。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ソースからコンパイル</p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span></span>./gradlew build</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>インストール</p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span></span>./gradlew install -Pgradle_installPath=/usr/local/gradle-source-build<span class="s1"><span class="Apple-tab-span">	</span></span></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>パスとか弄らないままversion</b></p>
+<p class="p4"><span class="s1"><b><span class="Apple-tab-span">	</span></b></span>./usr/local/gradle-source-build/bin/gradle -version<span class="s1"><span class="Apple-tab-span">	</span></span></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>1.0 milestone…とか出るはず。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>Screencast</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>インストール後の使い方の様子をプロジェクト作成からテスト走らせるまで。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>http://www.screenr.com/ih88</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>使用したプロジェクト一式はこちら</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>http://dl.dropbox.com/u/7807380/SampleGradleProject.zip</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>使い方</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>(Screencastとは名前が異なります)</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Eclipseで適当にプロジェクト一つ作ります</p>
+<p class="p3"><span class="Apple-tab-span">	</span>src/some/package/SampleProject</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>一つクラス追加</p>
+<p class="p3"><span class="Apple-tab-span">	</span>HelloWorld.java</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>JUnitを使ったテストクラスを追加</p>
+<p class="p3"><span class="Apple-tab-span">	</span>SampleTests.java</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>test/some/package/SampleTests.java の形で置く</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>srcフォルダと同じ階層に build.gradle ファイル追加</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>内容を記述</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>/*ここから*/</p>
+<p class="p3">apply plugin:'java'</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3">//add dependenncies into this build-rule</p>
+<p class="p3">dependencies {</p>
+<p class="p3"><span class="Apple-tab-span">	</span>testCompile 'junit:junit:4.8.2'</p>
+<p class="p3">}</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3">//set repositories for this build-rule</p>
+<p class="p3">repositories {</p>
+<p class="p3"><span class="Apple-tab-span">	</span>mavenCentral();</p>
+<p class="p3">}</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3">//change test-source dir from src/test/java to below</p>
+<p class="p3">sourceSets {</p>
+<p class="p3"><span class="Apple-converted-space">  </span>test {</p>
+<p class="p3"><span class="Apple-converted-space">    </span>java {</p>
+<p class="p3"><span class="Apple-converted-space">      </span>srcDir "test/com/kissaki"</p>
+<p class="p3"><span class="Apple-converted-space">    </span>}</p>
+<p class="p3"><span class="Apple-converted-space">  </span>}</p>
+<p class="p3">}</p>
+<p class="p3"><span class="Apple-tab-span">	</span>/*ここまで*/</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>このあと、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>該当するbuild.gradle のあるフォルダまで行ってから、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>gradle build とするとビルド、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>gradle test とするとテストが走ります。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Screencastだと、いきなりテストを行い、テスト側に</p>
+<p class="p3"><span class="Apple-tab-span">	</span>fail(not yet implemented);</p>
+<p class="p3"><span class="Apple-tab-span">	</span>があるので、失敗してます。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>testを実行するとき、 -i オプションを付ける事で、詳細を表示していますが、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>レポート自体は</p>
+<p class="p3"><span class="Apple-tab-span">	</span>srcと同じ階層に</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>build</p>
+<p class="p3"><span class="Apple-tab-span">	</span>フォルダが勝手に生成され、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>build/reports/tests/<span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>に、<b>index.html</b>と、<b>パッケージ名.html </b>という形でテスト結果が出力されてます。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>build.gradle内容解説</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・apply plugin:'java' で、javaだよーって宣言してます。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>これによって、gradleが見るsrcとかtestとかのパスのルールが決定されています。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・dependencies には、依存している(以下略)</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・テストのソースの場所設定を、sourceSetsで行ってます。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>デフォルトの位置は、javaの場合、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>src/test/java/ 下になります。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ちなみにこの設定でtestフォルダの位置を変えてるのは、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>たまたま近所にあったGWTの構成がそうだったから。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>必然性はありません。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3">ご意見ご感想は @toru_inoue まで。あるもんならな！！</p>
+</body>
+</html>
