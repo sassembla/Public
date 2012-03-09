@@ -7,102 +7,122 @@
   <meta name="Generator" content="rtfd2html handling Cocoa HTML Writer">
   <meta name="CocoaVersion" content="1138.23">
   <style type="text/css">
-    p.p1 {margin: 0.0px 0.0px 12.0px 0.0px; font: 26.0px Times}
-    p.p2 {margin: 0.0px 0.0px 12.0px 0.0px; font: 14.0px 'Hiragino Mincho ProN'}
-    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px 'Hiragino Mincho ProN'}
-    p.p4 {margin: 0.0px 0.0px 12.0px 0.0px; font: 14.0px Times}
-    p.p5 {margin: 0.0px 0.0px 12.0px 0.0px; font: 14.0px Monaco}
-    p.p6 {margin: 0.0px 0.0px 12.0px 0.0px; font: 14.0px Monaco; color: #1400c0}
-    p.p7 {margin: 0.0px 0.0px 12.0px 0.0px; font: 14.0px Monaco; color: #407f5e}
-    p.p8 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica,Arial}
-    p.p9 {margin: 0.0px 0.0px 12.0px 0.0px; font: 22.0px Times}
-    p.p10 {margin: 0.0px 0.0px 12.0px 0.0px; font: 22.0px 'Hiragino Mincho ProN'}
-    p.p11 {margin: 0.0px 0.0px 12.0px 0.0px; font: 14.0px 'Hiragino Kaku Gothic ProN'}
-    span.s1 {font: 26.0px 'Hiragino Mincho ProN'}
-    span.s2 {font: 14.0px Times}
-    span.s3 {font: 14.0px 'Hiragino Mincho ProN'}
-    span.s4 {font: 14.0px Symbol}
-    span.s5 {color: #7f0055}
-    span.s6 {color: #1400c0}
-    span.s7 {font: 14.0px Times; color: #000000}
-    span.s8 {font: 14.0px 'Hiragino Kaku Gothic ProN'}
-    span.s9 {color: #2a02ff}
-    span.s10 {color: #000000}
-    span.s11 {font: 22.0px 'Hiragino Mincho ProN'}
-    span.s12 {font: 14.0px Monaco}
+    p.p1 {margin: 0.0px 0.0px 12.0px 0.0px; font: 26.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 12.0px 0.0px; font: 14.0px 'Hiragino Kaku Gothic ProN'}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px 'Hiragino Kaku Gothic ProN'}
+    p.p4 {margin: 0.0px 0.0px 12.0px 0.0px; font: 14.0px 'Hiragino Kaku Gothic ProN'; min-height: 21.0px}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px 'Hiragino Kaku Gothic ProN'; min-height: 21.0px}
+    p.p6 {margin: 0.0px 0.0px 12.0px 0.0px; font: 19.0px 'Hiragino Kaku Gothic ProN'; min-height: 29.0px}
+    p.p7 {margin: 0.0px 0.0px 12.0px 0.0px; font: 14.0px 'Hiragino Kaku Gothic ProN'; color: #1400c0}
+    p.p8 {margin: 0.0px 0.0px 12.0px 0.0px; font: 14.0px 'Hiragino Kaku Gothic ProN'; color: #407f5e}
+    p.p9 {margin: 0.0px 0.0px 0.0px 0.0px; font: 19.0px 'Hiragino Kaku Gothic ProN'; min-height: 29.0px}
+    p.p10 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica,Arial}
+    p.p11 {margin: 0.0px 0.0px 12.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p12 {margin: 0.0px 0.0px 12.0px 0.0px; font: 19.0px 'Hiragino Kaku Gothic ProN'}
+    span.s1 {color: #7f0055}
+    span.s2 {color: #1400c0}
+    span.s3 {color: #2a02ff}
+    span.s4 {color: #000000}
+    span.s5 {font: 12.0px Helvetica,Arial}
+    span.s6 {font: 14.0px 'Hiragino Kaku Gothic ProN'}
+    span.Apple-tab-span {white-space:pre}
   </style>
 </head>
 <body>
-<p class="p1">GWT<span class="s1">と</span>Dart<span class="s1">で</span>Messaging</p>
-<p class="p2">メッセージングとは</p>
-<p class="p3"><span class="s2"><span class="Apple-converted-space">  </span></span>本来の定義とは違いますが、</p>
-<p class="p3"><span class="s2"><span class="Apple-converted-space">  </span></span>ここでは、オブジェクト間の参照渡しなしで、相互に呼び合う、という機構として使っています。</p>
-<p class="p3"><span class="s2"><span class="Apple-converted-space">  </span></span>なにそれ凄い<span class="s2">!! </span>って思った方、居たら嬉しいです。</p>
-<p class="p3"><span class="s2"><span class="Apple-converted-space">  </span></span>言語的には、</p>
-<p class="p3"><span class="s2"><span class="Apple-converted-space">     </span></span>関数型言語、一部のオブジェクト指向言語で仕様として用意されています。</p>
-<p class="p4">Scala<span class="s3">とか、</span><br>
-Objective-C<span class="s3">とか。</span> Java<span class="s3">でも、</span>JMS<span class="s3">とかありましたけど、、</span></p>
-<p class="p2"><span class="s2">GWT</span>でメッセージング</p>
-<p class="p3"><span class="s2"><span class="Apple-converted-space">  </span></span>インストールと</p>
-<p class="p3"><span class="s2"><span class="Apple-converted-space">  </span></span>サンプル実行と</p>
-<p class="p3"><span class="s2"><span class="Apple-converted-space">  </span></span>メッセージングをやってみよう的な。</p>
-<p class="p2">ダウンロード<span class="s2"> </span>このへん</p>
-<p class="p4">https://gitorious.org/messengersystem-gwt#more</p>
-<p class="p2"><span class="s2">DL</span>して→<span class="s2">import</span>して、、って、コレからサクッとやってみます。<span class="s2"> ScreenCast</span>にあるので、まあ解説がてら。</p>
-<p class="p4">git clone git@gitorious.org:messengersystem-gwt/messengersystem-gwt.git</p>
-<p class="p4"><span class="s4">→</span>Eclipse<span class="s3">のプロジェクトなので、</span>Eclipse<span class="s3">に</span>import</p>
-<p class="p2">実行<span class="s2"><br>
-</span>各インスタンスから<span class="s2">Window.alert</span>がでますた。<span class="s2"> </span>インスタンスは保持してますが、メソッドは実行していない点に注目。</p>
-<p class="p2"><span class="s2">GWTMessenger</span>でのメッセージング<span class="s2"> JS</span>の<span class="s2">Window.postMessage</span>を使い、インスタンス間のポインタ手動ではない構造を作ってます。</p>
-<p class="p2"><span class="s2">//</span>何かしらオブジェクトを作ります</p>
-<p class="p5">Foo foo = <span class="s5">new </span>Foo("A");</p>
-<p class="p5">Foo foo2 = <span class="s5">new </span>Foo("B");</p>
-<p class="p5"><span class="s2">&gt;&gt; //</span><span class="s3">オブジェクトの中に、メッセージの受け手兼送り手の</span><span class="s2">MessngerGWTImplements</span><span class="s3">を書いときます。</span><span class="s2"> </span><span class="s6">messenger </span>= <span class="s5">new </span>MessengerGWTImplement(name, <span class="s5">this);</span></p>
-<p class="p2"><span class="s2">//</span>メッセージを送り合う関係を形成するように、<span class="s2">(</span>既にここからメッセージングで<span class="s2">)</span>親居ますか<span class="s2">?</span>ってメッセージを<span class="s2"> </span>環境に投げます。この場合は、<span class="s2">myself</span>って名前の人を親として設定します。</p>
-<p class="p6">messenger.sInputParent("myself"); <span class="s7">&lt;&lt;</span></p>
-<p class="p7">//<span class="s8">親設定のオブジェクト</span>myself <span class="s8">から、</span>A<span class="s8">にメッセージを送る</span> <span class="s6">messenger.call("A", </span><span class="s9">"fooCommand",</span></p>
-<p class="p6">messenger.tagValue("fooString", <span class="s9">"fooValue"), </span>messenger.tagValue("fooNumber", <span class="s10">100.0), </span>messenger.tagValue("fooObject", <span class="s10">fooObject)</span></p>
-<p class="p5">); !<span class="s8">とどいた</span>!!</p>
-<p class="p2">みたいな。</p>
-<p class="p2"><span class="s2">Dart</span>でメッセージング</p>
-<p class="p3"><span class="s2"><span class="Apple-converted-space">  </span></span>インストールと</p>
-<p class="p3"><span class="s2"><span class="Apple-converted-space">  </span></span>サンプル実行と</p>
-<p class="p3"><span class="s2"><span class="Apple-converted-space">  </span></span>メッセージングをやってみよう的な。</p>
-<p class="p2">インストール<span class="s2"> </span>簡単<span class="s2">Ver</span></p>
-<p class="p4">http://www.dartlang.org/docs/getting-started/editor/index-macos.html</p>
-<p class="p4"><span class="s3">めんどい</span>Ver(Before Oct 2011) <span class="s3">割愛</span></p>
-<p class="p8"><img src="img/page1image12480.png" alt="page1image12480.png"></p>
-<p class="p8"><img src="img/page1image12752.png" alt="page1image12752.png"></p>
-<p class="p2">インストールして、<span class="s2">"Something"</span>ってプロジェクトを作ってみた。</p>
-<p class="p8"><img src="img/page2image1072.png" alt="page2image1072.png"></p>
-<p class="p2">プロジェクトを制作すると、<span class="s2"> /Users/sassembla/dart </span>直下にフォルダが出来る。</p>
-<p class="p8"><img src="img/page2image2056.png" alt="page2image2056.png"></p>
-<p class="p2">サンプルでいい感じなのはコレ<span class="s2"> DL</span>したフォルダの中に、すでにサンプルが一式入ってます。<span class="s2"> dart/samples</span></p>
-<p class="p8"><img src="img/page3image504.png" alt="page3image504.png"></p>
-<p class="p4">Editor<span class="s3">から、</span> File &gt; Open &gt; /dart/samples/sunflower/sunflower.dart dart<span class="s3">では、</span>.dart<span class="s3">パッケージでアプリケーションの管理ファイルを構成している。</span> <span class="s3">開いて実行するとこんな感じ</span></p>
-<p class="p8"><img src="img/page3image1792.png" alt="page3image1792.png"></p>
-<p class="p3"><span class="s2"><span class="Apple-converted-space">  </span></span>フィボナッチ級数的な感じで、ひまわりが書ける、とか。</p>
-<p class="p2">本題、メッセージング<span class="s2"><br>
-</span>頑張って書いた、、んですが、<span class="s2"> </span>今朝見たら<span class="s2">sample</span>に<span class="s2">isolate</span>ってのがあってさ、、</p>
-<p class="p9"><span class="s2">/isolate<br>
-</span><span class="s11">作成日</span>:2011/11/9 by Google</p>
-<p class="p8"><img src="img/page4image504.jpg" alt="page4image504.jpg"></p>
-<p class="p10">なんやてぇぇぇ</p>
-<p class="p4"><span class="s3">俺のミッション、終了のお知らせ。</span> /dart/samples/isolate</p>
-<p class="p8"><img src="img/page4image1744.png" alt="page4image1744.png"></p>
-<p class="p2">実行すると</p>
-<p class="p8"><img src="img/page5image488.png" alt="page5image488.png"></p>
-<p class="p11"><span class="s3">中身の解説</span><span class="s2"> </span><span class="s12">ready()</span>メソッドで、要素を設定してる。</p>
-<p class="p5">//A,B<span class="s8">の</span>isolate(<span class="s8">独立スレッドを持つオブジェクト</span>!)<span class="s8">を作る</span> createIsolate("A");<br>
-createIsolate("B");</p>
-<p class="p5">createIsolate<span class="s8">メソッドの中で、</span>spawn()<span class="s8">メソッドを使っています。</span></p>
-<p class="p5">spawn<span class="s8">とは、、、</span>!!! Future&lt;SendPort&gt; spawn() {</p>
-<p class="p5"><span class="s5">return </span>IsolateNatives.spawn(this, _isLight); }</p>
-<p class="p2"><span class="s2">Future</span>型を返す、<span class="s2">dart</span>仕様で定義されている<span class="s2">(=Runtime</span>がある<span class="s2">)</span>メソッドで、<span class="s2"> isolate(</span>独立したオブジェクト<span class="s2"> = </span>スレッド<span class="s2">)</span>を実装します。</p>
-<p class="p2"><span class="s2">spawn()</span>メソッドの特徴として、<span class="s2"> </span>・実行するとコピーが作成され、コピーがスレッド化する</p>
-<p class="p2"><span class="s2">(</span>実装見てませんが、たぶんまんま<span class="s2">WebWorker</span>作ってます<span class="s2">) </span>で、</p>
-<p class="p4">//<span class="s3">送る</span></p>
-<p class="p5">ports[isolateName].call(message).receive( (var message, SendPort replyTo) { replyElement.text = message;</p>
-<p class="p5">});</p>
+<p class="p1"><b>GWTとDartでMessaging</b></p>
+<p class="p2"><b>メッセージングとは</b></p>
+<p class="p3"><span class="Apple-converted-space">  </span>本来の定義とは違いますが、</p>
+<p class="p3"><span class="Apple-converted-space">  </span>ここでは、"オブジェクト間の参照渡しなしで、相互に呼び合うことができる機構"として使っています。</p>
+<p class="p3"><span class="Apple-converted-space">  </span>なにそれ凄い!! って思った方、居たら嬉しいです。</p>
+<p class="p3"><span class="Apple-converted-space">  </span>言語的には、</p>
+<p class="p3"><span class="Apple-converted-space">     </span>関数型言語、一部のオブジェクト指向言語で仕様として用意されています。</p>
+<p class="p2">Scalaとか、<br>
+Objective-Cとか。<span class="Apple-converted-space"> </span></p>
+<p class="p4"><b></b><br></p>
+<p class="p2"><b>GWTでメッセージング</b></p>
+<p class="p3"><span class="Apple-converted-space">  </span>インストールと</p>
+<p class="p3"><span class="Apple-converted-space">  </span>サンプル実行と</p>
+<p class="p3"><span class="Apple-converted-space">  </span>メッセージングをやってみよう的な。</p>
+<p class="p5"><b></b><br></p>
+<p class="p5"><b></b><br></p>
+<p class="p2"><b>ダウンロード このへん</b></p>
+<p class="p2"><b><span class="Apple-tab-span">	</span></b>https://gitorious.org/messengersystem-gwt#more</p>
+<p class="p2"><span class="Apple-tab-span">	</span>DLして→importして、、って、コレからサクッとやってみます。<span class="Apple-converted-space"> </span></p>
+<p class="p2"><span class="Apple-tab-span">	</span>ScreenCastにあるので、まあ解説がてら。</p>
+<p class="p2"><span class="Apple-tab-span">	</span>git clone git@gitorious.org:messengersystem-gwt/messengersystem-gwt.git</p>
+<p class="p2"><span class="Apple-tab-span">	</span>→Eclipseのプロジェクトなので、Eclipseにimport</p>
+<p class="p6"><b></b><br></p>
+<p class="p2"><b>実行<br>
+</b><span class="Apple-tab-span">	</span>各インスタンスからWindow.alertがでますた。 インスタンスは保持してますが、メソッドは実行していない点に注目。</p>
+<p class="p2"><span class="Apple-tab-span">	</span>GWTMessengerでのメッセージング JSのWindow.postMessageを使い、インスタンス間のポインタ手動ではない構造を作ってます。</p>
+<p class="p2"><span class="Apple-tab-span">	</span>//何かしらオブジェクトを作ります</p>
+<p class="p2"><span class="Apple-tab-span">	</span>Foo foo = <span class="s1">new </span>Foo("A");</p>
+<p class="p2"><span class="Apple-tab-span">	</span>Foo foo2 = <span class="s1">new </span>Foo("B");</p>
+<p class="p2"><span class="Apple-tab-span">	</span>&gt;&gt;<span class="Apple-converted-space"> </span></p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>//オブジェクトの中に、メッセージの受け手兼送り手のMessngerGWTImplementsを書いときます。<span class="Apple-converted-space"> </span></p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="s2">messenger </span>= <span class="s1">new </span>MessengerGWTImplement(name, <span class="s1">this);</span></p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>//メッセージを送り合う関係を形成するように、(既にここからメッセージングで)親居ますか?ってメッセージを<span class="Apple-converted-space"> </span></p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>環境に投げます。この場合は、myselfって名前の人を親として設定します。</p>
+<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>messenger.sInputParent("myself");<span class="Apple-converted-space"> </span></p>
+<p class="p2"><span class="s2"><span class="Apple-tab-span">	</span></span>&lt;&lt;</p>
+<p class="p8"><span class="Apple-tab-span">	</span>//親設定のオブジェクトmyself から、Aにメッセージを送る <span class="s2">messenger.call("A", </span><span class="s3">"fooCommand",</span></p>
+<p class="p7"><span class="Apple-tab-span">	</span>messenger.tagValue("fooString", <span class="s3">"fooValue"), </span>messenger.tagValue("fooNumber", <span class="s4">100.0), </span>messenger.tagValue("fooObject", <span class="s4">fooObject)</span></p>
+<p class="p2"><span class="Apple-tab-span">	</span>);</p>
+<p class="p4"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span> !とどいた!!</p>
+<p class="p2"><span class="Apple-tab-span">	</span>みたいな。</p>
+<p class="p6"><br></p>
+<p class="p2"><b>Dartでメッセージング</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>インストールと</p>
+<p class="p3"><span class="Apple-tab-span">	</span>サンプル実行と</p>
+<p class="p3"><span class="Apple-tab-span">	</span>メッセージングをやってみよう的な。</p>
+<p class="p4"><b><span class="Apple-tab-span">	</span></b></p>
+<p class="p2"><b>インストール 簡単Ver</b></p>
+<p class="p2"><span class="Apple-tab-span">	</span>http://www.dartlang.org/docs/getting-started/editor/index-macos.html</p>
+<p class="p4"><b><span class="Apple-tab-span">	</span></b></p>
+<p class="p2"><b>めんどいVer(Before Oct 2011) 割愛</b></p>
+<p class="p9"><b></b><br></p>
+<p class="p3"><span class="s5"><span class="Apple-tab-span">	</span></span>インストールして、"Something"ってプロジェクトを作ってみた。</p>
+<p class="p10"><img src="img/page2image1072.png" alt="page2image1072.png"></p>
+<p class="p2"><span class="Apple-tab-span">	</span>プロジェクトを制作すると、 /Users/sassembla/dart 直下にフォルダが出来る。</p>
+<p class="p10"><img src="img/page2image2056.png" alt="page2image2056.png"></p>
+<p class="p2"><span class="Apple-tab-span">	</span>サンプルでいい感じなのはコレ DLしたフォルダの中に、すでにサンプルが一式入ってます。 dart/samples</p>
+<p class="p10"><img src="img/page3image504.png" alt="page3image504.png"></p>
+<p class="p2"><span class="Apple-tab-span">	</span>Editorから、 File &gt; Open &gt; /dart/samples/sunflower/sunflower.dart dartでは、</p>
+<p class="p2"><span class="Apple-tab-span">	</span>.dartパッケージでアプリケーションの管理ファイルを構成している。 開いて実行するとこんな感じ</p>
+<p class="p10"><img src="img/page3image1792.png" alt="page3image1792.png"></p>
+<p class="p3"><span class="Apple-tab-span">	</span>フィボナッチ級数的な感じで、ひまわりが書ける、とか。</p>
+<p class="p4"><b></b><br></p>
+<p class="p2"><b>本題、メッセージング<br>
+</b><span class="Apple-tab-span">	</span>頑張って書いた、、んですが、 今朝見たらsampleにisolateってのがあってさ、、</p>
+<p class="p11"><span class="s6"><span class="Apple-tab-span">	</span>/isolate<br>
+</span><span class="Apple-tab-span">	</span>作成日:2011/11/9 by Google</p>
+<p class="p10"><img src="img/page4image504.jpg" alt="page4image504.jpg"></p>
+<p class="p11">なんやてぇぇぇ</p>
+<p class="p2"><span class="Apple-tab-span">	</span>俺のミッション、終了のお知らせ。</p>
+<p class="p2"><span class="Apple-tab-span">	</span> /dart/samples/isolate</p>
+<p class="p10"><img src="img/page4image1744.png" alt="page4image1744.png"></p>
+<p class="p2"><span class="Apple-tab-span">	</span>実行すると</p>
+<p class="p10"><img src="img/page5image488.png" alt="page5image488.png"></p>
+<p class="p2"><b>中身の解説<span class="Apple-converted-space"> </span></b></p>
+<p class="p2"><span class="Apple-tab-span">	</span>ready()メソッドで、要素を設定してる。</p>
+<p class="p2"><span class="Apple-tab-span">	</span>//A,Bのisolate(独立スレッドを持つオブジェクト!)を作る createIsolate("A");<br>
+<span class="Apple-tab-span">	</span>createIsolate("B");</p>
+<p class="p2"><span class="Apple-tab-span">	</span>createIsolateメソッドの中で、spawn()メソッドを使っています。</p>
+<p class="p2"><span class="Apple-tab-span">	</span>spawnとは、、、!!!<span class="Apple-converted-space"> </span></p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Future&lt;SendPort&gt; spawn() {</p>
+<p class="p2"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>return </span>IsolateNatives.spawn(this, _isLight);<span class="Apple-converted-space"> </span></p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}</p>
+<p class="p6"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span>Future型を返す、dart仕様で定義されている(=Runtimeがある)メソッドで、 isolate(独立したオブジェクト = スレッド)を実装します。</p>
+<p class="p2"><span class="Apple-tab-span">	</span>spawn()メソッドの特徴として、 ・実行するとコピーが作成され、コピーがスレッド化する</p>
+<p class="p2"><span class="Apple-tab-span">	</span>(実装見てませんが、たぶんまんまWebWorker作ってます) で、</p>
+<p class="p4"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span>//送る</p>
+<p class="p2"><span class="Apple-tab-span">	</span>ports[isolateName].call(message).receive( (var message, SendPort replyTo) {<span class="Apple-converted-space"> </span></p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>replyElement.text = message;</p>
+<p class="p2"><span class="Apple-tab-span">	</span>});</p>
+<p class="p6"><br></p>
+<p class="p12"><b>おしまい</b></p>
 </body>
 </html>
