@@ -11,6 +11,8 @@
     p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
     p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
     p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Courier; color: #333233; background-color: #f8f8f8}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #d6d6d6}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #d6d6d6; min-height: 18.0px}
     span.s1 {font: 12.0px 'Hiragino Kaku Gothic ProN'; color: #000000}
     span.Apple-tab-span {white-space:pre}
   </style>
@@ -54,9 +56,6 @@
 <p class="p3"><span class="Apple-tab-span">	</span>インストール後の使い方の様子をプロジェクト作成からテスト走らせるまで。</p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>http://www.screenr.com/ih88</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
-<p class="p3"><span class="Apple-tab-span">	</span>使用したプロジェクト一式はこちら</p>
-<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>http://dl.dropbox.com/u/7807380/SampleGradleProject.zip</p>
-<p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p2"><br></p>
 <p class="p3"><b>使い方</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>(Screencastとは名前が異なります)</p>
@@ -75,33 +74,30 @@
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>内容を記述</p>
+<p class="p5">apply plugin:'java'</p>
+<p class="p6"><br></p>
+<p class="p6"><br></p>
+<p class="p5">//add dependenncies into this build-rule</p>
+<p class="p5">dependencies {</p>
+<p class="p5"><span class="Apple-tab-span">	</span>testCompile 'junit:junit:4.8.2'</p>
+<p class="p5">}</p>
+<p class="p6"><br></p>
+<p class="p6"><br></p>
+<p class="p5">//set repositories for this build-rule</p>
+<p class="p5">repositories {</p>
+<p class="p5"><span class="Apple-tab-span">	</span>mavenCentral();</p>
+<p class="p5">}</p>
+<p class="p6"><br></p>
+<p class="p6"><br></p>
+<p class="p5">//change test-source dir from src/test/java to below</p>
+<p class="p5">sourceSets {</p>
+<p class="p5"><span class="Apple-converted-space">  </span>test {</p>
+<p class="p5"><span class="Apple-converted-space">    </span>java {</p>
+<p class="p5"><span class="Apple-converted-space">      </span>srcDir "test/com/kissaki"</p>
+<p class="p5"><span class="Apple-converted-space">    </span>}</p>
+<p class="p5"><span class="Apple-converted-space">  </span>}</p>
+<p class="p5">}</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>/*ここから*/</p>
-<p class="p3">apply plugin:'java'</p>
-<p class="p2"><br></p>
-<p class="p2"><br></p>
-<p class="p3">//add dependenncies into this build-rule</p>
-<p class="p3">dependencies {</p>
-<p class="p3"><span class="Apple-tab-span">	</span>testCompile 'junit:junit:4.8.2'</p>
-<p class="p3">}</p>
-<p class="p2"><br></p>
-<p class="p2"><br></p>
-<p class="p3">//set repositories for this build-rule</p>
-<p class="p3">repositories {</p>
-<p class="p3"><span class="Apple-tab-span">	</span>mavenCentral();</p>
-<p class="p3">}</p>
-<p class="p2"><br></p>
-<p class="p2"><br></p>
-<p class="p3">//change test-source dir from src/test/java to below</p>
-<p class="p3">sourceSets {</p>
-<p class="p3"><span class="Apple-converted-space">  </span>test {</p>
-<p class="p3"><span class="Apple-converted-space">    </span>java {</p>
-<p class="p3"><span class="Apple-converted-space">      </span>srcDir "test/com/kissaki"</p>
-<p class="p3"><span class="Apple-converted-space">    </span>}</p>
-<p class="p3"><span class="Apple-converted-space">  </span>}</p>
-<p class="p3">}</p>
-<p class="p3"><span class="Apple-tab-span">	</span>/*ここまで*/</p>
-<p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p3"><span class="Apple-tab-span">	</span>このあと、</p>
 <p class="p3"><span class="Apple-tab-span">	</span>該当するbuild.gradle のあるフォルダまで行ってから、</p>
 <p class="p3"><span class="Apple-tab-span">	</span>gradle build とするとビルド、</p>
