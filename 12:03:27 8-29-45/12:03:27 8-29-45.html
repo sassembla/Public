@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="rtfd2html handling Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1138.23">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica,Arial}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px Menlo}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px Menlo; min-height: 13.0px}
+    span.s1 {font: 12.0px Helvetica,Arial}
+    span.s2 {font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    span.s3 {color: #225a5f}
+    span.s4 {font: 11.0px Menlo}
+    span.s5 {font: 11.0px 'Hiragino Kaku Gothic ProN'}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1">Parseを使ってみる</p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>BaaS(Backend as a Service) の、Parseを使って遊んでみる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>https://www.parse.com/</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>BaaSって</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Parseの場合、WebServiceの「保存」Persistentを<b>勝手に旨い事やってくれる化・自動化</b>したもの。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>iOS/Androidから通信するだけで、特定のKVSとしてデータを保持してくれる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Parseの場合、データのPersistent以外にも、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・Web側データの管理、表示（課金にひもづくからそりゃあね</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・PushNotification</p>
+<p class="p3"><span class="Apple-tab-span">	</span>にも対応している。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>導入</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>クイックスタート</p>
+<p class="p3"><span class="Apple-tab-span">	</span>https://www.parse.com/apps/quickstart</p>
+<p class="p3"><span class="Apple-tab-span">	</span>から、</p>
+<p class="p4"><img src="img/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202012-03-28%2010.18.44.png" alt="スクリーンショット 2012-03-28 10.18.44.png"></p>
+<p class="p3"><span class="Apple-tab-span">	</span>適当に、Parse対応したいアプリの形式を選ぶ</p>
+<p class="p3"><span class="Apple-tab-span">	</span>(上だとExisting iOS を選んでいるけど、この記事では New iOS　を選択した。)</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ParseStarterProject　というiOS Project一式がDLされるので、Xcodeで開く。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>見てみると、いろいろFWつかってある。あとQuartzCoreはみ出てる。</p>
+<p class="p4"><img src="img/left.png" alt="left.png"></p>
+<p class="p3"><span class="Apple-tab-span">	</span>チュートリアルどおり、ParseStarterProjectAppDelegate.m &gt; didFinishLaunch にメソッド追加</p>
+<p class="p4"><img src="img/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202012-03-27%208.26.54.png" alt="スクリーンショット 2012-03-27 8.26.54.png"></p>
+<p class="p3"><span class="Apple-tab-span">	</span>同梱の ParseStarterProjectViewController.h にimport追加</p>
+<p class="p4"><img src="img/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202012-03-27%208.27.43.png" alt="スクリーンショット 2012-03-27 8.27.43.png"></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span></b>ParseStarterProjectViewController.m の viewDidLoadに下記を追加</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>通信用のオブジェクトを作成、オブジェクト(key-value)をセットしてsaveで、Parse側に保存される。</p>
+<p class="p4"><img src="img/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202012-03-27%208.28.12.png" alt="スクリーンショット 2012-03-27 8.28.12.png"></p>
+<p class="p3"><span class="Apple-tab-span">	</span>起動してみたところ<span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="s1"><img src="img/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202012-03-28%2010.33.59.png" alt="スクリーンショット 2012-03-28 10.33.59.png"></span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>チュートリアルに戻り、Testってボタンがあるので押すと、さきほど送り込んだKey-Valueが表示される。</p>
+<p class="p4"><img src="img/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202012-03-27%208.28.38.png" alt="スクリーンショット 2012-03-27 8.28.38.png"></p>
+<p class="p3"><span class="Apple-tab-span">	</span>こういうチュートリアル良いですね。やってた事の意味が分かりやすい。</p>
+<p class="p2"><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>疑問</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>通信に失敗したらどうなっちゃうの？</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>たとえば</p>
+<p class="p5"><span class="s2"><span class="Apple-tab-span">	</span></span>[testObject <span class="s3">save</span>]</p>
+<p class="p6"><br></p>
+<p class="p3"><span class="s4"><span class="Apple-tab-span">	</span></span><span class="s5">この</span>メソッドはbool値を返してきてて、同期的に通信を行い、正否を返してくる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>通信Offってやってみたらfalse帰ってきた。<span class="s1"><img src="img/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202012-03-28%2010.38.47.png" alt="スクリーンショット 2012-03-28 10.38.47.png"></span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>数回リトライし、理由を出力<span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>理由取得の方法は、必要があったら調べて書く。かんたんぽい。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>あと、RemoteNotification出して教えてくれるっぽい。実機なら試せる。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>使用感未確認だけど楽しそうだなーと思った部分</b></p>
+<p class="p5"><span class="s2"><b><span class="Apple-tab-span">	</span></b></span>saveInBackground</p>
+<p class="p5"><span class="Apple-tab-span">	</span>saveInBackgroundWithTarget</p>
+<p class="p5"><span class="Apple-tab-span">	</span>saveInBackgroundWithBlock</p>
+<p class="p5"><span class="Apple-tab-span">	</span>saveEventually</p>
+<p class="p6"><span class="Apple-tab-span">	</span></p>
+<p class="p5"><span class="Apple-tab-span">	</span>fetch<span class="s5">系</span></p>
+<p class="p6"><br></p>
+<p class="p5"><span class="Apple-tab-span">	</span>delete<span class="s5">系</span></p>
+<p class="p6"><br></p>
+<p class="p3"><span class="s4"><span class="Apple-tab-span">	</span></span>名前見てるだけで「ヘェ～」ってなるメソッドがいっぱいある。ステキ。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>とりあえずiOSだけで成立するようなクライアント限定系のアプリ/サービスをさくっと作る分には良さげ。</p>
+</body>
+</html>
