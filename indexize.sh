@@ -2,11 +2,13 @@
 #create index.html from these .html & rtfd-converted-html in same folder
 
 echo "indexize start"
-rm htmllist.log
+rm htmlList.log
+rm htmlListRev.log
+
 rm index.html
 
 #check exist .html -> line making -> output to htmllist.log
-find . -type f -name \*.html -print >> htmllist.log
+find . -type f -name \*.html -print >> htmlList.log
 
 #create html header
 header=$(cat << _header_
@@ -45,13 +47,15 @@ bodyHead=$(cat << _body_
 _body_)
 echo $bodyHead >> index.html
 
+#reverse htmllist.log
+tail -r htmlList.log >> htmlListRev.log
 
 #read TITLE by html from each line
 #define line-delim as below
 IFS="
 "
 
-for line in $(< htmllist.log);do
+for line in $(< htmlListRev.log);do
 	#read each file and get first-line as title.
 	if grep "p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px" $line
 	then
