@@ -34,11 +34,9 @@ bodyHead=$(cat << _body_
 <body>
 <!-- HEADER -->
 <div id="header_wrap" class="outer">
-    <header class="inner">
-
-      <h1 id="project_title">necomimi publish</h1>
-      <h2 id="project_tagline">Blog from My dropbox-folder</h2>
-		<div id="emblem"></div>
+	<header class="inner">
+		<h1 id="project_title">necomimi publish</h1>
+		<div class="emblem"></div>
     </header>
 </div>
 <!-- MAIN CONTENT -->
