@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1138.32">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>GroovyについてLion+Macports2.0+Groovy1.8.1でやってみた</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>SVGの値変更の処理を自動で解析したりして行いたかったので、使ってみた。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>インストール</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>MacPortsをインストール後、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>sudo port install groovy</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>1.8.0の時は呪われていたらしいが、今11/08/22 16:12:24は平気。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>使用感</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>特定のtagを無くす</p>
+<p class="p3"><span class="Apple-tab-span">	</span>doc.remove(doc.description)</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>特定のタグ全ての特定のattrを変更</p>
+<p class="p3"><span class="Apple-tab-span">	</span>doc.g.path.each {</p>
+<p class="p3"><span class="Apple-converted-space"> <span class="Apple-tab-span">	</span>   </span>it.@id = "shape" + (i++)</p>
+<p class="p3"><span class="Apple-tab-span">	</span>}</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>超素敵。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>アクセッサが天衣無縫で嬉しい。</p>
+</body>
+</html>

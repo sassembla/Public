@@ -1,0 +1,139 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1138.32">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Courier}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px 'Hiragino Kaku Gothic ProN'}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Courier; min-height: 16.0px}
+    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px 'Hiragino Kaku Gothic ProN'; min-height: 20.0px}
+    p.p8 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p9 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Courier; color: #444444}
+    p.p10 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Courier; color: #444444; min-height: 16.0px}
+    p.p11 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px 'Hiragino Kaku Gothic ProN'; color: #444444}
+    p.p12 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px 'Hiragino Kaku Gothic ProN'; color: #444444; min-height: 20.0px}
+    span.s1 {color: #444444; background-color: #eeeeee}
+    span.s2 {font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    span.s3 {font: 13.0px 'Hiragino Kaku Gothic ProN'}
+    span.s4 {font: 13.0px Courier}
+    span.s5 {font: 12.0px Courier; color: #8b8c73}
+    span.s6 {font: 12.0px Helvetica}
+    span.s7 {font: 13.0px 'Hiragino Kaku Gothic ProN'; color: #000000}
+    span.s8 {font: 13.0px Arial}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>yuroyoroさんの死霊にみちびかれるままsbtを入れてみたりする話</b></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>そもsbtってなんなのさ</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>判ってない。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>→SimpleBuildToolの略。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>で。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・最新版は一個前のstableを使ってビルドする</p>
+<p class="p3"><span class="Apple-tab-span">	</span>という事なので、導入するには一個前のビルドツールを落としてきて、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>それを使って最新の環境をビルドする事になる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>最終的に出来上がるものは、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Scalaのプログラムをビルドする為のjarファイル</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>ビルドに使うツールとしての、直前のバージョンのsbtをDL</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>sbt-launch.jar</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>ビルドする対象一式をDL</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>git clone git://github.com/harrah/xsbt.git</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ビルド用のsbtを使って、最新のsbtをコンパイルする。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>、、、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>んだけど、ぶっちゃけこの作業の必要性ってあんま無い。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>どうしてもって言うなら止めないけど、<b>macportsとかで最新のsbtが苦もなく手に入ったりする</b>し。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>うん。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>どうしてもっていうなら、</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>sbt build-all　とかでビルドが開始される。だけどまだやるなよ、</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>build-allは大体の場合、メモリエラーが出る。OutOfMemoryError。PermGen space関連。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これは、ただ単に色々デカすぎるものを一発でビルドしようとしている為。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>次の２点で対応。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>→ビルドに使用するsbt自体の設定を、少し弄ってみた。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>-XX:+CMSClassUnloadingEnabled -XX:MaxPermSize=256m</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>→個別にビルド</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>publish-local, proguard,sxr,doc<span class="s1">の</span>４構成なので、個別に</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>sbt publish-local とかやってあげれば、まだ平和に事が進む。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>セットアップと試し</b></p>
+<p class="p4"><span class="s2"><span class="Apple-tab-span">	</span></span>mkdir hello</p>
+<p class="p4"><span class="Apple-tab-span">	</span>cd hello</p>
+<p class="p4"><span class="s2"><span class="Apple-tab-span">	</span></span>echo 'object Hi { def main(args: Array[String]) = println("Hi!") }' &gt; hw.scala</p>
+<p class="p4"><span class="Apple-tab-span">	</span>sbt<span class="s3">　</span></p>
+<p class="p5"><span class="s4"><span class="Apple-tab-span">	</span></span>とかやると、初回であればいろんなコンポーネントを取得して来る。</p>
+<p class="p6"><span class="Apple-tab-span">	</span></p>
+<p class="p6"><span class="Apple-tab-span">	</span></p>
+<p class="p5"><span class="s4"><span class="Apple-tab-span">	</span></span>で、</p>
+<p class="p5"><span class="s4"><span class="Apple-tab-span">	</span></span>自分はエラーが出た。</p>
+<p class="p4"><span class="Apple-tab-span">	</span>[NOT FOUND<span class="Apple-converted-space">  </span>] commons-logging#commons-logging;1.0.4!commons-logging.jar</p>
+<p class="p6"><br></p>
+<p class="p5"><span class="s4"><span class="Apple-tab-span">	</span></span>無い、って言われるのだけれど、調べてみると、</p>
+<p class="p4"><span class="Apple-tab-span">	</span>http://blog.teksol.info/tags/scala</p>
+<p class="p5"><span class="s4"><span class="Apple-tab-span">	</span></span>依存性解決に失敗してるケースがあるみたい。</p>
+<p class="p5"><span class="s4"><span class="Apple-tab-span">	</span></span>実際には<span class="s5"><b>.ivy2</b></span>と<span class="s5"><b>.m2</b></span>を削除すると正確に動く。</p>
+<p class="p5"><span class="Apple-tab-span">	</span>クリーンインストール前提の罠。</p>
+<p class="p7"><br></p>
+<p class="p5"><span class="Apple-tab-span">	</span>ちなみに問題のivy2とm2は、Jenkinsがらみで先に入ってたものっぽい。</p>
+<p class="p5"><span class="Apple-tab-span">	</span>フォルダだけ作ってた系だろうか。</p>
+<p class="p7"><span class="Apple-tab-span">	</span></p>
+<p class="p5"><span class="Apple-tab-span">	</span>環境再現がとりにくい、、、</p>
+<p class="p7"><br></p>
+<p class="p5"><span class="Apple-tab-span">	</span>取得するものがそれ以上なくなれば、REPLの状態になる。</p>
+<p class="p7"><br></p>
+<p class="p5"><span class="Apple-tab-span">	</span>[info] Set current project to default-cde796 (in build file:/Users/sassembla/test/hello/)</p>
+<p class="p5"><span class="Apple-tab-span">	</span>これは、現在のプロジェクトをフォルダ～の場所にセットしましたよって情報。</p>
+<p class="p7"><span class="Apple-tab-span">	</span></p>
+<p class="p5"><span class="Apple-tab-span">	</span>で、</p>
+<p class="p5"><span class="Apple-tab-span">	</span>&gt; run</p>
+<p class="p5"><span class="Apple-tab-span">	</span>ビルドして起動する。</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>[info] Running Hi<span class="Apple-converted-space"> </span></p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Hi!</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>[success] Total time: 1 s, completed 2011/12/25 11:03:08</p>
+<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p7"><br></p>
+<p class="p7"><br></p>
+<p class="p5">TextMateと連携させてみる</p>
+<p class="p5"><span class="Apple-tab-span">	</span>自分はTextMate使いたいので、バンドルを探してみた。</p>
+<p class="p7"><span class="Apple-tab-span">	</span></p>
+<p class="p5"><span class="Apple-tab-span">	</span>下記に紹介があった。</p>
+<p class="p5"><span class="Apple-tab-span">	</span>http://www.sidewayscoding.com/2010/08/using-textmate-for-scala-development.html</p>
+<p class="p7"><span class="Apple-tab-span">	</span></p>
+<p class="p5"><span class="Apple-tab-span">	</span>バンドルをダウンロードして取得</p>
+<p class="p5"><span class="Apple-tab-span">	</span>git clone git://github.com/mads379/scala.tmbundle.git</p>
+<p class="p7"><span class="Apple-tab-span">	</span></p>
+<p class="p5"><span class="Apple-tab-span">	</span>出来たバンドルファイルを開くと、それだけでTextMateにインストールされる。</p>
+<p class="p8"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202011-12-25%2011.10.19.png" alt="スクリーンショット 2011-12-25 11.10.19.png"></p>
+<p class="p5"><span class="Apple-tab-span">	</span>これで、シンタックスハイライトが効く。</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="s6"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202011-12-25%2011.11.31.png" alt="スクリーンショット 2011-12-25 11.11.31.png"></span></p>
+<p class="p5"><span class="Apple-tab-span">	</span>この状態でRunさせようとしても、下記のようなエラーが出る。(まあブログの通りなの)</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="s6"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202011-12-25%2011.12.52.png" alt="スクリーンショット 2011-12-25 11.12.52.png"></span></p>
+<p class="p9"><span class="s7"><span class="Apple-tab-span">	</span></span>SCALA_HOME<span class="s8"> in </span>TextMate -&gt; Preferences... -&gt; Advanced -&gt; Shell Variables <span class="s3">を編集。</span></p>
+<p class="p10"><span class="Apple-tab-span">	</span></p>
+<p class="p11"><span class="s4"><span class="Apple-tab-span">	</span></span>ッつー事なので、xsbtだと何処をさせば良いのやら。</p>
+<p class="p12"><span class="Apple-tab-span">	</span></p>
+<p class="p10"><span class="Apple-tab-span">	</span></p>
+</body>
+</html>

@@ -16,7 +16,7 @@ header=$(cat << _header_
   <head>
     <meta charset='utf-8' />
     <meta http-equiv="X-UA-Compatible" content="chrome=1" />
-    <meta name="description" content="necomimi Public : Blog from My dropbox-folder" />
+    <meta name="description" content="necomimi Publish : Blog from My dropbox-folder" />
 
     <link rel="stylesheet" type="text/css" href="stylesheets/basic.css"/>
     <link rel="stylesheet" type="text/less" href="stylesheets/less/stylesheet.less"/>
