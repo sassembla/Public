@@ -1,0 +1,117 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="rtfd2html handling Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1138.23">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica,Arial}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; color: #ffffff; background-color: #000000}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; color: #ffffff; background-color: #000000; min-height: 18.0px}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>GWTをGradleでビルドする　GWT build with Gradle</b></p>
+<p class="p2"><b></b><br></p>
+<p class="p1"><b>概要</b></p>
+<p class="p1"><span class="Apple-tab-span">	</span>gradleでのビルド設定など</p>
+<p class="p2"><br></p>
+<p class="p1"><b>github</b></p>
+<p class="p1"><span class="Apple-tab-span">	</span>https://github.com/sassembla/GWTandGAEandGradle_SampleProject</p>
+<p class="p2"><br></p>
+<p class="p1"><b>Screencast</b></p>
+<p class="p1"><span class="Apple-tab-span">	</span>http://www.screenr.com/YBH8</p>
+<p class="p1"><b><span class="Apple-tab-span">	</span>*Gradleのスクリプトは下記のスクリプトをコピペしてるだけです！</b></p>
+<p class="p1"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>試行錯誤をお見せ出来ずすいません。</b></p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p1"><b>手順</b></p>
+<p class="p3"><img src="img/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202012-03-11%2018.57.10.png" alt="スクリーンショット 2012-03-11 18.57.10.png"></p>
+<p class="p2"><b></b><br></p>
+<p class="p1"><b>build.gradle</b></p>
+<p class="p4">apply plugin:"war"</p>
+<p class="p4">apply plugin:"java"</p>
+<p class="p5"><br></p>
+<p class="p4">modulename = "GWTandGAEandGradle_SampleProject"</p>
+<p class="p5"><br></p>
+<p class="p4">version = 1.0</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p4">repositories {</p>
+<p class="p4"><span class="Apple-tab-span">	</span>mavenCentral()</p>
+<p class="p4">}</p>
+<p class="p5"><br></p>
+<p class="p4">configurations {<span class="Apple-converted-space"> </span></p>
+<p class="p4"><span class="Apple-tab-span">	</span>gwtCompile<span class="Apple-converted-space"> </span></p>
+<p class="p4">}</p>
+<p class="p5"><span class="Apple-converted-space"> </span></p>
+<p class="p4">dependencies {</p>
+<p class="p4"><span class="Apple-tab-span">	</span>println("dependencies start")</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-converted-space"> </span></p>
+<p class="p4"><span class="Apple-tab-span">	</span>//gwt from maven repo, or local.</p>
+<p class="p4"><span class="Apple-tab-span">	</span>compile "com.google.gwt:gwt-servlet:2.4.0"</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-converted-space">    </span>//gwt compiler</p>
+<p class="p4"><span class="Apple-tab-span">	</span>gwtCompile ( <span class="Apple-converted-space">         </span></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>[group: 'com.google.gwt', name: 'gwt-user', version: '2.4.0'], <span class="Apple-converted-space">         </span></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>[group: 'com.google.gwt', name: 'gwt-dev', version: '2.4.0'] <span class="Apple-converted-space">         </span></p>
+<p class="p4"><span class="Apple-tab-span">	</span>)</p>
+<p class="p4"><span class="Apple-tab-span">	</span>println("dependencies over")</p>
+<p class="p4">}</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p4">//出力先をwarファイルに</p>
+<p class="p4">gwtBuildDir = 'war'</p>
+<p class="p5"><br></p>
+<p class="p4">task gwtCompile &lt;&lt; {</p>
+<p class="p5"><span class="Apple-tab-span">	</span></p>
+<p class="p4"><span class="Apple-tab-span">	</span>created = (new File(gwtBuildDir)).mkdirs()</p>
+<p class="p5"><span class="Apple-tab-span">	</span></p>
+<p class="p4"><span class="Apple-tab-span">	</span>println "gwtBuildDir<span class="Apple-tab-span">	</span>"+gwtBuildDir</p>
+<p class="p4"><span class="Apple-tab-span">	</span>ant.java(classname:'com.google.gwt.dev.Compiler', failOnError: 'true', fork: 'true')<span class="Apple-converted-space"> </span></p>
+<p class="p4"><span class="Apple-tab-span">	</span>{ <span class="Apple-converted-space">   </span></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>//args settings</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>jvmarg(value: '-Xmx512M') <span class="Apple-converted-space">   </span></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>arg(line: '-war ' + gwtBuildDir)</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>arg(line: '-logLevel INFO') <span class="Apple-converted-space">   </span></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>arg(line: '-style PRETTY')</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-converted-space"> </span></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>println "start,,," + gwtBuildDir</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>println "configurations.compile.asPath<span class="Apple-tab-span">	</span>"+configurations.compile.asPath</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>arg(value: 'com.kissaki.'+modulename)</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>classpath { <span class="Apple-converted-space">     </span></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>pathElement(location: 'src') <span class="Apple-converted-space">     </span></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>pathElement(path: configurations.compile.asPath) <span class="Apple-converted-space">     </span></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>pathElement(path: configurations.gwtCompile.asPath) <span class="Apple-converted-space">   </span></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>} <span class="Apple-converted-space"> </span></p>
+<p class="p4"><span class="Apple-tab-span">	</span>}</p>
+<p class="p4">}</p>
+<p class="p5"><span class="Apple-converted-space"> </span></p>
+<p class="p4">//dependency add.</p>
+<p class="p4">war.dependsOn gwtCompile</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p4">war {</p>
+<p class="p4"><span class="Apple-tab-span">	</span>println("war start")</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-converted-space">    </span>archiveName = "${modulename}.${extension}"</p>
+<p class="p4"><span class="Apple-converted-space">    </span>from gwtBuildDir<span class="Apple-converted-space"> </span></p>
+<p class="p5"><span class="Apple-converted-space"> </span></p>
+<p class="p4"><span class="Apple-converted-space">    </span>manifest {</p>
+<p class="p4"><span class="Apple-converted-space">       <span class="Apple-tab-span">	</span></span>attributes 'Implementation-Title': modulename+' Version'</p>
+<p class="p4"><span class="Apple-converted-space">        </span>attributes 'Implementation-Version': version</p>
+<p class="p4"><span class="Apple-converted-space">        </span>attributes provider: 'gradle'</p>
+<p class="p4"><span class="Apple-converted-space">    </span>}</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>println("war over")</p>
+<p class="p4">}</p>
+</body>
+</html>

@@ -1,0 +1,89 @@
+@charset "UTF-8";
+/* CSS Document */
+
+
+/*
+reset
+*/
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+font-family: 'Hiragino Kaku Gothic Pro', 'ヒラギノ角ゴ Pro W3', 'Meiryo', 'メイリオ', 'ＭＳ Ｐゴシック', 'ＭＳ ゴシック', Osaka, Osaka-等幅, sans-serif;}
+
+/*
+clearfix
+*/
+
+.clearfix {zoom:1;}
+.clearfix:after{
+    content: ""; 
+    display: block; 
+    clear: both;}
+*:after {
+  display:block;
+  clear:both;} 
+
+element {zoom:1;} /* clearfix IE6, 7 */
+element:after {content:"";} /* clearfix */
+.clear {
+    clear:both;}
+
+
+
+
+/*
+design
+*/
+strong {
+  font-weight: bold;
+}
+body {
+ 
+}
+
+.wide {
+  margin-right: auto;
+  margin-left: auto;
+  width: 980px;
+  clear: both;
+}
+
+.item {
+	
+}
+
+
+
+
+
+.button a {
+  display: block;
+}
+
+.button a:link,
+.button a:visited {
+  background-position: left top;
+}
+.button a:hover,
+.button a:active {
+  background-position: left bottom;
+}
+
+.text_image {
+  text-indent: -9999px;
+  display:block;
+  text-align:left
+}
+.image_link a {
+  text-indent: -9999px;
+  display:block;
+  text-align:left
+}
+
+
+

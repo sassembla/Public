@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1138.32">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    span.s1 {font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    span.s2 {font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    span.s3 {font: 12.0px Helvetica}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>Git</b><span class="s1"><b>の</b></span><b>Repository</b><span class="s1"><b>を</b></span><b>Dropbox</b><span class="s1"><b>内に作成</b></span></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p4"><span class="Apple-tab-span">	</span>Git<span class="s2">の</span>Repository<span class="s2">を</span>Dropbox<span class="s2">内に作成する。</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>出来ると、まあ、ウマーって感じで。</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p3"><b>手法</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>なんの事は無い、<span class="s3">Dropbox</span>の設定で、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>マシン内にDropboxフォルダを作った後で、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>通常の<span class="s3">git</span>の所作を行うのみ。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>操作</b></p>
+<p class="p4"><span class="Apple-tab-span">	</span>Dropbox<span class="s2">内で、</span></p>
+<p class="p2"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>mkdir origin.git</p>
+<p class="p4"><span class="Apple-tab-span">	</span>cd origin.git</p>
+<p class="p4"><span class="Apple-tab-span">	</span>git init --bare</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>コミットとか</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>他所のRepoで、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>git remote add origin (Dropbox/とかマシン内のアドレス)origin.git</p>
+<p class="p3"><span class="Apple-tab-span">	</span>git commit -m "なにかしら" 変更を加えたファイル</p>
+<p class="p3"><span class="Apple-tab-span">	</span>git push origin master</p>
+<p class="p5"><br></p>
+<p class="p3">以上</p>
+<p class="p5"><span class="Apple-tab-span">	</span></p>
+</body>
+</html>
