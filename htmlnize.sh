@@ -1,6 +1,6 @@
 #!/bin/sh
 
-
+echo "htmlnize start"
 rm rtfds.log
 
 ##list up
@@ -35,3 +35,5 @@ for line in $(< rtfds.log);do
 	cd ../
 done
 
+
+echo "htmlnize done"
