@@ -47,7 +47,7 @@ bodyHead=$(cat << _body_
 _body_)
 echo $bodyHead >> index.html
 
-#reverse htmllist.log
+#reverse htmllist.log (old ~ new -> new ~ old by date)
 tail -r htmlList.log >> htmlListRev.log
 
 #read TITLE by html from each line
@@ -66,6 +66,9 @@ for line in $(< htmlListRev.log);do
 		aTagHead="<a href=\"$line\">"
 		aTagTail="</a>"
 		
+		echo $line
+		#./12:01:29 18-37-00.html
+		
 		echo $aTagHead$currentNamePartStr$aTagTail >> index.html
 	fi
 done
@@ -76,6 +79,8 @@ bodyTail=$(cat << _body_
 	</section>
 	<!-- FOOTER  -->
     <div id="footer_wrap" class="outer">
+		<div>twitback with Twitter-account</div>
+
       <footer class="inner">
         <p class="copyright">necomimi publish maintained by <a href="https://github.com/sassembla">sassembla</a></p>
         <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
