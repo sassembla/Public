@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1138.32">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; text-align: center; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    span.s1 {font: 12.0px Helvetica}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>このブログっぽい何かの作り方</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>適当なフォルダにhtmlとかrtfdとかを集めて、shell実行して</p>
+<p class="p3"><span class="Apple-tab-span">	</span>index.htmlを生成してます。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、生成後にgithub-pagesにpushしてます。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>モチベーション</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>既存のBlogがめんどくさい。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>とにかくめんどくさい。以下の点がめんどくさい。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・画像貼る時にアップ</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・マークアップランゲージ、なにそれ食えるの、死ぬの</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・かいてる途中に落ちる</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・送信したのにウワアァァアァァア</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・要らない機能がある</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>以上。ろくな事が無い。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>Usage</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>まだApplicationとよべるようなものまで洗練してないけれど、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>次の3工程で記事をupできる。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・Macについてるコレ　</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="s1"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202012-04-23%201.26.34.png" alt="スクリーンショット 2012-04-23 1.26.34.png"></span>(テキストエディット)で、文字を書きなぐる。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ルールは2つ。</p>
+<p class="p3"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></b>1.<b>22pointサイズで一行目を描く事。</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>あとでファイルの見出しになる。</p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></b>2.<b>html形式　あるいはrtfd形式で保存する事。</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>画像をD&amp;Dで加えると、rtfdに変えますか？とか聞かれる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>画像を加えるならrtfdでOK。</p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・publi.shが置いてあるフォルダに放り込む。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>こんな感じになる。フォルダで上がっているのが元rtfd。<span class="s1"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202012-04-23%201.33.12.png" alt="スクリーンショット 2012-04-23 1.33.12.png"></span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>.publi.sh を実行。(下記はTextmateで実行している。)</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="s1"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202012-04-23%201.34.04.png" alt="スクリーンショット 2012-04-23 1.34.04.png"></span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>すると、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>rtfdがhtmlとimageに分解され、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>index.htmlが出来上がり、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>github-pagesへとPushされる、という仕掛け。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>今後</b></p>
+<p class="p4"><span class="Apple-tab-span">	</span>→<span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>←</p>
+<p class="p4"><span class="Apple-tab-span">	</span>このへんに、tracbackならぬtwitbackみたいな、Twitterからコメントできる機能を付けようかと思ってて</p>
+<p class="p4"><span class="Apple-tab-span">	</span>方法もある程度思いつくんだけど</p>
+<p class="p4"><span class="Apple-tab-span">	</span>ぶっちゃけモチベーションがあんまりない。</p>
+</body>
+</html>
