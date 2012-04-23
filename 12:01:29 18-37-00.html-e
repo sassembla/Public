@@ -7,10 +7,10 @@
   <meta name="Generator" content="Cocoa HTML Writer">
   <meta name="CocoaVersion" content="1138.32">
   <style type="texcss">
-    p.p1 {margin/ 0.0px 0.0px 0.0px 0.0px; font/ 22.0px 'Hiragino Kaku Gothic ProN'}
-    p.p2 {margin/ 0.0px 0.0px 0.0px 0.0px; font/ 12.0px 'Hiragino Kaku Gothic ProN'; min-height/ 18.0px}
-    p.p3 {margin/ 0.0px 0.0px 0.0px 0.0px; font/ 12.0px 'Hiragino Kaku Gothic ProN'}
-    span.Apple-tab-span {white-space/pre}
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    span.Apple-tab-span {white-space:pre}
   style>
 head>
 <body>
@@ -27,7 +27,7 @@ head>
 <p class="p3"><span class="Apple-tab-span">	span><b>ViewController.show().dialog()b>p>
 <p class="p3"><span class="Apple-tab-span">	span><span class="Apple-tab-span">	span>ダイアログを作成p>
 <p class="p2"><span class="Apple-tab-span">	span>p>
-<p class="p3"><span class="Apple-tab-span">	span><b>globalDialog.setStyle(http/stylclassic)b>p>
+<p class="p3"><span class="Apple-tab-span">	span><b>globalDialog.setStyle(http:stylclassic)b>p>
 <p class="p3"><span class="Apple-tab-span">	span><span class="Apple-tab-span">	span>ダイアログの表現処理をロードするp>
 <p class="p2"><span class="Apple-tab-span">	span>p>
 <p class="p3"><b><span class="Apple-tab-span">	span>→Viewが表示されるb>p>

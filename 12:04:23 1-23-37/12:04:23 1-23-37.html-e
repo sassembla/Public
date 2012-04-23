@@ -7,26 +7,26 @@
   <meta name="Generator" content="Cocoa HTML Writer">
   <meta name="CocoaVersion" content="1138.32">
   <style type="texcss">
-    p.p1 {margin/ 0.0px 0.0px 0.0px 0.0px; font/ 22.0px 'Hiragino Kaku Gothic ProN'}
-    p.p2 {margin/ 0.0px 0.0px 0.0px 0.0px; font/ 12.0px 'Hiragino Kaku Gothic ProN'; min-height/ 18.0px}
-    p.p3 {margin/ 0.0px 0.0px 0.0px 0.0px; font/ 12.0px 'Hiragino Kaku Gothic ProN'}
-    p.p4 {margin/ 0.0px 0.0px 0.0px 0.0px; font/ 14.0px 'Hiragino Kaku Gothic ProN'}
-    p.p5 {margin/ 0.0px 0.0px 0.0px 0.0px; text-align/ center; font/ 12.0px 'Hiragino Kaku Gothic ProN'; min-height/ 18.0px}
-    p.p6 {margin/ 0.0px 0.0px 0.0px 0.0px; text-align/ center; font/ 12.0px 'Hiragino Kaku Gothic ProN'}
-    span.s1 {font/ 12.0px 'Hiragino Kaku Gothic ProN'}
-    span.s2 {font/ 12.0px Helvetica}
-    span.s3 {font/ 22.0px 'Hiragino Kaku Gothic ProN'}
-    span.s4 {font/ 16.0px 'Hiragino Kaku Gothic ProN'}
-    span.s5 {font/ 11.0px 'Hiragino Kaku Gothic ProN'}
-    span.s6 {font/ 12.0px 'Hiragino Mincho Pro'}
-    span.s7 {text-decoration/ underline}
-    span.s8 {color/ #00a4dc}
-    span.s9 {color/ #257dff}
-    span.s10 {color/ #d300f9}
-    span.s11 {color/ #ff7f7b}
-    span.s12 {color/ #ffa700}
-    span.s13 {color/ #59c42e}
-    span.Apple-tab-span {white-space/pre}
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px 'Hiragino Kaku Gothic ProN'}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; text-align: center; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; text-align: center; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    span.s1 {font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    span.s2 {font: 12.0px Helvetica}
+    span.s3 {font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    span.s4 {font: 16.0px 'Hiragino Kaku Gothic ProN'}
+    span.s5 {font: 11.0px 'Hiragino Kaku Gothic ProN'}
+    span.s6 {font: 12.0px 'Hiragino Mincho Pro'}
+    span.s7 {text-decoration: underline}
+    span.s8 {color: #00a4dc}
+    span.s9 {color: #257dff}
+    span.s10 {color: #d300f9}
+    span.s11 {color: #ff7f7b}
+    span.s12 {color: #ffa700}
+    span.s13 {color: #59c42e}
+    span.Apple-tab-span {white-space:pre}
   style>
 head>
 <body>

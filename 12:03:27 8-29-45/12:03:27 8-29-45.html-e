@@ -7,18 +7,18 @@
   <meta name="Generator" content="rtfd handling Cocoa HTML Writer">
   <meta name="CocoaVersion" content="1138.23">
   <style type="texcss">
-    p.p1 {margin/ 0.0px 0.0px 0.0px 0.0px; font/ 22.0px 'Hiragino Kaku Gothic ProN'}
-    p.p2 {margin/ 0.0px 0.0px 0.0px 0.0px; font/ 12.0px 'Hiragino Kaku Gothic ProN'; min-height/ 18.0px}
-    p.p3 {margin/ 0.0px 0.0px 0.0px 0.0px; font/ 12.0px 'Hiragino Kaku Gothic ProN'}
-    p.p4 {margin/ 0.0px 0.0px 0.0px 0.0px; font/ 12.0px Helvetica,Arial}
-    p.p5 {margin/ 0.0px 0.0px 0.0px 0.0px; font/ 11.0px Menlo}
-    p.p6 {margin/ 0.0px 0.0px 0.0px 0.0px; font/ 11.0px Menlo; min-height/ 13.0px}
-    span.s1 {font/ 12.0px Helvetica,Arial}
-    span.s2 {font/ 12.0px 'Hiragino Kaku Gothic ProN'}
-    span.s3 {color/ #225a5f}
-    span.s4 {font/ 11.0px Menlo}
-    span.s5 {font/ 11.0px 'Hiragino Kaku Gothic ProN'}
-    span.Apple-tab-span {white-space/pre}
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica,Arial}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px Menlo}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px Menlo; min-height: 13.0px}
+    span.s1 {font: 12.0px Helvetica,Arial}
+    span.s2 {font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    span.s3 {color: #225a5f}
+    span.s4 {font: 11.0px Menlo}
+    span.s5 {font: 11.0px 'Hiragino Kaku Gothic ProN'}
+    span.Apple-tab-span {white-space:pre}
   style>
 head>
 <body>

@@ -7,10 +7,10 @@
   <meta name="Generator" content="Cocoa HTML Writer">
   <meta name="CocoaVersion" content="1138.32">
   <style type="texcss">
-    p.p1 {margin/ 0.0px 0.0px 0.0px 0.0px; font/ 22.0px 'Hiragino Kaku Gothic ProN'}
-    p.p2 {margin/ 0.0px 0.0px 0.0px 0.0px; font/ 12.0px 'Hiragino Kaku Gothic ProN'; min-height/ 18.0px}
-    p.p3 {margin/ 0.0px 0.0px 0.0px 0.0px; font/ 12.0px 'Hiragino Kaku Gothic ProN'}
-    span.Apple-tab-span {white-space/pre}
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    span.Apple-tab-span {white-space:pre}
   style>
 head>
 <body>
@@ -24,7 +24,7 @@ head>
 <p class="p3"><span class="Apple-tab-span">	span>MacPortsをインストール後、p>
 <p class="p3"><span class="Apple-tab-span">	span>sudo port install groovyp>
 <p class="p2"><br>p>
-<p class="p3"><span class="Apple-tab-span">	span>1.8.0の時は呪われていたらしいが、今1022 16/12/24は平気。p>
+<p class="p3"><span class="Apple-tab-span">	span>1.8.0の時は呪われていたらしいが、今1022 16:12:24は平気。p>
 <p class="p2"><br>p>
 <p class="p2"><br>p>
 <p class="p3"><b>使用感b>p>

@@ -7,17 +7,17 @@
   <meta name="Generator" content="Cocoa HTML Writer">
   <meta name="CocoaVersion" content="1138.23">
   <style type="texcss">
-    p.p1 {margin/ 0.0px 0.0px 0.0px 0.0px; font/ 22.0px Helvetica}
-    p.p2 {margin/ 0.0px 0.0px 0.0px 0.0px; font/ 12.0px Helvetica; min-height/ 14.0px}
-    p.p3 {margin/ 0.0px 0.0px 0.0px 0.0px; font/ 12.0px 'Hiragino Kaku Gothic ProN'; min-height/ 18.0px}
-    p.p4 {margin/ 0.0px 0.0px 0.0px 0.0px; font/ 12.0px 'Hiragino Kaku Gothic ProN'}
-    p.p5 {margin/ 0.0px 0.0px 0.0px 0.0px; font/ 12.0px Helvetica}
-    p.p6 {margin/ 0.0px 0.0px 0.0px 0.0px; font/ 13.0px Courier; color/ #006f00}
-    span.s1 {font/ 22.0px 'Hiragino Kaku Gothic ProN'}
-    span.s2 {font/ 12.0px Helvetica}
-    span.s3 {font/ 12.0px 'Hiragino Kaku Gothic ProN'}
-    span.s4 {font/ 12.0px 'Hiragino Kaku Gothic ProN'; color/ #000000}
-    span.Apple-tab-span {white-space/pre}
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Courier; color: #006f00}
+    span.s1 {font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    span.s2 {font: 12.0px Helvetica}
+    span.s3 {font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    span.s4 {font: 12.0px 'Hiragino Kaku Gothic ProN'; color: #000000}
+    span.Apple-tab-span {white-space:pre}
   style>
 head>
 <body>
@@ -50,7 +50,7 @@ head>
 <p class="p3"><br>p>
 <p class="p3"><br>p>
 <p class="p4"><b>リポジトリb>p>
-<p class="p4"><span class="Apple-tab-span">	span>git@github.com/sassemblSampleGWTProject-For-Test-installetion-.gitp>
+<p class="p4"><span class="Apple-tab-span">	span>git@github.com:sassemblSampleGWTProject-For-Test-installetion-.gitp>
 <p class="p3"><br>p>
 <p class="p3"><br>p>
 <p class="p4"><b>書いて動かすb>p>
@@ -67,7 +67,7 @@ head>
 <p class="p4"><span class="Apple-tab-span">	span>☆コンパイルされる対象はsrpackag<b>client 以下なので、b>p>
 <p class="p4"><span class="Apple-tab-span">	span><span class="Apple-tab-span">	span>tespackage<bclient の下にテスト置かないとそもコンパイルされない！b>p>
 <p class="p3"><br>p>
-<p class="p4"><b><span class="Apple-tab-span">	span><span class="Apple-tab-span">	span>com.google.gwt.junit.JUnitFatalLaunchException/ The test class 'com.kissaki.SampleGWT2Tests' was not found in module 'com.kissaki.gwtsampleproject'; no compilation unit for that type was seenb>p>
+<p class="p4"><b><span class="Apple-tab-span">	span><span class="Apple-tab-span">	span>com.google.gwt.junit.JUnitFatalLaunchException: The test class 'com.kissaki.SampleGWT2Tests' was not found in module 'com.kissaki.gwtsampleproject'; no compilation unit for that type was seenb>p>
 <p class="p3"><br>p>
 <p class="p4"><span class="Apple-tab-span">	span><span class="Apple-tab-span">	span>とか言われる。p>
 <p class="p3"><br>p>
@@ -92,7 +92,7 @@ head>
 <p class="p4"><b>実際のブラウザでテストb>p>
 <p class="p4"><span class="Apple-tab-span">	span>テストもブラウザで走らせられる。p>
 <p class="p3"><b><span class="Apple-tab-span">	span>b>p>
-<p class="p4"><b><span class="Apple-tab-span">	span>-d32 -Dgwt.args="-runStyle Manual/0"b>p>
+<p class="p4"><b><span class="Apple-tab-span">	span>-d32 -Dgwt.args="-runStyle Manual:0"b>p>
 <p class="p4"><b><span class="Apple-tab-span">	span>をVMArgumentにつけて実行。b>p>
 <p class="p3"><br>p>
 body>

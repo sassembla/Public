@@ -7,27 +7,27 @@
   <meta name="Generator" content="Cocoa HTML Writer">
   <meta name="CocoaVersion" content="1138.32">
   <style type="texcss">
-    p.p1 {margin/ 0.0px 0.0px 0.0px 0.0px; font/ 22.0px 'Hiragino Kaku Gothic ProN'}
-    p.p2 {margin/ 0.0px 0.0px 0.0px 0.0px; font/ 12.0px 'Hiragino Kaku Gothic ProN'; min-height/ 18.0px}
-    p.p3 {margin/ 0.0px 0.0px 0.0px 0.0px; font/ 12.0px 'Hiragino Kaku Gothic ProN'}
-    p.p4 {margin/ 0.0px 0.0px 0.0px 0.0px; font/ 13.0px Courier}
-    p.p5 {margin/ 0.0px 0.0px 0.0px 0.0px; font/ 13.0px 'Hiragino Kaku Gothic ProN'}
-    p.p6 {margin/ 0.0px 0.0px 0.0px 0.0px; font/ 13.0px Courier; min-height/ 16.0px}
-    p.p7 {margin/ 0.0px 0.0px 0.0px 0.0px; font/ 13.0px 'Hiragino Kaku Gothic ProN'; min-height/ 20.0px}
-    p.p8 {margin/ 0.0px 0.0px 0.0px 0.0px; font/ 12.0px Helvetica}
-    p.p9 {margin/ 0.0px 0.0px 0.0px 0.0px; font/ 13.0px Courier; color/ #444444}
-    p.p10 {margin/ 0.0px 0.0px 0.0px 0.0px; font/ 13.0px Courier; color/ #444444; min-height/ 16.0px}
-    p.p11 {margin/ 0.0px 0.0px 0.0px 0.0px; font/ 13.0px 'Hiragino Kaku Gothic ProN'; color/ #444444}
-    p.p12 {margin/ 0.0px 0.0px 0.0px 0.0px; font/ 13.0px 'Hiragino Kaku Gothic ProN'; color/ #444444; min-height/ 20.0px}
-    span.s1 {color/ #444444; background-color/ #eeeeee}
-    span.s2 {font/ 12.0px 'Hiragino Kaku Gothic ProN'}
-    span.s3 {font/ 13.0px 'Hiragino Kaku Gothic ProN'}
-    span.s4 {font/ 13.0px Courier}
-    span.s5 {font/ 12.0px Courier; color/ #8b8c73}
-    span.s6 {font/ 12.0px Helvetica}
-    span.s7 {font/ 13.0px 'Hiragino Kaku Gothic ProN'; color/ #000000}
-    span.s8 {font/ 13.0px Arial}
-    span.Apple-tab-span {white-space/pre}
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Courier}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px 'Hiragino Kaku Gothic ProN'}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Courier; min-height: 16.0px}
+    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px 'Hiragino Kaku Gothic ProN'; min-height: 20.0px}
+    p.p8 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p9 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Courier; color: #444444}
+    p.p10 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Courier; color: #444444; min-height: 16.0px}
+    p.p11 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px 'Hiragino Kaku Gothic ProN'; color: #444444}
+    p.p12 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px 'Hiragino Kaku Gothic ProN'; color: #444444; min-height: 20.0px}
+    span.s1 {color: #444444; background-color: #eeeeee}
+    span.s2 {font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    span.s3 {font: 13.0px 'Hiragino Kaku Gothic ProN'}
+    span.s4 {font: 13.0px Courier}
+    span.s5 {font: 12.0px Courier; color: #8b8c73}
+    span.s6 {font: 12.0px Helvetica}
+    span.s7 {font: 13.0px 'Hiragino Kaku Gothic ProN'; color: #000000}
+    span.s8 {font: 13.0px Arial}
+    span.Apple-tab-span {white-space:pre}
   style>
 head>
 <body>
@@ -71,7 +71,7 @@ head>
 <p class="p3"><span class="Apple-tab-span">	span>次の２点で対応。p>
 <p class="p2"><span class="Apple-tab-span">	span>p>
 <p class="p3"><span class="Apple-tab-span">	span>→ビルドに使用するsbt自体の設定を、少し弄ってみた。p>
-<p class="p3"><span class="Apple-tab-span">	span><span class="Apple-tab-span">	span>-XX/+CMSClassUnloadingEnabled -XX/MaxPermSize=256mp>
+<p class="p3"><span class="Apple-tab-span">	span><span class="Apple-tab-span">	span>-XX:+CMSClassUnloadingEnabled -XX:MaxPermSize=256mp>
 <p class="p2"><span class="Apple-tab-span">	span>p>
 <p class="p3"><span class="Apple-tab-span">	span>→個別にビルドp>
 <p class="p3"><span class="Apple-tab-span">	span><span class="Apple-tab-span">	span>publish-local, proguard,sxr,doc<span class="s1">のspan>４構成なので、個別にp>
@@ -81,7 +81,7 @@ head>
 <p class="p3"><b>セットアップと試しb>p>
 <p class="p4"><span class="s2"><span class="Apple-tab-span">	span>span>mkdir hellop>
 <p class="p4"><span class="Apple-tab-span">	span>cd hellop>
-<p class="p4"><span class="s2"><span class="Apple-tab-span">	span>span>echo 'object Hi { def main(args/ Array[String]) = println("Hi!") }' &gt; hw.scalap>
+<p class="p4"><span class="s2"><span class="Apple-tab-span">	span>span>echo 'object Hi { def main(args: Array[String]) = println("Hi!") }' &gt; hw.scalap>
 <p class="p4"><span class="Apple-tab-span">	span>sbt<span class="s3">　span>p>
 <p class="p5"><span class="s4"><span class="Apple-tab-span">	span>span>とかやると、初回であればいろんなコンポーネントを取得して来る。p>
 <p class="p6"><span class="Apple-tab-span">	span>p>
@@ -111,7 +111,7 @@ head>
 <p class="p5"><span class="Apple-tab-span">	span>ビルドして起動する。p>
 <p class="p5"><span class="Apple-tab-span">	span><span class="Apple-tab-span">	span>[info] Running Hi<span class="Apple-converted-space"> span>p>
 <p class="p5"><span class="Apple-tab-span">	span><span class="Apple-tab-span">	span>Hi!p>
-<p class="p5"><span class="Apple-tab-span">	span><span class="Apple-tab-span">	span>[success] Total time/ 1 s, completed 201125 11/03/08p>
+<p class="p5"><span class="Apple-tab-span">	span><span class="Apple-tab-span">	span>[success] Total time: 1 s, completed 201125 11:03:08p>
 <p class="p7"><span class="Apple-tab-span">	span><span class="Apple-tab-span">	span>p>
 <p class="p7"><br>p>
 <p class="p7"><br>p>

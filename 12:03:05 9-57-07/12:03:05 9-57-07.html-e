@@ -7,15 +7,15 @@
   <meta name="Generator" content="rtfd handling Cocoa HTML Writer">
   <meta name="CocoaVersion" content="1138.23">
   <style type="texcss">
-    p.p1 {margin/ 0.0px 0.0px 0.0px 0.0px; font/ 22.0px 'Hiragino Kaku Gothic ProN'}
-    p.p2 {margin/ 0.0px 0.0px 0.0px 0.0px; font/ 12.0px 'Hiragino Kaku Gothic ProN'; min-height/ 18.0px}
-    p.p3 {margin/ 0.0px 0.0px 0.0px 0.0px; font/ 12.0px 'Hiragino Kaku Gothic ProN'}
-    p.p4 {margin/ 0.0px 0.0px 0.0px 0.0px; font/ 12.0px Helvetica,Arial}
-    p.p5 {margin/ 0.0px 0.0px 0.0px 0.0px; font/ 12.0px Helvetica,Arial; min-height/ 14.0px}
-    span.s1 {font/ 12.0px Helvetica,Arial}
-    span.s2 {font/ 12.0px 'Hiragino Kaku Gothic ProN'}
-    span.s3 {font/ 18.0px 'Hiragino Kaku Gothic ProN'}
-    span.Apple-tab-span {white-space/pre}
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica,Arial}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica,Arial; min-height: 14.0px}
+    span.s1 {font: 12.0px Helvetica,Arial}
+    span.s2 {font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    span.s3 {font: 18.0px 'Hiragino Kaku Gothic ProN'}
+    span.Apple-tab-span {white-space:pre}
   style>
 head>
 <body>
@@ -37,18 +37,18 @@ head>
 <p class="p3"><span class="Apple-tab-span">	span><span class="Apple-tab-span">	span>source go.shp>
 <p class="p2"><br>p>
 <p class="p2"><span class="Apple-tab-span">	span>p>
-<p class="p3">somewhere/forge-tools someone$ source go.shp>
+<p class="p3">somewhere:forge-tools someone$ source go.shp>
 <p class="p2"><br>p>
 <p class="p3">Welcome to the Forge development environment!p>
 <p class="p2"><br>p>
-<p class="p3">To get started, change to a fresh directory for your app, then run/ forge createp>
+<p class="p3">To get started, change to a fresh directory for your app, then run: forge createp>
 <p class="p2"><span class="Apple-tab-span">	span><span class="Apple-tab-span">	span>p>
 <p class="p3"><span class="Apple-tab-span">	span><b>RuntimeにPython2.x系が必要。b>macだと最初から入ってると思います。p>
 <p class="p3"><span class="Apple-tab-span">	span>解凍した時点でこんな感じp>
 <p class="p4"><img src="im%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202012-03-05%209.58.42.png" alt="スクリーンショット 2012-03-05 9.58.42.png">p>
 <p class="p2"><br>p>
 <p class="p3"><b>アプリケーション作成b>p>
-<p class="p3"><span class="Apple-tab-span">	span>"To get started, change to a fresh directory for your app, then run/ forge create"p>
+<p class="p3"><span class="Apple-tab-span">	span>"To get started, change to a fresh directory for your app, then run: forge create"p>
 <p class="p3"><span class="Apple-tab-span">	span>っつーことなので、p>
 <p class="p2"><span class="Apple-tab-span">	span>p>
 <p class="p3"><span class="Apple-tab-span">	span><span class="Apple-tab-span">	span>mkdir .testAppp>
@@ -56,17 +56,17 @@ head>
 <p class="p3"><span class="Apple-tab-span">	span>で、p>
 <p class="p3"><span class="Apple-tab-span">	span><span class="Apple-tab-span">	span>forge create　p>
 <p class="p2"><br>p>
-<p class="p3">(forge-environment)somewhere/testApp someone$ forge createp>
+<p class="p3">(forge-environment)somewhere:testApp someone$ forge createp>
 <p class="p3">[ <span class="Apple-converted-space">  span>INFO] Forge tools running at version 2.6.2_p>
-<p class="p3">[ <span class="Apple-converted-space">  span>INFO] Update result/ you already have the latest toolsp>
-<p class="p3">Enter app name/ TestAppp>
-<p class="p3">Your email address/ sassembla@hotmail.comp>
-<p class="p3">Password/<span class="Apple-converted-space"> span>p>
+<p class="p3">[ <span class="Apple-converted-space">  span>INFO] Update result: you already have the latest toolsp>
+<p class="p3">Enter app name: TestAppp>
+<p class="p3">Your email address: sassembla@hotmail.comp>
+<p class="p3">Password:<span class="Apple-converted-space"> span>p>
 <p class="p3">[ <span class="Apple-converted-space">  span>INFO] authenticating as "sassembla@hotmail.com"p>
 <p class="p3">[ <span class="Apple-converted-space">  span>INFO] authentication successfulp>
 <p class="p3">[ <span class="Apple-converted-space">  span>INFO] Registering new app "TestApp" with trigger.io...p>
 <p class="p3">[ <span class="Apple-converted-space">  span>INFO] Fetching initial project templatep>
-<p class="p3">[ <span class="Apple-converted-space">  span>INFO] App structure created. To proceed/p>
+<p class="p3">[ <span class="Apple-converted-space">  span>INFO] App structure created. To proceed:p>
 <p class="p3">[ <span class="Apple-converted-space">  span>INFO] 1) Put your code in the "src" folderp>
 <p class="p3">[ <span class="Apple-converted-space">  span>INFO] 2) Run forge build to make a buildp>
 <p class="p3">[ <span class="Apple-converted-space">  span>INFO] 3) Run forge run to test out your buildp>
@@ -81,8 +81,8 @@ head>
 <p class="p3"><span class="Apple-tab-span">	span>forge buildp>
 <p class="p2"><br>p>
 <p class="p3">[ <span class="Apple-converted-space">  span>INFO] Forge tools running at version 2.6.2p>
-<p class="p3">[ <span class="Apple-converted-space">  span>INFO] configuration has changed/ creating new templatesp>
-<p class="p3">[ <span class="Apple-converted-space">  span>INFO] Update result/ you already have the latest toolsp>
+<p class="p3">[ <span class="Apple-converted-space">  span>INFO] configuration has changed: creating new templatesp>
+<p class="p3">[ <span class="Apple-converted-space">  span>INFO] Update result: you already have the latest toolsp>
 <p class="p3">[ <span class="Apple-converted-space">  span>INFO] Starting new buildp>
 <p class="p3">[ <span class="Apple-converted-space">  span>INFO] Build 2537 started...p>
 <p class="p3">[ <span class="Apple-converted-space">  span>INFO] This could take a while, but will only happen again if you modify config.jsonp>
@@ -93,7 +93,7 @@ head>
 <p class="p3">[ <span class="Apple-converted-space">  span>INFO] creating output directory ".template"p>
 <p class="p3">[ <span class="Apple-converted-space">  span>INFO] fetched build into UsersassemblDownloadtestAp.templatchrome", UsersassemblDownloadtestAp.templatandroid", UsersassemblDownloadtestAp.templatios"p>
 <p class="p3">[ <span class="Apple-converted-space">  span>INFO] fetching generation instructions for build 2537 into .templatgenerate_dynamicp>
-<p class="p3">[ <span class="Apple-converted-space">  span>INFO] enabled platforms/ ['android', 'chrome', 'ios']p>
+<p class="p3">[ <span class="Apple-converted-space">  span>INFO] enabled platforms: ['android', 'chrome', 'ios']p>
 <p class="p3">[ <span class="Apple-converted-space">  span>INFO] &lt;Build (android, chrome, ios)&gt; running...p>
 <p class="p3">[ <span class="Apple-converted-space">  span>INFO] reading app code fromUsersassemblDownloadtestApsrcp>
 <p class="p3">[ <span class="Apple-converted-space">  span>INFO] writing new app toUsersassemblDownloadtestApdevelopmentp>
@@ -104,14 +104,14 @@ head>
 <p class="p3"><b>Runb>p>
 <p class="p4"><span class="Apple-tab-span">	span>forge run iosp>
 <p class="p4">[ <span class="Apple-converted-space">  span>INFO] Forge tools running at version 2.6.2p>
-<p class="p4">[ <span class="Apple-converted-space">  span>INFO] enabled platforms/ ['android', 'chrome', 'ios']p>
+<p class="p4">[ <span class="Apple-converted-space">  span>INFO] enabled platforms: ['android', 'chrome', 'ios']p>
 <p class="p4">[ <span class="Apple-converted-space">  span>INFO] &lt;Build (android, chrome, ios)&gt; running...p>
 <p class="p4">[ <span class="Apple-converted-space">  span>INFO] reading app code fromUser<span class="s2">sassemblaspanDesktotestApsrcp>
 <p class="p4">[ <span class="Apple-converted-space">  span>INFO] writing new app toUser<span class="s2">sassemblaspanDesktotestApdevelopmentp>
 <p class="p4">[ <span class="Apple-converted-space">  span>INFO] simulator pid is 41242p>
-<p class="p4">2012-03-05 13/13/21.940 iPhone Simulator[41242/707] NSUnscaledWindowMask is deprecated and will be ignored.p>
-<p class="p4">[ <span class="Apple-converted-space">  span>INFO] pid for iPhone app is/ 41252p>
-<p class="p4">[ <span class="Apple-converted-space">  span>INFO] Showing log output/p>
+<p class="p4">2012-03-05 13:13:21.940 iPhone Simulator[41242:707] NSUnscaledWindowMask is deprecated and will be ignored.p>
+<p class="p4">[ <span class="Apple-converted-space">  span>INFO] pid for iPhone app is: 41252p>
+<p class="p4">[ <span class="Apple-converted-space">  span>INFO] Showing log output:p>
 <p class="p5"><br>p>
 <p class="p3"><span class="Apple-tab-span">	span>ここでSimulator起動p>
 <p class="p4"><img src="im%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202012-03-05%2013.14.13.png" alt="スクリーンショット 2012-03-05 13.14.13.png">p>
@@ -137,7 +137,7 @@ head>
 <p class="p2"><br>p>
 <p class="p3"><span class="Apple-tab-span">	span>forge package iosp>
 <p class="p3">[ <span class="Apple-converted-space">  span>INFO] Forge tools running at version 3.0.1p>
-<p class="p3">[ <span class="Apple-converted-space">  span>INFO] enabled platforms/ ['ios']p>
+<p class="p3">[ <span class="Apple-converted-space">  span>INFO] enabled platforms: ['ios']p>
 <p class="p3">[ <span class="Apple-converted-space">  span>INFO] &lt;ForgeTask (ios)&gt; running...p>
 <p class="p3">[ <span class="Apple-converted-space">  span>INFO] reading app code fromUsersassemblDesktoforge-toolsamplsrcp>
 <p class="p3">[ <span class="Apple-converted-space">  span>INFO] writing new app toUsersassemblDesktoforge-toolsampldevelopmentp>
@@ -146,17 +146,17 @@ head>
 <p class="p3">[ <span class="Apple-converted-space">  span>INFO] Verifying your configuration settings...p>
 <p class="p3">[ <span class="Apple-converted-space">  span>INFO] Configuration settings check completep>
 <p class="p3">[ <span class="Apple-converted-space">  span>INFO] Starting package process for iOSp>
-<p class="p3">[ <span class="Apple-converted-space">  span>INFO] going to package/UsersassemblDesktoforge-toolsampldevelopmeniodevice-io.trigger.forgef81472a869ef11e19a1b12313d1adcbe.appp>
-<p class="p3">[<span class="Apple-converted-space">  span>ERROR] [Errno 2] No such file or directory/ u'' while running package_ios((), {})p>
-<p class="p3">[<span class="Apple-converted-space">  span>ERROR] Something went wrong that we didn't expect/p>
-<p class="p3">[<span class="Apple-converted-space">  span>ERROR] [Errno 2] No such file or directory/ u''p>
+<p class="p3">[ <span class="Apple-converted-space">  span>INFO] going to package:UsersassemblDesktoforge-toolsampldevelopmeniodevice-io.trigger.forgef81472a869ef11e19a1b12313d1adcbe.appp>
+<p class="p3">[<span class="Apple-converted-space">  span>ERROR] [Errno 2] No such file or directory: u'' while running package_ios((), {})p>
+<p class="p3">[<span class="Apple-converted-space">  span>ERROR] Something went wrong that we didn't expect:p>
+<p class="p3">[<span class="Apple-converted-space">  span>ERROR] [Errno 2] No such file or directory: u''p>
 <p class="p3">[<span class="Apple-converted-space">  span>ERROR] SeeUsersassemblDesktoforge-toolsamplforge-error.log for more detailsp>
 <p class="p3">[<span class="Apple-converted-space">  span>ERROR] Please contact support@trigger.iop>
 <p class="p2"><br>p>
 <p class="p3"><span class="Apple-tab-span">	span>以上。p>
 <p class="p3"><span class="Apple-tab-span">	span>俺の旅は終わった。p>
 <p class="p2"><br>p>
-<p class="p3">backTo/p>
+<p class="p3">backTo:p>
 <p class="p3">https/github.cosassemblPublicommidf5402c0ab93242d0daf02b6185deddc7be29a6dp>
 <p class="p2"><span class="Apple-tab-span">	span>p>
 body>

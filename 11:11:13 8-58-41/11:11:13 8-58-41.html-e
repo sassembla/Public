@@ -7,25 +7,25 @@
   <meta name="Generator" content="rtfd handling Cocoa HTML Writer">
   <meta name="CocoaVersion" content="1138.23">
   <style type="texcss">
-    p.p1 {margin/ 0.0px 0.0px 0.0px 0.0px; font/ 22.0px 'Hiragino Kaku Gothic ProN'}
-    p.p2 {margin/ 0.0px 0.0px 12.0px 0.0px; font/ 14.0px 'Hiragino Kaku Gothic ProN'}
-    p.p3 {margin/ 0.0px 0.0px 0.0px 0.0px; font/ 14.0px 'Hiragino Kaku Gothic ProN'}
-    p.p4 {margin/ 0.0px 0.0px 12.0px 0.0px; font/ 14.0px 'Hiragino Kaku Gothic ProN'; min-height/ 21.0px}
-    p.p5 {margin/ 0.0px 0.0px 0.0px 0.0px; font/ 14.0px 'Hiragino Kaku Gothic ProN'; min-height/ 21.0px}
-    p.p6 {margin/ 0.0px 0.0px 12.0px 0.0px; font/ 19.0px 'Hiragino Kaku Gothic ProN'; min-height/ 29.0px}
-    p.p7 {margin/ 0.0px 0.0px 12.0px 0.0px; font/ 14.0px 'Hiragino Kaku Gothic ProN'; color/ #1400c0}
-    p.p8 {margin/ 0.0px 0.0px 12.0px 0.0px; font/ 14.0px 'Hiragino Kaku Gothic ProN'; color/ #407f5e}
-    p.p9 {margin/ 0.0px 0.0px 0.0px 0.0px; font/ 19.0px 'Hiragino Kaku Gothic ProN'; min-height/ 29.0px}
-    p.p10 {margin/ 0.0px 0.0px 0.0px 0.0px; font/ 12.0px Helvetica,Arial}
-    p.p11 {margin/ 0.0px 0.0px 12.0px 0.0px; font/ 22.0px 'Hiragino Kaku Gothic ProN'}
-    p.p12 {margin/ 0.0px 0.0px 12.0px 0.0px; font/ 19.0px 'Hiragino Kaku Gothic ProN'}
-    span.s1 {color/ #7f0055}
-    span.s2 {color/ #1400c0}
-    span.s3 {color/ #2a02ff}
-    span.s4 {color/ #000000}
-    span.s5 {font/ 12.0px Helvetica,Arial}
-    span.s6 {font/ 14.0px 'Hiragino Kaku Gothic ProN'}
-    span.Apple-tab-span {white-space/pre}
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 12.0px 0.0px; font: 14.0px 'Hiragino Kaku Gothic ProN'}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px 'Hiragino Kaku Gothic ProN'}
+    p.p4 {margin: 0.0px 0.0px 12.0px 0.0px; font: 14.0px 'Hiragino Kaku Gothic ProN'; min-height: 21.0px}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px 'Hiragino Kaku Gothic ProN'; min-height: 21.0px}
+    p.p6 {margin: 0.0px 0.0px 12.0px 0.0px; font: 19.0px 'Hiragino Kaku Gothic ProN'; min-height: 29.0px}
+    p.p7 {margin: 0.0px 0.0px 12.0px 0.0px; font: 14.0px 'Hiragino Kaku Gothic ProN'; color: #1400c0}
+    p.p8 {margin: 0.0px 0.0px 12.0px 0.0px; font: 14.0px 'Hiragino Kaku Gothic ProN'; color: #407f5e}
+    p.p9 {margin: 0.0px 0.0px 0.0px 0.0px; font: 19.0px 'Hiragino Kaku Gothic ProN'; min-height: 29.0px}
+    p.p10 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica,Arial}
+    p.p11 {margin: 0.0px 0.0px 12.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p12 {margin: 0.0px 0.0px 12.0px 0.0px; font: 19.0px 'Hiragino Kaku Gothic ProN'}
+    span.s1 {color: #7f0055}
+    span.s2 {color: #1400c0}
+    span.s3 {color: #2a02ff}
+    span.s4 {color: #000000}
+    span.s5 {font: 12.0px Helvetica,Arial}
+    span.s6 {font: 14.0px 'Hiragino Kaku Gothic ProN'}
+    span.Apple-tab-span {white-space:pre}
   style>
 head>
 <body>
@@ -49,7 +49,7 @@ Objective-Cとか。<span class="Apple-converted-space"> span>p>
 <p class="p2"><b><span class="Apple-tab-span">	span>b>https/gitorious.ormessengersystem-gwt#morep>
 <p class="p2"><span class="Apple-tab-span">	span>DLして→importして、、って、コレからサクッとやってみます。<span class="Apple-converted-space"> span>p>
 <p class="p2"><span class="Apple-tab-span">	span>ScreenCastにあるので、まあ解説がてら。p>
-<p class="p2"><span class="Apple-tab-span">	span>git clone git@gitorious.org/messengersystem-gwmessengersystem-gwt.gitp>
+<p class="p2"><span class="Apple-tab-span">	span>git clone git@gitorious.org:messengersystem-gwmessengersystem-gwt.gitp>
 <p class="p2"><span class="Apple-tab-span">	span>→Eclipseのプロジェクトなので、Eclipseにimportp>
 <p class="p6"><b>b><br>p>
 <p class="p2"><b>実行<br>
@@ -96,7 +96,7 @@ b><span class="Apple-tab-span">	span>各インスタンスからWindow.alertが�
 <p class="p2"><b>本題、メッセージング<br>
 b><span class="Apple-tab-span">	span>頑張って書いた、、んですが、 今朝見たらsampleにisolateってのがあってさ、、p>
 <p class="p11"><span class="s6"><span class="Apple-tab-span">	spanisolate<br>
-span><span class="Apple-tab-span">	span>作成日/20119 by Googlep>
+span><span class="Apple-tab-span">	span>作成日:20119 by Googlep>
 <p class="p10"><img src="impage4image504.jpg" alt="page4image504.jpg">p>
 <p class="p11">なんやてぇぇぇp>
 <p class="p2"><span class="Apple-tab-span">	span>俺のミッション、終了のお知らせ。p>

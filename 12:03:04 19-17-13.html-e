@@ -7,14 +7,14 @@
   <meta name="Generator" content="Cocoa HTML Writer">
   <meta name="CocoaVersion" content="1138.23">
   <style type="texcss">
-    p.p1 {margin/ 0.0px 0.0px 0.0px 0.0px; font/ 22.0px 'Hiragino Kaku Gothic ProN'}
-    p.p2 {margin/ 0.0px 0.0px 0.0px 0.0px; font/ 12.0px 'Hiragino Kaku Gothic ProN'; min-height/ 18.0px}
-    p.p3 {margin/ 0.0px 0.0px 0.0px 0.0px; font/ 12.0px 'Hiragino Kaku Gothic ProN'}
-    p.p4 {margin/ 0.0px 0.0px 0.0px 0.0px; font/ 12.0px Courier; color/ #333233; background-color/ #f8f8f8}
-    p.p5 {margin/ 0.0px 0.0px 0.0px 0.0px; font/ 12.0px 'Hiragino Kaku Gothic ProN'; background-color/ #d6d6d6}
-    p.p6 {margin/ 0.0px 0.0px 0.0px 0.0px; font/ 12.0px 'Hiragino Kaku Gothic ProN'; background-color/ #d6d6d6; min-height/ 18.0px}
-    span.s1 {font/ 12.0px 'Hiragino Kaku Gothic ProN'; color/ #000000}
-    span.Apple-tab-span {white-space/pre}
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Courier; color: #333233; background-color: #f8f8f8}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #d6d6d6}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #d6d6d6; min-height: 18.0px}
+    span.s1 {font: 12.0px 'Hiragino Kaku Gothic ProN'; color: #000000}
+    span.Apple-tab-span {white-space:pre}
   style>
 head>
 <body>
@@ -74,12 +74,12 @@ head>
 <p class="p2"><br>p>
 <p class="p2"><br>p>
 <p class="p3"><span class="Apple-tab-span">	span>内容を記述p>
-<p class="p5">apply plugin/'java'p>
+<p class="p5">apply plugin:'java'p>
 <p class="p6"><br>p>
 <p class="p6"><br>p>
 <p class="p5"/add dependenncies into this build-rulep>
 <p class="p5">dependencies {p>
-<p class="p5"><span class="Apple-tab-span">	span>testCompile 'junit/junit/4.8.2'p>
+<p class="p5"><span class="Apple-tab-span">	span>testCompile 'junit:junit:4.8.2'p>
 <p class="p5">}p>
 <p class="p6"><br>p>
 <p class="p6"><br>p>
@@ -117,7 +117,7 @@ head>
 <p class="p2"><span class="Apple-tab-span">	span>p>
 <p class="p2"><br>p>
 <p class="p3"><b>build.gradle内容解説b>p>
-<p class="p3"><span class="Apple-tab-span">	span>・apply plugin/'java' で、javaだよーって宣言してます。p>
+<p class="p3"><span class="Apple-tab-span">	span>・apply plugin:'java' で、javaだよーって宣言してます。p>
 <p class="p3"><span class="Apple-tab-span">	span><span class="Apple-tab-span">	span>これによって、gradleが見るsrcとかtestとかのパスのルールが決定されています。p>
 <p class="p2"><br>p>
 <p class="p3"><span class="Apple-tab-span">	span>・dependencies には、依存している(以下略)p>
