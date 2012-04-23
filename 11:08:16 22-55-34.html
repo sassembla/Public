@@ -1,155 +1,155 @@
-<!DOCTYPE PUBLIC "/W3/DTD HTML 4.0/EN" "http/www.w3.orstrict.dtd">
->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
 <head>
-  <meta http-equiv="Content-Type" content="te; charset=utf-8">
-  <meta http-equiv="Content-Style-Type" content="texcss">
-  <title>title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
   <meta name="Generator" content="Cocoa HTML Writer">
   <meta name="CocoaVersion" content="1138.23">
-  <style type="texcss">
-    p.p1 {margin/ 0.0px 0.0px 0.0px 0.0px; font/ 22.0px 'Hiragino Kaku Gothic ProN'}
-    p.p2 {margin/ 0.0px 0.0px 0.0px 0.0px; font/ 12.0px 'Hiragino Kaku Gothic ProN'; min-height/ 18.0px}
-    p.p3 {margin/ 0.0px 0.0px 0.0px 0.0px; font/ 12.0px 'Hiragino Kaku Gothic ProN'}
-    span.Apple-tab-span {white-space/pre}
-  style>
-head>
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
 <body>
-<p class="p1"><b>GWTについてb>p>
-<p class="p2"><br>p>
-<p class="p3"><b>概要b>p>
-<p class="p3"><span class="Apple-tab-span">	span>GWTとは。p>
-<p class="p3"><span class="Apple-tab-span">	span>GoogleWebToolkit GWT (グウィット 2009年ころにIOで突如言い出してた気がする。)p>
-<p class="p3"><span class="Apple-tab-span">	span>Googleが作ったJava言語を利用したJSコンパイル技術。FWではない。Java to JSの変換技術。p>
-<p class="p3"><span class="Apple-tab-span">	span>JSCompilerp>
-<p class="p2"><span class="Apple-tab-span">	span>p>
-<p class="p3"><span class="Apple-tab-span">	span>・Javaで記述、コンパイル結果がJavaScript(JS)として実装、実働p>
-<p class="p3"><span class="Apple-tab-span">	span>・Javaのメソッドやクラスが使えるp>
-<p class="p3"><span class="Apple-tab-span">	span>・Eclipseなどと連携可能p>
-<p class="p3"><span class="Apple-tab-span">	span><span class="Apple-tab-span">	span>ステップ実行ができる、プラグインが使える、などなど鬼便利というかこれが肝コレだけコレが全てp>
-<p class="p3"><span class="Apple-tab-span">	span>・JUnitが使える、テストが可能p>
-<p class="p3"><span class="Apple-tab-span">	span>・JavaScript単体では書けないような範囲の物事を、Javaの型安全な世界で記述する事ができるp>
-<p class="p3"><span class="Apple-tab-span">	span>・JSのローディングやテストを、Javaに関連する世界で自動化できるp>
-<p class="p3"><span class="Apple-tab-span">	span>・あらかじめ用意されているライブラリがたくさんp>
-<p class="p3"><span class="Apple-tab-span">	span><span class="Apple-tab-span">	span>イベントリスナ、JSON、JSONP、GUI Widget(ダサい。ダサい。あとダサい。Apple並みとは言わないまでも、、)、p>
-<p class="p3"><span class="Apple-tab-span">	span><span class="Apple-tab-span">	span>Canvas、Sound、他p>
-<p class="p3"><span class="Apple-tab-span">	span>・JSも使える Java中JS、JS中Javaが可能p>
-<p class="p3"><span class="Apple-tab-span">	span><span class="Apple-tab-span">	span>JSNI(JavaScriptNativeInterface)p>
-<p class="p2"><br>p>
-<p class="p2"><br>p>
-<p class="p3"><b>落とし穴もがっちりあるb>p>
-<p class="p3"><span class="Apple-tab-span">	span>JavaかとおもったらJSだった。何を言っているかわからねーと思うが(ryp>
-<p class="p2"><span class="Apple-tab-span">	span>p>
-<p class="p3"><span class="Apple-tab-span">	span>・変換不可能なクラスもあるp>
-<p class="p3"><span class="Apple-tab-span">	span><span class="Apple-tab-span">	span>日付に関するクラスとかが無い。めんどかったんだと思うが。p>
-<p class="p2"><span class="Apple-tab-span">	span><span class="Apple-tab-span">	span><span class="Apple-tab-span">	span>p>
-<p class="p3"><span class="Apple-tab-span">	span>・Widgetが破滅的にダサいp>
-<p class="p3"><span class="Apple-tab-span">	span><span class="Apple-tab-span">	span>グラフィカルな面で本当に残念です。ありがとうございます。p>
-<p class="p2"><br>p>
-<p class="p3"><span class="Apple-tab-span">	span>・ロードとstaticの関係p>
-<p class="p3"><span class="Apple-tab-span">	span><span class="Apple-tab-span">	span>staticなどを使うと、優先的にLoadingが組まれる。結果として、名前空間が効かないポイントが生まれたりする。p>
-<p class="p3"><span class="Apple-tab-span">	span><span class="Apple-tab-span">	span>Javaであればリフレクションなどの手段で明確にアクセスできるところ、偶然名前が一致して衝突、などがあり得る。p>
-<p class="p2"><br>p>
-<p class="p3"><span class="Apple-tab-span">	span>・イベントの解除などはJSの癖を引きずるp>
-<p class="p3"><span class="Apple-tab-span">	span><span class="Apple-tab-span">	span>イベントへのアイデンティファイに対して、制約が多い。根源がJSのリスナなのでしょうがない。p>
-<p class="p3"><span class="Apple-tab-span">	span><span class="Apple-tab-span">	span>具体的には、特定のオブジェクトのみリスナから外す、という事ができない。p>
-<p class="p3"><span class="Apple-tab-span">	span><span class="Apple-tab-span">	span>オブジェクトが帰属するクラス単位でのリスナがごっそりと消える。p>
-<p class="p3"><span class="Apple-tab-span">	span><span class="Apple-tab-span">	span>(リスなのアイデンティファイに着いて、それ以上小さな単位でのアイデンティファイができない)p>
-<p class="p2"><br>p>
-<p class="p3"><span class="Apple-tab-span">	span>・JSNIはJSなので何が起こってもおかしく無いし補完が効かないp>
-<p class="p3"><span class="Apple-tab-span">	span><span class="Apple-tab-span">	span>オハコンの中のオワコンp>
-<p class="p2"><br>p>
-<p class="p2"><br>p>
-<p class="p3"><b>ところでJavaScriptとはなんだったのかb>p>
-<p class="p3"><span class="Apple-tab-span">	span>GWTのようなJSCompilerが生まれた経緯を推察してみる。p>
-<p class="p2"><span class="Apple-tab-span">	span>p>
-<p class="p3"><span class="Apple-tab-span">	span>JSとは、p>
-<p class="p3"><span class="Apple-tab-span">	span>HashMap a ... bp>
-<p class="p3"><span class="Apple-tab-span">	span>b ( =a)p>
-<p class="p3"><span class="Apple-tab-span">	span>a ( =b)p>
-<p class="p3"><span class="Apple-tab-span">	span>a(function b()) など。p>
-<p class="p2"><span class="Apple-tab-span">	span>p>
-<p class="p3"><span class="Apple-tab-span">	span>何でも連鎖マップに入れられ、発火させられる言語p>
-<p class="p3"><span class="Apple-tab-span">	span><span class="Apple-tab-span">	span>→他の言語でやっている様々な事が、ほぼ、JSでもって、JSを使って、JSの上で実装可能。p>
-<p class="p2"><span class="Apple-tab-span">	span><span class="Apple-tab-span">	span>p>
-<p class="p3">ここに闇があるp>
-<p class="p3"><span class="Apple-tab-span">	span>☆他の言語でやっている様々な事が、ほぼ、JSでもって、JSを使って、JSの上で実装可能。p>
-<p class="p2"><span class="Apple-tab-span">	span><span class="Apple-tab-span">	span>p>
-<p class="p3"><span class="Apple-tab-span">	span><span class="Apple-tab-span">	span>→言語の中に、同じ言語を使って、機能や仕組みを実装する、という行為には、元来無理があるp>
-<p class="p2"><br>p>
-<p class="p3"><span class="Apple-tab-span">	span>だって元々その言語に無いのだもの。p>
-<p class="p3"><span class="Apple-tab-span">	span>・内部にむき出しの実装が増える事によって、トラブルが増えるp>
-<p class="p3"><span class="Apple-tab-span">	span><span class="Apple-tab-span">	span>「実装した機能」それ自体の<b>実装b>に触る事ができてしまうp>
-<p class="p3"><span class="Apple-tab-span">	span><span class="Apple-tab-span">	span>e.g. C++のスマートポインタ、Javaのメッセージングp>
-<p class="p2"><span class="Apple-tab-span">	span><span class="Apple-tab-span">	span>p>
-<p class="p3"><span class="Apple-tab-span">	span><span class="Apple-tab-span">	span>JavaScriptの場合は、元来無いものが非常に多い。p>
-<p class="p3"><span class="Apple-tab-span">	span><span class="Apple-tab-span">	span>名前空間(致命傷)、クラス、メッセージング、自己環境把握概念p>
-<p class="p2"><br>p>
-<p class="p3"><span class="Apple-tab-span">	span>・実装機能と自分が書き足したものとの区別がつくのは今この瞬間の書いている自分だけp>
-<p class="p3"><span class="Apple-tab-span">	span><span class="Apple-tab-span">	span>a = a+b;p>
-<p class="p3"><span class="Apple-tab-span">	span><span class="Apple-tab-span">	span>a = a+b+c;p>
-<p class="p3"><span class="Apple-tab-span">	span><span class="Apple-tab-span">	span>1D後、1W後、1Y後に見て、何処が「足された部分」かわかりますか？　ッつー話。p>
-<p class="p2"><br>p>
-<p class="p3"><span class="Apple-tab-span">	span>・トラブルを起こさないように実装するには、階層を分けてのFW化(e.g. RoR)、ルール化が有用だが、。p>
-<p class="p3"><span class="Apple-tab-span">	span><span class="Apple-tab-span">	span>フォルダなどによる階層化が不可能→JSには「ブラウザに直接読み込まれる」という制約がある。これは致命傷。p>
-<p class="p3"><span class="Apple-tab-span">	span><span class="Apple-tab-span">	span>ルールが増える事(ルール爆発)は自殺行為→多彩なルールを守る事にコストがかかってしまう。しかもそれは永遠に続くp>
-<p class="p2"><br>p>
-<p class="p2"><br>p>
-<p class="p3"><span class="Apple-tab-span">	span>→解決策として、コンパイル　という「改変」行程が選ばれる。p>
-<p class="p3"><span class="Apple-tab-span">	span><span class="Apple-tab-span">	span>JSをコンパイルの結果として作りあげる技術たち JSCompilerp>
-<p class="p2"><span class="Apple-tab-span">	span><span class="Apple-tab-span">	span>p>
-<p class="p3"><span class="Apple-tab-span">	span><span class="Apple-tab-span">	span>Google Closure<span class="Apple-tab-span">	span>(JS to JS コンパイル)p>
-<p class="p3"><span class="Apple-tab-span">	span><span class="Apple-tab-span">	span><span class="Apple-tab-span">	span>強くルール付けされた構造を模倣する事でのプラグイン化p>
-<p class="p3"><span class="Apple-tab-span">	span><span class="Apple-tab-span">	span><span class="Apple-tab-span">	span>自己制約をパッケージ化するp>
-<p class="p2"><br>p>
-<p class="p3"><span class="Apple-tab-span">	span><span class="Apple-tab-span">	span>CoffeeScript<span class="Apple-tab-span">	span><span class="Apple-tab-span">	span>(Coffee to JS コンパイル)p>
-<p class="p3"><span class="Apple-tab-span">	span><span class="Apple-tab-span">	span><span class="Apple-tab-span">	span>JSの穴をあらかじめ殺した記法での記述と、コンパイル処理による最適化、ネームスペースの補助p>
-<p class="p3"><span class="Apple-tab-span">	span><span class="Apple-tab-span">	span><span class="Apple-tab-span">	span>RoR3系で色々動きがあるらしいが？よく知らない。これからJSをどうしても書かなければ行けない分野では来ると思う。p>
-<p class="p2"><br>p>
-<p class="p3"><span class="Apple-tab-span">	span><span class="Apple-tab-span">	span>GWT<span class="Apple-tab-span">	span><span class="Apple-tab-span">	span><span class="Apple-tab-span">	span>(Java to JavaScript コンパイル)p>
-<p class="p3"><span class="Apple-tab-span">	span><span class="Apple-tab-span">	span><span class="Apple-tab-span">	span>Googleが用意した特定のクラス、メソッドがJSに変換される。p>
-<p class="p3"><span class="Apple-tab-span">	span><span class="Apple-tab-span">	span><span class="Apple-tab-span">	span>コンパイル処理による最適化、パッケージによるネームスペース明示、p>
-<p class="p3"><span class="Apple-tab-span">	span><span class="Apple-tab-span">	span><span class="Apple-tab-span">	span>staticによるシングルトン明示などができる。p>
-<p class="p3"><span class="Apple-tab-span">	span><span class="Apple-tab-span">	span><span class="Apple-tab-span">	span>おまけでブラウザ間の差異を勝手に吸収する。p>
-<p class="p3"><span class="Apple-tab-span">	span><span class="Apple-tab-span">	span><span class="Apple-tab-span">	span>Java言語自体に素敵さが足りないので、後述のJSCompilerたちの方が先があると思う。p>
-<p class="p2"><br>p>
-<p class="p3"><span class="Apple-tab-span">	span><span class="Apple-tab-span">	span>Pyjamas<span class="Apple-tab-span">	span><span class="Apple-tab-span">	span><span class="Apple-tab-span">	span>(Python to JS コンパイル)p>
-<p class="p3"><span class="Apple-tab-span">	span><span class="Apple-tab-span">	span><span class="Apple-tab-span">	span>触った事無いからわからんp>
-<p class="p2"><br>p>
-<p class="p3"><span class="Apple-tab-span">	span><span class="Apple-tab-span">	span>ClojureScript<span class="Apple-tab-span">	span><span class="Apple-tab-span">	span>(Clojure to JS コンパイル)p>
-<p class="p3"><span class="Apple-tab-span">	span><span class="Apple-tab-span">	span><span class="Apple-tab-span">	span>さわり中　まだよくわからんp>
-<p class="p2"><br>p>
-<p class="p3"><span class="Apple-tab-span">	span><span class="Apple-tab-span">	span>ScalaJS<span class="Apple-tab-span">	span><span class="Apple-tab-span">	span><span class="Apple-tab-span">	span>(Scala to JS コンパイル　？　未登場)p>
-<p class="p3"><span class="Apple-tab-span">	span><span class="Apple-tab-span">	span><span class="Apple-tab-span">	span>まだ無いのでわからん<span class="Apple-tab-span">	span>本命。p>
-<p class="p2"><br>p>
-<p class="p2"><br>p>
-<p class="p3"><b>A to JavaScript の利点b>p>
-<p class="p3"><span class="Apple-tab-span">	span>とあるA言語の能力 &gt;&gt;&gt;&gt;&gt;&gt; JSの能力　である前提がある。p>
-<p class="p2"><span class="Apple-tab-span">	span>p>
-<p class="p3"><span class="Apple-tab-span">	span>Aという言語があり、ルール的にJavaScriptよりも厳格　かつ、機能が定義されているとする。p>
-<p class="p3"><span class="Apple-tab-span">	span>名前空間、記法制限、型、演算子、メッセージング、クラス、構造体、列挙子、、、p>
-<p class="p2"><br>p>
-<p class="p3"><span class="Apple-tab-span">	span>これらを、その言語で書き、JSにコンパイルする。p>
-<p class="p2"><br>p>
-<p class="p3"><span class="Apple-tab-span">	span>元々のAという言語にある機能を、Aという言語の記法で使う範囲でのみ担保すればいい。p>
-<p class="p3"><span class="Apple-tab-span">	span>→最終的に出力されるJSには、手を触れる事が無い(あるとしたらA to JSコンパイラのバグとか不備)p>
-<p class="p2"><span class="Apple-tab-span">	span><span class="Apple-tab-span">	span>p>
-<p class="p2"><span class="Apple-tab-span">	span>p>
-<p class="p3"><span class="Apple-tab-span">	span>例えばクラスをJSで実装する場合、p>
-<p class="p3"><span class="Apple-tab-span">	span>JSで直に実装→JSを書く際に、その自己定義した構造にあわせたreadとwriteが必要になるp>
-<p class="p3"><span class="Apple-tab-span">	span><span class="Apple-tab-span">	span>→ルールを言語の内側につくるので、さらに内側に書くしかない。p>
-<p class="p2"><br>p>
-<p class="p3"><span class="Apple-tab-span">	span>他言語で書く場合p>
-<p class="p3"><span class="Apple-tab-span">	span><span class="Apple-tab-span">	span>→ルールは記述時言語側が持っているため、書き手は意識しないでいい。p>
-<p class="p3"><span class="Apple-tab-span">	span><span class="Apple-tab-span">	span>→コンパイルされた結果は、ルールが構築されたJSの中に、手続きが記述された状態になる。p>
-<p class="p3"><span class="Apple-tab-span">	span><span class="Apple-tab-span">	span><span class="Apple-tab-span">	span>→結果は同じであっても、人が煩わされる行程が減っている、自動化できている事に注目。p>
-<p class="p2"><span class="Apple-tab-span">	span><span class="Apple-tab-span">	span><span class="Apple-tab-span">	span>p>
-<p class="p2"><br>p>
-<p class="p3"><b>今の俺の結論b>p>
-<p class="p3"><span class="Apple-tab-span">	span>JSオワコン。JSCompilerオハコン。p>
-<p class="p3"><span class="Apple-tab-span">	span>言語の中に言語で機能を追加する副作用を回避できる。p>
-<p class="p3"><span class="Apple-tab-span">	span>ブラウザで動く言語がJSに限られている事が一因だが、今後は異なるといいなーとか。JSのライブラリ化とか進むといいなー。p>
-<p class="p2"><span class="Apple-tab-span">	span>p>
-<p class="p2"><br>p>
-<p class="p2"><br>p>
-body>
-html>
+<p class="p1"><b>GWTについて</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>GWTとは。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>GoogleWebToolkit GWT (グウィット 2009年ころにIOで突如言い出してた気がする。)</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Googleが作ったJava言語を利用したJSコンパイル技術。FWではない。Java to JSの変換技術。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>JSCompiler</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・Javaで記述、コンパイル結果がJavaScript(JS)として実装、実働</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・Javaのメソッドやクラスが使える</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・Eclipseなどと連携可能</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ステップ実行ができる、プラグインが使える、などなど鬼便利というかこれが肝コレだけコレが全て</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・JUnitが使える、テストが可能</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・JavaScript単体では書けないような範囲の物事を、Javaの型安全な世界で記述する事ができる</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・JSのローディングやテストを、Javaに関連する世界で自動化できる</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・あらかじめ用意されているライブラリがたくさん</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>イベントリスナ、JSON、JSONP、GUI Widget(ダサい。ダサい。あとダサい。Apple並みとは言わないまでも、、)、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Canvas、Sound、他</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・JSも使える Java中JS、JS中Javaが可能</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>JSNI(JavaScriptNativeInterface)</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>落とし穴もがっちりある</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>JavaかとおもったらJSだった。何を言っているかわからねーと思うが(ry</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・変換不可能なクラスもある</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>日付に関するクラスとかが無い。めんどかったんだと思うが。</p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・Widgetが破滅的にダサい</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>グラフィカルな面で本当に残念です。ありがとうございます。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・ロードとstaticの関係</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>staticなどを使うと、優先的にLoadingが組まれる。結果として、名前空間が効かないポイントが生まれたりする。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Javaであればリフレクションなどの手段で明確にアクセスできるところ、偶然名前が一致して衝突、などがあり得る。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・イベントの解除などはJSの癖を引きずる</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>イベントへのアイデンティファイに対して、制約が多い。根源がJSのリスナなのでしょうがない。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>具体的には、特定のオブジェクトのみリスナから外す、という事ができない。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>オブジェクトが帰属するクラス単位でのリスナがごっそりと消える。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>(リスなのアイデンティファイに着いて、それ以上小さな単位でのアイデンティファイができない)</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・JSNIはJSなので何が起こってもおかしく無いし補完が効かない</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>オハコンの中のオワコン</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>ところでJavaScriptとはなんだったのか</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>GWTのようなJSCompilerが生まれた経緯を推察してみる。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>JSとは、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>HashMap a ... b</p>
+<p class="p3"><span class="Apple-tab-span">	</span>b ( =a)</p>
+<p class="p3"><span class="Apple-tab-span">	</span>a ( =b)</p>
+<p class="p3"><span class="Apple-tab-span">	</span>a(function b()) など。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>何でも連鎖マップに入れられ、発火させられる言語</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>→他の言語でやっている様々な事が、ほぼ、JSでもって、JSを使って、JSの上で実装可能。</p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p3">ここに闇がある</p>
+<p class="p3"><span class="Apple-tab-span">	</span>☆他の言語でやっている様々な事が、ほぼ、JSでもって、JSを使って、JSの上で実装可能。</p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>→言語の中に、同じ言語を使って、機能や仕組みを実装する、という行為には、元来無理がある</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>だって元々その言語に無いのだもの。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・内部にむき出しの実装が増える事によって、トラブルが増える</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>「実装した機能」それ自体の<b>実装</b>に触る事ができてしまう</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>e.g. C++のスマートポインタ、Javaのメッセージング</p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>JavaScriptの場合は、元来無いものが非常に多い。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>名前空間(致命傷)、クラス、メッセージング、自己環境把握概念</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・実装機能と自分が書き足したものとの区別がつくのは今この瞬間の書いている自分だけ</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>a = a+b;</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>a = a+b+c;</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>1D後、1W後、1Y後に見て、何処が「足された部分」かわかりますか？　ッつー話。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・トラブルを起こさないように実装するには、階層を分けてのFW化(e.g. RoR)、ルール化が有用だが、。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>フォルダなどによる階層化が不可能→JSには「ブラウザに直接読み込まれる」という制約がある。これは致命傷。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ルールが増える事(ルール爆発)は自殺行為→多彩なルールを守る事にコストがかかってしまう。しかもそれは永遠に続く</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>→解決策として、コンパイル　という「改変」行程が選ばれる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>JSをコンパイルの結果として作りあげる技術たち JSCompiler</p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Google Closure<span class="Apple-tab-span">	</span>(JS to JS コンパイル)</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>強くルール付けされた構造を模倣する事でのプラグイン化</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>自己制約をパッケージ化する</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>CoffeeScript<span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>(Coffee to JS コンパイル)</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>JSの穴をあらかじめ殺した記法での記述と、コンパイル処理による最適化、ネームスペースの補助</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>RoR3系で色々動きがあるらしいが？よく知らない。これからJSをどうしても書かなければ行けない分野では来ると思う。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>GWT<span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>(Java to JavaScript コンパイル)</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Googleが用意した特定のクラス、メソッドがJSに変換される。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>コンパイル処理による最適化、パッケージによるネームスペース明示、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>staticによるシングルトン明示などができる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>おまけでブラウザ間の差異を勝手に吸収する。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Java言語自体に素敵さが足りないので、後述のJSCompilerたちの方が先があると思う。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Pyjamas<span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>(Python to JS コンパイル)</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>触った事無いからわからん</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ClojureScript<span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>(Clojure to JS コンパイル)</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>さわり中　まだよくわからん</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ScalaJS<span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>(Scala to JS コンパイル　？　未登場)</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>まだ無いのでわからん<span class="Apple-tab-span">	</span>本命。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>A to JavaScript の利点</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>とあるA言語の能力 &gt;&gt;&gt;&gt;&gt;&gt; JSの能力　である前提がある。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Aという言語があり、ルール的にJavaScriptよりも厳格　かつ、機能が定義されているとする。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>名前空間、記法制限、型、演算子、メッセージング、クラス、構造体、列挙子、、、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これらを、その言語で書き、JSにコンパイルする。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>元々のAという言語にある機能を、Aという言語の記法で使う範囲でのみ担保すればいい。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>→最終的に出力されるJSには、手を触れる事が無い(あるとしたらA to JSコンパイラのバグとか不備)</p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>例えばクラスをJSで実装する場合、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>JSで直に実装→JSを書く際に、その自己定義した構造にあわせたreadとwriteが必要になる</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>→ルールを言語の内側につくるので、さらに内側に書くしかない。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>他言語で書く場合</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>→ルールは記述時言語側が持っているため、書き手は意識しないでいい。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>→コンパイルされた結果は、ルールが構築されたJSの中に、手続きが記述された状態になる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>→結果は同じであっても、人が煩わされる行程が減っている、自動化できている事に注目。</p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>今の俺の結論</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>JSオワコン。JSCompilerオハコン。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>言語の中に言語で機能を追加する副作用を回避できる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ブラウザで動く言語がJSに限られている事が一因だが、今後は異なるといいなーとか。JSのライブラリ化とか進むといいなー。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+</body>
+</html>

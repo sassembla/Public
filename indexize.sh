@@ -5,6 +5,8 @@ echo "indexize start"
 rm htmlList.log
 rm htmlListRev.log
 
+rm index.html
+
 #check exist .html -> line making -> output to htmllist.log
 find . -type f -name \*.html -print >> htmlList.log
 
@@ -55,32 +57,19 @@ IFS="
 
 for line in $(< htmlListRev.log);do
 	#read each file and get first-line as title.
+	echo $line
 	if grep "p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px" $line
 	then
-	  	#echo "here is title with formatted-p1-tag"
+	  	echo "here is title with formatted-p1-tag"
 		currentNamePartStr=$(grep "<p class=\"p1\">" $line)
 		
 		#create link-tag Head and Tail
 		aTagHead="<a href=\"$line\">"
 		aTagTail="</a>"
 		
-		echo $line
 		#./12:01:29 18-37-00.html
 		echo $line
 		originalTime=$line
-		
-		
-		#remove "./"
-		sed -i -e 's/\.\///g' $originalTime
-		echo 2	$originalTime
-
-		#remove ".html"
-		sed -i -e 's/.html//g' $originalTime
-		echo 3	$originalTime
-
-		#convert ":" to "/"
-		sed -i -e 's/\:/\//g' $originalTime
-	
 		
 		echo $aTagHead$currentNamePartStr$aTagTail >> index.html
 	fi
