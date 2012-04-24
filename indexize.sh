@@ -4,7 +4,9 @@
 echo "indexize start"
 # import JSON.sh
 . ./libraries/JSON.sh
-jsonParams=$(./libraries/JSON.sh < params.json)
+
+./libraries/JSON.sh < params.json
+
 
 #echo $jsonParams
 rm htmlList.log
@@ -25,10 +27,13 @@ cat ./html/html_body_head.html >> index.html
 #define line-delim as below
 IFS="
 "
+echo $jsonParams | tokenize | parse | egrep '\["finder"\]' | sed s/'\["finder"\]	'//
 
-finder=$(echo "$jsonParams" | tokenize | parse | egrep '\["finder"\]' | sed s/'\["finder"\]	'//)
-picker=$(echo "$jsonParams" | tokenize | parse | egrep '\["picker"\]' | sed s/'\["picker"\]	'//)
-echo $finder
+finder=$(echo $jsonParams | tokenize | parse | egrep '\["finder"\]' | sed s/'\["finder"\]	'//)
+picker=$(echo $jsonParams | tokenize | parse | egrep '\["picker"\]' | sed s/'\["picker"\]	'//)
+
+echo a is $finder
+echo b is "p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px"
 
 for line in $(< htmlList.log);do
 	#read each file and get first-line as title.
