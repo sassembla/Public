@@ -2,14 +2,11 @@
 #create index.html from these .html & rtfd-converted-html in same folder
 
 echo "indexize start"
-# JSON.sh
+# import JSON.sh
 . ./libraries/JSON.sh
+jsonParams=$(./libraries/JSON.sh < params.json)
 
-
-# libraries/JSON.sh
-./libraries/JSON.sh json_parse < params.json
-
-
+#echo $jsonParams
 rm htmlList.log
 rm index.html
 
@@ -17,10 +14,10 @@ rm index.html
 find . -type f -name \*.html -print | tail -r >> htmlList.log
 
 #add html header
-cat html_header.html > index.html
+cat ./html/html_header.html > index.html
 
 #add html body
-cat html_body_head.html >> index.html
+cat ./html/html_body_head.html >> index.html
 
 
 
@@ -29,14 +26,15 @@ cat html_body_head.html >> index.html
 IFS="
 "
 
-finder=$(cat finder.txt)
-picker=$(cat picker.txt)
+finder=$(echo "$jsonParams" | tokenize | parse | egrep '\["finder"\]' | sed s/'\["finder"\]	'//)
+picker=$(echo "$jsonParams" | tokenize | parse | egrep '\["picker"\]' | sed s/'\["picker"\]	'//)
+echo $finder
 
 for line in $(< htmlList.log);do
 	#read each file and get first-line as title.
-	if grep $finder $line
+	if grep "p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px" $line
 	then
-		currentNamePartStr=$(grep $picker $line)
+		currentNamePartStr=$(grep "<p class=\"p1\">" $line)
 		
 		#create link-tag Head and Tail
 		aTagHead="<a href=\"$line\">"
@@ -50,6 +48,6 @@ for line in $(< htmlList.log);do
 	fi
 done
 
-cat html_body_tail.html >> index.html
+cat ./html/html_body_tail.html >> index.html
 
 echo "indexize done"
