@@ -2,10 +2,8 @@
 #create index.html from these .html & rtfd-converted-html in same folder
 
 echo "indexize start"
-# import JSON.sh
-. ./libraries/JSON.sh
 
-#echo $jsonParams
+#delete logs
 rm htmlList.log
 rm index.html
 
@@ -13,10 +11,10 @@ rm index.html
 find . -type f -name \*.html -print | tail -r >> htmlList.log
 
 #input html header
-cat ./html/html_header.html > index.html
+cat ./htmlResource/html_header.html > index.html
 
 #add html body
-cat ./html/html_body_head.html >> index.html
+cat ./htmlResource/html_body_head.html >> index.html
 
 
 
@@ -25,14 +23,13 @@ cat ./html/html_body_head.html >> index.html
 IFS="
 "
 
-./libraries/JSON.sh < params.json | egrep '\["finder"\]' | cut -d'	' -f2 | sed s/'\"'//g
-
-finder=$(./libraries/JSON.sh < params.json | egrep '\["finder"\]' | cut -d'	' -f2 | sed s/'\"'//g)
+#read "params.json"
+marker=$(./libraries/JSON.sh < params.json | egrep '\["marker"\]' | cut -d'	' -f2 | sed s/'\"'//g)
 picker=$(./libraries/JSON.sh < params.json | egrep '\["picker"\]' | cut -d'	' -f2 | cut -c2-17)
 
 for line in $(< htmlList.log);do
 	#read each file and get first-line as title.
-	if grep "$finder" $line
+	if grep "$marker" $line
 	then
 	echo $picker
 		currentNamePartStr=$(grep "$picker" $line)
@@ -49,6 +46,6 @@ for line in $(< htmlList.log);do
 	fi
 done
 
-cat ./html/html_body_tail.html >> index.html
+cat ./htmlResource/html_body_tail.html >> index.html
 
 echo "indexize done"

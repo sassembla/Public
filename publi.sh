@@ -1,4 +1,4 @@
 #!/bin/sh
 
-sh htmlnize.sh
-sh indexize.sh
+sh ./htmlnize.sh
+sh ./indexize.sh
