@@ -31,18 +31,18 @@ for line in $(< htmlList.log);do
 	#read each file and get first-line as title.
 	if grep "$marker" $line
 	then
-	echo $picker
+	#get namePart
 		currentNamePartStr=$(grep "$picker" $line)
 		
 		#create link-tag Head and Tail
 		aTagHead="<a href=\"$line\">"
 		aTagTail="</a>"
 		
+		#./12:04:23 1-23-37/
 		#./12:01:29 18-37-00.html
-		echo $line
-		originalTime=$line
+		date=$(echo "\"$line\"" | cut -d '/' -f2 | sed s/'.html\"'//)
 		
-		echo $aTagHead$currentNamePartStr$aTagTail >> index.html
+		echo $aTagHead$currentNamePartStr$aTagTail "wrote "$date>> index.html
 	fi
 done
 
