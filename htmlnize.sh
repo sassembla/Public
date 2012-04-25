@@ -64,8 +64,6 @@ for line in $(< rtfs.log);do
 
 	targetHtmlFile="$path".html
 	
-	#delete dust..
-	rm "$path".html-e
 	cd ../
 done
 
