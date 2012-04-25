@@ -18,3 +18,21 @@ ignores/jsonizing_last.txt
 ignores/battle_Resources/images.jpeg
 
 ignores/test
+javascripts/.DS_Store
+shared/.DS_Store
+shared/TechHUB/.DS_Store
+shared/TechHUB/2011_07/.DS_Store
+shared/TechHUB/2011_07/iPhone/.DS_Store
+shared/TechHUB/2011_12/.DS_Store
+shared/TechHUB/2011_12/pictures/.DS_Store
+shared/TechHUB/PPT/.DS_Store
+shared/TechHUB/PPT/PDF/.DS_Store
+shared/TechHUB/TechHUB_Android_2011_04_02/.DS_Store
+shared/TechHUB/TechHUB_iPhone_2011_04_02/.DS_Store
+shared/TechHUB/TechHUB_iPhone_2011_04_16/.DS_Store
+shared/TechHUB/TechHUB_iPhone_2011_04_30/.DS_Store
+shared/Unity_20110820_Web/.DS_Store
+shared/nullpointerexception/.DS_Store
+shells/.DS_Store
+stylesheets/.DS_Store
+stylesheets/less/.DS_Store
