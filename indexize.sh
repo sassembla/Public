@@ -38,11 +38,20 @@ for line in $(< htmlList.log);do
 		aTagHead="<a href=\"$line\">"
 		aTagTail="</a>"
 		
-		#./12:04:23 1-23-37/
-		#./12:01:29 18-37-00.html
-		date=$(echo "\"$line\"" | cut -d '/' -f2 | sed s/'.html\"'//)
+		#wrote-date like 12/04/23 1:23:37
+		wroteDate=$(echo "\"$line\"" | cut -d '/' -f2 | sed s/'.html\"'// | sed s/':'/'\/'/g | sed s/'-'/':'/g)
+
+		#updated-date like (updated 3min ago)
+		updatedDate=$"under configuration"
+	
+#		ls -l $line
+#		modf_time=$(ls -l $line)
+#		time_hr=`echo hr $time_hrmin | cut -d ':' -f1`
+#		time_min=`echo min $time_hrmin | cut -d ':' -f2`
+#		echo $time_month $time_day $time_hr $time_min
+# 		"updated "$updatedDate
 		
-		echo $aTagHead$currentNamePartStr$aTagTail "wrote "$date>> index.html
+		echo $aTagHead$currentNamePartStr$aTagTail "wrote "$wroteDate >> index.html
 	fi
 done
 
