@@ -10,7 +10,9 @@
     p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
     p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
     p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
-    span.s1 {text-decoration: underline}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    span.s1 {font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    span.s2 {text-decoration: underline}
     span.Apple-tab-span {white-space:pre}
   </style>
 </head>
@@ -19,35 +21,35 @@
 <p class="p2"><br></p>
 <p class="p3"><b>概要</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>Shellでモノを作ってて、受け渡す値とかをJSONにしたくなった。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>まさか無いだろう、と思ったらあったので、記録までに</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Shellでそんなものまさか無いだろう、と思ったらあったので、記録までに</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>コレ</p>
 <p class="p3"><span class="Apple-tab-span">	</span><a href="https://github.com/dominictarr/JSON.sh">https://github.com/dominictarr/JSON.sh</a></p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>使い方</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>Parseだけが出来る。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>で、pipeでその後の取得処理とかを書ける。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>JSONのparseだけが出来る。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、pipeでその後の取得処理とかを書クという面白スタイル。</p>
 <p class="p3"><span class="Apple-tab-span">	</span>(ちょうどいい、この記事、コードタグの実験にも使おう。どんな変化ならキャッチできる？)</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>サンプル</b></p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>リソース(params.json)</p>
-<p class="p3">{</p>
-<p class="p3"><span class="Apple-tab-span">	</span>"marker":"p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px",</p>
-<p class="p3"><span class="Apple-tab-span">	</span>"picker":"&lt;p class=\"p1\"&gt;"</p>
-<p class="p3">}</p>
+<p class="p4">{</p>
+<p class="p4"><span class="Apple-tab-span">	</span>"marker":"p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px",</p>
+<p class="p4"><span class="Apple-tab-span">	</span>"picker":"&lt;p class=\"p1\"&gt;"</p>
+<p class="p4">}</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>式</p>
-<p class="p3">./JSON.sh &lt; params.json</p>
+<p class="p4">./JSON.sh &lt; params.json</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>結果</p>
-<p class="p3">["marker"]<span class="Apple-tab-span">	</span>"p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px"</p>
-<p class="p3">["picker"]<span class="Apple-tab-span">	</span>"&lt;p class=\"p1\"&gt;"</p>
-<p class="p3">[]<span class="Apple-tab-span">	</span>{"marker":"p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px","picker":"&lt;p class=\"p1\"&gt;"}<span class="Apple-tab-span">	</span></p>
+<p class="p4">["marker"]<span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px"</p>
+<p class="p4">["picker"]<span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"&lt;p class=\"p1\"&gt;"</p>
+<p class="p4">[]<span class="Apple-tab-span">	</span>{"marker":"p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px","picker":"&lt;p class=\"p1\"&gt;"}<span class="s1"><span class="Apple-tab-span">	</span></span></p>
 <p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
-<p class="p3"><span class="Apple-tab-span">	</span>こんな感じに、[<span class="s1">key</span>]<span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>(tab)<span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="s1">value</span> になる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>こんな感じに、[<span class="s2">key</span>]<span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>(tab)<span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="s2">value</span> になる。</p>
 <p class="p2"><br></p>
 <p class="p3"><b>使い方</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>./JSON.sh &lt; params.json | 全キーを取り出す式</p>
@@ -59,7 +61,7 @@
 <p class="p3"><span class="Apple-tab-span">	</span>とかやってた。</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p3"><span class="Apple-tab-span">	</span>サンプルのmarkerが欲しければ、</p>
-<p class="p3"><span class="Apple-tab-span">	</span>./libraries/JSON.sh &lt; params.json | egrep '\["marker"\]' | cut -d'<span class="Apple-tab-span">	</span>' -f2 | sed s/'\"'//g</p>
+<p class="p4">./libraries/JSON.sh &lt; params.json | egrep '\["marker"\]' | cut -d'<span class="Apple-tab-span">	</span>' -f2 | sed s/'\"'//g</p>
 <p class="p2"><br></p>
 </body>
 </html>
