@@ -1,20 +1,18 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
-<head>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <meta http-equiv="Content-Style-Type" content="text/css">
   <title></title>
-  <meta name="Generator" content="rtfd2html handling Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="1138.23">
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1138.32">
   <style type="text/css">
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 21.0px 'Hiragino Kaku Gothic ProN'}
     p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
     p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
-    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica,Arial}
-    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica,Arial; min-height: 14.0px}
-    span.s1 {font: 12.0px Helvetica,Arial}
-    span.s2 {font: 12.0px 'Hiragino Kaku Gothic ProN'}
-    span.s3 {font: 18.0px 'Hiragino Kaku Gothic ProN'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    span.s1 {font: 12.0px Helvetica}
+    span.s2 {font: 18.0px 'Hiragino Kaku Gothic ProN'}
     span.Apple-tab-span {white-space:pre}
   </style>
 </head>
@@ -26,7 +24,7 @@
 <p class="p3"><span class="Apple-tab-span">	</span>http://trigger.io/</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>この記事みて興味持った。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>http://trigger.io/cross-platform-application-development-blog/2012/02/24/why-trigger-io-doesnt-use-phonegap-5x-faster-native-bridge/</p>
+<p class="p3"><span class="Apple-tab-span">	</span><a href="http://trigger.io/cross-platform-application-development-blog/2012/02/24/why-trigger-io-doesnt-use-phonegap-5x-faster-native-bridge/">http://trigger.io/cross-platform-application-development-blog/2012/02/24/why-trigger-io-doesnt-use-phonegap-5x-faster-native-bridge/</a></p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>セットアップ</b></p>
@@ -38,23 +36,22 @@
 <p class="p2"><br></p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p3">somewhere:forge-tools someone$ source go.sh</p>
-<p class="p2"><br></p>
 <p class="p3">Welcome to the Forge development environment!</p>
 <p class="p2"><br></p>
 <p class="p3">To get started, change to a fresh directory for your app, then run: forge create</p>
 <p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
 <p class="p3"><span class="Apple-tab-span">	</span><b>RuntimeにPython2.x系が必要。</b>macだと最初から入ってると思います。</p>
 <p class="p3"><span class="Apple-tab-span">	</span>解凍した時点でこんな感じ</p>
-<p class="p4"><img src="img/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202012-03-05%209.58.42.png" alt="スクリーンショット 2012-03-05 9.58.42.png"></p>
+<p class="p4"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202012-03-05%209.58.42.png" alt="スクリーンショット 2012-03-05 9.58.42.png"></p>
 <p class="p2"><br></p>
 <p class="p3"><b>アプリケーション作成</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>"To get started, change to a fresh directory for your app, then run: forge create"</p>
 <p class="p3"><span class="Apple-tab-span">	</span>っつーことなので、</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
-<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>mkdir ../testApp</p>
-<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>cd ../testApp</p>
+<p class="p3">mkdir ../testApp</p>
+<p class="p3">cd ../testApp</p>
 <p class="p3"><span class="Apple-tab-span">	</span>で、</p>
-<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>forge create　</p>
+<p class="p3">forge create　</p>
 <p class="p2"><br></p>
 <p class="p3">(forge-environment)somewhere:testApp someone$ forge create</p>
 <p class="p3">[ <span class="Apple-converted-space">  </span>INFO] Forge tools running at version 2.6.2_</p>
@@ -72,13 +69,13 @@
 <p class="p3">[ <span class="Apple-converted-space">  </span>INFO] 3) Run forge run to test out your build</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>この時点で、testAppフォルダ内は、<span class="Apple-tab-span">	</span><span class="s1"><img src="img/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202012-03-05%2010.40.03.png" alt="スクリーンショット 2012-03-05 10.40.03.png"></span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>この時点で、testAppフォルダ内は、<span class="Apple-tab-span">	</span><span class="s1"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202012-03-05%2010.40.03.png" alt="スクリーンショット 2012-03-05 10.40.03.png"></span></p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>わーいなんか出来たー。</p>
-<p class="p4"><img src="img/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202012-03-05%2010.40.11.png" alt="スクリーンショット 2012-03-05 10.40.11.png"></p>
+<p class="p4"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202012-03-05%2010.40.11.png" alt="スクリーンショット 2012-03-05 10.40.11.png"></p>
 <p class="p2"><br></p>
 <p class="p3"><b>Build</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>forge build</p>
+<p class="p3">forge build</p>
 <p class="p2"><br></p>
 <p class="p3">[ <span class="Apple-converted-space">  </span>INFO] Forge tools running at version 2.6.2</p>
 <p class="p3">[ <span class="Apple-converted-space">  </span>INFO] configuration has changed: creating new templates</p>
@@ -102,30 +99,31 @@
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>Run</b></p>
-<p class="p4"><span class="Apple-tab-span">	</span>forge run ios</p>
-<p class="p4">[ <span class="Apple-converted-space">  </span>INFO] Forge tools running at version 2.6.2</p>
-<p class="p4">[ <span class="Apple-converted-space">  </span>INFO] enabled platforms: ['android', 'chrome', 'ios']</p>
-<p class="p4">[ <span class="Apple-converted-space">  </span>INFO] &lt;Build (android, chrome, ios)&gt; running...</p>
-<p class="p4">[ <span class="Apple-converted-space">  </span>INFO] reading app code from /Users/<span class="s2">sassembla</span>/Desktop/testApp/src</p>
-<p class="p4">[ <span class="Apple-converted-space">  </span>INFO] writing new app to /Users/<span class="s2">sassembla</span>/Desktop/testApp/development</p>
-<p class="p4">[ <span class="Apple-converted-space">  </span>INFO] simulator pid is 41242</p>
-<p class="p4">2012-03-05 13:13:21.940 iPhone Simulator[41242:707] NSUnscaledWindowMask is deprecated and will be ignored.</p>
-<p class="p4">[ <span class="Apple-converted-space">  </span>INFO] pid for iPhone app is: 41252</p>
-<p class="p4">[ <span class="Apple-converted-space">  </span>INFO] Showing log output:</p>
-<p class="p5"><br></p>
+<p class="p3">forge run ios</p>
+<p class="p2"><br></p>
+<p class="p3">[ <span class="Apple-converted-space">  </span>INFO] Forge tools running at version 2.6.2</p>
+<p class="p3">[ <span class="Apple-converted-space">  </span>INFO] enabled platforms: ['android', 'chrome', 'ios']</p>
+<p class="p3">[ <span class="Apple-converted-space">  </span>INFO] &lt;Build (android, chrome, ios)&gt; running...</p>
+<p class="p3">[ <span class="Apple-converted-space">  </span>INFO] reading app code from /Users/sassembla/Desktop/testApp/src</p>
+<p class="p3">[ <span class="Apple-converted-space">  </span>INFO] writing new app to /Users/sassembla/Desktop/testApp/development</p>
+<p class="p3">[ <span class="Apple-converted-space">  </span>INFO] simulator pid is 41242</p>
+<p class="p3">2012-03-05 13:13:21.940 iPhone Simulator[41242:707] NSUnscaledWindowMask is deprecated and will be ignored.</p>
+<p class="p3">[ <span class="Apple-converted-space">  </span>INFO] pid for iPhone app is: 41252</p>
+<p class="p3">[ <span class="Apple-converted-space">  </span>INFO] Showing log output:</p>
+<p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>ここでSimulator起動</p>
-<p class="p4"><img src="img/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202012-03-05%2013.14.13.png" alt="スクリーンショット 2012-03-05 13.14.13.png"></p>
+<p class="p4"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202012-03-05%2013.14.13.png" alt="スクリーンショット 2012-03-05 13.14.13.png"></p>
 <p class="p2"><br></p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p3"><span class="Apple-tab-span">	</span>いきなり.appが作られた。</p>
-<p class="p4"><img src="img/device-app.png" alt="device-app.png"></p>
+<p class="p4"><img src="device-app.png" alt="device-app.png"></p>
 <p class="p2"><br></p>
-<p class="p5"><br></p>
+<p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>む、、ということは、アプリに対するiOSというかObjective-C的な編集性が</p>
 <p class="p3"><span class="Apple-tab-span">	</span>みじんも無いのか。</p>
 <p class="p3"><span class="Apple-tab-span">	</span>まじで。</p>
-<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>→まじだとしたら<span class="s3"><b>Titaniumの方がすてき</b></span>なので、えっと。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>→まじだとしたら<span class="s2"><b>Titaniumの方がすてき</b></span>なので、えっと。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>いやきっとあるはずだ、、</p>
@@ -135,7 +133,8 @@
 <p class="p3"><b>Package</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>特に説明がないんだけど、写真にはうつってるので試してみた！</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>forge package ios</p>
+<p class="p3">forge package ios</p>
+<p class="p2"><br></p>
 <p class="p3">[ <span class="Apple-converted-space">  </span>INFO] Forge tools running at version 3.0.1</p>
 <p class="p3">[ <span class="Apple-converted-space">  </span>INFO] enabled platforms: ['ios']</p>
 <p class="p3">[ <span class="Apple-converted-space">  </span>INFO] &lt;ForgeTask (ios)&gt; running...</p>
@@ -155,9 +154,5 @@
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>以上。</p>
 <p class="p3"><span class="Apple-tab-span">	</span>俺の旅は終わった。</p>
-<p class="p2"><br></p>
-<p class="p3">backTo:</p>
-<p class="p3">https://github.com/sassembla/Public/commit/df5402c0ab93242d0daf02b6185deddc7be29a6d</p>
-<p class="p2"><span class="Apple-tab-span">	</span></p>
 </body>
 </html>

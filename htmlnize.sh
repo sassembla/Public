@@ -27,6 +27,8 @@ function customize() {
 }
 
 function codenize() {
+	echo not yet completed imple.
+	
 	#get code-marker
 	codeMarker=$(../libraries/JSON.sh < ../params.json | egrep '\["codeMarker"\]' | cut -d'	' -f2 | sed s/\"//g)
 
@@ -37,9 +39,9 @@ function codenize() {
 
 	#change <p class="$expression"> to	<pre class="code">
 #	sed -i -e 's/<p class=$expression>/<pre class=\"code\">/' -e 's/<\/p>/<\/pre>/' $1
-	sed -i -e 's/<p class=\"p4\">/<pre class=\"code\">/' $1
+	sed -i -e 's/<p class=\"$expression\">/<pre class=\"code\">/' $1
 
-	#
+	#want close....</pre>
 
 	rm $1-e
 }
