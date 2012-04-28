@@ -14,30 +14,35 @@ find . -type d -name \*.rtfd -print -maxdepth 1 >> rtfds.log
 IFS="
 "
 
-
 #add default.less into 
-function addCSSLoader() {
-	echo not yet implemented prefectly.
+function customize() {
+	#add css-loader
+	sed -i -e 's/<head>/<head><script type=\"text\/javascript\" src=\"..\/javascripts\/less-1.3.0.min.js\"><\/script>/' $1
 	
-	#get code-marker
-	codeMarker=$(../libraries/JSON.sh < ../params.json | egrep '\["codeMarker"\]' | cut -d'	' -f2 | sed s/\"//g)
-	
-	#later create codeMarker
-	expression=$(grep "$codeMarker" $1 | cut -d " " -f5)
-	
-	echo $expression
-	
-	#change <p class="$expression"> to	<p class="code">
-#	sed -i -e 's/<p class=$expression>/<pre class=\"code\">/' -e 's/<\/p>/<\/pre>/' $1
-	sed -i -e 's/<p class=$expression>/<pre class=\"code\">/' $1
-	
-	echo not work yet.
-	#
-	
-	rm $1-e
-	echo " css loader added";
+	#add default-css
+    sed -i -e 's/<head>/<head><link rel=\"stylesheet\" type=\"text\/less\" href=\"..\/stylesheets\/less\/default.less\"\/>/' $1
+
+	#adjust code-css-class
+	codenize $1
 }
 
+function codenize() {
+	#get code-marker
+	codeMarker=$(../libraries/JSON.sh < ../params.json | egrep '\["codeMarker"\]' | cut -d'	' -f2 | sed s/\"//g)
+
+	#later create codeMarker
+	expression=$(grep "$codeMarker" $1 | cut -d " " -f5 | cut -d "." -f2 )
+
+	echo $expression
+
+	#change <p class="$expression"> to	<pre class="code">
+#	sed -i -e 's/<p class=$expression>/<pre class=\"code\">/' -e 's/<\/p>/<\/pre>/' $1
+	sed -i -e 's/<p class=\"p4\">/<pre class=\"code\">/' $1
+
+	#
+
+	rm $1-e
+}
 
 for line in $(< rtfds.log);do
 	path=$(echo "$line" | sed -e 's/.rtfd//')
@@ -54,7 +59,7 @@ for line in $(< rtfds.log);do
 	textutil -convert html "$path".rtfd
 
 	targetHtmlFile="$path".html
-	addCSSLoader $targetHtmlFile
+	customize $targetHtmlFile
 	
 	
 	#replace "file:///somefile.jpg" to "somefile.jpg"
@@ -90,7 +95,7 @@ for line in $(< rtfs.log);do
 	textutil -convert html "$path".rtf
 
 	targetHtmlFile="$path".html
-	addCSSLoader $targetHtmlFile
+	customize $targetHtmlFile
 	
 	cd ../
 done
