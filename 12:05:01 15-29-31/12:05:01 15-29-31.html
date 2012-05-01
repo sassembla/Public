@@ -22,17 +22,15 @@
 <p class="p1"><b>JVMに渡っているArgumentを見る</b></p>
 <p class="p2"><br></p>
 <p class="p3"><b>概要</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>とあるアプリの中身をのぞいていて、中身でargumentを渡しているコードがあったので</p>
-<p class="p3"><span class="Apple-tab-span">	</span>見ていた。</p>
-<p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>ぶっちゃけEclipseから渡っているパラメータ自体もよくわからない</p>
-<p class="p3"><span class="Apple-tab-span">	</span>（argumentの欄が基本まっしろ、だが実際そんな訳が無い）</p>
-<p class="p3"><span class="Apple-tab-span">	</span>くらいラップされていたので、こう、気になってですね。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>とあるJavaアプリケーションの起動時に渡っているargumentが気になった。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>わからねぇ</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>実行前のargumentの欄が空っぽで、まあそんな分けないだろうと思う挙動をしてる訳ですが、</p>
-<p class="p3"><span class="Apple-tab-span">	</span>デコンパイルしたコードをちょっと除いてみたら、まあ、パラメータを足しまくっている。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Eclipseで見てみる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>実行前のargumentの欄が空っぽで、まあそんな訳ないだろうと思う挙動をしてる訳ですが、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>デコンパイルしたコードをちょっと見てみたら、パラメータを足しまくっている。</p>
+<p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>しかも上書きしたりtry-catchでリセットしたりしてる。そこかしこで。</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>えーこれどこが末端か調べるのも大変だし、そもこの環境でコンパイルして実行できる保証が無い。</p>
@@ -52,9 +50,10 @@
 <p class="p2"><br></p>
 <pre class="code">jps -v</pre>
 <p class="p3"><span class="Apple-tab-span">	</span>で、こんな感じに表示された。　</p>
-<p class="p3"><span class="Apple-tab-span">	</span>DevModeって名前のプロセスが動いてて、引数はこんな感じ。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>なるほどなー！！</p>
 <p class="p4"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202012-05-01%2015.31.36.png" alt="スクリーンショット 2012-05-01 15.31.36.png"></p>
+<p class="p3"><span class="Apple-tab-span">	</span>例だけど、これだと、DevModeって名前のプロセスが動いてて、引数はこんな感じ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>なるほどなー！！</p>
+<p class="p2"><br></p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p2"><br></p>
 <p class="p3"><b>くいしーさんが助けてくれた</b></p>
