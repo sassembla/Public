@@ -7,67 +7,66 @@
   <meta name="Generator" content="Cocoa HTML Writer">
   <meta name="CocoaVersion" content="1138.32">
   <style type="text/css">
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
     p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
-    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
     span.Apple-tab-span {white-space:pre}
   </style>
 </head>
 <body>
-<p class="p1"><b>GWTのテストをGradleで行う、のまとめ(途中)</b></p>
+<p class="p1"><b>GWTのテストをGradleで行う、のまとめ</b></p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
-<p class="p3"><b>概要</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>GWTでのテストは、通常Eclipseなどと連携して行われる。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>オートマチックに行うには、antを叩く、とかすればOKなのだが、</p>
-<p class="p3"><span class="Apple-tab-span">	</span>それをGradleから行いたい。</p>
+<p class="p1"><b>概要</b></p>
+<p class="p1"><span class="Apple-tab-span">	</span>GWTでのテストは、通常Eclipseなどと連携して行われる。</p>
+<p class="p1"><span class="Apple-tab-span">	</span>オートマチックに行うには、antを叩く、とかすればOKなのだが、</p>
+<p class="p1"><span class="Apple-tab-span">	</span>それをGradleから行いたい。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
-<p class="p3"><b>自動化するテストの種類</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>GWTには複数の実行時モードと、さらにテスト環境による派生がある。</p>
+<p class="p1"><b>自動化するテストの種類</b></p>
+<p class="p1"><span class="Apple-tab-span">	</span>GWTには複数の実行時モードと、さらにテスト環境による派生がある。</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>モードは、</p>
-<p class="p3"><span class="Apple-tab-span">	</span>JavaでJUnitをそのまま実行するモードと、</p>
-<p class="p3"><span class="Apple-tab-span">	</span>JavaからJSへと変換を行ってから実行するProductionModeの２つ。</p>
+<p class="p1"><span class="Apple-tab-span">	</span>モードは、</p>
+<p class="p1"><span class="Apple-tab-span">	</span>JavaでJUnitをそのまま実行するモードと、</p>
+<p class="p1"><span class="Apple-tab-span">	</span>JavaからJSへと変換を行ってから実行するProductionModeの２つ。</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
-<p class="p3"><span class="Apple-tab-span">	</span>環境は、</p>
-<p class="p3"><span class="Apple-tab-span">	</span>HTMLUnitと、<span class="Apple-tab-span">	</span></p>
-<p class="p3"><span class="Apple-tab-span">	</span>実ブラウザを使用してのモードの2つ。</p>
+<p class="p1"><span class="Apple-tab-span">	</span>環境は、</p>
+<p class="p1"><span class="Apple-tab-span">	</span>HTMLUnitと、<span class="Apple-tab-span">	</span></p>
+<p class="p1"><span class="Apple-tab-span">	</span>実ブラウザを使用してのモードの2つ。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>ぶっちゃけJavaでテストしてもロジック部分しかテストできない＋</p>
-<p class="p3"><span class="Apple-tab-span">	</span>HTMLUnitだとテストできない項目が多いので、</p>
+<p class="p1"><span class="Apple-tab-span">	</span>ぶっちゃけJavaでテストしてもロジック部分しかテストできない＋</p>
+<p class="p1"><span class="Apple-tab-span">	</span>HTMLUnitだとテストできない項目が多いので、</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>JSで、複数の実ブラウザ上でのテストを行う。</p>
+<p class="p1"><span class="Apple-tab-span">	</span>JSで、複数の実ブラウザ上でのテストを行う。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
-<p class="p3"><b>モチベーション</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>主なモチベーションは、GWTで書いたものが自動的にブラウザ上でテストできる、</p>
-<p class="p3"><span class="Apple-tab-span">	</span>なのだけれど、</p>
+<p class="p1"><b>モチベーション</b></p>
+<p class="p1"><span class="Apple-tab-span">	</span>主なモチベーションは、GWTで書いたものが自動的にブラウザ上でテストできる、</p>
+<p class="p1"><span class="Apple-tab-span">	</span>なのだけれど、</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
-<p class="p3"><span class="Apple-tab-span">	</span>GWTの仕組みを面白おかしく使えば、</p>
-<p class="p3"><span class="Apple-tab-span">	</span>既存のJSライブラリ や新規JSライブラリ、HTML5の機構を使った部分とかも</p>
-<p class="p3"><span class="Apple-tab-span">	</span><b>Javaでテスト書ける</b>うえに<b>実ブラウザ上で実行できる</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>ので、こう、なんだ、うれしい。</p>
+<p class="p1"><span class="Apple-tab-span">	</span>GWTの仕組みを面白おかしく使えば、</p>
+<p class="p1"><span class="Apple-tab-span">	</span>既存のJSライブラリ や新規JSライブラリ、HTML5の機構を使った部分とかも</p>
+<p class="p1"><span class="Apple-tab-span">	</span><b>Javaでテスト書ける</b>うえに<b>実ブラウザ上で実行できる</b></p>
+<p class="p1"><span class="Apple-tab-span">	</span>ので、こう、なんだ、うれしい。</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
-<p class="p3"><b>さらに修羅の道を歩むと</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>テストだけを特定のモバイル端末に送り込み、結果を集計してテストマスターに返す、</p>
-<p class="p3"><span class="Apple-tab-span">	</span>なんていう仕掛けも可能だったりする。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>もちろんJavaで。</p>
+<p class="p1"><b>さらに修羅の道を歩むと</b></p>
+<p class="p1"><span class="Apple-tab-span">	</span>テストだけを特定のモバイル端末に送り込み、結果を集計してテストマスターに返す、</p>
+<p class="p1"><span class="Apple-tab-span">	</span>なんていう仕掛けも可能だったりする。</p>
+<p class="p1"><span class="Apple-tab-span">	</span>もちろんJavaで。</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>こういうことは得意なJavaで。</p>
+<p class="p1"><span class="Apple-tab-span">	</span>こういうことは得意なJavaで。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
-<p class="p3"><b>GWTのコンパイルの中身から、それらを自動化する算段をたてる</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>ぶっちゃけやる事はantです。xmlです。☆になれば良いですね。</p>
+<p class="p1"><b>GWTのコンパイルの中身から、それらを自動化する算段をたてる</b></p>
+<p class="p1"><span class="Apple-tab-span">	</span>ぶっちゃけやる事はantです。xmlです。☆になれば良いですね。</p>
 <p class="p2"><br></p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
-<p class="p3"><span class="Apple-tab-span">	</span>GWT自体のビルドについての解説はこちら</p>
-<p class="p3"><span class="Apple-tab-span">	</span><a href="http://sassembla.github.com/Public/12:03:11%2018-56-27/12:03:11%2018-56-27.html">http://sassembla.github.com/Public/12:03:11%2018-56-27/12:03:11%2018-56-27.html</a></p>
+<p class="p1"><span class="Apple-tab-span">	</span>GWT自体のビルドについての解説はこちら</p>
+<p class="p1"><span class="Apple-tab-span">	</span><a href="http://sassembla.github.com/Public/12:03:11%2018-56-27/12:03:11%2018-56-27.html">http://sassembla.github.com/Public/12:03:11%2018-56-27/12:03:11%2018-56-27.html</a></p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>で、テストケースをJUnitで書いて、依存性解決してビルドして走らせれば、それがテストになる、というのがJUnitとかの特徴。</p>
+<p class="p1"><span class="Apple-tab-span">	</span>で、テストケースをJUnitで書いて、依存性解決してビルドして走らせれば、それがテストになる、というのがJUnitとかの特徴。</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>GWTでは、特にGWTTetcaseというクラスを拡張してJUnitのテストを書くことになる。</p>
+<p class="p1"><span class="Apple-tab-span">	</span>GWTでは、特にGWTTetcaseというクラスを拡張してJUnitのテストを書くことになる。</p>
 <p class="p2"><br></p>
 </body>
 </html>
