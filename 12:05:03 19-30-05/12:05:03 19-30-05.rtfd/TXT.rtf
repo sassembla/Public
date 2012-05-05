@@ -1,0 +1,214 @@
+{\rtf1\ansi\ansicpg932\cocoartf1138\cocoasubrtf320
+{\fonttbl\f0\fnil\fcharset128 HiraKakuProN-W3;\f1\fnil\fcharset0 LucidaGrande;\f2\fmodern\fcharset0 Courier;
+\f3\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;\red79\green131\blue48;\red52\green52\blue52;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww16600\viewh10800\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+
+\f0\b\fs44 \cf0 Gradle\'82\'a9\'82\'e7Jetty\'82\'f0\'93\'ae\'82\'a9\'82\'b7+Deploy
+\b0\fs24 \
+\
+\
+
+\b \'8a\'54\'97\'76
+\b0 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803
+\cf0 	Gradle\'82\'a9\'82\'e7Jetty\'93\'ae\'82\'a9\'82\'b5\'82\'c4\'81\'41\'89\'bd\'82\'a9\'82\'b5\'82\'e7\'82\'ccServe\'82\'f0\'8d\'73\'82\'a4\'81\'42\
+\
+\
+
+\b \'93\'e0\'97\'65
+\b0 \
+	Gradle User Guide\
+	{\field{\*\fldinst{HYPERLINK "http://www.monochromeroad.com/artifacts/gradle/userguide/userguide.html"}}{\fldrslt http://www.monochromeroad.com/artifacts/gradle/userguide/userguide.html}}\
+	\'82\'cc\'81\'41\
+	\
+	
+\b\fs28 \cf2 \'91\'e6
+\f1 10
+\f0 \'8f\'cd
+\f1  Web
+\f0 \'83\'41\'83\'76\'83\'8a\'83\'50\'81\'5b\'83\'56\'83\'87\'83\'93\'83\'4e\'83\'43\'83\'62\'83\'4e\'83\'58\'83\'5e\'81\'5b\'83\'67
+\b0\fs24 \cf0 \
+	{\field{\*\fldinst{HYPERLINK "http://www.monochromeroad.com/artifacts/gradle/userguide/web_project_tutorial.html"}}{\fldrslt http://www.monochromeroad.com/artifacts/gradle/userguide/web_project_tutorial.html}}\
+	\'82\'f0\'8e\'51\'8d\'6c\'82\'c9\'81\'41\
+\
+	"
+\f1 \cf3 War
+\f0 \'83\'76\'83\'89\'83\'4f\'83\'43\'83\'93\'82\'c9\'82\'c2\'82\'a2\'82\'c4\'82\'cc\'8f\'da\'8d\'d7\'82\'cd{\field{\*\fldinst{HYPERLINK "http://www.monochromeroad.com/artifacts/gradle/userguide/war_plugin.html"}}{\fldrslt 
+\f1 26
+\f0 \'8f\'cd
+\f1 War 
+\f0 \'83\'76\'83\'89\'83\'4f\'83\'43\'83\'93}}\'81\'41
+\f1  Jetty
+\f0 \'83\'76\'83\'89\'83\'4f\'83\'43\'83\'93\'82\'cc\'8f\'da\'8d\'d7\'82\'c9\'82\'c2\'82\'a2\'82\'c4\'82\'cd{\field{\*\fldinst{HYPERLINK "http://www.monochromeroad.com/artifacts/gradle/userguide/jetty_plugin.html"}}{\fldrslt 
+\f1 28
+\f0 \'8f\'cd
+\f1 Jetty 
+\f0 \'83\'76\'83\'89\'83\'4f\'83\'43\'83\'93}}\'82\'f0\'8e\'51\'8f\'c6\'82\'b5\'82\'c4\'82\'ad\'82\'be\'82\'b3\'82\'a2\'81\'42
+\f1  Gradle
+\f0 \'94\'7a\'95\'7a\'95\'a8\'82\'cc
+\f2 samples/webApplication
+\f0 \'83\'66\'83\'42\'83\'8c\'83\'4e\'83\'67\'83\'8a\'82\'c9\'83\'54\'83\'93\'83\'76\'83\'8b
+\f1 Java
+\f0 \'83\'76\'83\'8d\'83\'57\'83\'46\'83\'4e\'83\'67\'82\'aa\'82\'a0\'82\'e8\'82\'dc\'82\'b7\'81\'42"
+\fs30 \
+
+\fs24 \cf0 \
+	\'82\'c6\'82\'a9\'82\'a0\'82\'e9\'82\'cc\'82\'c5\'81\'41\'93\'4b\'93\'96\'82\'c9Script\'82\'f0\'83\'70\'83\'4e\'82\'c1\'82\'c4\'81\'41\'8e\'8e\'82\'b7\'81\'42\
+	\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+
+\b \cf0 \'8e\'c0\'91\'48\
+
+\b0 	\'92\'50\'8f\'83\'82\'c9\'93\'ae\'82\'a9\'82\'b7\'82\'be\'82\'af\'82\'c8\'82\'e7\'81\'41build.gradle\'82\'c9\'81\'41\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803
+
+\f3 \cf0 apply plugin : 'jetty'
+\f0 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+\cf0 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803
+\cf0 	\'82\'c6\'8f\'91\'82\'ad\'82\'be\'82\'af\'81\'41\'82\'a9\'82\'e7\'82\'cc \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803
+
+\f3 \cf0 gradle jettyRunWar
+\f0 \
+	 \'82\'c5\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural
+
+\f3 \cf0 {{\NeXTGraphic スクリーンショット 2012-05-05 15.10.05.png \width13680 \height8760
+}�}
+\f0 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803
+\cf0 	\'82\'c6\'95\'5c\'8e\'a6\'82\'b3\'82\'ea\'82\'c4\'81\'41Jetty\'83\'54\'81\'5b\'83\'6f\'82\'aa\'97\'a7\'82\'bf\'8f\'e3\'82\'aa\'82\'e9\'81\'42\
+	
+\b Gradle\'82\'ccwar\'83\'52\'83\'7d\'83\'93\'83\'68\'82\'c6\'89\'bd\'82\'a9\'82\'f0\'8a\'d6\'98\'41\'82\'c3\'82\'af\'82\'c4\'82\'a8\'82\'af\'82\'ce\'81\'41\'82\'b1\'82\'cc\'83\'52\'83\'7d\'83\'93\'83\'68\'82\'c5war\'93\'e0\'82\'cc\'90\'b6\'90\'ac\'95\'a8\'82\'aajetty\'82\'d6\'82\'c6deploy\'82\'b3\'82\'ea\'82\'e9\'81\'42
+\b0 \
+	\uc0\u8984 +.\'82\'c6\'82\'a9\'82\'c5\'8f\'49\'97\'b9\'82\'c5\'82\'ab\'82\'e9\'81\'42\
+\
+\
+	\'83\'41\'83\'4e\'83\'5a\'83\'58\'82\'b5\'82\'c4\'82\'dd\'82\'e9\'82\'c6\'81\'41\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural
+
+\f3 \cf0 {{\NeXTGraphic スクリーンショット 2012-05-05 15.16.24.png \width16140 \height7880
+}�}
+\f0 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803
+\cf0 	test\'82\'c1\'82\'c4\'96\'bc\'91\'4f\'82\'cc\'83\'74\'83\'48\'83\'8b\'83\'5f\'82\'a9\'82\'e7\'8e\'c0\'8d\'73\'82\'b5\'82\'bd\'81\'42\
+	test\'83\'74\'83\'48\'83\'8b\'83\'5f\'8f\'e3\'82\'c9\'82\'cd\'81\'41Jetty\'82\'cc\'8d\'5c\'90\'ac\'82\'aa\'8f\'6f\'97\'88\'82\'c4\'82\'a2\'82\'e9\'81\'42\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural
+
+\f3 \cf0 {{\NeXTGraphic スクリーンショット 2012-05-05 15.17.55.png \width19420 \height11040
+}�}
+\f0 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803
+\cf0 \
+\
+
+\b Deploy
+\b0 \
+	\'82\'e2\'82\'e8\'82\'bd\'82\'a2\'82\'b1\'82\'c6\'82\'cd\'81\'41\
+	\'81\'45Jetty\'82\'c9\'89\'bd\'82\'a9\'82\'b5\'82\'e7\'82\'cc\'83\'41\'83\'76\'83\'8a\'83\'50\'81\'5b\'83\'56\'83\'87\'83\'93\'82\'f0\'83\'66\'83\'76\'83\'8d\'83\'43\'81\'42\
+	\
+	\'8e\'c0\'8d\'db\'82\'c9\'82\'cd \cf3 jettyRunWar
+\fs30  
+\fs24 \cf0 \'83\'52\'83\'7d\'83\'93\'83\'68\'82\'cd\'81\'41war\'83\'52\'83\'7d\'83\'93\'83\'68\'82\'c5\'90\'b6\'90\'ac\'82\'b5\'82\'bd\'82\'e0\'82\'cc\'82\'f0\
+	deploy\'82\'b7\'82\'e9\'81\'41\'82\'c6\'82\'cc\'8e\'96\'82\'c8\'82\'cc\'82\'c5\'81\'41	\
+	war\'83\'52\'83\'7d\'83\'93\'83\'68\'82\'f0build.gradle\'82\'c9\'8f\'91\'82\'ab\'89\'c1\'82\'a6\'82\'e9\'81\'42\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803
+
+\f3 \cf0 apply plugin : 'jetty'
+\f0 \
+
+\f3 war \{\
+    baseName = 'someWebApp'\
+    archiveName = "something"\
+    from 'war' \
+ \
+    manifest \{\
+        attributes 'Implementation-Title': 'something'\
+        attributes 'Implementation-Version': 'some version'\
+        attributes provider: 'gradle'\
+    \}\
+\}
+\f0 \
+\
+	\'82\'c5\'81\'41\
+	war\'83\'74\'83\'48\'83\'8b\'83\'5f\'81\'5b\'82\'f0\'97\'70\'88\'d3\'82\'b5\'82\'c4\'81\'41\'82\'bb\'82\'cc\'92\'86\'82\'c9index.html\'82\'f0\'92\'75\'82\'a2\'82\'c4\'82\'dd\'82\'bd\'81\'42\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural
+
+\f3 \cf0 {{\NeXTGraphic スクリーンショット 2012-05-05 16.08.26.png \width17280 \height11040
+}�}
+\f0 \
+	\'8e\'c0\'8d\'73\'82\'b5\'82\'c4\'82\'dd\'82\'e9\
+
+\f3 {{\NeXTGraphic スクリーンショット 2012-05-05 16.07.27.png \width13680 \height8760
+}�}
+\f0 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803
+\cf0 	war\'89\'bb\'8e\'9e\'82\'ccmanifest\'82\'a9\'82\'e7\'81\'41\'83\'41\'83\'76\'83\'8a\'83\'50\'81\'5b\'83\'56\'83\'87\'83\'93\'96\'bc\'82\'aa\'94\'bd\'89\'66\'82\'b3\'82\'ea\'82\'c4\'82\'a2\'82\'e9\'82\'cc\'82\'aa\'94\'bb\'82\'e9\'81\'42\
+	\'82\'c5\'81\'41\
+	\'83\'41\'83\'4e\'83\'5a\'83\'58\'82\'b5\'82\'c4\'82\'dd\'82\'e9		\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural
+
+\f3 \cf0 {{\NeXTGraphic スクリーンショット 2012-05-05 16.09.09.png \width12780 \height7880
+}�}
+\f0 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803
+\cf0 \
+\
+
+\b run+deploy\'82\'f0Gradle\'82\'cc\'92\'86\'82\'a9\'82\'e7\'8d\'73\'82\'a4
+\b0 \
+	\'82\'b1\'82\'b1\'82\'a9\'82\'e7\'82\'aa\'96\'7b\'91\'e8\'81\'41\'8f\'e3\'8b\'4c\'82\'f0gradle\'82\'cc\'92\'86\'82\'a9\'82\'e7\'8d\'73\'82\'a4\'81\'42\
+	(\'8a\'4f\'91\'a4\'82\'cc\'95\'ca\'82\'ccGradle\'82\'a9\'82\'e7\'8e\'c0\'8d\'73\'82\'b5\'82\'c4\'82\'e0\'82\'a2\'82\'a2\'82\'f1\'82\'be\'82\'af\'82\'c7\'81\'41\'92\'86\'82\'a9\'82\'e7\'83\'52\'83\'93\'83\'67\'83\'8d\'81\'5b\'83\'8b\'82\'c5\'82\'ab\'82\'bd\'95\'fb\'82\'aa\'8a\'79\'82\'b5\'82\'a2\'81\'42)\
+\
+	\'8e\'c0\'8d\'db\'82\'c9\'8b\'81\'82\'df\'82\'e9\'83\'52\'83\'93\'83\'67\'83\'8d\'81\'5b\'83\'8b\'82\'cd\'81\'41\
+	\'81\'45\'82\'c6\'82\'a0\'82\'e9\'8f\'f0\'8c\'8f\'82\'f0\'96\'9e\'82\'bd\'82\'b7\'82\'dc\'82\'c5\'82\'cd\'93\'ae\'82\'a2\'82\'c4\'82\'a2\'82\'c4\'97\'7e\'82\'b5\'82\'a2\
+	\'81\'45\'82\'c6\'82\'a0\'82\'e9\'8f\'f0\'8c\'8f\'82\'f0\'96\'9e\'82\'bd\'82\'b5\'82\'bd\'82\'e7\'97\'8e\'82\'bf\'82\'c4\'97\'7e\'82\'b5\'82\'a2\
+	\'82\'c6\'82\'a2\'82\'a4\'8a\'b4\'82\'b6\'82\'c9\'82\'c8\'82\'e9\'81\'42\
+	\
+	\'97\'a7\'82\'bf\'8f\'e3\'82\'b0\'82\'c1\'82\'cf\'82\'c8\'82\'b5\'82\'c9\'91\'ce\'82\'b5\'82\'c4\'83\'5e\'83\'58\'83\'4e\'82\'f0\'97\'5e\'82\'a6\'82\'e9\'93\'49\'82\'c8\'93\'ae\'82\'ab\'82\'cd\'8d\'a1\'89\'f1\'82\'cd\'88\'d3\'8e\'af\'82\'b5\'82\'c8\'82\'a2\'81\'42\
+	\
+	\'8e\'51\'8d\'6c\'82\'c6\'82\'b5\'82\'c4\'81\'41JettyPluginConversion\'83\'62\'82\'c2\'81\'5b\'8b\'4b\'96\'f1\'8f\'57\'82\'aa\'82\'a0\'82\'c1\'82\'bd\'82\'cc\'82\'c5\'81\'41\'96\'da\'82\'f0\'92\'ca\'82\'b5\'82\'c4\'82\'dd\'82\'e9\'81\'42\
+	{\field{\*\fldinst{HYPERLINK "http://www.gradle.org/docs/current/javadoc/index.html?org/gradle/api/plugins/jetty/JettyPluginConvention.html"}}{\fldrslt http://www.gradle.org/docs/current/javadoc/index.html?org/gradle/api/plugins/jetty/JettyPluginConvention.html}}\
+	\
+	\
+\'82\'b1\'82\'cc\'8e\'9e\'93\'5f\'82\'c5\'82\'ccbuild.gradle\'82\'aa\'82\'b1\'82\'f1\'82\'c8\'8a\'b4\'82\'b6\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803
+
+\f3 \cf0 apply plugin : 'jetty'\
+\
+war \{\
+    baseName = 'someWebApp'\
+    archiveName = "something"\
+    from 'war' \
+ \
+    manifest \{\
+        attributes 'Implementation-Title': 'something'\
+        attributes 'Implementation-Version': 'some version'\
+        attributes provider: 'gradle'\
+    \}\
+\}\
+\
+task jettyRunTasks << \{\
+/*    httpPort = jettyConfig.port*/\
+	println "jettyRun before..."\
+	\
+	//mada yoku wakatte nai\
+    jettyRunWar.daemon = false //no effect\
+	println "getWebApp "+jettyRunWar.getWebApp() // /Users/sassembla/Desktop/test/build/libs/something\
+	println "getJettyConfig "+jettyRunWar.getJettyConfig() //null\
+//	jettyRunWar.restartWebApp(false)\
+//	jettyRunWar.createServer() //creates something,,\
+	jettyRunWar.startJetty() //Run!! but with eror..\
+//	jettyRunWar.startJettyInternal() //same above\
+	\
+	println "jettyRun...after"\
+\}
+\f0 \
+\
+	}

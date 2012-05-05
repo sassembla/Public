@@ -1,0 +1,149 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1138.32">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px 'Hiragino Kaku Gothic ProN'; color: #4b9935}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; color: #444444}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+    span.s1 {font: 12.0px 'Hiragino Kaku Gothic ProN'; color: #000000}
+    span.s2 {font: 14.0px 'Lucida Grande'}
+    span.s3 {color: #000000}
+    span.s4 {font: 12.0px 'Lucida Grande'}
+    span.s5 {font: 12.0px Courier}
+    span.s6 {color: #444444}
+    span.s7 {font: 15.0px 'Hiragino Kaku Gothic ProN'; color: #444444}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>GradleからJettyを動かす+Deploy</b></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>GradleからJetty動かして、何かしらのServeを行う。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>内容</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Gradle User Guide</p>
+<p class="p3"><span class="Apple-tab-span">	</span><a href="http://www.monochromeroad.com/artifacts/gradle/userguide/userguide.html">http://www.monochromeroad.com/artifacts/gradle/userguide/userguide.html</a></p>
+<p class="p3"><span class="Apple-tab-span">	</span>の、</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span></span><b>第</b><span class="s2"><b>10</b></span><b>章</b><span class="s2"><b> Web</b></span><b>アプリケーションクイックスタート</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><a href="http://www.monochromeroad.com/artifacts/gradle/userguide/web_project_tutorial.html">http://www.monochromeroad.com/artifacts/gradle/userguide/web_project_tutorial.html</a></p>
+<p class="p3"><span class="Apple-tab-span">	</span>を参考に、</p>
+<p class="p2"><br></p>
+<p class="p5"><span class="s3"><span class="Apple-tab-span">	</span>"</span><span class="s4">War</span>プラグインについての詳細は<a href="http://www.monochromeroad.com/artifacts/gradle/userguide/war_plugin.html"><span class="s4">26</span>章<span class="s4">War </span>プラグイン</a>、<span class="s4"> Jetty</span>プラグインの詳細については<a href="http://www.monochromeroad.com/artifacts/gradle/userguide/jetty_plugin.html"><span class="s4">28</span>章<span class="s4">Jetty </span>プラグイン</a>を参照してください。<span class="s4"> Gradle</span>配布物の<span class="s5">samples/webApplication</span>ディレクトリにサンプル<span class="s4">Java</span>プロジェクトがあります。"</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>とかあるので、適当にScriptをパクって、試す。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>実践</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>単純に動かすだけなら、build.gradleに、</p>
+<p class="p6">apply plugin : 'jetty'</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>と書くだけ、からの<span class="Apple-converted-space"> </span></p>
+<p class="p6">gradle jettyRunWar</p>
+<p class="p3"><span class="Apple-tab-span">	</span> で</p>
+<p class="p6"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202012-05-05%2015.10.05.png" alt="スクリーンショット 2012-05-05 15.10.05.png"></p>
+<p class="p3"><span class="Apple-tab-span">	</span>と表示されて、Jettyサーバが立ち上がる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>Gradleのwarコマンドと何かを関連づけておけば、このコマンドでwar内の生成物がjettyへとdeployされる。</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>⌘+.とかで終了できる。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>アクセスしてみると、</p>
+<p class="p6"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202012-05-05%2015.16.24.png" alt="スクリーンショット 2012-05-05 15.16.24.png"></p>
+<p class="p3"><span class="Apple-tab-span">	</span>testって名前のフォルダから実行した。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>testフォルダ上には、Jettyの構成が出来ている。</p>
+<p class="p6"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202012-05-05%2015.17.55.png" alt="スクリーンショット 2012-05-05 15.17.55.png"></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>Deploy</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>やりたいことは、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・Jettyに何かしらのアプリケーションをデプロイ。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>実際には <span class="s6">jettyRunWar</span><span class="s7"> </span>コマンドは、warコマンドで生成したものを</p>
+<p class="p3"><span class="Apple-tab-span">	</span>deployする、との事なので、<span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>warコマンドをbuild.gradleに書き加える。</p>
+<p class="p2"><br></p>
+<p class="p6">apply plugin : 'jetty'</p>
+<p class="p6">war {</p>
+<p class="p6"><span class="Apple-converted-space">    </span>baseName = 'someWebApp'</p>
+<p class="p6"><span class="Apple-converted-space">    </span>archiveName = "something"</p>
+<p class="p6"><span class="Apple-converted-space">    </span>from 'war'<span class="Apple-converted-space"> </span></p>
+<p class="p7"><span class="Apple-converted-space"> </span></p>
+<p class="p6"><span class="Apple-converted-space">    </span>manifest {</p>
+<p class="p6"><span class="Apple-converted-space">        </span>attributes 'Implementation-Title': 'something'</p>
+<p class="p6"><span class="Apple-converted-space">        </span>attributes 'Implementation-Version': 'some version'</p>
+<p class="p6"><span class="Apple-converted-space">        </span>attributes provider: 'gradle'</p>
+<p class="p6"><span class="Apple-converted-space">    </span>}</p>
+<p class="p6">}</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>warフォルダーを用意して、その中にindex.htmlを置いてみた。</p>
+<p class="p6"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202012-05-05%2016.08.26.png" alt="スクリーンショット 2012-05-05 16.08.26.png"></p>
+<p class="p3"><span class="Apple-tab-span">	</span>実行してみる</p>
+<p class="p6"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202012-05-05%2016.07.27.png" alt="スクリーンショット 2012-05-05 16.07.27.png"></p>
+<p class="p3"><span class="Apple-tab-span">	</span>war化時のmanifestから、アプリケーション名が反映されているのが判る。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>アクセスしてみる<span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p6"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202012-05-05%2016.09.09.png" alt="スクリーンショット 2012-05-05 16.09.09.png"></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>run+deployをGradleの中から行う</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ここからが本題、上記をgradleの中から行う。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>(外側の別のGradleから実行してもいいんだけど、中からコントロールできた方が楽しい。)</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>実際に求めるコントロールは、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・とある条件を満たすまでは動いていて欲しい</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・とある条件を満たしたら落ちて欲しい</p>
+<p class="p3"><span class="Apple-tab-span">	</span>という感じになる。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>立ち上げっぱなしに対してタスクを与える的な動きは今回は意識しない。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>参考として、JettyPluginConversionッつー規約集があったので、目を通してみる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><a href="http://www.gradle.org/docs/current/javadoc/index.html?org/gradle/api/plugins/jetty/JettyPluginConvention.html">http://www.gradle.org/docs/current/javadoc/index.html?org/gradle/api/plugins/jetty/JettyPluginConvention.html</a></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3">この時点でのbuild.gradleがこんな感じ</p>
+<p class="p6">apply plugin : 'jetty'</p>
+<p class="p7"><br></p>
+<p class="p6">war {</p>
+<p class="p6"><span class="Apple-converted-space">    </span>baseName = 'someWebApp'</p>
+<p class="p6"><span class="Apple-converted-space">    </span>archiveName = "something"</p>
+<p class="p6"><span class="Apple-converted-space">    </span>from 'war'<span class="Apple-converted-space"> </span></p>
+<p class="p7"><span class="Apple-converted-space"> </span></p>
+<p class="p6"><span class="Apple-converted-space">    </span>manifest {</p>
+<p class="p6"><span class="Apple-converted-space">        </span>attributes 'Implementation-Title': 'something'</p>
+<p class="p6"><span class="Apple-converted-space">        </span>attributes 'Implementation-Version': 'some version'</p>
+<p class="p6"><span class="Apple-converted-space">        </span>attributes provider: 'gradle'</p>
+<p class="p6"><span class="Apple-converted-space">    </span>}</p>
+<p class="p6">}</p>
+<p class="p7"><br></p>
+<p class="p6">task jettyRunTasks &lt;&lt; {</p>
+<p class="p6">/*<span class="Apple-converted-space">    </span>httpPort = jettyConfig.port*/</p>
+<p class="p6"><span class="Apple-tab-span">	</span>println "jettyRun before..."</p>
+<p class="p7"><span class="Apple-tab-span">	</span></p>
+<p class="p6"><span class="Apple-tab-span">	</span>//mada yoku wakatte nai</p>
+<p class="p6"><span class="Apple-converted-space">    </span>jettyRunWar.daemon = false //no effect</p>
+<p class="p6"><span class="Apple-tab-span">	</span>println "getWebApp "+jettyRunWar.getWebApp() // /Users/sassembla/Desktop/test/build/libs/something</p>
+<p class="p6"><span class="Apple-tab-span">	</span>println "getJettyConfig "+jettyRunWar.getJettyConfig() //null</p>
+<p class="p6">//<span class="Apple-tab-span">	</span>jettyRunWar.restartWebApp(false)</p>
+<p class="p6">//<span class="Apple-tab-span">	</span>jettyRunWar.createServer() //creates something,,</p>
+<p class="p6"><span class="Apple-tab-span">	</span>jettyRunWar.startJetty() //Run!! but with eror..</p>
+<p class="p6">//<span class="Apple-tab-span">	</span>jettyRunWar.startJettyInternal() //same above</p>
+<p class="p7"><span class="Apple-tab-span">	</span></p>
+<p class="p6"><span class="Apple-tab-span">	</span>println "jettyRun...after"</p>
+<p class="p6">}</p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+</body>
+</html>
