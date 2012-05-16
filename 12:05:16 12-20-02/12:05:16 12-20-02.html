@@ -1,0 +1,167 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1138.32">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 17.0px Times; color: #0f0066}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 18.0px 'Hiragino Kaku Gothic ProN'}
+    span.s1 {font: 5.0px 'Hiragino Kaku Gothic ProN'; color: #000000}
+    span.s2 {font: 17.0px 'Hiragino Mincho ProN'}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>XMLをJSONに変換したらまだ読みやすかった件および経験について</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>XMLの可読性の低さがキライです。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>なんで開きタグと閉じタグが必要なんですか？</p>
+<p class="p3"><span class="Apple-tab-span">	</span>アトリビュートとかそういうのって選択肢無駄に増やしてるだけで読みにくいです</p>
+<p class="p3"><span class="Apple-tab-span">	</span>馬鹿なんですか。　死ぬんですか。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>(個人差があります。)</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、ビジュアライズするツールを探した。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>要件は、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・Webサービスである事</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・xml本来よりまだ見やすい表現方法であること</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>探し方</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ここに一番詰った。これを書きたい。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>最初、<b>xml visualization </b>でググって探した。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>xmlの内容を読みやすくできればいいかなーと思ったので。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>visualize</b>であるかなーと。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>そしたら、</p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>なんでかオンライン表示ツールは存在せず、</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>ダウンロードして動かしてね的なツールが山のように見つかった。</b></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>stackoverflowですら、GUIツールを提示してきて絶望した。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>もちろんそんなものに用は無い。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>たかだか可読性をあげるためだけに、何かインストールして見るとか厭だ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>しかも対象はxml。</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>絶対に厭だ。</b></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>で、考え直す</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>落ち着け、素数を数えて落ち着くんだ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ぶっちゃけxmlの形式が読みにくいだけなんで、ほかの形式に変える、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>そう、そういうアプローチにしよう。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>って探したら、すばらしい事に最初の目的<span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・xmlのビジュアライズを行うツール</p>
+<p class="p3"><span class="Apple-tab-span">	</span>に巡り会えた。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>今回の神</b></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span></span><b>XML-JSON</b><span class="s2"><b>相互変換ツール</b></span><b> - Bluehawk's lab.</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><a href="http://bluehawk.infinitybird.com/dev/xmljson.html">http://bluehawk.infinitybird.com/dev/xmljson.html</a></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>おかげさまで読みやすいです。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>JSONオブジェクトを階層表示で表示可能で、xmlをビジュアライズしたかった事も叶いました。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>参考までに。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>xmlのクソデータ</p>
+<p class="p2"><br></p>
+<p class="p3">&lt;?xml version="1.0" encoding="utf-8"?&gt;<span class="Apple-converted-space"> </span></p>
+<p class="p3">&lt;areaData title="サンプルデータ"&gt;</p>
+<p class="p3"><span class="Apple-converted-space">  </span>&lt;hrTitle1 title="見出し1" no="0"&gt;</p>
+<p class="p3"><span class="Apple-converted-space">    </span>&lt;hrTitle2 title="見出し2a" no="0"&gt;</p>
+<p class="p3"><span class="Apple-converted-space">      </span>&lt;hrTitle3 title="見出し3a" no="0"&gt;</p>
+<p class="p3"><span class="Apple-converted-space">       </span>&lt;listItem&gt;テスト&lt;/listItem&gt;</p>
+<p class="p3"><span class="Apple-converted-space">      </span>&lt;/hrTitle3&gt;</p>
+<p class="p3"><span class="Apple-converted-space">      </span>&lt;hrTitle3 title="見出し3a" no="1"&gt;</p>
+<p class="p3"><span class="Apple-converted-space">       </span>&lt;listItem&gt;テスト&lt;/listItem&gt;</p>
+<p class="p3"><span class="Apple-converted-space">      </span>&lt;/hrTitle3&gt;</p>
+<p class="p3"><span class="Apple-converted-space">    </span>&lt;/hrTitle2&gt;</p>
+<p class="p3"><span class="Apple-converted-space">    </span>&lt;hrTitle2 title="見出し2b" no="1"&gt;</p>
+<p class="p3"><span class="Apple-converted-space">      </span>&lt;hrTitle3 title="見出し3b" no="0"&gt;</p>
+<p class="p3"><span class="Apple-converted-space">       </span>&lt;listItem&gt;テスト&lt;/listItem&gt;</p>
+<p class="p3"><span class="Apple-converted-space">       </span>&lt;listItem&gt;テスト&lt;/listItem&gt;</p>
+<p class="p3"><span class="Apple-converted-space">       </span>&lt;listItem&gt;テスト&lt;/listItem&gt;</p>
+<p class="p3"><span class="Apple-converted-space">       </span>&lt;listItem&gt;テスト&lt;/listItem&gt;</p>
+<p class="p3"><span class="Apple-converted-space">       </span>&lt;listItem&gt;テスト&lt;/listItem&gt;</p>
+<p class="p3"><span class="Apple-converted-space">      </span>&lt;/hrTitle3&gt;</p>
+<p class="p3"><span class="Apple-converted-space">    </span>&lt;/hrTitle2&gt;</p>
+<p class="p3"><span class="Apple-converted-space">  </span>&lt;/hrTitle1&gt;</p>
+<p class="p3">&lt;/areaData&gt;</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>jsonのまだ赦せるデータ</p>
+<p class="p2"><br></p>
+<p class="p3">{</p>
+<p class="p3"><span class="Apple-converted-space">  </span>"areaData": {</p>
+<p class="p3"><span class="Apple-converted-space">    </span>"-title": "サンプルデータ",</p>
+<p class="p3"><span class="Apple-converted-space">    </span>"hrTitle1": {</p>
+<p class="p3"><span class="Apple-converted-space">      </span>"-title": "見出し1",</p>
+<p class="p3"><span class="Apple-converted-space">      </span>"-no": "0",</p>
+<p class="p3"><span class="Apple-converted-space">      </span>"hrTitle2": [</p>
+<p class="p3"><span class="Apple-converted-space">        </span>{</p>
+<p class="p3"><span class="Apple-converted-space">          </span>"-title": "見出し2a",</p>
+<p class="p3"><span class="Apple-converted-space">          </span>"-no": "0",</p>
+<p class="p3"><span class="Apple-converted-space">          </span>"hrTitle3": [</p>
+<p class="p3"><span class="Apple-converted-space">            </span>{</p>
+<p class="p3"><span class="Apple-converted-space">              </span>"-title": "見出し3a",</p>
+<p class="p3"><span class="Apple-converted-space">              </span>"-no": "0",</p>
+<p class="p3"><span class="Apple-converted-space">              </span>"listItem": "テスト"</p>
+<p class="p3"><span class="Apple-converted-space">            </span>},</p>
+<p class="p3"><span class="Apple-converted-space">            </span>{</p>
+<p class="p3"><span class="Apple-converted-space">              </span>"-title": "見出し3a",</p>
+<p class="p3"><span class="Apple-converted-space">              </span>"-no": "1",</p>
+<p class="p3"><span class="Apple-converted-space">              </span>"listItem": "テスト"</p>
+<p class="p3"><span class="Apple-converted-space">            </span>}</p>
+<p class="p3"><span class="Apple-converted-space">          </span>]</p>
+<p class="p3"><span class="Apple-converted-space">        </span>},</p>
+<p class="p3"><span class="Apple-converted-space">        </span>{</p>
+<p class="p3"><span class="Apple-converted-space">          </span>"-title": "見出し2b",</p>
+<p class="p3"><span class="Apple-converted-space">          </span>"-no": "1",</p>
+<p class="p3"><span class="Apple-converted-space">          </span>"hrTitle3": {</p>
+<p class="p3"><span class="Apple-converted-space">            </span>"-title": "見出し3b",</p>
+<p class="p3"><span class="Apple-converted-space">            </span>"-no": "0",</p>
+<p class="p3"><span class="Apple-converted-space">            </span>"listItem": [</p>
+<p class="p3"><span class="Apple-converted-space">              </span>"テスト",</p>
+<p class="p3"><span class="Apple-converted-space">              </span>"テスト",</p>
+<p class="p3"><span class="Apple-converted-space">              </span>"テスト",</p>
+<p class="p3"><span class="Apple-converted-space">              </span>"テスト",</p>
+<p class="p3"><span class="Apple-converted-space">              </span>"テスト"</p>
+<p class="p3"><span class="Apple-converted-space">            </span>]</p>
+<p class="p3"><span class="Apple-converted-space">          </span>}</p>
+<p class="p3"><span class="Apple-converted-space">        </span>}</p>
+<p class="p3"><span class="Apple-converted-space">      </span>]</p>
+<p class="p3"><span class="Apple-converted-space">    </span>}</p>
+<p class="p3"><span class="Apple-converted-space">  </span>}</p>
+<p class="p3">}</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>アトリビュートもウマい事わけてくれて、助かります。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>一つ思いついた事</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>人間が手を加える前提のファイルと、そうでなくProgramから触れる前提のファイルを、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>xmlの<b>クソビジュアル性</b>を使って別けられるのではないか。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>人が手を加えたり読んだり<b>する</b>前提のファイルは</p>
+<p class="p5"><b><span class="Apple-tab-span">	</span>xml以外</b></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>人が手を加えたり読んだり<b>しない</b>前提のファイルは</p>
+<p class="p5"><b><span class="Apple-tab-span">	</span>xml</b></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>コレでいい気がする。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>俺の中では、xmlはバイナリファイル。　俺の中ではな。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>そんなことよりももいろClojureがいい感じです(脳内で</p>
+</body>
+</html>
