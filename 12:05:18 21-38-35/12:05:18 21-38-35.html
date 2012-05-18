@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1138.47">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>大嫌いなmavenのリポジトリの依存関係を可視化する</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>maven、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>pom.xmlが偏在しててムカつきます。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>.svnと同じ愚を冒している気がしてなりません。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>でもいいの、、、わたしにはGradleがあるもの、、！！</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>とはいえ仕事なんで、内容とか問題があれば見なきゃいけないんですが、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>手で開いてると発狂するので、ツールで見る事にします。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>使う形式</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>graphml形式を使います。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><a href="http://graphml.graphdrawing.org/">http://graphml.graphdrawing.org/</a></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>この形式を選んだ理由は、<b>近所に知ってる奴が居たから。</b></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>自分が気に入ってるビューアは下記<span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>gephi</p>
+<p class="p3"><span class="Apple-tab-span">	</span><a href="https://gephi.org/">https://gephi.org/</a></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>mavenでgraphml形式で依存をoutput</b></p>
+<pre class="code">mvn dependency:tree -DoutputType=graphml -DoutputFile=dependency.graphml</pre>
+<p class="p3"><span class="Apple-tab-span">	</span>で、指定したフォルダに dependency.graphml ファイルが出来てる筈です。</p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>読ませようとするとエラー</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>上記ファイルをgephiで開こうとすると、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Content is not allowed in prolog.　</p>
+<p class="p3"><span class="Apple-tab-span">	</span>とか言われます。saxパーサでエラーが出てる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、ファイル見てみたら、saxパーサで読むとは思えないデータ形式。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>こんな感じ</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>org.codehaus.mojo:XXX:XXX</p>
+<p class="p3"><span class="Apple-tab-span">	</span>+- org.apache.maven:maven-project:jar:2.0.9:compile</p>
+<p class="p3"><span class="Apple-tab-span">	</span>|<span class="Apple-converted-space">  </span>+- org.apache.maven:maven-settings:jar:2.0.9:compile</p>
+<p class="p3"><span class="Apple-tab-span">	</span>|<span class="Apple-converted-space">  </span>+- org.apache.maven:maven-profile:jar:2.0.9:compile</p>
+<p class="p3"><span class="Apple-tab-span">	</span>|<span class="Apple-converted-space">  </span>+- org.apache.maven:maven-artifact-manager:jar:2.0.9:compile</p>
+<p class="p3"><span class="Apple-tab-span">	</span>|<span class="Apple-converted-space">  </span>|<span class="Apple-converted-space">  </span>+- org.apache.maven:maven-repository-metadata:jar:2.0.9:compile</p>
+<p class="p3"><span class="Apple-tab-span">	</span>|<span class="Apple-converted-space">  </span>|<span class="Apple-converted-space">  </span>\- org.apache.maven.wagon:wagon-provider-api:jar:1.0-beta-2:compile</p>
+<p class="p3"><span class="Apple-tab-span">	</span>|<span class="Apple-converted-space">  </span>\- org.apache.maven:maven-plugin-registry:jar:2.0.9:compile</p>
+<p class="p3"><span class="Apple-tab-span">	</span>…</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ただ、mavenでの実行自体にエラーは出ていない。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>カンで、「もしかしてバージョンあるんじゃね？」って思って、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>バージョン指定する下記設定をpom.xmlのbuildブロックに書き足した。</p>
+<p class="p2"><br></p>
+<pre class="code">&lt;plugin&gt;</pre>
+<pre class="code"><span class="Apple-tab-span">	</span>&lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;</pre>
+<pre class="code"><span class="Apple-tab-span">	</span>&lt;artifactId&gt;maven-dependency-plugin&lt;/artifactId&gt;</pre>
+<pre class="code"><span class="Apple-tab-span">	</span>&lt;version&gt;2.2&lt;/version&gt;</pre>
+<pre class="code">&lt;/plugin&gt;</pre>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>完成図</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>出力されたファイルはxmlっぽくなってて、gephiで開くと下記みたいな。</p>
+<p><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202012-05-18%2021.26.46.png" alt="スクリーンショット 2012-05-18 21.26.46.png"></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>今後</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Gradle版も出せるようにしたいです。そのうち探す。</p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>参考にしたサイト</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><a href="http://www.summa-tech.com/blog/2011/04/12/a-visual-maven-dependency-tree-view/">http://www.summa-tech.com/blog/2011/04/12/a-visual-maven-dependency-tree-view/</a></p>
+<p class="p3"><span class="Apple-tab-span">	</span>モロにバージョン指定について書いてあった。</p>
+</body>
+</html>
