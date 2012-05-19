@@ -1,0 +1,152 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1138.47">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>GWTをおすすめする/しない について</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>GWTについて、自分が考えている事を纏めておく。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・どんな人にお勧めするか</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・どんな人にお勧めしないか</p>
+<p class="p3"><span class="Apple-tab-span">	</span>を主眼にする。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>自分の目、判断基準について</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>チーム戦を前提に機構やルールを組み上げる仕事をしてるので、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>自分の主義主張に関して、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>「えっそれ個人なら問題にならなくね？」というコトがありがち。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>それでも、自分にとっては、数日前の自分ですら他人(覚えてない自信がある)なので、</p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>・如何に暗黙のルールを自明にできるか</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>・如何にルール遵守を自動化できるか</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>・どうしても手でやらなきゃならないとして、如何にルール自体の数を減らせるか</b></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>というのが、<b>自分にとって必要な理</b>だったりします。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>判断基準として共有までに。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>前提、GWTとはなんだったのか</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Googleが作った、WebToolKit</p>
+<p class="p3"><span class="Apple-tab-span">	</span>略してGWT。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>.javaファイルに書かれたjava+jsソースを、jsに変換する。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>単純に書くと、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Javaを使って、ブラウザで動くアプリのコーディングができる</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>なんか気を利かせて、各ブラウザ向けのコードを吐いてくれたりする。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>圧倒的な利点</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・Javaの言語的なルールをもってして、JSを構造的に記述できる</p>
+<p class="p3"><span class="Apple-tab-span">	</span>→妄信的にコーディングルールを定めてクソみたいなJSコードになるよりは、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Javaというカチカチした言語のルールの中で記述する方がマシ。兆倍マシ。</p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>が、これはGWTだけの利点ではなく、他の言語→JSを出力する仕掛け、でも実現できる。</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>LLVM to JSとか、ClojureScriptとか。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Dartはまだ仕様カチッとしてないしGoogleだから気にしない。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>上記 恩恵として、大規模なWebクライアントを書く事が可能。あくまで可能性だけど。　</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ブラウザでやった方が良い事、ネイティブでやった方が良い事、サーバでやった方が良い事、の3つがあり、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>そのうちの一つが強大になって行くのを担保できる、という利がある。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span></b>はっきり言ってJSでのブラウザ巨大アプリは、作らないでいいなら作らないでいい方が<b>本当に良い</b>。</p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>でも、</b>って場合、Javaのルールがある程度の助けになる。素のJSよりマシ。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・JavaでJSのテストが書け、ブラウザで実行できる</p>
+<p class="p3"><span class="Apple-tab-span">	</span>→JSで書いたライブラリを内包して、薄いラッパー書いてテストをJavaで書いて自動化、なんてことができる。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>圧倒的な損点</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・手法としてまどろっこしい</p>
+<p class="p3"><span class="Apple-tab-span">	</span>→実際まどろっこしい。変換行程は省けないし、変換アクセラレーションも限界がある。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>でも、CI組んじゃえば割とどうでも良かったりする。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・Javaちゃんやっぱりちょっと、、ご免っていうか<b>めんどくさい</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>→ハンドラとか書いてると挫けそうになる。メッセージング無いし。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・Googleプロダクトにありがちだけど、<b>未来が不明</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>→が、すでに基礎を行うには十分なリソースがそろっていると言える。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>JSでHTML5の機構を書いて、Javaでラップ、テストを書いて作って使う、なんてことも可能。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>→<b>ぶっちゃけ未来なんてどうでも良い</b>、と言える。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>いっそ手放してくれたほうが、、、ほら、Waveみたいにさ、、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>(ツールとプロダクトを一緒くたにすんなっつう反論はご尤も。)</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>GWTの現状</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>HTML4のブラウザアプリならそのまま使用OK。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>HTML5の機能に対応するモジュールとかは無い、が、自力で足せる</p>
+<p class="p3"><span class="Apple-tab-span">	</span>リリース予定などのスケジュールが未定、そもナニしたいのか、リリース方針が未定</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>以上をふまえた上で、</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>自分がGWTをお勧めする人</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>初学でない +<span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Java書けて +<span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>JSで大規模なものを作るのに苦を感じる +<span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>テストをする事に重要性を感じて +<span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>大穴で、JSの損点が他の言語のルールを使う事でどのように補完されるか見たい +<span class="Apple-converted-space"> </span></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>な、人。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>余談だけど、GWTが吐き出すJSが読める、ていう能力の必要はねーと思う。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>バグったらJavaのコードをまず疑うべく。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>どうせJSのコードを手で直す機会は絶対に訪れない訳だし。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ただし、現在12/05/19 16:09:54 ですけど、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>1年後には誰も使わなくなってる言語になってると思います。</b></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>理由は、「他の ToJSCompile言語なりツール」が出て来るから。っていうかもう出てきてるんだけどさ。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>なので、GWTは、「<b>JavaをJSに変換する唯一の手段</b>」ではなく、あくまで「<b>JavaをJSに変換する1手段</b>」でしかありません。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>そこんとこよろしく。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>別の選択肢があるなら別のを学ぶと良いと思うよ。</b></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>自分がGWTをお勧めしない人</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>初学 or 初学でない +<span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Java書けない or　Javaキライ +</p>
+<p class="p3"><span class="Apple-tab-span">	</span>JS好き or JSで大規模なものを作るのに苦を感じない +</p>
+<p class="p3"><span class="Apple-tab-span">	</span>別にテスト無くても大丈夫! だぜな +</p>
+<p class="p3"><span class="Apple-tab-span">	</span>日本語でおk +</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>な、人。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>上記に該当する人は、根本的にお勧めしません。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>初学ならこんな難しいものやるより、Coffeeとかのほうにしましょう。</p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>JavaキライならGWTはJavaなのでBye! です。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>JS好きならJS書いててください。コールバックコールバック。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>別にテスト→そのコード、ずっと動くと良いね！ JSでね！！　ククク</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>日本語でおk→GoogleがGWTの死霊を1.6くらいで他言語化放置してるので、やめた方がいいよ。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>以上。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>In Other Words</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>GWT is already completed. and Dead. RIP.</p>
+<p class="p3"><span class="Apple-tab-span">	</span>please choose the other one.</p>
+</body>
+</html>
