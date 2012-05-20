@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1138.47">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+	<script type="text/javascript" src="http://platform.twitter.com/anywhere.js?id=bKHhDxNgJLJUmFmej4sEw&v=1"></script>
+</head>
+<body>
+<p class="p1"><b>Something to JS まとめ</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>主にBrowserで動く[言語AからJSを作り出すツール類]を纏めとく。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ただ単に人に説明する時リスト的なものが無くて</p>
+<p class="p3"><span class="Apple-tab-span">	</span>面倒くさくなったためカッとなって作っている。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>GWT</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span></b><a href="https://developers.google.com/web-toolkit/">https://developers.google.com/web-toolkit/</a></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span></b>JavaコードからJSを出力。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>JSとの橋渡し機能有り。</p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>ocamljs</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><a href="http://code.google.com/p/ocamljs/">http://code.google.com/p/ocamljs/</a></p>
+<p class="p3"><span class="Apple-tab-span">	</span>OCamlがJSに変換される。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>JSとの橋渡し機能もあるらしい。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>ClojureScript</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><a href="https://github.com/clojure/clojurescript">https://github.com/clojure/clojurescript</a></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ClojureからJSに変換。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>BicaVM</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><a href="http://badassjs.com/post/12648021003/bicavm-a-jvm-implementation-in-javascript">http://badassjs.com/post/12648021003/bicavm-a-jvm-implementation-in-javascript</a></p>
+<p class="p3"><span class="Apple-tab-span">	</span>JSで書かれたJVM。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>LLVM to JS</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span></b><a href="https://github.com/kripken/emscripten">https://github.com/kripken/emscripten</a></p>
+<p class="p3"><span class="Apple-tab-span">	</span>コードをLLVMを通じてJSにコンパイルする。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>強烈にマニアックだけど、これでJVMをJS化すればいいんじゃねえのと</p>
+<p class="p3"><span class="Apple-tab-span">	</span>考えてる。次試す。</p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>Doppio</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span></b><a href="http://int3.github.com/doppio/about.html">http://int3.github.com/doppio/about.html</a></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Coffeeで書かれたJVM。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>デモすら動かしてないのでホントに動くのかどうかは知らない。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>以下おまけ</b></p>
+<p class="p3"><b>JS to Coffee</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><a href="http://js2coffee.org/">http://js2coffee.org/</a></p>
+<p class="p3"><span class="Apple-tab-span">	</span>JSをCoffeeに変えてくれるサイト。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3">これ以外にも「こんなのあるよ！」って言うのがあったら、</p>
+<p class="p3">@toru_inoue まで教えてもらえるとたすかりんこ。</p>
+<script type="text/javascript">
+  twttr.anywhere(function (T) {
+    T.hovercards();
+  });
+</script>
+</body>
+</html>
