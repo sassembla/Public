@@ -61,9 +61,9 @@
 <p class="p3"><span class="Apple-tab-span">	</span>emscripten側のpathを書き換えるだけ。</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>自分だと、次の2行を弄った。</p>
-<pre class="code">EMSCRIPTEN_ROOT = os.path.expanduser('~/test/emscripten') # this helps projects using emscripten find it</pre>
+<pre class="code">EMSCRIPTEN_ROOT = os.path.expanduser('~/emsTest/emscripten') # this helps projects using emscripten find it</pre>
 <p class="p3"><span class="Apple-tab-span">	</span>と</p>
-<pre class="code">LLVM_ROOT = os.path.expanduser('~/test/clang+llvm-3.0-x86_64-apple-darwin11/bin')</pre>
+<pre class="code">LLVM_ROOT = os.path.expanduser('~/emsTest/clang+llvm-3.0-x86_64-apple-darwin11/bin')</pre>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>→</p>
 <p class="p3"><span class="Apple-converted-space"> </span>   <span class="Apple-tab-span">	</span>./emcc ../hello.c<span class="Apple-converted-space"> </span></p>
