@@ -1,0 +1,175 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1138.47">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>MavenとGradleを比べてGradleがいいんじゃないかなって思う理由</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>すっごく前に作って安定稼働していたMaven(作った奴もこれ以上変えたく無いやつ)</p>
+<p class="p3"><span class="Apple-tab-span">	</span>を、ついに必要な部分だけGradleに変えた。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>そのモチベーションになった</p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>MavenとGradleの違い</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>について書く。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>かなり致命的なレベルでいろいろちがう。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>設定ファイル vs スクリプト</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>どこかでだれかが言ってたとおり、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>MavenとGradleの最大の違いはそこかな、って自分も思ってた。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Mavenは設定ファイル</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Gradleはスクリプト。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>自分で手を汚してみた結果、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>差分の表現としてはちょっと足りないかな、って思う事がこの移行に際してあったので、次に挙げる。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>エラー検出力</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>設定ファイルのミスを見つけるのがmaven。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>スクリプト実行の内容エラーを吐くのがGradle.</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>設定ファイルの出す答えって、処理内容単位でのOKかErrorの二択だよね。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ずーっと人任せだったんで、ほぼ初めてmaven触ってみた時の感想として、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>判りづらい！！！　って思ってしまった。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Gradleだと、プログラムを順次実行してく感じになる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>どこでエラーが出たか、については、ここまでは同じ。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、Gradleだと行にprintlnとか入れられるのです。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>何処まで行ってどんな状態か、判る訳です。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>エラー出力内容</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Maven、何かあるとwikiに行けって書いてあるのは超イラついた。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>追跡構造はしっかりしてるので、特に問題は無いと思う。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>プラグイン読めば良いんじゃないの。そして絶望すればいいんじゃないの。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>プラグイン内でエラーもみ消される事の方が多くてその辺については本当救いようがない。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Gradle、行単位でエラー見れる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>が、エラー発生時には、Gradleのエラー表示も出て、それで根本的なエラー原因をシークする時間がちょっとずつ掛かるのが戴けない。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>もしかしたらGradleのエラー表示部分だけ避ける、とかオプションあるのかな。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>フォルダ/ファイルの扱い</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>プラグインがJavaで書かれていて内部でJavaプログラムでファイル作ったりするのがMaven</p>
+<p class="p3"><span class="Apple-tab-span">	</span>全部スクリプトで書かれてるのがGradle</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>正直、Maven触って一番がっかりしたのがフォルダ/ファイルに関して。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>TODO:今まで触ってくれてたkrmdに感謝と懺悔の意を込めてメシおごる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Mavenの「基礎コンテキスト」領域には、<b>フォルダ・ファイル操作系APIが無い。</b></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>プラグイン内でファイル操作が必要なら、File.ioをインポートしまくり。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>そこら中の.javaファイルでインポートしまくり。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Javaに限らないけど、プログラムでファイル処理扱うのってまず第一級の鬼門でしょ。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>なぜならファイル処理は前提の多いシーケンシャルな処理だから。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>有無を確認、正当性をチェック、フォルダか？、ファイルか？</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>その時どんな状態か、というのをValidateする必要に追われる。</b></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>そんな鬼門コードが、個別に書かれた複数のプログラムとして<b>至る所にある</b>。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>個別にFile.ioで、読んで吐いて書き換えて消して。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ダメだろ。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>全体的にファイルインプット/アウトプットについて扱う、大枠を用意して、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>できるだけ一つのコンテキスト内でファイル作ったり消したりコピーしたりしましょうよ。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Write Everywhereになっちゃう処理があるってことは、それを上位に持ってこないと酷い目に遭います。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>同じ処理を別のファイルに2つ書いた時点で気付こうぜ。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>おかげさまで、</p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>Create/Delete処理が各Java/Classファイルに分散、全体像が把握しにくい。</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>エラーチェックが部分部分になる。(Javaでtry~catchしても握りつぶすだけでしょクソが)</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>チェックを多重化せざるを得ない（チェックコードが増える、それもケース判断を限られたアスペクトで。無理。）</b></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Javaのダメなとこスケールしてんぞコラ。しかもオートだ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>こんなものが世界中にばらまかれてるかと思うと虫酸。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>フォルダ/ファイル扱うのが不自由ってだけでもう断定するけど、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>Mavenは、依存性解決設定ファイルとそのビルダーであって、</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>アーキタイプ作成ツール/他に「なってはいけない、向いてない」</b></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Gradleだと、FileIO系はデフォルトでAPIとしてGradleが動作する環境内にある。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ので、処理がばらける事は（デフォルト使ってくれれば）無い。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>デフォルトで用意されてれば使うでしょ、ってのは理想論だけど、少なくとも機能が考慮されてる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>そうあれ、とデザインされてる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>ユーザー全体が同一アスペクト内でファイル操作が出来るメリットは、Mavenの抱えるデメリットが無い事。</b></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>どこかに書かれてる筈なんだ、とPluginの素のJavaファイルをがさごそすることは、無い。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>エラーも、必ず最前面に出て来る。少なくともtry~catchが存在するのはgradleファイルだ。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>プラグイン作りの難解さ</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Mavenだと、プラグイン用のpom書いて、Javaソース書いて、コンパイルして、パッケージして、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>手元環境だったらinstall→実際に使うプロジェクト側でmvn なにやら</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>めんどくせーーーーーーーー</p>
+<p class="p3"><span class="Apple-tab-span">	</span>そしてソースコード多ーい。 File.io多ーい。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Gradleだと、まだ数作ってないですけど、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ぶっちゃけスクリプトだから<b>書いて実行すればいいんだわさ。</b></p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>まとめ</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>比較うすッ！！ まあ俺が苦しんだのがこの程度の事だったんです。</p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>そんな薄い結論:</p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>ビルド+バージョンを纏めておく為の機構としてはMavenいい子。</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>それ以上の何かを求めるならGradleが良いと思う。</b></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>Maven</b>は、自分は何処から聞いたか忘れましたけど、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>「ビルド+Archtypeとかが色々出来るツール」として聞いてたんですが、これ、ビルド以外<b>全部無理でしょうや。</b></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>プロジェクトのビルドに関するArtifactバージョン定義と依存性解決ツール</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ってだけだ。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Archtype生成や、test結果のGenerateの為には、どうしても「ファイルを扱う」ってのが</p>
+<p class="p3"><span class="Apple-tab-span">	</span>要件に入るのに、それを各プラグインのコード内で対処しようとしたのが設計ミスってると思う。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>尻拭いとして「凄く良く様々なケースで失敗する」ってのが出てきちゃう。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>裏を返せば、「ハマると強い」なんだけど。ハマる所が狭いだけでしょ。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>それって、「想定できてる奴しか出来ませんしその条件ってのも暗黙化しててほぼ明示しませんけど、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>使いたければどうぞ、探ってw 試してw 読んでww 苦しんでww」っていう。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>お勧めされたら、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>「ぜひ一人でお苦しみください」って返したい気分ですはい。</p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>Gradle</b>は、Mavenに出来る事は全部、Mavenよりスマートな方法で出来る。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>後出しだからね、、！！</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Architype作り、プラグインでのファイル制御、前提エラーの出し方、これらは、<span class="Apple-tab-span">	</span>Gradleの方が苦労も痛みも少ない。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>コード=スクリプト=実行内容だから、<b>そこに書いてないことは起こらない。</b></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>終いに</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>今までMavenを頑張って書いてきた人に敬意を表する。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>凄いよ。大変だったでしょ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>もう、難しい方法でファイルとか扱わなくていいと思います。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>File.ioをインポートしまくらないで良いと思います。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>プラグインJavaで書いて、コンパイルして、それを含んだプロジェクト側でmvn なにやら。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>大変だったでしょう。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>build.gradleに何か書いて、gradle なにやら でOKになるんで。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>もう苦しまなくていいんだょ。</p>
+<p class="p2"><br></p>
+</body>
+</html>
