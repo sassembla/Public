@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1138.47">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>GradleでShellScriptを実行する</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>GradleからShellScript実行する。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>dependなどが指定できるので、Gradleの仕組みの中でShellが有効活用できる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>daemonとして動かしたりする場合に、使う事がある。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>手法</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>文字配列.execute()を使う。</p>
+<p class="p2"><br></p>
+<pre class="code">task makeDirectory {</pre>
+<pre class="code"><span class="Apple-tab-span">	</span>["mkdir", "somet"].execute()<span class="Apple-converted-space"> </span></pre>
+<pre class="code">}</pre>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>上記で、gradle実行フォルダにsomeフォルダが生成される。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>一応書いておくと、Gradleだと、フォルダ生成は</p>
+<p class="p2"><br></p>
+<pre class="code">file('first').mkdir()</pre>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>とかで出来る。条件とかも細かく指定できる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>mkdir程度だったらこっちを使おう。</b></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>参考：逆引きGradle</p>
+<p class="p3"><span class="Apple-tab-span">	</span><a href="http://d.hatena.ne.jp/nightmare_tim+gradlerevercelookup/20111027/1319733318">http://d.hatena.ne.jp/nightmare_tim+gradlerevercelookup/20111027/1319733318</a></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+</body>
+</html>
