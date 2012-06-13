@@ -1,4 +1,4 @@
-#!/bin/sh
+ #!/bin/sh
 #create index.html from these .html & rtfd-converted-html in same folder
 
 echo "indexize start"
