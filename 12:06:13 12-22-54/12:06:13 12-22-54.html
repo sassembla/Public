@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Style-Type" content="text/css">
   <title></title>
   <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="1138.32">
+  <meta name="CocoaVersion" content="1138.47">
   <style type="text/css">
     p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
     p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
@@ -16,19 +16,57 @@
   </style>
 </head>
 <body>
-<p class="p1"><b>新</b><span class="s1"><b>MBA</b></span><b>でMateDotとTermHereが動かない問題(未解決)</b></p>
+<p class="p1"><b>新</b><span class="s1"><b>MBA</b></span><b>でMateDotとTermHereが動かない問題</b></p>
 <p class="p2"><b></b><br></p>
 <p class="p3"><b>概要</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>Finderに置ける、TextMateとかTerminalのショートカットスクリプト。</p>
-<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Finderに置ける、TextMateとかTerminalのショートカットアプリケーション。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><a href="http://manas.tungare.name/software/finder-apps/">http://manas.tungare.name/software/finder-apps/</a></p>
 <p class="p4"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202012-06-13%2012.21.09.png" alt="スクリーンショット 2012-06-13 12.21.09.png"></p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>MBAの新型(2012Mid)使うようになって、以前他人が直面した問題</p>
-<p class="p3"><span class="Apple-tab-span">	</span>「動作しない」と直面。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>次の３種類が有る。</p>
+<p class="p3"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>TermHere<span class="Apple-tab-span">	</span></b>Terminal.appをそのフォルダにcdした状態で開く</p>
+<p class="p3"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>MateDot<span class="Apple-tab-span">	</span></b>TextMateをそのフォルダについて開く</p>
+<p class="p3"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Touch<span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></b>新規ファイル作成</p>
 <p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>困ったこと</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>MBAの新型(2012Mid)使うようになって、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>「アイコンをクリックしても動作しない」と直面。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>この問題は、2ヶ月くらい前に同僚が発症してた。</p>
 <p class="p3"><span class="Apple-tab-span">	</span>あのとき解決しておけば良かったなあ。。。</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>解決しよう。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ということで、、解決しよう。</p>
 <p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>原因</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>アプリケーションの実行自体が、TermHere.app内部のshellまで到達してない模様。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>.app内部のshellを直に実行したら動いた。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ので、</p>
+<p class="p4"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202012-06-14%2021.37.47.png" alt="スクリーンショット 2012-06-14 21.37.47.png"></p>
+<p class="p3"><span class="Apple-tab-span">	</span>から、Contents &gt; Resources &gt; Scripts と進んで、</p>
+<p class="p4"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202012-06-14%2021.37.55.png" alt="スクリーンショット 2012-06-14 21.37.55.png"></p>
+<p class="p3"><span class="Apple-tab-span">	</span>心臓部のスクリプトをAppleScript エディタ で開く。</p>
+<p class="p4"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202012-06-14%2021.38.05.png" alt="スクリーンショット 2012-06-14 21.38.05.png"></p>
+<p class="p3"><span class="Apple-tab-span">	</span>開いたら、別名保存 &gt; 名前を、TermHereならTermHere.app に変えて、<b>アプリケーション</b>として保存。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>下記はTouchなのでTouch.appにする。</p>
+<p class="p4"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202012-06-14%2021.38.33.png" alt="スクリーンショット 2012-06-14 21.38.33.png"></p>
+<p class="p3"><span class="Apple-tab-span">	</span>するとこんな感じになるはず。　</p>
+<p class="p4"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202012-06-14%2021.38.44.png" alt="スクリーンショット 2012-06-14 21.38.44.png"></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これで、アプリケーションとしては、<b>動作するようになる</b>。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>けどアイコンがScriptのものになってしまう。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>名前も、表示されなくなる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ここで、<b>一つ上の階層のapplet.icnsを⌘+cでコピーしておいて、</b>Touch.appを　<b>もう一度右クリック &gt; パッケージの内容を表示、と進んで、、</b></p>
+<p class="p4"><img src="1__%23$!@%25!%23__%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202012-06-14%2021.37.47.png" alt="1__#$!@%!#__スクリーンショット 2012-06-14 21.37.47.png"></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>中に入ってる.icnsに先ほどコピった.icnsファイルを上書きすると、Touch.appのアイコンがかわる。</b></p>
+<p class="p4"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202012-06-14%2022.00.14.png" alt="スクリーンショット 2012-06-14 22.00.14.png"></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>これを、ファインダーにD&amp;Dすれば、完了。</b></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>名前消えたけど。入れ子になっちゃったけど。</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>動くからいいよね、、、</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
 </body>
 </html>
