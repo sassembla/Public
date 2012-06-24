@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1138.47">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    span.s1 {font: 22.0px Helvetica}
+    span.s2 {font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+	<script type="text/javascript" src="http://platform.twitter.com/anywhere.js?id=bKHhDxNgJLJUmFmej4sEw&v=1"></script>
+</head>
+<body>
+<p class="p1"><b>テストを書かないと禁則事項的にダメなので</b><span class="s1"><b>Haskell</b></span><b>でもテスト書く</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span></b>イテレーション早くなるのでテスト書きたい。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ので、勉強。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>HUnitについてのLTが</p>
+<p class="p4"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>第一回スタートHaskell2　</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span></b><a href="http://atnd.org/events/29448"><b>http://atnd.org/events/29448</b></a></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>#start_haskell</b></p>
+<p class="p4"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で有ったので、行ってきた。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p5"><b>Haskell</b><span class="s2"><b>のテスト</b></span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>発表者の @shokos さんのgithubを参考にしてる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><a href="https://github.com/shokos/Haskell_test_tut">https://github.com/shokos/Haskell_test_tut</a></p>
+<p class="p4"><b><span class="Apple-tab-span">	</span></b></p>
+<p class="p4"><b></b><br></p>
+<p class="p3"><b>HUnit</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>HaskellInstallerには入ってないので、自分でインストールしてね！</p>
+<p class="p3"><span class="Apple-tab-span">	</span>HaslellInstaller使ってHaskell入れてる場合、</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>cabal</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>package system for Haskell software.</p>
+<p class="p3"><span class="Apple-tab-span">	</span><a href="http://www.haskell.org/cabal/">http://www.haskell.org/cabal/</a></p>
+<p class="p3"><span class="Apple-tab-span">	</span><a href="http://www.haskell.org/cabal/users-guide/">http://www.haskell.org/cabal/users-guide/</a></p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>が入ってるので、下記コマンドでインストールできる。</p>
+<p class="p4"><br></p>
+<pre class="code">cabal install HUnit</pre>
+<p class="p4"><span class="Apple-tab-span">	</span></p>
+<p class="p5"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202012-06-24%2020.40.36.png" alt="スクリーンショット 2012-06-24 20.40.36.png"></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、おわったら</p>
+<p class="p4"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>自分はTextMate使ってるので、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>サンプルにあげてくれてるファイルの中身をマルコピして実行してみる。</p>
+<p class="p5"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202012-06-24%2021.33.09.png" alt="スクリーンショット 2012-06-24 21.33.09.png"></p>
+<p class="p3"><span class="Apple-tab-span">	</span>実行結果</p>
+<p class="p5"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202012-06-24%2021.32.58.png" alt="スクリーンショット 2012-06-24 21.32.58.png"></p>
+<p class="p3"><span class="Apple-tab-span">	</span>OK。これは使いやすい。</p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p3"><b>QuickCheck</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>プログラムの特性をテストしてくれるツール。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>こちらもcabalからinstall可能。</p>
+<pre class="code">cabal install QuickCheck</pre>
+<p class="p4"><br></p>
+<p class="p5"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202012-06-24%2020.42.54.png" alt="スクリーンショット 2012-06-24 20.42.54.png"></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、案の定コピペ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ただし、こいつにはmain書かれてないので書き足し。</p>
+<p class="p5"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202012-06-24%2021.46.38.png" alt="スクリーンショット 2012-06-24 21.46.38.png"></p>
+<p class="p3"><span class="Apple-tab-span">	</span>実行結果</p>
+<p class="p5"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202012-06-24%2021.46.35.png" alt="スクリーンショット 2012-06-24 21.46.35.png"></p>
+<p class="p3"><span class="Apple-tab-span">	</span>99までテストされてて、ラスト付近は</p>
+<p class="p5"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202012-06-24%2021.47.55.png" alt="スクリーンショット 2012-06-24 21.47.55.png"></p>
+<p class="p3"><span class="Apple-tab-span">	</span>となっている。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>べんりーーーーーーー！！！！！</p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>勉強になった！！！</p>
+<p class="p3"><span class="Apple-tab-span">	</span>やっぱやったこと無い言語はいいのう。</p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p3"><b>どうでもいいことだけど</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>今日俺の性善説が死んだ。惜しいやつを無くした。</p>
+<script type="text/javascript">
+  twttr.anywhere(function (T) {
+    T.hovercards();
+  });
+</script>
+</body>
+</html>
