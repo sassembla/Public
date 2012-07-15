@@ -1,0 +1,146 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1138.47">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+    span.s1 {font: 22.0px Helvetica}
+    span.s2 {font: 12.0px 'Lucida Grande'}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><span class="s1"><b>Gradle</b></span><b>で</b><span class="s1"><b>Scala</b></span><b>プロジェクトをビルドする的な</b></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span></b>build.gradleでScalaのプログラムをビルドするってのを</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ちゃんと小さくまとめてなかったので小さくまとめる。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>フォルダ構成</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>本当はGradle標準にあわせたいんだけど、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>万が一的な意味でEclipseで触ったりすることを考えてこんな形にしちゃう。</p>
+<p class="p4"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202012-07-15%2021.46.51.png" alt="スクリーンショット 2012-07-15 21.46.51.png"></p>
+<p class="p3"><span class="Apple-tab-span">	</span>フォルダ階層をEclipseのデフォルトに合わせる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>この時点でsrc、testフォルダは空。build.gradleは白紙。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>なにはともあれWrapper</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>自分はTextMate x Gradleな感じなので、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>TextMateのGradleプラグイン使うためにまずgradleWrapperを作ってしまう。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>以下はずっとbuild.gradleファイルに追記。</p>
+<p class="p2"><br></p>
+<pre class ="code">apply plugin:"scala"</pre>
+<p class="p5"><br></p>
+<pre class ="code">version = 1.0</pre>
+<p class="p5"><br></p>
+<pre class ="code">task wrapper(type: Wrapper) {</pre>
+<pre class ="code"><span class="Apple-converted-space">    </span>gradleVersion = version</pre>
+<pre class ="code">}</pre>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>この状態で、gradle wrapper をTerminalとかでやると、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>gradlew.shとかexeが作られて、Gradle入ってない人でも楽に拉致できるようになる。</p>
+<p class="p4"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202012-07-15%2021.52.43.png" alt="スクリーンショット 2012-07-15 21.52.43.png"></p>
+<p class="p3"><span class="Apple-tab-span">	</span>終わると、フォルダがこんな感じになってる。</p>
+<p class="p4"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202012-07-15%2021.54.34.png" alt="スクリーンショット 2012-07-15 21.54.34.png"></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>srcフォルダの場所を書く</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span></b>srcフォルダの場所とtestフォルダの場所が、通常のGradleとは違っているので、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>書き加える。</p>
+<pre class ="code">sourceSets {</pre>
+<pre class ="code"><span class="Apple-tab-span">	</span>main {</pre>
+<pre class ="code"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>scala {</pre>
+<pre class ="code"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>srcDir 'src'</pre>
+<pre class ="code"><span class="Apple-converted-space">    <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>}</pre>
+<pre class ="code"><span class="Apple-tab-span">	</span>}</pre>
+<pre class ="code"><span class="Apple-tab-span">	</span>test {</pre>
+<pre class ="code"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>scala {</pre>
+<pre class ="code"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>srcDir 'test'</pre>
+<pre class ="code"><span class="Apple-converted-space">    <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>}</pre>
+<pre class ="code"><span class="Apple-converted-space">  <span class="Apple-tab-span">	</span></span>}</pre>
+<pre class ="code">}</pre>
+<p class="p2"><b></b><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>Dependenciesを書き加える</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Scalaのビルドを通すために、依存を書く。</p>
+<pre class ="code">repositories {</pre>
+<pre class ="code"><span class="Apple-tab-span">	</span>mavenCentral()</pre>
+<pre class ="code">}</pre>
+<p class="p5"><br></p>
+<pre class ="code">dependencies {</pre>
+<pre class ="code"><span class="Apple-tab-span">	</span>scalaTools<span class="Apple-converted-space">  </span>(</pre>
+<pre class ="code"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>[group: "org.scala-lang", name: "scala-compiler",version: "2.9.2"],</pre>
+<pre class ="code"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>[group: "org.scala-lang", name: "scala-library",version: "2.9.2"]</pre>
+<pre class ="code"><span class="Apple-tab-span">	</span>)</pre>
+<pre class ="code"><span class="Apple-tab-span">	</span></pre>
+<pre class ="code"><span class="Apple-tab-span">	</span>compile (</pre>
+<pre class ="code"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>[group: "org.scala-lang", name: "scala-library",version: "2.9.2"]</pre>
+<pre class ="code"><span class="Apple-tab-span">	</span>)</pre>
+<pre class ="code">}</pre>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これで、Scalaのコードをsrc内とかtest内に書けば、ビルドできる。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>ビルド対象のHello.scala書く</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>srcフォルダ下にファイル追加</p>
+<p class="p4"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202012-07-15%2022.02.45.png" alt="スクリーンショット 2012-07-15 22.02.45.png"></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Hello.scala</p>
+<pre class ="code">object Hello {</pre>
+<pre class ="code"><span class="Apple-tab-span">	</span>def main(args: Array[String]) {</pre>
+<pre class ="code"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>println("necomimi-mode--!!!")</pre>
+<pre class ="code"><span class="Apple-tab-span">	</span>}</pre>
+<pre class ="code">}</pre>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>趣向が凝らされた至高の文章。</p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>このときのbuild.gradleの全体像</p>
+<p class="p4"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202012-07-15%2022.07.43.png" alt="スクリーンショット 2012-07-15 22.07.43.png"></p>
+<p class="p3"><span class="Apple-tab-span">	</span>わざわざ { } 使って書くこと無いけど、今回は時間ないし眠いので。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>コンパイル</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Terminalから、<span class="Apple-converted-space"> </span></p>
+<pre class ="code">gradle compileScala</pre>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ってやっても良いし、TextMateから</p>
+<pre class ="code"><span class="s2">⌘</span>+shift+G</pre>
+<pre class ="code">compileScala</pre>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ってやってもいい。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Terminalからだと、</p>
+<p class="p4"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202012-07-15%2022.11.17.png" alt="スクリーンショット 2012-07-15 22.11.17.png"></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>TextMateからだと、</p>
+<p class="p4"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202012-07-15%2022.07.33.png" alt="スクリーンショット 2012-07-15 22.07.33.png"></p>
+<p class="p3"><span class="Apple-tab-span">	</span>こんな風に表示される。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>(実際先にTextMateのほう動かしてしまったのでTerminalの方はもう最新でした的な表示が出てる)</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>buildフォルダが作られて、classとか出来てる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>testフォルダにテストとか書けば、gradle test から実行できる。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>プロジェクト一式</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/SampleScalaGradle">https://github.com/sassembla/SampleScalaGradle</a></p>
+<p class="p3"><span class="Apple-tab-span">	</span>書いてる間に渋谷から横浜に着いた！</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>駆動方法</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>cloneしてから、Terminal で、</p>
+<pre class ="code">gradlew compileScala</pre>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>とかすると、ネットにつながっててJavaが動きさえすれば、動くと思う。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+</body>
+</html>
