@@ -14,6 +14,7 @@
     p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
     span.s1 {font: 22.0px 'Hiragino Kaku Gothic ProN'}
     span.s2 {font: 12.0px Helvetica}
+    span.s3 {font: 12.0px 'Hiragino Kaku Gothic ProN'}
     span.Apple-tab-span {white-space:pre}
   </style>
 </head>
@@ -23,8 +24,16 @@
 <p class="p3"><b>概要</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>akkaのサンプルを落としてきて、remoteActorについて学ぶ。</p>
 <p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>解説用サンプル</p>
+<p class="p3"><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/ScalaAkkaRemoteActorWithGradle">https://github.com/sassembla/ScalaAkkaRemoteActorWithGradle</a></p>
+<p class="p4"><br></p>
 <p class="p4"><br></p>
 <p class="p3"><b>準備</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>サンプルならそのまま動く。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>以下は、自分で環境から用意しようぜ、的な話。</p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>まずはakkaをゲットしよう。</p>
 <p class="p4"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>おぞましい事になる。</p>
@@ -96,7 +105,186 @@
 <p class="p4"><b><span class="Apple-tab-span">	</span></b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>左が1 CalcApp<span class="Apple-converted-space"> </span></p>
 <p class="p3"><span class="Apple-tab-span">	</span>右が3 LookupApp</p>
+<p class="p4"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>2つのTerminalが連動しているのが解ると思う。</p>
+<p class="p4"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>(右　LookupAppが計算問題を出し、)</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>左　CalcAppが計算問題に答え、</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>右　LookupAppが受け取った結果を表示</b></p>
+<p class="p4"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>という事をしている。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>通信はすべてActorを通して、サーバはNettyが使用されている。</p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p3"><b>内容解説</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ここまでのセットアップ後、最小範囲での依存解決とかをして、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>あとで自分が忘れても解りやすいようにしたものを、Gradleでビルドしておいた。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/ScalaAkkaRemoteActorWithGradle">https://github.com/sassembla/ScalaAkkaRemoteActorWithGradle</a></p>
+<p class="p3"><span class="Apple-tab-span">	</span>(この記事トップのものと同じ)</p>
 <p class="p4"><br></p>
 <p class="p4"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b>①CalcApp側.1</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Actorを起動して、放置。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>RemoteActorの通信が来るのを待ち受ける。</p>
+<p class="p2"><br></p>
+<pre class="code">class CalculatorApplication extends Bootable {</pre>
+<pre class="code"><span class="Apple-tab-span">	</span>//#setup</pre>
+<pre class="code"><span class="Apple-tab-span">	</span>val system = ActorSystem("CalculatorApplication", ConfigFactory.load.getConfig("calculator"))</pre>
+<p class="p4"><b></b><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>このコンフィグがキモで、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>resources/ 下の conf ファイルがそれ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>application.conf から一部抜粋すると、</p>
+<p class="p4"><br></p>
+<pre class="code">//#calculator</pre>
+<pre class="code">calculator {</pre>
+<pre class="code"><span class="Apple-converted-space">  </span>include "common"</pre>
+<pre class="code"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>include "reference"</pre>
+<pre class="code"><span class="Apple-tab-span">	</span></pre>
+<pre class="code"><span class="Apple-converted-space">  </span>akka {</pre>
+<pre class="code"><span class="Apple-converted-space">    </span>remote.netty.max-total-memory-size = 0b</pre>
+<pre class="code"><span class="Apple-converted-space">    </span>remote.netty.max-channel-memory-size = 0b</pre>
+<pre class="code"><span class="Apple-converted-space">    </span>remote.netty.execution-pool-size = 4</pre>
+<pre class="code"><span class="Apple-converted-space">    </span>remote.netty.execution-pool-keepalive = 60s</pre>
+<pre class="code"><span class="Apple-converted-space">    </span>remote.netty.backlog = 4096</pre>
+<pre class="code"><span class="Apple-converted-space">    </span>remote.netty.connection-timeout = 120s</pre>
+<pre class="code"><span class="Apple-converted-space">    </span>remote.netty.outbound-local-address = "auto"</pre>
+<pre class="code"><span class="Apple-converted-space">    </span>remote.netty.message-frame-size = 1 MiB</pre>
+<pre class="code"><span class="Apple-converted-space">    </span>remote.netty.reconnect-delay = 5s</pre>
+<pre class="code"><span class="Apple-converted-space">    </span>remote.netty.all-timeout = 0s</pre>
+<pre class="code"><span class="Apple-converted-space">    </span>remote.netty.write-timeout = 0s</pre>
+<pre class="code"><span class="Apple-converted-space">    </span>remote.netty.read-timeout = 0s</pre>
+<pre class="code"><span class="Apple-converted-space">    </span>remote.netty.reconnection-time-window = 600s</pre>
+<pre class="code"><span class="Apple-converted-space">    </span>remote.netty.backoff-timeout = 0ms</pre>
+<pre class="code"><span class="Apple-converted-space">    </span>remote.netty.secure-cookie = ""</pre>
+<pre class="code"><span class="Apple-converted-space">    </span>remote.netty.require-cookie = off</pre>
+<pre class="code"><span class="Apple-converted-space">    </span>remote.netty.use-passive-connections = on</pre>
+<pre class="code"><span class="Apple-converted-space">    </span>remote.backoff-timeout = 0ms</pre>
+<pre class="code"><span class="Apple-converted-space">    </span>remote.untrusted-mode = off</pre>
+<pre class="code"><span class="Apple-converted-space">    </span>remote.remote-daemon-ack-timeout = 30s</pre>
+<pre class="code"><span class="Apple-converted-space">    </span>remote.transport = "akka.remote.netty.NettyRemoteTransport"</pre>
+<pre class="code"><span class="Apple-converted-space">    </span>remote.log-received-messages = on</pre>
+<pre class="code"><span class="Apple-converted-space">    </span>remote.log-sent-messages = on</pre>
+<pre class="code"><span class="Apple-converted-space">    </span>remote.netty.port = <b>2552</b></pre>
+<pre class="code"><span class="Apple-converted-space">  </span>}</pre>
+<pre class="code">}</pre>
+<pre class="code">//#calculator</pre>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>と、remoteCreationに関する設定</p>
+<p class="p4"><br></p>
+<pre class="code">//#remotecreation</pre>
+<pre class="code">remotecreation {</pre>
+<pre class="code"><span class="Apple-converted-space">  </span>include "common"</pre>
+<pre class="code"><br></pre>
+<pre class="code"><span class="Apple-converted-space">  </span>akka {</pre>
+<pre class="code"><span class="Apple-converted-space">    </span>actor {</pre>
+<pre class="code"><span class="Apple-converted-space">      </span>deployment {</pre>
+<pre class="code"><span class="Apple-converted-space">        </span>/advancedCalculator {</pre>
+<pre class="code"><span class="Apple-converted-space">          </span>remote = "akka://CalculatorApplication@127.0.0.1:<b>2552</b>"</pre>
+<pre class="code"><span class="Apple-converted-space">        </span>}</pre>
+<pre class="code"><span class="Apple-converted-space">      </span>}</pre>
+<pre class="code"><span class="Apple-converted-space">    </span>}</pre>
+<pre class="code"><span class="Apple-converted-space">    </span>remote.netty.max-total-memory-size = 0b</pre>
+<pre class="code"><span class="Apple-converted-space">    </span>remote.netty.max-channel-memory-size = 0b</pre>
+<pre class="code"><span class="Apple-converted-space">    </span>remote.netty.execution-pool-size = 4</pre>
+<pre class="code"><span class="Apple-converted-space">    </span>remote.netty.execution-pool-keepalive = 60s</pre>
+<pre class="code"><span class="Apple-converted-space">    </span>remote.netty.backlog = 4096</pre>
+<pre class="code"><span class="Apple-converted-space">    </span>remote.netty.connection-timeout = 120s</pre>
+<pre class="code"><span class="Apple-converted-space">    </span>remote.netty.outbound-local-address = "auto"</pre>
+<pre class="code"><span class="Apple-converted-space">    </span>remote.netty.message-frame-size = 1 MiB</pre>
+<pre class="code"><span class="Apple-converted-space">    </span>remote.netty.reconnect-delay = 5s</pre>
+<pre class="code"><span class="Apple-converted-space">    </span>remote.netty.all-timeout = 0s</pre>
+<pre class="code"><span class="Apple-converted-space">    </span>remote.netty.write-timeout = 0s</pre>
+<pre class="code"><span class="Apple-converted-space">    </span>remote.netty.read-timeout = 0s</pre>
+<pre class="code"><span class="Apple-converted-space">    </span>remote.netty.reconnection-time-window = 600s</pre>
+<pre class="code"><span class="Apple-converted-space">    </span>remote.netty.backoff-timeout = 0ms</pre>
+<pre class="code"><span class="Apple-converted-space">    </span>remote.netty.secure-cookie = ""</pre>
+<pre class="code"><span class="Apple-converted-space">    </span>remote.netty.require-cookie = off</pre>
+<pre class="code"><span class="Apple-converted-space">    </span>remote.netty.use-passive-connections = on</pre>
+<pre class="code"><span class="Apple-converted-space">    </span>remote.untrusted-mode = off</pre>
+<pre class="code"><span class="Apple-converted-space">    </span>remote.remote-daemon-ack-timeout = 30s</pre>
+<pre class="code"><span class="Apple-converted-space">    </span>remote.log-received-messages = on</pre>
+<pre class="code"><span class="Apple-converted-space">    </span>remote.log-sent-messages = on</pre>
+<pre class="code"><span class="Apple-converted-space">    </span>remote.transport = "akka.remote.netty.NettyRemoteTransport"</pre>
+<pre class="code"><span class="Apple-converted-space">    </span>remote.netty.port = 2554</pre>
+<pre class="code"><span class="Apple-converted-space">  </span>}</pre>
+<pre class="code">}</pre>
+<pre class="code">//#remotecreation</pre>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、hostNameの設定だけは common.conf に出してある。</p>
+<p class="p4"><b></b><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ひとまず起動すると、このサーバは単純に「待つ」。</p>
+<p class="p4"><b></b><br></p>
+<p class="p4"><b></b><br></p>
+<p class="p3"><b>②LookupApp側.1</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Actor立ち上げ後、下記コード部分でActorSystemへの参加と、すでに起動しているCalcAppのActorの呼び出しをしている。</p>
+<p class="p4"><br></p>
+<pre class="code">class LookupApplication extends Bootable {</pre>
+<pre class="code"><span class="Apple-tab-span">	</span>//#setup</pre>
+<pre class="code"><span class="Apple-tab-span">	</span>val system = ActorSystem("LookupApplication", ConfigFactory.load.getConfig("remotelookup"))</pre>
+<pre class="code"><span class="Apple-tab-span">	</span>val actor = system.actorOf(Props[LookupActor], "lookupActor")</pre>
+<pre class="code"><span class="Apple-tab-span">	</span>val remoteActor = system.actorFor("akka://CalculatorApplication@127.0.0.1:2552/user/simpleCalculator")</pre>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ローカルの2552ポートへとアクセス、名前(CalculatorApplication)とクラス情報(/user/simpleCalculato)でもって、CalcAppの呼び出しを発生させる。</p>
+<p class="p4"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ここで、2554ポートを使うと、remoteCreationが発生すると思う。今回のCalcAppははじめからActor込みで待ってるけど。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、LookupApp は起動後、下記コードで</p>
+<pre class="code">while (true) {</pre>
+<pre class="code"><span class="Apple-tab-span">	</span>if (Random.nextInt(100) % 2 == 0) app.doSomething(Add(Random.nextInt(100), Random.nextInt(100)))</pre>
+<pre class="code"><span class="Apple-tab-span">	</span>else app.doSomething(Subtract(Random.nextInt(100), Random.nextInt(100)))</pre>
+<p class="p2"><br></p>
+<pre class="code"><span class="Apple-tab-span">	</span>Thread.sleep(200)</pre>
+<pre class="code">}</pre>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>定期的にappのdoSomethingメソッドを、ランダムな数値を2つ入れて実行。</p>
+<p class="p4"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>doSomethingメソッドは、</p>
+<p class="p4"><br></p>
+<pre class="code">def doSomething(op: MathOp) = {</pre>
+<pre class="code"><span class="Apple-tab-span">	</span>actor ! (remoteActor, op)</pre>
+<pre class="code"><span class="Apple-converted-space"> </span>}</pre>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>な感じで、remoteActorに対して、actor経由でop（足したり引いたりとかのオペランドが入ってる型のオブジェクト）を</p>
+<p class="p3"><span class="Apple-tab-span">	</span>送りつける。</p>
+<p class="p4"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ここからはCalcApp側が受けるはなし</p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p3"><b>③CalcApp側.2</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>receive周りはこんな感じ</p>
+<p class="p4"><br></p>
+<pre class="code">class SimpleCalculatorActor extends Actor {</pre>
+<pre class="code"><span class="Apple-tab-span">	</span>def receive = {</pre>
+<pre class="code"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>case Add(n1, n2) <span class="s3">⇒</span></pre>
+<pre class="code"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>println("Calculating %d + %d".format(n1, n2))</pre>
+<pre class="code"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>sender ! AddResult(n1, n2, n1 + n2)</pre>
+<pre class="code"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>case Subtract(n1, n2) <span class="s3">⇒</span></pre>
+<pre class="code"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>println("Calculating %d - %d".format(n1, n2))</pre>
+<pre class="code"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>sender ! SubtractResult(n1, n2, n1 - n2)</pre>
+<pre class="code"><span class="Apple-tab-span">	</span>}</pre>
+<pre class="code">}</pre>
+<p class="p4"><b></b><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Addがきたら、足してsenderに返す。とかしてる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>sender = LookupAppなので、返ると、、、</p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p3"><b>④LookupApp側.2</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span></b>こちらのreceiverは</p>
+<p class="p4"><br></p>
+<pre class="code">class LookupActor extends Actor {</pre>
+<pre class="code"><span class="Apple-tab-span">	</span>def receive = {</pre>
+<pre class="code"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>case (actor: ActorRef, op: MathOp) <span class="s3">⇒</span> actor ! op</pre>
+<pre class="code"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>case result: MathResult <span class="s3">⇒</span> result match {</pre>
+<pre class="code"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>case AddResult(n1, n2, r)<span class="Apple-converted-space">      </span><span class="s3">⇒</span> println("Add result: %d + %d = %d".format(n1, n2, r))</pre>
+<pre class="code"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>case SubtractResult(n1, n2, r) <span class="s3">⇒</span> println("Sub result: %d - %d = %d".format(n1, n2, r))</pre>
+<pre class="code"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}</pre>
+<pre class="code"><span class="Apple-tab-span">	</span>}</pre>
+<pre class="code">}</pre>
+<p class="p4"><b></b><br></p>
+<p class="p4"><span class="s3"><span class="Apple-tab-span">	</span>で、数式の結果(</span>AddResult or SubtractResult<span class="s3">)がきたら、プリントしてる。</span></p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>という感じ。</p>
+<p class="p4"><br></p>
 </body>
 </html>
