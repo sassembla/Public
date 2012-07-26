@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1138.47">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    span.s1 {font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    span.s2 {font: 12.0px Helvetica}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>JSX</b><span class="s1"><b>と</b></span><b>Haxe</b><span class="s1"><b>と</b></span><b>GWT</b><span class="s1"><b>それぞれの</b></span><b>JavaScript</b><span class="s1"><b>の使い方</b></span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span>JavaScript</span>みたいなダメ言語触ってちゃダメです。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>もうちょい高度な事を簡単にできるように、変換系の言語使いましょう。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>っていうなかで、JSXとHaxeとGWTそれぞれを、弊社内でぶつくさ言いながら触ってみてる</p>
+<p class="p3"><span class="Apple-tab-span">	</span>2人で愚痴りながら、それぞれの違いとか特質とか書いてみてる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>重点として、global namespace pollutionと戦えるかどうか、というのが注目すべき点になります。</p>
+<p class="p4"><br></p>
+<p class="p2"><br></p>
+<p class="p5"><b>JSX</b></p>
+<p class="p5"><span class="Apple-tab-span">	</span><a href="http://d.hatena.ne.jp/nishiohirokazu/20120531/1338456208">http://d.hatena.ne.jp/nishiohirokazu/20120531/1338456208</a></p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>を参考に。</p>
+<p class="p4"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>var jQuery = js.global["$"] as function(:string):variant;</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これって、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>既にブラウザに読み込んでるjQueryを読み込むって事になってる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>名前空間は、、？</p>
+<p class="p4"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・JSの読み込み方そのまま、&lt;Script&gt;タグで読み込まれている必要がある</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・JSを文字列を介して読み出すことが出来る</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・JSをオブジェクトとしてJSX内に初期化する方法自体は無い（パッケージラッピングなどが出来ない）</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ので、global namespace pollutionと戦えない。</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>この辺は、ネットワークかフォルダから読む方法が無いと、話にならんぞ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>きっとあるんでしょう。、、、みつけらんないんだけど。</p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p3"><b>Haxe</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><a href="http://blog.romatica.com/2012/01/09/haxe_jquery/">http://blog.romatica.com/2012/01/09/haxe_jquery/</a></p>
+<p class="p3"><span class="Apple-tab-span">	</span>を参考に。</p>
+<p class="p4"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>って調べてみたら、やたらとHaxeラッピングされているJavaScriptライブラリが多い。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>jQuery、ProcessingJS、linq、、、linq!!? (二度見</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://gitorious.org/more">http://gitorious.org/more</a></p>
+<p class="p4"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>資産多いねー。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、肝心のHaxeでjQuery、上記ライブラリの中身を追う事で調べてみ</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>調べてみ、、、てるとこ！！　読み方何通りもあるわこれ。</p>
+<p class="p4"><span class="Apple-tab-span">	</span></p>
+<p class="p4"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・コンパイル時に組み込んでしまう事で、global namespace pollutionと戦える。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://stackoverflow.com/questions/3828423/haxe-for-javascript-without-global-namespace-pollution">http://stackoverflow.com/questions/3828423/haxe-for-javascript-without-global-namespace-pollution</a></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・&lt;script&gt;タグからの読み込みも可能<span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・ライブラリを介してのオブジェクトとしてのJS読み込みが可能(書き途中</p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p3"><b>GWT</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>オワコンなので特に語る必要は無いが、一応。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・&lt;script&gt;タグからの読み込みが可能</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・JSNIがあるので、JavaとJSのあいだを型をつかったまま行ったり来たりできる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>JSNI内でjsを読み込む事で、global namespace pollutionと戦える。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・GWT独自のJS読み込みスロットあり。Script読み込みを書く場所が限定される。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・JSに対して、Java由来のガッチガチの名前空間パッケージラッピングが可能</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>static,public,private final ほか</p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p3"><b>雑なまとめ</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>JSの読み込み方一つで、いろんなバリエーションがあるんですね！</p>
+<p class="p3"><span class="Apple-tab-span">	</span>個人的には名前空間に配慮できるものをきちんと使うのが、クソJSをマジックハンド介してとはいえ</p>
+<p class="p3"><span class="Apple-tab-span">	</span>触る上での、最低限ジェントルマン的な嗜みかなーと思います。</p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p3"><b>参考(にしてる途中の何か)</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Haxe、2012/5時点でのFlashDevelopとの連携まとめ</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://robertbak.com/wordpress/2012/05/getting-started-with-haxe-for-javascript/">http://robertbak.com/wordpress/2012/05/getting-started-with-haxe-for-javascript/</a></p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Haxe、JSからの値取得、xml読み込み</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://www.youtube.com/watch?v=KlJ4VSifpsY">http://www.youtube.com/watch?v=KlJ4VSifpsY</a></p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Haxe、っていうかFlashとかとも連携できる(4年前、、、!!)</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://trac.puremvc.org/Demo_Haxe_JS_Flash_MultiplatformComm">http://trac.puremvc.org/Demo_Haxe_JS_Flash_MultiplatformComm</a></p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Haxe、incrootっていう修飾子でjs読み込めるcompilerっぽいの。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://code.google.com/p/haxetacy/wiki/postcompiler">http://code.google.com/p/haxetacy/wiki/postcompiler</a></p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Haxeの資産すげーーーーー。。</p>
+</body>
+</html>
