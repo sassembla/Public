@@ -1,0 +1,192 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1138.47">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    span.s1 {font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    span.s2 {font: 12.0px Helvetica}
+    span.s3 {font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>Gradle</b><span class="s1"><b>の機能を使って、</b></span><b>Github</b><span class="s1"><b>を</b></span><b>MavenRepo</b><span class="s1"><b>化</b></span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span>Gradle</span>で管理しているプロジェクトを、<span class="s2">Github</span>上に<span class="s2">up</span>して、</p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span>MavenRepo</span>として使用できるようにする。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>以降は、MavenCentralに代わって、自分たちのGithubを依存性解決に使えるようになる。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>(private useのための認証などは書いてません。すまん、眠い。)</p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p3"><b>おおざっぱな手順</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>1.build.gradleに追記、MavenRepoとしての設定を書きこんで、MavenRepo用にビルド。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>2.ビルドしたものをGithubにpush。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>3.使用するプロジェクトを一つ作る。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>4.2でupしたMavenRepoに依存する感じに設定してウマー</p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p3"><b>こちらが出来上がったものになります</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span></b>既存のいい感じのが無いので新規で用意。実際に作ったものを下記にupしておいた。</p>
+<p class="p4"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>MavenRepoになる側</p>
+<p class="p3"><span class="Apple-tab-span">	</span>SampleMavenRepoByGradle</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/SampleMavenRepoByGradle">https://github.com/sassembla/SampleMavenRepoByGradle</a></p>
+<p class="p4"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Github上のMavenRepoを使う側</p>
+<p class="p3"><span class="Apple-tab-span">	</span>SampleGithubRepoUseProjectByGradle</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/SampleGithubRepoUseProjectByGradle">https://github.com/sassembla/SampleGithubRepoUseProjectByGradle</a></p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p3"><b>1.build.gradleに追記、MavenRepoとしての設定を書きこんで、MavenRepo用にビルド</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>通常のJavaプロジェクトをビルドする以外に、下記の部分がMavenRepoを作る上でポイントになる。</p>
+<p class="p4"><br></p>
+<pre class="code">//MavenRepository identity setting <span class="s3">リポジトリの設定。これらは当然、読み込み時に使用する</span></pre>
+<pre class="code">group = 'com.kissaki.sample'<span class="Apple-tab-span">	</span>//<span class="s3">グループ</span></pre>
+<pre class="code">archivesBaseName = 'Samplemavenrepobygradle' <span class="Apple-tab-span">	</span>//<span class="s3">アーカイブベース</span></pre>
+<pre class="code">version = '0.0.1'<span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>//<span class="s3">バージョン</span></pre>
+<pre class="code"><br></pre>
+<pre class="code"><span class="s2">uploadArchives {//</span>アーカイブに際して、Maven形式で、どこに出力するかを指定する箇所</pre>
+<pre class="code"><span class="Apple-tab-span">	</span>repositories {</pre>
+<pre class="code"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>mavenDeployer {</pre>
+<pre class="code"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>repository(url: 'file:/Users/sassembla/Desktop/SampleMavenRepoByGradle')</pre>
+<pre class="code"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}</pre>
+<pre class="code"><span class="Apple-tab-span">	</span>}</pre>
+<pre class="code">}</pre>
+<pre class="code"><br></pre>
+<pre class="code"><span class="s2">//</span>まんまコピペさせてもらった、<span class="s2">pom</span>のライセンス情報とかを設定する箇所</pre>
+<pre class="code">[install.repositories.mavenInstaller, uploadArchives.repositories.mavenDeployer]*.pom*.whenConfigured { pom -&gt;</pre>
+<pre class="code"><span class="Apple-tab-span">	</span>pom.project {</pre>
+<pre class="code"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>inceptionYear '2012'</pre>
+<pre class="code"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>packaging 'jar'</pre>
+<pre class="code"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>licenses {</pre>
+<pre class="code"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>license {</pre>
+<pre class="code"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>name 'The Apache Software License, Version 2.0'</pre>
+<pre class="code"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>url 'http://www.apache.org/licenses/LICENSE-2.0.txt'</pre>
+<pre class="code"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>distribution 'repo'</pre>
+<pre class="code"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}</pre>
+<pre class="code"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}</pre>
+<pre class="code"><span class="Apple-tab-span">	</span>}</pre>
+<pre class="code">}</pre>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>この状態で、src下に下記ファイルがあるとする。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>src/com/kissaki/sample/</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>SampleMavenRepoByGradle.java</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>内容は</p>
+<pre class="code">package com.kissaki.sample;</pre>
+<pre class="code"><br></pre>
+<pre class="code">public class SampleMavenRepoByGradle {</pre>
+<pre class="code"><span class="Apple-tab-span">	</span>public void something() {</pre>
+<pre class="code"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>System.out.println("Something!!");</pre>
+<pre class="code"><span class="Apple-tab-span">	</span>}</pre>
+<pre class="code">}</pre>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>この状態で、</p>
+<p class="p4"><br></p>
+<pre class="code">gradle uploadArchives</pre>
+<p class="p4"><b><span class="Apple-tab-span">	</span></b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ってやると、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>com/フォルダ以下がちょこちょこ作られる。(凄く横に長い画像)</p>
+<p class="p5"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202012-07-26%2023.58.23.png" alt="スクリーンショット 2012-07-26 23.58.23.png"></p>
+<p class="p3"><span class="Apple-tab-span">	</span>中身にはjarとかpomとかが出来てる。pom、、、なんて汚らわしい。</p>
+<p class="p4"><br></p>
+<p class="p4"><b></b><br></p>
+<p class="p3"><b>2.ビルドしたものをGithubにpush</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>まんま、Githubにpush。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>comなんちゃらも、ちゃんとaddして含もう。</p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p3"><b>3.使用するプロジェクトを一つ作る</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span></b>SampleGithubRepoUseProjectByGradle を作成。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Javaのプロジェクトで、せっかくなのでmain関数の中で</p>
+<p class="p3"><span class="Apple-tab-span">	</span>SampleMavenRepoByGradle.java の内容を使う。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>src/com/kissaki　フォルダ以下に下記を用意。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>SampleGithubRepoUseProjectByGradle.java</p>
+<p class="p4"><br></p>
+<pre class="code">package com.kissaki;</pre>
+<pre class="code"><br></pre>
+<pre class="code">import com.kissaki.sample.*;</pre>
+<pre class="code"><br></pre>
+<pre class="code">public class SampleGithubRepoUseProjectByGradle {</p>
+<p class="p2"><br></pre>
+<pre class="code"><span class="Apple-tab-span">	</span>/**</pre>
+<pre class="code"><span class="Apple-tab-span">	</span> * @param args</pre>
+<pre class="code"><span class="Apple-tab-span">	</span> */</pre>
+<pre class="code"><span class="Apple-tab-span">	</span>public static void main(String[] args) {</pre>
+<pre class="code"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>SampleMavenRepoByGradle m = new SampleMavenRepoByGradle();</pre>
+<pre class="code"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>m.something();</pre>
+<pre class="code"><span class="Apple-tab-span">	</span>}</pre>
+<pre class="code"><br></pre>
+<pre class="code">}</pre>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>この状態で gradle compileJava とかやっても、<span class="s2">SampleMavenRepoByGradle</span>クラスの依存性解決ができず</p>
+<p class="p3"><span class="Apple-tab-span">	</span>エラーになること必須。</p>
+<p class="p4"><b></b><br></p>
+<p class="p4"><b></b><br></p>
+<p class="p3"><b>4. 2でupしたMavenRepoに依存する感じに設定してウマー</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>githubへの依存は、こんな感じに書けば良い。<b><span class="Apple-tab-span">	</span></b></p>
+<p class="p4"><b></b><br></p>
+<pre class="code">repositories {<span class="Apple-converted-space"> </span></pre>
+<pre class="code"><span class="Apple-tab-span">	</span>mavenRepo urls: 'https://github.com/sassembla/SampleMavenRepoByGradle/raw/master/'</pre>
+<pre class="code">}<span class="Apple-converted-space"> </span></pre>
+<pre class="code"><span class="Apple-converted-space"> </span></pre>
+<pre class="code">dependencies {</pre>
+<pre class="code"><span class="Apple-tab-span">	</span>compile 'com.kissaki.sample:Samplemavenrepobygradle:0.0.1'</pre>
+<pre class="code">}</pre>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>repoについては、Web上のgithubリポジトリのアドレスに、raw/master をつけてあげる事でOK。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>compile時に依存するので、依存内容であるMavenRepoのidentityを書く。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、実際に、 gradle compileJava でビルドしてみると</p>
+<p class="p5"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202012-07-27%200.25.27.png" alt="スクリーンショット 2012-07-27 0.25.27.png"></p>
+<p class="p3"><span class="Apple-tab-span">	</span>あら、一発でうまく行った。(写真はTextMateのGradle bundle を使っています)</p>
+<p class="p3"><span class="Apple-tab-span">	</span>せっかくなので、jarで動かせるように、下記をbuild.gradleに書き加える。</p>
+<pre class="code">jar {</pre>
+<pre class="code"><span class="Apple-tab-span">	</span>manifest {</pre>
+<pre class="code"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>attributes 'Main-class': 'com.kissaki.SampleGithubRepoUseProjectByGradle'<span class="Apple-converted-space"> </span></pre>
+<pre class="code"><span class="Apple-tab-span">	</span>}</pre>
+<pre class="code"><span class="Apple-tab-span">	</span></pre>
+<pre class="code"><span class="Apple-tab-span">	</span>from {</pre>
+<pre class="code"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>configurations.runtime.collect {</pre>
+<pre class="code"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>if (it.isDirectory()){</pre>
+<pre class="code"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>it</pre>
+<pre class="code"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>} else {</pre>
+<pre class="code"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>zipTree(it)</pre>
+<pre class="code"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}</pre>
+<pre class="code"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}</pre>
+<pre class="code"><span class="Apple-tab-span">	</span>}</pre>
+<pre class="code">}</pre>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>からの、</p>
+<pre class="code">gradle jar</pre>
+<p class="p4"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="s2"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202012-07-27%200.28.42.png" alt="スクリーンショット 2012-07-27 0.28.42.png"></span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>できたー。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>実行してみよう。</p>
+<p class="p4"><br></p>
+<pre class="code">java -jar /Users/sassembla/Desktop/SampleGithubRepoUseProjectByGradle/build/libs/SampleGithubRepoUseProjectByGradle.jar</pre>
+<p class="p4"><span class="Apple-tab-span">	</span></p>
+<p class="p5"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202012-07-27%200.30.30.png" alt="スクリーンショット 2012-07-27 0.30.30.png"></p>
+<p class="p3"><span class="Apple-tab-span">	</span>パーフェクトだウォルター。</p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p3"><b>参考</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>krmdから、この辺を参考にしたって聞いて自分も参考にしました。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><a href="http://wadahiro.hatenablog.com/entry/2012/07/24/234727">http://wadahiro.hatenablog.com/entry/2012/07/24/234727</a></p>
+<p class="p3"><span class="Apple-tab-span">	</span><a href="http://downright-amazed.blogspot.jp/2011/09/hosting-maven-repository-on-github-for.html">http://downright-amazed.blogspot.jp/2011/09/hosting-maven-repository-on-github-for.html</a></p>
+</body>
+</html>
