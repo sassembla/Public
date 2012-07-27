@@ -60,7 +60,7 @@
 <pre class="code"><span class="s2">uploadArchives {//</span>アーカイブに際して、Maven形式で、どこに出力するかを指定する箇所</pre>
 <pre class="code"><span class="Apple-tab-span">	</span>repositories {</pre>
 <pre class="code"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>mavenDeployer {</pre>
-<pre class="code"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>repository(url: 'file:/Users/sassembla/Desktop/SampleMavenRepoByGradle')</pre>
+<pre class="code"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>repository(url: "file:${projectDir}")</pre>
 <pre class="code"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}</pre>
 <pre class="code"><span class="Apple-tab-span">	</span>}</pre>
 <pre class="code">}</pre>

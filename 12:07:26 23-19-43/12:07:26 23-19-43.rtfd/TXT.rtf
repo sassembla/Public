@@ -79,7 +79,7 @@ uploadArchives \{//
 \f0 \
 	repositories \{\
 		mavenDeployer \{\
-			repository(url: 'file:/Users/sassembla/Desktop/SampleMavenRepoByGradle')\
+			repository(url: "file:$\{projectDir\}")\
 		\}\
 	\}\
 \}\
@@ -102,17 +102,15 @@ uploadArchives \{//
 		\}\
 	\}\
 \}\
-\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
 
-\f1 \cf0 \
+\f1 \
 	\'82\'b1\'82\'cc\'8f\'f3\'91\'d4\'82\'c5\'81\'41src\'89\'ba\'82\'c9\'89\'ba\'8b\'4c\'83\'74\'83\'40\'83\'43\'83\'8b\'82\'aa\'82\'a0\'82\'e9\'82\'c6\'82\'b7\'82\'e9\'81\'42\
 	src/com/kissaki/sample/\
 		SampleMavenRepoByGradle.java\
 \
 	\'93\'e0\'97\'65\'82\'cd\
-\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
 
-\f0 \cf0 package com.kissaki.sample;\
+\f0 package com.kissaki.sample;\
 \
 public class SampleMavenRepoByGradle \{\
 	public void something() \{\
@@ -126,24 +124,22 @@ public class SampleMavenRepoByGradle \{\
 
 \f0 gradle uploadArchives
 \f1 \
-\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
 
-\b \cf0 	\
-\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+\b 	\
 
-\b0 \cf0 	\'82\'c1\'82\'c4\'82\'e2\'82\'e9\'82\'c6\'81\'41\
+\b0 	\'82\'c1\'82\'c4\'82\'e2\'82\'e9\'82\'c6\'81\'41\
 	com/\'83\'74\'83\'48\'83\'8b\'83\'5f\'88\'c8\'89\'ba\'82\'aa\'82\'bf\'82\'e5\'82\'b1\'82\'bf\'82\'e5\'82\'b1\'8d\'ec\'82\'e7\'82\'ea\'82\'e9\'81\'42(\'90\'a6\'82\'ad\'89\'a1\'82\'c9\'92\'b7\'82\'a2\'89\'e6\'91\'9c)\
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural
 
 \f0 \cf0 {{\NeXTGraphic スクリーンショット 2012-07-26 23.58.23.png \width29920 \height7380
-}�}
-\f1 \
+}�}\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural
+
+\f1 \cf0 \
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
 \cf0 	\'92\'86\'90\'67\'82\'c9\'82\'cdjar\'82\'c6\'82\'a9pom\'82\'c6\'82\'a9\'82\'aa\'8f\'6f\'97\'88\'82\'c4\'82\'e9\'81\'42pom\'81\'41\'81\'41\'81\'41\'82\'c8\'82\'f1\'82\'c4\'89\'98\'82\'e7\'82\'ed\'82\'b5\'82\'a2\'81\'42\
 \
-\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
 
-\b \cf0 \
+\b \
 2.\'83\'72\'83\'8b\'83\'68\'82\'b5\'82\'bd\'82\'e0\'82\'cc\'82\'f0Github\'82\'c9push
 \b0 \
 	\'82\'dc\'82\'f1\'82\'dc\'81\'41Github\'82\'c9push\'81\'42\
@@ -161,9 +157,8 @@ public class SampleMavenRepoByGradle \{\
 	src/com/kissaki\'81\'40\'83\'74\'83\'48\'83\'8b\'83\'5f\'88\'c8\'89\'ba\'82\'c9\'89\'ba\'8b\'4c\'82\'f0\'97\'70\'88\'d3\'81\'42\
 		SampleGithubRepoUseProjectByGradle.java\
 \
-\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
 
-\f0 \cf0 package com.kissaki;\
+\f0 package com.kissaki;\
 \
 import com.kissaki.sample.*;\
 \
@@ -178,26 +173,22 @@ public class SampleGithubRepoUseProjectByGradle \{\
 	\}\
 \
 \}\
-\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
 
-\f1 \cf0 \
+\f1 \
 	\'82\'b1\'82\'cc\'8f\'f3\'91\'d4\'82\'c5 gradle compileJava \'82\'c6\'82\'a9\'82\'e2\'82\'c1\'82\'c4\'82\'e0\'81\'41
 \f0 SampleMavenRepoByGradle
 \f1 \'83\'4e\'83\'89\'83\'58\'82\'cc\'88\'cb\'91\'b6\'90\'ab\'89\'f0\'8c\'88\'82\'aa\'82\'c5\'82\'ab\'82\'b8\
 	\'83\'47\'83\'89\'81\'5b\'82\'c9\'82\'c8\'82\'e9\'82\'b1\'82\'c6\'95\'4b\'90\'7b\'81\'42\
-\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
 
-\b \cf0 \
+\b \
 \
 4. 2\'82\'c5up\'82\'b5\'82\'bdMavenRepo\'82\'c9\'88\'cb\'91\'b6\'82\'b7\'82\'e9\'8a\'b4\'82\'b6\'82\'c9\'90\'dd\'92\'e8\'82\'b5\'82\'c4\'83\'45\'83\'7d\'81\'5b\
-\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
 
-\b0 \cf0 	github\'82\'d6\'82\'cc\'88\'cb\'91\'b6\'82\'cd\'81\'41\'82\'b1\'82\'f1\'82\'c8\'8a\'b4\'82\'b6\'82\'c9\'8f\'91\'82\'af\'82\'ce\'97\'c7\'82\'a2\'81\'42
+\b0 	github\'82\'d6\'82\'cc\'88\'cb\'91\'b6\'82\'cd\'81\'41\'82\'b1\'82\'f1\'82\'c8\'8a\'b4\'82\'b6\'82\'c9\'8f\'91\'82\'af\'82\'ce\'97\'c7\'82\'a2\'81\'42
 \b 	\
 \
-\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
 
-\f0\b0 \cf0 repositories \{ \
+\f0\b0 repositories \{ \
 	mavenRepo urls: 'https://github.com/sassembla/SampleMavenRepoByGradle/raw/master/'\
 \} \
  \
@@ -213,12 +204,14 @@ dependencies \{\
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural
 
 \f0 \cf0 {{\NeXTGraphic スクリーンショット 2012-07-27 0.25.27.png \width13300 \height9140
-}�}
-\f1 \
+}�}\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural
+
+\f1 \cf0 \
 	\'82\'a0\'82\'e7\'81\'41\'88\'ea\'94\'ad\'82\'c5\'82\'a4\'82\'dc\'82\'ad\'8d\'73\'82\'c1\'82\'bd\'81\'42(\'8e\'ca\'90\'5e\'82\'cdTextMate\'82\'ccGradle bundle \'82\'f0\'8e\'67\'82\'c1\'82\'c4\'82\'a2\'82\'dc\'82\'b7)\
 	\'82\'b9\'82\'c1\'82\'a9\'82\'ad\'82\'c8\'82\'cc\'82\'c5\'81\'41jar\'82\'c5\'93\'ae\'82\'a9\'82\'b9\'82\'e9\'82\'e6\'82\'a4\'82\'c9\'81\'41\'89\'ba\'8b\'4c\'82\'f0build.gradle\'82\'c9\'8f\'91\'82\'ab\'89\'c1\'82\'a6\'82\'e9\'81\'42\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural
 
-\f0 jar \{\
+\f0 \cf0 jar \{\
 	manifest \{\
 		attributes 'Main-class': 'com.kissaki.SampleGithubRepoUseProjectByGradle' \
 	\}\
@@ -233,11 +226,13 @@ dependencies \{\
 		\}\
 	\}\
 \}\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural
 
-\f1 \
+\f1 \cf0 \
 	\'82\'a9\'82\'e7\'82\'cc\'81\'41\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural
 
-\f0 gradle jar
+\f0 \cf0 gradle jar
 \f1 \
 	\
 	
@@ -249,17 +244,21 @@ dependencies \{\
 \
 
 \f0 java -jar /Users/sassembla/Desktop/SampleGithubRepoUseProjectByGradle/build/libs/SampleGithubRepoUseProjectByGradle.jar\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural
 
-\f1 	\
+\f1 \cf0 	\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural
 
-\f0 {{\NeXTGraphic スクリーンショット 2012-07-27 0.30.30.png \width13680 \height5960
-}�}
-\f1 \
+\f0 \cf0 {{\NeXTGraphic スクリーンショット 2012-07-27 0.30.30.png \width13680 \height5960
+}�}\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural
+
+\f1 \cf0 \
 	\'83\'70\'81\'5b\'83\'74\'83\'46\'83\'4e\'83\'67\'82\'be\'83\'45\'83\'48\'83\'8b\'83\'5e\'81\'5b\'81\'42\
 \
 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural
 
-\b \'8e\'51\'8d\'6c
+\b \cf0 \'8e\'51\'8d\'6c
 \b0 \
 	krmd\'82\'a9\'82\'e7\'81\'41\'82\'b1\'82\'cc\'95\'d3\'82\'f0\'8e\'51\'8d\'6c\'82\'c9\'82\'b5\'82\'bd\'82\'c1\'82\'c4\'95\'b7\'82\'a2\'82\'c4\'8e\'a9\'95\'aa\'82\'e0\'8e\'51\'8d\'6c\'82\'c9\'82\'b5\'82\'dc\'82\'b5\'82\'bd\'81\'42\
 	{\field{\*\fldinst{HYPERLINK "http://wadahiro.hatenablog.com/entry/2012/07/24/234727"}}{\fldrslt http://wadahiro.hatenablog.com/entry/2012/07/24/234727}}\
