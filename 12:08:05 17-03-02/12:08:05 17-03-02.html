@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1138.47">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    span.s1 {font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    span.s2 {font: 12.0px Helvetica}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>Gradle</b><span class="s1"><b>の</b></span><b>version</b><span class="s1"><b>の上げ方</b></span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span>1.0</span>を使ってたんだけど<span class="s2">1.1</span>が出たので、上げがてら</p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>簡単な上げ方を見てみる。</p>
+<p class="p4"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b>HomeBrewで入れたしHomeBrewでupgradeできませんかね</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>何も考えずにbrew upgrade gradle</p>
+<p class="p3"><span class="Apple-tab-span">	</span>→</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Error: gradle-1.0 already installed</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>？</p>
+<p class="p4"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>brew outdated</p>
+<p class="p3"><span class="Apple-tab-span">	</span>→なんもなし。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>はい。<span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>まだHomeBrewには1.1入ってないのね。</p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p3"><b>手段について調べる</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>次の2つが思いつく。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・普通に落として入れる</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・gradlewでのversion指定効果を使う</p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p3"><b>普通に落としていれる</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><a href="http://www.gradle.org/">http://www.gradle.org/</a></p>
+<p class="p3"><span class="Apple-tab-span">	</span>から落として入れ替ry</p>
+<p class="p4"><span class="Apple-tab-span">	</span></p>
+<p class="p4"><br></p>
+<p class="p3"><b>gradlewでのversion指定効果を使う</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>「ぶっちゃけcacheに入ったりするんだろうか？」</p>
+<p class="p3"><span class="Apple-tab-span">	</span>という好奇心からやってみた。</p>
+<p class="p4"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>結論から言うと、gradle1.1がcacheに入った。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>まずbuild.gradleのWrapperのバージョンを書き換えて、</p>
+<p class="p4"><br></p>
+<pre class="code">task wrapper(type: Wrapper) {</pre>
+<pre class="code"><span class="Apple-converted-space">    </span>gradleVersion = '1.1'</pre>
+<pre class="code">}</pre>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>コマンドラインから、gradle wrapperを実行。</p>
+<p class="p4"><span class="Apple-tab-span">	</span></p>
+<pre class="code">gradle wrapper</pre>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これで準備完了で、次回以降にgradlew を使ったタイミングで、勝手にversion1.1のGradleを取得してくる。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>取得されたgradle 1.1は、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>user以下の</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>.gradle/caches/</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>に入っている。</p>
+<p class="p4"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>こんな感じ</p>
+<p class="p5"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202012-08-05%2017.37.49.png" alt="スクリーンショット 2012-08-05 17.37.49.png"></p>
+<p class="p3"><span class="Apple-tab-span">	</span>以降、gradlewを使った場合は、勝手に1.1が使われてくれる。</p>
+<p class="p5"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202012-08-05%2017.54.20.png" alt="スクリーンショット 2012-08-05 17.54.20.png"></p>
+<p class="p3"><span class="Apple-tab-span">	</span>自社だと、サーバ側はgradleではなくgradlewを使うようにしているので、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>これでVersion Up が超簡単に済む事が解った。</p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+</body>
+</html>
