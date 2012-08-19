@@ -1,0 +1,139 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1138.47">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px Helvetica}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px Helvetica; min-height: 13.0px}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px Helvetica; color: #5100ff}
+    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px Monaco; min-height: 15.0px}
+    p.p8 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+    p.p9 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p10 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; color: #2c00ee}
+    span.s1 {font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    span.s2 {color: #9d0065}
+    span.s3 {text-decoration: underline}
+    span.s4 {color: #000000}
+    span.s5 {color: #5100ff}
+    span.s6 {font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    span.s7 {font: 12.0px 'Hiragino Kaku Gothic ProN'; text-decoration: underline}
+    span.s8 {font: 12.0px 'Hiragino Kaku Gothic ProN'; color: #000000}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>Specs2</b><span class="s1"><b>を</b></span><b>Gradle</b><span class="s1"><b>で使う</b></span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Scalaのテストツール Specs2をGradleから使おうとした時に</p>
+<p class="p3"><span class="Apple-tab-span">	</span>つまづいたのでまとめまでに。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>Specs2以外のテストツール、Scalatestだと解りやすかった</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ScalatestをGradleから使う方法</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Scalatestのユニットテストはこんな感じ。</p>
+<p class="p2"><br></p>
+<pre class="code""><span class="s2">import</span> org.scalatest.FunSuite</pre>
+<pre class="code"><br></pre>
+<pre class="code"><span class="s2">class</span> <span class="s3">SampleTests</span> <span class="s2">extends</span> FunSuite {</pre>
+<pre class="code"><span class="s4"><span class="Apple-tab-span">	</span>test(</span>"Something"<span class="s4">) {</span></pre>
+<pre class="code"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="s2">val</span> a = List(<span class="s5">"A"</span>, <span class="s5">"B"</span>)</pre>
+<pre class="code"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="s2">val</span> b = Seq(<span class="s5">"A"</span>, <span class="s5">"B"</span>)</pre>
+<pre class="code"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>assert(a == b)</pre>
+<pre class="code"><span class="Apple-tab-span">	</span>}</pre>
+<pre class="code">}</pre>
+<p class="p7"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>こいつを起動する事ができればOK</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Gradleのtestタスクを上書きして、Scalatestを実行できれば良い。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>例えばtestタスクをこんな感じにするとOK。</p>
+<p class="p8"><br></p>
+<pre class="code">task test(overwrite: true, dependsOn: testClasses) &lt;&lt; {</pre>
+<pre class="code"><span class="Apple-converted-space">    </span>ant.taskdef(name: 'scalatest',</pre>
+<pre class="code"><span class="Apple-converted-space">        </span>classname: 'org.scalatest.tools.ScalaTestAntTask',</pre>
+<pre class="code"><span class="Apple-converted-space">        </span>classpath: sourceSets.test.runtimeClasspath.asPath</pre>
+<pre class="code"><span class="Apple-converted-space">    </span>)</pre>
+<pre class="code"><span class="Apple-converted-space">    </span>ant.scalatest(runpath: 'build/classes/test',</pre>
+<pre class="code"><span class="Apple-converted-space">        </span>haltonfailure: 'true',</pre>
+<pre class="code"><span class="Apple-converted-space">        </span>fork: 'false') {reporter(type: 'stdout')}</pre>
+<pre class="code">}</pre>
+<p class="p8"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="s6">タスク</span> testClasses<span class="s6">に依存する形で、</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>このタスクを実行するとまずtestClassesが実行されて、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>次にantTaskとしてscalatestというのを定義、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>そのままパスを与えて実行する。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>インプットできるパラメータとかを明示してくれていて使いやすい。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>で、Specs2</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>勝手が分かんなかったので、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>死霊を見るに、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Specs2の死霊</p>
+<p class="p3"><span class="Apple-tab-span">	</span><a href="http://etorreborre.github.com/specs2/guide/org.specs2.UserGuide.html#User+Guide">http://etorreborre.github.com/specs2/guide/org.specs2.UserGuide.html#User+Guide</a></p>
+<p class="p3"><span class="Apple-tab-span">	</span>→Specification をextendsしたテストを書いて、タスク testで実行するようにすればよさげ。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>試しに小さなテストを書いて、Gradleから実行してみる事にした。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>build.gradle側記述</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>dependenciesに下記を記述</p>
+<p class="p8"><br></p>
+<pre class="code">testCompile (</pre>
+<pre class="code"><span class="Apple-tab-span">	</span>[group: 'junit', name:'junit', version:'4.5'],</pre>
+<pre class="code"><span class="Apple-tab-span">	</span>[group: "org.specs2", name: "specs2_2.9.2", version:"1.12.1"],</pre>
+<pre class="code"><span class="Apple-tab-span">	</span>[group: 'org.specs2', name: 'specs2-scalaz-core_2.9.1',version:'6.0.1'],</pre>
+<pre class="code">)</pre>
+<p class="p8"><br></p>
+<p class="p8"><br></p>
+<p class="p8"><span class="Apple-tab-span">	</span>テストクラスの内容は下記</p>
+<pre class="code">package com.kissaki</pre>
+<pre class="code"><br></pre>
+<pre class="code"pre class="code">import org.specs2.mutable._</pre>
+<pre class="code">import org.specs2.runner.JUnitRunner</pre>
+<pre class="code">import org.junit.runner.RunWith</pre>
+<pre class="code"><span class="Apple-converted-space"> </span></pre>
+<pre class="code">@RunWith(classOf[JUnitRunner])</pre>
+<pre class="code">class SampleTests extends Specification {</pre>
+<pre class="code"><span class="Apple-tab-span">	</span></pre>
+<pre class="code"><span class="Apple-tab-span">	</span>"Some test for my specs2 understand" should {</pre>
+<pre class="code"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"same-check between List &amp; Seq" in {</pre>
+<pre class="code"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>val a = List("A","B")</pre>
+<pre class="code"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>val b = Seq("A","B")</pre>
+<pre class="code"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></pre>
+<pre class="code"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span> a == b must beTrue</pre>
+<pre class="code"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}</pre>
+<pre class="code"><span class="Apple-tab-span">	</span>}</pre>
+<pre class="code">}</pre>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これらを整えた状態で、</p>
+<pre class="code">gradle test</pre>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>とやると、依存性解決してこんな感じになると思う。</p>
+<p class="p9"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202012-08-19%2023.07.19.png" alt="スクリーンショット 2012-08-19 23.07.19.png"></p>
+<p class="p3"><span class="Apple-tab-span">	</span>いつも通りGradleによるテストのreportsも作られてる。</p>
+<p class="p9"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202012-08-19%2023.09.06.png" alt="スクリーンショット 2012-08-19 23.09.06.png"></p>
+<p class="p3"><span class="Apple-tab-span">	</span>中身はこんな感じ。</p>
+<p class="p9"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202012-08-19%2023.10.03.png" alt="スクリーンショット 2012-08-19 23.10.03.png"></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>htmlを吐く機能が付いてるんだけど、どっちかって言うとGradleが吐く奴の方が</p>
+<p class="p3"><span class="Apple-tab-span">	</span>見た目にはすっきりしてて一次情報としてはうれしい感じ。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>ここに嵌った</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>runner.RunWithインポートするの忘れてて、1時間くらい無駄にした。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>サンプルプロジェクト</b></p>
+<p class="p10"><span class="s4"><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/ScalaSpecs2WithGradle"><span class="s7">https://github.com/sassembla/</span><span class="s8">ScalaSpecs2WithGradle</span></a></span></p>
+<p class="p2"><br></p>
+</body>
+</html>
