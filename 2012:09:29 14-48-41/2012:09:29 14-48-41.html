@@ -17,16 +17,11 @@
     span.s1 {font: 22.0px Helvetica}
     span.s2 {font: 12.0px Helvetica}
     span.s3 {font: 12.0px 'Lucida Grande'}
-    span.s4 {color: #e32400}
-    span.s5 {font: 12.0px 'Hiragino Kaku Gothic ProN'}
-    span.s6 {color: #0061ff}
-    span.s7 {font: 18.0px 'Hiragino Kaku Gothic ProN'}
-    span.s8 {font: 16.0px 'Hiragino Kaku Gothic ProN'}
     span.Apple-tab-span {white-space:pre}
   </style>
 </head>
 <body>
-<p class="p1"><span class="s1"><b>Specs2</b></span><b>で嵌っている話</b></p>
+<p class="p1"><span class="s1"><b>Specs2</b></span><b>で嵌っていた話</b></p>
 <p class="p2"><br></p>
 <p class="p3"><b>概要</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>Scalaでマルチスレッド的なアプリケーションを作っていた。</p>
@@ -84,25 +79,22 @@
 <p class="p6"><br></p>
 <p class="p3"><span class="s3"><span class="Apple-tab-span">	</span>→</span>ただ単に時間がかかる系？違うな。必ず、ってのがおかしい。</p>
 <p class="p3"><span class="s3"><span class="Apple-tab-span">	</span>→</span>内容について調べてみると、<b>別インスタンスのはずの、各テストケースのクラス中の</b><span class="s2"><b>var</b></span><b>が更新されてしまう</b>、というのが原因だった</p>
-<p class="p2"><br></p>
-<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span>var</span>の時点でアレだなーとは思うんだけど。唯一の<span class="s2">var</span>。</p>
-<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>えーやだー。酷いコードだ書いた奴殺すー→俺</p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>なんでこんな事が？</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
-<p class="p3"><b>該当クラスのコンストラクタで、</b><span class="s2"><b>this</b></span><b>をprintln表示してみる</b></p>
+<p class="p3"><b>最終的に</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>→Threadの止め方の問題だった。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Specs2は、非同期のテストを書きたい場合は、そのまま、</p>
 <p class="p2"><br></p>
-<p class="p7"><span class="Apple-tab-span">	</span>contextIdentity<span class="Apple-tab-span">	</span>1:run A then Z<span class="Apple-tab-span">	</span>/ProcessContext@<span class="s4"><b>74fa8a70</b></span></p>
-<p class="p7"><span class="Apple-tab-span">	</span>contextIdentity<span class="Apple-tab-span">	</span>3:run A then Z 1msec <span class="s5">で　</span>ContextTimeout<span class="s5">する</span><span class="Apple-tab-span">	</span>/ProcessContext@<span class="s4"><b>74fa8a70</b></span></p>
-<p class="p2"><br></p>
-<p class="p7"><span class="Apple-tab-span">	</span>contextIdentity<span class="Apple-tab-span">	</span>2:run A then Z finallyTimeout<span class="s5">付きで時間内に完了する</span>/ProcessContext@<span class="s6"><b>7fdac9db</b></span></p>
-<p class="p7"><span class="Apple-tab-span">	</span>contextIdentity<span class="Apple-tab-span">	</span>4:run A then Z 0msec <span class="s5">で正常終了</span><span class="Apple-tab-span">	</span>/ProcessContext@<span class="s6"><b>7fdac9db</b></span></p>
+<p class="p7">Thread.sleep(long)<span class="Apple-converted-space"> </span></p>
 <p class="p4"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>んっと、<span class="s7"><b>個別</b></span><b>の<span class="Apple-tab-span">	</span>"</b><span class="s2"><b>test</b></span><b>name" in { }<span class="Apple-tab-span">	</span>テストケースで作ったインスタンスの</b><span class="s8"><b>ポインタが一緒</b></span><b>。</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>で、待てば良いのだった。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>このへん、待つ機能を独自に作って使い回してたのが判明（Actor側に同期通信投げてActor内でThread.sleep）</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>穴を掘って穴に嵌った形。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><b>値が同期したのは、単純に「システムの一部がロックして、値が変わらなかった」のを誤って観測したため。</b></p>
 <p class="p4"><span class="Apple-tab-span">	</span></p>
-<p class="p3"><span class="Apple-tab-span">	</span>、、、</p>
-<p class="p3"><b><span class="Apple-tab-span">	</span>"testname" should { } </b>でも再現。</p>
-<p class="p2"><br></p>
-<p class="p2"><br></p>
-<p class="p3"><b>イマココ</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>お粗末！</p>
 </body>
 </html>
