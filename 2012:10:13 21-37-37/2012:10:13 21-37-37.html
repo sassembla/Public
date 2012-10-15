@@ -14,25 +14,27 @@
     p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 17.0px 'Hiragino Kaku Gothic ProN'; min-height: 26.0px}
     p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 17.0px 'Hiragino Kaku Gothic ProN'}
     p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
-    span.s1 {font: 12.0px Helvetica}
-    span.s2 {font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    span.s1 {font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    span.s2 {font: 12.0px Helvetica}
     span.s3 {font: 12.0px 'Lucida Grande'}
     span.Apple-tab-span {white-space:pre}
   </style>
 </head>
 <body>
-<p class="p1"><span class="s1"><span class="Apple-converted-space"> </span></span><b>Eclipse</b><span class="s2"><b>で</b></span><b>Scala</b><span class="s2"><b>やる場合の注意点</b></span></p>
+<p class="p1"><b>Eclipse</b><span class="s1"><b>で</b></span><b>Scala</b><span class="s1"><b>やる場合の注意点</b></span></p>
 <p class="p2"><br></p>
 <p class="p3"><b>概要</b></p>
-<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span></span>自分だけではなく、弊社の他の人も踏んだバグがちらちら重複してきた感があるので、</p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>自分だけではなく、弊社の他の人も踏んだバグがちらちら重複してきた感があるので、</p>
 <p class="p3"><span class="Apple-tab-span">	</span>まとめてみた。</p>
 <p class="p4"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>対象艦橋は、Scala IDE 2.0.2 + Eclipse 3.7.2 + Mac OS 10.8.2</p>
-<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>対象環境は、Scala IDE 2.0.2 + Eclipse 3.7.2 + Mac OS 10.8.2</p>
+<p class="p4"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ちなみに、どれも「完全再現できない」感じ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>時々発生する。</p>
 <p class="p5"><b></b><br></p>
 <p class="p6"><b>Eclipse+Java+Scala複合の問題</b></p>
 <p class="p2"><br></p>
-<p class="p3"><span class="s1"><b>Java</b></span><b>で定義した定数の内容をScalaからは認識できない</b></p>
+<p class="p3"><span class="s2"><b>Java</b></span><b>で定義した定数の内容をScalaからは認識できないことがある</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>Java側のクラス情報の更新が、Scala側まで伝わらない模様。</p>
 <p class="p4"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>たとえばJava側で</p>
@@ -56,7 +58,7 @@
 <p class="p4"><br></p>
 <p class="p6"><b>Eclipse+Scala単独の問題</b></p>
 <p class="p4"><b></b><br></p>
-<p class="p3"><b>object/classファイルを作成後、class/objectに切り替えると、ビルドエラーが出る</b></p>
+<p class="p3"><b>object/classファイルを作成後、class/objectに切り替えると、ビルドエラーが出ることがある</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>Scalaプラグインを入れたEclipseのウィザードから、</p>
 <p class="p3"><span class="Apple-tab-span">	</span>object/classを作ったあと、内容編集でobject → class　とかに編集すると、</p>
 <p class="p3"><span class="Apple-tab-span">	</span>ビルド時/実行時にエラーになる。</p>
@@ -65,7 +67,7 @@
 <p class="p3"><span class="Apple-tab-span">	</span>Eclipseの再起動で直る。</p>
 <p class="p4"><span class="Apple-tab-span">	</span></p>
 <p class="p4"><br></p>
-<p class="p3"><b>Scalaのコンストラクタの引数をあとから足すと、new演算子にエラー表記が出っぱなしになる</b></p>
+<p class="p3"><b>Scalaのコンストラクタの引数をあとから足すと、new演算子にエラー表記が出っぱなしになることがある</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>・Scalaのコンストラクト時の引数を、適当なタイミングで足すと、new演算子がエラー出す事が有る。</p>
 <p class="p4"><br></p>
 <p class="p4"><br></p>
