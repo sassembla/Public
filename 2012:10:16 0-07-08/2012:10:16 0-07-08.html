@@ -1,0 +1,247 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1187.34">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Courier; color: #323333; background-color: #d6d6d6}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Courier; color: #999988; background-color: #d6d6d6}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 16.0px 'Hiragino Kaku Gothic ProN'}
+    p.p8 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Courier; color: #323333; min-height: 14.0px}
+    p.p9 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Courier; color: #455588; background-color: #d6d6d6}
+    p.p10 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Courier; color: #323333; background-color: #d6d6d6; min-height: 14.0px}
+    span.s1 {font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    span.s2 {font: 12.0px 'Hiragino Kaku Gothic ProN'; color: #000000}
+    span.s3 {color: #455588}
+    span.s4 {font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    span.s5 {color: #991200}
+    span.s6 {font: 12.0px Helvetica}
+    span.s7 {color: #323333}
+    span.s8 {color: #009999}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>ScalaBase</b><span class="s1"><b>に行けないエントリ</b></span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span></b>よくわからない生き物が近々生まれるそうなので東京に居なければならず、ScalaBaseに行けない。ギギギ。。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ので、もし自分が行けてたらプレゼンして</p>
+<p class="p3"><span class="Apple-tab-span">	</span>マサカリ投げられたりしてみたかった事とかを書きます。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>ScalaでActorをwrapしたメッセージパッシング便利化ライブラリを書いてみた</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/ScalaMessengerPrototype">https://github.com/sassembla/ScalaMessengerPrototype</a></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Scalaで標準に用意されているActor(2.9.2までなのでActors)</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://www.scala-lang.org/api/current/scala/actors/Actor.html">http://www.scala-lang.org/api/current/scala/actors/Actor.html</a></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>を、特にclass間のmessagePassingに使用するために使いやすくしたつもりのライブラリです。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ちょうど2.10がそろそろ出るぜ的な話があったので、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Akkaに取って替わられるActorsにお別れを言いがてら作ってみてました。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、作って使ってるのでご意見募集、という感じでした。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>コンセプト/要件定義</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・Javaから使える/Scalaから使える</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・通信内部は全部Actors、Akka版へのリプレースを考慮に入れる</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・同期、非同期でのメッセージ送付/受信</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・ネスト呼び出し可能</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・ブロードキャスト</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・通信が可能な対象を明示する機構</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・メッセージラベルの付与</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・可変長引数でのオブジェクトの送付</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・テスト書く</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・動作にかかるコストは無視</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>オリジナルは、Objective-CのNSNotificationを使ったもの、になります。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>このへん。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/MessengerSystem">https://github.com/sassembla/MessengerSystem</a></p>
+<p class="p3"><span class="Apple-tab-span">	</span>(古いです。ARC対応してません。ぶっちゃけARC対応した最新の社内版があるのだけど、特化しすぎてて出せない。)</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>何がどう楽になるの？</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>メッセージパッシングのそもそもの利点として、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>pointer/参照を持たないオブジェクト同士が、物を投げ合ったりする事が出来る</b></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>っつーのがあるのですが、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ただ、Actorsそのままだと、毎回定義するものが多かったり、case class作りまくらないといけなかったりで、めんどいのでした。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>なので、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>数行書けば使える</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>みたいな目標をたてて作ってました。実際、Javaからだと6行くらい、Scalaからだと4行くらい書けば使えます。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>①特定フォーマットでメッセージを送れる</b></p>
+<p class="p2"><br></p>
+<p class="p4"><span class="s2"><span class="Apple-tab-span">	</span></span><b>def</b> call<b>(</b>targetName <b>:</b> <span class="s3"><b>String</b></span><b>,</b> exec <b>:</b> <span class="s3"><b>String</b></span><b>,</b> message <b>:</b> <span class="s3"><b>Array</b></span><b>[</b><span class="s3"><b>TagValue</b></span><b>])</b></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>targetName</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>メッセージ送付ターゲットの識別子、メールでいうところのTo</p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>exec</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></b>メッセージの識別子、メールでいうところのタイトル</p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>message</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>可変長引数のkey-valueペア。本文みたいなもの。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>②必ず書かなきゃ行けない特定の受信箇所に届く</b></p>
+<p class="p5"><span class="s2"><span class="Apple-tab-span">	</span></span><i>/**</i></p>
+<p class="p5"><i><span class="Apple-tab-span">	</span> * Child</i><span class="s4">のレシーバ</span></p>
+<p class="p5"><i><span class="Apple-tab-span">	</span> */</i></p>
+<p class="p4"><span class="Apple-tab-span">	</span>@Override</p>
+<p class="p4"><span class="Apple-tab-span">	</span><b>public</b> <span class="s3"><b>void</b></span> <span class="s5"><b>receiver</b></span><b>(</b>String exec<b>,</b> TagValue<b>[]</b> tagValues<b>)</b> <b>{</b></p>
+<p class="p4"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>.......</b></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>いちいち自由意志でoverrideしないでも、無いとコンパイルとおらない。</p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><b><span class="Apple-tab-span">	</span></b></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>サンプルコード</b></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Javaから使う</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>親</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/ScalaMessengerPrototype/blob/master/sample/sampleJava/com/kissaki/Parent.java">https://github.com/sassembla/ScalaMessengerPrototype/blob/master/sample/sampleJava/com/kissaki/Parent.java</a></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>子</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/ScalaMessengerPrototype/blob/master/sample/sampleJava/com/kissaki/Child.java">https://github.com/sassembla/ScalaMessengerPrototype/blob/master/sample/sampleJava/com/kissaki/Child.java</a></p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p6"><span class="Apple-tab-span">	</span>Scala<span class="s4">から使う</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>親</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/ScalaMessengerPrototype/blob/master/sample/sampleScala/com/kissaki/Parent.scala">https://github.com/sassembla/ScalaMessengerPrototype/blob/master/sample/sampleScala/com/kissaki/Parent.scala</a></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>子</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/ScalaMessengerPrototype/blob/master/sample/sampleScala/com/kissaki/Child.scala">https://github.com/sassembla/ScalaMessengerPrototype/blob/master/sample/sampleScala/com/kissaki/<span class="s6">Chil</span>d.scala</a></p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>制約</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="s6">PRO</span>BLEM:</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><b>pointerに依存せずに自由に物を送り合う事が出来るので、自由にやり過ぎるとカオスになる</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>受信者の名前だけを指定して送る形式だった時代があって、誰が誰に何を送ってるかがカオスになった。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>SOLUTION;</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><b>明示した関係の間柄でしか、送付しあえないようにする</b></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>具体的には→</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>[親子関係がある間柄しかmessageを送付しあえない]</p>
+<p class="p3"><span class="Apple-tab-span">	</span>という制約を勝手に作ってます。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>下記内容で成立してます。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>・messengerが各自なまえを持つ</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>・子どもになる予定のmessengerからinputParent(親名称)で仮親を名前で指定</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>・親予定のmessengerが受信、条件を満たしていたら子予定を子どもとして認定、子どもに返信</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>・親子関係成立</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>→制約が有る上でのデメリット</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>・誰にでも送る、という動作ができなくなった</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>・本来余剰な機構なので重い</p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>→制約がある上でのメリット</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>・誰に送るつもりか、コードの特定の箇所をみればわかる</p>
+<p class="p2"><b><span class="Apple-tab-span">	</span></b></p>
+<p class="p2"><b></b><br></p>
+<p class="p7"><span class="s4"><span class="Apple-tab-span">	</span></span><b>デメリットの方が多いんだけど、複数人で使う上では、メッセージの方向の明示性は必須だった。</b></p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>モヤッとしてるところ</b></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>コアがシングルトンなobject</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>→一番なんとかならんかなーって思った箇所で、Actorsの<span class="s6">channel</span>とかをちゃんと使えば出来たような気がします。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>次必ず消します。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>ScalaScalaしてない</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>→ログの機構とかにListBuffer使いまくってます。吊ってきます。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>キャストって言う動作が完全に終わってる</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>→Akka版作るときは型変換効かせたいです。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>Javaから使うのを優先しすぎた感ある</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>→Javaでテストを書いていたので、書きにくい形式を選べませんでした吊ってきます。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>次回からScalaオンリーの予定。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>遅い</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>→Javaから使って、messageが同期で届くまでに0.01秒くらいかかってる感じ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ボトルネックは、通信のたびに小さな内部Actorを作っている事。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Actorsの実装だと、Actorから自分自身を呼び出すとロックする。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>それを回避するために、自分自身へのメッセージ送付を肩代わりするActorが一瞬だけ生成される。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>例えば下記の、親を呼ぶメソッドからは、</p>
+<p class="p2"><br></p>
+<p class="p8"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span><b>def</b> callParent<b>(</b>exec <b>:</b> <span class="s3"><b>String</b></span><b>,</b> message <b>:</b> <span class="s3"><b>Array</b></span><b>[</b><span class="s3"><b>TagValue</b></span><b>])</b> <b>=</b> <b>{</b></p>
+<p class="p9"><span class="s7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>log <b>+=</b> </span><b>Log</b><span class="s7"><b>.</b></span><b>LOG_TYPE_CALLPARENT</b><span class="s7"><b>.</b>toString</span></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><b>val</b> future <b>=</b> parent<b>(</b><span class="s8">0</span><b>).</b>duplicate <b>!!</b> <span class="s3"><b>CallParent</b></span><b>(</b>exec<b>,</b> message<b>)</b></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><b>val</b> result <b>=</b> future<b>()</b></p>
+<p class="p10"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>result <b>match</b> <b>{</b></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><b>case</b> <span class="s3"><b>Done</b></span><b>(_)</b> <b>=&gt;</b></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><b>case</b> <span class="s3"><b>Failure</b></span><b>(</b>reason<b>)</b> <b>=&gt;</b></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><b>}</b></p>
+<p class="p4"><span class="Apple-tab-span">	</span><b>}</b></p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>duplicateメソッドでActorを一つ作って、ネストした際のロックを避けるようになっている。</p>
+<p class="p8"><br></p>
+<p class="p8"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span><b>def</b> duplicate <b>:</b> <span class="s3"><b>SubMessengerActor</b></span> <b>=</b> <b>{</b></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><b>new</b> <span class="s3"><b>SubMessengerActor</b></span><b>(this,</b> myself<b>)</b></p>
+<p class="p4"><span class="Apple-tab-span">	</span><b>}</b></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>で、SubMessengerActorの実装は、まんまActor。</p>
+<p class="p2"><br></p>
+<p class="p9"><span class="s7"><b>class</b> </span><b>SubMessengerActor</b><span class="s7"><b>(</b>master <b>:</b> </span><b>MessengerActor</b><span class="s7"><b>,</b> myself <b>:</b> </span><b>MessengerProtocol</b><span class="s7"><b>)</b> <b>extends</b> </span><b>Actor</b><span class="s7"> <b>{</b></span></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>start</p>
+<p class="p10"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><b>def</b> act<b>()</b> <b>=</b> <b>{</b></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>loop <b>{</b></p>
+<p class="p4"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>...</b></p>
+<p class="p8"><b></b><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Actorの中に、通信のたびに別のActorが生まれて、終わったら消える。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>こんなのがメッセージごとにあるので、めっちゃコスト喰うし、遅い。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>Deallocがある</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>→Actorの都合上、停止は明示的に書かないといけないです。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>このライブラリのMessengerも、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>closeでMessengerだけを、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>closeSystemで「系」全体を停止させます。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>どうすればいいのかわかりません。GCさんよろしくお願いします、、よろ、、し、、、</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3">ざっくり、以上。</p>
+<p class="p2"><br></p>
+<p class="p3">それこんなライブラリ使うともっと簡単にできるよ、とか、</p>
+<p class="p3">車輪の再発明乙、とかだったら切ないので教えてもらえるとたすかりんこ。</p>
+<p class="p2"><br></p>
+</body>
+</html>
