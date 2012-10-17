@@ -7,10 +7,14 @@
 ./shared/antInGradle/assets/player/KeynoteDHTMLPlayer.html
 ./shared/antInGradle/assets/fallback/index.html
 ./shared/2nengo-ni-kiku-list.html
-./ignores/irofdot/irofied.html
+./ignores/test.html
+./ignores/sublime-presentation/index.html
+./ignores/sublime-presentation/assets/player/KeynoteDHTMLPlayer.html
+./ignores/sublime-presentation/assets/fallback/index.html
 ./htmlResource/html_header.html
 ./htmlResource/html_body_tail.html
 ./htmlResource/html_body_head.html
+./2012:10:17 17-03-36/2012:10:17 17-03-36.html
 ./2012:10:16 0-07-08/2012:10:16 0-07-08.html
 ./2012:10:13 21-37-37/2012:10:13 21-37-37.html
 ./2012:09:29 14-48-41/2012:09:29 14-48-41.html

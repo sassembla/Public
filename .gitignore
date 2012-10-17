@@ -1,23 +1,6 @@
 
-ignores/battle.html
+ignores/*
 
-ignores/battle_Resources/HYPE.js
-
-ignores/battle_Resources/banner5-1.bmp
-
-ignores/battle_Resources/PIE.htc
-
-ignores/battle_Resources/battle_hype_generated_script.js
-
-ignores/battle_Resources/chara.png
-
-ignores/jsonizing.txt
-
-ignores/jsonizing_last.txt
-
-ignores/battle_Resources/images.jpeg
-
-ignores/test
 javascripts/.DS_Store
 shared/.DS_Store
 shared/TechHUB/.DS_Store
