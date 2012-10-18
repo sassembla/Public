@@ -34,3 +34,5 @@ shared/examples/transformTest.blend
 shared/examples/transformTest.html
 shared/examples/walk.blend
 shared/examples/walk.html
+
+.DS_Store

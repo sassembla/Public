@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1187.34">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #d6d6d6}
+    span.s1 {font: 22.0px Helvetica}
+    span.s2 {font: 12.0px Helvetica}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><span class="s1"><b>Sublime</b></span><b>で動く</b><span class="s1"><b>Gradle</b></span><b>ショートカットを雑に作る</b></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>SublimeTextからGradleを動かすプラグインが見つけられなかった、、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ので作った。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>っていうか超簡単に雑な感じのが作れたのでお茶濁しまでに。</p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>2012/10/19 0:43:17</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>githubに上げるようなとこまでやってなくて、とりあえずコマンドとして</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>走らせられるようにしただけ。</b></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>完全固定で特定のtaskを実行するだけ、めっちゃ手抜きです。</b></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>そのうち、build.gradleの特定の行のコマンドを実行、とか、、</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>やるかもやらないかも。</b></p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>前提</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span></b>Gradleをhomebrewとかで入れてある。</p>
+<p class="p3"><b><span class="Apple-tab-span">	</span></b><span class="s2"> = /usr/local/bin </span>に gradleのショートカットがある、、とする。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>べつのとこにあってもパス変えればOK。<span class="Apple-tab-span">	</span></p>
+<p class="p4"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202012-10-19%200.44.19.png" alt="スクリーンショット 2012-10-19 0.44.19.png"></p>
+<p class="p5"><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>作成開始</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Sublimeを起動した状態で、トップのバーの</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Tool &gt; Build System &gt; New Build System...</p>
+<p class="p3"><span class="s2"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202012-10-19%200.47.13.png" alt="スクリーンショット 2012-10-19 0.47.13.png"></span><span class="Apple-tab-span">	</span><span class="s2"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202012-10-19%200.47.20.png" alt="スクリーンショット 2012-10-19 0.47.20.png"></span>(ここでもうgradleがあるのはすでに作っちゃったから。)</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>するとこんな感じに、ビルド設定ファイルのひな形が開くはず。</p>
+<p class="p4"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202012-10-19%200.47.32.png" alt="スクリーンショット 2012-10-19 0.47.32.png"></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ここに設定を書けば、command + b で実行できるぜ、と。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、下記のように書いて、</p>
+<p class="p6">{</p>
+<p class="p6"><span class="Apple-tab-span">	</span>"cmd": ["/usr/local/bin/gradle test -d"],</p>
+<p class="p6"><span class="Apple-tab-span">	</span>"file_regex": "<span class="s2">build.</span>gradle",</p>
+<p class="p6"><span class="Apple-tab-span">	</span>"selector": "build.gradle",</p>
+<p class="p6"><span class="Apple-tab-span">	</span>"working_dir": "${project_path:${folder}}",</p>
+<p class="p6"><span class="Apple-tab-span">	</span>"shell": "true"</p>
+<p class="p6">}</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>お察しのように、めっちゃ単純です。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>プロジェクトのフォルダがある階層のbuild.gradleに、test -d をそのままぶちこんでます。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、保存。　このときの名前が Build System の一覧に出ます。</p>
+<p class="p4"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202012-10-19%200.54.50.png" alt="スクリーンショット 2012-10-19 0.54.50.png"></p>
+<p class="p3"><span class="Apple-tab-span">	</span>保存場所は一定で、/Users/だれだれ/Library/Application Support/Sublime Text 2/Packages/User</p>
+<p class="p3"><span class="Apple-tab-span">	</span>に出来る。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、Tool &gt; Build System から該当のを選択した上で、command + b でビルドできる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>らくちん。</p>
+<p class="p4"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202012-10-19%201.01.29.png" alt="スクリーンショット 2012-10-19 1.01.29.png"></p>
+<p class="p3"><span class="Apple-tab-span">	</span>あ、テスト失敗。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>ぱっと作った上での課題</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>まず「これbuildでやることか？」ってのがある。すいません簡単そうだったんで試したかったんです。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>あと、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>どうも、build で実行されてるプロセスは、Sublimeにけっこう組み付いた状態で実行されてるらしくて、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>重い処理を実行するとSublimeも引っ張られて挙動が鈍化する。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>試しにSpecs2で1000くらいのテスト並列実行ってやったら、全く操作できなかった。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>build以外で、外部プロセスにしたりすれば軽いと思うんだけどな、、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>今後、プラグインで別プロセス、というのを試すつもり。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+</body>
+</html>
