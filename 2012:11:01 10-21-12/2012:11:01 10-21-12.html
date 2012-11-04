@@ -16,7 +16,7 @@
     p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #d6d6d6; min-height: 18.0px}
     p.p8 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; background-color: #d6d6d6}
     p.p9 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; background-color: #d6d6d6; min-height: 14.0px}
-    p.p10 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px 'Lucida Grande'}
+    p.p10 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px 'Hiragino Kaku Gothic ProN'}
     p.p11 {margin: 0.0px 0.0px 0.0px 0.0px; font: 21.0px 'Hiragino Kaku Gothic ProN'}
     span.s1 {font: 22.0px Helvetica}
     span.s2 {font: 12.0px 'Hiragino Kaku Gothic ProN'}
@@ -57,21 +57,21 @@
 <p class="p4"><br></p>
 <p class="p4"><span class="Apple-tab-span">	</span></p>
 <p class="p5"><b>command</b><span class="s2"><b>について</b></span></p>
-<p class="p3"><span class="s3"><span class="Apple-tab-span">	</span>SublimeText2</span>でよく見る、実行プロトコルみたいなもの。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>SublimeText2でよく見る、実行プロトコルみたいなもの。</p>
 <p class="p3"><span class="Apple-tab-span">	</span>値の名前がついてるPythonプログラムを実行する。<span class="Apple-converted-space"> </span></p>
 <p class="p3"><span class="Apple-tab-span">	</span>JSON内で定義されている事が多いが、.py内から他のcommandも呼べる。</p>
-<p class="p2"><br></p>
-<p class="p3"><span class="s3"><span class="Apple-tab-span">	</span></span>例えば、</p>
-<p class="p2"><br></p>
-<p class="p5"><span class="Apple-tab-span">	</span>"command": "myCommand"</p>
-<p class="p2"><br></p>
-<p class="p3"><span class="s3"><span class="Apple-tab-span">	</span></span>とか書いてあると、</p>
-<p class="p2"><br></p>
-<p class="p3"><span class="s3"><b><span class="Apple-tab-span">	</span>myCommand </b></span><b>って名前をつけられてる特定条件を満たした.pyプログラムが実行される。</b></p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>例えば、</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>"command": "myCommand"</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>とか書いてあると、</p>
+<p class="p4"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>myCommand って名前をつけられてる特定条件を満たした.pyプログラムが実行される。</b></p>
 <p class="p4"><b></b><br></p>
 <p class="p3"><b><span class="Apple-tab-span">	</span>特定条件<span class="Apple-tab-span">	</span></b></p>
 <p class="p3"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></b>command : <b>コマンド名 </b>に対して、</p>
-<p class="p2"><br></p>
+<p class="p4"><br></p>
 <p class="p3"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></b>・このプラグインフォルダ中に、<b>コマンド名を含んだclass が定義されている.pyファイルがある</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>.pyファイルならファイル名は何でも良くて、<b>class名がコマンド名を含んでいる</b>のが条件。</p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>command : <b>something</b>　なら、 <b>Something</b>Happen とかになる。</p>
@@ -103,12 +103,12 @@
 <p class="p3"><b>プラグイン基礎構造</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>プラグイン名のフォルダ</p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>+-syntax</p>
-<p class="p5"><span class="s2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>+-</span>Default.sublime-commands</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>+-Default.sublime-commands</p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>+-Default.sublime-keymap</p>
-<p class="p3"><span class="s3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>+-</span>Main.sublime-menu</p>
-<p class="p5"><span class="s2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>+-</span>package-metadata.json</p>
-<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>+-<span class="s2">プラグイン名.</span>sublime-settings</p>
-<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>+-<span class="s2">その他　.pyとか、</span>README.md<span class="s2">とか</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>+-Main.sublime-menu</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>+-package-metadata.json</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>+-プラグイン名.sublime-settings</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>+-その他　.pyとか、README.mdとか</p>
 <p class="p4"><b></b><br></p>
 <p class="p4"><b></b><br></p>
 <p class="p3"><b>何を変えるとどこが変わるのか<span class="Apple-tab-span">	</span></b></p>
@@ -266,8 +266,8 @@
 <p class="p6"><b>sublime.set_timeout(callback,<span class="Apple-converted-space">  </span>delay)</b></p>
 <p class="p2"><b></b><br></p>
 <p class="p2"><b><span class="Apple-tab-span">	</span></b></p>
-<p class="p3"><span class="s3"><span class="Apple-tab-span">	</span>Android</span>やってる人ならピンと来るかもしれない。</p>
-<p class="p3"><span class="s3"><span class="Apple-tab-span">	</span>iOS</span>やってる人には全くピンと来ないと思う。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Androidやってる人ならピンと来るかもしれない。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>iOSやってる人には全くピンと来ないと思う。</p>
 <p class="p3"><span class="Apple-tab-span">	</span>JSerな自分はJSな理解で誤解した。</p>
 <p class="p2"><b><span class="Apple-tab-span">	</span></b></p>
 <p class="p2"><b></b><br></p>
@@ -285,13 +285,13 @@
 <p class="p4"><b></b><br></p>
 <p class="p3"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>SublimeTextのAPIに含まれている。</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://www.sublimetext.com/docs/2/api_reference.html">http://www.sublimetext.com/docs/2/api_reference.html</a></p>
-<p class="p2"><b><span class="Apple-tab-span">	</span></b></p>
-<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="s2">この</span>API<span class="s2">は、</span></p>
+<p class="p4"><b><span class="Apple-tab-span">	</span></b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>このAPIは、</p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>特定の関数(callback)を、delayミリ秒後に<b>MainThreadで実行する</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>っていう感じのものになる。</p>
 <p class="p10"><span class="s2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"</span>It is safe to call setTimeout from multiple threads."</p>
-<p class="p2"><br></p>
-<p class="p3"><span class="s3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>この一文から解れってのが、ちょっとキツい。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>この一文から解れってのが、ちょっとキツい。</p>
 <p class="p4"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span><b>これらを使って何をすると捗るか：</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>スレッド立ち上げてなんらかの処理を実行、</p>
@@ -358,7 +358,7 @@
 <p class="p3"><span class="Apple-tab-span">	</span>JSだとそもThreadって概念無いので、はい。</p>
 <p class="p4"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>Sublimeは、っていうと、だいたい上記のメソッドで、優雅では無いけど使いやすい感じに仕上がっていると思う。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>せめて<span class="s3">runOn</span>MainThread と　<span class="s3">runOn</span>MainThreadWithDelay とかに出来なかったのか、、とか思うが、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>せめてrunOnMainThread と　runOnMainThreadWithDelay とかに出来なかったのか、、とか思うが、</p>
 <p class="p4"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>関数そのまま渡せるのですっごく助かる。</p>
 <p class="p4"><br></p>
@@ -397,19 +397,19 @@
 <p class="p4"><br></p>
 <p class="p3"><b>Toolでのプラグインの実行表記に、ショートカットが勝手についた<span class="Apple-converted-space">  </span>＼(^o^)／わーい</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>プラグイン作ってる途中になんか、勝手についちゃった。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>本来は、<span class="s3"><span class="Apple-tab-span">	</span></span><b>Default.sublime-keymap</b>に書かなければつかない、、はず、、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>本来は、<span class="Apple-tab-span">	</span><b>Default.sublime-keymap</b>に書かなければつかない、、はず、、</p>
 <p class="p4"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>勝手にショートカットついちゃった//// 流石俺/////</p>
 <p class="p5"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202012-11-03%2022.22.01.png" alt="スクリーンショット 2012-11-03 22.22.01.png"></p>
 <p class="p3"><span class="Apple-tab-span">	</span>→なぜなんだぜ</p>
-<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>→build という<span class="s3">command</span>名を用意していたんだが、それが不味かった。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>→build というcommand名を用意していたんだが、それが不味かった。</p>
 <p class="p4"><br></p>
-<p class="p3"><span class="s3"><span class="Apple-tab-span">	</span></span>デフォルトで存在する<span class="s3">commnd</span>名 <b>build</b>　とモロかぶりした。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>デフォルトで存在するcommnd名 <b>build</b>　とモロかぶりした。</p>
 <p class="p4"><br></p>
-<p class="p2"><br></p>
-<p class="p3"><span class="s3"><span class="Apple-tab-span">	</span></span>デフォルトで存在する<span class="s3">commnd</span>名を自作プラグインが定義してしまうと、プラグインのもので上書きされる。</p>
-<p class="p2"><br></p>
-<p class="p3"><span class="s3"><span class="Apple-tab-span">	</span></span>で、デフォルトのbuildには、super + b というキーが <b>Default.sublime-keymapで </b>セットしてあったので、</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>デフォルトで存在するcommnd名を自作プラグインが定義してしまうと、プラグインのもので上書きされる。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、デフォルトのbuildには、super + b というキーが <b>Default.sublime-keymapで </b>セットしてあったので、</p>
 <p class="p3"><span class="Apple-tab-span">	</span>基礎定義部分だけプラグインがオーバーライドして、表記などは <b>Default.sublime-keymap </b>のものが採用されてた、という。</p>
 <p class="p4"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>部分オーバーライド(?)こええ。</p>
