@@ -1,0 +1,352 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1187.34">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #d6d6d6}
+    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; background-color: #d6d6d6}
+    p.p8 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; background-color: #d6d6d6; min-height: 14.0px}
+    p.p9 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px 'Lucida Grande'}
+    p.p10 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #d6d6d6; min-height: 18.0px}
+    p.p11 {margin: 0.0px 0.0px 0.0px 0.0px; font: 21.0px 'Hiragino Kaku Gothic ProN'}
+    span.s1 {font: 22.0px Helvetica}
+    span.s2 {font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    span.s3 {font: 12.0px Helvetica}
+    span.s4 {font: 17.0px 'Hiragino Kaku Gothic ProN'}
+    span.s5 {font: 17.0px 'Hiragino Kaku Gothic ProN'; color: #ff4013}
+    span.s6 {font: 12.0px 'Lucida Grande'}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><span class="s1"><b>SublimeText2</b></span><b>のプラグインを作るときの基礎知識とか</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>プラグインを作るときに、自分が調べて学んだこととか</p>
+<p class="p3"><span class="Apple-tab-span">	</span>調べ方とかを纏めておく。</p>
+<p class="p4"><b></b><br></p>
+<p class="p4"><b></b><br></p>
+<p class="p3"><b>参考にしたもの</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span></b>なにはともあれまず<b>API</b>と、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><a href="http://www.sublimetext.com/docs/2/api_reference.html">http://www.sublimetext.com/docs/2/api_reference.html</a></p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>作り方</p>
+<p class="p3"><span class="Apple-tab-span">	</span><a href="http://net.tutsplus.com/tutorials/python-tutorials/how-to-create-a-sublime-text-2-plugin/">http://net.tutsplus.com/tutorials/python-tutorials/how-to-create-a-sublime-text-2-plugin/</a></p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>あと今まで使ってたプラグインを、参考までに開けて見てた。</p>
+<p class="p3"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>InsertDate</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>どっちかっていうとPythonの勉強になった</p>
+<p class="p4"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Package Control</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>UIの勉強に超なった</p>
+<p class="p4"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span></p>
+<p class="p5"><b>command</b><span class="s2"><b>について</b></span></p>
+<p class="p3"><span class="s3"><span class="Apple-tab-span">	</span>SublimeText2</span>でよく見る、実行プロトコルみたいなもの。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>JSONで定義されている事が多い。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="s3"><span class="Apple-tab-span">	</span></span>例えば、</p>
+<p class="p2"><br></p>
+<p class="p5"><span class="Apple-tab-span">	</span>"command": "myCommand"</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="s3"><span class="Apple-tab-span">	</span></span>とか書いてあると、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="s3"><b><span class="Apple-tab-span">	</span>myCommand </b></span><b>って名前をつけられてる特定条件を満たした.pyプログラムが実行される。</b></p>
+<p class="p4"><b></b><br></p>
+<p class="p4"><b></b><br></p>
+<p class="p3"><b>プラグイン基礎構造</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>プラグイン名のフォルダ</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>+-syntax</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>+-Default.sublime-keymap</p>
+<p class="p5"><span class="s2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>+-</span>Default.sublime-commands</p>
+<p class="p3"><span class="s3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>+-</span>Main.sublime-menu</p>
+<p class="p5"><span class="s2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>+-</span>package-metadata.json</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>+-<span class="s2">プラグイン名.</span>sublime-settings</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>+-<span class="s2">その他　.pyとか、</span>README.md<span class="s2">とか</span></p>
+<p class="p4"><b></b><br></p>
+<p class="p4"><b></b><br></p>
+<p class="p3"><b>なにをどう変えるとどこが変わるのか<span class="Apple-tab-span">	</span></b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>プラグインの中のファイル一覧と、その内容についての記述が無かったのでメモ。</p>
+<p class="p4"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="s3"><span class="Apple-tab-span">	</span></span><b>Default.sublime-keymap</b></p>
+<p class="p3"><span class="s3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>キーバインド、ショートカットとcommand(ST2での標準的な実行形式)の連携を書くファイル。<span class="s3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>ところでキーマップ一覧をチートシートみたいに表示するプラグインが欲しい。。</p>
+<p class="p2"><br></p>
+<p class="p5"><b><span class="Apple-tab-span">	</span>Default.sublime-commands</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>⌘ + shift + pから出てくる、プラグインに含まれてるcommand一覧が書いてある。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>表示条件は、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>・このプラグインフォルダ中に、command : <b>コマンド名 </b>の<span class="s4"><b>コマンド名を</b></span><span class="s5"><b>含んだ</b></span><span class="s4"><b>class </b></span><b>が、</b><span class="s4"><b>記述されている.pyファイル</b></span>が、<span class="s4"><b>存在している</b></span></p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>・その class クラス名 が、次のどれかのSublimeのクラスを継承している。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>sublime_plugin.ApplicationCommand</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>sublime_plugin.WindowCommand</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>sublime_plugin.TextCommand</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>それぞれの違いはAPIみてくだしあ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://www.sublimetext.com/docs/api-reference#sublimeplugin.Plugin">http://www.sublimetext.com/docs/api-reference#sublimeplugin.Plugin</a></p>
+<p class="p4"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>・run メソッドを持っている</p>
+<p class="p4"><b></b><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>各条件を満たした.pyの表記はこんな感じ。</p>
+<p class="p6"><b>.pyファイル</b></p>
+<p class="p6"><b><span class="Apple-tab-span">	</span>class コマンド名を含んだクラス名 (TextCommand):</b></p>
+<p class="p6"><b><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>def run (self, edit) :</b></p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>Main.sublime-menu</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="s3"><span class="Apple-tab-span">	</span>Tools</span>など、Sublime上部のバーで表示する要素に追加する項目を記述する所。</p>
+<p class="p3"><span class="s3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>json</span>での階層構造、とても奇麗。<b>//でコメントが使える。</b></p>
+<p class="p7">[</p>
+<p class="p7"><span class="Apple-converted-space">    </span>{</p>
+<p class="p7"><span class="Apple-converted-space">        </span>"id": "tools",<span class="s6">←</span><span class="s2">①</span></p>
+<p class="p7"><span class="Apple-converted-space">        </span>"children":</p>
+<p class="p7"><span class="Apple-converted-space">        </span>[</p>
+<p class="p7"><span class="Apple-converted-space">            </span>{</p>
+<p class="p7"><span class="Apple-converted-space">                </span>"caption": "Gradle",<span class="s6">←</span><span class="s2">②</span></p>
+<p class="p7"><span class="Apple-converted-space">                </span>"children":</p>
+<p class="p7"><span class="Apple-converted-space">                </span>[</p>
+<p class="p7"><span class="Apple-converted-space">                     </span>{ "caption": "Log", "command": "test" }</p>
+<p class="p7"><span class="Apple-converted-space">                </span>]</p>
+<p class="p7"><span class="Apple-converted-space">            </span>}</p>
+<p class="p7"><span class="Apple-converted-space">        </span>]</p>
+<p class="p7"><span class="Apple-converted-space">    </span>}</p>
+<p class="p8"><br></p>
+<p class="p7"><span class="Apple-converted-space">    </span>,{</p>
+<p class="p7"><span class="Apple-converted-space">        </span>"caption": "Preferences",<span class="s6">←</span><span class="s2">③</span></p>
+<p class="p7"><span class="Apple-converted-space">        </span>"mnemonic": "n",</p>
+<p class="p7"><span class="Apple-converted-space">        </span>"id": "preferences",</p>
+<p class="p7"><span class="Apple-converted-space">        </span>"children":</p>
+<p class="p7"><span class="Apple-converted-space">        </span>[</p>
+<p class="p7"><span class="Apple-converted-space">            </span>{</p>
+<p class="p7"><span class="Apple-converted-space">                </span>"caption": "Package Settings",</p>
+<p class="p7"><span class="Apple-converted-space">                </span>"mnemonic": "P",</p>
+<p class="p7"><span class="Apple-converted-space">                </span>"id": "package-settings",</p>
+<p class="p7"><span class="Apple-converted-space">                </span>"children":</p>
+<p class="p7"><span class="Apple-converted-space">                </span>[</p>
+<p class="p7"><span class="Apple-converted-space">                    </span>{</p>
+<p class="p7"><span class="Apple-converted-space">                        </span>"caption": "Gradle",</p>
+<p class="p7"><span class="Apple-converted-space">                        </span>"children":</p>
+<p class="p7"><span class="Apple-converted-space">                        </span>[</p>
+<p class="p7"><span class="Apple-converted-space">                            </span>{</p>
+<p class="p7"><span class="Apple-converted-space">                                </span>"command": "open_file",<span class="s6">←</span><span class="s2">④</span></p>
+<p class="p7"><span class="Apple-converted-space">                                </span>"args": {"file": "${packages}/Gradle/Gradle.sublime-settings"},</p>
+<p class="p7"><span class="Apple-converted-space">                                </span>"caption": "Settings – Default"</p>
+<p class="p7"><span class="Apple-converted-space">                            </span>},</p>
+<p class="p7"><span class="Apple-converted-space">                            </span>{</p>
+<p class="p7"><span class="Apple-converted-space">                                </span>"command": "open_file",<span class="s6">←</span><span class="s2">⑤</span></p>
+<p class="p7"><span class="Apple-converted-space">                                </span>"args": {"file": "${packages}/User/Gradle.sublime-settings"},</p>
+<p class="p7"><span class="Apple-converted-space">                                </span>"caption": "Settings – User"</p>
+<p class="p7"><span class="Apple-converted-space">                            </span>},</p>
+<p class="p7"><span class="Apple-converted-space">                            </span>{ "caption": "-" }</p>
+<p class="p7"><span class="Apple-converted-space">                        </span>]</p>
+<p class="p7"><span class="Apple-converted-space">                    </span>}</p>
+<p class="p7"><span class="Apple-converted-space">                </span>]</p>
+<p class="p7"><span class="Apple-converted-space">            </span>}</p>
+<p class="p7"><span class="Apple-converted-space">        </span>]</p>
+<p class="p7"><span class="Apple-converted-space">    </span>}</p>
+<p class="p7">]</p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><span class="s3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>とか書くと、①<span class="s3"><b>Tools </b></span>の項目にGradle、さらにその要素として Log が表示される。</p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><b>③Preferences &gt; package Settings </b>に表示される際の名称。アプリの設定(Preferences)から選択できる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>だいたいのプラグインは、ここから設定ファイル ④、⑤<b>プラグイン名.</b><span class="s3"><b>sublime-settings </b></span>を開けるようにしているみたい。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>メニューの項目はネスト可能で、ネストした場合、プルダウン表示される。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="s3"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202012-11-02%202.27.54.png" alt="スクリーンショット 2012-11-02 2.27.54.png"></span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>簡単に作れて素敵。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p5"><span class="Apple-tab-span">	</span><b>Side Bar.sublime-menu</b></p>
+<p class="p3"><span class="s3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>サイドバーで、メニュー表示時に表示される内容が書き足せる。</p>
+<p class="p3"><span class="s3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>json</span>での階層構造、とても奇麗。<b>コメントが使える。</b></p>
+<p class="p2"><br></p>
+<p class="p5"><span class="Apple-tab-span">	</span><b>package-metadata.json</b></p>
+<p class="p3"><span class="s3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>プラグインのDL元とかをかいておくところ？　よくわかってない。</p>
+<p class="p2"><br></p>
+<p class="p5"><b><span class="Apple-tab-span">	</span></b><span class="s2"><b>プラグイン名</b></span><b>.sublime-settings</b></p>
+<p class="p3"><span class="s3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>設定ファイル。</p>
+<p class="p3"><span class="s3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>プラグインのデフォルトがプラグインフォルダにあり、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>上書き用の同名のファイルがSublimeのUser フォルダ下にあるのがコモンセンスらしい。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>プラグイン製作中のSublimeの挙動について</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>control +<span class="Apple-converted-space">  </span>`　でSublime内のPythonコマンドライン窓が出るんだけど、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>プラグインのファイルを編集→保存、とかやると、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>[Reloading plugin /Users/sassembla/なにやら]　とか表示されるので、プラグインは都度更新、ビルド、再読み込みがされている。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="s3"><b>.py</b></span><b>ファイルについて</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>プラグインのフォルダ内に存在してれば読み込まれる。</p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p3"><b>Toolsからのプラグインのcommandの実行について</b></p>
+<p class="p7">[</p>
+<p class="p7"><span class="Apple-converted-space">    </span>{</p>
+<p class="p7"><span class="Apple-converted-space">        </span>"id": "tools",<span class="s6">←</span><span class="s2">①</span></p>
+<p class="p7"><span class="Apple-converted-space">        </span>"children":</p>
+<p class="p7"><span class="Apple-converted-space">        </span>[</p>
+<p class="p7"><span class="Apple-converted-space">            </span>{</p>
+<p class="p7"><span class="Apple-converted-space">                </span>"caption": "Gradle",<span class="s6">←</span><span class="s2">②</span></p>
+<p class="p7"><span class="Apple-converted-space">                </span>"children":</p>
+<p class="p7"><span class="Apple-converted-space">                </span>[</p>
+<p class="p7"><span class="Apple-converted-space">                     </span>{ "caption": "Build", "command": "build" }<span class="s6">←</span><span class="s2">③</span></p>
+<p class="p7"><span class="Apple-converted-space">                </span>]</p>
+<p class="p7"><span class="Apple-converted-space">            </span>}</p>
+<p class="p7"><span class="Apple-converted-space">        </span>]</p>
+<p class="p7"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>①、②で、ToolにGradleメニューが現れるようになるが、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>③の<b>test</b> comma<span class="s3">nd</span>がちゃんとToolsからハイライト表示されるかどうかは、</p>
+<p class="p4"><br></p>
+<p class="p5"><span class="s2"><span class="Apple-tab-span">	</span></span><b>Default.sublime-commands</b><span class="s2"> と同じ条件を満たす必要がある。</span></p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>条件を満たさない場合、commandは灰色で実行できない。<b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></b></p>
+<p class="p4"><b></b><br></p>
+<p class="p3"><b>実際の挙動を作る</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>具体例はちょっと思いつかないので、仮の例を挙げる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・とあるプロセスをSublimeText2から実行したい</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>たとえば<b>TypeScriptのテスト(って何まだ無いけど)を実行したい</b>とか、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>JenkinsのトリガーをSublimeText2から引きたい</b>とか</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>そんな感じの物事があったとして、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>「無事にPlugin作りました、簡単です、実行できます！」</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>→いざ実行→UIがロックされる</p>
+<p class="p3"><span class="Apple-tab-span">	</span>と殺意を覚える。コンマ一秒でもUIをロックしちゃだめだ。。。</p>
+<p class="p4"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>→できるだけ非同期に行って、でも結果はUIに返そうぜ！</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>そんなときは次の機能のペアが役に立つ。</p>
+<p class="p4"><br></p>
+<p class="p6"><b>threading.Thread</b></p>
+<p class="p4"><b></b><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span></b>と</p>
+<p class="p6"><b>sublime.set_timeout(callback,<span class="Apple-converted-space">  </span>delay)</b></p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><b><span class="Apple-tab-span">	</span></b></p>
+<p class="p3"><span class="s3"><span class="Apple-tab-span">	</span>Android</span>やってる人ならピンと来るかもしれない。</p>
+<p class="p3"><span class="s3"><span class="Apple-tab-span">	</span>iOS</span>やってる人には全くピンと来ないと思う。</p>
+<p class="p2"><b><span class="Apple-tab-span">	</span></b></p>
+<p class="p3"><span class="s3"><b><span class="Apple-tab-span">	</span></b></span><b>threading.Thread は</b></p>
+<p class="p4"><b></b><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>PythonのAPIに入ってるので調べてくだしあ。</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>このへん</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://docs.python.org/2/library/threading.html">http://docs.python.org/2/library/threading.html</a></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://www.doughellmann.com/PyMOTW-ja/threading/">http://www.doughellmann.com/PyMOTW-ja/threading/</a></p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>sublime.set_timeout は</b></p>
+<p class="p4"><b></b><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>SublimeTextのAPIに含まれている。</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://www.sublimetext.com/docs/2/api_reference.html">http://www.sublimetext.com/docs/2/api_reference.html</a></p>
+<p class="p2"><b><span class="Apple-tab-span">	</span></b></p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="s2">この</span>API<span class="s2">は、</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>特定の関数(callback)を、delayミリ秒後に<b>MainThreadで実行する</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>っていう感じのものになる。</p>
+<p class="p9"><span class="s2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"</span>It is safe to call setTimeout from multiple threads."</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="s3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>この一文から解れってのが、ちょっとおかしい。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>一般的な話として、UIをもつアプリケーションは、須くUIを扱うThreadを持つわけで、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>このUIThreadへのアクセスができないと、GUIになんにも反映できない。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>例えば</p>
+<p class="p6"><b>status_message(string)</b><span class="Apple-tab-span">	</span></p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>なんかは、stringに入れた内容をSublimeText2の最下部のバーに表示できるんだけど、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>UIThread(っていうかMainThread)からしか呼べない。</p>
+<p class="p4"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>適当にThreadを継承したクラスを作って、インスタンスつくって、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>インスタンス内でstatus_messageメソッドを呼ぼうとすると、Assertionで殺される。</p>
+<p class="p4"><br></p>
+<p class="p6"><span class="Apple-converted-space">    </span>#どっかでスレッド継承クラスをinstantiateして、start</p>
+<p class="p6"><span class="Apple-converted-space">    </span>thread = SomeThread("hahaha!")</p>
+<p class="p6"><span class="Apple-converted-space">    </span>thread.start()</p>
+<p class="p10"><br></p>
+<p class="p6">#スレッド継承クラス</p>
+<p class="p6">class SomeThread(threading.Thread):</p>
+<p class="p6"><span class="Apple-converted-space">  </span>def __init__(self, message):</p>
+<p class="p6"><span class="Apple-converted-space">    </span>self. message = message</p>
+<p class="p6"><span class="Apple-converted-space">    </span>threading.Thread.__init__(self)</p>
+<p class="p10"><br></p>
+<p class="p6"><span class="Apple-converted-space">  </span>def run(self):</p>
+<p class="p6"><span class="Apple-converted-space">    </span>print "run start, message is ", self.message</p>
+<p class="p6"><b><span class="Apple-converted-space">    </span>sublime.status_message(self.message)</b></p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>こいつは、次のエラーを呼ぶ。</p>
+<p class="p6">Exception in thread Thread-397:</p>
+<p class="p6">Traceback (most recent call last):</p>
+<p class="p6"><span class="Apple-converted-space">  </span>File "/System/Library/Frameworks/Python.framework/Versions/2.6/lib/python2.6/threading.py", line 532, in __bootstrap_inner</p>
+<p class="p6"><span class="Apple-converted-space">  </span>File "./testing.py", line 40, in run</p>
+<p class="p6"><span class="Apple-converted-space">    </span>sublime.status_message(self.command)</p>
+<p class="p6"><b>RuntimeError: Must call on main thread, consider using sublime.set_timeout(function, timeout)</b></p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、言われた通り、sublime.set_timeout を使うと、問題なく該当メソッドが呼べる。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>delayミリ秒後、timeout先で呼ばれるのがmainThreadになっている、という絡繰り。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>関数をぶん投げて、MainThread で実行される。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Androidだと、実行したい処理を含んだThreadを作ってrunOnUiThreadメソッドにThread放り込んで云々、って感じになるところ。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>iOSだと、そもそもそんな残念な苦労はしなくてよくて、UIViewのクラスメソッドや、NSNotificationが超強力になんとかしてくれる。</p>
+<p class="p4"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Sublimeは、っていうと、だいたい上記のメソッドで、優雅では無いけど使いやすい感じに仕上がっていると思う。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>すっごく助かる。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>人の手に触れる物はレスポンスが命。</b></p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p11"><b>メモ</b></p>
+<p class="p4"><br></p>
+<p class="p3"><b>OS判定</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>デフォルトでOS判別をしてくれてる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>詳しくは@ikeikeさんのScalariformとか読むと良いと思う。<span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ikeike443 / Sublime-Scalariform</p>
+<p class="p3"><span class="Apple-tab-span">	</span><a href="https://github.com/ikeike443/Sublime-Scalariform">https://github.com/ikeike443/Sublime-Scalariform</a></p>
+<p class="p4"><span class="Apple-tab-span">	</span></p>
+<p class="p4"><br></p>
+<p class="p3"><b>Terminalみたいに何かを実行したいんだけど。</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>コマンドラインを実行するには。</p>
+<p class="p4"><br></p>
+<p class="p6">self.view.window().run_command('exec', {'cmd': ['sh', 'script.sh'], 'quiet': False}) <span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>→viewが存在するメインスレッドからのみ実行できる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>実行中の内容がPromptっぽいWindowで表示できるんだけど、Mainをがっちり掴んでしまう。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>スレッド違いには出来ない。UIが絡んでるからだね。</p>
+<p class="p4"><br></p>
+<p class="p6">subprocess.call(self.CMD+self.view.file_name(), shell=True)</p>
+<p class="p3"><span class="Apple-tab-span">	</span>→別スレッドでも実行可能。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>この辺にシリーズの情報あり。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>なんだかんだで Popen が無双。</p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p3"><b>再描画</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>self._force_refresh()</p>
+<p class="p3"><span class="Apple-tab-span">	</span>強制読み直し</p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p3"><b>Toolでのプラグインの実行表記に、ショートカットが勝手についたわーい</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>なぜなんだぜ</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>→build という<span class="s3">command</span>名を用意していたんだが、それが不味かった。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="s3"><span class="Apple-tab-span">	</span></span>デフォルトで存在する<span class="s3">commnd</span>名をプラグインが定義してしまうと、プラグインのもので上書きされる。</p>
+<p class="p3"><span class="s3"><span class="Apple-tab-span">	</span></span>何それ怖い。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="s3"><span class="Apple-tab-span">	</span></span>で、デフォルトのbuildには、super + b というキーがセットしてあったので、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>効果部分だけプラグインがオーバーライドして、表記などはデフォルトのものが採用されてた、という。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>設定と動作の不一致部分がちょっと怖い。どこかに一意な根っこが欲しいが。</p>
+<p class="p4"><br></p>
+</body>
+</html>
