@@ -76,6 +76,14 @@
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>.pyファイルならファイル名は何でも良くて、<b>class名がコマンド名を含んでいる</b>のが条件。</p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>command : <b>something</b>　なら、 <b>Something</b>Happen とかになる。</p>
 <p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>注意点として、cammelケースとかがあると、混乱のもと。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>command : somethingelse　とあったら、</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>class SomethingElse　だと　×。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>class Somethingelse　で　○。 一度ハマった。</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p4"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>・その class が、次のどれかのSublimeのクラスを継承している。</p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>sublime_plugin.ApplicationCommand</p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>sublime_plugin.WindowCommand</p>
@@ -90,6 +98,7 @@
 <p class="p4"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></b></p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>・run メソッド(特定引数あり)を持っている</p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>引数は上記クラスによって異なる。</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
 <p class="p4"><b></b><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>各条件を満たした.pyの表記はこんな感じ。</p>
 <p class="p6"><b>.pyファイル</b></p>
