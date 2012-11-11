@@ -10,8 +10,9 @@
     p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'; color: #323333; background-color: #fefdfa}
     p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px 'Hiragino Kaku Gothic ProN'; color: #323333; background-color: #fefdfa; min-height: 20.0px}
     p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px 'Hiragino Kaku Gothic ProN'; color: #323333; background-color: #fefdfa}
-    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px 'Hiragino Kaku Gothic ProN'; color: #323333; background-color: #d6d6d6}
-    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px 'Hiragino Kaku Gothic ProN'; color: #323333; background-color: #d6d6d6; min-height: 20.0px}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px 'Hiragino Kaku Gothic ProN'; color: #323333; background-color: #d6d6d6}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px 'Hiragino Kaku Gothic ProN'; color: #323333; background-color: #d6d6d6; min-height: 20.0px}
     span.s1 {font: 13.0px Helvetica}
     span.Apple-tab-span {white-space:pre}
   </style>
@@ -25,7 +26,18 @@
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://blogs.oracle.com/katakai/entry/netbeans_and_java_for_mac2">https://blogs.oracle.com/katakai/entry/netbeans_and_java_for_mac2</a></p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>死ね！！　<span class="s1">SJIS</span>死ね！！！</p>
-<p class="p3"><span class="Apple-tab-span">	</span>というのを、launchctlを使って解決する方法があったので纏める。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>いままで全く気にしてなかったんだが、原因調べてみたいんだけど、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Macからは特になんも指定してないような感じ。JDKのほうのデフォルトの変化か何かなのかな？　諭してくれ神々よ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>すくなくとも日本語でっせ！　みたいな情報がJVM使う際にわたってると思うんだけど。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>それかinstall時かな？</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、結局文字化けして困るよね！</p>
+<p class="p3"><span class="Apple-tab-span">	</span>っつーのを、launchctlを使って解決する方法があったので纏める。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>環境は</p>
+<p class="p4"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202012-11-11%2015.02.41.png" alt="スクリーンショット 2012-11-11 15.02.41.png"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202012-11-11%2015.03.33.png" alt="スクリーンショット 2012-11-11 15.03.33.png"></p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>いままでの自分の対処法</b></p>
@@ -35,7 +47,7 @@
 <p class="p3"><span class="Apple-tab-span">	</span>対処方法として、今まで下記を使ってきた。</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>・ツールの起動時に</p>
-<p class="p4">export _JAVA_OPTIONS=-Dfile.encoding=UTF-8</p>
+<p class="p5">export _JAVA_OPTIONS=-Dfile.encoding=UTF-8</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>とかやる</p>
 <p class="p2"><br></p>
@@ -67,62 +79,62 @@
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>このStackoverflowの記事中で弄っている項目自体はかなり物騒な感じなのだけれど、</p>
 <p class="p3"><span class="Apple-tab-span">	</span>自分がやりたいのはencodeをUTF-8にするだけなので、</p>
-<p class="p4">setenv JAVA_TOOL_OPTIONS -Dfile.encoding=UTF-8</p>
+<p class="p5">setenv JAVA_TOOL_OPTIONS -Dfile.encoding=UTF-8</p>
 <p class="p3"><span class="Apple-tab-span">	</span>とだけ書き込んでマシン再起動。ログオフでもいいかもしれない。</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>で、たとえば</p>
-<p class="p4">java -h</p>
+<p class="p5">java -h</p>
 <p class="p3"><span class="Apple-tab-span">	</span>↓</p>
-<p class="p4">highvision:~ sassembla$ java -h</p>
-<p class="p4">Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8</p>
-<p class="p4">使用方法: java [-options] class [args...]</p>
-<p class="p4"><span class="Apple-converted-space">           </span>(クラスを実行する場合)</p>
-<p class="p4"><span class="Apple-converted-space">   </span>または<span class="Apple-converted-space">  </span>java [-options] -jar jarfile [args...]</p>
-<p class="p4"><span class="Apple-converted-space">           </span>(jarファイルを実行する場合)</p>
-<p class="p4">optionsには次のものがあります。</p>
-<p class="p4"><span class="Apple-converted-space">    </span>-d32<span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>使用可能な場合は32ビットのデータ・モデルを使用する</p>
-<p class="p4"><span class="Apple-converted-space">    </span>-d64<span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>使用可能な場合は64ビットのデータ・モデルを使用する</p>
-<p class="p4"><span class="Apple-converted-space">    </span>-server<span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>"server" VMを選択する場合</p>
-<p class="p4"><span class="Apple-converted-space">                  </span>デフォルトVMはserverです,</p>
-<p class="p4"><span class="Apple-converted-space">                  </span>これはサーバークラスのマシンで実行しているためです。</p>
-<p class="p5"><br></p>
-<p class="p5"><br></p>
-<p class="p4"><span class="Apple-converted-space">    </span>-cp &lt;class search path of directories and zip/jar files&gt;</p>
-<p class="p4"><span class="Apple-converted-space">    </span>-classpath &lt;class search path of directories and zip/jar files&gt;</p>
-<p class="p4"><span class="Apple-converted-space">                  </span>クラス・ファイルを検索するディレクトリ、</p>
-<p class="p4"><span class="Apple-converted-space">                  </span>JARアーカイブおよびZIPアーカイブの:で区切られたリストです。</p>
-<p class="p4"><span class="Apple-converted-space">    </span>-D&lt;name&gt;=&lt;value&gt;</p>
-<p class="p4"><span class="Apple-converted-space">                  </span>システム・プロパティを設定する</p>
-<p class="p4"><span class="Apple-converted-space">    </span>-verbose[:class|gc|jni]</p>
-<p class="p4"><span class="Apple-converted-space">                  </span>詳細な出力を行う</p>
-<p class="p4"><span class="Apple-converted-space">    </span>-version<span class="Apple-converted-space">      </span>製品バージョンを出力して終了する</p>
-<p class="p4"><span class="Apple-converted-space">    </span>-version:&lt;value&gt;</p>
-<p class="p4"><span class="Apple-converted-space">                  </span>指定したバージョンを実行に必須にする</p>
-<p class="p4"><span class="Apple-converted-space">    </span>-showversion<span class="Apple-converted-space">  </span>製品バージョンを出力して続行する</p>
-<p class="p4"><span class="Apple-converted-space">    </span>-jre-restrict-search | -no-jre-restrict-search</p>
-<p class="p4"><span class="Apple-converted-space">                  </span>ユーザーのプライベートJREをバージョン検索に含める/除外する</p>
-<p class="p4"><span class="Apple-converted-space">    </span>-? -help<span class="Apple-converted-space">      </span>このヘルプ・メッセージを出力する</p>
-<p class="p4"><span class="Apple-converted-space">    </span>-X<span class="Apple-converted-space">            </span>非標準オプションに関するヘルプを出力する</p>
-<p class="p4"><span class="Apple-converted-space">    </span>-ea[:&lt;packagename&gt;...|:&lt;classname&gt;]</p>
-<p class="p4"><span class="Apple-converted-space">    </span>-enableassertions[:&lt;packagename&gt;...|:&lt;classname&gt;]</p>
-<p class="p4"><span class="Apple-converted-space">                  </span>指定した粒度でアサーションを有効にする</p>
-<p class="p4"><span class="Apple-converted-space">    </span>-da[:&lt;packagename&gt;...|:&lt;classname&gt;]</p>
-<p class="p4"><span class="Apple-converted-space">    </span>-disableassertions[:&lt;packagename&gt;...|:&lt;classname&gt;]</p>
-<p class="p4"><span class="Apple-converted-space">                  </span>指定した粒度でアサーションを無効にする</p>
-<p class="p4"><span class="Apple-converted-space">    </span>-esa | -enablesystemassertions</p>
-<p class="p4"><span class="Apple-converted-space">                  </span>システム・アサーションを有効にする</p>
-<p class="p4"><span class="Apple-converted-space">    </span>-dsa | -disablesystemassertions</p>
-<p class="p4"><span class="Apple-converted-space">                  </span>システム・アサーションを無効にする</p>
-<p class="p4"><span class="Apple-converted-space">    </span>-agentlib:&lt;libname&gt;[=&lt;options&gt;]</p>
-<p class="p4"><span class="Apple-converted-space">                  </span>ネイティブ・エージェント・ライブラリ&lt;libname&gt;をロードする。例: -agentlib:hprof</p>
-<p class="p4"><span class="Apple-converted-space">                  </span>-agentlib:jdwp=helpと-agentlib:hprof=helpも参照</p>
-<p class="p4"><span class="Apple-converted-space">    </span>-agentpath:&lt;pathname&gt;[=&lt;options&gt;]</p>
-<p class="p4"><span class="Apple-converted-space">                  </span>フルパス名でネイティブ・エージェント・ライブラリをロードする</p>
-<p class="p4"><span class="Apple-converted-space">    </span>-javaagent:&lt;jarpath&gt;[=&lt;options&gt;]</p>
-<p class="p4"><span class="Apple-converted-space">                  </span>Javaプログラミング言語エージェントをロードする。java.lang.instrumentを参照</p>
-<p class="p4"><span class="Apple-converted-space">    </span>-splash:&lt;imagepath&gt;</p>
-<p class="p4"><span class="Apple-converted-space">                  </span>指定したイメージでスプラッシュ画面を表示する</p>
-<p class="p4">詳細はhttp://www.oracle.com/technetwork/java/javase/documentation/index.htmlを参照してください。</p>
+<p class="p5">highvision:~ sassembla$ java -h</p>
+<p class="p5">Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8</p>
+<p class="p5">使用方法: java [-options] class [args...]</p>
+<p class="p5"><span class="Apple-converted-space">           </span>(クラスを実行する場合)</p>
+<p class="p5"><span class="Apple-converted-space">   </span>または<span class="Apple-converted-space">  </span>java [-options] -jar jarfile [args...]</p>
+<p class="p5"><span class="Apple-converted-space">           </span>(jarファイルを実行する場合)</p>
+<p class="p5">optionsには次のものがあります。</p>
+<p class="p5"><span class="Apple-converted-space">    </span>-d32<span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>使用可能な場合は32ビットのデータ・モデルを使用する</p>
+<p class="p5"><span class="Apple-converted-space">    </span>-d64<span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>使用可能な場合は64ビットのデータ・モデルを使用する</p>
+<p class="p5"><span class="Apple-converted-space">    </span>-server<span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>"server" VMを選択する場合</p>
+<p class="p5"><span class="Apple-converted-space">                  </span>デフォルトVMはserverです,</p>
+<p class="p5"><span class="Apple-converted-space">                  </span>これはサーバークラスのマシンで実行しているためです。</p>
+<p class="p6"><br></p>
+<p class="p6"><br></p>
+<p class="p5"><span class="Apple-converted-space">    </span>-cp &lt;class search path of directories and zip/jar files&gt;</p>
+<p class="p5"><span class="Apple-converted-space">    </span>-classpath &lt;class search path of directories and zip/jar files&gt;</p>
+<p class="p5"><span class="Apple-converted-space">                  </span>クラス・ファイルを検索するディレクトリ、</p>
+<p class="p5"><span class="Apple-converted-space">                  </span>JARアーカイブおよびZIPアーカイブの:で区切られたリストです。</p>
+<p class="p5"><span class="Apple-converted-space">    </span>-D&lt;name&gt;=&lt;value&gt;</p>
+<p class="p5"><span class="Apple-converted-space">                  </span>システム・プロパティを設定する</p>
+<p class="p5"><span class="Apple-converted-space">    </span>-verbose[:class|gc|jni]</p>
+<p class="p5"><span class="Apple-converted-space">                  </span>詳細な出力を行う</p>
+<p class="p5"><span class="Apple-converted-space">    </span>-version<span class="Apple-converted-space">      </span>製品バージョンを出力して終了する</p>
+<p class="p5"><span class="Apple-converted-space">    </span>-version:&lt;value&gt;</p>
+<p class="p5"><span class="Apple-converted-space">                  </span>指定したバージョンを実行に必須にする</p>
+<p class="p5"><span class="Apple-converted-space">    </span>-showversion<span class="Apple-converted-space">  </span>製品バージョンを出力して続行する</p>
+<p class="p5"><span class="Apple-converted-space">    </span>-jre-restrict-search | -no-jre-restrict-search</p>
+<p class="p5"><span class="Apple-converted-space">                  </span>ユーザーのプライベートJREをバージョン検索に含める/除外する</p>
+<p class="p5"><span class="Apple-converted-space">    </span>-? -help<span class="Apple-converted-space">      </span>このヘルプ・メッセージを出力する</p>
+<p class="p5"><span class="Apple-converted-space">    </span>-X<span class="Apple-converted-space">            </span>非標準オプションに関するヘルプを出力する</p>
+<p class="p5"><span class="Apple-converted-space">    </span>-ea[:&lt;packagename&gt;...|:&lt;classname&gt;]</p>
+<p class="p5"><span class="Apple-converted-space">    </span>-enableassertions[:&lt;packagename&gt;...|:&lt;classname&gt;]</p>
+<p class="p5"><span class="Apple-converted-space">                  </span>指定した粒度でアサーションを有効にする</p>
+<p class="p5"><span class="Apple-converted-space">    </span>-da[:&lt;packagename&gt;...|:&lt;classname&gt;]</p>
+<p class="p5"><span class="Apple-converted-space">    </span>-disableassertions[:&lt;packagename&gt;...|:&lt;classname&gt;]</p>
+<p class="p5"><span class="Apple-converted-space">                  </span>指定した粒度でアサーションを無効にする</p>
+<p class="p5"><span class="Apple-converted-space">    </span>-esa | -enablesystemassertions</p>
+<p class="p5"><span class="Apple-converted-space">                  </span>システム・アサーションを有効にする</p>
+<p class="p5"><span class="Apple-converted-space">    </span>-dsa | -disablesystemassertions</p>
+<p class="p5"><span class="Apple-converted-space">                  </span>システム・アサーションを無効にする</p>
+<p class="p5"><span class="Apple-converted-space">    </span>-agentlib:&lt;libname&gt;[=&lt;options&gt;]</p>
+<p class="p5"><span class="Apple-converted-space">                  </span>ネイティブ・エージェント・ライブラリ&lt;libname&gt;をロードする。例: -agentlib:hprof</p>
+<p class="p5"><span class="Apple-converted-space">                  </span>-agentlib:jdwp=helpと-agentlib:hprof=helpも参照</p>
+<p class="p5"><span class="Apple-converted-space">    </span>-agentpath:&lt;pathname&gt;[=&lt;options&gt;]</p>
+<p class="p5"><span class="Apple-converted-space">                  </span>フルパス名でネイティブ・エージェント・ライブラリをロードする</p>
+<p class="p5"><span class="Apple-converted-space">    </span>-javaagent:&lt;jarpath&gt;[=&lt;options&gt;]</p>
+<p class="p5"><span class="Apple-converted-space">                  </span>Javaプログラミング言語エージェントをロードする。java.lang.instrumentを参照</p>
+<p class="p5"><span class="Apple-converted-space">    </span>-splash:&lt;imagepath&gt;</p>
+<p class="p5"><span class="Apple-converted-space">                  </span>指定したイメージでスプラッシュ画面を表示する</p>
+<p class="p5">詳細はhttp://www.oracle.com/technetwork/java/javase/documentation/index.htmlを参照してください。</p>
 <p class="p3"><span class="Apple-tab-span">	</span>みたいな感じになった。</p>
 <p class="p3"><span class="Apple-tab-span">	</span>ステキ。</p>
 <p class="p2"><br></p>
