@@ -10,19 +10,24 @@
     p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
     p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
     p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
-    span.s1 {font: 22.0px Helvetica}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #d6d6d6}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #fafafa}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; color: #454545; background-color: #fafafa; min-height: 18.0px}
+    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; color: #454545; background-color: #fafafa}
+    p.p8 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #fafafa; min-height: 18.0px}
+    span.s1 {font: 12.0px Helvetica}
     span.Apple-tab-span {white-space:pre}
   </style>
 </head>
 <body>
-<p class="p1"><b>さくら</b><span class="s1"><b>VP</b></span><b>Sで最低限セキュアな感じ + SFTP</b></p>
+<p class="p1"><b>さくらVPSで最低限セキュアな感じ + SFTP + Git + Jenkins</b></p>
 <p class="p2"><br></p>
 <p class="p3"><b>概要</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>VPSを追加していろいろラボ的な内容を試したくなってきたので、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ずっと放置してたVPS、隔離ラボ的な内容を試したくなってきたので、</p>
 <p class="p3"><span class="Apple-tab-span">	</span>纏めがてら実行してみます。</p>
-<p class="p2"><br></p>
 <p class="p2"><b></b><br></p>
-<p class="p3"><b>したごしらえ</b></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>セキュリティ的したごしらえ</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>下記を参考に。</p>
 <p class="p3"><span class="Apple-tab-span">	</span><a href="http://blog.myfinder.jp/2010/09/vpsssh.html">http://blog.myfinder.jp/2010/09/vpsssh.html</a></p>
 <p class="p2"><br></p>
@@ -30,6 +35,55 @@
 <p class="p3"><b>SFTP</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>下記を参考に。</p>
 <p class="p3"><span class="Apple-tab-span">	</span><a href="http://lamp-oita.blogspot.jp/2012/07/vpssftp.html">http://lamp-oita.blogspot.jp/2012/07/vpssftp.html</a></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>Git</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>入ってた。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>git version 1.7.1</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>Java</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>DLしてインストール</p>
+<p class="p3"><span class="Apple-tab-span">	</span><a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html">http://www.oracle.com/technetwork/java/javase/downloads/index.html</a></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>から落とした物を置いて、</p>
+<p class="p4">sudo rpm -Uvh jdk-7u9-linux-x64-1.rpm</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>NginxとJenkinsインストール</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>インストール参考</p>
+<p class="p3"><span class="Apple-tab-span">	</span><a href="http://blog.livedoor.jp/tattyamm/archives/4147336.html">http://blog.livedoor.jp/tattyamm/archives/4147336.html</a></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p5"><b>Jenkinsにセキュリティ設定</b></p>
+<p class="p5"><span class="Apple-tab-span">	</span>参考</p>
+<p class="p5"><span class="Apple-tab-span">	</span><a href="https://wiki.jenkins-ci.org/display/JA/Standard+Security+Setup">https://wiki.jenkins-ci.org/display/JA/Standard+Security+Setup</a></p>
+<p class="p6"><br></p>
+<p class="p7"><span class="Apple-tab-span">	</span>サインアップが終わったら、viewもサインアップも封印しておこうね！</p>
+<p class="p6"><br></p>
+<p class="p8"><br></p>
+<p class="p5"><b>JenkinsのGitプラグインを使う為にJenkinsのユーザーを変更</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>調整しておかないと、Jenkinsのデフォルトユーザーjenkinsではgitが実行できない。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="s1">code</span> 128のエラーが出たりする。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>/etc/sysconfig/jenkins の中の下記設定を弄る</p>
+<p class="p2"><br></p>
+<p class="p4">JENKINS_USER="username"</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>//持ち主調整</p>
+<p class="p4">sudo chown -R username /var/lib/jenkins</p>
+<p class="p4">sudo chown -R username /var/log/jenkins</p>
+<p class="p4">sudo chown -R username /var/cache/jenkins</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>//再起動</p>
+<p class="p4">service jenkins restart</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>Jenkinsのコンソールで日本語が化けるので調整</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>/etc/sysconfig/i18n を開いて、</p>
+<p class="p4">LANG="ja_JP.UTF-8"</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>とか書いておく。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3">動いた！　やったねたえちゃん！</p>
