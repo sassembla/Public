@@ -22,13 +22,14 @@
 <p class="p1"><b>Mac</b><span class="s1"><b>で</b></span><b>JDK6</b><span class="s1"><b>以降の</b></span><b>stdout</b><span class="s1"><b>が</b></span><b>SJIS</b><span class="s1"><b>になる現象の根源</b></span></p>
 <p class="p2"><br></p>
 <p class="p3"><b>概要</b></p>
-<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>てらださんに粘着して教えていただいたので、纏めておく。</p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>Tさんに粘着して教えていただいたので、纏めておく。</p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>Tさんすいませんでした。</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>参考</p>
 <p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://happygiraffe.net/blog/2009/09/24/java-platform-encoding/">http://happygiraffe.net/blog/2009/09/24/java-platform-encoding/</a></p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
-<p class="p3"><b>意訳：</b></p>
+<p class="p3"><b>参考の意訳</b></p>
 <p class="p3">不運にも、コマンドラインで<span class="s2">Java</span>を実行する際、<span class="s2">UTF-8</span>文字列<span class="s2">(U+00A9 COPYRIGHT SIGN[?])</span>を渡したものを<span class="s2">print</span>したら、二重にエンコードされてしまった。</p>
 <p class="p2"><br></p>
 <p class="p4"><span class="s3">とりあえず</span>-Dfile.encoding=UTF-8<span class="s3">で対処していたんだけど、</span></p>
@@ -47,7 +48,7 @@
 <p class="p3">このプロパティに関するドキュメントは、探してみたけど知る限りどこにも無いみたいだ。</p>
 <p class="p3">実際の挙動を知る為に、<span class="s2">JDK6</span>のソースコードを読むしか無い。</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="s2">main</span>関数は<span class="s2"><b>java.c</b></span>にあった。実際に使われている<span class="s2">JavaMain()</span>関数の中身をみると、</p>
+<p class="p3"><span class="s2">main</span>関数は<span class="s2">java.c</span>にあった。実際に使われている<span class="s2">JavaMain()</span>関数の中身をみると、</p>
 <p class="p3"><span class="s2">NewPlatformStringArray()</span>関数が定義されていて、コマンドラインからの入力行ごとに実行されている。</p>
 <p class="p4"><span class="s3">その中では、</span> new String(byte[], encoding)<span class="s3">が呼ばれている。</span></p>
 <p class="p4"><span class="s3">さらにその中で呼ばれている</span> getPlatformEncoding() <span class="s3">関数で、</span></p>
@@ -81,20 +82,29 @@
 <p class="p3">で、このパラメータは<span class="s2">override</span>できる。</p>
 <p class="p4">$ LANG= java -Dsun.jnu.encoding=UTF-8 -Dfile.encoding=UTF-8</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="s2">:</span>訳終わり</p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>訳終わり</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>という訳で</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>初期エンコーディングの可能性は、この<span class="s2"> java_props_md.c </span>を見れば判る、と。</p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>初期エンコーディングの可能性は、この<span class="s2"> java_props_md.c </span>らへんを見れば判る、と。</p>
+<p class="p4"><span class="Apple-tab-span">	</span><a href="http://hg.openjdk.java.net/jdk6/jdk6/jdk/file/536cbf2d9d0e/src/solaris/native/java/lang/java_props_md.c">http://hg.openjdk.java.net/jdk6/jdk6/jdk/file/536cbf2d9d0e/src/solaris/native/java/lang/java_props_md.c</a></p>
 <p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>GetJavaProperties <span class="s3">メソッドの所には、</span></p>
 <p class="p4"><span class="Apple-tab-span">	</span>"Determine the language, country, variant, and encoding from the host"</p>
-<p class="p3"><span class="Apple-tab-span">	</span>って書いてある。これが元か。<span class="s2">JDK5</span>との比較しなきゃだけど、なぜこんな仕様になったんだろう。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>インストーラの仕事サボった？</p>
 <p class="p2"><br></p>
-<p class="p4"><span class="Apple-tab-span">	</span>sun.jnu.encoding<span class="s3">の候補は、</span></p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>って書いてある。これが元か。<span class="s2">JDK5</span>との比較しなきゃだけど、なぜこんな仕様になったんだろう。</p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>インストーラの仕事サボった？</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>上からファイル追っていくと、<span class="s2">sun.jnu.encoding</span>の候補は、環境とか<span class="s2">locale</span>とかによってころころと変わっていく。</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="s3">最終的に</span> sun.jnu.encoding <span class="s3">は</span> std_encoding <span class="s3">の値を代入されるのだけれど、</span></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p4"><span class="Apple-tab-span">	</span>std_encoding <span class="s3">の値が下記のように変わる。</span></p>
+<p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p4">ISO8859-15<span class="Apple-tab-span">	</span><span class="s4">←</span><span class="s3">これは</span>US-ASCII</p>
-<p class="p4">nl_langinfo(CODESET)<span class="Apple-tab-span">	</span><span class="s4">←</span><span class="s3">こいつは</span> langinfo.h <span class="s3">で定義されてる。</span> CODESET<span class="s3">は環境によって異なる。</span></p>
+<p class="p2"><br></p>
+<p class="p4">nl_langinfo(CODESET)<span class="Apple-tab-span">	</span><span class="s4">←</span><span class="s3">こいつは</span> langinfo.h <span class="s3">/</span> langinfo.c <span class="s3">で定義されてる。</span> CODESET<span class="s3">は環境によって異なる。</span></p>
 <p class="p4"><span class="Apple-tab-span">	</span>#ifdef __linux__</p>
 <p class="p2"><br></p>
 <p class="p4"><span class="Apple-tab-span">	</span>#define CODESET _NL_CTYPE_CODESET_NAME</p>
@@ -106,25 +116,37 @@
 <p class="p2"><br></p>
 <p class="p4"><span class="Apple-tab-span">	</span>#endif</p>
 <p class="p2"><br></p>
+<p class="p2"><br></p>
 <p class="p4">ISO646-US<span class="Apple-tab-span">	</span><span class="s4">←</span><span class="s3">下記</span>URL<span class="s3">に色々載ってる。</span></p>
-<p class="p4"><span class="Apple-tab-span">	</span>http://www.asahi-net.or.jp/~yw3t-trns/code/iso646.html</p>
+<p class="p4"><span class="Apple-tab-span">	</span><a href="http://www.asahi-net.or.jp/~yw3t-trns/code/iso646.html">http://www.asahi-net.or.jp/~yw3t-trns/code/iso646.html</a></p>
+<p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p4">ISO8859-1<span class="Apple-tab-span">	</span><span class="s4">←</span>Latin-1</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
 <p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>さらに各環境の場合、下記がセットされる。</p>
 <p class="p2"><br></p>
+<p class="p4">//en_UK <span class="s3">だったら</span></p>
 <p class="p4">ISO8859-1</p>
-<p class="p4">EUC-JP-LINUX</p>
+<p class="p2"><br></p>
+<p class="p4">//linux<span class="s3">だったら系</span></p>
+<p class="p4">EUC-JP-LINUX<span class="Apple-converted-space"> </span></p>
 <p class="p4">eucJP-open</p>
 <p class="p4">Big5_Solaris</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>で！</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>で！</p>
+<p class="p3"><span class="Apple-tab-span">	</span>langinfo.c を探してみると、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>すいませんよくわかりません。どこに有るんや。</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>続く。</p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>下記適当に見つけてきた <span class="s2">langinfo.c </span>だと、<span class="s2">locale</span>が<span class="s2">jp</span>だったら<span class="s2">SJIS</span>返してる。</p>
+<p class="p4"><span class="Apple-tab-span">	</span><a href="http://www.cl.cam.ac.uk/~mgk25/ucs/langinfo.c">http://www.cl.cam.ac.uk/~mgk25/ucs/langinfo.c</a></p>
 <p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3">続く。</p>
 <p class="p2"><br></p>
 </body>
 </html>
