@@ -1,0 +1,116 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1187.34">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #d6d6d6}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>UnityのDeviceビルドをSimulatorビルドに換装する</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>適宜Simulator版とDevice版を動かし分けたい。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>具体的に言うと、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・Simu版をサーバで動かしてCI</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・そこからDevice版を実機転送で動かして遠隔実機CI</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>などがしたい。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ので、片方からもう一方が作れないか試してみた。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>特にDevice版からSimulator版、その後またDeviceに戻す、というのをやってみた感じ。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>差異</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>DeviceビルドとSImulatorビルドの差異は、下記のフォルダにのみある。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Libraries/</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Assembly-CSharp-firstpass.dll.s</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Assembly-CSharp.dll.s</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Assembly-UnityScript-firstpass.dll.s</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Assembly-UnityScript.dll.s</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>mscorlib.dll.s</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Data/Managed/</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Assembly-CSharp-firstpass.dll.mdb</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Assembly-CSharp.dll.mdb</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Assembly-UnityScript-firstpass.dll.mdb</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Assembly-UnityScript.dll.mdb</p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>PROJECT.xcodeproj/</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>project.pbxproj</p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ここの特定の設定項目を変える必要がある。(ビルド自体にも影響)</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>Libraries/以下</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>フォルダごと入れ替える事で解決できる。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>Data/Managed/以下</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>フォルダごと入れ替えることで解決。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>実はアプリが起動するまで全く触られないらしく、無くても動く。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>無い場合は起動後に落ちる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>その際のエラーは</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Failed to load AOT module 'Assembly-CSharp-firstpass' while running in aot-only mode.</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>PROJECT.xcodeproj/の内容変更</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>を変更する前に、タブでDevice/Simulatorとかが選べるようにする。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>プロジェクトアイコン &gt; Build Settings &gt;</p>
+<p class="p3"><span class="Apple-tab-span">	</span>SupporterPlatform で、iOSを選択。</p>
+<p class="p4"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202012-12-01%2018.38.37.png" alt="スクリーンショット 2012-12-01 18.38.37.png"></p>
+<p class="p2"><br></p>
+<p class="p4"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202012-12-01%2018.38.42.png" alt="スクリーンショット 2012-12-01 18.38.42.png"></p>
+<p class="p3"><span class="Apple-tab-span">	</span>独自に文字書いてあるのを変更。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Scheme から、Simulatorが選べるようになるはず。</p>
+<p class="p4"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202012-12-01%2018.41.01.png" alt="スクリーンショット 2012-12-01 18.41.01.png"></p>
+<p class="p3"><span class="Apple-tab-span">	</span>加えて、一番大事な、</p>
+<p class="p2"><br></p>
+<p class="p5">OTHER_CFLAGS = <b>-mno-thumb</b></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>を、</p>
+<p class="p2"><br></p>
+<p class="p5">OTHER_CFLAGS = <b>-DTARGET_IPHONE_SIMULATOR=1</b></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>に変える。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>逆</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>(SimulatorをDeviceにするのではなく、</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Deviceを一度Simulator化したものを再度Device化する話。)</b></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span></b>LibraryとDataを変更、</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p5">OTHER_CFLAGS = <b>-DTARGET_IPHONE_SIMULATOR=1</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>を、</p>
+<p class="p2"><br></p>
+<p class="p5">OTHER_CFLAGS = <b>-mno-thumb<span class="Apple-converted-space"> </span></b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>に戻す。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>加えて、Debug Informationも弄る必要が有る</p>
+<p class="p2"><br></p>
+<p class="p5">Debug Information Format = <b>DWARF with dSYM File</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>になっているのを、</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p5">Debug Information Format = <b>DWARF<span class="Apple-converted-space"> </span></b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>に変えるとOK。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>最後の Debug Information Format 設定は、はじめから設定してしまっても良いかもしれない。</p>
+<p class="p2"><br></p>
+</body>
+</html>
