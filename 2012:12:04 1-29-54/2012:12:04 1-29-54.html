@@ -1,0 +1,252 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1187.34">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px Menlo; color: #78492a; background-color: #ebebeb}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px Menlo; color: #bb2ca2; background-color: #ebebeb}
+    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px Menlo; background-color: #ebebeb}
+    p.p8 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px Menlo; background-color: #ebebeb; min-height: 13.0px}
+    p.p9 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px Menlo; color: #d12f1b; background-color: #ebebeb}
+    p.p10 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px Menlo; color: #31595d; background-color: #ebebeb}
+    p.p11 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px Menlo}
+    p.p12 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px 'Hiragino Kaku Gothic ProN'}
+    p.p13 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px 'Hiragino Kaku Gothic ProN'; min-height: 17.0px}
+    p.p14 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px Menlo; color: #3d1d81; background-color: #ebebeb}
+    p.p15 {margin: 0.0px 0.0px 0.0px 0.0px; font: 17.0px Menlo; background-color: #ebebeb}
+    p.p16 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px Menlo; color: #703daa; background-color: #ebebeb}
+    p.p17 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px Menlo; min-height: 13.0px}
+    p.p18 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #ebebeb}
+    span.s1 {font: 22.0px Helvetica}
+    span.s2 {font: 12.0px Helvetica}
+    span.s3 {color: #000000}
+    span.s4 {color: #d12f1b}
+    span.s5 {color: #bb2ca2}
+    span.s6 {color: #272ad8}
+    span.s7 {color: #78492a}
+    span.s8 {color: #703daa}
+    span.s9 {color: #3d1d81}
+    span.s10 {color: #4f8187}
+    span.s11 {font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    span.s12 {background-color: #ebebeb}
+    span.s13 {font: 11.0px 'Hiragino Kaku Gothic ProN'}
+    span.s14 {font: 11.0px Helvetica}
+    span.s15 {color: #31595d}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><span class="s1"><b>Unity</b></span><b>の</b><span class="s1"><b>iOS</b></span><b>向けビルドを別アプリに含んで起動する</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>最近Unityで遊んでるのだけど、ちょっと思う所あってゴニョゴニョと弄ってみてた。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>今回試したのは、iOS向けにビルドしたUnityのアプリパッケージを<b>全く弄らず</b>、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>Xcodeで自前作成したアプリケーションから起動してみようぜ</b>、というもの。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>追求したい利点としては</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・端末へのインストールをもうちょい楽に自動化したい</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>いろいろとまあ、なんだ、そのままやると大変。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・<span class="s2">i</span>OSのネイティブアプリケーション部分のバージョン管理がしやすくなる</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><b>本命。</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>iOSのプロジェクト本体と、まるっと生成されるUnityでのアプリケーション、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>従来ならUnityに完全包含されてしまう、iOS側の設定がとっても楽になる。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>などなので、決して、非プロ版で起動スプラッシュ外そうぜとかそういうノリでやっている物ではない。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>、、プロ版は、、、いいぞ、、、！！</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>完成系のイメージ</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>自分で適当に制作したアプリケーションに、任意のUnityのプロジェクト一式を読み込んで、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>任意のタイミング、コード上のポイントから、Unity起動~終了、などが扱えるようになる。</p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b>手順</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>①UnityでiOS用にプロジェクトをビルドしておく。プロ版とか、そうでない版のプロジェクトを用意</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>②所変わって、XcodeでiOS用の新規プロジェクトを用意、ここではSampleProjectって名前にする</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ちなみに<b>ARCは使用不可</b>。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Unityが吐き出すApplicationがバリバリにAutoreleasePoolとか使ってるので。</p>
+<p class="p4"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202012-12-04%202.13.22.png" alt="スクリーンショット 2012-12-04 2.13.22.png"></p>
+<p class="p3"><span class="Apple-tab-span">	</span>③SampleProjectのprefixに設定を追加する<span class="Apple-converted-space"> </span></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>作成したアプリケーションのXcode上でのグループ</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span> SampleProject/Supporting Files/<b>SampleProject-Prefix.pch</b> 箇所に下記を足す。</p>
+<p class="p2"><br></p>
+<p class="p5">#ifdef __cplusplus</p>
+<p class="p6">extern<span class="s3"> </span><span class="s4">"C"</span><span class="s3"> {</span></p>
+<p class="p5">#endif</p>
+<p class="p7"><span class="Apple-converted-space">    </span><span class="s5">void</span> UnitySendMessage(<span class="s5">const</span> <span class="s5">char</span>* obj, <span class="s5">const</span> <span class="s5">char</span>* method, <span class="s5">const</span> <span class="s5">char</span>* msg);</p>
+<p class="p5">#ifdef __cplusplus</p>
+<p class="p7">}</p>
+<p class="p5">#endif</p>
+<p class="p8"><br></p>
+<p class="p5">#define printf_console printf</p>
+<p class="p8"><br></p>
+<p class="p5">#define IPHONE_TRAMPOLINE <span class="s6">1</span></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>こいつは、Unityのアプリケーションを足した際、主にprintf_consoleの為に使う。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>UnitySendMessageも大事だけど。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>④下記のframeworkを追加</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>SystemConfiguration.framework</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>CoreLocation.framework</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>MediaPlayer.framework</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>UIKit.framework</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>OpenGLES.framework</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>QuartzCore.framework</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>OpenAL.framework</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>libiconv.2.dylib</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>CFNetwork.framework</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>AudioToolbox.framework</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>iAd.framework</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>CoreMedia.framework</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>CoreVideo.framework</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>AVFoundation.framework</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>CoreGraphics.framework</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>CoreMotion.framework</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>GameKit.framework</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>すべてUnityに含まれているもの。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>⑤UnityをBootするクラス UnityBooter を作成する</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>NSObjectを拡張してクラスを一つ作る。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>起動部分でC++を使うため、Obj-C++、拡張子は.mm にする。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>この後で、Unityのプロジェクト一式を含むようにするため、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>このクラスの初期化メソッドからUnityを起動できるようにしむける。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>下記が UnityBooter.mm の内容。</p>
+<p class="p2"><br></p>
+<p class="p9"><span class="s7">#import </span>"UnityBooter.h"</p>
+<p class="p8"><br></p>
+<p class="p9"><span class="s7">#import </span>"AppController.h"</p>
+<p class="p9"><span class="s7">#import </span>"RegisterClasses.h"</p>
+<p class="p9"><span class="s7">#import </span>"RegisterMonoModules.h"</p>
+<p class="p8"><br></p>
+<p class="p7"><span class="s5">static</span> <span class="s5">const</span> <span class="s5">int</span> constsection = <span class="s6">0</span>;</p>
+<p class="p7"><span class="s5">bool</span> UnityParseCommandLine(<span class="s5">int</span> argc, <span class="s5">char</span> *argv[]);</p>
+<p class="p8"><br></p>
+<p class="p8"><br></p>
+<p class="p6">@implementation<span class="s3"> UnityBooter</span></p>
+<p class="p7">- (<span class="s5">id</span>) initWithUnity:(<span class="s8">UIApplication</span> * )application withLaunchOptions:(<span class="s8">NSDictionary</span> * )launchOptions {</p>
+<p class="p7"><span class="Apple-converted-space">    </span><span class="s5">if</span> (<span class="s5">self</span> = [<span class="s5">super</span> <span class="s9">init</span>]) {</p>
+<p class="p10"><span class="s3"><span class="Apple-converted-space">        </span></span>RegisterMonoModules<span class="s3">();</span></p>
+<p class="p8"><span class="Apple-converted-space">        </span></p>
+<p class="p7"><span class="Apple-converted-space">        </span><span class="s10">AppController</span> * unityApp = [[<span class="s10">AppController</span> <span class="s9">alloc</span>]<span class="s9">init</span>];</p>
+<p class="p7"><span class="Apple-converted-space">        </span>[unityApp <span class="s9">application</span>:application <span class="s9">didFinishLaunchingWithOptions</span>:launchOptions];</p>
+<p class="p7"><span class="Apple-converted-space">    </span>}</p>
+<p class="p6"><span class="s3"><span class="Apple-converted-space">    </span></span>return<span class="s3"> </span>self<span class="s3">;</span></p>
+<p class="p7">}</p>
+<p class="p6">@end</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>この時点で、下のようなプロジェクトの構成になっているはず。</p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p4"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202012-12-04%202.12.43.png" alt="スクリーンショット 2012-12-04 2.12.43.png"></p>
+<p class="p11"><span class="s11"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>で、</span><span class="s12">initWithUnity</span> <span class="s13">メソッドを</span>AppDelegate<span class="s13">から適切な引数で呼ぶようにする。</span></p>
+<p class="p12"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>UnityBoote<span class="s14">r</span>.hにも書いておこう。</p>
+<p class="p13"><br></p>
+<p class="p7">- (<span class="s5">BOOL</span>)application:(<span class="s8">UIApplication</span> *)application didFinishLaunchingWithOptions:(<span class="s8">NSDictionary</span> *)launchOptions</p>
+<p class="p7">{</p>
+<p class="p14"><span class="s3"><span class="Apple-converted-space">    </span></span><span class="s5">self</span><span class="s3">.</span><span class="s10">window</span><span class="s3"> = [[[</span><span class="s8">UIWindow</span><span class="s3"> </span>alloc<span class="s3">] </span>initWithFrame<span class="s3">:[[</span><span class="s8">UIScreen</span><span class="s3"> </span>mainScreen<span class="s3">] </span>bounds<span class="s3">]] </span>autorelease<span class="s3">];</span></p>
+<p class="p8"><span class="Apple-converted-space">    </span></p>
+<p class="p15"><span class="Apple-converted-space">  </span><span class="s10">UnityBooter</span> * booter = [[<span class="s10">UnityBooter</span> <span class="s9">alloc</span>]<span class="s15">initWithUnity</span>:application <span class="s15">withLaunchOptions</span>:launchOptions];</p>
+<p class="p8"><span class="Apple-converted-space">    </span></p>
+<p class="p16"><span class="s3"><span class="Apple-converted-space">    </span></span><span class="s5">self</span><span class="s3">.</span><span class="s10">window</span><span class="s3">.</span>backgroundColor<span class="s3"> = [</span>UIColor<span class="s3"> </span><span class="s9">whiteColor</span><span class="s3">];</span></p>
+<p class="p14"><span class="s3"><span class="Apple-converted-space">    </span>[</span><span class="s5">self</span><span class="s3">.</span><span class="s10">window</span><span class="s3"> </span>makeKeyAndVisible<span class="s3">];</span></p>
+<p class="p6"><span class="s3"><span class="Apple-converted-space">    </span></span>return<span class="s3"> </span>YES<span class="s3">;</span></p>
+<p class="p7">}</p>
+<p class="p17"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>⑥UnityでiOS用 Device用ビルドを、自作プロジェクトに放り込む</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ほんとにそのまま放り込む。</p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ここでは、Unityから吐き出したiOSアプリ用プロジェクトを、iOSUnityという名前にした。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>(Device用に設定したため、Deviceでしか動かないが、過去の記事を参考に何かすると、Simulatorでももちろん動かせる。)</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://sassembla.github.com/Public/2012:12:01%2012-03-18/2012:12:01%2012-03-18.html">http://sassembla.github.com/Public/2012:12:01%2012-03-18/2012:12:01%2012-03-18.html</a></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>一度SampleApp フォルダに放り込んだ後、XcodeからSampleProjectへとaddする。</p>
+<p class="p4"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202012-12-04%202.14.32.png" alt="スクリーンショット 2012-12-04 2.14.32.png"></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>そのままプロジェクトに含んだ結果。</p>
+<p class="p4"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202012-12-04%202.16.32.png" alt="スクリーンショット 2012-12-04 2.16.32.png"></p>
+<p class="p3"><span class="Apple-tab-span">	</span>⑦Unityから持ち込んだ main.mmファイルを、remove reference する</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Xcodeグループ内、iOSUnity/Classes/main.mm の参照を消す。</p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>mainが２つあると、そもビルドが通らないので、referenceのみでいいからremoveする必要がある。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ここだけはどうしようも無かった。 ファイルを捨てる必要は無い。</p>
+<p class="p4"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202012-12-04%202.26.17.png" alt="スクリーンショット 2012-12-04 2.26.17.png"></p>
+<p class="p3"><span class="Apple-tab-span">	</span>⑧C++ Standard Library の設定を、Defaultに変更</p>
+<p class="p4"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202012-12-04%202.33.43.png" alt="スクリーンショット 2012-12-04 2.33.43.png"></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Compiler Default に変更する。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="s2"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202012-12-04%202.33.51.png" alt="スクリーンショット 2012-12-04 2.33.51.png"></span></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>⑨Valid Architectures を、armv7 armv7s から、armv7 のみに変更する</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Unityで使用しているライブラリが、armv7sに対応してないので、armv7のみをValidなアーキテクチャとして設定する。　</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>(Unityは、ターゲットがiOS6のみ、とか設定したら、7s対応したVersionのライブラリを吐くのかもしれない。未確認。)</p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p4"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202012-12-04%202.51.05.png" alt="スクリーンショット 2012-12-04 2.51.05.png"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202012-12-04%202.56.23.png" alt="スクリーンショット 2012-12-04 2.56.23.png"></p>
+<p class="p3"><span class="Apple-tab-span">	</span>⑨Build Active Architecuture Only に No と入力</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ビルド時にarmv7のみを設定するようにしたため、この部分がNoでないと矛盾してエラーが出る。</p>
+<p class="p4"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202012-12-04%203.20.33.png" alt="スクリーンショット 2012-12-04 3.20.33.png"></p>
+<p class="p3"><span class="Apple-tab-span">	</span>⑩Build Phases に、UnityのDataをアプリケーションビルド時に内部にコピーするスクリプトを追加する</p>
+<p class="p3"><span class="s2"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202012-12-04%202.58.40.png" alt="スクリーンショット 2012-12-04 2.58.40.png"></span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p4"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202012-12-04%202.58.46.png" alt="スクリーンショット 2012-12-04 2.58.46.png"></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>位置 = 実行順序をドラッグして調整</p>
+<p class="p4"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202012-12-04%202.58.53.png" alt="スクリーンショット 2012-12-04 2.58.53.png"></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>内容として、下記を入力。太字部分は<b>Unityのプロジェクト名</b>。</p>
+<p class="p2"><br></p>
+<p class="p18">rm -rf "$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Data"</p>
+<p class="p18">cp -Rf "$PROJECT_DIR/<b>iOSUnityApp</b>/Data" "$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Data"</p>
+<p class="p18">if [ "$PLATFORM_NAME" == "iphonesimulator" ]</p>
+<p class="p18">then cp -f "$PROJECT_DIR/<b>iOSUnityApp</b>"/*.png "$TARGET_BUILD_DIR/$PRODUCT_NAME.app/"</p>
+<p class="p18"><span class="Apple-converted-space">                          </span>fi</p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>これで、iOSUnityApp内に含まれるDataフォルダが、アプリケーションビルド時に、.app内に含まれるようになる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>これをやらないと、Unityの起動後、シーンデータなどが読み込めずに落ちる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>おまけ①：非プロ版の場合、Applicationに自前で含まれている Supporting Files 下のスプラッシュを消す必要がある</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Unityのプロジェクトに含まれているものが使われないと、落ちる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>素晴らしいフェイルセーフ。異論は無い。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>アプリケーションの中の SampleProject/Supporting Files の中のpngを削除。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>これで、自動的にUnityプロジェクトに含まれるものが使われる。</p>
+<p class="p2"><br></p>
+<p class="p4"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202012-12-04%203.15.42.png" alt="スクリーンショット 2012-12-04 3.15.42.png"></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>おまけ②：iOS6が入った実機にインストールする場合、一度Xcodeを再起動しないと、Valid Architectures の設定が読み込み直されない。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Xcode終了して再度プロジェクト開けばOK。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>以上で、ビルドは通り、実機を繋げば実行できる、、ハズ。</b></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>参考までに、Unityのプロジェクトを<b>含まない外装</b>一式をgithubに置いておいた。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/UnityFreeLocation_SampleProject">https://github.com/sassembla/UnityFreeLocation_SampleProject</a></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>起動からボタンを表示するViewをつけて、ボタンが押されたらUnity起動、という遷移のスクリーンショット</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>めざめたおっさんが走り出す。 時間が戻ってるのはすいません、キャプチャミスった。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>非プロ版だと、ちゃんとUnity起動時に powered by Unity のSplashが出る。</p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p4"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202012-12-04%203.58.48.png" alt="スクリーンショット 2012-12-04 3.58.48.png"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202012-12-04%203.58.56.png" alt="スクリーンショット 2012-12-04 3.58.56.png"></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ツッコミ等あれば、<a href="https://twitter.com">@toru_inoue</a>まで。</p>
+<p class="p2"><br></p>
+</body>
+</html>
