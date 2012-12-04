@@ -140,7 +140,7 @@
 <p class="p8"><br></p>
 <p class="p8"><br></p>
 <p class="p6">@implementation<span class="s3"> UnityBooter</span></p>
-<p class="p7">- (<span class="s5">id</span>) initWithUnity:(<span class="s8">UIApplication</span> * )application withLaunchOptions:(<span class="s8">NSDictionary</span> * )launchOptions {</p>
+<p class="p7">- (<span class="s5">id</span>) initWithApp:(<span class="s8">UIApplication</span> * )application withLaunchOptions:(<span class="s8">NSDictionary</span> * )launchOptions {</p>
 <p class="p7"><span class="Apple-converted-space">    </span><span class="s5">if</span> (<span class="s5">self</span> = [<span class="s5">super</span> <span class="s9">init</span>]) {</p>
 <p class="p10"><span class="s3"><span class="Apple-converted-space">        </span></span>RegisterMonoModules<span class="s3">();</span></p>
 <p class="p8"><span class="Apple-converted-space">        </span></p>
@@ -154,14 +154,14 @@
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>この時点で、下のようなプロジェクトの構成になっているはず。</p>
 <p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
 <p class="p4"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202012-12-04%202.12.43.png" alt="スクリーンショット 2012-12-04 2.12.43.png"></p>
-<p class="p11"><span class="s11"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>で、</span><span class="s12">initWithUnity</span> <span class="s13">メソッドを</span>AppDelegate<span class="s13">から適切な引数で呼ぶようにする。</span></p>
+<p class="p11"><span class="s11"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>で、</span><span class="s12">initWithApp</span> <span class="s13">メソッドを</span>AppDelegate<span class="s13">から適切な引数で呼ぶようにする。</span></p>
 <p class="p12"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>UnityBoote<span class="s14">r</span>.hにも書いておこう。</p>
 <p class="p13"><br></p>
 <p class="p7">- (<span class="s5">BOOL</span>)application:(<span class="s8">UIApplication</span> *)application didFinishLaunchingWithOptions:(<span class="s8">NSDictionary</span> *)launchOptions</p>
 <p class="p7">{</p>
 <p class="p14"><span class="s3"><span class="Apple-converted-space">    </span></span><span class="s5">self</span><span class="s3">.</span><span class="s10">window</span><span class="s3"> = [[[</span><span class="s8">UIWindow</span><span class="s3"> </span>alloc<span class="s3">] </span>initWithFrame<span class="s3">:[[</span><span class="s8">UIScreen</span><span class="s3"> </span>mainScreen<span class="s3">] </span>bounds<span class="s3">]] </span>autorelease<span class="s3">];</span></p>
 <p class="p8"><span class="Apple-converted-space">    </span></p>
-<p class="p15"><span class="Apple-converted-space">  </span><span class="s10">UnityBooter</span> * booter = [[<span class="s10">UnityBooter</span> <span class="s9">alloc</span>]<span class="s15">initWithUnity</span>:application <span class="s15">withLaunchOptions</span>:launchOptions];</p>
+<p class="p15"><span class="Apple-converted-space">  </span><span class="s10">UnityBooter</span> * booter = [[<span class="s10">UnityBooter</span> <span class="s9">alloc</span>]<span class="s15">initWithApp</span>:application <span class="s15">withLaunchOptions</span>:launchOptions];</p>
 <p class="p8"><span class="Apple-converted-space">    </span></p>
 <p class="p16"><span class="s3"><span class="Apple-converted-space">    </span></span><span class="s5">self</span><span class="s3">.</span><span class="s10">window</span><span class="s3">.</span>backgroundColor<span class="s3"> = [</span>UIColor<span class="s3"> </span><span class="s9">whiteColor</span><span class="s3">];</span></p>
 <p class="p14"><span class="s3"><span class="Apple-converted-space">    </span>[</span><span class="s5">self</span><span class="s3">.</span><span class="s10">window</span><span class="s3"> </span>makeKeyAndVisible<span class="s3">];</span></p>
@@ -185,7 +185,7 @@
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>そのままプロジェクトに含んだ結果。</p>
 <p class="p4"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202012-12-04%202.16.32.png" alt="スクリーンショット 2012-12-04 2.16.32.png"></p>
 <p class="p3"><span class="Apple-tab-span">	</span>⑦Unityから持ち込んだ main.mmファイルを、remove reference する</p>
-<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Xcodeグループ内、iOSUnity/Classes/main.mm の参照を消す。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Xcodeグループ内、iOSUnityApp/Classes/main.mm の参照を消す。</p>
 <p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
 <p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>mainが２つあると、そもビルドが通らないので、referenceのみでいいからremoveする必要がある。</p>
@@ -198,7 +198,7 @@
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>⑨Valid Architectures を、armv7 armv7s から、armv7 のみに変更する</p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Unityで使用しているライブラリが、armv7sに対応してないので、armv7のみをValidなアーキテクチャとして設定する。　</p>
-<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>(Unityは、ターゲットがiOS6のみ、とか設定したら、7s対応したVersionのライブラリを吐くのかもしれない。未確認。)</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>(Unityは、ターゲットがarmv7s対象のみ、とか設定したら、7s対応したVersionのライブラリを吐くのかもしれない。未確認。)</p>
 <p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
 <p class="p4"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202012-12-04%202.51.05.png" alt="スクリーンショット 2012-12-04 2.51.05.png"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202012-12-04%202.56.23.png" alt="スクリーンショット 2012-12-04 2.56.23.png"></p>
 <p class="p3"><span class="Apple-tab-span">	</span>⑨Build Active Architecuture Only に No と入力</p>
@@ -229,7 +229,7 @@
 <p class="p2"><br></p>
 <p class="p4"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202012-12-04%203.15.42.png" alt="スクリーンショット 2012-12-04 3.15.42.png"></p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>おまけ②：iOS6が入った実機にインストールする場合、一度Xcodeを再起動しないと、Valid Architectures の設定が読み込み直されない。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>おまけ②：実機にインストールする場合、一度Xcodeを再起動しないと、Valid Architectures の設定が読み込み直されない。</p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Xcode終了して再度プロジェクト開けばOK。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
