@@ -1,0 +1,131 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1187.34">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    span.s1 {font: 12.0px Helvetica}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>クリップボードの内容を保存するアプリをいろいろ試してみた</b></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>⌘ + c でコピーした項目を、リスト上に保存しておけるアプリを探していた。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>事の発端は、ClipMenuというアプリケーションの開発が停滞しているっぽくて、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>バグレポとか結構前にやったんだけど音沙汰ないし、そろそろ後継探すべ、、ってことで。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>Candidates<span class="Apple-tab-span">	</span>候補アプリ</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ゆるっとTwで聞いてみたけど、そもどんなものを探しているのか判りづらかったと思うし、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>自分で探す + しりあいづてに聞いてみるなどした。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>Flycut</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>じぶんで見つけたもの。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>オープンソースで、Github上にコードがあった。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>特定キーショートカットを押している間だけ、過去にcしたものが表示されて、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>左右でどれかを選んで離した瞬間ペースト、という</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>「おまえ、、、これ、、、」</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>的なUIを体験できた。スクリーンショットも取れない。。。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>無し。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>唯一凄いなーと思ったのが、秘匿フィールド(文字が*とかに変わるフィールド)の内容は記録しない、という点。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>UI的に恐ろしく使いづらいので、コミットする気にでもならないと使わなそう。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>CopyLess (Light)</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>教えてもらったもの１。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>無料版と有償版がある。画面とかは無償版のもの。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>有償版は¥600</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>cした内容が、リストで <b>アイコン + 内容 </b>として表示される。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>QuickLookにも対応していて、ペーストするものがどんななのか、見れる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Webブラウザとかで見てる途中の内容とかもコピペできるし、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>性能はClipMenu(今回見限ったやつ)に非常に近い。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ClipMenuよりも便利な内容として、検索窓とかもついてて、非常に有用。⌘+fでフォーカス移る点</p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>メニューバー上のアイコン</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="s1"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202012-12-17%2015.09.03.png" alt="スクリーンショット 2012-12-17 15.09.03.png"></span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>と、メニュー</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="s1"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202012-12-17%2015.25.07.png" alt="スクリーンショット 2012-12-17 15.25.07.png"></span></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Appアイコン</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="s1"><img src="cpl.png" alt="cpl.png"></span></p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>見た目</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="s1"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202012-12-17%2015.12.41.png" alt="スクリーンショット 2012-12-17 15.12.41.png"></span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>上部バーを消した所。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="s1"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202012-12-17%2015.08.24.png" alt="スクリーンショット 2012-12-17 15.08.24.png"></span></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>QuickLookしたとこ</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="s1"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202012-12-17%2015.24.33.png" alt="スクリーンショット 2012-12-17 15.24.33.png"></span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>設定画面</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>できることが多すぎ + 有用。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>特にすげーと思った内容をアップ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ショートカット、けっこう細かくセット可能。Favoとかもある。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="s1"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202012-12-17%2015.30.10.png" alt="スクリーンショット 2012-12-17 15.30.10.png"></span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>表示項目をカスタマイズ可能、メニューバーからも消せる。正直メニューバーにモノが並ばない方が好きなので助かる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Use compact とかやると、全項目が80%くらいのサイズになる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="s1"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202012-12-17%2015.28.22.png" alt="スクリーンショット 2012-12-17 15.28.22.png"></span></p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>Clyppan</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>教えてもらいもの２。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>有償版のみ。¥250</p>
+<p class="p3"><span class="Apple-tab-span">	</span>基本性能はCopyLessと全く同じ。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>cした項目を<b>favorite</b>できる、というのがある。　ふぁぼ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>お好きでしょうか、ふぁぼ。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ふぁぼった項目は別途Favoriteメニューに残すことができる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>正直自分はこの機能あんま使わない。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>自分が使った難点としては、PrefernceがAppのウインドウからしかアクセスできないところ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>メニューバー上のアイコンからは触れない。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>何故。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>メニューバー上のアイコン<span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="s1"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202012-12-17%2015.25.16.png" alt="スクリーンショット 2012-12-17 15.25.16.png"></span></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Appアイコン</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="s1"><img src="cp.png" alt="cp.png"></span></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>見た目</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="s1"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202012-12-17%2014.59.43.png" alt="スクリーンショット 2012-12-17 14.59.43.png"></span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>QuickLookしたとこ</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="s1"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202012-12-17%2015.21.23.png" alt="スクリーンショット 2012-12-17 15.21.23.png"></span></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>設定画面</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="s1"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202012-12-17%2015.21.32.png" alt="スクリーンショット 2012-12-17 15.21.32.png"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202012-12-17%2015.21.39.png" alt="スクリーンショット 2012-12-17 15.21.39.png"></span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>という事で</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>自分はCopyLessをつかうことにしましたとさ。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+</body>
+</html>
