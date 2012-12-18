@@ -77,6 +77,11 @@
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>emscriptenを動かしてみる</p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://sassembla.github.com/Public/12:05:21%2017-38-30/12:05:21%2017-38-30.html">http://sassembla.github.com/Public/12:05:21%2017-38-30/12:05:21%2017-38-30.html</a></p>
 <p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>補足<span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></b>LLVMって？</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>コレ。　コンパイラみたいなものです。</p>
+<p class="p3"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></b><a href="http://llvm.org">http://llvm.org</a></p>
+<p class="p2"><br></p>
 <p class="p2"><b></b><br></p>
 <p class="p3"><b>やってみよう！</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>今回は、Objective-CのコードをJS化してみるよ！</p>
@@ -103,6 +108,8 @@
 <p class="p2"><b></b><br></p>
 <p class="p3"><b>MacでClangをインストール</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>Xcodeから入れると、フレームワークとかのパス設定をはしょれて凄く楽です。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Xcode &gt; Preferences &gt; Downloads &gt;<span class="Apple-converted-space"> </span></p>
+<p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>最初llvm自体をDLして、ガチで挑んで死ぬかと思いました。</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>Windowsでも調べてみたら相ッ当なドMな方だとお見受けしますが、</p>
@@ -121,10 +128,12 @@
 <p class="p7"><span class="Apple-converted-space">    </span>return 0;</p>
 <p class="p7">}</p>
 <p class="p2"><b></b><br></p>
-<p class="p3"><b><span class="Apple-tab-span">	</span>ビールドー</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>百回hello, world っていうプログラムです。</p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>ビルド</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>llvmは、clangというフロントエンドツールを介してコントロールします。</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>ビルドは</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ビルドコマンドは</p>
 <p class="p3"><span class="Apple-tab-span">	</span>clang test.c -v</p>
 <p class="p3"><span class="Apple-tab-span">	</span>↓</p>
 <p class="p8"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202012-12-18%2022.29.04.png" alt="スクリーンショット 2012-12-18 22.29.04.png"></p>
@@ -165,11 +174,11 @@
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>ちょっと脱線しつつ説明しておくと、</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>llvmはその名の通り、「ローレベルなバーチャルマシン」で、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>llvmは「ローレベルなバーチャルマシンで色んな事をする為のコンパイルの基盤」で、</p>
 <p class="p3"><span class="Apple-tab-span">	</span>その目的は</p>
-<p class="p3"><span class="Apple-tab-span">	</span>・ビルドする行為それ自体と、ビルドして動作するアーキテクチャを切り離す(中間言語としてビルドする)</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・言語をビルドする行為それ自体と、ビルドしたものが実際に動作するアーキテクチャを切り離す</p>
 <p class="p3"><span class="Apple-tab-span">	</span>・中間言語の時点で最適化を施す</p>
-<p class="p3"><span class="Apple-tab-span">	</span>というもの。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>というもの。超ザックリ。</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p3"><span class="Apple-tab-span">	</span>で、.ll/.bcファイルは、まさにその中間言語化された状態のcompiledな状態。</p>
 <p class="p3"><span class="Apple-tab-span">	</span>言語形式を引きずってない、意図だけのソース。</p>
@@ -182,27 +191,37 @@
 <p class="p8"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202012-12-18%2023.53.50.png" alt="スクリーンショット 2012-12-18 23.53.50.png"></p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
+<p class="p3"><b>emscriptenのセットアップ</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>割愛。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>参考になるステキな記事。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><b>c/c++ -&gt; javascript 変換compiler - emscripten を試す</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://d.hatena.ne.jp/end0tknr/20120714/1342233561">http://d.hatena.ne.jp/end0tknr/20120714/1342233561</a></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
 <p class="p3"><b>作成した中間言語をemsriptenでjs化</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>C言語版</p>
 <p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>./emscripten/emcc ソース</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>出力されるのが、.jsファイル。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>-o 出力ファイル名　とかで調整も可能。</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>オリジナル</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Cオリジナル</p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://dl.dropbox.com/u/36583594/shared/test/test.c">https://dl.dropbox.com/u/36583594/shared/test/test.c</a></p>
 <p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>js化したものをhtmlに入れたヤツ</p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://dl.dropbox.com/u/36583594/shared/test/test.html">https://dl.dropbox.com/u/36583594/shared/test/test.html</a></p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
-<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>プリント文が出てるぞ！！ デバッガを見てね！</p>
-<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Cのprintfに対応して、プリント文が出てるぞ！！ デバッガを見てね！</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="s5"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202012-12-19%200.34.15.png" alt="スクリーンショット 2012-12-19 0.34.15.png"></span></p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>Obj-C版</p>
 <p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
-<p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>オリジナル</p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://dl.dropbox.com/u/36583594/shared/test/test.m">https://dl.dropbox.com/u/36583594/shared/test/test.m</a></p>
 <p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
-<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>★最新のemsだと駄目らしい！！！</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>★最新のemsだと、.llからの変換が駄目らしい！！！</p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>調整中、、2012/12/18 23:57:43</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
