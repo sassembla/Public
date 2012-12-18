@@ -1,4 +1,5 @@
 ./shared/Unity_20110820_Web/20110820_Web.html
+./shared/test/test.html
 ./shared/nullpointerexception/nullpointerexception.html
 ./shared/IrofTheWorld/IrofTheWorld.html
 ./shared/antInGradle/index.html
@@ -8,6 +9,7 @@
 ./htmlResource/html_header.html
 ./htmlResource/html_body_tail.html
 ./htmlResource/html_body_head.html
+./2012:12:18 00-00-00/2012:12:18 00-00-00.html
 ./2012:12:17 14-59-47/2012:12:17 14-59-47.html
 ./2012:12:14 00-00-00/2012:12:14 00-00-00.html
 ./2012:12:04 1-29-54/2012:12:04 1-29-54.html
