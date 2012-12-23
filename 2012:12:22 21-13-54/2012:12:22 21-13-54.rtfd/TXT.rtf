@@ -2,9 +2,8 @@
 {\fonttbl\f0\fnil\fcharset128 HiraKakuProN-W3;\f1\fswiss\fcharset0 Helvetica;\f2\fnil\fcharset0 Menlo-Regular;
 }
 {\colortbl;\red255\green255\blue255;\red63\green110\blue116;\red230\green230\blue230;\red46\green13\blue110;
-\red38\green71\blue75;\red100\green56\blue32;\red170\green13\blue145;\red92\green38\blue153;\red254\green209\blue207;
-\red255\green219\blue205;\red0\green116\blue0;\red196\green26\blue22;\red28\green0\blue207;\red255\green39\blue18;
-}
+\red38\green71\blue75;\red100\green56\blue32;\red170\green13\blue145;\red92\green38\blue153;\red205\green205\blue205;
+\red0\green116\blue0;\red196\green26\blue22;\red28\green0\blue207;\red255\green39\blue18;}
 \paperw11900\paperh16840\margl1440\margr1440\vieww14780\viewh13960\viewkind0
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
 
@@ -182,8 +181,10 @@
 	\'82\'c6\'82\'a2\'82\'a4\'96\'bc\'91\'4f\'82\'cc\'83\'43\'83\'78\'83\'93\'83\'67\'82\'aa\'82\'a9\'82\'c1\'94\'f2\'82\'f1\'82\'c5\'82\'ad\'82\'e9\'81\'42\
 \
 	\'83\'52\'81\'5b\'83\'68\'82\'c9\'87\'40\'81\'41\'87\'41\'82\'c6\'82\'a9\'82\'cc\'94\'d4\'8d\'86\'90\'55\'82\'c1\'82\'c4\'82\'a8\'82\'a2\'82\'bd\'82\'cc\'82\'c5\'81\'41\'82\'bb\'82\'ea\'8c\'a9\'82\'c2\'82\'c2\'89\'f0\'90\'e0\'82\'b7\'82\'e9\'81\'42\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
 
 \f2\fs22 \cf6 \CocoaLigature0 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
 
 \f0\fs24 \cf0 \CocoaLigature1 	AppDelegate.m\
 \pard\tx529\pardeftab529\pardirnatural
@@ -194,37 +195,31 @@
     \
     \cf7 if\cf0  ([exec \cf4 isEqualToString\cf0 :\cf6 SAMPLE_TITLEVIEWCONT_EXEC_UNITY_ON_TAPPED\cf0 ]) \{\
 		\
-	
-\f0 \cb9 \'87\'40
-\f2 \cb10 	\cf11 /*\
-\pard\tx529\pardeftab529\pardirnatural
-\cf11 \cb3 	\cb10 	 ignite Unity\
-\cb3 	\cb10 	 */\cf0 \
-\pard\tx529\pardeftab529\pardirnatural
-\cf0 \cb3     \cb10     [\cf2 messenger\cf0  \cf5 call\cf0 :\cf6 KS_UNITYBOOTER\cf0  \cf5 withExec\cf0 :\cf6 KS_UNITYBOOTER_EXEC_INITIALIZE\cf0 ,\
-\cb3     \cb10      [\cf2 messenger\cf0  \cf5 tag\cf0 :\cf12 @"application"\cf0  \cf5 val\cf0 :\cf2 m_application\cf0 ],\
-\cb3     \cb10      [\cf2 messenger\cf0  \cf5 tag\cf0 :\cf12 @"launchOptions"\cf0  \cf5 val\cf0 :\cf2 m_launchOptions\cf0 ],\
-\cb3     \cb10      \cf7 nil\cf0 ];\
+\cb9 	
+\f0 \'87\'40
+\f2 	\cf10 /*\
+		 ignite Unity\
+		 */\cf0 \
+        [\cf2 messenger\cf0  \cf5 call\cf0 :\cf6 KS_UNITYBOOTER\cf0  \cf5 withExec\cf0 :\cf6 KS_UNITYBOOTER_EXEC_INITIALIZE\cf0 ,\
+         [\cf2 messenger\cf0  \cf5 tag\cf0 :\cf11 @"application"\cf0  \cf5 val\cf0 :\cf2 m_application\cf0 ],\
+         [\cf2 messenger\cf0  \cf5 tag\cf0 :\cf11 @"launchOptions"\cf0  \cf5 val\cf0 :\cf2 m_launchOptions\cf0 ],\
+         \cf7 nil\cf0 ];\
 \cb3 		\
 	\
-	
-\f0 \cb10 \'87\'41
-\f2 	\cf11 /*\
-\pard\tx529\pardeftab529\pardirnatural
-\cf11 \cb3 	\cb10 	 generate pinView(back button inside.)\
-\cb3 	\cb10 	 */\cf0 \
-\pard\tx529\pardeftab529\pardirnatural
-\cf0 \cb3 	\cb10 	\cf2 SamplePinViewControler\cf0  * samplePinViewCont = [[\cf2 SamplePinViewControler\cf0  \cf4 alloc\cf0 ]\cf4 init\cf0 ];\
-\cb3 	\cb10 	\
-\cb3 	\cb10 	\cf11 /*\
-\pard\tx529\pardeftab529\pardirnatural
-\cf11 \cb3 	\cb10 	 set pinView to Unity-window after some seconds.(this is for experimental.)\
-\cb3 	\cb10 	 */\cf0 \
-\pard\tx529\pardeftab529\pardirnatural
-\cf0 \cb3 	\cb10 	[\cf2 messenger\cf0  \cf5 callMyself\cf0 :\cf6 CONNECTOR_MASTER_EXEC_SET_VIEW_TO_UNITYWINDOW\cf0 ,\
-\cb3 	\cb10 	 [\cf2 messenger\cf0  \cf5 tag\cf0 :\cf12 @"view"\cf0  \cf5 val\cf0 :samplePinViewCont.\cf8 view\cf0 ],\
-\cb3 	\cb10 	 [\cf2 messenger\cf0  \cf5 withDelay\cf0 :\cf13 5.0\cf0 ],\
-\cb3 	\cb10 	 \cf7 nil\cf0 ];\
+\cb9 	
+\f0 \'87\'41
+\f2 	\cf10 /*\
+		 generate pinView(back button inside.)\
+		 */\cf0 \
+		\cf2 SamplePinViewControler\cf0  * samplePinViewCont = [[\cf2 SamplePinViewControler\cf0  \cf4 alloc\cf0 ]\cf4 init\cf0 ];\
+		\
+		\cf10 /*\
+		 set pinView to Unity-window after some seconds.(this is for experimental.)\
+		 */\cf0 \
+		[\cf2 messenger\cf0  \cf5 callMyself\cf0 :\cf6 CONNECTOR_MASTER_EXEC_SET_VIEW_TO_UNITYWINDOW\cf0 ,\
+		 [\cf2 messenger\cf0  \cf5 tag\cf0 :\cf11 @"view"\cf0  \cf5 val\cf0 :samplePinViewCont.\cf8 view\cf0 ],\
+		 [\cf2 messenger\cf0  \cf5 withDelay\cf0 :\cf12 5.0\cf0 ],\
+		 \cf7 nil\cf0 ];\
 \cb3     \}
 \f0\fs24 \CocoaLigature1 \
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
@@ -252,13 +247,14 @@
 	KSUnityBooter.mm\
 \pard\tx529\pardeftab529\pardirnatural
 
-\f2\fs22 \cf6 \cb3 \CocoaLigature0 #import \cf12 "AppController.h"\cf6 \
-#import \cf12 "RegisterClasses.h"\cf6 \
-#import \cf12 "RegisterMonoModules.h"\cf6 \
+\f2\fs22 \cf6 \cb3 \CocoaLigature0 #import \cf11 "AppController.h"\cf6 \
+#import \cf11 "RegisterClasses.h"\cf6 \
+#import \cf11 "RegisterMonoModules.h"\cf6 \
+\pard\tx529\pardeftab529\pardirnatural
 \cf0 \
 \
 \pard\tx529\pardeftab529\pardirnatural
-\cf7 static\cf0  \cf7 const\cf0  \cf7 int\cf0  constsection = \cf13 0\cf0 ;\
+\cf7 static\cf0  \cf7 const\cf0  \cf7 int\cf0  constsection = \cf12 0\cf0 ;\
 \cf7 bool\cf0  UnityParseCommandLine(\cf7 int\cf0  argc, \cf7 char\cf0  *argv[]);\
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
 
@@ -276,8 +272,8 @@
     \cf8 NSDictionary\cf0  * dict = [\cf2 messenger\cf0  \cf5 getTagValueDictionaryFromNotification\cf0 :notif];\
     \
     \
-    \cf11 //unity-app wrapper with UIApplicationDelegate\cf0 \
-    \cf11 /*\
+    \cf10 //unity-app wrapper with UIApplicationDelegate\cf0 \
+    \cf10 /*\
      o     - (void)applicationDidFinishLaunching:(UIApplication *)application;\
 (
 \f0 \'92\'86\'97\'aa
@@ -286,11 +282,11 @@
      */\cf0 \
     \
     \cf7 if\cf0  ([exec \cf4 isEqualToString\cf0 :\cf6 KS_UNITYBOOTER_EXEC_INITIALIZE\cf0 ]) \{\
-        \cf6 NSAssert\cf0 ([dict \cf4 valueForKey\cf0 :\cf12 @"application"\cf0 ],\cf12 @"application required"\cf0 );\
-        \cf6 NSAssert\cf0 ([dict \cf4 valueForKey\cf0 :\cf12 @"launchOptions"\cf0 ], \cf12 @"launchOptions required"\cf0 );\
+        \cf6 NSAssert\cf0 ([dict \cf4 valueForKey\cf0 :\cf11 @"application"\cf0 ],\cf11 @"application required"\cf0 );\
+        \cf6 NSAssert\cf0 ([dict \cf4 valueForKey\cf0 :\cf11 @"launchOptions"\cf0 ], \cf11 @"launchOptions required"\cf0 );\
         \
-        \cf8 UIApplication\cf0  * application = [dict \cf4 valueForKey\cf0 :\cf12 @"application"\cf0 ];\
-        \cf8 NSDictionary\cf0  * launchOptions = [dict \cf4 valueForKey\cf0 :\cf12 @"launchOptions"\cf0 ];\
+        \cf8 UIApplication\cf0  * application = [dict \cf4 valueForKey\cf0 :\cf11 @"application"\cf0 ];\
+        \cf8 NSDictionary\cf0  * launchOptions = [dict \cf4 valueForKey\cf0 :\cf11 @"launchOptions"\cf0 ];\
         \
         \cf5 RegisterMonoModules\cf0 ();\
         \
@@ -317,8 +313,9 @@
 	\'82\'b1\'82\'ea\'82\'c5\'81\'41Unity\'82\'cc\'8b\'4e\'93\'ae\'82\'aa\'8a\'4a\'8e\'6e\'81\'42\
 	\'83\'41\'83\'76\'83\'8a\'82\'cc\'89\'e6\'96\'ca\'82\'c9Unity\'82\'cc\'83\'58\'83\'76\'83\'89\'83\'62\'83\'56\'83\'85\'82\'aa\'95\'5c\'8e\'a6\'82\'b3\'82\'ea\'82\'e9\'82\'e6\'82\'a4\'82\'c9\'82\'c8\'82\'e9\'81\'42\
 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
 
-\b \cf14 	\'82\'bf\'82\'c8\'82\'dd\'82\'c9\'81\'41\'94\'f1\'83\'76\'83\'8d\'94\'c5\'8e\'9e\'82\'cc\'82\'dd\'95\'5c\'8e\'a6\'82\'b3\'82\'ea\'82\'e9\'83\'58\'83\'76\'83\'89\'83\'62\'83\'56\'83\'85\'82\'be\'82\'af\'82\'c7\'81\'41\'97\'70\'88\'d3\'82\'b3\'82\'ea\'82\'bd\'83\'74\'83\'40\'83\'43\'83\'8b\'82\'f0\'8e\'67\'82\'ed\'82\'c8\'82\'a2\'82\'e6\'82\'a4\'82\'c9\'82\'b7\'82\'e9\'82\'c6\
+\b \cf13 	\'82\'bf\'82\'c8\'82\'dd\'82\'c9\'81\'41\'94\'f1\'83\'76\'83\'8d\'94\'c5\'8e\'9e\'82\'cc\'82\'dd\'95\'5c\'8e\'a6\'82\'b3\'82\'ea\'82\'e9\'83\'58\'83\'76\'83\'89\'83\'62\'83\'56\'83\'85\'82\'be\'82\'af\'82\'c7\'81\'41\'97\'70\'88\'d3\'82\'b3\'82\'ea\'82\'bd\'83\'74\'83\'40\'83\'43\'83\'8b\'82\'f0\'8e\'67\'82\'ed\'82\'c8\'82\'a2\'82\'e6\'82\'a4\'82\'c9\'82\'b7\'82\'e9\'82\'c6\
 	\'82\'ab\'82\'bf\'82\'f1\'82\'c6\'83\'47\'83\'89\'81\'5b\'82\'c5\'97\'8e\'82\'bf\'82\'e9\'81\'42\
 	\'88\'ab\'82\'a2\'82\'b1\'82\'c6\'82\'f0\'82\'b5\'82\'c4\'82\'cd\'82\'a2\'82\'af\'82\'c8\'82\'a2\'81\'42
 \b0 \cf0 \
@@ -330,21 +327,19 @@
 
 \b \cf0 	\'87\'41Unity\'8f\'e3\'82\'c9UI\'82\'f0\'92\'75\'82\'ad
 \b0 \
-\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
-\cf0 \cb1 	\'82\'b1\'82\'b1\'82\'c5\'82\'cd\'81\'41\
+	\'82\'b1\'82\'b1\'82\'c5\'82\'cd\'81\'41\
 	\'83\'41\'83\'89\'81\'5b\'83\'67\'82\'f0\'83\'5a\'83\'62\'83\'67\'82\'b5\'82\'c4\'82\'a0\'82\'e9\'83\'7b\'83\'5e\'83\'93\'82\'aa\'92\'75\'82\'a2\'82\'c4\'82\'a0\'82\'e9UIView\'82\'cc
 \f2\fs22 \cf2 \CocoaLigature0 SamplePinViewControler
 \f0\fs24 \cf0 \CocoaLigature1 \'82\'f0\'83\'43\'83\'93\'83\'58\'83\'5e\'83\'93\'83\'58\'89\'bb\'81\'42\
 	\
-	\'82\'bb\'82\'ccview\'82\'f0\'81\'41\cb1 5.0\'95\'62\'8c\'e3\'82\'c9\'82\'bb\'82\'cc\'83\'43\'83\'93\'83\'58\'83\'5e\'83\'93\'83\'58\'82\'f0\'8e\'a9\'95\'aa\'8e\'a9\'90\'67(
+	\'82\'bb\'82\'ccview\'82\'f0\'81\'415.0\'95\'62\'8c\'e3\'82\'c9\'82\'bb\'82\'cc\'83\'43\'83\'93\'83\'58\'83\'5e\'83\'93\'83\'58\'82\'f0\'8e\'a9\'95\'aa\'8e\'a9\'90\'67(
 \f2\fs22 \CocoaLigature0 AppDelegate.m
 \f0 \'82\'cc\'83\'43\'83\'93\'83\'58\'83\'5e\'83\'93\'83\'58
 \fs24 \CocoaLigature1 )\'82\'d6\'82\'c6\'91\'97\'82\'e9\'81\'42\
 	\
 \
-\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
 
-\b \cf0 3.Unity\'82\'aa\'8b\'4e\'93\'ae\'82\'b5\'82\'bd\'82\'e7Unity\'8f\'e3\'82\'c9UI\'82\'f0\'92\'75\'82\'ad
+\b 3.Unity\'82\'aa\'8b\'4e\'93\'ae\'82\'b5\'82\'bd\'82\'e7Unity\'8f\'e3\'82\'c9UI\'82\'f0\'92\'75\'82\'ad
 \b0 \
 	UnityApp\'82\'cc\'8b\'4e\'93\'ae\'8a\'ae\'97\'b9 = Unity\'82\'cc\'83\'58\'83\'76\'83\'89\'83\'62\'83\'56\'83\'85\'82\'aa\'8f\'c1\'82\'a6\'82\'e9\'81\'41\'82\'c8\'82\'cc\'82\'be\'82\'af\'82\'ea\'82\'c7\'81\'41UnityApp\'82\'c9\'8e\'e8\'82\'f0\'89\'c1\'82\'a6\'82\'c8\'82\'a2\'82\'c6\
 	\'82\'bb\'82\'ea\'82\'aa\'8e\'40\'92\'6d\'82\'c5\'82\'ab\'82\'c8\'82\'a2\'81\'42\
@@ -363,23 +358,23 @@
 \f2 )\
 	\
 	\cf7 if\cf0  ([exec \cf4 isEqualToString\cf0 :\cf6 CONNECTOR_MASTER_EXEC_SET_VIEW_TO_UNITYWINDOW\cf0 ]) \{\
-		\cf4 NSLog\cf0 (\cf12 @"m_application %@"\cf0 ,	[\cf2 m_application\cf0  \cf4 windows\cf0 ]);\
-		\cf6 NSAssert\cf0 ([dict \cf4 valueForKey\cf0 :\cf12 @"view"\cf0 ], \cf12 @"view required"\cf0 );\
+		\cf4 NSLog\cf0 (\cf11 @"m_application %@"\cf0 ,	[\cf2 m_application\cf0  \cf4 windows\cf0 ]);\
+		\cf6 NSAssert\cf0 ([dict \cf4 valueForKey\cf0 :\cf11 @"view"\cf0 ], \cf11 @"view required"\cf0 );\
 		\
-		\cf11 //get the view what want to append to Unity.\cf0 \
-		\cf8 UIView\cf0  * testView = [dict \cf4 valueForKey\cf0 :\cf12 @"view"\cf0 ];\
+		\cf10 //get the view what want to append to Unity.\cf0 \
+		\cf8 UIView\cf0  * testView = [dict \cf4 valueForKey\cf0 :\cf11 @"view"\cf0 ];\
 		\
-		\cf11 //get window array of this app\cf0 \
+		\cf10 //get window array of this app\cf0 \
 		\cf8 NSArray\cf0  * windowArray = [\cf2 m_application\cf0  \cf4 windows\cf0 ];\
 		\
 \pard\tx529\pardeftab529\pardirnatural
-\cf11 //		for (UIWindow * window in [m_application windows]) \{\cf0 \
-\cf11 //			NSLog(@"[window subviews]	%@", [window subviews]);\cf0 \
-\cf11 //		\}\cf0 \
+\cf10 //		for (UIWindow * window in [m_application windows]) \{\cf0 \
+\cf10 //			NSLog(@"[window subviews]	%@", [window subviews]);\cf0 \
+\cf10 //		\}\cf0 \
 		\
-		\cf11 //append view onto Unity-window\cf0 \
-		\cf7 if\cf0  (\cf13 1\cf0  < [windowArray \cf4 count\cf0 ]) \{\
-			[[windowArray \cf4 objectAtIndex\cf0 :\cf13 1\cf0 ] \cf4 addSubview\cf0 :testView];\
+		\cf10 //append view onto Unity-window\cf0 \
+		\cf7 if\cf0  (\cf12 1\cf0  < [windowArray \cf4 count\cf0 ]) \{\
+			[[windowArray \cf4 objectAtIndex\cf0 :\cf12 1\cf0 ] \cf4 addSubview\cf0 :testView];\
 		\}\
 	\}
 \f0\fs24 \CocoaLigature1 \
@@ -412,7 +407,7 @@
 	SamplePinViewControler.m\
 
 \f2\fs22 \cb3 \CocoaLigature0 - (\cf7 IBAction\cf0 )tapped:(\cf7 id\cf0 )sender \{\
-	\cf8 UIAlertView\cf0  * alertView = [[\cf8 UIAlertView\cf0  \cf4 alloc\cf0 ]\cf4 initWithTitle\cf0 :\cf12 @"active"\cf0  \cf4 message\cf0 :\cf12 @"can react UI-something"\cf0  \cf4 delegate\cf0 :\cf7 self\cf0  \cf4 cancelButtonTitle\cf0 :\cf12 @"DONE"\cf0  \cf4 otherButtonTitles\cf0 :\cf7 nil\cf0 ];\
+	\cf8 UIAlertView\cf0  * alertView = [[\cf8 UIAlertView\cf0  \cf4 alloc\cf0 ]\cf4 initWithTitle\cf0 :\cf11 @"active"\cf0  \cf4 message\cf0 :\cf11 @"can react UI-something"\cf0  \cf4 delegate\cf0 :\cf7 self\cf0  \cf4 cancelButtonTitle\cf0 :\cf11 @"DONE"\cf0  \cf4 otherButtonTitles\cf0 :\cf7 nil\cf0 ];\
 	[alertView \cf4 show\cf0 ];\
 \}\
 
