@@ -7,25 +7,134 @@
   <meta name="Generator" content="Cocoa HTML Writer">
   <meta name="CocoaVersion" content="1187.34">
   <style type="text/css">
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px Helvetica}
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
     p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
     p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
-    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
-    span.s1 {font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px Menlo; background-color: #ebebeb}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px Menlo; color: #272ad8; background-color: #ebebeb}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px Menlo; color: #008400; background-color: #ebebeb}
+    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px Menlo; background-color: #ebebeb; min-height: 13.0px}
+    p.p8 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    span.s1 {font: 22.0px Helvetica}
     span.s2 {font: 12.0px Helvetica}
+    span.s3 {color: #000000}
+    span.s4 {color: #272ad8}
     span.Apple-tab-span {white-space:pre}
   </style>
 </head>
 <body>
-<p class="p1"><b>Gradle</b><span class="s1"><b>で</b></span><b>Xcode</b><span class="s1"><b>プロジェクトをビルド</b></span></p>
+<p class="p1"><span class="s1"><b>Gradle</b></span><b>で</b><span class="s1"><b>Xcode</b></span><b>プロジェクトをビルド/テスト</b></p>
 <p class="p2"><b></b><br></p>
 <p class="p3"><b>概要</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>Gradleのプラグインで、XcodeのiOSビルドを自動化するものがあった。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Gradleのプラグインで、XcodeのiOSビルドとかを補助するものがあった。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><a href="https://github.com/openbakery/gradle-xcodePlugin">https://github.com/openbakery/gradle-xcodePlugin</a></p>
+<p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>その簡単な使い方を見つつ、発展系として</p>
 <p class="p3"><span class="Apple-tab-span">	</span>TestFlig<span class="s2">ht</span>に放り込んだり、</p>
-<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>先の<span class="s2">Unity</span>ビルドとの連携を試してみる。</p>
-<p class="p4"><span class="Apple-tab-span">	</span></p>
-<p class="p4"><br></p>
-<p class="p3">続く。</p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>先の<span class="s2">Unity</span>ビルドとの連携を試してみたり、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>超願望としてはCocoaPodsと連携させてみたい。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>サンプルプロジェクトはgithubにあげておいた。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/Gradle_XcodeSample">https://github.com/sassembla/Gradle_XcodeSample</a></p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b>手始めにSimulator用ビルド</b></p>
+<p class="p3">build.gradle</p>
+<p class="p4">buildscript {</p>
+<p class="p4"><span class="Apple-tab-span">	</span>repositories {</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>maven {</p>
+<p class="p5"><span class="s3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>url(</span>'http://openbakery.org/repository/'<span class="s3">)</span></p>
+<p class="p6"><span class="s3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>//url uri('/tmp/repo')</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>mavenCentral()</p>
+<p class="p4"><span class="Apple-converted-space">    </span>}</p>
+<p class="p4"><span class="Apple-converted-space">    </span>dependencies {</p>
+<p class="p4"><span class="Apple-converted-space">        </span>classpath group: <span class="s4">'org.openbakery'</span>, name: <span class="s4">'xcodePlugin'</span>, version: <span class="s4">'0.6.+'</span></p>
+<p class="p4"><span class="Apple-converted-space">    </span>}</p>
+<p class="p4">}</p>
+<p class="p7"><br></p>
+<p class="p7"><br></p>
+<p class="p4">apply plugin: <span class="s4">'xcode'</span></p>
+<p class="p7"><br></p>
+<p class="p4">buildscript {</p>
+<p class="p4"><span class="Apple-converted-space">    </span>configurations.classpath.resolutionStrategy.cacheChangingModulesFor <span class="s4">0</span>, <span class="s4">'seconds'</span></p>
+<p class="p4">}</p>
+<p class="p7"><br></p>
+<p class="p4">xcodebuild {</p>
+<p class="p5"><span class="s3"><span class="Apple-tab-span">	</span>sdk = </span>'iphonesimulator'</p>
+<p class="p5"><span class="s3"><span class="Apple-tab-span">	</span>target = </span>'Gradle_XcodeSample'</p>
+<p class="p4">}</p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>特に解説がいらないんじゃないかな的な気もするくらい、簡単なビルドスクリプト。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、Terminalでgradle xcodebuild　とか実行すると、</p>
+<p class="p8"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202012-12-31%202.00.33.png" alt="スクリーンショット 2012-12-31 2.00.33.png"></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Simulatorでのビルド、成功！。</p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>Simulatorでのtest</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span> 前提として、下記を満たしている必要がある。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・テスト対象は、Xcodeで作ったOCTestUnitのコード</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・テスト用のbundleがある</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>みためでいうとこんな感じ。</p>
+<p class="p8"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202012-12-31%201.24.39.png" alt="スクリーンショット 2012-12-31 1.24.39.png"></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、OCUnitをコマンドラインから実行するために、TEST HOST のパラメータを空にする。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>理由はおまけで後述</p>
+<p class="p8"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202012-12-31%201.27.26.png" alt="スクリーンショット 2012-12-31 1.27.26.png"></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、build.gradleの設定を調整する。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>xcodebuild タスクの中に１行追加</p>
+<p class="p3">build.gradle</p>
+<p class="p4">xcodebuild {</p>
+<p class="p5"><span class="s3"><span class="Apple-tab-span">	</span>sdk = </span>'iphonesimulator'</p>
+<p class="p5"><span class="s3"><span class="Apple-tab-span">	</span>target = </span>'Gradle_XcodeSample'</p>
+<p class="p5"><span class="s3"><b><span class="Apple-tab-span">	</span>unitTestTarget = </b></span><b>'Gradle_XcodeSampleTests'</b></p>
+<p class="p4">}</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これで、xcodebuild実行時に、unitTestTargetで指定したターゲットに含まれるOCUnitTestが実行される。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>試しに実行すると、一件のテストが失敗する。</p>
+<p class="p8"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202012-12-31%201.49.31.png" alt="スクリーンショット 2012-12-31 1.49.31.png"></p>
+<p class="p3"><span class="Apple-tab-span">	</span>通常のGradleの動作だと、テストが成功したり失敗したりしたリストがxmlファイルとして生成されるのだけれど、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>このプラグインにはまだその出力機構は無い模様。</p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>ちなみに自作はかんたんな筈です。</b></p>
+<p class="p2"><b><span class="Apple-tab-span">	</span></b></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>Deviceでのビルド</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>魅力を感じないのでパス。</p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>Deviceでのテスト</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>あまり魅力を感じないのでやはりパス</p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>Xcodeつないでるとき以外やんないでしょ。</b></p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>Testflightとの連携</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>また今度。</p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>おまけ</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>なんでSimulatorでTestする際、T<span class="s2">est</span> Host 項目を空にするのか</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Xcodeをインストールすると使える<span class="Apple-tab-span">	</span>Xcodebuildコマンドで、<span class="s2">OCUnit</span>の実行は出来る。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>んだけど、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>xcodebuild -configuration Debug -sdk iphonesimulator -target Gradle_XcodeSampleTests TEST_AFTER_BUILD=YES DSTROOT=/Users/sassembla/Desktop/Gradle_XcodeSample/build/dst OBJROOT=/Users/sassembla/Desktop/Gradle_XcodeSample/build/obj SYMROOT=/Users/sassembla/Desktop/Gradle_XcodeSample/build/sym SHARED_PRECOMPS_DIR=/Users/sassembla/Desktop/Gradle_XcodeSample/build/shared</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>とか実行しようとすると、</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span></b>/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Tools/Tools/RunPlatformUnitTests:81:<span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>warning: Skipping tests; the iPhoneSimulator platform does not currently support application-hosted tests (TEST_HOST set).</b></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>って言われて、テストがスキップされてしまう。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ようは、SimulatorでTestする場合、<b>TEST_HOSTのパラメータに何かセットしてあると、サポートしてないんでスキップするぜ、</b>っていうことだった。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>デフォルトで、このパラメータはプロジェクト自体のパスが入っている。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、上でやったように、このTEST_HOST項目を空にすることでテストがスキップされずにちゃんと実行されるよ、ということ。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
 </body>
 </html>
