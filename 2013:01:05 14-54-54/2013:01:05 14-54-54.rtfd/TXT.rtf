@@ -6,7 +6,7 @@
 
 \f0\b\fs44 \cf0 MacRuby
 \f1 \'82\'f0
-\f0 Xcode4.5.2 + MacRuy0.12 + Mac OSX  10.8.2
+\f0 Xcode4.5.2 + MacRuby0.12 + Mac OSX  10.8.2
 \f1  \'82\'c5\'93\'ae\'82\'a9\'82\'b7
 \f0\b0\fs24 \
 \
@@ -44,15 +44,21 @@
 \b \cf0 \
 \
 \'83\'72\'83\'8b\'83\'68\'82\'b7\'82\'e9\'82\'c6\'83\'47\'83\'89\'81\'5b\'82\'aa\'8f\'6f\'82\'e9\
-\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
 
-\b0 \cf0 	MacRuby.h\'82\'aa\'82\'c8\'82\'a2\'81\'41\'82\'c6\'8c\'be\'82\'ed\'82\'ea\'82\'e9\'81\'42\
-	\'82\'bb\'82\'ea\'88\'c8\'91\'4f\'82\'c9\'81\'41\
+\b0 	MacRuby.h\'82\'aa\'82\'c8\'82\'a2\'81\'41\'82\'c6\'8c\'be\'82\'ed\'82\'ea\'82\'e9\'81\'42\
+	\'82\'bb\'82\'ea\'88\'c8\'91\'4f\'82\'c9\'81\'41MacRuby.framework\'82\'aa\'96\'b3\'82\'a2\'82\'c1\'82\'c4\'82\'a2\'82\'a4\'83\'47\'83\'89\'81\'5b\'82\'aa\'8f\'6f\'82\'c4\'82\'e9\'81\'42\
 \
+\
+
+\b \'8c\'b4\'88\'f6\'82\'c6\'91\'ce\'8f\'88
+\b0 \
 	Xcode\'82\'ccVersion up\'82\'c9\'94\'ba\'82\'a2\'81\'41framework\'82\'cc\'8f\'ea\'8f\'8a\'82\'aa\'95\'cf\'8d\'58\'82\'c9\'82\'c8\'82\'c1\'82\'c4\'82\'a2\'82\'e9\'81\'42\
 	\'82\'cc\'82\'be\'82\'af\'82\'c7\'81\'41MacRuby\'82\'ccframework\'82\'cc\'83\'43\'83\'93\'83\'58\'83\'67\'81\'5b\'83\'8b\'8f\'ea\'8f\'8a\'82\'aa\'95\'cf\'8d\'58\'82\'b3\'82\'ea\'82\'b8\'8c\'c3\'82\'a2\'82\'dc\'82\'dc\'82\'c8\'82\'cc\'82\'aa\'96\'e2\'91\'e8\'81\'42\
-		Issue\'82\'c9\'82\'e0\'82\'a0\'82\'e9\
-		\
+		MacRuby\'82\'ccIssue\'82\'c9\'82\'e0\'82\'a0\'82\'e9\
+			
+\b Build fails after updating Xcode to 4.3.3
+\b0 \
+			{\field{\*\fldinst{HYPERLINK "https://github.com/MacRuby/MacRuby/issues/107"}}{\fldrslt https://github.com/MacRuby/MacRuby/issues/107}}	\
 \
 
 \f0 	
@@ -67,19 +73,24 @@
 \f0 MacRuby
 \f1 \'82\'cc
 \f0 .framework
-\f1 \'83\'74\'83\'48\'83\'8b\'83\'5f\'88\'ea\'8e\'ae\'81\'40MacRuby.framework\
+\f1 \'83\'74\'83\'48\'83\'8b\'83\'5f\'88\'ea\'8e\'ae\'81\'40MacRuby.framework \'82\'c9\'91\'ce\'82\'b5\'82\'c4\'81\'41\
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
 
 \f0 \cf0 {{\NeXTGraphic スクリーンショット 2013-01-05 15.06.40.png \width25860 \height11040
 }�}\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
 
 \f1 \cf0 \
-	1.\'83\'76\'83\'8d\'83\'57\'83\'46\'83\'4e\'83\'67\'82\'ccBuild Setting\'82\'cc Framework Search paths \'8d\'80\'96\'da\'82\'c9\'81\'41/Library/Frameworks \'82\'f0\'92\'ca\'82\'b7\
+
+\b 	1.\'83\'76\'83\'8d\'83\'57\'83\'46\'83\'4e\'83\'67\'82\'ccBuild Setting\'82\'cc Framework Search paths \'8d\'80\'96\'da\'82\'c9\'81\'41/Library/Frameworks \'82\'f0\'92\'ca\'82\'b7
+\b0 \
 		\'82\'b1\'82\'cc\'82\'d6\'82\'f1\'82\'f0\'8e\'51\'8d\'6c\'82\'c9\
 		{\field{\*\fldinst{HYPERLINK "http://watson1978.github.com/MacRuby-DoJo/blog/2012/03/07/intro-stopwatch/"}}{\fldrslt http://watson1978.github.com/MacRuby-DoJo/blog/2012/03/07/intro-stopwatch/}}\
 			\'83\'52\'83\'81\'83\'93\'83\'67\'97\'93\'82\'c5\'8b\'63\'98\'5f\'82\'aa\'82\'a0\'82\'e9\'81\'42\
 \
-	2.Xcode\'93\'e0\'82\'c9 MacRuby.framework\'82\'f0\'88\'da\'82\'b7\
+\
+
+\b 	2.Xcode\'93\'e0\'82\'c9 MacRuby.framework\'82\'f0\'88\'da\'82\'b7
+\b0 \
 	MacRuby.framework \'82\'f0\'81\'41
 \f0  Xcode
 \f1 \'82\'cc
@@ -103,9 +114,11 @@
 \f1 \'82\'bd\'82\'be\'82\'b5\'81\'41\
 	
 \f0 \cb2 MacOSX10.8.sdk\cb1  
-\f1 \'82\'aa\'83\'70\'83\'58\'82\'c9\'8a\'dc\'82\'dc\'82\'ea\'82\'c4\'82\'a2\'82\'e9\'82\'c6\'82\'b1\'82\'eb\'82\'a9\'82\'e7\'94\'bb\'82\'e9\'82\'e6\'82\'a4\'82\'c9\
-		\'81\'7b\
-	Xcode.app\'82\'cc\'92\'86\'82\'f0\'82\'a2\'82\'b6\'82\'c1\'82\'c4\'82\'a2\'82\'e9\'82\'c6\'82\'b1\'82\'eb\'82\'a9\'82\'e7\'94\'bb\'82\'e9\'82\'e6\'82\'a4\'82\'c9
+\f1 \'82\'aa\'83\'70\'83\'58\'82\'c9\'8a\'dc\'82\'dc\'82\'ea\'82\'c4\'82\'a2\'82\'e9\
+		&\
+	Xcode.app\'82\'cc\'92\'86\'82\'f0\'82\'a2\'82\'b6\'82\'c1\'82\'c4\'82\'a2\'82\'e9\
+\
+	\'82\'c6\'82\'b1\'82\'eb\'82\'a9\'82\'e7\'94\'bb\'82\'e9\'82\'e6\'82\'a4\'82\'c9
 \f0 \
 \
 	Xcode
