@@ -14,8 +14,10 @@
     p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
     p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; background-color: #ebebeb}
     span.s1 {font: 22.0px 'Hiragino Kaku Gothic ProN'}
-    span.s2 {font: 12.0px Helvetica}
-    span.s3 {font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    span.s2 {font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    span.s3 {font: 12.0px Helvetica}
+    span.s4 {font: 12.0px Helvetica; background-color: #ebebeb}
+    span.s5 {background-color: #ebebeb}
     span.Apple-tab-span {white-space:pre}
   </style>
 </head>
@@ -23,12 +25,12 @@
 <p class="p1"><b>MacRuby</b><span class="s1"><b>を</b></span><b>Xcode4.5.2 + MacRuy0.12 + Mac OSX<span class="Apple-converted-space">  </span>10.8.2</b><span class="s1"><b> で動かす</b></span></p>
 <p class="p2"><br></p>
 <p class="p3"><b>概要</b></p>
-<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>試す</p>
+<p class="p4"><span class="Apple-tab-span">	</span>MacRuby<span class="s2">を上記環境で試す</span></p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
-<p class="p3"><b>DL</b><span class="s2"><span class="Apple-tab-span">	</span></span></p>
-<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>ここから。</p>
-<p class="p4"><span class="Apple-tab-span">	</span>(<span class="s3">あとで</span>)</p>
+<p class="p3"><b>DL</b><span class="s3"><span class="Apple-tab-span">	</span></span></p>
+<p class="p3"><span class="s3"><span class="Apple-tab-span">	</span></span>ここから。</p>
+<p class="p4"><span class="Apple-tab-span">	</span><a href="http://macruby.org">http://macruby.org</a></p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>新規プロジェクトを作る</b></p>
@@ -46,18 +48,39 @@
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Issueにもある</p>
 <p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
 <p class="p5"><br></p>
-<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>解消するには、</p>
-<p class="p4"><span class="Apple-tab-span">	</span>MacRuby<span class="s3">インストール後、</span></p>
+<p class="p3"><span class="s3"><span class="Apple-tab-span">	</span></span>解消するには2つ手段があり、</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>/Library/Frameworks に出来てる<span class="s2">MacRuby</span>の<span class="s2">.framework</span>フォルダ一式　macRuby.framework</p>
+<p class="p4"><span class="Apple-tab-span">	</span>MacRuby<span class="s2">インストール後、</span></p>
+<p class="p3"><span class="s3"><span class="Apple-tab-span">	</span></span>/Library/Frameworks に出来てる<span class="s3">MacRuby</span>の<span class="s3">.framework</span>フォルダ一式　MacRuby.framework</p>
 <p class="p4"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202013-01-05%2015.06.40.png" alt="スクリーンショット 2013-01-05 15.06.40.png"></p>
-<p class="p3"><span class="Apple-tab-span">	</span>これを、<span class="s2"><span class="Apple-tab-span">	</span>Xcode</span>の<span class="s2">App</span>内の特定の箇所へとコピーする。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>1.プロジェクトのBuild Settingの Framework Search paths 項目に、/Library/Frameworks を通す</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>このへんを参考に</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://watson1978.github.com/MacRuby-DoJo/blog/2012/03/07/intro-stopwatch/">http://watson1978.github.com/MacRuby-DoJo/blog/2012/03/07/intro-stopwatch/</a></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>コメント欄で議論がある。</p>
 <p class="p5"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>Xcode.app　を右クリック→パッケージの内容を表示　から、</p>
-<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>2.Xcode内に MacRuby.frameworkを移す</p>
+<p class="p3"><span class="Apple-tab-span">	</span>MacRuby.framework を、<span class="s3"> Xcode</span>の<span class="s3">App</span>内の特定の箇所へとコピーする。</p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Xcode.app　を右クリック→パッケージの内容を表示　から、Xcode.appの中身が見られる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、下記パスまですすみ、</p>
 <p class="p6">Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/System/Library</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>にぶち込むと、<span class="s2">OK</span>になる。</p>
+<p class="p3"><span class="s3"><span class="Apple-tab-span">	</span></span>そこに MacRuby.framework をぶち込むと、以降手を加えないでも<span class="s3">OK</span>になる。</p>
 <p class="p2"><br></p>
+<p class="p3"><span class="s3"><span class="Apple-tab-span">	</span></span>ただし、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="s4">MacOSX10.8.sdk</span><span class="s3"> </span>がパスに含まれているところから判るように</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>＋</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Xcode.appの中をいじっているところから判るように</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="s3"><span class="Apple-tab-span">	</span>Xcode</span>のアップデート、<span class="s3">Mac OSX </span>のアップデートに影響される。</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="s5">MacOSX10.9.sdk</span><span class="s2">が来たら、どうしようとか、</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Xcode.appがバージョンアップされたらどうしよう、とか。</p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>直接ぶちこまんでも、既に含まれているパスとかにぶち込めば、OS updateからは簡単に逃げられると思う。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="s3"><span class="Apple-tab-span">	</span>Xcode update</span>されたときにこの辺の問題で困った事が無いので、なんか「このパスに置けばupdateされても平気」とか情報があったら</p>
+<p class="p3"><span class="Apple-tab-span">	</span>@toru_inoue まで教えてもらえると助かります。</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
 </body>
 </html>
