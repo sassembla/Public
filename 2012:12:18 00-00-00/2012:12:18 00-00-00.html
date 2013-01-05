@@ -13,9 +13,9 @@
     p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px 'Hiragino Kaku Gothic ProN'}
     p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px 'Helvetica Neue'; color: #323333}
     p.p6 {margin: 0.0px 0.0px 16.0px 0.0px; font: 20.0px 'Hiragino Kaku Gothic Pro'}
-    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #d6d6d6}
+    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #ebebeb}
     p.p8 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
-    p.p9 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #d6d6d6; min-height: 18.0px}
+    p.p9 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #ebebeb; min-height: 18.0px}
     p.p10 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px 'Hiragino Kaku Gothic ProN'; color: #232323}
     span.s1 {color: #ff4013}
     span.s2 {font: 12.0px 'Hiragino Kaku Gothic ProN'}
@@ -128,7 +128,7 @@
 <p class="p7"><span class="Apple-converted-space">    </span>return 0;</p>
 <p class="p7">}</p>
 <p class="p2"><b></b><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>百回hello, world っていうプログラムです。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>適当な回数hello, world っていうプログラムです。</p>
 <p class="p2"><b></b><br></p>
 <p class="p3"><b><span class="Apple-tab-span">	</span>ビルド</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>llvmは、clangというフロントエンドツールを介してコントロールします。</p>
@@ -175,7 +175,7 @@
 <p class="p2"><b></b><br></p>
 <p class="p2"><b></b><br></p>
 <p class="p3"><b>ビルドできる環境が整ったら、.ll/.bcファイルを出力</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>emscriptenに喰わせるための、LLVM bitcode file を生成する。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>emscriptenに喰わせるため、LLVM IR(Intermediate Representation) = LLVM上でのコード中間表現 を生成する。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>ちょっと脱線しつつ説明しておくと、</p>
@@ -186,7 +186,7 @@
 <p class="p3"><span class="Apple-tab-span">	</span>・中間言語の時点で最適化を施す</p>
 <p class="p3"><span class="Apple-tab-span">	</span>というもの。超ザックリ。</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
-<p class="p3"><span class="Apple-tab-span">	</span>で、.ll/.bcファイルは、まさにその中間言語化された状態のcompiledな状態。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、.ll/.bcファイルは、その中間言語化された状態。optとかを使って最適化ができる。ここではやんないけど。</p>
 <p class="p3"><span class="Apple-tab-span">	</span>実行形式を引きずってない、意図だけのソース。</p>
 <p class="p3"><span class="Apple-tab-span">	</span>その辺をclangからつくる。</p>
 <p class="p2"><br></p>
@@ -207,7 +207,7 @@
 <p class="p3"><b>作成した中間言語をemsriptenでjs化</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>C言語版</p>
 <p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
-<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>./emscripten/emcc ソース</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>./emscripten/emcc ソース.c</p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>出力されるのが、.jsファイル。</p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>-o 出力ファイル名　とかで調整も可能。</p>
 <p class="p2"><br></p>

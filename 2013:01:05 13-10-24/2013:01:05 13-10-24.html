@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1187.34">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #ebebeb}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Courier; color: #87165e; background-color: #ebebeb}
+    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Courier; color: #394251; background-color: #ebebeb}
+    p.p8 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Courier; color: #394251}
+    p.p9 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Courier; color: #394251; background-color: #ebebeb}
+    p.p10 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; color: #394251}
+    p.p11 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Courier; color: #394251; min-height: 14.0px}
+    span.s1 {font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    span.s2 {font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    span.s3 {color: #394251}
+    span.s4 {color: #87165e}
+    span.s5 {font: 12.0px 'Hiragino Kaku Gothic ProN'; color: #000000}
+    span.s6 {color: #000000}
+    span.s7 {font: 12.0px Courier; color: #87165e}
+    span.s8 {font: 12.0px Courier}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>Datomic</b><span class="s1"><b>の始め方</b></span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>おもしろデータベース Datomic 事始め</p>
+<p class="p3"><span class="Apple-tab-span">	</span><a href="http://www.datomic.com">http://www.datomic.com</a></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>インフラストラクチャーを見ているだけでもかなり驚きと思いっきりにあふれたDatomic。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><a href="http://docs.datomic.com/architecture.html">http://docs.datomic.com/architecture.html</a></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>公式サイトには「動かしながら学べる」感じのリファレンスがあるので、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><a href="http://docs.datomic.com/getting-started.html">http://docs.datomic.com/getting-started.html</a></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>はじめにこれをやってみよう的な。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>DL</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>DatomicにはFree版とPro版があり、Free版は下記からDLできる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><a href="http://downloads.datomic.com/free.html">http://downloads.datomic.com/free.html</a></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>in-memory dbを動かす</b></p>
+<p class="p4"><span class="s2"><span class="Apple-tab-span">	</span></span>shell<span class="s2">起動</span></p>
+<p class="p5">bin/shell</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>in-memory dbのドメインを切る</p>
+<p class="p6"><span class="s3">uri = </span>"datomic:mem://hello"<span class="s3">;</span></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span> dbを作る</p>
+<p class="p7">Peer.createDatabase(uri);</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Peerっていうのは、インターフェースみたいなもの。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>connectionを作成</p>
+<p class="p7">conn = Peer.connect(uri);</p>
+<p class="p3">→</p>
+<p class="p8">&lt;datomic.peer.LocalConnection@473fae05&gt;</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>データを作成、次に追加を行う。</p>
+<p class="p7">datom = Util.list(<span class="s4">"db/add"</span>,<span class="Apple-converted-space"> </span></p>
+<p class="p7"><span class="Apple-converted-space">                  </span>Peer.tempid(<span class="s4">"db.part/user"</span>),<span class="Apple-converted-space"> </span></p>
+<p class="p7"><span class="Apple-converted-space">                  </span><span class="s4">"db/doc"</span>,</p>
+<p class="p7"><span class="Apple-converted-space">                  </span><span class="s4">"hello world"</span>);</p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>データを追加</p>
+<p class="p9">response = conn.transact(Util.list(datom));<span class="s5"><span class="Apple-tab-span">	</span></span></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>データベースを取得</p>
+<p class="p7">db = conn.db();</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p10"><span class="s6"><span class="Apple-tab-span">	</span></span>クエリを打ってみる → cb/docプロパティの値が<span class="s7">"hello world"</span>なentity を取得する</p>
+<p class="p6"><span class="s3">Peer.q(</span>"[:find ?entity :where [?entity :db/doc \"hello world\"]]"<span class="s3">, db);</span></p>
+<p class="p3">→</p>
+<p class="p8">&lt;[[17592186045417]]&gt;</p>
+<p class="p11"><br></p>
+<p class="p10"><span class="s8"><span class="Apple-tab-span">	</span></span>値が返ってきた。</p>
+<p class="p11"><br></p>
+<p class="p11"><br></p>
+<p class="p10">続く</p>
+</body>
+</html>
