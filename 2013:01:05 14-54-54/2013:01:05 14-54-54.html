@@ -37,21 +37,25 @@
 <p class="p4"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202013-01-05%2014.51.38.png" alt="スクリーンショット 2013-01-05 14.51.38.png"></p>
 <p class="p5"><b></b><br></p>
 <p class="p5"><b></b><br></p>
-<p class="p3"><b>エラーが出る</b></p>
+<p class="p3"><b>ビルドするとエラーが出る</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>MacRuby.hがない、と言われる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>それ以前に、</p>
 <p class="p5"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>XcodeのVersion upに伴い、frameworkの場所が変更になっている。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>のだけど、MacRubyのframeworkインストール場所が変更されず古いままなのが問題。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>のだけど、MacRubyのframeworkのインストール場所が変更されず古いままなのが問題。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Issueにもある</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
 <p class="p5"><br></p>
 <p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>解消するには、</p>
 <p class="p4"><span class="Apple-tab-span">	</span>MacRuby<span class="s3">インストール後、</span></p>
 <p class="p2"><br></p>
-<p class="p4"><span class="Apple-tab-span">	</span><span class="s3">このへんに出来てる</span>MacRuby<span class="s3">の</span>.framework<span class="s3">フォルダ一式を、</span></p>
-<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span>(</span>あとで、、たぶん判る筈。<span class="s2">)</span></p>
-<p class="p2"><span class="Apple-tab-span">	</span></p>
-<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span>Xcode</span>の<span class="s2">App</span>内へと、Xcode.app　を右クリック→パッケージの内容を表示　から、</p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>/Library/Frameworks に出来てる<span class="s2">MacRuby</span>の<span class="s2">.framework</span>フォルダ一式　macRuby.framework</p>
+<p class="p4"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202013-01-05%2015.06.40.png" alt="スクリーンショット 2013-01-05 15.06.40.png"></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これを、<span class="s2"><span class="Apple-tab-span">	</span>Xcode</span>の<span class="s2">App</span>内の特定の箇所へとコピーする。</p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Xcode.app　を右クリック→パッケージの内容を表示　から、</p>
 <p class="p2"><br></p>
-<p class="p6">/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/System/Library</p>
+<p class="p6">Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/System/Library</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>にぶち込むと、<span class="s2">OK</span>になる。</p>
 <p class="p2"><br></p>
