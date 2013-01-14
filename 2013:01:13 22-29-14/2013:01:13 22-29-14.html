@@ -10,7 +10,9 @@
     p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
     p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
     p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
-    span.s1 {font: 12.0px Helvetica}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #ebebeb}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #ebebeb; min-height: 18.0px}
     span.Apple-tab-span {white-space:pre}
   </style>
 </head>
@@ -20,36 +22,85 @@
 <p class="p3"><b>概要</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>Akka 2.1.0系がScala2.10.0に統合された。</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
-<p class="p3"><span class="Apple-tab-span">	</span>公式の方だと、Migrationとかもあるけど、</p>
-<p class="p3"><span class="Apple-tab-span">	</span>正直、以前のActorにつきっきりで無かったのなら、Migrateにつきあう必要は無さそう。</p>
-<p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>実際、scala 2.10.0を落としてくると、</p>
-<p class="p3"><span class="s1"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202013-01-13%2022.08.25.png" alt="スクリーンショット 2013-01-13 22.08.25.png"></span><span class="Apple-tab-span">	</span>こんな感じに</p>
+<p class="p3"><span class="Apple-tab-span">	</span>scala 2.10.0を落としてくると、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>(下記はhomebrewで入れたCellerのなかみ)</p>
+<p class="p4"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202013-01-13%2022.08.25.png" alt="スクリーンショット 2013-01-13 22.08.25.png"></p>
+<p class="p3"><span class="Apple-tab-span">	</span>こんな感じに</p>
 <p class="p3"><span class="Apple-tab-span">	</span>akka-actors.jar と scala-actors.jar が同居しているところが見れる。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>公式の方だと、Migration Guide とかもあるけど、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://docs.scala-lang.org/overviews/core/actors-migration-guide.html">http://docs.scala-lang.org/overviews/core/actors-migration-guide.html</a></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>正直、以前のActorにつきっきりで無かったのなら、Migrateにつきあう必要は無さそう。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
 <p class="p3"><b>Gradleでの設定</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>CIできないコードは糞だ。サーイエッサー！！</p>
-<p class="p3"><span class="Apple-tab-span">	</span>早速GradleでCIできるようにセットアップ</p>
+<p class="p3"><span class="Apple-tab-span">	</span>「CIできないコードは糞だ！　手離れよくなるようにまず回転を作り出せ糞共！！」「サーイエッサー！！」</p>
+<p class="p3"><span class="Apple-tab-span">	</span>早速GradleでCIできるようにセットアップ。</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>が、</p>
 <p class="p3"><span class="Apple-tab-span">	</span>MavenCentralに、akka-actors.jar が、まだ無い。</p>
-<p class="p3"><span class="Apple-tab-span">	</span><a href="http://search.maven.org/#search%7Cga%7C1%7Corg.scala-lang">http://search.maven.org/#search%7Cga%7C1%7Corg.scala-lang</a></p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>ので、地道にScalaをインストールしたlibから引き出す事になる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://search.maven.org/#search%7Cga%7C1%7Corg.scala-lang">http://search.maven.org/#search%7Cga%7C1%7Corg.scala-lang</a></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>、、akka-actors.jar が無い。</p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>org.scala-lang 以外でpublishされてるのかな。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ほかのものは大体あるんだけどなー。</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>めんどくせええええええ。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>ので、</p>
-<p class="p3"><span class="Apple-tab-span">	</span><a href="http://myrepo.net/repo">http://myrepo.net/repo</a></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>代わりに(いつも通り)、Akka actorの2.1.0 for Scala 2.10.0 を見つけてきて対処。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://mvnrepository.com/artifact/org.scala-lang">http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22com.typesafe.akka%22</a></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>から、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>akka-actor_2.10-2.1.0.jar</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
-<p class="p3"><span class="Apple-tab-span">	</span>をrepoに加えて、</p>
-<p class="p3"><span class="Apple-tab-span">	</span>[group: "com.typesafe.akka", name: "akka-actor_2.10",version: "2.1.0"]</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>を取得。</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>とか書いて解決してた。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>今回はこの負債を払う。</p>
 <p class="p2"><br></p>
-<p class="p3">つづく。</p>
+<p class="p3"><b>差分</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Acala 2.10.0に含まれる akka-actors.jar と Akka が現在配布している akka-actor_2.10-2.1.0.jar の差分は、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>無い。</p>
 <p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>build.gradle</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>とりあえず、最新のAkka-actorを使うコードについてのbuild.gradle は、下記みたいな感じ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>sbtでも同様。</p>
+<p class="p2"><br></p>
+<p class="p3">build.gradle</p>
+<p class="p5">apply plugin:"scala"</p>
+<p class="p6"><br></p>
+<p class="p5">repositories {</p>
+<p class="p5"><span class="Apple-tab-span">	</span>mavenCentral()</p>
+<p class="p5">}</p>
+<p class="p6"><br></p>
+<p class="p5">dependencies {</p>
+<p class="p5"><span class="Apple-tab-span">	</span>scalaTools<span class="Apple-converted-space">  </span>(</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>[group: "org.scala-lang", name: "scala-compiler",version: "2.10.0"],</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>[group: "org.scala-lang", name: "scala-library",version: "2.10.0"],</p>
+<p class="p5"><span class="Apple-tab-span">	</span>)</p>
+<p class="p6"><br></p>
+<p class="p5"><span class="Apple-tab-span">	</span>compile (</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>[group: "org.scala-lang", name: "scala-library",version: "2.10.0"],</p>
+<p class="p6"><br></p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>// [group: "org.scala-lang", name: "akka-actors",version: "2.10.0"],not yet applied. 01/13/13 22:27:38</p>
+<p class="p6"><br></p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>[group: "com.typesafe.akka", name: "akka-actor_2.10",version: "2.1.0"],</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>// [group: "com.typesafe.akka", name: "akka-kernel",version: "2.1.0"],</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>// [group: "com.typesafe.akka", name: "akka-remote",version: "2.1.0"],</p>
+<p class="p5"><span class="Apple-tab-span">	</span>)</p>
+<p class="p5">}</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>まー根本的に、CIサーバにScala入れてあるんだからそこから akka-actors.jar 使えよって話なんですけど、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>できることなら、Centralから落として、CIの環境に依存しないようにしたいなっていう。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Centralには依存しまくりなんだけど。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>定期的にgradle内のlibをfrozenな感じにして保存しておけばOKかなと。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p2"><br></p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
 </body>
