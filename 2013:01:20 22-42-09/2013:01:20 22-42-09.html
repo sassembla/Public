@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1187.34">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    span.s1 {font: 12.0px Helvetica}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>PythonでWebsocket受けるサーバ</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>さっくり作ってみる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>libevent と、geventが必要。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>環境はMac OSX 10.8.2 、Python 2.7</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>libevent</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><a href="http://libevent.org">http://libevent.org</a></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>brewから入れると楽。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>sudo chown sassembla:wheel /usr/local/lib</p>
+<p class="p3"><span class="Apple-tab-span">	</span>と</p>
+<p class="p3"><span class="Apple-tab-span">	</span>sudo chown sassembla:wheel /usr/local/include</p>
+<p class="p3"><span class="Apple-tab-span">	</span>が必要だった。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="s1">M</span>acでこの辺がwheelになってるのなんでだろう。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>gevent</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>libeventに依存しているので、libeventを先に入れておくこと。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Macだとデフォルトでeasy_installが入っているので、入れるのは楽。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>sudo easy_install gevent-websocket</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>sudoいるっけな、、、</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+</body>
+</html>
