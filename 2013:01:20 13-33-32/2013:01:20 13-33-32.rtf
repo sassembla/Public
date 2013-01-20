@@ -1,0 +1,226 @@
+{\rtf1\ansi\ansicpg932\cocoartf1187\cocoasubrtf340
+{\fonttbl\f0\fnil\fcharset128 HiraKakuProN-W3;\f1\fnil\fcharset0 Monaco;\f2\fswiss\fcharset0 Helvetica;
+}
+{\colortbl;\red255\green255\blue255;\red127\green0\blue85;\red230\green230\blue230;\red0\green0\blue192;
+\red94\green94\blue255;\red42\green0\blue255;\red63\green127\blue95;\red230\green230\blue230;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww23040\viewh9120\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+
+\f0\b\fs44 \cf0 Akka\'82\'ccActor\'82\'c5Broadcast
+\b0\fs24 \
+\
+
+\b \'8a\'54\'97\'76
+\b0 \
+	Akka\'82\'ccActor\'82\'cd\'81\'41Scala\'82\'ccActors\'82\'c6\'88\'d9\'82\'c8\'82\'e8\'81\'41ActorSystem\'82\'c6\'82\'a2\'82\'a4\'8d\'aa\'8a\'b2\'83\'56\'83\'58\'83\'65\'83\'80\'82\'f0\'8e\'9d\'82\'c1\'82\'c4\'82\'a2\'82\'e9\'81\'42\
+\
+	\'82\'b1\'82\'ea\'82\'c9\'82\'e6\'82\'c1\'82\'c4\'81\'41Actor\'8a\'d4\'82\'f0\'8c\'d7\'82\'a2\'82\'be\'83\'52\'83\'93\'83\'67\'83\'8d\'81\'5b\'83\'8b\'82\'e2\'81\'41\'83\'56\'83\'58\'83\'65\'83\'80\'93\'af\'8e\'6d\'82\'cc\'83\'52\'83\'93\'83\'67\'83\'8d\'81\'5b\'83\'8b\'82\'aa\'89\'c2\'94\'5c\'82\'c9\'82\'c8\'82\'c1\'82\'c4\'82\'a2\'82\'e9\'81\'42\
+\
+	Actors(2.9.x\'88\'c8\'91\'4f\'82\'ccScala\'82\'ccActor)\'82\'be\'82\'c6\'81\'41\'82\'b1\'82\'cc\'95\'d3\'82\'aa\'96\'b3\'82\'a9\'82\'c1\'82\'bd\'82\'cc\'82\'c5\'81\'41\
+	Broadcast = \'83\'81\'83\'62\'83\'5a\'81\'5b\'83\'57\'82\'aa\'91\'53Actor\'82\'c9\'93\'cd\'82\'ad\'81\'40\'82\'c6\'82\'a9\'82\'b5\'82\'bd\'82\'a2\'8f\'ea\'8d\'87\'81\'41\'8e\'a9\'91\'4f\'82\'c5object\'92\'75\'82\'ad\'82\'c6\'82\'a9\'82\'b5\'82\'c4\'91\'ce\'8f\'88\'82\'b5\'82\'c4\'82\'bd\'81\'42\
+\
+	\'97\'76\'82\'cd\'81\'41\'8b\'40\'8d\'5c\'82\'c6\'82\'b5\'82\'c4\'81\'41Central\'82\'dd\'82\'bd\'82\'a2\'82\'c8\'82\'e0\'82\'cc\'82\'aa\'96\'b3\'82\'ad\'82\'c4\'81\'41\'8e\'a9\'91\'4f\'82\'c5\'8e\'c0\'91\'95\'82\'b5\'82\'c8\'82\'ab\'82\'e1\'82\'a2\'82\'af\'82\'c8\'82\'a9\'82\'c1\'82\'bd\'81\'41\'82\'c6\'81\'42\
+\
+	\'82\'bb\'82\'cc\'95\'d3\'81\'411W\'82\'ad\'82\'e7\'82\'a2\'82\'c5\'82\'b4\'82\'c1\'82\'c6Java\'82\'a9\'82\'e7\'8e\'67\'82\'a6\'82\'e9\'82\'e6\'82\'a4\'82\'c9\'82\'b5\'82\'bd\'82\'cc\'82\'aa\'82\'b1\'82\'cc\'95\'d3\
+		{\field{\*\fldinst{HYPERLINK "https://github.com/sassembla/ScalaMessengerPrototype"}}{\fldrslt https://github.com/sassembla/ScalaMessengerPrototype}}\
+\
+	\'82\'c5\'81\'41Akka\'82\'c5\'8f\'91\'82\'ab\'92\'bc\'82\'b5\'82\'c4Java?\'82\'c8\'82\'c9\'82\'bb\'82\'ea\'81\'48\'82\'c8\'8a\'b4\'82\'b6\'82\'c9\'82\'c8\'82\'c1\'82\'bd\'82\'e0\'82\'cc\'82\'f0\'8e\'67\'82\'c1\'82\'c4\'82\'cd\'82\'e2\'8e\'4f\'83\'96\'8c\'8e\'81\'42\
+	\'8c\'8e\'93\'fa\'82\'aa\'8c\'6f\'82\'c2\'82\'cc\'82\'cd\'91\'ac\'82\'a2\'81\'42\
+	\
+	\'82\'e0\'82\'a4Actors\'82\'c9\'8a\'d6\'82\'b5\'82\'c4\'82\'cd\'89\'bd\'82\'e0\'82\'a9\'82\'e0\'96\'b3\'82\'a9\'82\'c1\'82\'bd\'8e\'96\'82\'c9\'82\'b5\'82\'c4\'82\'a2\'82\'a2\'82\'c6\'8e\'76\'82\'a4\'81\'42\
+	\'82\'c5\'81\'41\
+\
+\
+
+\b Akka\'82\'ccActor\'82\'c5Broadcast\'82\'c8\'8e\'64\'91\'67\'82\'dd\'82\'f0\'8d\'ec\'82\'c1\'82\'c4\'82\'dd\'82\'e9
+\b0 \
+	\'97\'e1\'82\'c6\'82\'b5\'82\'c4\'8d\'a1\'89\'f1\'82\'cc\'82\'a8\'91\'e8\'81\'41\'95\'a1\'90\'94\'82\'ccActor\'8a\'d4\'82\'c5\'83\'81\'83\'62\'83\'5a\'81\'5b\'83\'57\'82\'f0\'89\'f0\'8e\'df\'82\'b5\'82\'bd\'82\'a2\'8f\'ea\'8d\'87\'81\'41\
+\
+	Akka\'82\'ccActor\'82\'c5\'82\'cd\'81\'41EventBus\'82\'f0\'8e\'67\'82\'c1\'82\'c4pub-sub\'82\'aa\'8e\'c0\'91\'95\'82\'c5\'82\'ab\'82\'e9\'81\'42\
+		\'8e\'51\'8d\'6c\'81\'46{\field{\*\fldinst{HYPERLINK "http://doc.akka.io/docs/akka/2.1-M2/scala/event-bus.html"}}{\fldrslt http://doc.akka.io/docs/akka/2.1-M2/scala/event-bus.html}}\
+\
+\
+	(Akka Router \'82\'ccBroadcast\'82\'cd\'82\'b1\'82\'ea\'82\'c6\'82\'cd\'88\'d9\'82\'c8\'82\'c1\'82\'bd\'97\'70\'93\'72\'82\'c9\'8e\'67\'97\'70\'82\'b7\'82\'e9)\
+		\'8e\'51\'8d\'6c\'81\'46{\field{\*\fldinst{HYPERLINK "http://doc.akka.io/docs/akka/snapshot/scala/routing.html"}}{\fldrslt http://doc.akka.io/docs/akka/snapshot/scala/routing.html}}\
+\
+	\'82\'b1\'82\'f1\'82\'c8\'8a\'b4\'82\'b6\'81\'42\
+SampleBroadcasterMain.scala\
+\pard\pardeftab720
+
+\f1\fs22 \cf2 \cb3 import\cf0  akka.actor._\
+\
+\cf2 case\cf0  \cf2 class\cf0  Message\ul (\cf4 \ulnone body\cf0 :String)\
+\
+\cf2 class\cf0  SampleActor \cf2 extends\cf0  Actor \{\
+  \cf2 import\cf0  java.util.UUID\
+\
+  \cf2 val\cf0  \cf4 myId\cf0  = UUID.randomUUID.toString\
+\
+  \cf2 def\cf0  receive = \{\
+    \cf2 case\cf0  \cf5 message\cf0 :Message => println(\cf6 "I am "\cf0 +\cf4 myId\cf0 +\cf6 " /message:"\cf0 +\cf5 message\cf0 .\cf4 body\cf0 )    \
+  \}\
+\}\
+\
+\
+\cf2 object\cf0  SampleBroadcasterMain \{\
+  \cf2 def\cf0  main(args: Array[String]) = \{\
+\
+   \cf7 //\ul Genereate\ulnone  system\cf0 \
+    \cf2 val\cf0  \cf5 system\cf0  = ActorSystem(\cf6 "namespace"\cf0 )\
+\
+    \cf7 //Create actor\cf0 \
+    \cf2 val\cf0  \cf5 sub1\cf0  = \cf5 system\cf0 .actorOf(Props[SampleActor])\
+\
+    \cf7 //add actor to system-subscriber's network\cf0 \
+    \cf5 system\cf0 .eventStream.subscribe(sub1, classOf[Message])\
+\
+    \cf7 //add another one -the 2nd\cf0 \
+    \cf5 system\cf0 .eventStream.subscribe(system.actorOf(Props[SampleActor]), classOf[Message])\
+\
+    \cf7 //and add another one -the 3rd\cf0 \
+    \cf5 system\cf0 .eventStream.subscribe(system.actorOf(Props[SampleActor]), classOf[Message])\
+\
+    \cf7 //publish \ul messeage\ulnone  from here to the all subscribers.\cf0 \
+    \cf5 system\cf0 .eventStream.publish(Message(\cf6 "hereComes! subscrivers!!"\cf0 ))\
+  \}\
+\}
+\f0\fs24 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+\cf0 \cb1 \
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+
+\b \cf0 \'8e\'c0\'8d\'73\'82\'b7\'82\'e9\'82\'c6
+\b0 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+\cf0 \cb8 17:06:50.341 [INFO] [org.gradle.api.internal.project.ant.AntLoggingAdapter] [ant:java] I am 77175ffd-9823-4444-96ac-7dc6e7d250e4 /message:hereComes! subscrivers!!\
+17:06:50.342 [INFO] [org.gradle.api.internal.project.ant.AntLoggingAdapter] [ant:java] I am 6166563a-c421-4ae4-a820-8fbdec895e2e /message:hereComes! subscrivers!!\
+17:06:50.343 [INFO] [org.gradle.api.internal.project.ant.AntLoggingAdapter] [ant:java] I am 88b7d855-b0fa-4706-87fd-558760876024 /message:hereComes! subscrivers!!
+\b \
+
+\b0 \cb1 \
+	\'8c\'a9\'8e\'96\'82\'c9\'81\'41\'93\'6f\'98\'5e\'82\'b5\'82\'bdactor\'82\'b7\'82\'d7\'82\'c4\'82\'c9Message\'83\'49\'83\'75\'83\'57\'83\'46\'83\'4e\'83\'67\'82\'aa\'93\'8a\'82\'b0\'82\'e7\'82\'ea\'82\'c4\'82\'a2\'82\'e9\'81\'42\
+	\'82\'e7\'82\'c1\'82\'ad\'81\'5b\'81\'5b\'81\'5b\'81\'42\
+\
+	eventBus\'82\'cd\'81\'41\'8a\'f9\'91\'b6\'82\'cc\'97\'70\'93\'72\'82\'c6\'82\'b5\'82\'c4DeadLetter\'82\'c6\'82\'a9\'82\'c9\'8e\'67\'82\'c1\'82\'c4\'82\'a2\'82\'e9\'81\'42\
+	\'82\'bb\'82\'ea\'82\'f0\'8a\'4f\'91\'a4\'82\'a9\'82\'e7\'82\'e0\'8e\'67\'82\'a6\'82\'e9\'82\'e6\'82\'a4\'82\'c9\'81\'41\'8e\'51\'89\'c1\'89\'c2\'94\'5c\'82\'c8\'82\'e6\'82\'a4\'82\'c9\'82\'b5\'82\'c4\'82\'a0\'82\'e9\'81\'41\'82\'c6\'82\'a2\'82\'a4\'81\'42\
+	\'82\'c8\'82\'e9\'82\'d9\'82\'c7\'93\'49\'82\'c8\'8a\'b4\'82\'b6\'81\'42\
+\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+
+\b \cf0 \'91\'bc\'82\'c9\'82\'e0\'89\'bd\'82\'aa\'8a\'79\'82\'a9
+\b0 \
+	Log\'82\'c6\'82\'a9\'82\'aa\'8a\'79\'82\'c9\'82\'c8\'82\'c1\'82\'c4\'82\'a2\'82\'dc\'82\'b7\'81\'42\
+	\'82\'bd\'82\'c6\'82\'a6\'82\'ceLogger\'82\'dd\'82\'bd\'82\'a2\'82\'c8\'82\'e0\'82\'cc\'82\'f0\'8c\'c2\'95\'ca\'82\'c9\'90\'cf\'82\'f1\'82\'be\'82\'e8\'81\'41\
+\
+	LoggerActor\'82\'dd\'82\'bd\'82\'a2\'82\'c8\'82\'cc\'82\'f0\'8d\'ec\'82\'c1\'82\'c4CentralPoint\'82\'dd\'82\'bd\'82\'a2\'82\'c8\'82\'e0\'82\'cc\'82\'f0\'8e\'a9\'91\'4f\'82\'c5\'8d\'ec\'82\'c1\'82\'bd\'82\'e8\'82\'b5\'82\'c4\'82\'bd\'82\'cc\'82\'c5\'82\'b7\'82\'aa\'81\'41\
+\
+	Akka\'82\'c9\'82\'c8\'82\'e9\'82\'c6\'81\'41ActorSystem\'82\'c9\'91\'ce\'82\'b5\'82\'c4\'82\'ccLogging\'82\'cc\'8e\'f3\'82\'af\'8e\'4d\'82\'aa\'8e\'e6\'82\'e8\'95\'74\'82\'af\'89\'c2\'94\'5c\'82\'c8\'82\'cc\'82\'c5\'81\'41\'82\'a0\'82\'c6\'82\'a9\'82\'e7Log\'82\'f0\'82\'c2\'82\'af\'82\'bd\'82\'e8\'8a\'4f\'82\'b5\'82\'bd\'82\'e8\'82\'aa\'82\'c6\'82\'c4\'82\'e0\'97\'65\'88\'d5\'82\'c9\'82\'c8\'82\'e8\'82\'dc\'82\'b5\'82\'bd\'81\'42\
+	\'91\'53\'91\'cc\'91\'9c\'82\'c6\'82\'b5\'82\'c4\'82\'cd\'81\'41\
+\
+	\'81\'45LogActor\'82\'f0Actor\'82\'d6\'82\'c6mixin + log\'8f\'6f\'97\'cd\'82\'b7\'82\'e9\'83\'52\'81\'5b\'83\'68\'82\'f0Actor\'82\'cc\'92\'86\'82\'c9\'8f\'91\'82\'ad\
+	\'81\'45system\'82\'d6\'82\'c6\
+\
+\
+	system\'82\'d6\'82\'c6logListener\'82\'f0\'92\'c7\'89\'c1\
+\pard\pardeftab720
+
+\f1\fs22 \cf0 \cb8     \cf2 val\cf0  \cf4 logListener\cf0  = system.actorOf(Props[\cb3 SampleLogListener\cb8 ])
+\f0\fs24 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+\cf0 \cb1 \
+	\'82\'c6\'81\'41\
+	log\'82\'f0\'93\'fc\'97\'cd\'82\'b5\'82\'bd\'82\'a2Actor\'82\'d6\'82\'c6trait\'82\'f0mixim\
+\pard\pardeftab720
+
+\f1\fs22 \cf2 \cb8 class\cf0  SampleActor \cf2 extends\cf0  Actor \cf2 with\cf0  ActorLogging \{\
+  \cf2 import\cf0  java.util.UUID\
+\
+  \cf2 val\cf0  \cf4 myId\cf0  = UUID.randomUUID.toString\
+\
+  \cf2 def\cf0  receive = \{\
+    \cf2 case\cf0  \cf5 message\cf0 :Message => \{\
+      println(\cf6 "I am "\cf0 +myId+\cf6 " /message:"\cf0 +\cf5 \ul \ulc5 message\cf0 \ulc0 .body\ulnone )\
+      \cf4 log\cf0 .info(\cf6 "I am "\cf0 +myId+\cf6 " /message:"\cf0 +\cf5 \ul \ulc5 message\cf0 \ulc0 .body\ulnone )\
+\pard\pardeftab720
+\cf0 \cb3     \cb8 \}\
+\pard\pardeftab720
+\cf0   \ul \}\ulnone \
+\}
+\f0\fs24 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+\cf0 \cb1 \
+\
+	\'82\'c5\'81\'41LogListener\'82\'cc\'96\'7b\'91\'cc\'82\'cd\'82\'b1\'82\'f1\'82\'c8\'8a\'b4\'82\'b6\
+\pard\pardeftab720
+
+\f1\fs22 \cf2 \cb8 class\cf0  SampleLogListener \cf2 extends\cf0  Actor \{\
+  \cf7 //log\cf0 \
+  \cf2 import\cf0  akka.event.Logging.InitializeLogger\
+  \cf2 import\cf0  akka.event.Logging.LoggerInitialized\
+  \cf2 import\cf0  akka.event.Logging.Error\
+  \cf2 import\cf0  akka.event.Logging.Warning\
+  \cf2 import\cf0  akka.event.Logging.Info\
+  \cf2 import\cf0  akka.event.Logging.Debug\
+  \
+  \cf2 def\cf0  receive = \{\
+    \cf2 case\cf0  InitializeLogger(_)                        
+\f0 \'81\'cb
+\f1  print(\cf6 "initilaized"\cf0 )\
+    \cf2 case\cf0  Error(\cf5 cause\cf0 , \cf5 logSource\cf0 , \cf5 logClass\cf0 , \cf5 message\cf0 ) 
+\f0 \'81\'cb
+\f1  print(\cf6 "Err  "\cf0  + \cf5 message\cf0 )\
+    \cf2 case\cf0  Warning(\cf5 logSource\cf0 , \cf5 logClass\cf0 , \cf5 message\cf0 )      
+\f0 \'81\'cb
+\f1  print(\cf6 "War  "\cf0  + \cf5 message\cf0 )\
+    \cf2 case\cf0  Info(\cf5 logSource\cf0 , \cf5 logClass\cf0 , \cf5 message\cf0 )         
+\f0 \'81\'cb
+\f1  print(\cf6 "Inf  "\cf0  + \cf5 message\cf0 )\
+    \cf2 case\cf0  Debug(\cf5 logSource\cf0 , \cf5 logClass\cf0 , \cf5 message\cf0 )        
+\f0 \'81\'cb
+\f1  print(\cf6 "Deb  "\cf0  + \cf5 message\cf0 )\
+  \}\
+\}
+\f0\fs24 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+\cf0 \cb1 \
+	\'82\'c1\'82\'c4\'82\'c8\'8a\'b4\'82\'b6\'82\'c8\'82\'cc\'82\'c5\'81\'41\'8c\'e3\'95\'74\'82\'af\'82\'e0\'82\'e7\'82\'ad\'82\'bf\'82\'f1\'81\'42\
+\
+	\'83\'8d\'83\'4f\'82\'cd\'82\'b1\'82\'f1\'82\'c8\'8a\'b4\'82\'b6\'82\'c9\'82\'c5\'82\'dc\'82\'b7\'81\'42\
+\cb8 18:25:55.925 [INFO] [org.gradle.api.internal.project.ant.AntLoggingAdapter] [ant:java] [INFO] [01/20/2013 18:25:55.845] [namespace-akka.actor.default-dispatcher-4] [akka://namespace/user/$b] I am \cb3 77175ffd-9823-4444-96ac-7dc6e7d250e4\cb8  /message:hereComes! subscrivers!!\
+18:25:55.926 [INFO] [org.gradle.api.internal.project.ant.AntLoggingAdapter] [ant:java] [INFO] [01/20/2013 18:25:55.849] [namespace-akka.actor.default-dispatcher-2] [akka://namespace/user/$d] I am \cb3 6166563a-c421-4ae4-a820-8fbdec895e2e\cb8  /message:hereComes! subscrivers!!\
+18:25:55.926 [INFO] [org.gradle.api.internal.project.ant.AntLoggingAdapter] [ant:java] [INFO] [01/20/2013 18:25:55.850] [namespace-akka.actor.default-dispatcher-3] [akka://namespace/user/$c] I am \cb3 88b7d855-b0fa-4706-87fd-558760876024\cb8  /message:hereComes! subscrivers!!\
+\cb1 	\
+	\'82\'b1\'82\'b1\'82\'c9
+\f2 flu
+\f0 entd\'82\'c6\'82\'a9\'82\'d6\'82\'cc\'82\'c2\'82\'c8\'82\'ac\'8d\'9e\'82\'dd\'82\'cc\'83\'52\'81\'5b\'83\'68\'82\'f0\'8f\'91\'82\'af\'82\'ce\'81\'41\'81\'41\'81\'41\
+	\'82\'a0\'82\'c6\'82\'cd\'81\'41\'81\'41\'81\'41\'82\'ed\'82\'a9\'82\'e9\'82\'c8\'81\'41\'81\'41\'81\'48\
+\
+	\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+
+\b \cf0 \'82\'a8\'82\'dc\'82\'af ActorSystem\'82\'d6\'82\'e6\'82\'a4\'82\'b1\'82\'bb
+\b0 \
+	log\'82\'cc\'92\'86\'82\'c9\'81\'41\cb3 akka://namespace/user/\cb1  \'82\'c6\'82\'a9\'82\'aa\'8f\'6f\'82\'dc\'82\'b5\'82\'bd\'81\'42\
+\
+	\'82\'bb\'82\'a4\'81\'41\'82\'b1\'82\'cc\'82\'d6\'82\'f1\'82\'cd\'81\'41ActorSystem\'82\'cc\'96\'bc\'8f\'cc\'82\'c8\'82\'f1\'82\'c5\'82\'b7\'81\'42\'82\'b3\'82\'c1\'82\'ab\'8c\'88\'82\'df\'82\'bd\'82\'e2\'82\'c2\'81\'42\
+	user\'82\'a9\'82\'e7\'90\'e6\'82\'c9\'81\'41actor\'82\'aa\'90\'dd\'92\'75\'82\'b3\'82\'ea\'82\'c4\'82\'a2\'82\'e9\'81\'42\
+\
+	Supervisor\'82\'c6\'82\'a9\'82\'cc\'98\'62\'82\'c9\'82\'c2\'82\'c8\'82\'aa\'82\'e9\'81\'41ActorSystem\'82\'cc\'91\'53\'91\'cc\'91\'9c\'82\'aa\'81\'41\'82\'b1\'82\'cc\'95\'d3\'82\'c9\'8a\'d6\'82\'ed\'82\'e9\'8a\'b4\'82\'b6\'81\'42\
+	\'8f\'da\'82\'b5\'82\'ad\'82\'cd\
+	{\field{\*\fldinst{HYPERLINK "http://doc.akka.io/docs/akka/2.0/general/actor-systems.html"}}{\fldrslt http://doc.akka.io/docs/akka/2.0/general/actor-systems.html}}\
+\
+\
+
+\b \'83\'54\'83\'93\'83\'76\'83\'8b\'82\'c6\'82\'a9
+\b0 \
+	\'83\'54\'83\'93\'83\'76\'83\'8b\'82\'cd\'89\'ba\'8b\'4c\'82\'c9up\'82\'b5\'82\'dc\'82\'b7\'82\'bd\'81\'42\
+	{\field{\*\fldinst{HYPERLINK "https://github.com/sassembla/AkkaSampleBroadcaster"}}{\fldrslt https://github.com/sassembla/AkkaSampleBroadcaster}}\
+\
+	\
+	\'83\'74\'83\'48\'83\'8b\'83\'5f\'82\'c5\'81\'41\
+	gradlew runJar -d \'82\'c6\'82\'a9\'82\'e2\'82\'e9\'82\'c6\'81\'41\'89\'d2\'93\'ad\'82\'b7\'82\'e9\'94\'a4\'81\'42\
+\
+\
+}
