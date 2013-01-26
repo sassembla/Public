@@ -10,7 +10,6 @@
     p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
     p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
     p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
-    span.s1 {font: 12.0px Helvetica}
     span.Apple-tab-span {white-space:pre}
   </style>
 </head>
@@ -19,11 +18,22 @@
 <p class="p2"><br></p>
 <p class="p3"><b>概要</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>ST2との連携でちょっと必要になったので作ってみる。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>libevent と、geventが必要。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>libevent と、geventが必要。<b>→ 結局ST2上で動かないので、地味に書き直し！</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>環境はMac OSX 10.8.2 、Python 2.7</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ST2でのPython環境は Python 2.6</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
+<p class="p3"><b>用件</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ST2への、他プロセスからの入力を行う方式として、WebSocketでのpushを試してみた。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ST2のプラグインとしてWebSocketのサーバを起動し、他のプロセスからの入力を受ける。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>WebSocketのクライアントとサーバどっち書こう、と迷って、サーバにした。</p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>他プロセス側でサーバ書くのだるいと思ったので。</b></p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>使用ライブラリ一覧</b></p>
 <p class="p3"><b>libevent</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>結局使わない！！！</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span><a href="http://libevent.org">http://libevent.org</a></p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p3"><span class="Apple-tab-span">	</span>brewから入れると楽。</p>
@@ -33,19 +43,49 @@
 <p class="p3"><span class="Apple-tab-span">	</span>sudo chown sassembla:wheel /usr/local/include</p>
 <p class="p3"><span class="Apple-tab-span">	</span>が必要だった。</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span><span class="s1">M</span>acでこの辺がwheelになってるのなんでだろう。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Macでこの辺がwheelになってるのなんでだろう。</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p2"><br></p>
 <p class="p3"><b>gevent</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>結局使わない！！！</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>libeventに依存しているので、libeventを先に入れておくこと。</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p3"><span class="Apple-tab-span">	</span>Macだとデフォルトでeasy_installが入っているので、入れるのは楽。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>sudo easy_install gevent-websocket</p>
-<p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>sudoいるっけな、、、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>sudo easy_install-2.6 gevent-websocket</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>2.6なのは、ST2のMac版のデフォルトのPythonがv2.6だから。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Macには標準で2.7入ってるんだけどなっ　なっ、、</p>
 <p class="p2"><br></p>
-<p class="p3"><b>ST2で、ErrorとかをPushで受けて表示する</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>続く。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>最初、なにも考えずeasy_installしてたら、2.7が入ってて、ST2から呼べずに死んでた。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>下記を参考にimport弄る or 2.6を使う、で、2.6を使う事を選択。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><a href="http://d.hatena.ne.jp/holiru/20101223/1293118186">http://d.hatena.ne.jp/holiru/20101223/1293118186</a></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ST2のプラグインとして、上で紹介したWS受ける機構をMainThread以外のとこで実行することで、WSのサーバは完成。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>、、したと思ったんだけど、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>このライブラリをST2から別スレッドで呼ぼうとしたところ、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>「multiThreadには対応してねーよksg」と言われてしまうなどしていた。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><a href="http://stackoverflow.com/questions/9692089/why-gevent-on-a-flask-app-with-apache-mod-wsgi-is-raising-notimplementederror">http://stackoverflow.com/questions/9692089/why-gevent-on-a-flask-app-with-apache-mod-wsgi-is-raising-notimplementederror</a></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>書く</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>既存のヤツはだめだ！！　</p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>（というかMainThread以外でサーバ動かそうという理屈がそもそもおかしい）</b></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>自分で書くことにした。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>さまよって、Pythonのみで書かれた力作を発見。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><a href="https://github.com/kcuzner/python-websocket-server">https://github.com/kcuzner/python-websocket-server</a></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>いろいろ勉強させてもらいつつ、写経。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>単体で動かす事が出来た！！　依存がないぞ素晴らしい。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/SublimeSocket">https://github.com/sassembla/SublimeSocket</a></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>ST2で、ErrorとかをPushで受けて、エラー情報や値内容をバッファに表示する</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>続く</p>
 </body>
 </html>
