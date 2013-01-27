@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1187.34">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+    span.s1 {font: 12.0px Helvetica}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>Sublime + WebSocketServer = SublimeSocket</b></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>SublimeText2の話。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>SublimeServerとかもある事だし、Sublime上でWebSocketのサーバとか動いたら、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>入力が簡単で疎結合でプラガブルなエディタ補助機構がつくれるんじゃね？という内容を、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Scala全然関係ないGroovy勉強会で思いつくなどしていた。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>WebSocketを使えば、外部からPushで</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・エラー</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・コードの挙動に対する注意点</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・部分的なコンソールの結果</p>
+<p class="p3"><span class="Apple-tab-span">	</span>等をST2に送りつけてバッファに表示することが可能なのではないだろうか？</p>
+<p class="p3"><span class="Apple-tab-span">	</span>というアイデアを得て、やってみてる。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>今までとこれから</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>よくST2でScalaとかを書いているのですが、もしWebSocketがST2に積めると、</p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>ST2</b> + <b>ENSIME Server</b> → 補完、コンパイル補助を<b>ST2に反映</b></p>
+<p class="p4"><br></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span></span>だったのが、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>ST2</b> - websocket - <b>コンパイラとか</b></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>という感じになる。sbtとか繋いで、バカみたいにパワーあるマシンでコンパイルして、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>その間ST2には全く負荷がかからない。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>しかも、テストとか動作時のパラメータを拾ってきて、テストケースの特定の値の上に表示、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>なんてことも出来ちゃう。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>解決したい事</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ENSIMEは、ENSIME自身が重くなる瞬間、ST2も重くなる、という弱点があった。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>注釈も、型について、とかは出せなかったし。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>果たすべき目的は、<b>重量級機能の外部化</b>と、<b>注釈機能の強化。</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>拡張が容易な形</b>とかだと、うれしいな！</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ということで、作っている。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/SublimeSocket">https://github.com/sassembla/SublimeSocket</a></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>興味ある人いらっしゃれば、ぜひ @toru_inoue まで。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+</body>
+</html>
