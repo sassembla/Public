@@ -11,11 +11,12 @@
     p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
     p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
     span.s1 {font: 22.0px Helvetica}
+    span.s2 {font: 12.0px Helvetica}
     span.Apple-tab-span {white-space:pre}
   </style>
 </head>
 <body>
-<p class="p1"><span class="s1"><b>MsgPack</b></span><b>ハッカソン(進行中)</b></p>
+<p class="p1"><span class="s1"><b>MsgPack</b></span><b>ハッカソン(中断中)</b></p>
 <p class="p2"><b></b><br></p>
 <p class="p3"><b>概要</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>せっかくなので、</p>
@@ -42,16 +43,29 @@
 <p class="p3"><b><span class="Apple-tab-span">	</span>node側</b></p>
 <p class="p3"><b><span class="Apple-tab-span">	</span></b><a href="https://github.com/pgriess/node-msgpack">https://github.com/pgriess/node-msgpack</a></p>
 <p class="p2"><b></b><br></p>
-<p class="p3"><b><span class="Apple-tab-span">	</span>から入ったデータが、</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span></b>から入ったデータが、</p>
 <p class="p2"><b></b><br></p>
 <p class="p3"><b><span class="Apple-tab-span">	</span>Python側</b></p>
 <p class="p3"><b><span class="Apple-tab-span">	</span></b><a href="http://pypi.python.org/pypi/msgpack-python/">http://pypi.python.org/pypi/msgpack-python/</a></p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>に出てくる、というだけ。</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
-<p class="p3"><span class="Apple-tab-span">	</span>SublimeSocketのプロトコルとして、MsgPackの受け側作った事無いので、</p>
-<p class="p3"><span class="Apple-tab-span">	</span>どうした物かな的なところ体当たり。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>そもMsgPackの受け側作った事無いので、どうした物かな的なところ体当たり。</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>続く</p>
+<p class="p2"><br></p>
+<p class="p3"><b>実際</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>nodeのWebSocket Clientに、常にopcode = 0x1 =text で送っちゃうバグがあるっぽくて、<span class="Apple-tab-span">	</span>それ直したら何の問題も無く動いた。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>成果物</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/SublimeSocket">SublimeSocket</a></p>
+<p class="p3"><span class="Apple-tab-span">	</span>の、msgpack branch(未push)</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>TODO</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>node websocket client 修正内容を再度確認して、プルリク</p>
+<p class="p3"><span class="Apple-tab-span">	</span>nodeでの<span class="s2">tail&amp;WebSocket</span>ツールが思ったよりも使いやすいので、ファイル監視はこのへんをデフォルトにしようかなと思ったり。</p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>npm</span>でのインストール物が多いのがめんどうくさいが、、うーん、、</p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>この記事の完成、出来た物のプレゼン</p>
 </body>
 </html>
