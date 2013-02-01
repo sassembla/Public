@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1187.34">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    span.s1 {font: 12.0px Helvetica}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>UnityでのコンパイルエラーをSublimeTextに表示</b></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>SublimeText用のプラグインを作っているのだけど、入力サンプルとして</p>
+<p class="p3"><span class="Apple-tab-span">	</span>UnityのエラーログとかをSTで開いたソースに反映してみる。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>必要なもの</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ST側：SublimeSocketプラグイン</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Unity側：特に無し</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>中継機：WebSocketのクライアントに成れて、Unityのログが読めるやつ</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>→<b>node.js</b>で。　あんま詳しく無いけど。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>Unityのコンソール出力はどこに有るのか</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Twitterで教えてもらった、この辺にあった。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>素直にtailすればよさげ。</p>
+<p class="p4"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202013-01-30%2015.49.39.png" alt="スクリーンショット 2013-01-30 15.49.39.png"></p>
+<p class="p3"><b>WebSocketClientを用意</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ssh + WebSocket、 Clientもある。</p>
+<p class="p3"><b><span class="Apple-tab-span">	</span></b><a href="https://github.com/aluzzardi/wssh">https://github.com/aluzzardi/wssh</a></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>node版</p>
+<p class="p3"><b><span class="Apple-tab-span">	</span></b><a href="https://github.com/einaros/ws">https://github.com/einaros/ws</a></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>今回はこっちを使った。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>shakehandにOriginキーが無かったので、足した。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>足してプルリク中。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>tail</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>nodeでの<span class="s1">tail</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><a href="https://github.com/forward/node-tail">https://github.com/forward/node-tail</a></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ちょうどよそで同僚が使っていたので、感想聞いて使う事が出来た。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>すごくべんり。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>結果</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ちょうど<span class="s1">M</span>sgPackハッカソンがあるので、まとめてアウトプット。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+</body>
+</html>
