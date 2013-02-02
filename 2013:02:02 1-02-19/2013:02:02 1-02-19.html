@@ -16,7 +16,7 @@
   </style>
 </head>
 <body>
-<p class="p1"><span class="s1"><b>MsgPack</b></span><b>ハッカソン(中断中)</b></p>
+<p class="p1"><span class="s1"><b>MsgPack</b></span><b>ハッカソンでSublimeSocket用にMsgPackの受け口作った</b></p>
 <p class="p2"><b></b><br></p>
 <p class="p3"><b>概要</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>せっかくなので、</p>
@@ -38,25 +38,26 @@
 <p class="p2"><b></b><br></p>
 <p class="p2"><b></b><br></p>
 <p class="p3"><b>各MsgPack</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>まずは簡単に、</p>
-<p class="p2"><b></b><br></p>
-<p class="p3"><b><span class="Apple-tab-span">	</span>node側</b></p>
-<p class="p3"><b><span class="Apple-tab-span">	</span></b><a href="https://github.com/pgriess/node-msgpack">https://github.com/pgriess/node-msgpack</a></p>
-<p class="p2"><b></b><br></p>
-<p class="p3"><b><span class="Apple-tab-span">	</span></b>から入ったデータが、</p>
-<p class="p2"><b></b><br></p>
-<p class="p3"><b><span class="Apple-tab-span">	</span>Python側</b></p>
-<p class="p3"><b><span class="Apple-tab-span">	</span></b><a href="http://pypi.python.org/pypi/msgpack-python/">http://pypi.python.org/pypi/msgpack-python/</a></p>
-<p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>に出てくる、というだけ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>node側から入ったデータが、Python側に出てくる、というだけ。</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p3"><span class="Apple-tab-span">	</span>そもMsgPackの受け側作った事無いので、どうした物かな的なところ体当たり。</p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>node側</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span></b>installから。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><a href="https://github.com/pgriess/node-msgpack">https://github.com/pgriess/node-msgpack</a></p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
-<p class="p3"><b>実際</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>nodeのWebSocket Clientに、常にopcode = 0x1 =text で送っちゃうバグがあるっぽくて、<span class="Apple-tab-span">	</span>それ直したら何の問題も無く動いた。</p>
-<p class="p3"><span class="Apple-tab-span">	</span><a href="https://gist.github.com/4692531#file-node-fileobserver-js-L12">https://gist.github.com/4692531#file-node-fileobserver-js-L12</a></p>
+<p class="p3"><b>Python側</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span></b>こちらもinstallから。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><a href="https://github.com/pgriess/node-msgpack">https://github.com/msgpack/msgpack-python</a></p>
 <p class="p2"><br></p>
+<p class="p3">easy_install msgpack-python</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>なのですが、今回はST2の環境(Python2.6)で動かしたいので、</p>
+<p class="p3">easy_install-2.6 msgpack-python</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p2"><br></p>
 <p class="p3"><b>成果物</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/SublimeSocket">SublimeSocket</a></p>
@@ -64,7 +65,6 @@
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>TODO</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>node websocket client 修正内容を再度確認して、プルリク</p>
 <p class="p3"><span class="Apple-tab-span">	</span>nodeでの<span class="s2">tail&amp;WebSocket</span>ツールが思ったよりも使いやすいので、ファイル監視はこのへんをデフォルトにしようかなと思ったり。</p>
 <p class="p3"><span class="s2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>npm</span>でのインストール物が多いのがめんどうくさいが、、うーん、、</p>
 <p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>この記事の完成、出来た物のプレゼン</p>
