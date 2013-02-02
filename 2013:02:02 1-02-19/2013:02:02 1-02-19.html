@@ -22,21 +22,25 @@
   </style>
 </head>
 <body>
-<p class="p1"><b>msgpackハッカソンでSublimeSocketにmp用の受け口作ってUnityのエラー表示した</b></p>
+<p class="p1"><b>msgpackでSublimeSocketにmp用の受け口作って以下略</b></p>
 <p class="p2"><b></b><br></p>
 <p class="p3"><b>概要</b></p>
-<p class="p3"><b><span class="Apple-tab-span">	</span></b>「AkkaのActor関連でmsgpackを扱ったコードを書く」と言ったな、、あれは嘘だ、、</p>
+<p class="p3"><b><span class="Apple-tab-span">	</span></b>「AkkaのActor関連でmsgpackを扱ったコードを書く」と言ったな、、あれは嘘だ。</p>
 <p class="p2"><b></b><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>MessagePackオンラインハッカソン #1</p>
 <p class="p3"><span class="Apple-tab-span">	</span><a href="http://www.zusaar.com/event/505055">http://www.zusaar.com/event/505055</a></p>
 <p class="p3"><span class="Apple-tab-span">	</span>に参加しました。</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>・Obj-Cのメッセージングしてるツールのサーバ間での通信をMsgPackに変える</p>
-<p class="p3"><span class="Apple-tab-span">	</span>・自社で使ってるAkka Actorでの通信モジュールに、MsgPackを使う</p>
-<p class="p3"><span class="Apple-tab-span">	</span>・<a href="https://github.com/sassembla/SublimeSocket">SublimeSocket</a>に、MsgPackでの受け入れクチを付ける</p>
+<p class="p3"><span class="Apple-tab-span">	</span>1.Obj-Cのメッセージングしてるツールのサーバ間での通信をMsgPackに変える</p>
+<p class="p3"><span class="Apple-tab-span">	</span>2.自社で使ってるAkka Actorでの通信モジュールに、MsgPackを使う</p>
+<p class="p3"><span class="Apple-tab-span">	</span>3.SublimeTextのプラグイン<a href="https://github.com/sassembla/SublimeSocket">SublimeSocket</a>(SS)に、MsgPackでの受け入れクチを付ける</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>の、中から、SublimeSocketを選択。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>の、中から、3.SublimeSocketを選択。</p>
+<p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>理由は、一番がんばらずに動く物をまるっと公開できるから、、<span class="Apple-tab-span">	</span>あと、ちょうど、Unity用のコードを書くきっかけが欲しかったので。</p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>目標：</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>msgpack対応でバッファデータとかをUnity &gt; node tail &gt; SSで受け取り &gt; SublimeTextに表示</b></p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>In&amp;Out</b></p>
@@ -44,17 +48,17 @@
 <p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p3"><span class="Apple-tab-span">	</span>node &gt; WebSocket &gt; SublimeText</p>
 <p class="p3"><span class="Apple-tab-span">	</span>が、</p>
-<p class="p3"><b><span class="Apple-tab-span">	</span></b>node &gt; <b>(MsgPack pack)</b> WebSocket <b>(MsgPack unpack)</b> &gt; SublimeText</p>
+<p class="p3"><b><span class="Apple-tab-span">	</span></b>node &gt; <b>(msgpack pack)</b> WebSocket <b>(msgpack unpack)</b> &gt; SublimeText</p>
 <p class="p3"><span class="Apple-tab-span">	</span>になる筈。</p>
 <p class="p2"><b></b><br></p>
 <p class="p2"><b></b><br></p>
-<p class="p3"><b>各msgpack</b></p>
+<p class="p3"><b>各環境でのmsgpack</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>node側から入ったデータが、Python側に出てくる、というだけ。</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p3"><span class="Apple-tab-span">	</span>そもMsgPackの受け側作った事無いので、どうした物かな的なところ体当たり。</p>
 <p class="p2"><b></b><br></p>
 <p class="p2"><b></b><br></p>
-<p class="p3"><b>node側</b></p>
+<p class="p3"><b>msgpack node側</b></p>
 <p class="p3"><b><span class="Apple-tab-span">	</span></b>installから。</p>
 <p class="p3"><span class="Apple-tab-span">	</span><a href="https://github.com/pgriess/node-msgpack">https://github.com/pgriess/node-msgpack</a></p>
 <p class="p2"><br></p>
@@ -63,7 +67,7 @@
 <p class="p3"><span class="Apple-tab-span">	</span><b>ChromeとかだとOrigin=nullでも送ってきたりする</b>ので、デフォルトでもOrigin=nullとかで送ってもらった方が良いのかな、、</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p2"><br></p>
-<p class="p3"><b>Python側</b></p>
+<p class="p3"><b>msgpack<span class="Apple-converted-space">  </span>Python側</b></p>
 <p class="p3"><b><span class="Apple-tab-span">	</span></b>こちらもinstallから。</p>
 <p class="p3"><span class="Apple-tab-span">	</span><a href="https://github.com/pgriess/node-msgpack">https://github.com/msgpack/msgpack-python</a></p>
 <p class="p2"><br></p>
@@ -72,7 +76,8 @@
 <p class="p3"><span class="Apple-tab-span">	</span>なのですが、今回はST2の環境(Python2.6)で動かしたいので、</p>
 <p class="p4">easy_install-2.6 msgpack-python</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>早くST3こねーかなー。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>早くST3こねーかなー。3.3全力で使いたい。</p>
+<p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>成果物</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>UnityのエラーをSublimeText上に表示できるようになった。</p>
@@ -81,10 +86,10 @@
 <p class="p3"><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/SublimeSocket">SublimeSocket</a></p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>の、msgpack branch。</p>
-<p class="p3"><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/SublimeSocket/tree/msgpack">https://github.com/sassembla/SublimeSocket/tree/msgpack</a></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/SublimeSocket/tree/msgpack">https://github.com/sassembla/SublimeSocket/tree/msgpack</a></p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p3"><span class="Apple-tab-span">	</span>説明が最高にアレなのでムビとった。</p>
-<p class="p3"><span class="Apple-tab-span">	</span><a href="http://www.youtube.com/watch?v=JSdpa_LXa8c&amp;feature=youtu.be">http://www.youtube.com/watch?v=JSdpa_LXa8c&amp;feature=youtu.be</a></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://www.youtube.com/watch?v=JSdpa_LXa8c&amp;feature=youtu.be">http://www.youtube.com/watch?v=JSdpa_LXa8c&amp;feature=youtu.be</a></p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>内容</b></p>
@@ -126,9 +131,11 @@
 <p class="p2"><b></b><br></p>
 <p class="p2"><b><span class="Apple-tab-span">	</span></b></p>
 <p class="p3"><b>感想</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>msgpack楽しいですねこれ、、、</p>
-<p class="p3"><span class="Apple-tab-span">	</span>Python版を使うときに、自分が作ってる物がSublimeTextのプラグインなので、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>msgpack Python 楽しいですねこれ、、、らくだし、、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Pythonで使うときに、自分が作ってる物がSublimeTextのプラグインなので、</p>
 <p class="p3"><span class="Apple-tab-span">	</span>どうやってeasy-install促すかなーとか考えが全く及んでなかった事があって、こう、アレでした。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>考えさせられた。もっと考えんと。</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>あとnodeのwsの使い方思いっきり間違えた。Readme読めと。。</p>
 <p class="p2"><b></b><br></p>
@@ -141,5 +148,7 @@
 <p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ws、tail、msgpack モジュールに依存。</p>
 <p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3">ツッコミ等あれば、<a href="https://twitter.com/toru_inoue">@toru_inoue</a>まで。</p>
 </body>
 </html>
