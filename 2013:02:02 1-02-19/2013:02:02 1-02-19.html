@@ -8,12 +8,13 @@
   <meta name="CocoaVersion" content="1187.34">
   <style type="text/css">
     p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
-    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
-    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #ebebeb}
-    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Courier; color: #dd2244; background-color: #fffecc}
-    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; color: #323333}
-    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; color: #323333; min-height: 18.0px}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #ebebeb}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Courier; color: #dd2244; background-color: #fffecc}
+    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; color: #323333}
+    p.p8 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; color: #323333; min-height: 18.0px}
     span.s1 {font: 12.0px 'Hiragino Kaku Gothic ProN'; color: #000000; background-color: transparent}
     span.s2 {color: #323333}
     span.s3 {color: #009999}
@@ -22,133 +23,151 @@
   </style>
 </head>
 <body>
-<p class="p1"><b>msgpackでSublimeSocketにmp用の受け口作って以下略</b></p>
-<p class="p2"><b></b><br></p>
-<p class="p3"><b>概要</b></p>
-<p class="p3"><b><span class="Apple-tab-span">	</span></b>「AkkaのActor関連でmsgpackを扱ったコードを書く」と言ったな、、あれは嘘だ。</p>
-<p class="p2"><b></b><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>MessagePackオンラインハッカソン #1</p>
-<p class="p3"><span class="Apple-tab-span">	</span><a href="http://www.zusaar.com/event/505055">http://www.zusaar.com/event/505055</a></p>
-<p class="p3"><span class="Apple-tab-span">	</span>に参加しました。</p>
-<p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>1.Obj-Cのメッセージングしてるツールのサーバ間での通信をMsgPackに変える</p>
-<p class="p3"><span class="Apple-tab-span">	</span>2.自社で使ってるAkka Actorでの通信モジュールに、MsgPackを使う</p>
-<p class="p3"><span class="Apple-tab-span">	</span>3.SublimeTextのプラグイン<a href="https://github.com/sassembla/SublimeSocket">SublimeSocket</a>(SS)に、MsgPackでの受け入れクチを付ける</p>
-<p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>の、中から、3.SublimeSocketを選択。</p>
-<p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>理由は、一番がんばらずに動く物をまるっと公開できるから、、<span class="Apple-tab-span">	</span>あと、ちょうど、Unity用のコードを書くきっかけが欲しかったので。</p>
-<p class="p2"><b></b><br></p>
-<p class="p3"><b><span class="Apple-tab-span">	</span>目標：</b></p>
-<p class="p3"><b><span class="Apple-tab-span">	</span>msgpack対応でバッファデータとかをUnity &gt; node tail &gt; SSで受け取り &gt; SublimeTextに表示</b></p>
-<p class="p2"><br></p>
-<p class="p2"><br></p>
-<p class="p3"><b>In&amp;Out</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>サンプルとして、nodeで適当なファイルをtail、その結果をSublimeTextのコンソールへと出す、というのをやってみる。</p>
-<p class="p2"><span class="Apple-tab-span">	</span></p>
-<p class="p3"><span class="Apple-tab-span">	</span>node &gt; WebSocket &gt; SublimeText</p>
-<p class="p3"><span class="Apple-tab-span">	</span>が、</p>
-<p class="p3"><b><span class="Apple-tab-span">	</span></b>node &gt; <b>(msgpack pack)</b> WebSocket <b>(msgpack unpack)</b> &gt; SublimeText</p>
-<p class="p3"><span class="Apple-tab-span">	</span>になる筈。</p>
-<p class="p2"><b></b><br></p>
-<p class="p2"><b></b><br></p>
-<p class="p3"><b>各環境でのmsgpack</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>node側から入ったデータが、Python側に出てくる、というだけ。</p>
-<p class="p2"><span class="Apple-tab-span">	</span></p>
-<p class="p3"><span class="Apple-tab-span">	</span>そもMsgPackの受け側作った事無いので、どうした物かな的なところ体当たり。</p>
-<p class="p2"><b></b><br></p>
-<p class="p2"><b></b><br></p>
-<p class="p3"><b>msgpack node側</b></p>
-<p class="p3"><b><span class="Apple-tab-span">	</span></b>installから。</p>
-<p class="p3"><span class="Apple-tab-span">	</span><a href="https://github.com/pgriess/node-msgpack">https://github.com/pgriess/node-msgpack</a></p>
-<p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>node wsでのbinary送信で嵌ってた。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>nodeのwsのオプションでの明示に切り替え。他に、デフォだと入ってないOriginとかもそこで付けられた。</p>
-<p class="p3"><span class="Apple-tab-span">	</span><b>ChromeとかだとOrigin=nullでも送ってきたりする</b>ので、デフォルトでもOrigin=nullとかで送ってもらった方が良いのかな、、</p>
-<p class="p2"><span class="Apple-tab-span">	</span></p>
-<p class="p2"><br></p>
-<p class="p3"><b>msgpack<span class="Apple-converted-space">  </span>Python側</b></p>
-<p class="p3"><b><span class="Apple-tab-span">	</span></b>こちらもinstallから。</p>
-<p class="p3"><span class="Apple-tab-span">	</span><a href="https://github.com/pgriess/node-msgpack">https://github.com/msgpack/msgpack-python</a></p>
-<p class="p2"><br></p>
-<p class="p4">easy_install msgpack-python</p>
-<p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>なのですが、今回はST2の環境(Python2.6)で動かしたいので、</p>
-<p class="p4">easy_install-2.6 msgpack-python</p>
-<p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>早くST3こねーかなー。3.3全力で使いたい。</p>
-<p class="p2"><br></p>
-<p class="p2"><br></p>
-<p class="p3"><b>成果物</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>UnityのエラーをSublimeText上に表示できるようになった。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>msgpackは、Unityから出力されたLog用のDataを固めるために使っている。</p>
-<p class="p2"><b><span class="Apple-tab-span">	</span></b></p>
-<p class="p3"><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/SublimeSocket">SublimeSocket</a></p>
-<p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>の、msgpack branch。</p>
-<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/SublimeSocket/tree/msgpack">https://github.com/sassembla/SublimeSocket/tree/msgpack</a></p>
-<p class="p2"><span class="Apple-tab-span">	</span></p>
-<p class="p3"><span class="Apple-tab-span">	</span>説明が最高にアレなのでムビとった。</p>
-<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://www.youtube.com/watch?v=JSdpa_LXa8c&amp;feature=youtu.be">http://www.youtube.com/watch?v=JSdpa_LXa8c&amp;feature=youtu.be</a></p>
-<p class="p2"><br></p>
-<p class="p2"><br></p>
-<p class="p3"><b>内容</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>太字<b>3,4</b>が今回のハッカソンで作った部分</p>
-<p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>1.<span class="Apple-tab-span">	</span>Unityを起動 &gt; STでファイル開く &gt; SublimeSocket起動 &gt;<span class="Apple-converted-space"> </span></p>
-<p class="p3"><span class="Apple-tab-span">	</span>2.<span class="Apple-tab-span">	</span>node tail起動 &gt;</p>
-<p class="p3"><b><span class="Apple-tab-span">	</span>3.<span class="Apple-tab-span">	</span>Unityのビルド結果ログからパターン出して、msgpackで固めてWebSocketでSublimeSocketに送信 &gt;</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span><b>4.<span class="Apple-tab-span">	</span>SublimeSocket側で複合 &gt;<span class="Apple-converted-space"> </span></b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>5.<span class="Apple-tab-span">	</span>STで表示される<span class="Apple-tab-span">	</span></p>
-<p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>実際にはnode tail</p>
-<p class="p3"><span class="Apple-tab-span">	</span><a href="https://gist.github.com/4692531">https://gist.github.com/4692531</a></p>
-<p class="p3"><span class="Apple-tab-span">	</span>の部分に、Unityのエラーログを見て、<b>SublimeSocketの表示API</b>を叩くところまでが書いてある。</p>
-<p class="p2"><b></b><br></p>
-<p class="p2"><b></b><br></p>
-<p class="p3"><b><span class="Apple-tab-span">	</span>実際のnode tailコードはこのへん</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/SublimeSocket/blob/msgpack/tool/nodeTailSocket/node_tailsocket.js">https://github.com/sassembla/SublimeSocket/blob/msgpack/tool/nodeTailSocket/node_tailsocket.js</a></p>
-<p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>死にたくなるくらい汚い書きかたしてある。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>この辺の書き方をどうすれば良いか、っていうのも、考えるべき事の一つ。</p>
-<p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>ここでSTへのsendの流量をしぼらず、全開素通りにして、SublimeSocket側でAPIに割り当てるとかも考えたけど、</p>
-<p class="p3"><span class="Apple-tab-span">	</span>プラグイン側が全然二次的にプラガブルでないんで、ちょっとこう、、絞って投げる形にした。</p>
-<p class="p2"><span class="Apple-tab-span">	</span></p>
-<p class="p3"><span class="Apple-tab-span">	</span>line28</p>
-<p class="p5"><span class="s1"><span class="Apple-tab-span">	</span></span>eval:[\"sublime.message_dialog('"<span class="s2"><b>+</b>data<b>+</b></span>"')\</p>
-<p class="p3"><span class="Apple-tab-span">	</span>とかで、data文字列をSublimeText側にダイアログとして表示できる。</p>
-<p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>今回は実はDialogはバグって動いてない。(STへのデータ全体の投入が0.1秒以内同時になっちゃって、STが怒った。)</p>
-<p class="p2"><b><span class="Apple-tab-span">	</span></b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>line42</p>
-<p class="p5"><span class="s1"><b><span class="Apple-tab-span">	</span></b></span>"eval:[\"self.setLineFromTo("<span class="s2"><b>+</b>dataArray[</span><span class="s3">3</span><span class="s2">]<b>+</b></span>",lines)\",\"regions.append(active_view.line(lines[0]))\",\"active_view.add_regions('hereComes', regions, 'comment', 'dot', sublime.DRAW_OUTLINED)\"]"<span class="s2">;</span></p>
-<p class="p6"><span class="s4"><span class="Apple-tab-span">	</span></span>は、メソッド名を渡して<span class="s4">ST</span>側で<span class="s4">eval</span>して順に実行してる。</p>
-<p class="p7"><br></p>
-<p class="p6"><span class="Apple-tab-span">	</span>lines配列にdataArray[3]を渡して、 &gt; len(dataArray) = 1, 中身はST内の行番号</p>
-<p class="p6"><span class="Apple-tab-span">	</span>次の命令でlines[0]を使ってハイライト領域をSTに登録、</p>
-<p class="p6"><span class="Apple-tab-span">	</span>最後に表示をonにしている。</p>
-<p class="p2"><b></b><br></p>
-<p class="p2"><b><span class="Apple-tab-span">	</span></b></p>
-<p class="p3"><b>感想</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>msgpack Python 楽しいですねこれ、、、らくだし、、</p>
-<p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>Pythonで使うときに、自分が作ってる物がSublimeTextのプラグインなので、</p>
-<p class="p3"><span class="Apple-tab-span">	</span>どうやってeasy-install促すかなーとか考えが全く及んでなかった事があって、こう、アレでした。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>考えさせられた。もっと考えんと。</p>
-<p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>あとnodeのwsの使い方思いっきり間違えた。Readme読めと。。</p>
-<p class="p2"><b></b><br></p>
-<p class="p2"><b></b><br></p>
-<p class="p3"><b>TODO</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>後でパイプラインを図で書く。</p>
-<p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>nodeでのtail&amp;WebSocketツールが思ったよりも使いやすいので、</p>
-<p class="p3"><span class="Apple-tab-span">	</span>自前で適当にWebSocketと繋ぐファイル監視はこのへんをデフォルトにしようかなと思ったり。</p>
-<p class="p2"><span class="Apple-tab-span">	</span></p>
-<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ws、tail、msgpack モジュールに依存。</p>
-<p class="p2"><br></p>
-<p class="p2"><br></p>
-<p class="p3">ツッコミ等あれば、<a href="https://twitter.com/toru_inoue">@toru_inoue</a>まで。</p>
+<p class="p1"><b>msgpackハッカソンでSublimeSocketにmp用の受け口を作った</b></p>
+<p class="p2"><b>のと、Unity-SublimeText間の連携でそれを使用した話</b></p>
+<p class="p3"><b></b><br></p>
+<p class="p2"><b>概要</b></p>
+<p class="p2"><b><span class="Apple-tab-span">	</span></b>「AkkaのActor関連でmsgpackを扱ったコードを書く」と言ったな、、あれは嘘だ。</p>
+<p class="p3"><b></b><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span>MessagePackオンラインハッカソン #1</p>
+<p class="p2"><span class="Apple-tab-span">	</span><a href="http://www.zusaar.com/event/505055">http://www.zusaar.com/event/505055</a></p>
+<p class="p2"><span class="Apple-tab-span">	</span>に参加しました。</p>
+<p class="p3"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span>1.Obj-Cのメッセージングしてるツールのサーバ間での通信をMsgPackに変える</p>
+<p class="p2"><span class="Apple-tab-span">	</span>2.自社で使ってるAkka Actorでの通信モジュールに、MsgPackを使う</p>
+<p class="p2"><span class="Apple-tab-span">	</span>3.SublimeTextのプラグイン<a href="https://github.com/sassembla/SublimeSocket">SublimeSocket</a>(SS)に、MsgPackでの受け入れクチを付ける</p>
+<p class="p3"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span>の、中から、3.SublimeSocketを選択。</p>
+<p class="p3"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span>理由は、一番がんばらずに動く物をまるっと公開できるから、、<span class="Apple-tab-span">	</span>あと、ちょうど、Unity-ST間の連携用のコードを書くきっかけが欲しかったので。</p>
+<p class="p3"><b></b><br></p>
+<p class="p2"><b><span class="Apple-tab-span">	</span>目標：</b></p>
+<p class="p2"><b><span class="Apple-tab-span">	</span>msgpack対応でバッファデータとかをUnity &gt; node tail &gt; SSで受け取り &gt; SublimeTextに表示</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><span class="Apple-tab-span">	</span>特に表示する内容=データソースを、Unityのエラー、とした。</p>
+<p class="p3"><br></p>
+<p class="p3"><br></p>
+<p class="p2"><b>完成図</b></p>
+<p class="p2"><span class="Apple-tab-span">	</span>こんなかんじになった。msgpack'd dataあたりが今回作った部分。</p>
+<p class="p4"><img src="Document_2013-01-17_16-01-55.png" alt="Document_2013-01-17_16-01-55.png"></p>
+<p class="p3"><br></p>
+<p class="p3"><br></p>
+<p class="p2"><b>以下制作過程</b></p>
+<p class="p3"><b></b><br></p>
+<p class="p3"><b></b><br></p>
+<p class="p2"><b>In&amp;Out</b></p>
+<p class="p2"><span class="Apple-tab-span">	</span>サンプルとして、nodeで適当なファイルをtail、その結果をSublimeTextのコンソールへと出す、というのをやってみる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><span class="Apple-tab-span">	</span>node &gt; WebSocket &gt; SublimeText</p>
+<p class="p2"><span class="Apple-tab-span">	</span>が、</p>
+<p class="p2"><b><span class="Apple-tab-span">	</span></b>node &gt; <b>(msgpack pack)</b> WebSocket <b>(msgpack unpack)</b> &gt; SublimeText</p>
+<p class="p2"><span class="Apple-tab-span">	</span>になる筈。</p>
+<p class="p3"><b></b><br></p>
+<p class="p3"><b></b><br></p>
+<p class="p2"><b>各環境でのmsgpack</b></p>
+<p class="p2"><span class="Apple-tab-span">	</span>node側から入ったデータが、Python側に出てくる、というだけ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><span class="Apple-tab-span">	</span>そもMsgPackの受け側作った事無いので、どうした物かな的なところ体当たり。</p>
+<p class="p3"><b></b><br></p>
+<p class="p3"><b></b><br></p>
+<p class="p2"><b>msgpack node側</b></p>
+<p class="p2"><b><span class="Apple-tab-span">	</span></b>installから。</p>
+<p class="p2"><span class="Apple-tab-span">	</span><a href="https://github.com/pgriess/node-msgpack">https://github.com/pgriess/node-msgpack</a></p>
+<p class="p3"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span>node wsでのbinary送信で嵌ってた。</p>
+<p class="p2"><span class="Apple-tab-span">	</span>nodeのwsのオプションでの明示に切り替え。他に、デフォだと入ってないOriginとかもそこで付けられた。</p>
+<p class="p2"><span class="Apple-tab-span">	</span><b>ChromeとかだとOrigin=nullでも送ってきたりする</b>ので、デフォルトでもOrigin=nullとかで送ってもらった方が良いのかな、、</p>
+<p class="p3"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><br></p>
+<p class="p2"><b>msgpack<span class="Apple-converted-space">  </span>Python側</b></p>
+<p class="p2"><b><span class="Apple-tab-span">	</span></b>こちらもinstallから。</p>
+<p class="p2"><span class="Apple-tab-span">	</span><a href="https://github.com/pgriess/node-msgpack">https://github.com/msgpack/msgpack-python</a></p>
+<p class="p3"><br></p>
+<p class="p5">easy_install msgpack-python</p>
+<p class="p3"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span>なのですが、今回はST2の環境(Python2.6)で動かしたいので、</p>
+<p class="p5">easy_install-2.6 msgpack-python</p>
+<p class="p3"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span>早くST3こねーかなー。3.3全力で使いたい。</p>
+<p class="p3"><br></p>
+<p class="p3"><br></p>
+<p class="p2"><b>成果物</b></p>
+<p class="p2"><span class="Apple-tab-span">	</span>UnityのエラーをSublimeText上に表示できるようになった。</p>
+<p class="p2"><span class="Apple-tab-span">	</span>msgpackは、Unityから出力されたLog用のDataを固めるために使っている。</p>
+<p class="p3"><b><span class="Apple-tab-span">	</span></b></p>
+<p class="p2"><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/SublimeSocket">SublimeSocket</a></p>
+<p class="p3"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span>の、msgpack branch。</p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/SublimeSocket/tree/msgpack">https://github.com/sassembla/SublimeSocket/tree/msgpack</a></p>
+<p class="p3"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><span class="Apple-tab-span">	</span>説明が最高にアレなのでムビとった。</p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://www.youtube.com/watch?v=JSdpa_LXa8c&amp;feature=youtu.be">http://www.youtube.com/watch?v=JSdpa_LXa8c&amp;feature=youtu.be</a></p>
+<p class="p3"><br></p>
+<p class="p3"><br></p>
+<p class="p2"><b>内容</b></p>
+<p class="p2"><span class="Apple-tab-span">	</span>太字<b>3,4</b>が今回のハッカソンで作った部分</p>
+<p class="p3"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span>1.<span class="Apple-tab-span">	</span>Unityを起動 &gt; STでファイル開く &gt; SublimeSocket起動 &gt;<span class="Apple-converted-space"> </span></p>
+<p class="p2"><span class="Apple-tab-span">	</span>2.<span class="Apple-tab-span">	</span>node tail起動 &gt;</p>
+<p class="p2"><b><span class="Apple-tab-span">	</span>3.<span class="Apple-tab-span">	</span>Unityのビルド結果ログからパターン出して、msgpackで固めてWebSocketでSublimeSocketに送信 &gt;</b></p>
+<p class="p2"><span class="Apple-tab-span">	</span><b>4.<span class="Apple-tab-span">	</span>SublimeSocket側で複合 &gt;<span class="Apple-converted-space"> </span></b></p>
+<p class="p2"><span class="Apple-tab-span">	</span>5.<span class="Apple-tab-span">	</span>STで表示される<span class="Apple-tab-span">	</span></p>
+<p class="p3"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span>実際にはnode tail</p>
+<p class="p2"><span class="Apple-tab-span">	</span><a href="https://gist.github.com/4692531">https://gist.github.com/4692531</a></p>
+<p class="p2"><span class="Apple-tab-span">	</span>の部分に、Unityのエラーログを見て、<b>SublimeSocketの表示API</b>を叩くところまでが書いてある。</p>
+<p class="p3"><b></b><br></p>
+<p class="p3"><b></b><br></p>
+<p class="p2"><b><span class="Apple-tab-span">	</span>実際のnode tailコードはこのへん</b></p>
+<p class="p2"><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/SublimeSocket/blob/msgpack/tool/nodeTailSocket/node_tailsocket.js">https://github.com/sassembla/SublimeSocket/blob/msgpack/tool/nodeTailSocket/node_tailsocket.js</a></p>
+<p class="p3"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span>死にたくなるくらい汚い書きかたしてある。</p>
+<p class="p2"><span class="Apple-tab-span">	</span>この辺の書き方をどうすれば良いか、っていうのも、考えるべき事の一つ。</p>
+<p class="p3"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span>ここでSTへのsendの流量をしぼらず、全開素通りにして、SublimeSocket側でAPIに割り当てるとかも考えたけど、</p>
+<p class="p2"><span class="Apple-tab-span">	</span>まだプラグイン側の構造が全然二次的にプラガブルでないんで、ちょっとこう、、node側で絞って投げる形にした。</p>
+<p class="p3"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><span class="Apple-tab-span">	</span>SublimeSocketにはAPIが仮設してあって、 command : JSONDATA という形でデータを与えると、エラー表示とか値表示とかが</p>
+<p class="p2"><span class="Apple-tab-span">	</span>リモートから入力できるようにしてある。</p>
+<p class="p2"><span class="Apple-tab-span">	</span>その辺のデータを、nodeから直に入力。</p>
+<p class="p3"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span>line28</p>
+<p class="p6"><span class="s1"><span class="Apple-tab-span">	</span></span>eval:[\"sublime.message_dialog('"<span class="s2"><b>+</b>data<b>+</b></span>"')\</p>
+<p class="p2"><span class="Apple-tab-span">	</span>とかで、data文字列をSublimeText側にダイアログとして表示できる。</p>
+<p class="p3"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span>今回は実はDialogはバグって動いてない。(STへのデータ全体の投入が0.1秒以内同時になっちゃって、STが怒った。)</p>
+<p class="p3"><b><span class="Apple-tab-span">	</span></b></p>
+<p class="p2"><span class="Apple-tab-span">	</span>line42</p>
+<p class="p6"><span class="s1"><b><span class="Apple-tab-span">	</span></b></span>"eval:[\"self.setLineFromTo("<span class="s2"><b>+</b>dataArray[</span><span class="s3">3</span><span class="s2">]<b>+</b></span>",lines)\",\"regions.append(active_view.line(lines[0]))\",\"active_view.add_regions('hereComes', regions, 'comment', 'dot', sublime.DRAW_OUTLINED)\"]"<span class="s2">;</span></p>
+<p class="p7"><span class="s4"><span class="Apple-tab-span">	</span></span>は、メソッド名を渡して<span class="s4">ST</span>側で<span class="s4">eval</span>して順に実行してる。</p>
+<p class="p8"><br></p>
+<p class="p7"><span class="Apple-tab-span">	</span>エスケープシーケンスェ、、、痛々しい。</p>
+<p class="p7"><span class="Apple-tab-span">	</span>JSONなのでその辺の組み立て機構を作れば良いのだと思う。</p>
+<p class="p7"><span class="Apple-tab-span">	</span>で、シリアライズするだけ。</p>
+<p class="p8"><br></p>
+<p class="p7"><span class="Apple-tab-span">	</span>lines配列にdataArray[3]を渡して、 &gt; len(dataArray) = 1, 中身はST内の行番号</p>
+<p class="p7"><span class="Apple-tab-span">	</span>次の命令でlines[0]を使ってハイライト領域をSTに登録、</p>
+<p class="p7"><span class="Apple-tab-span">	</span>最後に表示をonにしている。</p>
+<p class="p3"><b></b><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span></b></p>
+<p class="p2"><b>感想</b></p>
+<p class="p2"><span class="Apple-tab-span">	</span>msgpack Python 楽しいですねこれ、、、らくだし、、</p>
+<p class="p3"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span>Pythonで使うときに、自分が作ってる物がSublimeTextのプラグインなので、</p>
+<p class="p2"><span class="Apple-tab-span">	</span>どうやってeasy-install促すかなーとか考えが全く及んでなかった事があって、こう、アレでした。</p>
+<p class="p2"><span class="Apple-tab-span">	</span>考えさせられた。もっと考えんと。</p>
+<p class="p3"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span>フィルタの実例その１が作れたので、あとはUnityのエラーログの解析を、どうやって</p>
+<p class="p3"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span>あとnodeのwsの使い方思いっきり間違えた。Readme読めと。。</p>
+<p class="p3"><b></b><br></p>
+<p class="p3"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span>おまけで、nodeでのtail&amp;WebSocketツールが思ったよりも使いやすいので、</p>
+<p class="p2"><span class="Apple-tab-span">	</span>自前で適当にWebSocketと繋ぐファイル監視はこのへんをデフォルトにしようかなと思ったり。</p>
+<p class="p3"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ws、tail、msgpack モジュールに依存。</p>
+<p class="p3"><br></p>
+<p class="p3"><br></p>
+<p class="p2">ツッコミ等あれば、<a href="https://twitter.com/toru_inoue">@toru_inoue</a>まで。</p>
 </body>
 </html>
