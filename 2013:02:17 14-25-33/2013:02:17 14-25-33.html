@@ -1,0 +1,188 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1187.34">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #ebebeb}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #ebebeb; min-height: 18.0px}
+    span.s1 {font: 12.0px Helvetica}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>pyhackでSublimeSocketのUnity用フィルタ書いた</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>pyhack</p>
+<p class="p3"><span class="Apple-tab-span">	</span><a href="http://connpass.com/event/1729/">http://connpass.com/event/1729/</a></p>
+<p class="p3"><span class="Apple-tab-span">	</span>に参加して、俺俺SublimeText(ST)プラグイン SublimeSocket(SS)について、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>送り込むログへの適応をプログラマブルにできるように改修、フィルタを書いた。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>ムービー</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>とった。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>UnityのファイルをSTで開いて、エラー行が表示されるまでのしかけ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><a href="http://www.youtube.com/watch?v=OQHSPJDNDug">http://www.youtube.com/watch?v=OQHSPJDNDug</a></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>(0:18)</p>
+<p class="p3"><span class="Apple-tab-span">	</span>STが落ちたみたいに見える瞬間があるけど、Unityが.csファイルの監視をちゃんとやってくれないタイミングがあって、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>開き直すとファイル監視がオンになり、保存時にコンパイルが走るようになる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>(0:45)</p>
+<p class="p3"><span class="Apple-tab-span">	</span>SSプラグインのフォルダの中に、tool/nodeTailSocket/node node_tailsocket.jsがあり、それを起動している。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>(1:25)</p>
+<p class="p3"><span class="Apple-tab-span">	</span>途中、エラーにも関わらず表示が変わらないように見えるのは、クラス定義の時点でエラー出ててUnityがコンパイルあきらめてるため。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>改修点</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>下の図の、nodeの部分にあった直書きしちゃってる問題点(<a href="http://sassembla.github.com/Public/2013:02:02%201-02-19/2013:02:02%201-02-19.html">過去記事参照</a>)を解決して、プログラマブルにした。</p>
+<p class="p3">---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</p>
+<p class="p4"><img src="Document_2013-01-17_16-01-55.png" alt="Document_2013-01-17_16-01-55.png"></p>
+<p class="p3">---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>以前は、nodeのtailの中に、<b>直に</b>「<b>Unityからのログを解釈してSublimeのAPIを叩く機構</b>」が書き込まれていて、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>例えば他の物(TypeScriptとかScalaとか)に使ったりとかする時にしんどかった。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>機構としては、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>Unityがなんかエラーログ吐く → nodeがそれをtail → wsでSTへ発射 → SSがそれを受ける → 解析 → STのビューへと反映 → 編集 →</b>...</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>というのができれば良かったので、量や負荷なんてたがが知れてるし、node側からは全部送って、SS側で内容を振り分ける、という風にした。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ただし、今後、複数プロセスからSSに対しての内容を受ける、という予定があるので、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>node側から送り込むとき、ifとか判別はないけどプロトコルは特定の物を使う、という形にした。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>USAGE</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>まだ複雑な、複数の行程になってしまっている。今後楽にする。 <span class="s1">node</span>の起動とかはやめられる筈。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・Unity起動</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・Unityからファイルを開く際のエディタ設定をSTにしておく</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・STでファイルを開いたら、SublimeSocket起動</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・nodetail+socket起動、フィルタ適応</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>あとはファイルを編集すると、Unityのコンパイルが走って、ST上にエラーが表示される。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>SublimeTextに、SublimeSocketのインストール</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>下記から。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>3系出てからpackageControlに登録しようと思う。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/SublimeSocket/tree/unity">https://github.com/sassembla/SublimeSocket/tree/unity</a><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>実際のコードとしくみ</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>大きく分けて、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>0.SSの起動</p>
+<p class="p3"><span class="Apple-tab-span">	</span>1.nodeを起動、SSへのフィルタの定義</p>
+<p class="p3"><span class="Apple-tab-span">	</span>2.nodeからのログの流し込み</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>の3工程になっている。</p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>0.SSの起動</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>省略。</p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>1.nodeを起動、SSへのフィルタ定義のセット</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>あらかじめフィルタをセットしておく or nodeからフィルタをセットされる必要がある。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>今回は、WebSocket開通時にnode側からフィルタを送っている。 以下がUnity用フィルタの全文。</p>
+<p class="p2"><br></p>
+<p class="p5">ws.on('open', function() {</p>
+<p class="p5"><span class="Apple-tab-span">	</span>console.log("OPENED");</p>
+<p class="p6"><span class="Apple-tab-span">	</span></p>
+<p class="p5"><span class="Apple-tab-span">	</span>var json =<span class="Apple-converted-space"> </span></p>
+<p class="p5"><span class="Apple-converted-space">    </span>{</p>
+<p class="p5"><span class="Apple-converted-space">        </span>"name": "unity",</p>
+<p class="p5"><span class="Apple-converted-space">        </span>"patterns": [</p>
+<p class="p5"><span class="Apple-converted-space">            </span>{</p>
+<p class="p5"><span class="Apple-converted-space">                </span>".ts.*[(]([0-9].*?),.*:(.*)": {</p>
+<p class="p5"><span class="Apple-converted-space">                    </span>"runnable": {</p>
+<p class="p5"><span class="Apple-converted-space">                        </span>"showLine": {</p>
+<p class="p5"><span class="Apple-converted-space">                            </span>"line": "groups[1]",</p>
+<p class="p5"><span class="Apple-converted-space">                            </span>"message": "groups[2]"</p>
+<p class="p5"><span class="Apple-converted-space">                        </span>}</p>
+<p class="p5"><span class="Apple-converted-space">                    </span>}</p>
+<p class="p5"><span class="Apple-converted-space">                </span>}</p>
+<p class="p5"><span class="Apple-converted-space">            </span>},</p>
+<p class="p5"><span class="Apple-converted-space">            </span>{</p>
+<p class="p5"><span class="Apple-converted-space">                </span>"Compilation failed:(.*)": {</p>
+<p class="p5"><span class="Apple-converted-space">                    </span>"runnable": {</p>
+<p class="p5"><span class="Apple-converted-space">                        </span>"showStatusMessage": {</p>
+<p class="p5"><span class="Apple-converted-space">                            </span>"message":"groups[0]"</p>
+<p class="p5"><span class="Apple-converted-space">                        </span>}</p>
+<p class="p5"><span class="Apple-converted-space">                    </span>}</p>
+<p class="p5"><span class="Apple-converted-space">                </span>}</p>
+<p class="p5"><span class="Apple-converted-space">            </span>},</p>
+<p class="p5"><span class="Apple-converted-space">            </span>{</p>
+<p class="p5"><span class="Apple-converted-space">                </span>"(^Mono: successfully reloaded assembly)": {</p>
+<p class="p5"><span class="Apple-converted-space">                    </span>"runnable": {</p>
+<p class="p5"><span class="Apple-converted-space">                        </span>"showStatusMessage": {</p>
+<p class="p5"><span class="Apple-converted-space">                            </span>"message":"groups[0]"</p>
+<p class="p5"><span class="Apple-converted-space">                        </span>}</p>
+<p class="p5"><span class="Apple-converted-space">                    </span>}</p>
+<p class="p5"><span class="Apple-converted-space">                </span>}</p>
+<p class="p5"><span class="Apple-converted-space">            </span>}</p>
+<p class="p5"><span class="Apple-converted-space">        </span>]</p>
+<p class="p5"><span class="Apple-converted-space">    </span>};</p>
+<p class="p6"><br></p>
+<p class="p5"><span class="Apple-tab-span">	</span>ws.send("ss@defineFilter:"+JSON.stringify(json));</p>
+<p class="p5">});</p>
+<p class="p3"><span class="Apple-tab-span">	</span>これで、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>unityというフィルタ名で、正規表現と、そのパラメータを使って動く関連性を、SS上に定義できる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>上記は正規表現のマッチがあるとき、showLine関数とかを実行する。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>たとえば</p>
+<p class="p5">Assets/NewBehaviourScript.cs(6,12): error CS8025: Parsing error</p>
+<p class="p3"><span class="Apple-tab-span">	</span>みたいな文字列が送り込まれてきたとき、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>正規表現からパラメータを受け取り、置換したパラメータを使う事が出来る。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>上の例でいうと、パターン通過後、SS内で実行されるのは、</p>
+<p class="p5">ss@showLine:<span class="Apple-converted-space"> </span></p>
+<p class="p5">{</p>
+<p class="p5"><span class="Apple-converted-space">    </span>"line": "6",</p>
+<p class="p5"><span class="Apple-converted-space">    </span>"message": "Parsing error"</p>
+<p class="p5">}</p>
+<p class="p3"><span class="Apple-tab-span">	</span>になる。今はまだ<span class="s1">Message</span>どこにも出ないんだけどさ。</p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>2.nodeからのログの流し込み</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>フィルタ名とソースがJSONで渡せればOK。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>こんな感じ。</p>
+<p class="p2"><br></p>
+<p class="p5">ss@detectView+filtering:<span class="Apple-converted-space"> </span></p>
+<p class="p5">{</p>
+<p class="p5"><span class="Apple-converted-space">    </span>"name": "unity",</p>
+<p class="p5"><span class="Apple-converted-space">    </span>"source": "Assets/NewBehaviourScript.cs(6,12): error CS8025: Parsing error"</p>
+<p class="p5">}</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これで、unityという名前で登録してあったフィルタに対して、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>sourceが送られ、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>対象のviewがどれなのかセットされ(該当が無い場合は直前のものが流用される)</p>
+<p class="p3"><span class="Apple-tab-span">	</span>そのビューの指定行に指定コメントを出す、というのが可能になる。<span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ちなみにエラーとかの対象のビューがSTに展開されてない場合とかは特に考えてない。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>StatusBarか、このファイルがヤベーとかSideBarやDialog出せば良いのでは。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>そういうAPIはないけど、STのAPIが任意に実行できるEvalは積んであるので、やろうと思ったら出来る筈。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>もし~だったら、とか、そのへんのifはどうするかなー。まだ困ってないからいいや。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3">使っててだんだん目立つようになってきたけど、フィルタを入力可能にしたことで、エディタ連携が凄く楽になった。</p>
+<p class="p3">次はマウスオーバーでの注釈とか、リフレッシュ、候補のぶち込みを考える。</p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><b><span class="Apple-tab-span">	</span></b></p>
+</body>
+</html>
