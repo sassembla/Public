@@ -1,0 +1,106 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1187.34">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #ebebeb}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    span.s1 {background-color: #ebebeb}
+    span.s2 {font: 12.0px Helvetica}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>SublimeSocket0.8.0で出来るようになった事まとめ</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>普通に開発に使う分には、いろんな機能が整った。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>メモ程度に。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>フィルタがJSONで追加可能</b></p>
+<p class="p4">ss@defineFilter:</p>
+<p class="p4">{</p>
+<p class="p4"><span class="Apple-converted-space">    </span>"name": "unity",</p>
+<p class="p4"><span class="Apple-converted-space">    </span>"patterns": [</p>
+<p class="p4"><span class="Apple-converted-space">        </span>{</p>
+<p class="p4"><span class="Apple-converted-space">            </span>"[(]([0-9].*?),.*:(.*)": {</p>
+<p class="p4"><span class="Apple-converted-space">                </span>"runnable": {</p>
+<p class="p4"><span class="Apple-converted-space">                    </span>"showLine": {</p>
+<p class="p4"><span class="Apple-converted-space">                        </span>"line": "groups[1]",</p>
+<p class="p4"><span class="Apple-converted-space">                        </span>"message": "groups[2]"</p>
+<p class="p4"><span class="Apple-converted-space">                    </span>}</p>
+<p class="p4"><span class="Apple-converted-space">                </span>}</p>
+<p class="p4"><span class="Apple-converted-space">            </span>}</p>
+<p class="p4"><span class="Apple-converted-space">        </span>}</p>
+<p class="p4"><span class="Apple-converted-space">    </span>]</p>
+<p class="p4">}</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>みたいに書けるようになった。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>後出しでどんなフィルタ内容にも対応可能。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>リアクタの追加</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>SublimeTextの特定のイベントを監視、一定インターバルで指定APIを実行可能になった。</p>
+<p class="p2"><br></p>
+<p class="p4">ss@setReactor:</p>
+<p class="p4">{</p>
+<p class="p4"><span class="Apple-converted-space">    </span>"target": "targetWebSocketClientIdentity",</p>
+<p class="p4"><span class="Apple-converted-space">    </span>"event": "on_selection_modified",</p>
+<p class="p4"><span class="Apple-converted-space">    </span>"selector": {</p>
+<p class="p4"><span class="Apple-converted-space">        </span>"playRegions": {</p>
+<p class="p4"><span class="Apple-converted-space">            </span>"view": "will be replace to specific view",</p>
+<p class="p4"><span class="Apple-converted-space">            </span>"target": "targetWebSocketClientIdentity",</p>
+<p class="p4"><span class="Apple-converted-space">            </span>"showatstatus":true</p>
+<p class="p4"><span class="Apple-converted-space">        </span>}</p>
+<p class="p4"><span class="Apple-converted-space">    </span>},</p>
+<p class="p4"><span class="Apple-converted-space">    </span>"replacefromto": {</p>
+<p class="p4"><span class="Apple-converted-space">        </span>"view": "view"</p>
+<p class="p4"><span class="Apple-converted-space">    </span>},</p>
+<p class="p4"><span class="Apple-converted-space">    </span>"interval": 100</p>
+<p class="p4">}</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>イベントから予約済みAPIへのパラメータ代入を実装したけど、うーん名前がわかりにくい。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="s1">replacefromto</span>とか。これからリファクタリングする。replace記号でも定義するか？　めんどうな、、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>上記で、カーソルがどこかを選択(位置確定)すると、playRegions APIが実行される。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>範囲系APIの追加</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>SublimeText上で表示される、エラーとか明示用のRegion(ハコ)に対応するAPI。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ハコ敷設時、特定の要素をセットできる。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>要素は、上記のリアクタと組み合わせる形で発生させられる。</p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>エラー検出からRegionをセット → Regionがある行をクリック →<span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>リアクタ発生 → <b>Regionに入っている要素を取り出し、リアクタ内にセットされたAPIを実行</b></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Unity用だと、「とりあえず要素をそのまま表示する」APIを実行している。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>内容変更を逐次、WebSocketで外部に送る事も可能。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>結果として</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>こんなかんじにエラー表示が出来るようになった</p>
+<p class="p5"><img src="pcyt.png" alt="pcyt.png"></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ここまでで、ENSIMEができることの半分くらいが出来るようになったと思う。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>あとは、稼働中プログラム値のリアルタイムオーバーレイとかも可能。 WebSocketついてるから、外部連携の自由度が良い。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>UnityつかいつつSca<span class="s2">la</span>での全力に向けて遊ぶ。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>TODO</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>API一覧書く</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+</body>
+</html>

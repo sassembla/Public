@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1187.34">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px 'Hiragino Kaku Gothic ProN'}
+    span.s1 {font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>Unityのプラグイン開発でテスト書く</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Unityのプラグインをちまちま作ってるのですが、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>プラグインについてのテストを簡単にやる方法思いついたので備忘録までに。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>こんな感じになった。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>gist</p>
+<p class="p3"><span class="Apple-tab-span">	</span><a href="https://gist.github.com/sassembla/5082797">https://gist.github.com/sassembla/5082797</a></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>Purpose</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>特定のタイミングでプラグインの特定のメソッドを走らせて、状態をチェック。</p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>[InitializeOnLoad] を使って、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Unityが自動実行するたびにそれっぽいことを行えば、小気味よく実行できる。OK。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>なんでこんな簡単なこと思いつかなかったんだろう。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>いろいろ条件</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・Editorフォルダにファイルを置く</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Unityルール。InitializeOnLoadはEditor用。</p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・Assert関数は手書き</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>UnityにはAssert無い。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>えっ、、、</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Q.[test]Prefixとか、Annotation付けて検出とかは?</p>
+<p class="p3"><span class="Apple-tab-span">	</span>A.そういうのが出来る星でがんばってください。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>→ゆるしてくれぇ、、、</p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Q.どのテストが成功したかとかは判んないんですか?</p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>A.ぁあ～</span>ｸｯﾁｬｸｯﾁｬ　判らないっすかねぇ～、、ｸｯﾁｬｸｯﾁｬ</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>→識別子とかはとりあえず考えてないので吊ってきます。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Debug.Log("これでひとつよろしく");</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>→出力は、CIに入れる事があったら、xmlでも吐くようにします。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>YAGNI！　YAGNIダヨ！！</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+</body>
+</html>
