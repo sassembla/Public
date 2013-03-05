@@ -3,7 +3,7 @@
 \f3\fnil\fcharset0 HelveticaNeue;\f4\fnil\fcharset0 LucidaGrande;\f5\froman\fcharset0 Times-Roman;
 \f6\fnil\fcharset128 HiraMinProN-W3;}
 {\colortbl;\red255\green255\blue255;\red251\green0\blue7;\red230\green230\blue230;\red217\green11\blue0;
-\red230\green230\blue230;\red0\green0\blue0;\red109\green109\blue109;}
+}
 \paperw11900\paperh16840\margl1440\margr1440\vieww16840\viewh9320\viewkind0
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
 
@@ -70,7 +70,7 @@
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
 \cf0 \cb1 \
 	\'82\'b1\'82\'ea\'82\'c5\'81\'41\
-	connect \'82\'c6 disconnect \'82\'cc\'82\'51\'82\'c2\'82\'cc\'8d\'80\'96\'da\'82\'aa\'81\'41
+	connect \'82\'c6 close \'82\'cc\'82\'51\'82\'c2\'82\'cc\'8d\'80\'96\'da\'82\'aa\'81\'41
 \b disabled
 \b0 \'8f\'f3\'91\'d4\'82\'c5\'95\'5c\'8e\'a6\'82\'b3\'82\'ea\'82\'e9\'82\'cd\'82\'b8\'82\'c5\'82\'b7\'81\'42\
 	\'82\'b1\'82\'f1\'82\'c8\'82\'d3\'82\'a4\'82\'c9\'81\'42\
@@ -349,7 +349,7 @@
 	priority\'82\'f01\'82\'a9\'82\'e7\'8e\'6e\'82\'df\'82\'e9\'8f\'ea\'8d\'87\'81\'41\
 \
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural
-\cf0 \cb5 	[MenuItem ("SublimeSocket/connect", false, \cf4 1\cf0 )]\
+\cf0 \cb3 	[MenuItem ("SublimeSocket/connect", false, \cf4 \cb3 1\cf0 \cb3 )]\
 	static void Connect () \{\
 		\
 	\}\
@@ -360,7 +360,7 @@
 	\}\
 \
 \
-	[MenuItem ("SublimeSocket/disconnect", false, \cf4 2\cf0 )]\
+	[MenuItem ("SublimeSocket/disconnect", false, \cf4 \cb3 2\cf0 \cb3 )]\
 	static void Close () \{\
 		\
 	\}\
@@ -372,7 +372,7 @@
 \
 \
 	// reload\
-	[MenuItem ("SublimeSocket/reload", false, \cf4 13\cf0 )]\
+	[MenuItem ("SublimeSocket/reload", false, \cf4 \cb3 13\cf0 \cb3 )]\
 	static void Reload () \{\
 		\
 	\}\
@@ -382,7 +382,7 @@
 	\}\
 \
 \
-	[MenuItem ("SublimeSocket/autoConnect-on", false, \cf4 24\cf0 )]\
+	[MenuItem ("SublimeSocket/autoConnect-on", false, \cf4 \cb3 24\cf0 \cb3 )]\
 	static void TurnAutoOn () \{\
 		\
 	\}\
@@ -390,7 +390,8 @@
 	static bool IsTurnableAutoToOn () \{\
 		return true;\
 	\}\
-\cb1 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural
+\cf0 \cb1 \
 	\'82\'dd\'82\'bd\'82\'a2\'82\'c9\'82\'c8\'82\'e9\'81\'42\
 	\
 	\'82\'bd\'82\'d4\'82\'f1\'81\'41\'8c\'72\'90\'fc\'8f\'6f\'82\'e9 = (10 <= distance) \'82\'c6\'82\'a9\'8f\'91\'82\'a2\'82\'bf\'82\'e1\'82\'c1\'82\'bd\'82\'f1\'82\'b6\'82\'e1\'82\'cb\'81\'5b\'82\'a9\'82\'c8\'81\'5b\'81\'42 \
