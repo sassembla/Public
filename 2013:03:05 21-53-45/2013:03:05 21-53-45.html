@@ -15,18 +15,24 @@
     p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
     p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 24.0px 'Helvetica Neue'}
     p.p8 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Helvetica}
+    p.p9 {margin: 0.0px 0.0px 0.0px 0.0px; font: 32.0px 'Hiragino Kaku Gothic ProN'}
+    p.p10 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Times}
     span.s1 {font: 12.0px Osaka; letter-spacing: 1.0px; color: #ff2500}
     span.s2 {font: 12.0px Helvetica}
     span.s3 {background-color: transparent}
-    span.s4 {color: #e32400}
-    span.s5 {font: 12.0px 'Hiragino Kaku Gothic ProN'}
-    span.s6 {font: 13.0px 'Lucida Grande'}
-    span.s7 {font: 13.0px 'Hiragino Kaku Gothic ProN'}
+    span.s4 {font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    span.s5 {color: #e32400}
+    span.s6 {font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    span.s7 {font: 13.0px 'Lucida Grande'}
+    span.s8 {font: 13.0px 'Hiragino Kaku Gothic ProN'}
+    span.s9 {font: 12.0px 'Hiragino Mincho ProN'}
     span.Apple-tab-span {white-space:pre}
+    td.td1 {width: 52.0px; margin: 0.5px 0.5px 0.5px 0.5px; padding: 1.0px 1.0px 1.0px 1.0px}
+    td.td2 {width: 722.0px; margin: 0.5px 0.5px 0.5px 0.5px; padding: 1.0px 1.0px 1.0px 1.0px}
   </style>
 </head>
 <body>
-<p class="p1"><b>UnityのMenuItemに罫線 15分くらいの残念な歴史</b></p>
+<p class="p1"><b>UnityのMenuItemに罫線をつける、15分くらいの残念な歴史 ~完結編~</b></p>
 <p class="p2"><br></p>
 <p class="p3"><b>概要</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>自作プラグインのメニュー書いてました。</p>
@@ -35,8 +41,8 @@
 <p class="p3"><span class="Apple-tab-span">	</span>罫線<span class="s1">&lt;hr&gt;</span>これを、項目と項目の間に表示したかったわけです。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
-<p class="p3"><b>出来たもの</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>こちらが完成品になります。</p>
+<p class="p3"><b>完成品</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>出来上がったものがこちらになります。</p>
 <p class="p3"><b><span class="Apple-tab-span">	</span></b><span class="s2"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202013-03-05%2021.11.59.png" alt="スクリーンショット 2013-03-05 21.11.59.png"></span></p>
 <p class="p2"><b></b><br></p>
 <p class="p2"><b></b><br></p>
@@ -84,11 +90,11 @@
 <p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>で、じゃあすぐ下のペアはなんなの？っていうと、</p>
-<p class="p3"><span class="Apple-tab-span">	</span><b>パス部分の名前が一致する、すぐ上の項目に対して、eneable/disableを設定する関数+修飾</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>パス部分の名前が一致する、すぐ</b><span class="s4"><b>上</b></span><b>の修飾されたメソッド に対して、eneable/disableを設定する関数+修飾</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>なるほど。</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p3"><span class="Apple-tab-span">	</span>違いは第二引数、<b>true</b> の存在。</p>
-<p class="p4"><span class="s3"><span class="Apple-tab-span">	</span></span>[MenuItem ("SublimeSocket/connect", <span class="s4"><b>true</b></span>)]</p>
+<p class="p4"><span class="s3"><span class="Apple-tab-span">	</span></span>[MenuItem ("SublimeSocket/connect", <span class="s5"><b>true</b></span>)]</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p3"><span class="Apple-tab-span">	</span>この値と一致する値を直下のメソッドが返す場合、<b>その項目はenable</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>逆なら<b>disable</b></p>
@@ -105,7 +111,7 @@
 <p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p3"><span class="Apple-tab-span">	</span>priorityというパラメータがあるんだぜ、ってことで、まず調べる。</p>
 <p class="p2"><br></p>
-<p class="p7"><span class="s5"><span class="Apple-tab-span">	</span></span><b>Separator in custom Editor MenuItem</b></p>
+<p class="p7"><span class="s6"><span class="Apple-tab-span">	</span></span><b>Separator in custom Editor MenuItem</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span><a href="http://answers.unity3d.com/questions/51906/separator-in-custom-editor-menuitem.html">http://answers.unity3d.com/questions/51906/separator-in-custom-editor-menuitem.html</a><span class="Apple-tab-span">	</span></p>
 <p class="p3"><span class="Apple-tab-span">	</span>ほう。</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
@@ -116,7 +122,7 @@
 <p class="p4"><span class="Apple-tab-span">	</span>static void Connect () {</p>
 <p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
 <p class="p4"><span class="Apple-tab-span">	</span>}</p>
-<p class="p4"><span class="Apple-tab-span">	</span>[MenuItem ("SublimeSocket/connect", true, <span class="s4"><b>10</b></span>)]</p>
+<p class="p4"><span class="Apple-tab-span">	</span>[MenuItem ("SublimeSocket/connect", true, <span class="s5"><b>10</b></span>)]</p>
 <p class="p4"><span class="Apple-tab-span">	</span>static bool IsConnectable () {</p>
 <p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
 <p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>return false;</p>
@@ -127,7 +133,7 @@
 <p class="p4"><span class="Apple-tab-span">	</span>static void Close () {</p>
 <p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
 <p class="p4"><span class="Apple-tab-span">	</span>}</p>
-<p class="p4"><span class="Apple-tab-span">	</span>[MenuItem ("SublimeSocket/close", true, <span class="s4"><b>20</b></span>)]</p>
+<p class="p4"><span class="Apple-tab-span">	</span>[MenuItem ("SublimeSocket/close", true, <span class="s5"><b>20</b></span>)]</p>
 <p class="p4"><span class="Apple-tab-span">	</span>static bool IsClosable () {</p>
 <p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
 <p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>return false;</p>
@@ -137,6 +143,7 @@
 <p class="p3"><span class="Apple-tab-span">	</span>しーん、、、、</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>え。線が入らない。　値を変えても変わらない。　そんなアホな、、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>priority値をどんなに変えてもだめ。 <span class="Apple-converted-space"> </span></p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>いえね、罫線入れるとかは<b>オプション側かな</b>って思い込んじゃった。</p>
 <p class="p2"><br></p>
@@ -169,7 +176,7 @@
 <p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p3"><span class="Apple-tab-span">	</span>3rdバッター・<b>オーバーライン</b></p>
 <p class="p2"><b><span class="Apple-tab-span">	</span></b></p>
-<p class="p8"><span class="s5"><b><span class="Apple-tab-span">	</span>これだ！　→</b></span><b>‾‾‾‾‾‾‾‾‾‾‾‾‾</b><span class="s6"><b>←</b></span><b><span class="Apple-converted-space">  </span></b><span class="s7"><b>　</b></span><b>t‾wada</b><span class="s7"><b>さんみたいな救世主だ！！</b></span></p>
+<p class="p8"><span class="s6"><b><span class="Apple-tab-span">	</span>これだ！　→</b></span><b>‾‾‾‾‾‾‾‾‾‾‾‾‾</b><span class="s7"><b>←</b></span><b><span class="Apple-converted-space">  </span></b><span class="s8"><b>　</b></span><b>t‾wada</b><span class="s8"><b>さんみたいな救世主だ！！</b></span></p>
 <p class="p2"><br></p>
 <p class="p6"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202013-03-05%2021.03.57.png" alt="スクリーンショット 2013-03-05 21.03.57.png"></p>
 <p class="p2"><br></p>
@@ -188,7 +195,7 @@
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>コードがこちら。</p>
 <p class="p2"><br></p>
-<p class="p4"><span class="Apple-tab-span">	</span>[MenuItem ("SublimeSocket/connect", false <span class="s4"><b>10</b></span>)]</p>
+<p class="p4"><span class="Apple-tab-span">	</span>[MenuItem ("SublimeSocket/connect", false, <span class="s5"><b>10</b></span>)]</p>
 <p class="p4"><span class="Apple-tab-span">	</span>static void Connect () {</p>
 <p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
 <p class="p4"><span class="Apple-tab-span">	</span>}</p>
@@ -199,7 +206,7 @@
 <p class="p4"><span class="Apple-tab-span">	</span>}</p>
 <p class="p5"><br></p>
 <p class="p5"><br></p>
-<p class="p4"><span class="Apple-tab-span">	</span>[MenuItem ("SublimeSocket/close", false, <span class="s4"><b>30</b></span>))]</p>
+<p class="p4"><span class="Apple-tab-span">	</span>[MenuItem ("SublimeSocket/close", false, <span class="s5"><b>30</b></span>))]</p>
 <p class="p4"><span class="Apple-tab-span">	</span>static void Close () {</p>
 <p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
 <p class="p4"><span class="Apple-tab-span">	</span>}</p>
@@ -212,16 +219,82 @@
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>え。</p>
 <p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>オプションじゃないほうに入れんの。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>引数足りないのに。</p>
+<p class="p2"><br></p>
 <p class="p3"><b><span class="Apple-tab-span">	</span>つまり第三引数に入れろと。</b></p>
+<p class="p2"><b></b><br></p>
 <p class="p3"><b><span class="Apple-tab-span">	</span>無理矢理第二引数を埋めて入れろと。</b></p>
 <p class="p2"><br></p>
-<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p3"><span class="Apple-tab-span">	</span>（えー、、、、、、、、）</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>声にならない声</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span><b>出来上がったものがこちらになります。</b></p>
 <p class="p2"><b><span class="Apple-tab-span">	</span></b></p>
 <p class="p6"><img src="1__%23$!@%25!%23__%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202013-03-05%2021.11.59.png" alt="1__#$!@%!#__スクリーンショット 2013-03-05 21.11.59.png"></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>Undocumented information</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>罫線の発生条件は、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>直前のpriorityとの差が<b>11以上<span class="Apple-tab-span">	</span></b></p>
+<p class="p2"><b></b><br></p>
+<p class="p9"><b><span class="Apple-tab-span">	</span>11以上<span class="Apple-tab-span">	</span>。</b></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ハイここテストに出すぞ。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>priorityを1から始める場合、</p>
+<p class="p2"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>[MenuItem ("SublimeSocket/connect", false, <span class="s5">1</span>)]</p>
+<p class="p4"><span class="Apple-tab-span">	</span>static void Connect () {</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p4"><span class="Apple-tab-span">	</span>}</p>
+<p class="p4"><span class="Apple-tab-span">	</span>[MenuItem ("SublimeSocket/connect", true)]</p>
+<p class="p4"><span class="Apple-tab-span">	</span>static bool IsConnectable () {</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>return false;</p>
+<p class="p4"><span class="Apple-tab-span">	</span>}</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>[MenuItem ("SublimeSocket/disconnect", false, <span class="s5">2</span>)]</p>
+<p class="p4"><span class="Apple-tab-span">	</span>static void Close () {</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p4"><span class="Apple-tab-span">	</span>}</p>
+<p class="p4"><span class="Apple-tab-span">	</span>[MenuItem ("SublimeSocket/disconnect", true)]</p>
+<p class="p4"><span class="Apple-tab-span">	</span>static bool IsClosable () {</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>return false;</p>
+<p class="p4"><span class="Apple-tab-span">	</span>}</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>// reload</p>
+<p class="p4"><span class="Apple-tab-span">	</span>[MenuItem ("SublimeSocket/reload", false, <span class="s5">13</span>)]</p>
+<p class="p4"><span class="Apple-tab-span">	</span>static void Reload () {</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p4"><span class="Apple-tab-span">	</span>}</p>
+<p class="p4"><span class="Apple-tab-span">	</span>[MenuItem ("SublimeSocket/reload", true)]</p>
+<p class="p4"><span class="Apple-tab-span">	</span>static bool IsReloadable () {</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>return false;</p>
+<p class="p4"><span class="Apple-tab-span">	</span>}</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>[MenuItem ("SublimeSocket/autoConnect-on", false, <span class="s5">24</span>)]</p>
+<p class="p4"><span class="Apple-tab-span">	</span>static void TurnAutoOn () {</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p4"><span class="Apple-tab-span">	</span>}</p>
+<p class="p4"><span class="Apple-tab-span">	</span>[MenuItem ("SublimeSocket/autoConnect-on", true)]</p>
+<p class="p4"><span class="Apple-tab-span">	</span>static bool IsTurnableAutoToOn () {</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>return true;</p>
+<p class="p4"><span class="Apple-tab-span">	</span>}</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>みたいになる。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>たぶん、罫線出る = (10 &lt;= distance) とか書いちゃったんじゃねーかなー。<span class="Apple-converted-space"> </span></p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>次回予告</b></p>
@@ -246,6 +319,73 @@
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>むりっぽい気がしています。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>からの、</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<table cellspacing="0" cellpadding="0">
+  <tbody>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p6"><img src="%E4%B8%8D%E6%98%8E.png" alt="不明.png"></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p10"><b>nakamura001</b></p>
+        <p class="p10">@toru_inoue <span class="s9">チェック付けるのは</span>Prime31<span class="s9">ですらこんな実装なので結構難易度高いんじゃないかと見てます</span> http://t.co/qM1cWOSomL</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>、、、、、、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>、、、、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>、、</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>よし！！</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>打ち切りました。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>俺さんの次回作にご期待ください。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
