@@ -10,8 +10,8 @@
     p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
     p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
     p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
-    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px 'Hiragino Kaku Gothic ProN'}
-    span.s1 {font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    span.s1 {font: 12.0px Helvetica}
     span.Apple-tab-span {white-space:pre}
   </style>
 </head>
@@ -44,16 +44,30 @@
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>UnityにはAssert無い。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
-<p class="p3"><b>えっ、、、</b></p>
+<p class="p3"><b>完成したときの環境がこちら</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>UnityのAsset下にEditorフォルダつくって、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>gis<span class="s1">t</span>に上がってる内容を、UnityEditorTestKit.cs と言う名前でcsharpファイルとして保存すればOKです。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="s1"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202013-03-05%2016.53.17.png" alt="スクリーンショット 2013-03-05 16.53.17.png"></span></p>
+<p class="p4"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202013-03-05%2015.18.23.png" alt="スクリーンショット 2013-03-05 15.18.23.png"></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これだけで、Unity上のファイルがコンパイルされたりPlayするたび、テストの中に書いた内容が動くようになります。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>エラーが出るような内容があれば、Exceptionが発行されます。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>いやー書き続けられるって素敵だわー　マジで素敵だわー。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>えっ、、終わり、、、？</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>Q.[test]Prefixとか、Annotation付けて検出とかは?</p>
 <p class="p3"><span class="Apple-tab-span">	</span>A.そういうのが出来る星でがんばってください。</p>
-<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>→ゆるしてくれぇ、、、</p>
-<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>もしくはプルリクするなりがんばって作ってAssetStoreに出すなりするんだ！</p>
+<p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>Q.どのテストが成功したかとかは判んないんですか?</p>
-<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>A.ぁあ～</span>ｸｯﾁｬｸｯﾁｬ　判らないっすかねぇ～、、ｸｯﾁｬｸｯﾁｬ</p>
-<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>→識別子とかはとりあえず考えてないので吊ってきます。</p>
-<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Debug.Log("これでひとつよろしく");</p>
+<p class="p3"><span class="Apple-tab-span">	</span>A.ぁあ～、、　判らないっすねぇ～、、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>→個別のテストの識別子とかはとりあえず考えてないので吊ってきます。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>辞書持つとかすれば出来るんですが、、、めんどい。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>今のところは、<b>Debug.Log("これでひとつよろしく");</b></p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>→出力は、CIに入れる事があったら、xmlでも吐くようにします。</p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>YAGNI！　YAGNIダヨ！！</p>
