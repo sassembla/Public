@@ -8,10 +8,8 @@
   <meta name="CocoaVersion" content="1187.34">
   <style type="text/css">
     p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
     p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
-    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
-    span.s1 {font: 12.0px Helvetica}
     span.Apple-tab-span {white-space:pre}
   </style>
 </head>
@@ -19,90 +17,107 @@
 <p class="p1"><b>バッドノウハウとは何だろうメモ</b></p>
 <p class="p2"><br></p>
 <p class="p3"><b>概要</b></p>
-<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span></span>自分が考える「バッドノウハウとは何か」まとめる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>自分が考える「バッドノウハウとは何か」まとめる。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>バッドノウハウ a.k.a ただの残念</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>本来動くはずの実装に対する残念なバグを回避するための手段、実装。</p>
-<p class="p4"><br></p>
+<p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>たとえばガラケーの時は、端末ごとにサウンドプレイヤーの特性が～とかで、</p>
 <p class="p3"><span class="Apple-tab-span">	</span>APIは一辺倒なんだけど実挙動が違うとかあり得た。死ねば良いし実際死んだので文句は無い。</p>
-<p class="p4"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p3"><span class="Apple-tab-span">	</span>これをこじらせたのがAndroidで、APIとかスペックとかドキュメントに書いてある通りに</p>
 <p class="p3"><span class="Apple-tab-span">	</span><b>動かないことが稀によくある（悪意のある誇張</b></p>
-<p class="p4"><br></p>
+<p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>バッカじゃねーの？？？　って思いつつ、暖かく見守る。</p>
 <p class="p3"><span class="Apple-tab-span">	</span>そういう人力を捻出する事で回る世界もある。</p>
-<p class="p4"><br></p>
+<p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>言ってしまうと馬鹿が仕事を作るケース。</p>
 <p class="p3"><span class="Apple-tab-span">	</span><b>メーカーとか端末対応とかで期間延ばせるしその間下請けとかも延命できるので、いいのでは。</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span><b>不良更正物語みたいでいいのでは。</b></p>
-<p class="p4"><br></p>
-<p class="p4"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>CSSとかだと、reset.cssがバッドノウハウの域だと思う。超使ってたんですけど。</p>
-<p class="p4"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p3"><span class="Apple-tab-span">	</span>最近はこういうのがいいらしい (自分では使ってないけど職場で使ってる)</p>
-<p class="p4"><br></p>
+<p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>[なぜリセットではなく Normalize.css を使うのか]</p>
 <p class="p3"><span class="Apple-tab-span">	</span><a href="http://yomotsu.net/blog/2013/02/23/normalize.html">http://yomotsu.net/blog/2013/02/23/normalize.html</a></p>
-<p class="p4"><br></p>
-<p class="p4"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
 <p class="p3"><b>バッドノウハウ a.k.a Blocker、未来殺し</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>将来変更性に対する<span class="s1">Blocker</span>になり得る悪手。</p>
-<p class="p4"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>例えば状態を末尾に持ってしまったり、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>将来変更性に対するBlockerになり得る悪手。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>例えば多方面に影響を与える状態値を末尾に持ってしまったり、</p>
 <p class="p3"><span class="Apple-tab-span">	</span>きちんとした上位設計をしない事で、</p>
 <p class="p3"><span class="Apple-tab-span">	</span>未来そのパーツや全体が持つ変更可能性とか修正可能性を奪い去ってしまうこと。</p>
-<p class="p4"><br></p>
+<p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>発ガン性コードっていえば判りやすいか。そんなことないか、、、orz</p>
-<p class="p4"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p3"><span class="Apple-tab-span">	</span>主犯を挙げるとこんなキーワードが出てくる</p>
 <p class="p3"><span class="Apple-tab-span">	</span>・アホなextend</p>
 <p class="p3"><span class="Apple-tab-span">	</span>・広範囲に及ぶ独自型のアホな乱用</p>
 <p class="p3"><span class="Apple-tab-span">	</span>・状態の下手な隠蔽</p>
 <p class="p3"><span class="Apple-tab-span">	</span>・プラグインなど、変更可能性が多い場所でのjar化など固定化(これはピンポイントにMavenをDisっていると思ってもらってOK)</p>
 <p class="p3"><span class="Apple-tab-span">	</span>・上記から産まれる密結合</p>
-<p class="p4"><br></p>
+<p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>自分、疎結合大好きなんですが、</p>
-<p class="p3"><span class="Apple-tab-span">	</span>上記みたいな問題が出るのを、可能な限り遅らせることができる<span class="s1">(</span>主観です<span class="s1">)</span></p>
-<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span></span>+</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>上記みたいな問題が出るのを、可能な限り遅らせることができる(主観です)</p>
+<p class="p3"><span class="Apple-tab-span">	</span>+</p>
 <p class="p3"><span class="Apple-tab-span">	</span>可能な限り修正を楽にする事が出来る(主観です)</p>
-<p class="p4"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p3"><span class="Apple-tab-span">	</span>ので、疎結合大好きです。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>思うに、jarとかlibとかsoとかのライブラリはライブラリではなく、ファンクションとかそういう名前の方が良かったのでは。</p>
-<p class="p4"><br></p>
+<p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>x Library</p>
 <p class="p3"><span class="Apple-tab-span">	</span>o Function</p>
-<p class="p4"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p3"><span class="Apple-tab-span">	</span>そういう意味で、現代にはActorが居るのだと思っている。</p>
-<p class="p4"><br></p>
-<p class="p4"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>Actorをクライアントサイドのコードで使ってみると良い。　すばらしいですよ。</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>全部Actorの海に沈むけど。</b></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
 <p class="p3"><b>バッドノウハウ a.k.a 言語内言語機能拡張</b></p>
-<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span></span>言語機能自体を<b>自己的に拡張する試み。</b></p>
-<p class="p4"><b></b><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>言語機能自体を<b>自己的に拡張する試み。</b></p>
+<p class="p2"><b></b><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>何が悪いかと言うと、<b>どこまでがその機能のための実装なのか</b>、<b>どこからがその機能を使った実装なのか</b>、という</p>
 <p class="p3"><span class="Apple-tab-span">	</span><b>断面の喪失に繋がる</b>。</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>JavaScript</span>を使ってのFWに頻繁に出てくる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>JavaScriptを使ってのFWに頻繁に出てくる。</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span></span>極論すると、<b>デザインパターンと言い換えても良いのでは</b>。<span class="s1"><span class="Apple-converted-space"> </span></span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>極論すると、<b>デザインパターンと言い換えても良いのでは</b>。<span class="Apple-converted-space"> </span></p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p2"><br></p>
-<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span></span>デザインパターンを使う事で、その言語の基礎機能にない物事を実装する事は出来る。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>デザインパターンを使う事で、その言語の基礎機能にない物事を実装する事は出来る。</p>
 <p class="p3"><span class="Apple-tab-span">	</span>で、じゃあ、</p>
-<p class="p4"><br></p>
+<p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>どこまでがその機能を実装するための実装で、どこからがソレ以外か、<b>いつまで判然としてられると思う？</b>っていう。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>局所性の明示ができないところが、損のはじまり。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>人間によるidentificationが必要、って時点で、もう歪なんだとおもう。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、</p>
 <p class="p3"><span class="Apple-tab-span">	</span>ここでドキュメンテーションが出てくる。モジュライズみたいな話がでてくる。</p>
 <p class="p3"><span class="Apple-tab-span">	</span>実利として、これらは効果があると思う。</p>
-<p class="p4"><br></p>
+<p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>でも、そもそも無くてすむ方が良いだろ、、、と思うのは甘えですかそうですか。</p>
-<p class="p4"><br></p>
-<p class="p4"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>こういうのが現れない場合、仙人みたいな奴が生まれて、その人にお伺い立てながらがんばる地獄が始まる。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>一度失った断面を取り戻すのはとても大変で、隅々までそれ全体を理解しないと、恐ろしい深度で実はつながってたりする。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>再設計とかそういう部類の所行だと思う。</p>
-<p class="p4"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>砂漠から、ヒント無しで<b> しろごま くろごま</b> を見つける作業に等しい。フィールドの広さ的にもあの辺が限界だったような。</p>
-<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>時間が経つほど地下茎は全体に行き渡る。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>再設計とか書き直しとか、そういう部類の所行が必要だと思う。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>かかわりたくない。</p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>JSに関しては、そこでaltJSですよ、っていう。</b></p>
+<p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3">なんかバッドノウハウっていうより悪手コレクションになった、、みたいな、、ああ一緒か。</p>
 <p class="p2"><br></p>
