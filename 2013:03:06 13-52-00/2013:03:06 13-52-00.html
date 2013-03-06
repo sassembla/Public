@@ -28,18 +28,17 @@
 <p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p3"><span class="Apple-tab-span">	</span>これをこじらせたのがAndroidで、APIとかスペックとかドキュメントに書いてある通りに</p>
 <p class="p3"><span class="Apple-tab-span">	</span><b>動かないことが稀によくある（悪意のある誇張</b></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>そこで、いろんな機種でも動くように、まあいろいろ錯誤するわけですよね。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>その結果動くからそうね。良かったじゃん。</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>バッカじゃねーの？？？　って思いつつ、暖かく見守る。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>そういう人力を捻出する事で回る世界もある。</p>
-<p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>言ってしまうと馬鹿が仕事を作るケース。</p>
-<p class="p3"><span class="Apple-tab-span">	</span><b>メーカーとか端末対応とかで期間延ばせるしその間下請けとかも延命できるので、いいのでは。</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span><b>不良更正物語みたいでいいのでは。</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>この努力はブラウザでもネイティブでもずっと今後もあるから、がんばれバッドノウハウ。(この項は改変されました)</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>CSSとかだと、reset.cssがバッドノウハウの域だと思う。超使ってたんですけど。</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p3"><span class="Apple-tab-span">	</span>最近はこういうのがいいらしい (自分では使ってないけど職場で使ってる)</p>
+<p class="p3"><span class="Apple-tab-span">	</span>選択肢が生まれてバッドノウハウに降格的な。</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>[なぜリセットではなく Normalize.css を使うのか]</p>
 <p class="p3"><span class="Apple-tab-span">	</span><a href="http://yomotsu.net/blog/2013/02/23/normalize.html">http://yomotsu.net/blog/2013/02/23/normalize.html</a></p>
@@ -51,15 +50,16 @@
 <p class="p3"><span class="Apple-tab-span">	</span>例えば多方面に影響を与える状態値を末尾に持ってしまったり、</p>
 <p class="p3"><span class="Apple-tab-span">	</span>きちんとした上位設計をしない事で、</p>
 <p class="p3"><span class="Apple-tab-span">	</span>未来そのパーツや全体が持つ変更可能性とか修正可能性を奪い去ってしまうこと。</p>
-<p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>発ガン性コードっていえば判りやすいか。そんなことないか、、、orz</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p3"><span class="Apple-tab-span">	</span>主犯を挙げるとこんなキーワードが出てくる</p>
 <p class="p3"><span class="Apple-tab-span">	</span>・アホなextend</p>
 <p class="p3"><span class="Apple-tab-span">	</span>・広範囲に及ぶ独自型のアホな乱用</p>
 <p class="p3"><span class="Apple-tab-span">	</span>・状態の下手な隠蔽</p>
-<p class="p3"><span class="Apple-tab-span">	</span>・プラグインなど、変更可能性が多い場所でのjar化など固定化(これはピンポイントにMavenをDisっていると思ってもらってOK)</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・プラグインなど、変更可能性が多い場所でのjarなど固定化(これはピンポイントにMavenをDisっていると思ってもらってOK)</p>
 <p class="p3"><span class="Apple-tab-span">	</span>・上記から産まれる密結合</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>症状としては、変更が大変。大変。</p>
+<p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>自分、疎結合大好きなんですが、</p>
 <p class="p2"><br></p>
@@ -83,21 +83,28 @@
 <p class="p3"><b>バッドノウハウ a.k.a 言語内言語機能拡張</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>言語機能自体を<b>自己的に拡張する試み。</b></p>
 <p class="p2"><b></b><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span></b>JavaScriptを使ってのFWに頻繁に出てくる。</p>
+<p class="p2"><b></b><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>何が悪いかと言うと、<b>どこまでがその機能のための実装なのか</b>、<b>どこからがその機能を使った実装なのか</b>、という</p>
-<p class="p3"><span class="Apple-tab-span">	</span><b>断面の喪失に繋がる</b>。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>断面の喪失に繋がる</b>。<span class="Apple-tab-span">	</span></p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>JavaScriptを使ってのFWに頻繁に出てくる。</p>
-<p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>極論すると、<b>デザインパターンと言い換えても良いのでは</b>。<span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>極論すると、<b>デザインパターンから来る断面の喪失</b>と言い換えても良いのでは。<span class="Apple-converted-space"> </span></p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>あっちなみにデザパタ使うのが悪手、という話では<b>全くなく</b>、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>言語によってはそのデザパタそもそも言語機能で実装されてるからつかわなくていいのもあるんだよ、そっち使ったら消せるね、という話。</b></p>
 <p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>もちろん粒度によっても害悪具合い異なるし。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p3"><span class="Apple-tab-span">	</span>デザインパターンを使う事で、その言語の基礎機能にない物事を実装する事は出来る。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>で、じゃあ、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>絶対消せないし、消す必要も無い。</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>どこまでがその機能を実装するための実装で、どこからがソレ以外か、<b>いつまで判然としてられると思う？</b>っていう。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>局所性の明示ができないところが、損のはじまり。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、じゃあ、何を気にしているか。</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>人間によるidentificationが必要、って時点で、もう歪なんだとおもう。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>どこまでがその機能を実装するための実装で、どこからがソレ以外か、<b>いつまで判然としてられると思う？</b>っていう、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>局所性の明示が自明で出来ないところ。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これが、損のはじまりだと思っている。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>人間によるidentificationが必要、って時点で、もう駄目の入り口に立ってるんだとおもう。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>で、</p>
@@ -117,6 +124,11 @@
 <p class="p3"><span class="Apple-tab-span">	</span>かかわりたくない。</p>
 <p class="p2"><br></p>
 <p class="p3"><b><span class="Apple-tab-span">	</span>JSに関しては、そこでaltJSですよ、っていう。</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>誰が言ったか忘れたけど、とあるHaskellerに言われた言葉を覚えてる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>"デザインパターンはその言語の機能不足を具現化させたもの"</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>機能不足を補ってその先に有るのは、断面の喪失、というループ。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3">なんかバッドノウハウっていうより悪手コレクションになった、、みたいな、、ああ一緒か。</p>
