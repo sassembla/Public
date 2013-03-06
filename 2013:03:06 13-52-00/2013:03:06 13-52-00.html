@@ -88,47 +88,34 @@
 <p class="p3"><span class="Apple-tab-span">	</span>何が悪いかと言うと、<b>どこまでがその機能のための実装なのか</b>、<b>どこからがその機能を使った実装なのか</b>、という</p>
 <p class="p3"><span class="Apple-tab-span">	</span><b>断面の喪失に繋がる</b>。<span class="Apple-tab-span">	</span></p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>極論すると、<b>デザインパターンから来る断面の喪失</b>と言い換えても良いのでは。<span class="Apple-converted-space"> </span></p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
-<p class="p3"><span class="Apple-tab-span">	</span>あっちなみにデザパタ使うのが悪手、という話では<b>全くなく</b>、</p>
-<p class="p3"><span class="Apple-tab-span">	</span><b>言語によってはそのデザパタそもそも言語機能で実装されてるからつかわなくていいのもあるんだよ、そっち使ったら消せるね、という話。</b></p>
-<p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>もちろん粒度によっても害悪具合い異なるし。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>例えば機能Fを言語Jに実装するとして、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>言語Jで書く必要が有るわけで、、、</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
-<p class="p3"><span class="Apple-tab-span">	</span>デザインパターンを使う事で、その言語の基礎機能にない物事を実装する事は出来る。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>絶対消せないし、消す必要も無い。</p>
-<p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>で、じゃあ、何を気にしているか。</p>
-<p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>どこまでがその機能を実装するための実装で、どこからがソレ以外か、<b>いつまで判然としてられると思う？</b>っていう、</p>
-<p class="p3"><span class="Apple-tab-span">	</span>局所性の明示が自明で出来ないところ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>局所性の明示が自明に出来ないところ</b>が生まれる。</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>これが、損のはじまりだと思っている。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>人間によるidentificationが必要、って時点で、もう駄目の入り口に立ってるんだとおもう。</p>
-<p class="p2"><br></p>
-<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これが、損のはじまり、ここではこの種類のバッドノウハウの入り口だと思っている。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>人間によるidentificationが必要、って時点で、もう駄目のエントリーポイントに立ってるんだとおもう。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p3"><span class="Apple-tab-span">	</span>で、</p>
-<p class="p3"><span class="Apple-tab-span">	</span>ここでドキュメンテーションが出てくる。モジュライズみたいな話がでてくる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ここでドキュメンテーションが出てくる。モジュライズしようぜみたいな話がでてくる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>FWにしよう、1層限定のextendを使おう、など。</p>
+<p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>実利として、これらは効果があると思う。</p>
-<p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>でも、そもそも無くてすむ方が良いだろ、、、と思うのは甘えですかそうですか。</p>
-<p class="p2"><br></p>
-<p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>こういうのが現れない場合、仙人みたいな奴が生まれて、その人にお伺い立てながらがんばる地獄が始まる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>でも、そもそも無くてすむ方が良いだろ、、、と思ってしまうんだけど。そういうのは甘えですかそうですか。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>一度失った断面を取り戻すのはとても大変で、隅々までそれ全体を理解しないと、恐ろしい深度で実はつながってたりする。</p>
 <p class="p3"><span class="Apple-tab-span">	</span>時間が経つほど地下茎は全体に行き渡る。</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>再設計とか書き直しとか、そういう部類の所行が必要だと思う。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>かかわりたくない。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>再設計とか書き直しとか、<b>こ、こんな機能の貧弱な言語でやってられるか！　俺は別の言語で書くぜとか</b>そういう部類の所行が必要だと思う。</p>
+<p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b><span class="Apple-tab-span">	</span>JSに関しては、そこでaltJSですよ、っていう。</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>誰が言ったか忘れたけど、とあるHaskellerに言われた言葉を覚えてる。</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>"デザインパターンはその言語の機能不足を具現化させたもの"</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>機能不足を補ってその先に有るのは、断面の喪失、というループ。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3">なんかバッドノウハウっていうより悪手コレクションになった、、みたいな、、ああ一緒か。</p>
