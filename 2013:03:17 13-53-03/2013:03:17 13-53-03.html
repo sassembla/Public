@@ -1,0 +1,138 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1187.34">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #ebebeb}
+    span.s1 {font: 22.0px Helvetica}
+    span.s2 {font: 12.0px Helvetica}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><span class="s1"><b>Unity</b></span><b>にスクリプトのコンパイルを依頼するためにどう土下座すれば</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span>Unity</span>で、他のアプリケーションと連携して、<b>特定条件下</b>でビルド/Playを走らせてほしい。</p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>具体的には、デフォのMonoDevやXamarinや<span class="s2">SublimeText</span>などの外部エディタから、コンパイルを走らせたい。</p>
+<p class="p4"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>編集しながら、一定のタイミングでビルドを走らせたい。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>オートコンパイルがやりたい。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ビルドのトリガーは、Unity Editor側でも、外部エディタ側でもかまわない。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>今は、外部エディタからの制御を可能にしたので、そこからの入力を前提に考えている。</p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p3"><b>特定条件</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>求める条件は下記の通り</p>
+<p class="p3"><span class="Apple-tab-span">	</span>1.エディタでのファイルの保存、ビルドトリガーの実行(⌘+bとか)をトリガーに、Unityが信号を受け取る</p>
+<p class="p3"><span class="Apple-tab-span">	</span>2.トリガーをきっかけに、Unityがビルドを行う</p>
+<p class="p3"><span class="Apple-tab-span">	</span>3.<b>Unity以外のアプリ</b>にフォーカスが当たっている状態でも発動する</p>
+<p class="p3"><span class="Apple-tab-span">	</span>4.Unity.appは起動している</p>
+<p class="p3"><span class="Apple-tab-span">	</span>5.Unityとエディタは同一マシン上にある</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>上記条件のうち、1だけはそれ用の機構が必要なので、作った。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>エディタの特定動作から、UnityEditor側にトリガーを送り、UnityEditor側もそれを受けることができる。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、難関なのが、2だった。</p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p3"><b>実現手段その１</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Unityのビルドは、UnityEditorなどの中で、特定のスクリプトを実行すればOK。</p>
+<p class="p5">EditorApplication.isPlaying = true;</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>とか。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>が、これには制約があり、</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>制約1.このメソッドは、UnityのmainThreadからでないと実行できない</p>
+<p class="p3"><span class="Apple-tab-span">	</span>制約2.今回は外部からの入力という事で、別プロセスでUnityEditorから実行することになるので、実行母体はstaticなScriptになる</p>
+<p class="p3"><span class="Apple-tab-span">	</span>制約3.入力経路の関係上、Unityでトリガーを受け取る部分はmainThreadではなく、subThreadになる</p>
+<p class="p3"><span class="Apple-tab-span">	</span>制約4. Editor上で、subThreadからUnityのmainThreadに合流するAPIとかすべは<b>無い</b>??(見つけられてない</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>mainThreadでの動作は、UnityEditorのツールバーとかからクリックで選んだら即OK、なんだけど、、</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>唯一、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><b>Concurrency kit<span class="Apple-converted-space"> </span></b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Unity3.5でTaskっぽいものが実装してあるAsset</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://u3d.as/content/spicy-pixel/spicy-pixel-concurrency-kit/312">http://u3d.as/content/spicy-pixel/spicy-pixel-concurrency-kit/312</a></p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>テラシュールさんの判りやすい説明(まるなげ)</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://terasur.blog.fc2.com/blog-entry-341.html">http://terasur.blog.fc2.com/blog-entry-341.html</a></p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>が、対今回の用途として凄くいいとこまで行ってるんだけど、<b>制約2 Editorのスクリプトがstatic前提 </b>のため、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>肝心なところでエラーが出る。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>具体的に書くと、taskFactory.StartNew(Createobject()); が、<b>taskFactoryがstaticじゃない</b>ので利用できずに詰む。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>このライブラリはstatic前提で書かれていないんだわー。　だわー。ゎ_.<span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>→ちゃんとAPI読んだらそんなことないかもしれないよ？　って言われたので後で読む。</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>→ここから派生する別の解決策として、Unityにフォーカスが当たっていないタイミングでも定期的に動き続ける</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>UnityEditorのフックを探す、という手も考えられるんだけど、そんなの無さそう。見つけられてない。</p>
+<p class="p4"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b>実現手段その２</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ほかの手段として、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Unityのバッチを使用する手段も有るんだけど、こちらにも問題がある。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>下記のようにUnityのプロセスをバッチを介して動かせるが、</p>
+<p class="p5">/Applications/Unity/Unity.app/Contents/MacOS/Unity なんか引数とかバッチとか</p>
+<p class="p4"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>このためには、<b>Unity.appが起動していない </b>必要がある。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>別口で起動しているとバッチが「ちょwwなんか既に起動してるんですけどwww」なエラーを吐く。 ファーーーーーーwwwww</p>
+<p class="p4"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>今回の用途としては、実行したり編集したりしながらビルドしたいので、詰んでる。Unity起動してないとすぐ遊べない。</p>
+<p class="p4"><span class="Apple-tab-span">	</span></p>
+<p class="p4"><br></p>
+<p class="p3"><b>妥協の上での実現手段</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>いまのところ、下記２つの手段で、実用レベルとして妥協しまくりだが、実現している。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>1.保存時トリガーをUnityが自動検知、勝手にビルド</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Unityからファイルを開くと、エディタでのファイル保存時にビルドが走ってくれる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Macのファイル監視イベントをつかってるっぽい。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>→Unityが変な開き方するので、だいぶ辛い。一回で検知しないことが稀によくある。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>多分、汎用化のために、</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>1.アプリケーション起動コマンドを実行</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>2.そのアプリケーションにファイルパスを渡す</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>とかを行ってるんだろうなーと思うなど。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>それにしても認識しない。<b>最初の一回は絶対に認識しない。</b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>なによりダサいので逃げ出したい。</p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>2.Unityにフォーカスが移った瞬間ビルドが発生する</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>一瞬だけUnityにフォーカスを持って行くことでも自動的にコンパイルが走る。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>っていうか現在、一番まともな代替手段がコレ。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>→やってみたところの動画</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://vimeo.com/61986887">https://vimeo.com/61986887</a></p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>保存をトリガーにしていて、ファイルを保存するとパパッとフォーカスが移動して、、、つらい、、、、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>なにかの宗教的儀式みたいだ、、 なにかの宗教的儀式に従事されてる方すいません、、</p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>3.Unityの動作は別マシン上で行う</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>アレな意味で、コロンブスの卵的な解決法。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>確かにフォーカスが複数になるよ！？　でも、、うーん、、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>別マシンと見比べるの苦痛だよ、、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>とてもバックグラウンドが深くなるので、まだまだ先。</p>
+<p class="p4"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b>上記を満たす実行可能手段を探しています</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>たすけてください！　たす、、け、、</p>
+<p class="p4"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span></p>
+<p class="p4"><span class="Apple-tab-span">	</span></p>
+</body>
+</html>
