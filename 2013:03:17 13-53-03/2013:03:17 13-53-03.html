@@ -36,7 +36,7 @@
 <p class="p3"><span class="Apple-tab-span">	</span>1.エディタでのファイルの保存、ビルドトリガーの実行(⌘+bとか)をトリガーに、Unityが信号を受け取る</p>
 <p class="p3"><span class="Apple-tab-span">	</span>2.トリガーをきっかけに、Unityがビルドを行う</p>
 <p class="p3"><span class="Apple-tab-span">	</span>3.<b>Unity以外のアプリ</b>にフォーカスが当たっている状態でも発動する</p>
-<p class="p3"><span class="Apple-tab-span">	</span>4.Unity.appは起動している</p>
+<p class="p3"><span class="Apple-tab-span">	</span>4.Unity.appは起動し、特定のプロジェクトを開いている</p>
 <p class="p3"><span class="Apple-tab-span">	</span>5.Unityとエディタは同一マシン上にある</p>
 <p class="p4"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>上記条件のうち、1だけはそれ用の機構が必要なので、作った。</p>
@@ -87,9 +87,9 @@
 <p class="p3"><span class="Apple-tab-span">	</span>下記のようにUnityのプロセスをバッチを介して動かせるが、</p>
 <p class="p5">/Applications/Unity/Unity.app/Contents/MacOS/Unity -batchmode -executeMethod BuildBatch.Build</p>
 <p class="p4"><span class="Apple-tab-span">	</span></p>
-<p class="p3"><span class="Apple-tab-span">	</span>とか。主にCI上で利用している。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>とか。主にCI上で利用している。-quitで毎回終了させる事もだいじ。</p>
 <p class="p4"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>これが動くためには、<b>Unity.appが起動していない </b>必要がある。　条件4への明らかな違反。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>これが動くためには、<b>Unity.appがバッチ内容の対象のプロジェクトを開いていない </b>必要がある。　条件4への明らかな違反。</p>
 <p class="p4"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>無視して動かそうとすると、「ちょwwなんか既に起動してるんですけどwww」なエラーを吐く。 ファーーーーーーwwwww</p>
 <p class="p4"><br></p>
@@ -99,7 +99,9 @@
 <p class="p5">Multiple Unity instances can't open the same project.</p>
 <p class="p4"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>今回の用途としては、実行したり編集したりしながらビルドしたいので、詰んでる。Unity起動してないとすぐ遊べない。</p>
-<p class="p4"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>→対象となるプロジェクトを設定したらどうなるん？</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>駄目でした。　Unityは全く悪くない。俺が変な事しようとしてる。　先生ー！ 俺君がへんなことしてます！</p>
+<p class="p4"><br></p>
 <p class="p4"><br></p>
 <p class="p3"><b>妥協の上での実現手段</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>いまのところ、下記２つの手段で、実用レベルとして妥協しまくりだが、実現している。</p>
