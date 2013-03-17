@@ -62,7 +62,7 @@
 <p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>唯一、</p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><b>Concurrency kit<span class="Apple-converted-space"> </span></b></p>
-<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Unity3.5でTaskっぽいものが実装してあるAsset</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>C♯3.5以上の環境で動く、Taskっぽいものが実装してあるAsset</p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://u3d.as/content/spicy-pixel/spicy-pixel-concurrency-kit/312">http://u3d.as/content/spicy-pixel/spicy-pixel-concurrency-kit/312</a></p>
 <p class="p4"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>テラシュールさんの判りやすい説明(まるなげ)</p>
@@ -96,7 +96,7 @@
 <p class="p3"><b>妥協の上での実現手段</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>いまのところ、下記２つの手段で、実用レベルとして妥協しまくりだが、実現している。</p>
 <p class="p4"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>1.保存時トリガーをUnityが自動検知、勝手にビルド</p>
+<p class="p3"><span class="Apple-tab-span">	</span>手段1.保存時トリガーをUnityが自動検知してビルドするのを利用する</p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Unityからファイルを開くと、エディタでのファイル保存時にビルドが走ってくれる。</p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Macのファイル監視イベントをつかってるっぽい。</p>
 <p class="p4"><br></p>
@@ -111,7 +111,7 @@
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>それにしても認識しない。<b>最初の一回は絶対に認識しない。</b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>なによりダサいので逃げ出したい。</p>
 <p class="p4"><br></p>
 <p class="p4"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>2.Unityにフォーカスが移った瞬間ビルドが発生する</p>
+<p class="p3"><span class="Apple-tab-span">	</span>手段2.Unityにフォーカスが移った瞬間ビルドが発生するのを利用する</p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>一瞬だけUnityにフォーカスを持って行くことでも自動的にコンパイルが走る。</p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>っていうか現在、一番まともな代替手段がコレ。</p>
 <p class="p4"><br></p>
@@ -120,13 +120,6 @@
 <p class="p4"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>保存をトリガーにしていて、ファイルを保存するとパパッとフォーカスが移動して、、、つらい、、、、</p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>なにかの宗教的儀式みたいだ、、 なにかの宗教的儀式に従事されてる方すいません、、</p>
-<p class="p4"><br></p>
-<p class="p4"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>3.Unityの動作は別マシン上で行う</p>
-<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>アレな意味で、コロンブスの卵的な解決法。</p>
-<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>確かにフォーカスが複数になるよ！？　でも、、うーん、、</p>
-<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>別マシンと見比べるの苦痛だよ、、</p>
-<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>とてもバックグラウンドが深くなるので、まだまだ先。</p>
 <p class="p4"><br></p>
 <p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
 <p class="p3"><b>上記を満たす実行可能手段を探しています</b></p>
