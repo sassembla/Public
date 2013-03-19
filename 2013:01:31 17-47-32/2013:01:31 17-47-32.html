@@ -1,0 +1,231 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1187.34">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #ebebeb}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #ebebeb; min-height: 18.0px}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 16.0px 'Hiragino Kaku Gothic ProN'}
+    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; color: #e32400; background-color: #ebebeb}
+    span.s1 {font: 22.0px Helvetica}
+    span.s2 {font: 12.0px Helvetica}
+    span.s3 {font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><span class="s1"><b>Unity</b></span><b>を自動的にビルドする設定にしたときのメモ</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>自前のプラグインというかAssetStoreで売るんだぜ的ツールのテストがしたいんだぜ。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>iOS向けアプリケーションのビルドなので、<span class="Apple-tab-span">	</span>環境は必然的に<b>Mac</b>。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Unity.app内の<span class="s2">shell</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>/Applications/Unity/Unity.app/Contents/MacOS/Unity</p>
+<p class="p3"><span class="Apple-tab-span">	</span> に対して、特定のコマンドを実行することで、バッチの実行が出来る。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>あっちなみに Unity Pro 限定です。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>チャレンジしたこと</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>JenkinsでUnityのiOSビルド出力を行う</p>
+<p class="p3"><span class="Apple-tab-span">	</span>DeviceとSimulator両方出す</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>成果物：デバイスとシミュレータのビルドを連続で行うサンプル</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><a href="https://gist.github.com/sassembla/5194684">https://gist.github.com/sassembla/5194684</a></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>参考死霊</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>本当に情報が少ないんですけど、、！！</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>コマンドラインでのUnityの起動に関する日本語情報</p>
+<p class="p3"><span class="Apple-tab-span">	</span><a href="http://docs-jp.unity3d.com/Documentation/Manual/CommandLineArguments.html">http://docs-jp.unity3d.com/Documentation/Manual/CommandLineArguments.html</a></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>BuildPipeline Ref</p>
+<p class="p3"><span class="Apple-tab-span">	</span><a href="http://docs.unity3d.com/Documentation/ScriptReference/BuildPipeline.html">http://docs.unity3d.com/Documentation/ScriptReference/BuildPipeline.html</a></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>先駆者：アメーバのひと</p>
+<p class="p3"><span class="Apple-tab-span">	</span><a href="http://ameblo.jp/principia-ca/entry-11010391965.html">http://ameblo.jp/principia-ca/entry-11010391965.html</a></p>
+<p class="p2"><b><span class="Apple-tab-span">	</span></b></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>バッチとは</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Unityのビルドスクリプトのこと。Unityのプロジェクト中に特定の形式の.csとかを含んでおく事で、Unityの動作を実行できる。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>下準備</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Assets/どこか/Editor　フォルダをつくり、その中にビルド内容を記述した.csファイルを置く。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>コマンドラインから起動する予定のコード<b>　</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>BuildBatch.cs</b></p>
+<p class="p4">using UnityEngine;</p>
+<p class="p4">using UnityEditor;</p>
+<p class="p5"><br></p>
+<p class="p4">using System.Collections;</p>
+<p class="p4">public class BuildBatch : MonoBehaviour {</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>// build iOS app</p>
+<p class="p4"><span class="Apple-tab-span">	</span>private static void BuildiOS(){</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Debug.Log("///////////<span class="Apple-tab-span">	</span>hello build<span class="Apple-tab-span">	</span>///////////");</p>
+<p class="p4"><span class="Apple-tab-span">	</span>}</p>
+<p class="p4">}</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>コマンド</b></p>
+<p class="p4">/Applications/Unity/Unity.app/Contents/MacOS/Unity -batchmode -quit -projectPath /Users/sassembla/Desktop/SampleProject -executeMethod BuildBatch.BuildiOS -logFile ~/build.log; cat ~/build.log</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>-projectPathでプロジェクト指定が可能</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Assetsが入っているフォルダ　までのパスでOK。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>-quit で、ビルド後に「何もする事が無かったらUnityインスタンスを終了させる」ことが可能</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Macだと、複数のUnityインスタンスを立ち上げられない(open -n Unity.appとかやっても怒られる)ので、必須オプション。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>-executeMethodで、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>クラス BuildBatch に書かれた内容が実行される。(-executeMethod <b>BuildBatch</b>.Build)</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>特に、BuildBatch クラス中のBuildメソッドが実行されます。(-executeMethod BuildBatch.<b>Build</b>)</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>☆ドキュメント読んでもやってみるまでわからんこと☆</b></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>こんなの、あんまり書く人居ないと思うので、死亡録として書いておく。</b></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・<b>Macだと、Unityのインスタンスを複数立ち上げる事は出来ない。　open -n Unity.appとかやっても怒られる２。</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ダイアログが出て怒られる。</p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>・複数のUnity、一つのUnityから、一つのプロジェクトを同時に開くことは出来ない</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>たとえばエディタでプロジェクトAを開いている時、batchmodeでプロジェクトAのbatchを叩こうとすると、<b>怒られる</b>。</p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ドキュメントだと、<b>「バッチモードでプロジェクトを開くときにエディタも同じプロジェクトを開くことはサポートされていないことに留意してください」</b>とあり、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><a href="http://docs-jp.unity3d.com/Documentation/Manual/CommandLineArguments.html">http://docs-jp.unity3d.com/Documentation/Manual/CommandLineArguments.html</a></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>出来るプラットフォームもあるという残念な事象。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Windowsだと複数のUnity.exeが起動できる。　Linuxはわかんないや。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>でもWindowsとかじゃiOS用のビルドできないし、、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>まあはい。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>ここまでで、BuildBatch.csを起動可能。とりあえずバッチ実行できるようになった。</b></p>
+<p class="p2"><br></p>
+<p class="p6"><b>で、ここからが、「ちゃんと望むモノがビルドできるようになる」までの戦いだった。</b></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>UnityでiOS向けのビルドを、デバイス/シミュレータともに行う、っつー部分の死霊がまあナイナイ。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>特に、Device向けとSimulator向けをどう切り替えたもんか、まとまっている死霊が見当たらなかった。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、結局判ったので下記に纏める。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>完成版についてのGUIとの対応表</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><a href="https://gist.github.com/sassembla/5194684">gistのコード(同上)</a>に注釈いれつつ備忘録。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>最終的に下記のようになった。</p>
+<p class="p4">using UnityEngine;</p>
+<p class="p4">using UnityEditor;</p>
+<p class="p5"><br></p>
+<p class="p4">using System.Collections;</p>
+<p class="p4">public class BuildBatch : MonoBehaviour {</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>// build iOS app</p>
+<p class="p4"><span class="Apple-tab-span">	</span>private static void BuildiOS(){</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Debug.Log("///////////<span class="Apple-tab-span">	</span>build start<span class="Apple-tab-span">	</span>///////////");</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>string [] scene = {</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"Assets/SampleAsset.unity"</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>};</p>
+<p class="p7"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></b><span class="s3"><b>→ </b></span><b>.unityシーンを配列で渡す。UnityのGUIでの下記に対応。　なんか検出機構作って自動化すると良いと思う。</b></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="s2"><img src="sa.png" alt="sa.png"></span>fig.A</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>string dstDevice = "Device";</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>string dstSimulator = "Simulator";</p>
+<p class="p7"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></b><span class="s3"><b>→ </b></span><b>出力先のフォルダ名を、今回は適当だけど設置した。</b></p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>BuildOptions opt = BuildOptions.SymlinkLibraries |<span class="Apple-converted-space"> </span></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>BuildOptions.Development |<span class="Apple-converted-space"> </span></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>BuildOptions.ConnectWithProfiler |<span class="Apple-converted-space"> </span></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>BuildOptions.AllowDebugging;</p>
+<p class="p7"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></b><span class="s3"><b>→ </b></span><b>built playerで実行する時に使用される設定。</b></p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>// set cheched</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>EditorUserBuildSettings.symlinkLibraries = true;</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>EditorUserBuildSettings.development = true;</p>
+<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="s3"><b>→ </b></span><b>下記の</b><span class="s2"><b>GUI</b></span><b>に対応。デバッグとかのチェック、入れ忘れて辛い目に、、というのから、自動化で解放される。</b></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="s2"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202013-03-19%2017.55.52.png" alt="スクリーンショット 2013-03-19 17.55.52.png"></span>fig.B</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>//set Build-target : Device</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>PlayerSettings.iOS.sdkVersion = iOSSdkVersion.DeviceSDK;</p>
+<p class="p7"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></b><span class="s3"><b>→ </b></span><b>プラットフォーム Device or Simulator　のセットを行う。 エディターの次のGUIに対応。</b></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="s2"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202013-03-19%2018.34.59.png" alt="スクリーンショット 2013-03-19 18.34.59.png"></span>fig.C</p>
+<p class="p5"><br></p>
+<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><b>個人的に、超驚きのポイントだった。</b></p>
+<p class="p7"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></b>iOSSdkVersion.DeviceSDK<b>っていうパラメータは確認できてたので、てっきりどこかのsetメソッドの引数で渡すものだとばかり、、、</b></p>
+<p class="p7"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ここもプロパティだった。　思い込みよくない。</b></p>
+<p class="p5"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></b></p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>//BUILD for device</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>string errorMsg_Device = BuildPipeline.BuildPlayer(scene, dstDevice, BuildTarget.iPhone, opt);</p>
+<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="s3"><b>→ </b></span><b>fig.B のBuildボタンを押したときに行われてる内容</b></p>
+<p class="p7"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>押す &gt; 吐き出し先選択 &gt; OKを選択</b></p>
+<p class="p7"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>の内容をひとつのメソッドに固めてある。<span class="Apple-converted-space"> </span></b></p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>if (string.IsNullOrEmpty(errorMsg_Device)){</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Debug.Log("///////////<span class="Apple-tab-span">	</span>device build succeeded ///////////");</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>} else {</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Debug.Log("///////////<span class="Apple-tab-span">	</span>device build failure<span class="Apple-tab-span">	</span> ///////////");</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Debug.LogError(errorMsg_Device);</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}</p>
+<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="s3"><b>→ </b></span><b>エラーチェック（チェックするだけでSimulatorビルドには進んでほしいのでexitは無し。）</b></p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>//set Build-target : Simulator</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>PlayerSettings.iOS.sdkVersion = iOSSdkVersion.SimulatorSDK;</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>// BUILD for simulator</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>string errorMsg_Simulator = BuildPipeline.BuildPlayer(scene, dstSimulator, BuildTarget.iPhone, opt);</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>if (string.IsNullOrEmpty(errorMsg_Simulator)){</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Debug.Log("///////////<span class="Apple-tab-span">	</span>simulator build succeeded ///////////");</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>} else {</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Debug.Log("///////////<span class="Apple-tab-span">	</span>simulator build failure ///////////");</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Debug.LogError(errorMsg_Simulator);</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}</p>
+<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="s3"><b>→ </b></span><b>同Simulator。</b></p>
+<p class="p4"><span class="Apple-tab-span">	</span>}</p>
+<p class="p4">}</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>ビルド完了時</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>無事にDevice、Simulatorフォルダが出現。起動も出来た。ヒャッハー！</p>
+<p class="p3"><b><span class="Apple-tab-span">	</span></b><span class="s2"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202013-03-19%2018.33.57.png" alt="スクリーンショット 2013-03-19 18.33.57.png"></span></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>注意すべき点</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>プロパティでなんとかしてる箇所が多い</b>ので、順番的に書かざるを得ない、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>複数のプラットフォームのものを同時に並列にビルドとかはUnityの制約的に無理。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>つまり、Unity.app本体のシングルトン性で保護されて動いている機構だということを忘れてはいけない。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>まとめ</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Unityよくできてんな。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+</body>
+</html>
