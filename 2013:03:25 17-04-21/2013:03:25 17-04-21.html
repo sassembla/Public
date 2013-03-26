@@ -11,18 +11,17 @@
     p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
     p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
     p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #ebebeb}
-    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #ebebeb; min-height: 18.0px}
     span.s1 {font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    span.s2 {background-color: transparent}
     span.Apple-tab-span {white-space:pre}
   </style>
 </head>
 <body>
-<p class="p1"><span class="s1"><b>今日のレシピ:</b></span><b>TypeSc</b><span class="s1"><b>r</b></span><b>ipt</b><span class="s1"><b>の</b></span><b>SublimeSocket</b><span class="s1"><b>フィルタ書いた</b></span></p>
+<p class="p1"><span class="s1"><b>謎レシピ:</b></span><b>TypeSc</b><span class="s1"><b>r</b></span><b>ipt</b><span class="s1"><b>の</b></span><b>SublimeSocket</b><span class="s1"><b>フィルタ書いた</b></span></p>
 <p class="p2"><br></p>
 <p class="p3"><b>概要</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>深刻に、やせようと思います。</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
-<p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>関係ないけどTypeSciptのオートコンパイル &amp; エラーをコード上に表示 君を書きました。</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>可能になるのは下記</p>
@@ -37,7 +36,7 @@
 <p class="p2"><br></p>
 <p class="p2"><b></b><br></p>
 <p class="p3"><b>実際の映像</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span><a href="http://youtu.be/VXVei7ikYIQ">http://youtu.be/VXVei7ikYIQ</a></p>
+<p class="p3"><span class="Apple-tab-span">	</span><a href="https://vimeo.com/62707591">https://vimeo.com/62707591</a></p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>材料（ひとりぶん）</b></p>
@@ -89,70 +88,35 @@
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>これで、ST内にWebSocketサーバ/STのAPIサーバが立ち上がります。</p>
 <p class="p2"><b></b><br></p>
-<p class="p2"><b></b><br></p>
-<p class="p3"><b>3.フィルタ用のパスを調味</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>TypeScirptのデフォルトインストール場所や、SublimeSocketとの連携内容を</p>
-<p class="p3"><span class="Apple-tab-span">	</span>あらかじめ書いておいたファイルがSublimeSocketパッケージの中に入っているので、</p>
-<p class="p3"><span class="Apple-tab-span">	</span>そのファイル</p>
 <p class="p2"><br></p>
-<p class="p4">SublimeTextのパッケージフォルダ/SublimeSocket/tool/nodeTailSocket/node_tailsocket_typescript.js</p>
-<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
-<p class="p3"><span class="Apple-tab-span">	</span>に記述されている、パス情報をいろいろ調整します。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>具体的には、下記の中の、太字の <b>sassembla </b>とか書いてあるところを、自分の名前にするとかしてみてください。</p>
-<p class="p4"><span class="Apple-converted-space">    </span>var modifyReactJSON = {</p>
-<p class="p4"><span class="Apple-converted-space">        </span>"target": "typescript",</p>
-<p class="p4"><span class="Apple-converted-space">        </span>"event": "on_modified",</p>
-<p class="p4"><span class="Apple-converted-space">        </span>"interval": 1000,</p>
-<p class="p4"><span class="Apple-converted-space">        </span>"selectors": [</p>
-<p class="p4"><span class="Apple-converted-space">            </span>{</p>
-<p class="p4"><span class="Apple-converted-space">                </span>"runShell": {</p>
-<p class="p4"><span class="Apple-converted-space">                    </span>"main": "/bin/sh",</p>
-<p class="p4"><span class="Apple-converted-space">                    </span>"":[</p>
-<p class="p4"><span class="Apple-converted-space">                        </span>"\"/Users/<b>sassembla</b>/Library/Application Support/Sublime Text 2/Packages/SublimeSocket/tool/nodeTailSocket/tscwithenv.sh\"",</p>
-<p class="p4"><span class="Apple-converted-space">                        </span>"/Users/<b>sassembla</b>/Desktop/tscomp/*.ts",</p>
-<p class="p4"><span class="Apple-converted-space">                        </span>"2&gt;&gt;","/Users/<b>sassembla</b>/Desktop/tscomp/tsc.log"</p>
-<p class="p4"><span class="Apple-converted-space">                    </span>]</p>
-<p class="p4"><span class="Apple-converted-space">                </span>}</p>
-<p class="p4"><span class="Apple-converted-space">            </span>}</p>
-<p class="p4"><span class="Apple-converted-space">        </span>]</p>
-<p class="p4"><span class="Apple-converted-space">    </span>};</p>
-<p class="p5"><br></p>
-<p class="p4"><span class="Apple-converted-space">    </span>var saveReactorJSON = {</p>
-<p class="p4"><span class="Apple-converted-space">        </span>"target": "typescript",</p>
-<p class="p4"><span class="Apple-converted-space">        </span>"event": "on_post_save",</p>
-<p class="p4"><span class="Apple-converted-space">        </span>"interval": 100,</p>
-<p class="p4"><span class="Apple-converted-space">        </span>"selectors": [</p>
-<p class="p4"><span class="Apple-converted-space">            </span>{</p>
-<p class="p4"><span class="Apple-converted-space">                </span>"showStatusMessage": {</p>
-<p class="p4"><span class="Apple-converted-space">                    </span>"message": "typescript compiling..."</p>
-<p class="p4"><span class="Apple-converted-space">                </span>}</p>
-<p class="p4"><span class="Apple-converted-space">            </span>},</p>
-<p class="p4"><span class="Apple-converted-space">            </span>{</p>
-<p class="p4"><span class="Apple-converted-space">                </span>"showAtLog": {</p>
-<p class="p4"><span class="Apple-converted-space">                    </span>"message": "typescript compiling..."</p>
-<p class="p4"><span class="Apple-converted-space">                </span>}</p>
-<p class="p4"><span class="Apple-converted-space">            </span>},</p>
-<p class="p4"><span class="Apple-converted-space">            </span>{</p>
-<p class="p4"><span class="Apple-converted-space">                </span>"eraseAllRegion":{}</p>
-<p class="p4"><span class="Apple-converted-space">            </span>},</p>
-<p class="p4"><span class="Apple-converted-space">            </span>{</p>
-<p class="p4"><span class="Apple-converted-space">                </span>"runShell": {</p>
-<p class="p4"><span class="Apple-converted-space">                    </span>"main": "/bin/sh",</p>
-<p class="p4"><span class="Apple-converted-space">                    </span>"":[</p>
-<p class="p4"><span class="Apple-converted-space">                        </span>"\"/Users/<b>sassembla</b>/Library/Application Support/Sublime Text 2/Packages/SublimeSocket/tool/nodeTailSocket/tscwithenv.sh\"",</p>
-<p class="p4"><span class="Apple-converted-space">                        </span>"/Users/<b>sassembla</b>/Desktop/tscomp/*.ts",</p>
-<p class="p4"><span class="Apple-converted-space">                        </span>"2&gt;&gt;","/Users/<b>sassembla</b>/Desktop/tscomp/tsc.log"</p>
-<p class="p4"><span class="Apple-converted-space">                    </span>]</p>
-<p class="p4"><span class="Apple-converted-space">                </span>}</p>
-<p class="p4"><span class="Apple-converted-space">            </span>}</p>
-<p class="p4"><span class="Apple-converted-space">        </span>]<span class="Apple-converted-space"> </span></p>
-<p class="p4"><span class="Apple-converted-space">    </span>};</p>
+<p class="p3"><b>3.node_tailsocket_typescript.jsをnodeで起動します。</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>nodeで、TypeScriptのコンパイル環境を立ち上げます。</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>まだまだ生々しいので、いつかどこかに旨く隠蔽したい。</p>
-<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>その際、下記パスを使います。</p>
 <p class="p2"><br></p>
-<p class="p3"><b>4.　3で調整したnode_tailsocket_typescript.jsをnodeで起動します。</b></p>
-<p class="p4">node SublimeTextのパッケージフォルダ/SublimeSocket/tool/nodeTailSocket/node_tailsocket_typescript.js</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・コンパイルしたい.tsファイルが置いてあるフォルダのパス</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>コンパイル対象になる tsファイルの検索条件は、単なる*.tsです。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>複数ファイルをいっぺんにコンパイルしてますが、いまんとこ、異なるフォルダ階層のファイルは見に行ってません。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>簡単に改造できる筈。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・node_tailsocket_typescript.jsファイルのパス</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・tscwithenv.shファイルのパス</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>SublimeTextのパッケージフォルダ/SublimeSocket/tool/nodeTailSocket/下の下記2ファイル</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>(<b>別フォルダへの持ち出し可、位置相関なし。　っていうかSTのパスがspaceを含むため持ち出しを強く推奨。</b>)</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これらをパラメータとして、nodeで起動します。</p>
+<p class="p2"><br></p>
+<p class="p4">node node_tailsocket_typescript.jsファイルのパス tscwithenv.shファイルのパス コンパイルしたい.tsファイルが置いてあるフォルダのパス</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>SublimeSocketのフォルダパスをそのまま使って、Desktop上のフォルダ tscomp 内の.tsファイルを全部コンパイルしようとすると、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>下記のようなコマンドになります。きっと。</p>
+<p class="p4">node /Users/sassembla/Library/Application\ Support/Sublime\ Text\ 2/Packages/SublimeSocket/tool/nodeTailSocket/node_tailsocket_typescript.js "\"/Users/sassembla/Library/Application Support/Sublime Text 2/Packages/SublimeSocket/tool/nodeTailSocket/tscwithenv.sh\"" /Users/sassembla/Desktop/tscomp</p>
+<p class="p2"><br></p>
+<p class="p4"><span class="s2"><span class="Apple-tab-span">	</span>第二引数の　</span>"\"/Users/sassembla/Library/Application Support/Sublime Text 2/Packages/SublimeSocket/tool/nodeTailSocket/tscwithenv.sh\""<span class="s2">　について、</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>STのパスがスペースを含んでるクソッタレパスなので、""をつけ、かつ内部でも""がかかってる必要があるためエスケープしておく必要があります。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>や、node_tailsocket_typescript.js と tscwithenv.sh を手近などこかにコピーして、平和に実行する事をお勧めします。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>5.自家製TypeScriptをお好みで編集！</b></p>
@@ -163,10 +127,18 @@
 <p class="p3"><span class="Apple-tab-span">	</span>編集したり保存したりするタイミングで</p>
 <p class="p3"><span class="Apple-tab-span">	</span>勝手にビルドが走ります。</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>コンパイルログが　・コンパイルしたい.tsファイルが置いてあるフォルダのパス　に出力されるのですが、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>でけーな邪魔だなーと思ったら手で消してください。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>旨い機構とか考えたら自動的に消すとかしたいです。</p>
 <p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p3"><b>全体像</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>余裕できたら書きます。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・SublimeText内でSublimeSocketを起動、WebSocketを通じてSublimeのAPIを実行可能に。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・nodeで、TypeScriptのコンパイルログを監視、結果をWebSocket経由でSublimeTextに転送。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・SublimeText側でエラーとか行とか内容を取得、表示。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・SublimeText側から、コードの編集や保存をキーに、コンパイルを実行。</p>
 <p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ということをやってます。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3">ところで痩せたいです。運動スルベ。</p>
