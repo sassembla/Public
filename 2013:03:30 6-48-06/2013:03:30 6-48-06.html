@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1187.37">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #ebebeb}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>Unity用に、複数ファイルをmscでコンパイルするだけの簡単なお仕事</b></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>表題の通り</p>
+<p class="p3"><b><span class="Apple-tab-span">	</span></b>そろそろいろいろとDLLにして、ラクしようかなと思うところ。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>参考</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>mcs(1) - Linux man page</p>
+<p class="p3"><span class="Apple-tab-span">	</span><a href="http://linux.die.net/man/1/mcs">http://linux.die.net/man/1/mcs</a></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>コマンドラインで</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>コンパイルしてDLLにしたいフォルダ上で、</p>
+<p class="p4">mcs -r:/Applications/Unity/Unity.app/Contents/Frameworks/Managed/UnityEngine.dll -target:library -recurse:'*.cs'</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>以上。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>こんな感じのフォルダで実行すると</p>
+<p class="p5"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202013-03-30%2022.52.09.png" alt="スクリーンショット 2013-03-30 22.52.09.png"></p>
+<p class="p3"><span class="Apple-tab-span">	</span>dllが出来る。　やったね！</p>
+<p class="p5"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202013-03-30%2022.52.20.png" alt="スクリーンショット 2013-03-30 22.52.20.png"></p>
+<p class="p3"><span class="Apple-tab-span">	</span>テストも無事通過したので、うれしい限り。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+</body>
+</html>
