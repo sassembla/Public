@@ -1,0 +1,174 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1187.37">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #ebebeb}
+    span.s1 {font: 12.0px Helvetica}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>Breakが付いたUnitySublimeSocketAsset 0.6.1</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>予定していた、ゲーム内パラメータをエディタで見る機能と、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Break(特定行でゲーム中断)という機能が、試験的に実装できた。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ホントホント。エイプリルフールだけど。</p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・ゲーム中のその瞬間のパラメータが見れる</p>
+<p class="p4"><span class="s1">Debu</span>g.Log("L行番号:ファイル名: ほか</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Logの延長上で、ゲーム実行中の値が、エディタから見れるようになった。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・ゲーム中に特定の箇所でBreakが出来る</p>
+<p class="p4"><span class="s1">Debu</span>g.Log("<span class="s1">B</span>行番号:ファイル名: ほか</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>やはりLogの延長上で、特定Logが再生された瞬間、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>無理矢理フォーカスをUnityから別アプリ(SublimeTextとか)へと移動する事で、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ゲームの挙動を停止させる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>その時の値も見れる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="s1"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202013-04-01%2020.03.14.png" alt="スクリーンショット 2013-04-01 20.03.14.png"></span></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>ムービー</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><a href="https://vimeo.com/63078739">https://vimeo.com/63078739</a></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>どうやってるのか</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Unityで実行するLogに対して、特定フォーマットのものが発生したら、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>UnitySublimeSocketがSublimeSocketへとデータ転送</p>
+<p class="p3"><span class="Apple-tab-span">	</span>→SublimeSocketが反応、値を保持</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>という事をしてるだけ。<span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>設定には、SublimeSocketのAPIを使って、</p>
+<p class="p2"><br></p>
+<p class="p4">-&gt;defineFilter:<span class="Apple-converted-space"> </span></p>
+<p class="p4">{</p>
+<p class="p4"><span class="Apple-converted-space">    </span>"name": "unity",</p>
+<p class="p4"><span class="Apple-converted-space">    </span>"patterns": [</p>
+<p class="p4"><span class="Apple-converted-space">        </span>{</p>
+<p class="p4"><span class="Apple-converted-space">            </span>"(.*)[(]([0-9].*?),.*[)]: error .*:(.*)": {</p>
+<p class="p4"><span class="Apple-converted-space">                </span>"selectors": [</p>
+<p class="p4"><span class="Apple-converted-space">                    </span>{</p>
+<p class="p4"><span class="Apple-converted-space">                        </span>"showAtLog": {</p>
+<p class="p4"><span class="Apple-converted-space">                            </span>"message": "groups[0]"</p>
+<p class="p4"><span class="Apple-converted-space">                        </span>}</p>
+<p class="p4"><span class="Apple-converted-space">                    </span>},</p>
+<p class="p4"><span class="Apple-converted-space">                    </span>{</p>
+<p class="p4"><span class="Apple-converted-space">                        </span>"appendRegion": {</p>
+<p class="p4"><span class="Apple-converted-space">                            </span>"line": "groups[2]",</p>
+<p class="p4"><span class="Apple-converted-space">                            </span>"message": "\"groups[3]\"",</p>
+<p class="p4"><span class="Apple-converted-space">                            </span>"view": "groups[1]",</p>
+<p class="p4"><span class="Apple-converted-space">                            </span>"condition": "keyword"</p>
+<p class="p4"><span class="Apple-converted-space">                        </span>}</p>
+<p class="p4"><span class="Apple-converted-space">                    </span>}</p>
+<p class="p4"><span class="Apple-converted-space">                </span>]</p>
+<p class="p4"><span class="Apple-converted-space">            </span>}</p>
+<p class="p4"><span class="Apple-converted-space">        </span>},</p>
+<p class="p4"><span class="Apple-tab-span">	</span>(中略)</p>
+<p class="p4"><span class="Apple-converted-space">        </span>{</p>
+<p class="p4"><span class="Apple-converted-space">            </span>"^L([0-9].*):(.*): (.*)": {</p>
+<p class="p4"><span class="Apple-converted-space">                </span>"selectors": [</p>
+<p class="p4"><span class="Apple-converted-space">                    </span>{</p>
+<p class="p4"><span class="Apple-converted-space">                        </span>"appendRegion": {</p>
+<p class="p4"><span class="Apple-converted-space">                            </span>"line": "groups[1]",</p>
+<p class="p4"><span class="Apple-converted-space">                            </span>"message": "groups[3]",</p>
+<p class="p4"><span class="Apple-converted-space">                            </span>"view": "groups[2]",</p>
+<p class="p4"><span class="Apple-converted-space">                            </span>"condition": "string"</p>
+<p class="p4"><span class="Apple-converted-space">                        </span>}</p>
+<p class="p4"><span class="Apple-converted-space">                    </span>}</p>
+<p class="p4"><span class="Apple-converted-space">                </span>]</p>
+<p class="p4"><span class="Apple-converted-space">            </span>}</p>
+<p class="p4"><span class="Apple-converted-space">        </span>},</p>
+<p class="p4"><span class="Apple-converted-space">        </span>{</p>
+<p class="p4"><span class="Apple-converted-space">            </span>"^B([0-9].*):(.*): (.*)": {</p>
+<p class="p4"><span class="Apple-converted-space">                </span>"selectors": [</p>
+<p class="p4"><span class="Apple-converted-space">                    </span>{</p>
+<p class="p4"><span class="Apple-converted-space">                        </span>"showStatusMessage": {</p>
+<p class="p4"><span class="Apple-converted-space">                            </span>"message": "groups[2] break. line:groups[1], groups[3]"</p>
+<p class="p4"><span class="Apple-converted-space">                        </span>}</p>
+<p class="p4"><span class="Apple-converted-space">                    </span>},</p>
+<p class="p4"><span class="Apple-converted-space">                    </span>{</p>
+<p class="p4"><span class="Apple-converted-space">                        </span>"showAtLog": {</p>
+<p class="p4"><span class="Apple-converted-space">                            </span>"message": "groups[2] break. line:groups[1], groups[3]"</p>
+<p class="p4"><span class="Apple-converted-space">                        </span>}</p>
+<p class="p4"><span class="Apple-converted-space">                    </span>},</p>
+<p class="p4"><span class="Apple-converted-space">                    </span>{</p>
+<p class="p4"><span class="Apple-converted-space">                        </span>"appendRegion": {</p>
+<p class="p4"><span class="Apple-converted-space">                            </span>"line": "groups[1]",</p>
+<p class="p4"><span class="Apple-converted-space">                            </span>"message": "groups[3]",</p>
+<p class="p4"><span class="Apple-converted-space">                            </span>"view": "groups[2]",</p>
+<p class="p4"><span class="Apple-converted-space">                            </span>"condition": "string"</p>
+<p class="p4"><span class="Apple-converted-space">                        </span>}</p>
+<p class="p4"><span class="Apple-converted-space">                    </span>},</p>
+<p class="p4"><span class="Apple-converted-space">                    </span>{</p>
+<p class="p4"><span class="Apple-converted-space">                        </span>"monocastMessage": {</p>
+<p class="p4"><span class="Apple-converted-space">                            </span>"target": "unitysocket",</p>
+<p class="p4"><span class="Apple-converted-space">                            </span>"message": "break"</p>
+<p class="p4"><span class="Apple-converted-space">                        </span>}</p>
+<p class="p4"><span class="Apple-converted-space">                    </span>}</p>
+<p class="p4"><span class="Apple-converted-space">                </span>]</p>
+<p class="p4"><span class="Apple-converted-space">            </span>}</p>
+<p class="p4"><span class="Apple-converted-space">        </span>}</p>
+<p class="p4"><span class="Apple-converted-space">    </span>]</p>
+<p class="p4">}</p>
+<p class="p3"><span class="Apple-tab-span">	</span>正規表現に対して、特定のAPIを着火するようにしかけてあるだけ。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>いやーAPIつくって良かったわー。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>だいたいのことがカスタマイズできる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>思いつきで挙動変えられる。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>まだ本決まりでないBreak</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>理屈は恐ろしく下らないものなので、お判りの通り、これは正しいBreakではない。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>大体、Breakっつったら順に実行できたりしないとつまらないだろう。</p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>今後、気が向いたらなんとかすると思う。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>具体的にはコレ用のライブラリを書いて、Asset側で停止や次へ、を扱う。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>行単位実行は、、たぶんやらない。行単位でBreak置いてください的な。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>目指しているもの</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>本来、SublimeSocketは、Unity用では無く、Scalaとかをサーバサイドでコンパイルして、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>そのコンパイル中継やパラメータの流れをクライアント=SublimeText側で受けることを目的としたものだった。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ライブコンパイル用のBufferも、WebSocketを基礎にした設計もその辺が根源にある。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>なので、本来の用途じゃないけど、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>なかなか、Unityとの連携は面白いなーと思っているところ。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>で</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>そろそろAssetStoreに出す。出したい。誰かデバッグしてくれる人、追加で募集中。</p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>関係ないけど</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>SublimeTextの設計思想、メイン機構はC++、プラグインはPythonで、っていうのが、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ほんともう素晴らしい。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>プラグインはコンパイル無しの言語でサクサク書き、信頼が必要だったり頑強さが求められる部分や、テストは静的解析とかコンパイルできる言語で書くと</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ほんとに良いと思う。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>静的だけだとめんどい。 他に得に不満は無い。Scalaとか高機能な言語を使えば良い。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>動的だけだとバグる。 テストの量がネックになる。 いつでも型を気にしないといけない。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>この組み合わせは、とてもいい。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>いやー捗るわー。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>あっほら、4/1だから、アジだよ。</p>
+<p class="p2"><br></p>
+</body>
+</html>
