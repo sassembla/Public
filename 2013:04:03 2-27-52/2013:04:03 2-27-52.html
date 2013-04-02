@@ -1,0 +1,117 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1187.37">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>SublimeSocket + TypeScript さよならnode.js編</b></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>node.jsを貶める意図は無いです。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>下記の続きです。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://sassembla.github.com/Public/2013:03:25%2017-04-21/2013:03:25%2017-04-21.html">謎レシピ:TypeScriptのSublimeSocketフィルタ書いた</a></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>どーーーにもnode-tailの遅さに納得いかない。ファイルの更新拾うのが亀過ぎる</p>
+<p class="p3"><span class="Apple-tab-span">	</span>+</p>
+<p class="p3"><span class="Apple-tab-span">	</span>wsがOriginパラメータ持ってなくて大変めんどくさい</p>
+<p class="p3"><span class="Apple-tab-span">	</span>+</p>
+<p class="p3"><span class="Apple-tab-span">	</span>この2つのモジュールに依存するのどうなの？　残念なんじゃないの？</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>と思っていた昨今、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>案の定、知り合いに使ってもらったら環境構築の時点でいろいろつまづいたので、</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>脱node.jsして、tsc以外のnode.js依存の部分を、すべてChromeのExtensionにおんぶに抱っこしてもらう事にしました。</b></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>俺の使い方が悪いんです。nodeはいいコです。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>前提</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・node.jsは結局使う</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>tscを内部で使っています。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>よって、node.jsとtscがインストールしてある必要があります。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・Chromeに、SublimeSocket/tool内のExtensionをインストールしてもらう必要がある</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>nodeのwsとtailの代替になります。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・SublimeSocketが必要</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>はい。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>動画</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>百文は一動画にしかず</p>
+<p class="p3"><span class="Apple-tab-span">	</span><a href="http://vimeo.com/63188211">http://vimeo.com/63188211</a></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>TypeScriptのファイルを開いて偏執したりするとエラー行が光ったりする。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>以前のようなコマンドラインでの入力がほぼ無いのがうれしい。touch使ってるけど。</p>
+<p class="p2"><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>スクリーンショット</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>同一フォルダに入っているところをフォルダ単位でコンパイルされ、クラス名の重複を怒られている時の図<b><span class="Apple-tab-span">	</span></b></p>
+<p class="p4"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202013-04-02%2023.07.25.png" alt="スクリーンショット 2013-04-02 23.07.25.png"></p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>結果</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>最終的に、Chrome Extensionsで、nodeがやってた上記の内容をすべて肩代わりし、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>かつ私的な科学の進歩でいろいろなことができるようになった。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・コンパイルにはtscを使用しているが、nodeとか一切表に出てこない</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>清々した。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・コンパイルモード</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>編集中フォルダのみをコンパイルする<b>Focus</b>モード、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>対象のフォルダ一式内の.tsをコンパイルする<b>Folder</b>モード、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>対象フォルダを含む内包物すべてのなかの.tsをコンパイルする<b>Recursive</b>モード（未完どころか未制作）</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>から選べるようになるそのうち。今は内部の値で決定されてる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>動画の中ではFolderモードにしてある。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・省エネ指向</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>nodeでのtailとかのときよりちょっと省エネです。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>tail自体の処理を、必要な時だけに絞ったりしてる。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>まだ有った気がするけど、詳しくはねむみが抜けてから書きます。あれば。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>今後</b><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>node tscに依存せずにコンパイル、、、は、目指さない方がいいような気がしている。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>なんだかんだ追従が面倒くさそうなので。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>コンパイルについては、フォルダ階層を潜りつつコンパイルするようにします。きっと。そのうち。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>メモ</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span></b>・ChromeExtensions側からWbSocketがcloseできない</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>SublimeSocketの既知のバグ。直す。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・設定ファイルでいろいろセットできるようにしたい</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>コンパイルモードが3種あり、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>モード切り替え<span class="Apple-tab-span">	</span>を設定画面にもつ、、とかが出来ると思うんで、やる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・そろそろrunShellをrunSeqShellとrunKVShellに分けないとなー。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>SublimeSocketの中の不整合。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>置換系の差が出るはず。バグとしてそのうち気付く気がする。</p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>禁止文字replaceはかかってるので、その辺に追記すれば、、</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+</body>
+</html>
