@@ -11,6 +11,8 @@
     p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
     p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
     p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #ebebeb}
+    span.s1 {font: 12.0px Helvetica}
     span.Apple-tab-span {white-space:pre}
   </style>
 </head>
@@ -31,7 +33,7 @@
 <p class="p3"><span class="Apple-tab-span">	</span>この2つのモジュールに依存するのどうなの？　残念なんじゃないの？</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>と思っていた昨今、</p>
-<p class="p3"><span class="Apple-tab-span">	</span>案の定、知り合いに使ってもらったら環境構築の時点でいろいろつまづいたので、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>案の定、知り合いに使ってもらったら環境構築の時点でいろいろ躓いたので、</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p3"><b><span class="Apple-tab-span">	</span>脱node.jsして、tsc以外のnode.js依存の部分を、すべてChromeのExtensionにおんぶに抱っこしてもらう事にしました。</b></p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
@@ -102,21 +104,97 @@
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>、、、まあ、Chrome自体が、「これなんかめっちゃ電池喰ってないか？」と思う事はある。メモリも。</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p2"><br></p>
+<p class="p3"><b>インストール手順</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>1.TypeScriptのファイルを適当なフォルダに用意します</b></p>
+<p class="p4"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202013-04-03%2017.23.04.png" alt="スクリーンショット 2013-04-03 17.23.04.png"></p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>2.SublimeTextを入れます</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>(略)</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></b>tsファイルを開くとこんな感じです。シンタックスハイライトとかは、<a href="http://blogs.msdn.com/b/interoperability/archive/2012/10/01/sublime-text-vi-emacs-typescript-enabled.aspx">このへん</a> がいい感じです。</p>
+<p class="p4"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202013-04-03%2017.23.20.png" alt="スクリーンショット 2013-04-03 17.23.20.png"></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>3.SublimeSocketを入れます</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>PackageControlには申請してないので、cloneして落としてください。ST3に向けて作業中です。</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>masterブランチそのままで良いと思います。</b></p>
+<p class="p5">git clone https://github.com/sassembla/SublimeSocket.git</p>
+<p class="p2"><b><span class="Apple-tab-span">	</span></b></p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>4.Chromeを起動して ChromeExtensionsにSublimeSocketChromeClient プラグインを追加</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>パッケージ化してないプラグインがSublimeSocketに入ってるので、インストール。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>デベロッパーモードにチェックが入っていないと出ないので要チェックや。</p>
+<p class="p4"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202013-04-03%2017.23.52.png" alt="スクリーンショット 2013-04-03 17.23.52.png"></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>場所は、</p>
+<p class="p5">/Users/ユーーーーーザーーーーーー名/Library/Application Support/Sublime Text 2/Packages/SublimeSocket/tool/chromeClient</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>chromeClient フォルダを選んで、選択。</p>
+<p class="p4"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202013-04-03%2017.24.26.png" alt="スクリーンショット 2013-04-03 17.24.26.png"></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>できた。 <b>「ファイルのURLへのアクセスを許可する」 </b>にチェック入ってるのを確認してくださいませ。</p>
+<p class="p4"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202013-04-03%2017.20.20.png" alt="スクリーンショット 2013-04-03 17.20.20.png"></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>5. .tsが置いてあるフォルダに、適当な名前でログファイルを作成する</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>コンソールで、</p>
+<p class="p5">touch <span class="s1">something</span>.log</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>とかすれば良いと思う。日本語、スペースが含まれるファイル名はやめといたほうがいい。</p>
+<p class="p4"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202013-04-03%2017.21.02.png" alt="スクリーンショット 2013-04-03 17.21.02.png"></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>ここまでで準備完了。</b></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>作業する時は、ここから</b></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>6.編集したい.tsをSublimeTextで開いて、SublimeSocketをonにする</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>command + shift + p -&gt; soon とか打てばOK</p>
+<p class="p4"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202013-04-03%2017.25.19.png" alt="スクリーンショット 2013-04-03 17.25.19.png"></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>7. 　5で作ったlogファイルをChromeに喰わせる</b></p>
+<p class="p4"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202013-04-03%2017.22.25.png" alt="スクリーンショット 2013-04-03 17.22.25.png"></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>↓</b></p>
+<p class="p4"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202013-04-03%2017.24.52.png" alt="スクリーンショット 2013-04-03 17.24.52.png"></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>8.SublimeSocketChromeClient プラグインをOnにする</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></b><span class="s1"><img src="a.png" alt="a.png"></span></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>☆6と8が順番に行われる必要があります。</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></b>6でサーバ起動、8でそのサーバに繋ぎに行ってるので。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>つなげなかったら落とすとか今度入れよう。</p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>準備完了</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>これでSublimeTextとChromeが接続されるので、あとは保存するたびにコンパイルが走る。</p>
+<p class="p4"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202013-04-03%2017.25.38.png" alt="スクリーンショット 2013-04-03 17.25.38.png"></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>STのコンソール開く (shift + control + `) と、いろいろコンパイル成功したよーとかエラーだよーとか表示される。</p>
+<p class="p4"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202013-04-03%2017.26.18.png" alt="スクリーンショット 2013-04-03 17.26.18.png"></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>エラー出す内容書いて保存すると、その場に表示される。 necomimiクラスなんか無い！！</p>
+<p class="p4"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202013-04-03%2017.26.41.png" alt="スクリーンショット 2013-04-03 17.26.41.png"></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>エラーは、赤丸のポッチをクリックすると、詳細をNotificationで表示するようにしてある。necomimi、スコープ内に存在しないってよ。</p>
+<p class="p3"><b><span class="Apple-tab-span">	</span></b><span class="s1"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202013-04-03%2017.26.50.png" alt="スクリーンショット 2013-04-03 17.26.50.png"></span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>以上。</p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>構造</b></p>
+<p class="p4"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202013-04-03%2018.29.37.png" alt="スクリーンショット 2013-04-03 18.29.37.png"></p>
+<p class="p3"><span class="Apple-tab-span">	</span>(訳：そのうちSublimeSocket自体のAPIと一緒に書きます)</p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><b></b><br></p>
 <p class="p3"><b>今後</b><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>プラグイン内で、結局 tscを使っているので、node.js に依存している。</p>
+<p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>node tscに依存せずにコンパイル、、、は、目指さない方がいいような気がしている。</p>
 <p class="p3"><span class="Apple-tab-span">	</span>なんだかんだ追従が面倒くさそうなので。</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>コンパイルについては、フォルダ階層を潜りつつコンパイルするようにします。きっと。そのうち。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>あと、フォルダ階層を潜りつつコンパイルするようにします。きっと。そのうち。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>メモ</b></p>
 <p class="p3"><b><span class="Apple-tab-span">	</span></b>・ChromeExtensions側からWbSocketがcloseできない</p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>SublimeSocketの既知のバグ。直す。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>closeがSublimeSocket側に来ないんだよなー。WebSocketSharpのCloseはくるんだけどな。</p>
+<p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>・設定ファイルでいろいろセットできるようにしたい</p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>コンパイルモードが3種あり、</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>モード切り替え<span class="Apple-tab-span">	</span>を設定画面にもつ、、とかが出来ると思うんで、やる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>モード切り替え<span class="Apple-tab-span">	</span>を設定画面にもつ、、とかが出来ると思うんで、やろうかとおもってたんだけど、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>localStrage使うしか無さそうで、とても面倒くさくなった。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>コード内の値を直に書き換えると良いのでは。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/SublimeSocket/blob/master/tool/chromeClient/SublimeSocketChromeClient.js#L28">https://github.com/sassembla/SublimeSocket/blob/master/tool/chromeClient/SublimeSocketChromeClient.js#L28</a></p>
+<p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>・そろそろrunShellをrunSeqShellとrunKVShellに分けないとなー。</p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>SublimeSocketの中の不整合。</p>
@@ -125,7 +203,7 @@
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>禁止文字replaceはかかってるので、その辺に追記すれば、、</p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>⇒分けない方がいいって言われたなー。うーん。そだね。</p>
 <p class="p2"><br></p>
-<p class="p2"><br></p>
+<p class="p3">なんかあれば、@toru_inoue まで。</p>
 <p class="p2"><br></p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
 </body>
