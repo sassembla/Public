@@ -14,7 +14,6 @@
     p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px 'Hiragino Kaku Gothic ProN'; background-color: #ebebeb}
     p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px 'Hiragino Kaku Gothic ProN'; color: #ff2500}
     p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
-    p.p8 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
     span.s1 {font: 12.0px 'Hiragino Kaku Gothic ProN'}
     span.s2 {font: 12.0px 'Hiragino Kaku Gothic ProN'; color: #000000}
     span.s3 {font: 12.0px Helvetica}
@@ -22,21 +21,35 @@
   </style>
 </head>
 <body>
-<p class="p1"><b>TypeScriptでChromeのExtension書いててハマった</b></p>
+<p class="p1"><b>TypeScriptでChromeのExtension書いてハマったとこメモ</b></p>
 <p class="p2"><br></p>
 <p class="p3"><b>概要</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>ChromeExtensionをTypeScriptで書いてみてた。</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p3"><span class="Apple-tab-span">	</span>TypeScript化しつつあるブツはこちら。</p>
-<iframe src="http://player.vimeo.com/video/63188211" width="500" height="281" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe> <p><a href="http://vimeo.com/63188211">SublimeSocket TypeScript ChromeClient 0.5.0</a> from <a href="http://vimeo.com/user7525164">Vimeo</a>.</p>
 <p class="p3"><span class="Apple-tab-span">	</span>SublimeSocketでのTypeScriptコンパイル機構</p>
+<iframe src="http://player.vimeo.com/video/63188211" width="500" height="281" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe> <p><a href="http://vimeo.com/63188211">SublimeSocket TypeScript ChromeClient 0.5.0</a> from <a href="http://vimeo.com/user7525164">Vimeo</a>.</p>
+
 <p class="p2"><b></b><br></p>
 <p class="p3"><b><span class="Apple-tab-span">	</span></b>ChromeExtensionsのJSをTypeScript化することのメリットは、今回の場合下記を目論みつつ。</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>・クラス！！　クラス！！　クラスがホシイ！　デフォで！！</p>
 <p class="p3"><span class="Apple-tab-span">	</span>・extendsを使った振る舞いの置き換えが簡単に素敵！</p>
-<p class="p3"><span class="Apple-tab-span">	</span>・コンパイル時型チェックあるしラク</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・コンパイル時型チェックあるしミスに気付くチャンス増えてラク</p>
 <p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>既存のTypeScriptedなChromeExtensionはこちら。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/SublimeSocket/tree/dev/tool/chromeClients/TypeScriptClient">https://github.com/sassembla/SublimeSocket/tree/dev/tool/chromeClients/TypeScriptClient</a></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Chromeで開いたファイルをtailして結果をWebSocketで投げるやつ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>とりあえず自分が欲しい機能と、各言語版への記述拡張のための要件は満たした。</p>
+<p class="p2"><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>Coffeeじゃ駄目なの？</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>いんじゃね。</p>
+<p class="p2"><br></p>
+<p class="p3"><b>ハマったとこ列挙してく</b></p>
 <p class="p2"><b></b><br></p>
 <p class="p3"><b>1.chrome.*とのお付き合い</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>TypeScriptさんはchromeなにやらのことを知らないので、</p>
@@ -51,7 +64,18 @@
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>とかがTS内で使えるようになるので、他の、かっちり構造的にすべきところに注力する事が出来る。</p>
 <p class="p3"><span class="Apple-tab-span">	</span>他にはWIndow系とかがあるけどこの辺はもう普通のTSの使い方と変わらんす。</p>
-<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>d.tsを探せばどっかあるだろとか思ったんですが、なかなか変化しそう+使用するメソッドも関数渡しがメインだったので、今回は使ってないです。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ちなみにd.tsをつくった方、こちら。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><b><span class="Apple-tab-span">	</span>borisyankov / DefinitelyTyped</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/borisyankov/DefinitelyTyped">https://github.com/borisyankov/DefinitelyTyped</a></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>の、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/borisyankov/DefinitelyTyped/pull/93/files">https://github.com/borisyankov/DefinitelyTyped/pull/93/files</a></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>あたり。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>このひとすげーな。</p>
+<p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>2.extendsとロード順</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>ChromeのExtension、使用するjsをmanifest.jsonに定義するところについて。</p>
@@ -133,13 +157,24 @@
 <p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p3"><span class="Apple-tab-span">	</span>現行のオプションを試すともっといろいろ面白い事が出来るかもしれない。</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>コレ書いてる時の最新、0.8.3では、tsc.jsの<span class="s3">24502</span>行目から先につらつら書いてある。</p>
-<p class="p3"><span class="s3"><span class="Apple-tab-span">	</span></span>無くなってるオプションもけっこうあるような。</p>
-<p class="p8"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>コレ書いてる時の最新、0.8.3では、tsc.jsの24502行目から先につらつら書いてある。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>無くなってるオプションもけっこうあるような。</p>
 <p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="s3"><b>4.chrome.*</b></span><b>で発生したエラーのデバッガでの表示位置が微妙にずれる</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>chro<span class="s3">m</span>e.*系のメソッドは、TSからはdeclareしてるだけだと、特にそれらのメソッドについての型チェックが行われるわけではない。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>chrome.*をd.tsで定義してればまともに出る、、かなあ、、　sourcemapの出番だよなー。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>いちおうどうズレるかの例として、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>chome.browderAction.onClicked に渡すパラメータを間違えると、下記エラーが出て、エラー行の表示が可能なのだが、</p>
+<p class="p7"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202013-04-11%2017.36.24.png" alt="スクリーンショット 2013-04-11 17.36.24.png"></p>
+<p class="p3"><span class="Apple-tab-span">	</span>正し、エラー行の表示は原因行から若干”上”の行になる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>下の画像では、console.logで出た事になってる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>このTips、ぶっちゃけts関係ない。</p>
+<p class="p7"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202013-04-11%2017.36.34.png" alt="スクリーンショット 2013-04-11 17.36.34.png"></p>
 <p class="p3"><b>以上！</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>もうちょっとだけ、原因不明なやつがあったりするので、そのへんは解明しつつ書き足す。</p>
-<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p2"><br></p>
 </body>
 </html>
