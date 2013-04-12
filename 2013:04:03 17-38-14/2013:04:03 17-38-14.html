@@ -1,0 +1,172 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1187.37">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #ebebeb}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px Menlo}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px Menlo; background-color: #ebebeb}
+    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px Menlo; color: #bb2ca2; background-color: #ebebeb}
+    p.p8 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p9 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px Menlo; background-color: #ebebeb; min-height: 13.0px}
+    p.p10 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px Menlo; color: #3d1d81; background-color: #ebebeb}
+    p.p11 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px Menlo; color: #703daa; background-color: #ebebeb}
+    p.p12 {margin: 0.0px 0.0px 0.0px 0.0px; line-height: 15.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p13 {margin: 0.0px 0.0px 0.0px 0.0px; line-height: 15.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    span.s1 {font: 12.0px Helvetica}
+    span.s2 {font: 11.0px Menlo; color: #703daa}
+    span.s3 {font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    span.s4 {color: #bb2ca2}
+    span.s5 {color: #703daa}
+    span.s6 {color: #4f8187}
+    span.s7 {color: #3d1d81}
+    span.s8 {color: #31595d}
+    span.s9 {font: 11.0px 'Hiragino Kaku Gothic ProN'}
+    span.s10 {color: #000000}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>MacでNo GUI, No Dockなコマンドラインアプリケーションを作る</b></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>コマンドラインアプリって何。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>→コマンドラインから起動できるアプリです。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>とあるアプリからとあるアプリへと<span class="s1">Mac</span>のFocusを高速で移すアプリを作ったので、備忘録。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>具体的な用途として、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Unityに他アプリで編集したコードのビルドをしてもらうためには、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>UnityにFocusを移すのが一番、ということで、そういうMacのアプリケーションを作る話</p>
+<p class="p2"><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>成果</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>出来た物がこちらになります。</p>
+<p class="p3"><b><span class="Apple-tab-span">	</span></b><a href="https://github.com/sassembla/SwitchApp">https://github.com/sassembla/SwitchApp</a></p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>前提</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>次の条件を満たしたい。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>1.一瞬だけFocusをUnityに移して次の瞬間別の任意のアプリにFocusを移す</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>→これでUnityビルドが走る。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>2.コマンドラインから起動する</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>→最終的に完成した.app内のexec自体を、コマンドラインから起動する事を予定する。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>3.コマンドラインから値を受け取りたい</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>→ある程度値をparameterとして渡せるようにしたい。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>4.GUIを持たず、Dockにも表示されず、そのアプリケーション自体は一瞬もフォーカスを得ないようにしたい</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>→設定でなんとかなるのか？</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>5.確実に、100%　"コマンドが順に行われる事" を保証したい</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>→以前コマンドラインから、open -a "アプリ名" などと行った場合、挙動の終了を待てず、挙動が安定しなかった。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>そのへん改善したい。</p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>1.一瞬だけFocusをUnityに移して次の瞬間別の任意のアプリにFocusを移す</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>まずFocusをあてるアプリをfromApp、次にFocusを当てるアプリをtoAppとすると、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>このアプリ起動 &gt; fromAppにFocus &gt; toAppにFocus &gt; このアプリ終了</p>
+<p class="p3"><span class="Apple-tab-span">	</span>とかすればいいので、はい。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Unityのアプリケーションの特性として、Focusがあたると既存のアプリのビルドを始めてくれるので、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>それを狙って引き起こす。</p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>MacのFocusを弄るAPIが複数見つかったので、試してみる。</p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>2.コマンドラインから起動する</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>最終的にコンパイルした.appについて、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>コンテキストメニュー &gt;<span class="Apple-converted-space">  </span>パッケージの内容を表示 &gt; Contents &gt; MacOS &gt; "アプリ名" っていうUnix実行ファイルが入っているので、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>コレを使う。</p>
+<p class="p3"><b><span class="Apple-tab-span">	</span></b><span class="s1"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202013-04-12%2014.14.03.png" alt="スクリーンショット 2013-04-12 14.14.03.png"></span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これを、コマンドラインから実行するのは、</p>
+<p class="p4"><span class="Apple-tab-span">	</span>exec ./SwitchApp $@</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>とかすれば、引数含めて渡して実行する事が出来る。</p>
+<p class="p2"><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>3.コマンドラインから値を受け取りたい</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>正直死にたい実装になった。もっとあるだろ。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="s2">NSApplication</span> をextendsしたclass SwitchApp を定義し、main.mから実行される</p>
+<p class="p5"><span class="s3"><span class="Apple-tab-span">	</span></span><span class="s4">int</span> NSApplicationMain(<span class="s4">int</span> argc, <span class="s4">const</span> <span class="s4">char</span> *argv[]); <span class="s3">メソッドをオーバーライド、</span></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>SwitchApp.h</p>
+<p class="p6"><span class="s4">@interface</span> SwitchApp : <span class="s5">NSApplication</span></p>
+<p class="p6"><span class="s4">int</span> NSApplicationMain(<span class="s4">int</span> argc, <span class="s4">const</span> <span class="s4">char</span> *argv[]);</p>
+<p class="p7">@end</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>①.m側で、appDelegateを自分で初期化し、Delegateにセット</p>
+<p class="p6"><span class="Apple-converted-space">        </span><span class="s6">AppDelegate</span> * delegate = [[<span class="s6">AppDelegate</span> <span class="s7">alloc</span>] <span class="s7">init</span>];</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>②argc と argv から、値を抽出し、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>key-valueの形にして、appDelegateへと渡す。</p>
+<p class="p6"><span class="Apple-converted-space">        </span>[delegate <span class="s8">setArgs</span>:argsDict];</p>
+<p class="p2"><br></p>
+<p class="p5"><span class="s3"><span class="Apple-tab-span">	</span>③delegate側の</span>- (<span class="s4">void</span>)applicationDidFinishLaunching:(<span class="s5">NSNotification</span> * ) aNotification <span class="s3">メソッドを直で呼ぶ方法がなく、</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>アプリケーション自体の起動には</p>
+<p class="p6"><span class="Apple-converted-space">        </span>[<span class="s5">NSApp</span> <span class="s7">run</span>];<span class="s3"><span class="Apple-tab-span">	</span></span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>を使うしか無い(遅延とかはできるんだけどNotificationの内容に干渉する手段はない？)っぽい。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>②で値をグローバルな値として事前に渡し、[NSApp run]までの間、綱渡りしてるのが悔恨。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>何か方法あると思う。</p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>→runした後にメソッド実行して渡すっていうかそこから実行とかすればよかったですね！！！</p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><b><span class="Apple-tab-span">	</span></b></p>
+<p class="p3"><b>4.GUIを持たず、Dockにも表示されず、そのアプリケーション自体は一瞬もフォーカスを得ないようにしたい</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>GUIナシ、Dockにも映らない設定のMacアプリを作るには、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Application is background only : UIを持たない</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Application is agent (UIElement) <span class="s1">:</span> Dockや強制終了リストに映らない</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>をプロパティに宣言してビルドすればOK。</p>
+<p class="p2"><br></p>
+<p class="p8"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202013-04-12%2013.50.43.png" alt="スクリーンショット 2013-04-12 13.50.43.png"></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>詳細は下記</p>
+<p class="p3"><span class="Apple-tab-span">	</span><a href="http://developer.apple.com/library/ios/#documentation/general/Reference/InfoPlistKeyReference/Articles/LaunchServicesKeys.html">http://developer.apple.com/library/ios/#documentation/general/Reference/InfoPlistKeyReference/Articles/LaunchServicesKeys.html</a></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>5.確実に、100%　"コマンドが順に行われる事" を保証したい</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>現在動いているアプリ一覧からApplicationのBundleIdentifierを取得し、activateさせる、みたいな方法があったのだが、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>これが結局、ほぼ非同期でアクションを行っているようで、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>2連続させると正常に動作しないことがあった。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>一応下記のコードになる。　<span class="s1">fromApp</span>を文字列で定義してある。</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="s4">NSString </span>* fromApp = @"<span class="s9">アプリ名</span>";</p>
+<p class="p9"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p10"><span class="s10"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span><span class="s5">NSArray</span><span class="s10"> * apps = [[</span><span class="s5">NSWorkspace</span><span class="s10"> </span>sharedWorkspace<span class="s10">] </span>runningApplications<span class="s10">];</span></p>
+<p class="p11"><span class="s10"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span><span class="s4">for</span><span class="s10"> (</span>NSRunningApplication<span class="s10"> * app </span><span class="s4">in</span><span class="s10"> apps) {</span></p>
+<p class="p10"><span class="s10"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span><span class="s4">if</span><span class="s10">([app.</span><span class="s5">bundleIdentifier</span><span class="s10">.</span>lowercaseString<span class="s10"> </span>hasPrefix<span class="s10">:fromApp]) {</span></p>
+<p class="p10"><span class="s10"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>[app </span>activateWithOptions<span class="s10">:</span>NSApplicationActivateIgnoringOtherApps<span class="s10">];</span></p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="s1">for</span>文の外まで各アプリを引っ張って、並べて実行しても、行単位でブロックするわけでは無いらしく、Focusの移る順が前後することがあったため、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>10回に1回くらい、from to 2つのアプリのうち、toが全面に来ない、という事があった。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>そこで、ScriptingBridgeを使う実装に変更。</p>
+<p class="p10"><span class="s4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>id</span><span class="s10"> fromApp = [</span><span class="s5">SBApplication</span><span class="s10"> </span>applicationWithBundleIdentifier<span class="s10">:fromAppStr];</span></p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="s4">if</span> (fromApp) {</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>[fromApp <span class="s7">activate</span>];<span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}<span class="Apple-converted-space"> </span></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これで、Scriptの実行が完了するのが保証され、正しくfrom to の順にFocusが移り、toアプリが前面に残る結果になった。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>かなり高速に動作するようなのだけれど、どうしても一瞬ちらつく。ぐぬぬ。まいいか。</p>
+<p class="p2"><br></p>
+<p class="p12"><br></p>
+<p class="p13">以上。</p>
+</body>
+</html>
