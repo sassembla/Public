@@ -1,0 +1,204 @@
+{\rtf1\ansi\ansicpg932\cocoartf1187\cocoasubrtf370
+{\fonttbl\f0\fnil\fcharset128 HiraKakuProN-W3;\f1\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;\red230\green230\blue230;\red230\green230\blue230;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww19600\viewh10680\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+
+\f0\b\fs44 \cf0 Highvision\'82\'c9nginx\'82\'f0\'83\'43\'83\'93\'83\'58\'83\'67\'81\'5b\'83\'8b
+\b0\fs24 \
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+
+\b \cf0 \'8a\'54\'97\'76
+\b0 \
+	SublimeSocket\'82\'d6\'82\'cc\'83\'8b\'81\'5b\'83\'65\'83\'42\'83\'93\'83\'4f\'82\'f0\'8e\'8e\'82\'b5\'82\'c4\'82\'dd\'82\'e9\'81\'42\
+	\'82\'a2\'82\'af\'82\'e9\'82\'cd\'82\'b8\'81\'42\
+\
+\
+
+\b DL
+\b0 \
+	{\field{\*\fldinst{HYPERLINK "http://nginx.org/en/download.html"}}{\fldrslt http://nginx.org/en/download.html}}\
+	\'82\'a9\'82\'e7\'81\'41\
+	nginx-1.3.15\
+	\'82\'f0DL\'82\'c5\'82\'ab\'82\'e9\'82\'f1\'82\'be\'82\'af\'82\'c7\'81\'41homebrew\'82\'a9\'82\'e7\'82\'be\'82\'c6\'8a\'c8\'92\'50\'82\'c9\'93\'fc\'82\'e9\'93\'49\'82\'c8\'81\'42\
+	\'82\'c5\'82\'e0\'8c\'c3\'82\'a2\'82\'f1\'82\'b6\'82\'e1\'82\'cb\'81\'48\
+	\'81\'a81.3.14\'82\'be\'82\'c1\'82\'bd\'81\'42spdy\'93\'fc\'82\'c1\'82\'c4\'82\'c8\'82\'a2\'82\'af\'82\'c7\'82\'ab\'82\'c1\'82\'c6\'89\'b4\'82\'cd\'8d\'a2\'82\'e7\'82\'c8\'82\'a2\'81\'42\
+\
+	brew info nginx \'82\'c5\'8a\'6d\'94\'46\'82\'c5\'82\'ab\'82\'bd\'93\'e0\'97\'65\'82\'cd\'89\'ba\'8b\'4c\'81\'42\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+\cf0 \cb2 highvision:~ sassembla$ brew info nginx\
+nginx: stable 1.2.7, devel 1.3.14\
+http://nginx.org/\
+Depends on: pcre\
+Not installed\
+https://github.com/mxcl/homebrew/commits/master/Library/Formula/nginx.rb\
+==> Options\
+--with-debug\
+	Compile with support for debug log\
+--with-passenger\
+	Compile with support for Phusion Passenger module\
+--with-webdav\
+	Compile with support for WebDAV module\
+==> Caveats\
+In the interest of allowing you to run `nginx` without `sudo`, the default\
+port is set to localhost:8080.\
+\
+If you want to host pages on your local machine to the public, you should\
+change that to localhost:80, and run `sudo nginx`. You'll need to turn off\
+any other web servers running port 80, of course.\
+\
+You can start nginx automatically on login running as your user with:\
+  mkdir -p ~/Library/LaunchAgents\
+  cp /usr/local/Cellar/nginx/1.2.7/homebrew.mxcl.nginx.plist ~/Library/LaunchAgents/\
+  launchctl load -w ~/Library/LaunchAgents/homebrew.mxcl.nginx.plist\
+\
+Though note that if running as your user, the launch agent will fail if you\
+try to use a port below 1024 (such as http's default of 80.)\
+\
+To have launchd start nginx at login:\
+    ln -sfv /usr/local/opt/nginx/*.plist ~/Library/LaunchAgents\
+Then to load nginx now:\
+    launchctl load ~/Library/LaunchAgents/homebrew.mxcl.nginx.plist\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+\cf0 \cb1 	\'82\'c6\'81\'41\'82\'dc\'82\'c4\'82\'e6\'81\'48 brew\'8c\'c3\'82\'a2\'82\'f1\'82\'b6\'82\'e1\'82\'cb\'81\'48\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+\cf0 \cb2 highvision:~ sassembla$ brew info nginx\
+nginx: stable 1.2.8, devel 1.3.15\
+http://nginx.org/\
+Depends on: pcre\
+Not installed\
+https://github.com/mxcl/homebrew/commits/master/Library/Formula/nginx.rb\
+==> Options\
+--with-debug\
+	Compile with support for debug log\
+--with-passenger\
+	Compile with support for Phusion Passenger module\
+--with-webdav\
+	Compile with support for WebDAV module\
+==> Caveats\
+Docroot is: /usr/local/var/www\
+\
+The default port has been set to 8080 so that nginx can run without sudo.\
+\
+If you want to host pages on your local machine to the wider network you\
+can change the port to 80 in: /usr/local/etc/nginx/nginx.conf\
+\
+You will then need to run nginx as root: `sudo nginx`.\
+\
+To have launchd start nginx at login:\
+    ln -sfv /usr/local/opt/nginx/*.plist ~/Library/LaunchAgents\
+Then to load nginx now:\
+    launchctl load ~/Library/LaunchAgents/homebrew.mxcl.nginx.plist\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+\cf0 \cb1 	\'82\'a0\'81\'68\'81\'5b\'81\'40\'82\'c6\'82\'a2\'82\'a4\'82\'ed\'82\'af\'82\'c5\'81\'411.3.5\'82\'c5GO\'81\'42\
+\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+
+\b \cf0 homebrew\'8c\'6f\'97\'52\'82\'c5\'83\'43\'83\'93\'83\'58\'83\'67\'81\'5b\'83\'8b\'82\'b7\'82\'e9
+\b0 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+\cf0 \cb2 highvision:~ sassembla$ brew install nginx --devel	\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+\cf0 \cb1 	\'82\'c5OK\
+\
+	\'82\'a0\'82\'c6\'82\'cd\'81\'41\'89\'ba\'8b\'4c\'82\'f0\'8e\'51\'8d\'6c\'82\'c9\'8b\'4e\'93\'ae\'82\'c6\'82\'a9\'90\'dd\'92\'e8\'82\'c6\'82\'a9\'81\'42\
+	{\field{\*\fldinst{HYPERLINK "http://learnaholic.me/2012/10/10/installing-nginx-in-mac-os-x-mountain-lion/"}}{\fldrslt http://learnaholic.me/2012/10/10/installing-nginx-in-mac-os-x-mountain-lion/}}\
+\pard\pardeftab720
+\cf0 \
+\
+
+\b \'8b\'4e\'93\'ae
+\b0 \
+\cb2 sudo nginx\
+\cb1 	\'82\'c5\'81\'418080\'82\'c5\'82\'cc\'8b\'4e\'93\'ae\'82\'aa\'82\'c8\'82\'b3\'82\'ea\'82\'c4\'82\'a2\'82\'e9\'81\'42\
+	\
+
+\b \'92\'e2\'8e\'7e
+\b0 \
+\cb2 sudo nginx -s stop\
+\cb1 \
+\
+
+\b \'90\'dd\'92\'e8\'95\'cf\'8d\'58
+\b0 \
+	\'83\'7c\'81\'5b\'83\'67\'94\'d4\'8d\'86\'82\'cc\'95\'cf\'8d\'58\'82\'cd\'81\'41\'89\'ba\'8b\'4c\'90\'dd\'92\'e8\'83\'74\'83\'40\'83\'43\'83\'8b\'82\'f0\'98\'4d\'82\'e9\'81\'42\
+	/usr/local/etc/nginx/nginx.conf\
+\
+
+\b \
+\'82\'c5\'81\'41\'8a\'ae\'97\'b9\'82\'cc\'90\'7d
+\b0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural
+
+\f1 \cf0 {{\NeXTGraphic スクリーンショット 2013-04-16 21.01.57.png \width16640 \height8420
+}�}\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural
+
+\f0 \cf0 \
+	\'82\'e2\'82\'c1\'82\'bd\'82\'cb\'82\'bd\'82\'a6\'82\'bf\'82\'e1\'82\'f1\'81\'49\
+\pard\pardeftab720
+\cf0 \
+\
+
+\b \'83\'74\'83\'48\'83\'8f\'81\'5b\'83\'66\'83\'42\'83\'93\'83\'4f
+\b0 \
+	Jenkins\'82\'c6\'82\'a9\'82\'e2\'82\'c1\'82\'c6\'82\'ad\'82\'c6\'82\'a2\'82\'a2\'82\'b1\'82\'c6\'82\'a0\'82\'e9\'82\'a9\'82\'c8\'81\'42\
+	\'88\'c8\'91\'4fSakura\'82\'c5\'82\'e2\'82\'c1\'82\'bd\'82\'cc\'82\'c5\'81\'41\'82\'a0\'82\'bb\'82\'b1\'82\'a9\'82\'e7\'8b\'5a\'8f\'70\'83\'54\'83\'8b\'83\'78\'81\'5b\'83\'57\'82\'b7\'82\'ea\'82\'ce\'82\'c8\'82\'f1\'82\'c6\'82\'a9\'82\'c8\'82\'e9\'81\'42\
+	\'82\'c6\'82\'e8\'82\'a0\'82\'a6\'82\'b8\'81\'41Jenkins\'82\'cd\'8c\'bb\'8f\'f3\'82\'cc\'82\'dc\'82\'dc\'81\'418080\'82\'c5\'95\'fa\'92\'75\'82\'b5\'82\'c4\'82\'a8\'82\'ad\'81\'42\
+\
+\
+
+\b WebSocket\'82\'cc\'83\'74\'83\'48\'83\'8f\'81\'5b\'83\'66\'83\'42\'83\'93\'83\'4f\'82\'f0\'82\'b5\'82\'c4\'82\'dd\'82\'e9\
+
+\b0 	\'90\'dd\'92\'e8\'82\'cd\'89\'ba\'8b\'4c\'82\'f0\'8e\'51\'8f\'c6\
+	{\field{\*\fldinst{HYPERLINK "http://qiita.com/items/484aa9bfb7bc4206ffed"}}{\fldrslt http://qiita.com/items/484aa9bfb7bc4206ffed}}\
+\
+\cb3     server \{\
+        listen       80;\
+        server_name  localhost;\
+\
+        #charset koi8-r;\
+\
+        #access_log  logs/host.access.log  main;\
+\
+        location / \{\
+            proxy_pass http://127.0.0.1:8823/;\
+            proxy_http_version 1.1;\
+            proxy_set_header Upgrade $http_upgrade;\
+            proxy_set_header Connection "upgrade";\
+        \}\
+\cb1 	\'82\'f1\'82\'c5\'81\'41\'82\'b1\'82\'ea\'82\'f0\'82\'e2\'82\'c1\'82\'c4\'82\'dd\'82\'e9\'81\'42\
+\
+	\'8f\'e3\'8b\'4c\'82\'f0server \{\} \'82\'cc\'89\'ba\'82\'c9\'82\'e0\'82\'a4\'88\'ea\'82\'c2\'92\'c7\'89\'c1\'82\'b5\'82\'c4\'81\'41\'90\'dd\'92\'e8\'95\'cf\'8d\'58\'82\'b5\'82\'c4nginx\'82\'f0\'97\'a7\'82\'bf\'8f\'e3\'82\'b0\'81\'41\
+	e-mobile\'82\'c6\'82\'a9\'82\'cc\'90\'dd\'92\'e8\'82\'f0\'8d\'73\'82\'c1\'82\'bd\'8f\'e3\'82\'c5\'81\'41SublimeSocket\'82\'cc\'83\'52\'83\'93\'83\'5c\'81\'5b\'83\'8b\'82\'a9\'82\'e7\'90\'da\'91\'b1\'82\'b5\'82\'c4\'82\'dd\'82\'bd\'82\'c6\'82\'b1\'82\'eb\'81\'41\
+	\'93\'ae\'82\'a2\'82\'bd\'81\'42\
+	\'82\'a4\'82\'ed\'81\'5b\'83\'6f\'83\'4a\'82\'dd\'82\'bd\'82\'a2\'81\'42	\'93\'ae\'82\'a2\'82\'bd\'81\'42\
+	\
+	\'82\'c5\'81\'41\'82\'b1\'82\'ea\'82\'c5\'91\'e5\'8e\'e8\'82\'f0\'90\'55\'82\'c1\'82\'c4S2\'8b\'40\'8a\'d6\'82\'f0\'8e\'8e\'82\'b9\'82\'e9\'81\'42\
+\
+	\'90\'da\'91\'b1\'8c\'6f\'98\'48\'8c\'6e\'82\'aa\'96\'ca\'93\'7c\'82\'ad\'82\'b3\'82\'a2\'82\'cc\'82\'c5\'81\'41\
+	\'81\'45ip\'92\'b2\'82\'d7\'82\'c4\'90\'da\'91\'b1\'81\'41\'82\'cdSublimeSocket\'82\'a9\'82\'e7\'8d\'73\'82\'a2\'82\'bd\'82\'a2 or \'90\'da\'91\'b1\'82\'b3\'82\'f1\'82\'dd\'82\'bd\'82\'a2\'82\'c8\'93\'7a\'82\'c9\'82\'b5\'82\'c4\'82\'a8\'82\'ad\'81\'42\
+		\'93\'c1\'92\'e8\'82\'cc\'92\'ca\'90\'4d\'82\'f0\'8d\'73\'82\'a4\'82\'c6\'81\'41S2C\'82\'a9\'82\'e7\'83\'41\'83\'4e\'83\'5a\'83\'58\'82\'aa\'97\'88\'82\'e9\'81\'41\'82\'c6\'82\'a9\'82\'c9\'82\'b5\'82\'c6\'82\'ad\'82\'a9\'81\'42nginx\'82\'aa\'83\'54\'81\'5b\'83\'6f\'82\'c6\'82\'b5\'82\'c4\'93\'ae\'82\'a2\'82\'c4\'82\'e9\'81\'41\'82\'c6\'82\'a9\'8f\'f0\'8c\'8f\'82\'aa\'82\'a2\'82\'ad\'82\'c2\'82\'a9\'82\'a0\'82\'e9\'82\'f1\'82\'c5\'81\'41\'93\'5a\'82\'df\'82\'e9\'81\'42\
+\
+	\'81\'45receive\'91\'a4\'82\'ccServer\'82\'c5\'81\'41\'83\'8a\'83\'4e\'83\'47\'83\'58\'83\'67\'82\'c6\'82\'b5\'82\'c4\'8f\'88\'97\'9d\'82\'b5\'81\'41ws://ip:8823\'81\'40\'82\'c9\'90\'da\'91\'b1\'82\'b7\'82\'e9\'81\'42\'83\'4e\'83\'89\'83\'43\'83\'41\'83\'93\'83\'67\'82\'c8\'82\'e7\'89\'bd\'82\'c5\'82\'e0\'82\'a2\'82\'a2\'82\'cc\'82\'c5\'81\'41\'82\'bb\'82\'ea\'97\'70\'82\'cchtml\'93\'66\'82\'a2\'82\'c4\'81\'41chrome\'82\'c5\'8b\'4e\'93\'ae\'81\'41\'82\'c6\'82\'a9\'81\'41\
+		erlang\'82\'c5\'8b\'4e\'93\'ae\'81\'41\'82\'c6\'82\'a9\'81\'42\
+		\'95\'4b\'97\'76\'82\'c8\'90\'ab\'94\'5c\'82\'cd\'81\'41shell\'82\'f0\'8e\'c0\'8d\'73\'82\'b7\'82\'e9\'81\'41\'82\'c8\'82\'cc\'82\'c5\'81\'41\'82\'c7\'82\'f1\'82\'c8\'8d\'5c\'90\'ac\'82\'aa\'95\'4b\'97\'76\'82\'a9\'92\'b2\'82\'d7\'82\'e9\'81\'42\
+\
+	\
+S2C\'82\'cc\'8b\'4e\'93\'ae\'83\'8b\'81\'5b\'83\'67\
+	\'81\'45nginx\'82\'c6\'82\'a9\'82\'aa\'93\'ae\'82\'a2\'82\'c4\'82\'e9\
+	\'81\'45	\
+	\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+http://blog.geta6.net/post/45741693575\
+}
