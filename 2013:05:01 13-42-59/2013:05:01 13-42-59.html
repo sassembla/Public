@@ -1,0 +1,146 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1187.37">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #ebebeb}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Menlo; color: #3d1d81; background-color: #ebebeb}
+    span.s1 {font: 22.0px Helvetica}
+    span.s2 {font: 12.0px Helvetica}
+    span.s3 {font: 12.0px 'Lucida Grande'}
+    span.s4 {color: #000000}
+    span.s5 {color: #703daa}
+    span.s6 {color: #4f8187}
+    span.s7 {color: #bb2ca2}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>nnotifd NSDistNotifで制御する</b><span class="s1"><b>Obj-C</b></span><b>製CL実行デーモンみたいなの</b></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>コマンドラインから起動して、Mac内を駆け巡るNSDistributedNotificationを受信、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>特定の形式だった場合、コマンドラインを実行するプログラムを作った。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Macアプリではなく、Macコマンドラインアプリ。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>nnotifdというコマンド名にした。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/nnotifd">https://github.com/sassembla/nnotifd</a></p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span></b><span class="s2"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202013-05-01%2022.24.17.png" alt="スクリーンショット 2013-05-01 22.24.17.png"></span></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>SocketRoundabout</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></b>(WebSocketP、BT、HTTP、NSDistNotif、他、通信プロトコルを相互接続するツール)</p>
+<p class="p3"><span class="Apple-tab-span">	</span>と組み合わせて使う。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>単体でも使い道があるとは思うが、わざわざそのために脳みそ使って考える必要も無いだろう。</p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>動機</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>どんなニーズがこれを作らせたか、というと、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・Mac環境、サーバサイドで動く、コマンドライン実行クライアントが欲しかった</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>→SocketRoundaboutがその機能を持ちたくないので、コマンドラインを外部で動かすもの、という位置づけのプロダクトが必要だった。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・コマンドライン実行自体を、<span class="s2">NSDistributedNotification</span>をトリガーとして行いたかった</p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span><span class="s3">→</span>完全にSocketRoundaboutが話せるプロトコルだった、という都合。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>→そういえば大昔につくったObj-Cサーバあったよね！</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ということで、改造していろんな機能オミットしまくって、こうなった。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ちなみにデーモンって言ってるけどまだぜんぜんデーモンじゃない。</p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b>形式</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>会社でつかってる独自形式(文字列+JSON)をベースに、適当にコピーした形式を使っている。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>SublimeSocketとほぼ同系統だけど、こっちのほうが機能が圧倒的に少ない。必要ないしな。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>全体</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>nn:[JSONARRAY]</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ヘッダ</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>nn:</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>パラメータ</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>[JSONARRAY]</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>という形の文字列を送り込むと、コマンドラインとパラメータとパイプを解釈して、コマンドラインとして実行される。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>例's</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>始動</p>
+<p class="p4">nnotifd -c start -i IDENTITY</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、アイデンティティ = nnotifdが受信するチャンネル、という風に設定して起動できる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>別に起動と同時にスタートしないでもいいんだけど、-iでの「受信するアイデンティティの決定」だけは必須。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>nnotifdとのコミュニケーションには、NSDistributedNotificationを生成すればOKで、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>これはキーとかが合ってればプロセス間を跨ぎ放題、なんでも送ってOKというゆっるーい感じになっている。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>実行順は発行順と同じにならない(順保証がされない)ので、使いたい部分だけ注意して作った。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>実際には準保証をするための仕掛けもNSなんちゃらには用意されているが、テストしづらかったので、これから順保証モードとして着手する。</p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>なんかNSDistNotif越しの実行がしたい場合、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>nnotifdを起動したあと、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>付属のnnotif(入力した文字列をNSDistNotifにして発行するツール)で送付するか、どっかObj-Cで書いて送り込む。</p>
+<p class="p4">nnotif -t IDENTITY -k NN_DEFAULT_ROUTE -i nn@ -kill</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これでkillできる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>-iはnnotifのオプションで、<span class="s2">input</span>。 nn@以降の文字をnnotif<span class="s2">d</span>に対するコマンドとしてIDENTITYに対して送り込む。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Obj-Cで書く場合、</p>
+<p class="p5"><span class="s4">[[</span><span class="s5">NSDistributedNotificationCenter</span><span class="s4"> </span>defaultCenter<span class="s4">] </span>postNotificationName<span class="s4">:</span><span class="s6">IDENTITY</span><span class="s4"> </span>object<span class="s4">:</span><span class="s7">nil</span><span class="s4"> </span>userInfo<span class="s4">:dict </span>deliverImmediately<span class="s4">:</span><span class="s7">YES</span><span class="s4">];</span></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で良いと思う。dictの中身はパラメータになる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>コレに関しては、nnotifが | を受けられるため、コマンドラインから使えるほうが万倍いろんなことができる。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="s2">nnotif</span>dで特定のコマンドラインを実行したい場合、</p>
+<p class="p4">nnotif -t IDENTITY -k NN_DEFAULT_ROUTE -i nn@ -e nn:["/bin/pwd"]</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>とかで、pwdが実行できる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>nn@ までが入力のためのヘッダ、-eから先が<span class="s2">nntoifd</span>で実行されるコマンドの独自形式JSONArray。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>pwdがフルパスになってるのは、これの内部実装がNSTaskを使用しているので、コマンドのありかのパスを総て書かないと動かないため。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>nnotifd内で使用したいコマンドに対してパイプを使う事もできて、</p>
+<p class="p4">nnotif -t IDENTITY -k NN_DEFAULT_ROUTE -i nn@ -e nn:["/bin/cat","/SOMEWHERE/SOMETHING.txt","|","/usr/bin/grep","-e","KEYWORD"]</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>とかで、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>/SOMEWHERE/SOMETHING.txt　に対してgrep KEYWORD を実行する、みたいなのができる。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>おまけで、nnotif自体がパイプを扱えるので、</p>
+<p class="p4">tail -f /SOMEWHERE/SOMETHING.log | nnotif -t IDENTITY -k NN_DEFAULT_ROUTE</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>とかで、tail結果をダイレクトに、連続した状態でどこかへと送り込める。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>もちろんnnotifdのなかで<span class="s2">nno</span>tifを使用して別のNSDistNotifを発生させることもできる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これで、例えばサーバからのメッセージを受けて特定のコマンドラインを実行したり、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>実行した内容を同種の通信手段を使っているSocketのおばけみたいなプロダクトに送り込んだりできる。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>具体的な用途</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>特定のコマンドラインを実行し、その結果を、nnotifなどを使い、NSDistNotifで送り出す。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>NSDistNotification -&gt; BT　とか、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>NSDistNotification -&gt; WebSocket　とか、そういう転送ができるツールがあるので、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>そのツール自体のコントロールとか、プッシュの「起点」に使用する。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>そうっとう異様なニーズに応える代物。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>組み合わせで、WebSocketClientをサーバサイドでnodeとかより安定した挙動できるように動かそう、みたいな</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ニーズに応えるために作った。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ぶっちゃけnodeの難解なコントロールに耐えられなかった人間が狂気で作った何かのためのパーツ。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+</body>
+</html>
