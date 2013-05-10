@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1187.37">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #ebebeb}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #ebebeb; min-height: 18.0px}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>SublimeTextに選択式入力窓が付いたよ的な話</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ST3 build 3033 が出ました。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://www.sublimetext.com/3">http://www.sublimetext.com/3</a></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>いやー全然気付かなかったんだけど、APIドキュメントとか更新されてたんですね。</p>
+<p class="p3"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></b><a href="http://www.sublimetext.com/docs/3/index.html">http://www.sublimetext.com/docs/3/index.html</a></p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>相変わらず</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>view.sel.contains(region)がboolではなくNoneを返してくるんだけど、</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>そのへんはまあそのうち変わるのかな。</b></p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>選択窓</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>EclipseとかIDEにあって、SublimeTextにずっとなかったもの、それが「選択窓」。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>が、ついに付いたようです。まだ途中間溢れるんだけど、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>こんな見た目</p>
+<p class="p4"><img src="sel.png" alt="sel.png"></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>こんなコード</p>
+<p class="p5"># 実行時に呼ばれる関数、resultには、成功時にindex、キャンセル時に-1が返る。</p>
+<p class="p5">def test(self, result):</p>
+<p class="p5"><span class="Apple-converted-space">  </span>print("done", result)</p>
+<p class="p6"><br></p>
+<p class="p5"># これで、2択が出る</p>
+<p class="p5">view.show_popup_menu(["abcdef","abcdefa"], self.test);</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>んで、あとは関数内で、文字列を呼び出してどうこうすればいい、と。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>補完候補を、STの推論の外から持ってきておいて選ぶ、が出来ますねー。待ってました。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>行動のトリガーにも出来るので、たとえば</p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>テストコードの行頭を選んで、実行</b>　とか選ばせるのを作ってみようと思います。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ラク！　速い！　軽い！！</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>牛丼みたい。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>SublimeSocket for ST3</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>以前四国旅行中に手を入れてたんだけど、残すはview.selの問題のみです。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>はー待ち遠しい。</p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+</body>
+</html>
