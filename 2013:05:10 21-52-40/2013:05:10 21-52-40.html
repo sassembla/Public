@@ -8,50 +8,74 @@
   <meta name="CocoaVersion" content="1187.37">
   <style type="text/css">
     p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
-    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
     p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px Menlo; background-color: #ebebeb}
     p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
     p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px Menlo}
+    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #ebebeb}
+    p.p8 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px 'Hiragino Kaku Gothic ProN'; min-height: 17.0px}
+    p.p9 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px 'Lucida Grande'}
     span.s1 {font: 22.0px Helvetica}
     span.s2 {color: #bb2ca2}
     span.s3 {color: #703daa}
     span.s4 {font: 12.0px 'Hiragino Kaku Gothic ProN'}
-    span.s5 {font: 12.0px Helvetica}
+    span.s5 {font: 11.0px 'Hiragino Kaku Gothic ProN'}
+    span.s6 {font: 11.0px Menlo}
+    span.s7 {font: 12.0px Helvetica}
     span.Apple-tab-span {white-space:pre}
   </style>
 </head>
 <body>
-<p class="p1"><span class="s1"><b>Mac</b></span><b>アプリ独自拡張子の作り方</b></p>
-<p class="p2"><b>概要</b></p>
-<p class="p2"><span class="Apple-tab-span">	</span>独自拡張子が欲しかったのです。どうせ内容はテキストなんですけど。</p>
-<p class="p2"><span class="Apple-tab-span">	</span>ダブルクリックしたら特定のアプリが起動する的な。</p>
-<p class="p2"><span class="Apple-tab-span">	</span>はい。</p>
-<p class="p3"><br></p>
-<p class="p3"><br></p>
-<p class="p2"><b>.byaa拡張子のファイルをダブルクリックすると開くアプリケーションを作る</b></p>
-<p class="p2"><span class="Apple-tab-span">	</span>必要な設定は2つ。</p>
-<p class="p3"><br></p>
-<p class="p2"><span class="Apple-tab-span">	</span>・AppDelegateに、</p>
+<p class="p1"><span class="s1"><b>Mac</b></span><b>アプリと連携する独自拡張子の作り方</b></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>独自拡張子が欲しかったのです。どうせ内容はテキストなんですけど。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ダブルクリックしたら特定のアプリが起動する的な。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>はい。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>.byaa拡張子のファイルをダブルクリックすると開くアプリケーションを作る</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>必要な設定は2つ。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・AppDelegateに、</p>
 <p class="p4">- (<span class="s2">BOOL</span>)application:(<span class="s3">NSApplication</span> * )theApplication openFile:(<span class="s3">NSString</span> * )filename</p>
-<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>メソッドを書く</p>
-<p class="p3"><br></p>
-<p class="p2"><span class="Apple-tab-span">	</span>・Xcode &gt; ProjectNavigator &gt; TARGETS &gt; なんかtarget &gt; Info &gt; の下の方の、Document Types 項目の+を押す</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>メソッドを書く</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・Xcode &gt; ProjectNavigator &gt; TARGETS &gt; なんかtarget &gt; Info &gt; の下の方の、Document Types 項目の+を押す</p>
 <p class="p5"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202013-05-10%2021.59.16.png" alt="スクリーンショット 2013-05-10 21.59.16.png"></p>
-<p class="p2"><span class="Apple-tab-span">	</span>なんか設定画面が出来るので、Extensionsに形式を指定する。どっと要らない。</p>
-<p class="p3"><br></p>
-<p class="p2"><span class="Apple-tab-span">	</span>これだけ。</p>
-<p class="p3"><br></p>
-<p class="p3"><br></p>
-<p class="p2"><b>これだけで</b></p>
-<p class="p2"><span class="Apple-tab-span">	</span>.byaaファイルをダブルクリックすると、アプリが起動するようになる。</p>
-<p class="p3"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>なんか設定画面が出来るので、Extensionsに形式を指定する。どっと要らない。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これだけ。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>これだけで</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>.byaaファイルをダブルクリックすると、アプリが起動するようになる。</p>
+<p class="p2"><br></p>
 <p class="p6"><span class="s4"><span class="Apple-tab-span">	</span>ダブルクリックで.byaaファイルを開くと、</span>- (<span class="s2">BOOL</span>)application:(<span class="s3">NSApplication</span> * )theApplication openFile:(<span class="s3">NSString</span> * )filename <span class="s4">メソッドに通知が行き、</span></p>
-<p class="p2"><span class="Apple-tab-span">	</span>filenameにダブルクリックしたファイルパスが入るので、そこで読むとかすれば良いと思う。</p>
-<p class="p2"><span class="Apple-tab-span">	</span>返り値は、すでにアプリがファイルを開いてて云々～の時とかにfalseにすればいいのでは。</p>
-<p class="p2"><span class="Apple-tab-span">	</span><span class="s5"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202013-05-10%2021.56.15.png" alt="スクリーンショット 2013-05-10 21.56.15.png"></span></p>
-<p class="p3"><span class="Apple-tab-span">	</span></p>
-<p class="p2"><span class="Apple-tab-span">	</span>いやーーーらっくちんだなァ～。</p>
-<p class="p3"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>filenameにダブルクリックしたファイルパスが入るので、そこで読むとかすれば良いと思う。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ちなみに通知は<b>アプリケーションのLaunchより速く</b>発生する。</p>
+<p class="p2"><br></p>
+<p class="p4"><span class="s4"><span class="Apple-tab-span">	</span></span>- (<span class="s2">BOOL</span>)application:(<span class="s3">NSApplication</span> * )theApplication openFile:(<span class="s3">NSString</span> * )filename</p>
+<p class="p7"><span class="s5"><span class="Apple-tab-span">	</span></span>↓</p>
+<p class="p4"><span class="s4"><span class="Apple-tab-span">	</span></span>- (<span class="s2">void</span>)applicationDidFinishLaunching:(<span class="s3">NSNotification</span> * )aNotification</p>
+<p class="p8"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>返り値は、ドキュメントいわく</p>
+<p class="p9"><span class="s4"><span class="Apple-tab-span">	</span></span><span class="s6">YES</span> if the file was successfully opened or <span class="s6">NO</span> if it was not.</p>
+<p class="p3"><span class="Apple-tab-span">	</span>オープンが旨くいったら<span class="s7">Yes</span>返すと良いよ、他はNoでいいんじゃね</p>
+<p class="p3"><span class="Apple-tab-span">	</span>↓</p>
+<p class="p3"><span class="Apple-tab-span">	</span>YESでもNOでもアプリは起動する。し、起動しててももちろん発生する。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>何に使っているかというと、NSAppが発生させるNotificationのトリガーに使っている。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ただ、表立って効果がない。区別は出来る。 Notificationを無差別に拾ってみると、なんか違いがあると思う。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://developer.apple.com/library/mac/#documentation/Cocoa/Reference/ApplicationKit/Classes/NSApplication_Class/Reference/Reference.html">https://developer.apple.com/library/mac/#documentation/Cocoa/Reference/ApplicationKit/Classes/NSApplication_Class/Reference/Reference.html</a></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="s7"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202013-05-10%2021.56.15.png" alt="スクリーンショット 2013-05-10 21.56.15.png"></span></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>いやーーーらっくちんだなァ～。</p>
+<p class="p2"><br></p>
 </body>
 </html>
