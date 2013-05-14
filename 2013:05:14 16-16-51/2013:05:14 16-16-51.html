@@ -1,0 +1,143 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1187.37">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #ebebeb}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px Menlo; color: #d12f1b; background-color: #ebebeb}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px Menlo; background-color: #ebebeb; min-height: 13.0px}
+    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px Menlo; color: #bb2ca2; background-color: #ebebeb}
+    p.p8 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px Menlo; background-color: #ebebeb}
+    p.p9 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px Menlo; color: #008400; background-color: #ebebeb}
+    p.p10 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    span.s1 {font: 22.0px Helvetica}
+    span.s2 {color: #78492a}
+    span.s3 {color: #000000}
+    span.s4 {color: #bb2ca2}
+    span.s5 {color: #703daa}
+    span.s6 {color: #4f8187}
+    span.s7 {color: #3d1d81}
+    span.s8 {color: #272ad8}
+    span.s9 {color: #d12f1b}
+    span.s10 {font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: transparent}
+    span.s11 {font: 11.0px Menlo}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><span class="s1"><b>Mac</b></span><b>アプリ、</b><span class="s1"><b>Obj-C</b></span><b>でのNSDictionary略記法のダークなタイミング</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>NSDictionaryの略記法使うと、理由不明のエラーが出るケース。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ずーっと自分のライブラリ疑ってたんだけど、違った。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>下記ケースで、NSDictionaryの生成略記法 @{} での辞書生成が悪さをする。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ちなみにMac版アプリだけで発生を確認している。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>iOS用だと、実機/シミュレータともに発生していない。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>環境</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Xcode 4.6.2</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Mac OS 10.8.3</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ARC:あり</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Mac用アプリ</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>症状</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>IMPを指定してのメソッド実行で、そのメソッド内で</p>
+<p class="p4"><span class="Apple-tab-span">	</span>NSDictionary * dict = @{@"key":@"value"};</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>とすると、生成時は死なないが、メソッドを抜ける瞬間に</p>
+<p class="p2"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>EXEC_BAD_ACCESS(code=12,address=0x0)</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>が発生する。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>発生確率は10/100回、10%くらい。Jenkins見てる限りはそんな感じ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>環境差とかはわからん。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>サンプルコード</b></p>
+<p class="p5"><span class="s2">#import </span>"AppDelegate.h"</p>
+<p class="p6"><br></p>
+<p class="p7">@implementation<span class="s3"> AppDelegate {</span></p>
+<p class="p8"><span class="Apple-converted-space">    </span><span class="s4">SEL</span> m_receiver;</p>
+<p class="p8">}</p>
+<p class="p6"><br></p>
+<p class="p8">- (<span class="s4">void</span>)applicationDidFinishLaunching:(<span class="s5">NSNotification</span> *)aNotification</p>
+<p class="p8">{</p>
+<p class="p8"><span class="Apple-converted-space">    </span><span class="s6">m_receiver</span> = <span class="s4">@selector</span>(receiver:);</p>
+<p class="p6"><span class="Apple-converted-space">    </span></p>
+<p class="p9"><span class="s3"><span class="Apple-converted-space">    </span></span>// Insert code here to initialize your application</p>
+<p class="p8"><span class="Apple-converted-space">    </span><span class="s4">IMP</span> func = [<span class="s4">self</span> <span class="s7">methodForSelector</span>:<span class="s6">m_receiver</span>];</p>
+<p class="p8"><span class="Apple-converted-space">    </span>(* func)(<span class="s4">self</span>, <span class="s6">m_receiver</span>, aNotification);</p>
+<p class="p8">}</p>
+<p class="p6"><br></p>
+<p class="p8">- (<span class="s4">void</span>) receiver:(<span class="s5">NSNotification</span> * )notif {</p>
+<p class="p5"><span class="s3"><span class="Apple-converted-space">    </span></span><span class="s7">NSLog</span><span class="s3">(</span>@"hereComes %@"<span class="s3">, notif);</span></p>
+<p class="p8"><span class="Apple-converted-space">    </span><span class="s5">NSDictionary</span> * dict = <span class="s8">@{</span><span class="s9">@"key"</span>:<span class="s9">@"val"</span><span class="s8">}</span>;//←</p>
+<p class="p8">}</p>
+<p class="p6"><br></p>
+<p class="p7">@end</p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>←のあるラインで、この行を通過後、</p>
+<p class="p8">(* func)(<span class="s4">self</span>, <span class="s6">m_receiver</span>, aNotification);</p>
+<p class="p3"><span class="Apple-tab-span">	</span>この行を抜けるタイミングでエラーになる。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>サンプルプロジェクト</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>githubに上げといた。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/DummyProject">https://github.com/sassembla/DummyProject</a></p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b>100回Jenkinsさんでまわして発生するか試してみた条件など</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・ARCをオフにすると発生しない</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・略記法@{}ではなく、通常記法だと発生しない</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・辞書の内容を空にすると発生しない</p>
+<p class="p8"><span class="s10"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span><span class="s5">NSDictionary</span> * dict = <span class="s8">@{}</span>;<span class="s10"> だと、発生しなかった。</span></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・switch文に入れ、通過しないcaseの中にあっても発生した</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ぶっちゃけ原因追及に時間がかかった理由はこれで、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>switch文、しかもその時点では内容が存在するcaseを通過しない、という条件にも関わらず、発生している。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>switch文を加えた、下記コードでも問題が発生する。</p>
+<p class="p8">- (<span class="s4">void</span>) receiver:(<span class="s5">NSNotification</span> * )notif {</p>
+<p class="p5"><span class="s3"><span class="Apple-converted-space">    </span></span><span class="s7">NSLog</span><span class="s3">(</span>@"hereComes %@"<span class="s3">, notif);</span></p>
+<p class="p6"><span class="Apple-converted-space">    </span></p>
+<p class="p8"><span class="Apple-converted-space">    </span><span class="s4">int</span> a = <span class="s8">0</span>;</p>
+<p class="p6"><span class="Apple-converted-space">    </span></p>
+<p class="p8"><span class="Apple-converted-space">    </span><span class="s4">switch</span> (a) {</p>
+<p class="p8"><span class="Apple-converted-space">        </span><span class="s4">case</span> <span class="s8">0</span>:{</p>
+<p class="p8"><span class="Apple-converted-space">            </span><span class="s4">break</span>;</p>
+<p class="p8"><span class="Apple-converted-space">        </span>}</p>
+<p class="p8"><span class="Apple-converted-space">        </span><span class="s4">case</span> -<span class="s8">1</span>:{</p>
+<p class="p8"><span class="Apple-converted-space">            </span><span class="s5">NSDictionary</span> * dict = <span class="s8">@{</span><span class="s9">@"key"</span>:<span class="s9">@"val"</span><span class="s8">}</span>;//←</p>
+<p class="p8"><span class="Apple-converted-space">            </span><span class="s4">break</span>;</p>
+<p class="p8"><span class="Apple-converted-space">        </span>}</p>
+<p class="p6"><span class="Apple-converted-space">            </span></p>
+<p class="p8"><span class="Apple-converted-space">        </span><span class="s4">default</span>:</p>
+<p class="p8"><span class="Apple-converted-space">            </span><span class="s4">break</span>;</p>
+<p class="p8"><span class="Apple-converted-space">    </span>}</p>
+<p class="p4"><span class="s11">}</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>aが0なのは自明だし、switch文で0に飛び込むので、まーなんも起こらねーだろと思ったら、発生した。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>略記法の内容生成自体はswitch文生成と一緒に行われてるんだろうな。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>実際にallocするかどうかは別として。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>発生確率を上げる方法</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>特に思いついていないが、複数、辞書の初期化コードを書くとかしても、発生率に変化は無かった、、とおもう。たぶん。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>誰かのハマりの助けになれたらと思うが。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>なんかあったらgithubのIssueでもください。</p>
+<p class="p10"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202013-05-14%2017.01.32.png" alt="スクリーンショット 2013-05-14 17.01.32.png"></p>
+</body>
+</html>
