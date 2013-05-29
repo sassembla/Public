@@ -1,0 +1,182 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1187.37">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 18.0px 'Hiragino Kaku Gothic ProN'}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+    span.s1 {font: 12.0px Helvetica}
+    span.s2 {font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>RubyMotionKaigiにinしてきた</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>くりあがって(？)入れたので、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>RubyMotion Kaigi 2013</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://connpass.com/event/2095/">http://connpass.com/event/2095/</a></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>に参加してきた。肋骨折られるのヤダですし。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b>最初に蛇足、Why RubyMotion: for me</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>強固な言語で作られた基盤の上に、柔軟性の高い言語を置く、っていうアプローチがいいなーって思っているなど。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Javaの型システムの上にJS走らせる某AltJSとか、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>C++の横でプラグイン基盤としてPython走らせられるSublimeTextとか、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ガッチリ基礎があってその上で表現力豊かだったり楽に書ける言語で作るの良いよね～。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p4"><b>RubyMotionKaigiの話<span class="Apple-tab-span">	</span>基調講演トピック的な</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>by Laurentさん</p>
+<p class="p2"><br></p>
+<p class="p3"><b>Static analysys</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>静的解析、LLVMみたいなのをやるつもり、と。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>LLVMが出来るところまで行けると、もうRuby,,,だっけ？　ってくらい判りやすくなるんだろうな。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>2.0対応</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>refinementsとかRuby2.0の機能もサポートするよ</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p4"><b>RubyMotion 2.0系</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>by 「契約してMacRubyのコミッタになってよ！」でMacRubyにjoinしたwatsonさん。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>比較、値渡しなどの親和性</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>RubyMotionはObj-C runtimeを利用してRubyを実装しているので、Obj-CとRuby間の値の関係がストレートに出来ている</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>MacRubyとの「差」</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>JIT(MacRuby)か、preCompile(RubyMotion)</p>
+<p class="p3"><span class="Apple-tab-span">	</span>MacRubyで書いたアプリをRubyMotionで書き直すと2倍くらい速くなる</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>OS X対応</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>わーいゾーンですよ。ちょっとした用をはたすにはアプリ作ると良いのですよ！</p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b>高速化</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>gemとかのキャッシュ持ったよ！</p>
+<p class="p3"><span class="Apple-tab-span">	</span>rake時に全消しされてたのから、キャッシュ化することでその分の時間をryだよ！</p>
+<p class="p2"><br></p>
+<p class="p3"><b>weak reference</b></p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>Q,sug</b><span class="s1">a</span><b>r cubeについて</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>is 何?<span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>便利ライブラリ集。ObCで書くと長いコードがRubyのシンタックスシュガーで解決できる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>why not include?</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>RubyMotuonはthinなものにしてるので、そのへんの便利な物は</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>組み込まないよ！</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p4"><b>開発者の視点から<span class="Apple-converted-space"> </span></b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>by Naoya itoさん</p>
+<p class="p2"><br></p>
+<p class="p3"><b>最近の事例</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>37SignalsがiOSApp作ったよね</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>→実際使ってる。助かってる。</p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b>よくある質問</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Obj-Cわからなくても使えますか?<span class="Apple-tab-span">	</span>YES</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="s1">i</span>OSの知識が無くても使えますか？<span class="Apple-tab-span">	</span><b>NO!</b></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>CocoaTouchのAPIを呼ぶのでな！<span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Ruby脳でiOS App作れると思った？→残念　さやかちゃんでした</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>tapもKVOも使える</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ブリッジ系とは違うのだよ、的な。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Obj-Cの上でRubyが動いているので。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>なるほどなー確かに筋がいい。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>ARC風</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>メモリ管理は独自、not ARC、 not Ruby GC</p>
+<p class="p3"><span class="Apple-tab-span">	</span>中身はリファレンスカウンタ方式</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>Tips:ライフタイムが長そうなオブジェクトはインスタンス変数に入れる=強参照になる</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>オブジェクトのライフ周りにテを突っ込んでるの、かなり大変そうだけど、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Tipsがあることで「もしかしてこれが原因かも→試す→あってた、これだ」みたいな原因チェック我で来やすくなると思うので、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>イタダキ。</p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>RubyMotionのここが素晴らしい！</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Vi■、Emacs or TextMate とかで使えるんだよ！(抄訳)</p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>RubyMoとgems</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>sugarCubeべんり</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>NanoStoreInMotion</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="s1">iOS</span>向けのkvsのコントロールができる。<span class="s1">Ac</span>tiveRecord風インターフェース！</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>依存関係もあり</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>→rubymotion-wrappers.com に行け</p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b>Tips</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・ビルドシステムまわりはOSSでRubyなのでハックしやすい。のぞくと良いよ</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・Dashを使ってドキュメント見ると良いよ</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・テストもいろんなツールがあるよ！</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>クソムシに気を取られてしまってあやふや</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p4"><b>iOS使いがRubyMotionを使ってみたぜ！的なお話</b></p>
+<p class="p5"><span class="s2"><span class="Apple-tab-span">	</span>by @</span>mfks17 <span class="s2">さん</span></p>
+<p class="p6"><br></p>
+<p class="p5"><b>RubyMine5</b><span class="s2"><b>から</b></span><b>RubyMotion support</b><span class="s2"><b>が始まったよ！</b></span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>breakポイントにも対応</p>
+<p class="p2"><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>テストは書いた方が良い</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>三日前の自分は他人</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>もくもく会がすぐ埋まってしまうので勉強会を作る！</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>すげー</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p4"><b>質疑応答</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>アクティブユーザーってどのくらいいるの？</p>
+<p class="p3"><span class="Apple-tab-span">	</span>→Laurentさん：正確にはしらぬ。</p>
+<p class="p3"><b><span class="Apple-tab-span">	</span></b><span class="Apple-tab-span">	</span>ユーザー数としては、数千人。今年中に1万人は超えると思う、とのこと。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>アプリ数は？</p>
+<p class="p3"><span class="Apple-tab-span">	</span>→Laurentさん：しらぬ。　報告されないとわからぬし。 週一本は出てるんじゃないだろうか。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3">LT<span class="Apple-tab-span">	</span></p>
+<p class="p3"><b>RubyMotion in IRC</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>by @ninjinkunさん</p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>テキストベースに向いてると思ったので、IRCアプリをRubyMotionで作ってみた</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>このアプリでの、「あの辺から持ってきたら動いた」話は、なんか今後もちょくちょく思い出す気がする。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>扱う対象が同じで、実現するための手法も特定の形があるものなら、似通ったのそのまま持ってこれるよなーとか。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>最近WebSocketで同じ感覚にあっている。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+</body>
+</html>
