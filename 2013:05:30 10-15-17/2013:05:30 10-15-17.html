@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1187.37">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #ebebeb}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #ebebeb; min-height: 18.0px}
+    span.s1 {font: 12.0px Helvetica}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>いろんな通信を相互に繋ぐMacアプリ SocketRoundabout</b></p>
+<p class="p2"><b><span class="Apple-tab-span">	</span></b><span class="s1"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202013-05-30%2011.55.32.png" alt="スクリーンショット 2013-05-30 11.55.32.png"></span></p>
+<p class="p2"><b>概要</b></p>
+<p class="p2"><span class="Apple-tab-span">	</span>WebSocketを受けて、NSDistributedNotificationへと流す、とかがやりたくて作ったもの。</p>
+<p class="p2"><span class="Apple-tab-span">	</span>簡易のWebSocketサーバとかになる。</p>
+<p class="p3"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span>WebSocketサーバ → 別のWebSocketクライアント → 別のWebSocketサーバ、、とか接続する事が可能。</p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/SocketRoundabout-WS-NSDistNotif">https://github.com/sassembla/SocketRoundabout-WS-NSDistNotif</a></p>
+<p class="p3"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><br></p>
+<p class="p2"><b>設定ファイル</b></p>
+<p class="p2"><span class="Apple-tab-span">	</span>こんな感じの事を書いた.sr拡張子のファイルを用意すると、設定をこなしながら起動する。</p>
+<p class="p3"><br></p>
+<p class="p4">//1 WebSocketのOperationをセットする</p>
+<p class="p4">id:roundaboutTest0_2013/05/16_13:40:13 type:0 destination:ws://127.0.0.1:8823 option:websocketas:client</p>
+<p class="p4">id:roundaboutTest1_2013/05/16_13:40:13 type:1 destination:testNotif</p>
+<p class="p5"><br></p>
+<p class="p4">//接続待ち</p>
+<p class="p4">//connent</p>
+<p class="p4">connect:roundaboutTest1_2013/05/16_13:40:13 to:roundaboutTest0_2013/05/16_13:40:13</p>
+<p class="p5"><br></p>
+<p class="p4">//transfer</p>
+<p class="p4">trans:roundaboutTest1_2013/05/16_13:40:13 to:roundaboutTest0_2013/05/16_13:40:13 prefix:TEST_PREFIX suffix:TEST_SUFFIX</p>
+<p class="p3"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span>たぶんREADME.mdみたほうが速い。</p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/SocketRoundabout-WS-NSDistNotif/blob/master/README.md">https://github.com/sassembla/SocketRoundabout-WS-NSDistNotif/blob/master/README.md</a></p>
+<p class="p3"><br></p>
+<p class="p3"><br></p>
+<p class="p3"><br></p>
+</body>
+</html>
