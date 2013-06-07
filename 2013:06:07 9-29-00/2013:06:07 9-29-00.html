@@ -1,0 +1,128 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1187.37">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #ebebeb}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #ebebeb; min-height: 18.0px}
+    span.s1 {font: 22.0px Helvetica}
+    span.s2 {font: 12.0px Helvetica}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><span class="s1"><b>Unity</b></span><b>で曲線状にオブジェクトを動かす</b><span class="s1"><b>SuperSplines</b></span><b>を使ってみた</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Splineに乗って動く、みたいなツールを探していた。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>動作のデザインをカウンタで制御、とか、面倒なんだけど、動作を式化するプログラムを書くのも面倒だったので探してみたら</p>
+<p class="p3"><span class="Apple-tab-span">	</span>あったあった。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>SuperSplines</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://u3d.as/content/evoluo-technologies/super-splines/2kK">http://u3d.as/content/evoluo-technologies/super-splines/2kK</a></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、そのAPI</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://www.super-splines.de/documentation/example3.html">http://www.super-splines.de/documentation/example3.html</a></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>やりたい事</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>移動を表す関数 Aに対して、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>A(0)とか A(0.4)とか A(1) とか入れると、想定されたライン上の特定の位置に居るような式が欲しかったのよさ。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>具体的には、</p>
+<p class="p2"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>transform.positon = A(0).transform;//位置</p>
+<p class="p4"><span class="Apple-tab-span">	</span>transform.rotation = A(0).rotation;//傾きとか回転</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>とか。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>任意の数値について、「特定のタイミングの値」での、ある線上のパラメータを返す、みたいなの。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>線って書いたけど、テキトーな1,2次曲線とか直線、円ならまあ式が単純だし自作してもサクッと出来るし楽なんだと思うのですが、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>線に沿って人を歩かせて、向きとか傾きを出す、みたいなのを作るとしんどいわけで。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>上記式を提供してくれる<span class="s2">Asset</span>をちょっと探していた。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>そこで<span class="s2">Super</span>Spinesですよ。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>購入</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>25$のほうを買いました。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Pro版というか上位版もあるんだけど、見てると差が「ソースコード入ってまっせ！」だったので、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>うん、今は使えれば良いからいいや！</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>使い方</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>適当にCubeを用意。SuperSplinesはインストール済み。</p>
+<p class="p5"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202013-06-07%209.43.38.png" alt="スクリーンショット 2013-06-07 9.43.38.png"></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Splineを作成</p>
+<p class="p3"><span class="Apple-tab-span">	</span>GameObject &gt; CreateOther &gt; Spline &gt; HermiteとかBezierとか曲線のタイプ。今回はHermite。</p>
+<p class="p5"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202013-06-07%209.44.42.png" alt="スクリーンショット 2013-06-07 9.44.42.png"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202013-06-07%209.44.45.png" alt="スクリーンショット 2013-06-07 9.44.45.png"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202013-06-07%2010.45.41.png" alt="スクリーンショット 2013-06-07 10.45.41.png"></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、こんなのが出る。 4つの点から構成されたSpline。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>点がすべて結ばれるような曲線が補完される。</p>
+<p class="p5"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202013-06-07%209.50.53.png" alt="スクリーンショット 2013-06-07 9.50.53.png"></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>４つの点を勝手にキレイな曲線で結んでくれている。あとは、適当に編集して遊ぶ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>AutoCloseにチェックを入れると、線が閉じて輪になる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>(下のは２、３回クリックすると再生できるんじゃないだろうか。きっと)</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="s2"><object data="trimed2.mp4">trimed2.mp4</object></span></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="s2"><b>Cube</b></span><b>を動かす</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、これをオブジェクトに対応させるには、適当なScriptを用意してその中でこんな感じに書けば良い。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>SplineMove.cs</p>
+<p class="p4">using UnityEngine;</p>
+<p class="p4">using System.Collections;</p>
+<p class="p6"><br></p>
+<p class="p4">using SplineUtilities;</p>
+<p class="p6"><br></p>
+<p class="p4">public class SplineMove : MonoBehaviour {</p>
+<p class="p6"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>//Splineオブジェクト</p>
+<p class="p4"><span class="Apple-tab-span">	</span>public Spline spline;</p>
+<p class="p6"><br></p>
+<p class="p4"><span class="Apple-converted-space">  <span class="Apple-tab-span">	</span></span>//移動カウンタ</p>
+<p class="p4"><span class="Apple-converted-space">  <span class="Apple-tab-span">	</span></span>float counter;</p>
+<p class="p6"><span class="Apple-converted-space">  </span></p>
+<p class="p4"><span class="Apple-converted-space">  <span class="Apple-tab-span">	</span></span>float passedTime;</p>
+<p class="p6"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>// Update is called once per frame</p>
+<p class="p4"><span class="Apple-tab-span">	</span>void Update () {</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>passedTime = (counter % 101) * 0.01f;</p>
+<p class="p6"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>//passedTimeの撮り得る値は0から1.00</p>
+<p class="p4"><span class="Apple-converted-space">   <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>float clampedParam = SplineUtils.WrapValue(passedTime, 0f, 1f, WrapMode.Clamp);</p>
+<p class="p6"><br></p>
+<p class="p4"><span class="Apple-converted-space">    <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>//表示上の変形を適応する</p>
+<p class="p4"><span class="Apple-converted-space">    <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>transform.position = spline.GetPositionOnSpline( clampedParam );</p>
+<p class="p4"><span class="Apple-converted-space">    <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>transform.rotation = spline.GetOrientationOnSpline( clampedParam );</p>
+<p class="p4"><span class="Apple-tab-span">	</span>}</p>
+<p class="p6"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>void FixedUpdate () {</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>counter ++;<span class="Apple-converted-space"> </span></p>
+<p class="p4"><span class="Apple-tab-span">	</span>}</p>
+<p class="p4">}</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>こいつをCubeにアタッチ。</p>
+<p class="p5"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202013-06-07%2011.28.04.png" alt="スクリーンショット 2013-06-07 11.28.04.png"></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、Splineのところに、先ほど作成したNew Spline をアタッチ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="s2"><img src="bassui.png" alt="bassui.png"></span></p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>動かすと、こんな感じ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>(下のも２、３回クリックすると再生できるんじゃないだろうか。きっと)</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="s2"><object data="trimed3.mp4">trimed3.mp4</object></span></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>いやあ、便利。</p>
+</body>
+</html>
