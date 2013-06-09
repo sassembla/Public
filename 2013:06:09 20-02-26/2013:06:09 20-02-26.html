@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1187.37">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #ebebeb}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #ebebeb; min-height: 18.0px}
+    span.s1 {font: 12.0px Helvetica}
+    span.s2 {background-color: transparent}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>Unityで、彼の勇姿のその果てをグラフ化、、</b></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Unityでの特定のパラメータを、Debug.Log → ブラウザでグラフとして表示、というものを作ってみた。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><a href="https://vimeo.com/67981607">https://vimeo.com/67981607</a></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>期待している用途</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ゲームの流れの中で、特定のタイミングでの特定のパラメータ<b>だけ</b>を抜き出してグラフにしたい。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>例えばキャラの速度の最速値とか、クリアの最短値とか。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、そのへんのピックアップ+グラフ描画までを最短でする仕組みを作ってみた。</p>
+<p class="p2"><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>用意するもの</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>彼</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>おなじみ　3rd Person Controller さん</p>
+<p class="p4"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202013-06-09%2020.04.54.png" alt="スクリーンショット 2013-06-09 20.04.54.png"></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>あれ、、なんかかっこいい、、</p>
+<p class="p2"><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>UnitySublimeSocketAsset</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Unityと<span class="s1">Sub</span>limeTextとかを繋ぐアセット。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>(今度加筆)</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>こんなコード</b></p>
+<p class="p5">using UnityEngine;</p>
+<p class="p5">using System.Collections;</p>
+<p class="p6"><br></p>
+<p class="p5">public class NewBehaviourScript : MonoBehaviour {</p>
+<p class="p6"><br></p>
+<p class="p5"><span class="Apple-tab-span">	</span>GameObject the3dPlayer;</p>
+<p class="p6"><span class="Apple-tab-span">	</span></p>
+<p class="p5"><span class="Apple-tab-span">	</span>// Use this for initialization</p>
+<p class="p5"><span class="Apple-tab-span">	</span>void Start () {</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>the3dPlayer = GameObject.Find("3rd Person Controller");</p>
+<p class="p5"><span class="Apple-tab-span">	</span>}</p>
+<p class="p6"><span class="Apple-tab-span">	</span></p>
+<p class="p5"><span class="Apple-tab-span">	</span>// Update is called once per frame</p>
+<p class="p5"><span class="Apple-tab-span">	</span>void Update () {</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><b>Debug.Log("G:"+the3dPlayer.transform.position.y);</b></p>
+<p class="p5"><span class="Apple-tab-span">	</span>}</p>
+<p class="p5">}</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>カメラとかにくっつけてActiveな状態にしておく。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>すると、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><b>G:ってくっつけたログのパラメータが、ブラウザのグラフに描画される。</b></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>ブラウザ</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>WebSocketと、flot(<a href="http://www.flotcharts.org">http://www.flotcharts.org</a>)が動けば何でも良いと思います。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>WebSocketでのシグナルを受けて描画するようにセットしておきます。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>動かすと</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>いけっ! 3rd Person Controller！！</p>
+<p class="p4"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202013-06-09%2020.07.10.png" alt="スクリーンショット 2013-06-09 20.07.10.png"></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>登場の瞬間、まず小さく落下してから元気に走り出す彼。 微妙な上下動が不快。</p>
+<p class="p4"><img src="1__%23$!@%25!%23__%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202013-06-09%2020.07.10.png" alt="1__#$!@%!#__スクリーンショット 2013-06-09 20.07.10.png"></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ジャンプするとグラフにも反応が！　5.5ちょいくらいまで飛んでるみたいですね！　単位なんだろう。</p>
+<p class="p4"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202013-06-09%2020.07.16.png" alt="スクリーンショット 2013-06-09 20.07.16.png"></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>そして彼方に向かって跳躍、、！</p>
+<p class="p4"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202013-06-09%2020.07.44.png" alt="スクリーンショット 2013-06-09 20.07.44.png"></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ぐんぐん下がる右端。 グラフがタテに圧縮されていく。</p>
+<p class="p4"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202013-06-09%2020.07.51.png" alt="スクリーンショット 2013-06-09 20.07.51.png"></p>
+<p class="p2"><b></b><br></p>
+<p class="p4"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202013-06-09%2020.07.56.png" alt="スクリーンショット 2013-06-09 20.07.56.png"></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>彼は犠牲になったのだ。<span class="Apple-tab-span">	</span>晩ご飯何食べよう。</p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>連動の仕組み</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Unityからは、UnitySublimeSocketAssetを介して、ブラウザへと</p>
+<p class="p3"><span class="Apple-tab-span">	</span>「ログ文が発生したタイミングで」値を送付している。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>今回はUpdate文の内部から</p>
+<p class="p5"><span class="s2"><span class="Apple-tab-span">	</span></span><b>the3dPlayer.transform.position.y</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>を送ってみたけれど、だいたいリアルタイムっぽくグラフが追加された。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>FixedUpdate内から実行しても特に遅延無かったので、OKということで。<span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+</body>
+</html>
