@@ -25,10 +25,14 @@
 <p class="p3"><span class="Apple-tab-span">	</span>Unityでの特定のパラメータを、Debug.Log → ブラウザでグラフとして表示、というものを作ってみた。</p>
 <p class="p3"><span class="Apple-tab-span">	</span><a href="https://vimeo.com/67981607">https://vimeo.com/67981607</a></p>
 <p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>SublimeText依存。</p>
+<p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>期待している用途</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>ゲームの流れの中で、特定のタイミングでの特定のパラメータ<b>だけ</b>を抜き出してグラフにしたい。</p>
 <p class="p3"><span class="Apple-tab-span">	</span>例えばキャラの速度の最速値とか、クリアの最短値とか。</p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>特定の条件を満たした時に「だけ」記録されるポイントから作られたグラフが見たかった。</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>で、そのへんのピックアップ+グラフ描画までを最短でする仕組みを作ってみた。</p>
 <p class="p2"><br></p>
@@ -43,6 +47,10 @@
 <p class="p3"><b><span class="Apple-tab-span">	</span>UnitySublimeSocketAsset</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Unityと<span class="s1">Sub</span>limeTextとかを繋ぐアセット。</p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>(今度加筆)</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>このアセットから直接利用することができる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>そのほか、最新のSublimeSocket にToolとして入れたので、Unity以外からも利用可能。</p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b><span class="Apple-tab-span">	</span>こんなコード</b></p>
@@ -99,6 +107,11 @@
 <p class="p3"><span class="Apple-tab-span">	</span>を送ってみたけれど、だいたいリアルタイムっぽくグラフが追加された。</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>FixedUpdate内から実行しても特に遅延無かったので、OKということで。<span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>Unity以外から使ってみる</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>SublimeSocket <span class="s1">1.1.3</span>以降に加えておいたので、SublimeSocket/tool/graph からhtml開いて、WebSocketで点を送ると到着順にグラフ化される。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>アセットのWindows版がでてからしっかり書く。</p>
 <p class="p2"><br></p>
 </body>
 </html>
