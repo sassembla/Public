@@ -1,0 +1,185 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1187.39">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    span.s1 {font: 12.0px Helvetica}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>UnityのコードをSublimeTextで編集するAsset、販売中</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>身内間でのみ出してたやつ、やっとUnityのAssetStoreに出せた(<a href="https://www.assetstore.unity3d.com/#/content/8003">SublimeSocketAsset</a>)ので、その他のものと合わせて、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>SublimeTextでUnity、こんなに便利なんですよ！！ 的なまとめまでに。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>機能的に「ここに乗ってないこの機構でもできるよ！」ってのは有ると思うんだけど、独断と偏見で比べてまだマシなほうを残していたりする。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>判断基準は</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>・疎結合かどうか。強烈なパス依存とかがあるとドン引き。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>・非同期かどうか。コンパイルの度にプチフリするIDEとかつらい。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>あとショートカットとかはMac用で書いてある。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>STにUnity C#のシンタックスハイライトを導入</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>C#で書いていても、Unity用のキーワードとか基底クラスを特別扱いしたい。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>専用のシンタックスハイライトがあって便利。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Package Controlから入れると楽。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><b>Command Palette</b> -&gt; <b>package Control: Install Package</b> -&gt; <b>Unity3D</b></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>UnityのAPIから補完</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Unity C# Snippets</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><b>Command Palette</b> -&gt; <b>package Control: Install Package</b> -&gt; <b>Unity C# Snippets</b></p>
+<p class="p4"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202013-06-21%203.35.05.png" alt="スクリーンショット 2013-06-21 3.35.05.png"></p>
+<p class="p3"><span class="Apple-tab-span">	</span>時々、APIの情報が古いのか、パラメータの型情報が誤ったやつを出してくるのがあるけど、えらい捗る。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>キーボードショートカットでコメントアウト/イン</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>コメントアウト&amp;インを、command + / などのキーボードショートカットからなんとかしたくなるのが人情。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><a href="http://www.holoville.com/blog/?p=512">http://www.holoville.com/blog/?p=512</a></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>っていうかC#もできないので、そういう文化がない言語なんだな。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>MonoDevelopにも無い。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>いや良いけど。できるようになるので便利。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>エラーとかの行をUnityコンソールからSublimeTextで開く</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Unity editorでコンソールを表示した際、エラー内容をダブルクリックで対象の行に</p>
+<p class="p3"><span class="Apple-tab-span">	</span>フォーカスした状態でファイルを開く。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><a href="http://www.jacobpennock.com/Blog/?p=568">http://www.jacobpennock.com/Blog/?p=568</a></p>
+<p class="p3"><span class="Apple-tab-span">	</span>UnityHelperの話も出てるんだけど、個人的にはDashのほうが好き。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>今後SublimeSocketAssetに積もうかなーと考えている。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>STからUnityのドキュメントを開く</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Dashと、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://itunes.apple.com/jp/app/dash-docs-snippets/id458034879?mt=12">https://itunes.apple.com/jp/app/dash-docs-snippets/id458034879?mt=12</a></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>STからDashを起動するプラグイン</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><b>Command Palette</b> -&gt; <b>package Control: Install Package</b> -&gt; <b>DashDoc</b></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>の組み合わせが、異常に強力。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>STでコードを書いている途中、補完が出力したAPIを選択した状態で</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><b>Command Palette</b> -&gt; <b>DashDoc: invoke Dash with selected word(syntax-sensitive)<span class="Apple-converted-space"> </span></b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></b><span class="Apple-tab-span">	</span>or</p>
+<p class="p3"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>control + alt + h</b></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>STのシンタックスハイライトを見て、何が見たいか絞ってくれるので良い。</p>
+<p class="p2"><b><span class="Apple-tab-span">	</span></b></p>
+<p class="p4"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202013-06-21%203.40.18.png" alt="スクリーンショット 2013-06-21 3.40.18.png"></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3">~ここからSublimeSocketAssetの独壇場~</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>SublimeSocketAsset</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span></b><span class="Apple-tab-span">	</span><a href="https://www.assetstore.unity3d.com/#/content/8003">https://www.assetstore.unity3d.com/#/content/8003</a></p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>STからUnityのコンパイルを行う</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>SublimeTextのビルドシステムを使ったものも有ったんだけど、パスとか密結合でめんどうだったので、SublimeSocketAssetで疎結合にした。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>編集保存、即、コンパイル、が非同期にできるので、速い。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Unityから開いたファイル以外でもコンパイルターゲットにできる。つまりUnityのファイル監視機構に依存していない。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>ST上にUnityのコンパイルエラーを出す</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>無かったので作った。下記エラーやWarningが発生した際、ST上にライブで表示される。 一部、SublimeSocketAsset 1.4.<span class="s1">x</span>から対応が増えるかもしれない。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>対応しているエラーを無理矢理発生させたのが下の写真。各行左の丸いのをクリックすると詳細が表示される。</p>
+<p class="p4"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202013-06-21%204.21.57.png" alt="スクリーンショット 2013-06-21 4.21.57.png"></p>
+<p class="p3"><span class="Apple-tab-span">	</span>対応エラー一覧</p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Exception一般</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>以下に含まれないエラー一般。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Warning一般</b><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>unusedとか。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><b>NullReferenceException</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ぬるぽ。　ガッされてしまえ。</p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ArgumentException</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>いつ発生するのか忘れた。</p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>You are trying to create a MonoBehaviour using the 'new' keyword.</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>MonoBehaviourなものを知らず<span class="s1">new</span>してると出る。実行時に検出される。エラーではないので止まりはしないが、コード上に表示されるようにした。</p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>transform.position assign attempt for ~</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Nullな要素のVector3をTransform.positionとかに代入しようとすると出るエラー。式算出とかだと出くわす。</p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>UnityException</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>いつ発生するのか忘れた。</p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>IndexOutOfRangeException</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>読んで字のごとく。</p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>InvalidOperationException</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>いつ発生するのか忘れた。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>特筆すべきは、NullなVectorをtransformに対してセットしてしまった時のレアーーーなエラーとか、UnityExceptionが実行時にコード上に直に表示されるところ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>捗るぞ。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ちなみにError/Warning表示はSublimeText自体のログにも出る。</p>
+<p class="p4"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202013-06-21%204.50.20.png" alt="スクリーンショット 2013-06-21 4.50.20.png"></p>
+<p class="p3"><span class="Apple-tab-span">	</span>InvalidOperationとかいつ出たんだか、、、本当に忘れた。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ほかにもエラーが有ったら教えてほしく。</p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>これらのエラーは検出機構からして1ファイルで設定/拡張可能にしてあるので、自前でエラーを定義してアクションを追加したりできる。</b></p>
+<p class="p2"><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>ST上にUnityの動作中のパラメータを出す</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>無かったので作った。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>特定のDebug.Log形式でパラメータをST上に表示できる。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>複雑な条件の中に入ったかどうかとか、ログに特徴的な事を書いてUnityのコンソールから探す、とかするのシンドイので、通ったところが光るのが重宝する。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Debug.Logの中身をL: から始めるだけ。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="s1"><img src="livelog.png" alt="livelog.png"></span></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>今後のやる気</b></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>独自型の補完を出す</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>1.5.xには入れられると思う。</p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>エラーのQuickFixを出す</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ST3から導入できる。強力。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>Windows版</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></b>ST3の正式版が出たら、Windows版に対応。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>でもWinの人はVS使えば良いと思うが。</p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>STからのUnity editor Play</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>やりたい。</p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>次のエラー行へのジャンプ</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>いちいちUnityのコンソールを経由するのが面倒なので、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>キーバインドかなにかで次のエラーがあるファイル/行を表示するとかしたい。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>コード上への負荷表示</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>コード間の時間的負荷を、コード上に表示したい。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>などなど。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3">そんなわけで、宣伝だった。</p>
+<p class="p2"><br></p>
+</body>
+</html>
