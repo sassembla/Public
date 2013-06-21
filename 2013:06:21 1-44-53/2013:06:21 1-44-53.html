@@ -19,16 +19,17 @@
 <p class="p1"><b>UnityのコードをSublimeTextで編集するAsset、販売中</b></p>
 <p class="p2"><br></p>
 <p class="p3"><b>概要</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>身内間でのみ出してたやつ、やっとUnityのAssetStoreに出せた(<a href="https://www.assetstore.unity3d.com/#/content/8003">SublimeSocketAsset</a>)ので、その他のものと合わせて、</p>
-<p class="p3"><span class="Apple-tab-span">	</span>SublimeTextでUnity、こんなに便利なんですよ！！ 的なまとめまでに。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>身内間でのみ出してたやつ、やっとUnityのAssetStoreに出せた(<a href="https://www.assetstore.unity3d.com/#/content/8003">SublimeSocketAsset</a>)ので、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>その他のものと合わせて、<b>SublimeTextでUnity、こんなに便利なんですよ！！</b> 的なまとめを作ることにした。</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
-<p class="p3"><span class="Apple-tab-span">	</span>機能的に「ここに乗ってないこの機構でもできるよ！」ってのは有ると思うんだけど、独断と偏見で比べてまだマシなほうを残していたりする。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>機能的に「この機能は、ここに載ってないこの機構でもできるよ！」ってのは有ると思うんだけど、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>独断と偏見で比べて、まだマシなほうを残していたりする。</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>判断基準は</p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>・疎結合かどうか。強烈なパス依存とかがあるとドン引き。</p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>・非同期かどうか。コンパイルの度にプチフリするIDEとかつらい。</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>あとショートカットとかはMac用で書いてある。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>あとショートカットはMac用で書いてある。</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p2"><br></p>
 <p class="p3"><b>STにUnity C#のシンタックスハイライトを導入</b></p>
@@ -47,7 +48,7 @@
 <p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p2"><br></p>
 <p class="p3"><b>キーボードショートカットでコメントアウト/イン</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>コメントアウト&amp;インを、command + / などのキーボードショートカットからなんとかしたくなるのが人情。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>コメントアウト&amp;インを、command + / などのショートカットからなんとかしたくなるのが人情。</p>
 <p class="p3"><span class="Apple-tab-span">	</span><a href="http://www.holoville.com/blog/?p=512">http://www.holoville.com/blog/?p=512</a></p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>っていうかC#もできないので、そういう文化がない言語なんだな。</p>
@@ -92,16 +93,32 @@
 <p class="p2"><b></b><br></p>
 <p class="p2"><b></b><br></p>
 <p class="p3"><b>STからUnityのコンパイルを行う</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>SublimeTextのビルドシステムを使ったものも有ったんだけど、パスとか密結合でめんどうだったので、SublimeSocketAssetで疎結合にした。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>編集保存、即、コンパイル、が非同期にできるので、速い。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>SublimeTextのビルドシステムを使ったものも有ったんだけど、Unityのパスを手で入れなければならず、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>密結合で面倒だったので、SublimeSocketAssetで疎結合にした。</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>Unityから開いたファイル以外でもコンパイルターゲットにできる。つまりUnityのファイル監視機構に依存していない。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>既存リリースの1.3.xだとインストール手順が2段階あって煩雑だが、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>申請済みの1.4.x系が通れば、楽になる、、と思う。少しは。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>FAQに書いてしまっているレベル。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/SublimeSocketAsset-support">https://github.com/sassembla/SublimeSocketAsset-support</a></p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>編集→保存→コンパイル、が非同期にできる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>コンパイルにはUnity自体を使用しているので、Unityでのちゃんとしたビルド結果を取得する事が出来る。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Unityから開いたファイル以外でもコンパイルターゲットにできる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>つまりUnityのファイル監視機構に依存していない。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>この辺の手法は、過去の記事とかを見ると何したか察しがつくと思う。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><b>Unityにスクリプトのコンパイルを依頼するためにどう土下座すれば</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://sassembla.github.io/Public/2013:03:17%2013-53-03/2013:03:17%2013-53-03.html">http://sassembla.github.io/Public/2013:03:17%2013-53-03/2013:03:17%2013-53-03.html</a></p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>ST上にUnityのコンパイルエラーを出す</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>無かったので作った。下記エラーやWarningが発生した際、ST上にライブで表示される。 一部、SublimeSocketAsset 1.4.<span class="s1">x</span>から対応が増えるかもしれない。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>無かったので作った。下記エラーやWarningが発生した際、ST上にライブで表示される。</p>
+<p class="p3"><span class="Apple-tab-span">	</span> 一部、SublimeSocketAsset 1.4.<span class="s1">x</span>から対応が増えるかもしれない。</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>対応しているエラーを無理矢理発生させたのが下の写真。各行左の丸いのをクリックすると詳細が表示される。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>対応しているエラーを無理矢理発生させたのが下の写真。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>各行左の丸いのをクリックすると詳細がST上とMacのNotificationに表示される。</p>
 <p class="p4"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202013-06-21%204.21.57.png" alt="スクリーンショット 2013-06-21 4.21.57.png"></p>
 <p class="p3"><span class="Apple-tab-span">	</span>対応エラー一覧</p>
 <p class="p2"><br></p>
@@ -176,8 +193,12 @@
 <p class="p3"><span class="Apple-tab-span">	</span><b>コード上への負荷表示</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>コード間の時間的負荷を、コード上に表示したい。</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>などなど。</p>
-<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>ST上への全値のフィルタ表示</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>全値に対して、Debug.Log("L:") を仕込まないでもできる、、かもしれない。実験中。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>などなど。リクエスト有れば聞くだけ聞きたいです。</p>
+<p class="p2"><br></p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p3">そんなわけで、宣伝だった。</p>
 <p class="p2"><br></p>
