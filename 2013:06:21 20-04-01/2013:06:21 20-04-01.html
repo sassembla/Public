@@ -1,0 +1,173 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1187.39">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; color: #5284bd}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 17.0px 'Hiragino Kaku Gothic ProN'}
+    span.s1 {font: 22.0px Helvetica}
+    span.s2 {font: 12.0px Helvetica}
+    span.s3 {font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    span.s4 {color: #000000}
+    span.s5 {text-decoration: underline}
+    span.s6 {color: #555555}
+    span.s7 {color: #5284bd}
+    span.s8 {font: 13.0px 'Hiragino Kaku Gothic ProN'; color: #444444}
+    span.s9 {font: 13.0px Arial; color: #444444}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><span class="s1"><b>Unity AssetStore</b></span><b>になんか出してみるまでの記録というか備忘録</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span>SublimeSocketAsset(<a href="https://www.assetstore.unity3d.com/#/content/8003"><span class="s3">https://www.assetstore.unity3d.com/#/content/8003</span></a>)</span>を作ってUnityのAssetStore上に出すまでの記録。</p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>激しくいろいろ楽だった。</p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p3"><b>入り口</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Unityの<span class="s2">Web</span>トップから、<span class="s2">AssetStore</span>の項目を選ぶ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><a href="http://japan.unity3d.com/asset-store/">http://japan.unity3d.com/asset-store/</a></p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>と、その下の方に、ストアで販売|販売条件|パブリッシャー運営、とかいかにもそれっぽいコーナーがあるので、ここから始める。</p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p3"><b>コンテンツ提出方法</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><a href="http://japan.unity3d.com/asset-store/submit-content">http://japan.unity3d.com/asset-store/submit-content</a></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ここに書いてある事を上から順にやるだけ。わー簡単。</p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p3"><b>ルール</b></p>
+<p class="p5"><span class="s4"><span class="Apple-tab-span">	</span><a href="http://japan.unity3d.com/company/legal/as_provider"><span class="s5">アセットストアプロバイダー契約</span></a></span><span class="s6"> と <a href="http://japan.unity3d.com/asset-store/docs/submission-guidelines.html"><span class="s7">アセットストア提出ガイドライン</span></a></span><span class="s4"> を読もう。</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>日本語訳いいな、あったんだ　いいな。　知らずに訳そうとした俺の黒歴史なんかどうでもいい！</p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p3"><b>Assetを登録する用のAssetをゲット</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>AssetStoreへのAssetの登録も、Assetで行う。</p>
+<p class="p5"><span class="s4"><span class="Apple-tab-span">	</span><a href="http://u3d.as/content/unity-technologies/asset-store-tools/1sF">アセットストア ツール</a></span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>こんな構成のAsset。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="s2"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202013-06-22%201.31.41.png" alt="スクリーンショット 2013-06-22 1.31.41.png"></span></p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>このAsset取得後、メニュー -&gt; Asset Store Tools -&gt; Package Manager から、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="s2"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202013-06-22%201.35.07.png" alt="スクリーンショット 2013-06-22 1.35.07.png"></span></p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、初回時はアカウントも何も無いと思うので、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>NameとPassつけて、アカウントの作成を行う。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="s2"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202013-06-22%201.32.28.png" alt="スクリーンショット 2013-06-22 1.32.28.png"></span></p>
+<p class="p4"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Storeにぶっ飛ばされて詳細入力。素直に英語で入れるのがいいと思う。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="s2"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202013-06-22%201.34.05.png" alt="スクリーンショット 2013-06-22 1.34.05.png"></span></p>
+<p class="p4"><b></b><br></p>
+<p class="p4"><b><span class="Apple-tab-span">	</span></b></p>
+<p class="p3"><b>アカウント作成後、Assetの設定をいろいろと</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>再びAssetStoreManagerへ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>右上のPublisher Account から、パブリッシャー情報(ロゴとかサイトとか)の設定をする。</p>
+<p class="p3"><b><span class="Apple-tab-span">	</span></b><span class="s2"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202013-06-22%201.39.01.png" alt="スクリーンショット 2013-06-22 1.39.01.png"></span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>あとは、投稿したいAssetについて書く -&gt; Preview の繰り返しでなんとかなるはず。　特に挫ける要素は無い。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="s2"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202013-06-22%208.36.53.png" alt="スクリーンショット 2013-06-22 8.36.53.png"></span></p>
+<p class="p4"><br></p>
+<p class="p3"><b>注意点っつーかハマりポイント</b></p>
+<p class="p4"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>・画像をセットできるんだけど、Preview上での表示順がカオス？</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ファイル名、投稿順ともに関係ない。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>非同期にupしてるっぽいので、投稿の終了順、とかなのかな。</p>
+<p class="p4"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>意図した順番に左から並べるのにちょっと困った。</p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>・表示されてるpixel数 横x縦 と、実際の表示される領域が異なる</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>アイコン画像とかには、AssetStore側で文字が載る。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>、、だけじゃなくて、表示領域は画像サイズそのままではない。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>メニュー -&gt; Asset Store Tools -&gt; Package Manager から、Key Image Templates　使ってなんとかするのが常道らしい。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>自分は使うの忘れてた。</p>
+<p class="p3"><b><span class="Apple-tab-span">	</span></b><span class="s2"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202013-06-22%208.25.39.png" alt="スクリーンショット 2013-06-22 8.25.39.png"></span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>画像サイズそのままが表示されるのではなく、トリミングされるので、まあ試しながらやるといいよ的な。</p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>・Upload時のミスが多い</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>通信状態に関わらず、いざUploadしよう！　というタイミングで、Uploadゲージが0%から進まなかったりする。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>けっこうする。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>わかっているご機嫌取りの方法としては、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>・Unityごと再起動する</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>これがよい。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>原因はわかんないけど。フォーラムとかでも見かけるので、わりとメジャーな出来事らしい。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>惜しい、、、、！！</p>
+<p class="p4"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span></p>
+<p class="p6"><span class="s3"><b><span class="Apple-tab-span">	</span>・Upload直後、</b></span><b>AssetBundle にはそんなの含めないよ～ Warning</b><span class="s3"><b>　みたいなのが出る</b></span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>.dll、.rtfや、バイナリなどを含んだAssetをUploadしたときに出る。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>心底焦る。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Uploadが終わったタイミングで、.dll file couldn't include asset bundle ~ みたいな文言が出て、</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>「えっ.dll含んじゃいけなかったの！？　作り方不味かった！？」</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>とか</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>「えっバイナリ、、弾かれて他のだけアップされちゃったの、、？　審査がこの後ある状態なんでsyアババババ」</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>とかなった。心理的に。</p>
+<p class="p4"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>実際には、ちゃんとアップされる。</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>審査通ったの見て愕然としたけど。ちゃんとアップされてる。</b></p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>AssetBundle化処理が同時に走ってるのはなんでなんだろう。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>このへんの警告が出る事に対して、何の解説も見つけられず、全然理解できなかった。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>スッゲー怖かったが、大丈夫、アップされる。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>dllの作り方とかは、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><b>Unity用に、複数ファイルをmcsでコンパイルするだけの簡単なお仕事</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://sassembla.github.io/Public/2013:03:30%206-48-06/2013:03:30%206-48-06.html">http://sassembla.github.io/Public/2013:03:30%206-48-06/2013:03:30%206-48-06.html</a></p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>とかに書いておいた。</p>
+<p class="p4"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・exeバイナリのexeutable属性が消える</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ちょっと実験じみた内容だったのだけれど、Mac用のexeファイルをAssetに含んでみた。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>で、ハマッた。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>AssetStore経由で取得したバイナリは、下記のように権限が変わる。</p>
+<p class="p3"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>手元：-rwxr-xr-x<span class="Apple-converted-space">  </span>1 highvision<span class="Apple-converted-space">  </span>staff<span class="Apple-converted-space">  </span>19048<span class="Apple-converted-space">  </span>6 12 01:04 SwitchApp</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>GET：-rw-r--r--<span class="Apple-converted-space">  </span>1 highvision<span class="Apple-converted-space">  </span>staff<span class="Apple-converted-space">  </span>19048<span class="Apple-converted-space">  </span>6 20 11:10 SwitchApp</b></p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ずっとGithubとかからDLして模擬で試していたので、気づかんかった。なるほゲフゥ</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>SSA 1.3.x系はこのバグを抱えている。FAQ見て解決できるけど、玄人向けになってしまった。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>審査中の1.4.x系で解消されてるので、審査完了待ち。</p>
+<p class="p4"><b></b><br></p>
+<p class="p4"><br></p>
+<p class="p3"><b>審査を待つ</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、Package Managerでのupが終わったら、メールが届くので、審査完了を待つ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>審査状況は、メニュー -&gt; Asset Store Tools -&gt; Publisher Administration　から把握できる。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="s2"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202013-06-22%209.12.33.png" alt="スクリーンショット 2013-06-22 9.12.33.png"></span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ブラウザが開くので、はい。</p>
+<p class="p4"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b>審査にかかる期間と内容</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>iOSであるような、有償のAssetを販売するためにEINが～とか</p>
+<p class="p3"><span class="Apple-tab-span">	</span>企業だと～の提出が必要、とかそういうのがない。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>入金先の指定などは、上記 Publisher Administration から出来る。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Paypal無双。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>審査には2~3日とかそんな感じに書いてあるけど、自分が出したタイミングだと4~5日経ってもなんにもなくて、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>「今混んでるから！ 大丈夫ちゃんと審査してるよ<span class="s8">☆彡</span><span class="s9">(</span><span class="s8">ノ゜▽゜</span><span class="s9">)</span><span class="s8">ノ☆</span>　次は10日後に連絡よこせいいな！？」</p>
+<p class="p3"><span class="Apple-tab-span">	</span>みたいなメールが返ってきた。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>速いときは4~5日有れば南下のリアクションが返ってくると思う。</p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p3">ほかにもなんかあった気がするけど、メモ見る限りだとこんな感じだった。</p>
+<p class="p4"><br></p>
+</body>
+</html>
