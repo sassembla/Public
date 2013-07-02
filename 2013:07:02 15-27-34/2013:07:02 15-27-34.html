@@ -28,9 +28,10 @@
 <p class="p2"><br></p>
 <p class="p3"><b>最初に注意</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>apportableのインストール前に、XcodeのDeveloperPreviewとかが手元に有る場合、</p>
-<p class="p3"><span class="Apple-tab-span">	</span>消したりしておいた方が良いと思う。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>インストール時にXcodeのリンクとかが作られてxcrunで使われるんだけど、</p>
-<p class="p3"><span class="Apple-tab-span">	</span>プレビュー版が使われてそりゃもう動かんかった。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>注意。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>apportableのツール内からxcrunで使われるんだけど、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>プレビュー版が自動的に使われてそりゃもう動かんかった。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>xcode-select --switch で指定し直せば動く。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>導入</b></p>
@@ -369,25 +370,12 @@
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>で、まず動かすのはiOS App</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>注意点：</p>
-<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Xcodeのプレビュー版だとシミュレータでも実記でも動かなかった。試してないだろうし当たり前だが。</p>
-<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>さらに、後述のAndroidアプリに変換するコマンドで、DP5とかのプレビュー版が補足されてろくでもない目に遭う。</p>
-<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>消すしか無いのかなーと思ったけど、消しても駄目だ、、、どこで捕捉してるんだろう。</p>
-<p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>Xcodeプロジェクトを開いて、そのままiOSとかで実行すると</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="s1"><img src="a.png" alt="a.png"></span></p>
-<p class="p3"><span class="Apple-tab-span">	</span>まーこんな感じで。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>まーこんな感じで動作する。</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
-<p class="p2"><br></p>
-<p class="p3"><b>サンプルプロジェクトに詰む罠踏んだ</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>紹介されてたtweejumpは、iOS7の設定が入ってる、、みたいな、</p>
-<p class="p3"><span class="Apple-tab-span">	</span>感じで、下記のコマンドでのAndroidApp化が盛大に失敗する。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>環境になんかあるのかなーと思って別環境でやってみたところでも問題がでたので、</p>
-<p class="p3"><span class="Apple-tab-span">	</span>プロジェクトファイル自体の設定がiOS7向けになってるんじゃねーかなー。。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>cloneしてもそうなったしな、、まあいいか。</p>
-<p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>Android App 化</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>事前に実機を繋いでおく必要がある。</p>
@@ -397,110 +385,307 @@
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>で、またモサッと。</p>
 <p class="p2"><br></p>
-<p class="p3">Last login: Tue Jul<span class="Apple-converted-space">  </span>2 18:12:31 on ttys002</p>
-<p class="p3">Mondogrosso:TestApp mondogrosso$ /Users/mondogrosso/.apportable/SDK/bin/apportable load</p>
-<p class="p3">Building to /Users/mondogrosso/.apportable/SDK/Build/android-armeabi-debug</p>
-<p class="p3">Updating configuration parameters... Building Xcode project /Users/mondogrosso/Desktop/TestApp/TestApp</p>
-<p class="p3">Scanning build configuration for target TestApp</p>
-<p class="p3">2013-07-02 18:15:22.195 xcodebuild[7937:3d03]<span class="Apple-converted-space">  </span>DVTAssertions: Warning in /SourceCache/IDEXcode3ProjectSupport/IDEXcode3ProjectSupport-3504.8/Xcode3Sources/XcodeIDE/Frameworks/DevToolsBase/pbxcore/SpecificationTypes/XCGccMakefileDependencies.m:78</p>
-<p class="p3">Details:<span class="Apple-converted-space">  </span>Failed to load dependencies output contents from ``/var/folders/8f/v_w08y953pq9b2hf_k1p31t40000gn/C/com.apple.DeveloperTools/5.0-5A11314m/Xcode/SharedPrecompiledHeaders/TestApp-Prefix-anuxkoaygigszrewoslshfgzfydo/TestApp-Prefix.pch.d''. Error: Error Domain=NSCocoaErrorDomain Code=260 "The file “TestApp-Prefix.pch.d” couldn’t be opened because there is no such file." UserInfo=0x7f8dc3cef470 {NSFilePath=/var/folders/8f/v_w08y953pq9b2hf_k1p31t40000gn/C/com.apple.DeveloperTools/5.0-5A11314m/Xcode/SharedPrecompiledHeaders/TestApp-Prefix-anuxkoaygigszrewoslshfgzfydo/TestApp-Prefix.pch.d, NSUnderlyingError=0x7f8dc511f020 "The operation couldn’t be completed. No such file or directory"}. User info: {</p>
-<p class="p3"><span class="Apple-converted-space">    </span>NSFilePath = "/var/folders/8f/v_w08y953pq9b2hf_k1p31t40000gn/C/com.apple.DeveloperTools/5.0-5A11314m/Xcode/SharedPrecompiledHeaders/TestApp-Prefix-anuxkoaygigszrewoslshfgzfydo/TestApp-Prefix.pch.d";</p>
-<p class="p3"><span class="Apple-converted-space">    </span>NSUnderlyingError = "Error Domain=NSPOSIXErrorDomain Code=2 \"The operation couldn\U2019t be completed. No such file or directory\"";</p>
-<p class="p3">}.</p>
-<p class="p3">Function: void XCGccMakefileDependenciesParsePathsFromRuleFile(NSString *__strong, F) [F = &lt;lambda at /SourceCache/IDEXcode3ProjectSupport/IDEXcode3ProjectSupport-3504.8/Xcode3Sources/XcodeIDE/Frameworks/DevToolsBase/pbxcore/SpecificationTypes/XCGccMakefileDependencies.m:168:73&gt;]</p>
-<p class="p3">Thread: <span class="Apple-converted-space">  </span>&lt;NSThread: 0x7f8dc3cf1f80&gt;{name = (null), num = 9}</p>
-<p class="p3">Please file a bug at http://bugreport.apple.com with this warning message and any useful information you can provide.</p>
-<p class="p3">2013-07-02 18:15:22.222 xcodebuild[7937:6203]<span class="Apple-converted-space">  </span>DVTAssertions: Warning in /SourceCache/IDEXcode3ProjectSupport/IDEXcode3ProjectSupport-3504.8/Xcode3Sources/XcodeIDE/Frameworks/DevToolsBase/pbxcore/SpecificationTypes/XCGccMakefileDependencies.m:78</p>
-<p class="p3">Details:<span class="Apple-converted-space">  </span>Failed to load dependencies output contents from ``/var/folders/8f/v_w08y953pq9b2hf_k1p31t40000gn/T/tmp7DheK0/TARGET_TEMP_DIR/Objects-normal/armv7/AppDelegate.d''. Error: Error Domain=NSCocoaErrorDomain Code=260 "The file “AppDelegate.d” couldn’t be opened because there is no such file." UserInfo=0x7f8dc0e74ba0 {NSFilePath=/var/folders/8f/v_w08y953pq9b2hf_k1p31t40000gn/T/tmp7DheK0/TARGET_TEMP_DIR/Objects-normal/armv7/AppDelegate.d, NSUnderlyingError=0x7f8dc0e47bf0 "The operation couldn’t be completed. No such file or directory"}. User info: {</p>
-<p class="p3"><span class="Apple-converted-space">    </span>NSFilePath = "/var/folders/8f/v_w08y953pq9b2hf_k1p31t40000gn/T/tmp7DheK0/TARGET_TEMP_DIR/Objects-normal/armv7/AppDelegate.d";</p>
-<p class="p3"><span class="Apple-converted-space">    </span>NSUnderlyingError = "Error Domain=NSPOSIXErrorDomain Code=2 \"The operation couldn\U2019t be completed. No such file or directory\"";</p>
-<p class="p3">}.</p>
-<p class="p3">Function: void XCGccMakefileDependenciesParsePathsFromRuleFile(NSString *__strong, F) [F = &lt;lambda at /SourceCache/IDEXcode3ProjectSupport/IDEXcode3ProjectSupport-3504.8/Xcode3Sources/XcodeIDE/Frameworks/DevToolsBase/pbxcore/SpecificationTypes/XCGccMakefileDependencies.m:168:73&gt;]</p>
-<p class="p3">Thread: <span class="Apple-converted-space">  </span>&lt;NSThread: 0x7f8dc0e72c40&gt;{name = (null), num = 10}</p>
-<p class="p3">Please file a bug at http://bugreport.apple.com with this warning message and any useful information you can provide.</p>
-<p class="p3">2013-07-02 18:15:22.222 xcodebuild[7937:3d03]<span class="Apple-converted-space">  </span>DVTAssertions: Warning in /SourceCache/IDEXcode3ProjectSupport/IDEXcode3ProjectSupport-3504.8/Xcode3Sources/XcodeIDE/Frameworks/DevToolsBase/pbxcore/SpecificationTypes/XCGccMakefileDependencies.m:78</p>
-<p class="p3">Details:<span class="Apple-converted-space">  </span>Failed to load dependencies output contents from ``/var/folders/8f/v_w08y953pq9b2hf_k1p31t40000gn/T/tmp7DheK0/TARGET_TEMP_DIR/Objects-normal/armv7/main.d''. Error: Error Domain=NSCocoaErrorDomain Code=260 "The file “main.d” couldn’t be opened because there is no such file." UserInfo=0x7f8dc0c352d0 {NSFilePath=/var/folders/8f/v_w08y953pq9b2hf_k1p31t40000gn/T/tmp7DheK0/TARGET_TEMP_DIR/Objects-normal/armv7/main.d, NSUnderlyingError=0x7f8dc0c35370 "The operation couldn’t be completed. No such file or directory"}. User info: {</p>
-<p class="p3"><span class="Apple-converted-space">    </span>NSFilePath = "/var/folders/8f/v_w08y953pq9b2hf_k1p31t40000gn/T/tmp7DheK0/TARGET_TEMP_DIR/Objects-normal/armv7/main.d";</p>
-<p class="p3"><span class="Apple-converted-space">    </span>NSUnderlyingError = "Error Domain=NSPOSIXErrorDomain Code=2 \"The operation couldn\U2019t be completed. No such file or directory\"";</p>
-<p class="p3">}.</p>
-<p class="p3">Function: void XCGccMakefileDependenciesParsePathsFromRuleFile(NSString *__strong, F) [F = &lt;lambda at /SourceCache/IDEXcode3ProjectSupport/IDEXcode3ProjectSupport-3504.8/Xcode3Sources/XcodeIDE/Frameworks/DevToolsBase/pbxcore/SpecificationTypes/XCGccMakefileDependencies.m:168:73&gt;]</p>
-<p class="p3">Thread: <span class="Apple-converted-space">  </span>&lt;NSThread: 0x7f8dc3cf1f80&gt;{name = (null), num = 9}</p>
-<p class="p3">Please file a bug at http://bugreport.apple.com with this warning message and any useful information you can provide.</p>
-<p class="p3">Scanning build configuration for target TestAppTests</p>
-<p class="p3">2013-07-02 18:15:24.365 xcodebuild[7955:3d03]<span class="Apple-converted-space">  </span>DVTAssertions: Warning in /SourceCache/IDEXcode3ProjectSupport/IDEXcode3ProjectSupport-3504.8/Xcode3Sources/XcodeIDE/Frameworks/DevToolsBase/pbxcore/SpecificationTypes/XCGccMakefileDependencies.m:78</p>
-<p class="p3">Details:<span class="Apple-converted-space">  </span>Failed to load dependencies output contents from ``/var/folders/8f/v_w08y953pq9b2hf_k1p31t40000gn/C/com.apple.DeveloperTools/5.0-5A11314m/Xcode/SharedPrecompiledHeaders/TestApp-Prefix-bfgixiklwmwwjefdtmwvuuxmarhr/TestApp-Prefix.pch.d''. Error: Error Domain=NSCocoaErrorDomain Code=260 "The file “TestApp-Prefix.pch.d” couldn’t be opened because there is no such file." UserInfo=0x7f9fdc1d19c0 {NSFilePath=/var/folders/8f/v_w08y953pq9b2hf_k1p31t40000gn/C/com.apple.DeveloperTools/5.0-5A11314m/Xcode/SharedPrecompiledHeaders/TestApp-Prefix-bfgixiklwmwwjefdtmwvuuxmarhr/TestApp-Prefix.pch.d, NSUnderlyingError=0x7f9fdc1cf4d0 "The operation couldn’t be completed. No such file or directory"}. User info: {</p>
-<p class="p3"><span class="Apple-converted-space">    </span>NSFilePath = "/var/folders/8f/v_w08y953pq9b2hf_k1p31t40000gn/C/com.apple.DeveloperTools/5.0-5A11314m/Xcode/SharedPrecompiledHeaders/TestApp-Prefix-bfgixiklwmwwjefdtmwvuuxmarhr/TestApp-Prefix.pch.d";</p>
-<p class="p3"><span class="Apple-converted-space">    </span>NSUnderlyingError = "Error Domain=NSPOSIXErrorDomain Code=2 \"The operation couldn\U2019t be completed. No such file or directory\"";</p>
-<p class="p3">}.</p>
-<p class="p3">Function: void XCGccMakefileDependenciesParsePathsFromRuleFile(NSString *__strong, F) [F = &lt;lambda at /SourceCache/IDEXcode3ProjectSupport/IDEXcode3ProjectSupport-3504.8/Xcode3Sources/XcodeIDE/Frameworks/DevToolsBase/pbxcore/SpecificationTypes/XCGccMakefileDependencies.m:168:73&gt;]</p>
-<p class="p3">Thread: <span class="Apple-converted-space">  </span>&lt;NSThread: 0x7f9fdc1d1430&gt;{name = (null), num = 9}</p>
-<p class="p3">Please file a bug at http://bugreport.apple.com with this warning message and any useful information you can provide.</p>
-<p class="p3">2013-07-02 18:15:24.392 xcodebuild[7955:3d03]<span class="Apple-converted-space">  </span>DVTAssertions: Warning in /SourceCache/IDEXcode3ProjectSupport/IDEXcode3ProjectSupport-3504.8/Xcode3Sources/XcodeIDE/Frameworks/DevToolsBase/pbxcore/SpecificationTypes/XCGccMakefileDependencies.m:78</p>
-<p class="p3">Details:<span class="Apple-converted-space">  </span>Failed to load dependencies output contents from ``/var/folders/8f/v_w08y953pq9b2hf_k1p31t40000gn/T/tmpXuTxvk/TARGET_TEMP_DIR/Objects-normal/armv7/main.d''. Error: Error Domain=NSCocoaErrorDomain Code=260 "The file “main.d” couldn’t be opened because there is no such file." UserInfo=0x7f9fdf81e270 {NSFilePath=/var/folders/8f/v_w08y953pq9b2hf_k1p31t40000gn/T/tmpXuTxvk/TARGET_TEMP_DIR/Objects-normal/armv7/main.d, NSUnderlyingError=0x7f9fdf82d2e0 "The operation couldn’t be completed. No such file or directory"}. User info: {</p>
-<p class="p3"><span class="Apple-converted-space">    </span>NSFilePath = "/var/folders/8f/v_w08y953pq9b2hf_k1p31t40000gn/T/tmpXuTxvk/TARGET_TEMP_DIR/Objects-normal/armv7/main.d";</p>
-<p class="p3"><span class="Apple-converted-space">    </span>NSUnderlyingError = "Error Domain=NSPOSIXErrorDomain Code=2 \"The operation couldn\U2019t be completed. No such file or directory\"";</p>
-<p class="p3">}.</p>
-<p class="p3">Function: void XCGccMakefileDependenciesParsePathsFromRuleFile(NSString *__strong, F) [F = &lt;lambda at /SourceCache/IDEXcode3ProjectSupport/IDEXcode3ProjectSupport-3504.8/Xcode3Sources/XcodeIDE/Frameworks/DevToolsBase/pbxcore/SpecificationTypes/XCGccMakefileDependencies.m:168:73&gt;]</p>
-<p class="p3">Thread: <span class="Apple-converted-space">  </span>&lt;NSThread: 0x7f9fdc1d1430&gt;{name = (null), num = 9}</p>
-<p class="p3">Please file a bug at http://bugreport.apple.com with this warning message and any useful information you can provide.</p>
-<p class="p3">2013-07-02 18:15:24.393 xcodebuild[7955:313]<span class="Apple-converted-space">  </span>DVTAssertions: Warning in /SourceCache/IDEXcode3ProjectSupport/IDEXcode3ProjectSupport-3504.8/Xcode3Sources/XcodeIDE/Frameworks/DevToolsBase/pbxcore/SpecificationTypes/XCGccMakefileDependencies.m:78</p>
-<p class="p3">Details:<span class="Apple-converted-space">  </span>Failed to load dependencies output contents from ``/var/folders/8f/v_w08y953pq9b2hf_k1p31t40000gn/T/tmpXuTxvk/TARGET_TEMP_DIR/Objects-normal/armv7/AppDelegate.d''. Error: Error Domain=NSCocoaErrorDomain Code=260 "The file “AppDelegate.d” couldn’t be opened because there is no such file." UserInfo=0x7f9fdb61d910 {NSFilePath=/var/folders/8f/v_w08y953pq9b2hf_k1p31t40000gn/T/tmpXuTxvk/TARGET_TEMP_DIR/Objects-normal/armv7/AppDelegate.d, NSUnderlyingError=0x7f9fdb672d70 "The operation couldn’t be completed. No such file or directory"}. User info: {</p>
-<p class="p3"><span class="Apple-converted-space">    </span>NSFilePath = "/var/folders/8f/v_w08y953pq9b2hf_k1p31t40000gn/T/tmpXuTxvk/TARGET_TEMP_DIR/Objects-normal/armv7/AppDelegate.d";</p>
-<p class="p3"><span class="Apple-converted-space">    </span>NSUnderlyingError = "Error Domain=NSPOSIXErrorDomain Code=2 \"The operation couldn\U2019t be completed. No such file or directory\"";</p>
-<p class="p3">}.</p>
-<p class="p3">Function: void XCGccMakefileDependenciesParsePathsFromRuleFile(NSString *__strong, F) [F = &lt;lambda at /SourceCache/IDEXcode3ProjectSupport/IDEXcode3ProjectSupport-3504.8/Xcode3Sources/XcodeIDE/Frameworks/DevToolsBase/pbxcore/SpecificationTypes/XCGccMakefileDependencies.m:168:73&gt;]</p>
-<p class="p3">Thread: <span class="Apple-converted-space">  </span>&lt;NSThread: 0x7f9fdb607800&gt;{name = (null), num = 10}</p>
-<p class="p3">Please file a bug at http://bugreport.apple.com with this warning message and any useful information you can provide.</p>
-<p class="p3">2013-07-02 18:15:24.523 xcodebuild[7955:4503]<span class="Apple-converted-space">  </span>DVTAssertions: Warning in /SourceCache/IDEXcode3ProjectSupport/IDEXcode3ProjectSupport-3504.8/Xcode3Sources/XcodeIDE/Frameworks/DevToolsBase/pbxcore/SpecificationTypes/XCGccMakefileDependencies.m:78</p>
-<p class="p3">Details:<span class="Apple-converted-space">  </span>Failed to load dependencies output contents from ``/var/folders/8f/v_w08y953pq9b2hf_k1p31t40000gn/C/com.apple.DeveloperTools/5.0-5A11314m/Xcode/SharedPrecompiledHeaders/TestApp-Prefix-defqvnomgbpmyedginwdyynsvcsw/TestApp-Prefix.pch.d''. Error: Error Domain=NSCocoaErrorDomain Code=260 "The file “TestApp-Prefix.pch.d” couldn’t be opened because there is no such file." UserInfo=0x7f9fdfd02390 {NSFilePath=/var/folders/8f/v_w08y953pq9b2hf_k1p31t40000gn/C/com.apple.DeveloperTools/5.0-5A11314m/Xcode/SharedPrecompiledHeaders/TestApp-Prefix-defqvnomgbpmyedginwdyynsvcsw/TestApp-Prefix.pch.d, NSUnderlyingError=0x7f9fdc1a2200 "The operation couldn’t be completed. No such file or directory"}. User info: {</p>
-<p class="p3"><span class="Apple-converted-space">    </span>NSFilePath = "/var/folders/8f/v_w08y953pq9b2hf_k1p31t40000gn/C/com.apple.DeveloperTools/5.0-5A11314m/Xcode/SharedPrecompiledHeaders/TestApp-Prefix-defqvnomgbpmyedginwdyynsvcsw/TestApp-Prefix.pch.d";</p>
-<p class="p3"><span class="Apple-converted-space">    </span>NSUnderlyingError = "Error Domain=NSPOSIXErrorDomain Code=2 \"The operation couldn\U2019t be completed. No such file or directory\"";</p>
-<p class="p3">}.</p>
-<p class="p3">Function: void XCGccMakefileDependenciesParsePathsFromRuleFile(NSString *__strong, F) [F = &lt;lambda at /SourceCache/IDEXcode3ProjectSupport/IDEXcode3ProjectSupport-3504.8/Xcode3Sources/XcodeIDE/Frameworks/DevToolsBase/pbxcore/SpecificationTypes/XCGccMakefileDependencies.m:168:73&gt;]</p>
-<p class="p3">Thread: <span class="Apple-converted-space">  </span>&lt;NSThread: 0x7f9fdfd04220&gt;{name = (null), num = 11}</p>
-<p class="p3">Please file a bug at http://bugreport.apple.com with this warning message and any useful information you can provide.</p>
-<p class="p3">2013-07-02 18:15:24.552 xcodebuild[7955:4503]<span class="Apple-converted-space">  </span>DVTAssertions: Warning in /SourceCache/IDEXcode3ProjectSupport/IDEXcode3ProjectSupport-3504.8/Xcode3Sources/XcodeIDE/Frameworks/DevToolsBase/pbxcore/SpecificationTypes/XCGccMakefileDependencies.m:78</p>
-<p class="p3">Details:<span class="Apple-converted-space">  </span>Failed to load dependencies output contents from ``/var/folders/8f/v_w08y953pq9b2hf_k1p31t40000gn/T/tmpXuTxvk/TARGET_TEMP_DIR/Objects-normal/armv7/TestAppTests.d''. Error: Error Domain=NSCocoaErrorDomain Code=260 "The file “TestAppTests.d” couldn’t be opened because there is no such file." UserInfo=0x7f9fdc398500 {NSFilePath=/var/folders/8f/v_w08y953pq9b2hf_k1p31t40000gn/T/tmpXuTxvk/TARGET_TEMP_DIR/Objects-normal/armv7/TestAppTests.d, NSUnderlyingError=0x7f9fdc36e8d0 "The operation couldn’t be completed. No such file or directory"}. User info: {</p>
-<p class="p3"><span class="Apple-converted-space">    </span>NSFilePath = "/var/folders/8f/v_w08y953pq9b2hf_k1p31t40000gn/T/tmpXuTxvk/TARGET_TEMP_DIR/Objects-normal/armv7/TestAppTests.d";</p>
-<p class="p3"><span class="Apple-converted-space">    </span>NSUnderlyingError = "Error Domain=NSPOSIXErrorDomain Code=2 \"The operation couldn\U2019t be completed. No such file or directory\"";</p>
-<p class="p3">}.</p>
-<p class="p3">Function: void XCGccMakefileDependenciesParsePathsFromRuleFile(NSString *__strong, F) [F = &lt;lambda at /SourceCache/IDEXcode3ProjectSupport/IDEXcode3ProjectSupport-3504.8/Xcode3Sources/XcodeIDE/Frameworks/DevToolsBase/pbxcore/SpecificationTypes/XCGccMakefileDependencies.m:168:73&gt;]</p>
-<p class="p3">Thread: <span class="Apple-converted-space">  </span>&lt;NSThread: 0x7f9fdfd04220&gt;{name = (null), num = 11}</p>
-<p class="p3">Please file a bug at http://bugreport.apple.com with this warning message and any useful information you can provide.</p>
+<p class="p3">highvision:tweejump highvision$ /Users/highvision/.apportable/SDK/bin/apportable load</p>
+<p class="p3">Building to /Users/highvision/.apportable/SDK/Build/android-armeabi-debug</p>
+<p class="p3">Updating configuration parameters... Building Xcode project /Users/highvision/Desktop/tweejump/tweejump</p>
+<p class="p3">Scanning build configuration for target tweejump</p>
 <p class="p3">Merging configuration parameters.</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3">It looks like you're compiling this app for the first time.</p>
-<p class="p3">TestApp.approj/configuration.json will be created for you.</p>
+<p class="p3">tweejump.approj/configuration.json will be created for you.</p>
 <p class="p3">A few quick questions and you'll be on your way:</p>
 <p class="p2"><br></p>
 <p class="p3">If the app is using OpenGL ES, does it use ES1 or ES2? (Cocos2D 1.X uses ES1, 2.X uses ES2)</p>
 <p class="p3">[1/2]<span class="Apple-converted-space"> </span></p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>使ってない場合どうこたえろっちゅーねん　→　何も打たずエンター</p>
+<p class="p3"><span class="Apple-tab-span">	</span>使ってない場合どうこたえろっちゅーねん　→　何も打たずエンターでOKみたいな？</p>
 <p class="p2"><br></p>
 <p class="p3">Should the app initially launch in landscape or portrait orientation? (default: landscape)</p>
-<p class="p3">[L/p]</p>
-<p class="p3"><span class="Apple-tab-span">	</span>pで。</p>
+<p class="p3">[L/p]<span class="Apple-converted-space"> </span></p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>どちらなりと。</p>
+<p class="p2"><br></p>
 <p class="p3">Loading configuration.</p>
 <p class="p3">Finished parsing configuration.</p>
 <p class="p3">scons: Building targets ...</p>
-<p class="p3">Compiling /Users/mondogrosso/Desktop/TestApp/TestApp/AppDelegate.m</p>
-<p class="p3">Compiling /Users/mondogrosso/Desktop/TestApp/TestApp/main.m</p>
+<p class="p3">Compiling /Users/highvision/Desktop/tweejump/tweejump/AppDelegate.m</p>
+<p class="p3">Compiling /Users/highvision/Desktop/tweejump/tweejump/Classes/Game.m</p>
+<p class="p3">Compiling /Users/highvision/Desktop/tweejump/tweejump/Classes/Highscores.m</p>
+<p class="p3">Compiling /Users/highvision/Desktop/tweejump/tweejump/Classes/Main.m</p>
+<p class="p3">Compiling /Users/highvision/Desktop/tweejump/tweejump/RootViewController.m</p>
+<p class="p3">Compiling /Users/highvision/Desktop/tweejump/tweejump/libs/FontLabel/FontLabel.m</p>
+<p class="p3">/Users/highvision/Desktop/tweejump/tweejump/Classes/Game.m:266:7: warning:<span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-converted-space">      </span>expression result unused [-Wunused-value]</p>
+<p class="p3"><span class="Apple-converted-space">                </span>for(t; t &lt; kPlatformsStartTag + kNumPlatforms; t++) {</p>
+<p class="p3"><span class="Apple-converted-space">                    </span>^</p>
+<p class="p3">/Users/highvision/Desktop/tweejump/tweejump/Classes/Game.m:296:7: warning:<span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-converted-space">      </span>expression result unused [-Wunused-value]</p>
+<p class="p3"><span class="Apple-converted-space">                </span>for(t; t &lt; kCloudsStartTag + kNumClouds; t++) {</p>
+<p class="p3"><span class="Apple-converted-space">                    </span>^</p>
+<p class="p3">/Users/highvision/Desktop/tweejump/tweejump/Classes/Game.m:309:7: warning:<span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-converted-space">      </span>expression result unused [-Wunused-value]</p>
+<p class="p3"><span class="Apple-converted-space">                </span>for(t; t &lt; kPlatformsStartTag + kNumPlatforms; t++) {</p>
+<p class="p3"><span class="Apple-converted-space">                    </span>^</p>
+<p class="p3">/Users/highvision/Desktop/tweejump/tweejump/Classes/Main.m:112:6: warning:<span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-converted-space">      </span>expression result unused [-Wunused-value]</p>
+<p class="p3"><span class="Apple-converted-space">        </span>for(t; t &lt; kCloudsStartTag + kNumClouds; t++) {</p>
+<p class="p3"><span class="Apple-converted-space">            </span>^</p>
+<p class="p3">Compiling /Users/highvision/Desktop/tweejump/tweejump/libs/FontLabel/FontLabelStringDrawing.m</p>
+<p class="p3">1 warning generated.</p>
+<p class="p3">3 warnings generated.</p>
+<p class="p3">Compiling /Users/highvision/Desktop/tweejump/tweejump/libs/FontLabel/FontManager.m</p>
+<p class="p3">/Users/highvision/Desktop/tweejump/tweejump/libs/FontLabel/FontLabelStringDrawing.m:458:25: warning:<span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-converted-space">      </span>incompatible pointer types initializing 'NSMutableCharacterSet *' with an</p>
+<p class="p3"><span class="Apple-converted-space">      </span>expression of type 'NSCharacterSet *' [-Wincompatible-pointer-types]</p>
+<p class="p3"><span class="Apple-converted-space">  </span>...*alphaCharset = [NSMutableCharacterSet alphanumericCharacterSet];</p>
+<p class="p3"><span class="Apple-converted-space">      </span>^<span class="Apple-converted-space">              </span>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</p>
+<p class="p3">Compiling /Users/highvision/Desktop/tweejump/tweejump/libs/FontLabel/ZAttributedString.m</p>
+<p class="p3">1 warning generated.</p>
+<p class="p3">Compiling /Users/highvision/Desktop/tweejump/tweejump/libs/FontLabel/ZFont.m</p>
+<p class="p3">Compiling /Users/highvision/Desktop/tweejump/tweejump/libs/cocos2d/CCAction.m</p>
+<p class="p3">Compiling /Users/highvision/Desktop/tweejump/tweejump/libs/cocos2d/CCActionCamera.m</p>
+<p class="p3">Compiling /Users/highvision/Desktop/tweejump/tweejump/libs/cocos2d/CCActionEase.m</p>
+<p class="p3">/Users/highvision/Desktop/tweejump/tweejump/libs/cocos2d/CCAction.m:67:77: warning:<span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-converted-space">      </span>format specifies type 'unsigned int' but the argument has type</p>
+<p class="p3"><span class="Apple-converted-space">      </span>'CCAction *' [-Wformat]</p>
+<p class="p3"><span class="Apple-converted-space">  </span>...stringWithFormat:@"&lt;%@ = %08X | Tag = %i&gt;", [self class], self, tag_];</p>
+<p class="p3"><span class="Apple-converted-space">                              </span>~~~~ <span class="Apple-converted-space">                            </span>^~~~</p>
+<p class="p3"><span class="Apple-converted-space">                              </span>%8@</p>
+<p class="p3">Compiling /Users/highvision/Desktop/tweejump/tweejump/libs/cocos2d/CCActionGrid.m</p>
+<p class="p3">1 warning generated.</p>
+<p class="p3">Compiling /Users/highvision/Desktop/tweejump/tweejump/libs/cocos2d/CCActionGrid3D.m</p>
+<p class="p3">Compiling /Users/highvision/Desktop/tweejump/tweejump/libs/cocos2d/CCActionInstant.m</p>
+<p class="p3">Compiling /Users/highvision/Desktop/tweejump/tweejump/libs/cocos2d/CCActionInterval.m</p>
+<p class="p3">Compiling /Users/highvision/Desktop/tweejump/tweejump/libs/cocos2d/CCActionManager.m</p>
+<p class="p3">/Users/highvision/Desktop/tweejump/tweejump/libs/cocos2d/CCActionInstant.m:260:4: warning:<span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-converted-space">      </span>format specifies type 'unsigned int' but the argument has type</p>
+<p class="p3"><span class="Apple-converted-space">      </span>'CCCallFunc *' [-Wformat]</p>
+<p class="p3"><span class="Apple-converted-space">                        </span>self,</p>
+<p class="p3"><span class="Apple-converted-space">                        </span>^~~~</p>
+<p class="p3">Compiling /Users/highvision/Desktop/tweejump/tweejump/libs/cocos2d/CCActionPageTurn3D.m</p>
+<p class="p3">1 warning generated.</p>
+<p class="p3">Compiling /Users/highvision/Desktop/tweejump/tweejump/libs/cocos2d/CCActionProgressTimer.m</p>
+<p class="p3">Compiling /Users/highvision/Desktop/tweejump/tweejump/libs/cocos2d/CCActionTiledGrid.m</p>
+<p class="p3">Compiling /Users/highvision/Desktop/tweejump/tweejump/libs/cocos2d/CCActionTween.m</p>
+<p class="p3">Compiling /Users/highvision/Desktop/tweejump/tweejump/libs/cocos2d/CCAnimation.m</p>
+<p class="p3">Compiling /Users/highvision/Desktop/tweejump/tweejump/libs/cocos2d/CCAnimationCache.m</p>
+<p class="p3">/Users/highvision/Desktop/tweejump/tweejump/libs/cocos2d/CCAnimation.m:73:88: warning:<span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-converted-space">      </span>format specifies type 'unsigned int' but the argument has type</p>
+<p class="p3"><span class="Apple-converted-space">      </span>'CCAnimation *' [-Wformat]</p>
+<p class="p3"><span class="Apple-converted-space">  </span>...= %08X | frames=%d, delay:%f&gt;", [self class], self,</p>
+<p class="p3"><span class="Apple-converted-space">       </span>~~~~<span class="Apple-converted-space">                                        </span>^~~~</p>
+<p class="p3"><span class="Apple-converted-space">       </span>%8@</p>
+<p class="p3">1 warning generated.</p>
+<p class="p3">Compiling /Users/highvision/Desktop/tweejump/tweejump/libs/cocos2d/CCAtlasNode.m</p>
+<p class="p3">/Users/highvision/Desktop/tweejump/tweejump/libs/cocos2d/CCAnimationCache.m:70:92: warning:<span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-converted-space">      </span>format specifies type 'unsigned int' but the argument has type</p>
+<p class="p3"><span class="Apple-converted-space">      </span>'CCAnimationCache *' [-Wformat]</p>
+<p class="p3"><span class="Apple-converted-space">  </span>...= %08X | num of animations =<span class="Apple-converted-space">  </span>%i&gt;", [self class], self, [animations_ cou...</p>
+<p class="p3"><span class="Apple-converted-space">       </span>~~~~<span class="Apple-converted-space">                                            </span>^~~~</p>
+<p class="p3"><span class="Apple-converted-space">       </span>%8@</p>
+<p class="p3">1 warning generated.</p>
+<p class="p3">Compiling /Users/highvision/Desktop/tweejump/tweejump/libs/cocos2d/CCBlockSupport.m</p>
+<p class="p3">Compiling /Users/highvision/Desktop/tweejump/tweejump/libs/cocos2d/CCCamera.m</p>
+<p class="p3">Compiling /Users/highvision/Desktop/tweejump/tweejump/libs/cocos2d/CCConfiguration.m</p>
+<p class="p3">Compiling /Users/highvision/Desktop/tweejump/tweejump/libs/cocos2d/CCDirector.m</p>
+<p class="p3">/Users/highvision/Desktop/tweejump/tweejump/libs/cocos2d/CCCamera.m:46:94: warning:<span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-converted-space">      </span>format specifies type 'unsigned int' but the argument has type</p>
+<p class="p3"><span class="Apple-converted-space">      </span>'CCCamera *' [-Wformat]</p>
+<p class="p3"><span class="Apple-converted-space">  </span>...= %08X | center = (%.2f,%.2f,%.2f)&gt;", [self class], self, centerX_, cent...</p>
+<p class="p3"><span class="Apple-converted-space">       </span>~~~~<span class="Apple-converted-space">                                              </span>^~~~</p>
+<p class="p3"><span class="Apple-converted-space">       </span>%8@</p>
+<p class="p3">1 warning generated.</p>
+<p class="p3">Compiling /Users/highvision/Desktop/tweejump/tweejump/libs/cocos2d/CCDrawingPrimitives.m</p>
+<p class="p3">Compiling /Users/highvision/Desktop/tweejump/tweejump/libs/cocos2d/CCGrabber.m</p>
+<p class="p3">Compiling /Users/highvision/Desktop/tweejump/tweejump/libs/cocos2d/CCGrid.m</p>
+<p class="p3">Compiling /Users/highvision/Desktop/tweejump/tweejump/libs/cocos2d/CCLabelAtlas.m</p>
+<p class="p3">Compiling /Users/highvision/Desktop/tweejump/tweejump/libs/cocos2d/CCLabelBMFont.m</p>
+<p class="p3">/Users/highvision/Desktop/tweejump/tweejump/libs/cocos2d/CCGrid.m:128:87: warning:<span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-converted-space">      </span>format specifies type 'unsigned int' but the argument has type</p>
+<p class="p3"><span class="Apple-converted-space">      </span>'CCGridBase *' [-Wformat]</p>
+<p class="p3"><span class="Apple-converted-space">  </span>...= %08X | Dimensions = %ix%i&gt;", [self class], self, gridSize_.x, gridSize...</p>
+<p class="p3"><span class="Apple-converted-space">       </span>~~~~ <span class="Apple-converted-space">                                      </span>^~~~</p>
+<p class="p3"><span class="Apple-converted-space">       </span>%8@</p>
+<p class="p3">Compiling /Users/highvision/Desktop/tweejump/tweejump/libs/cocos2d/CCLabelTTF.m</p>
+<p class="p3">1 warning generated.</p>
+<p class="p3">/Users/highvision/Desktop/tweejump/tweejump/libs/cocos2d/CCLabelBMFont.m:124:93: warning:<span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-converted-space">      </span>format specifies type 'unsigned int' but the argument has type</p>
+<p class="p3"><span class="Apple-converted-space">      </span>'CCBMFontConfiguration *' [-Wformat]</p>
+<p class="p3"><span class="Apple-converted-space">  </span>...= %08X | Kernings:%d | Image = %@&gt;", [self class], self,</p>
+<p class="p3"><span class="Apple-converted-space">       </span>~~~~ <span class="Apple-converted-space">                                            </span>^~~~</p>
+<p class="p3"><span class="Apple-converted-space">       </span>%8@</p>
+<p class="p3">/Users/highvision/Desktop/tweejump/tweejump/libs/cocos2d/CCLabelTTF.m:139:84: warning:<span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-converted-space">      </span>format specifies type 'unsigned int' but the argument has type</p>
+<p class="p3"><span class="Apple-converted-space">      </span>'CCLabelTTF *' [-Wformat]</p>
+<p class="p3"><span class="Apple-converted-space">  </span>...stringWithFormat:@"&lt;%@ = %08X | FontSize = %.1f&gt;", [self class], self, f...</p>
+<p class="p3"><span class="Apple-converted-space">                              </span>~~~~<span class="Apple-converted-space">                                    </span>^~~~</p>
+<p class="p3"><span class="Apple-converted-space">                              </span>%8@</p>
+<p class="p3">Compiling /Users/highvision/Desktop/tweejump/tweejump/libs/cocos2d/CCLayer.m</p>
+<p class="p3">1 warning generated.</p>
+<p class="p3">1 warning generated.</p>
+<p class="p3">Compiling /Users/highvision/Desktop/tweejump/tweejump/libs/cocos2d/CCMenu.m</p>
+<p class="p3">Compiling /Users/highvision/Desktop/tweejump/tweejump/libs/cocos2d/CCMenuItem.m</p>
+<p class="p3">Compiling /Users/highvision/Desktop/tweejump/tweejump/libs/cocos2d/CCMotionStreak.m</p>
+<p class="p3">Compiling /Users/highvision/Desktop/tweejump/tweejump/libs/cocos2d/CCNode.m</p>
+<p class="p3">Compiling /Users/highvision/Desktop/tweejump/tweejump/libs/cocos2d/CCParallaxNode.m</p>
+<p class="p3">/Users/highvision/Desktop/tweejump/tweejump/libs/cocos2d/CCNode.m:321:77: warning:<span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-converted-space">      </span>format specifies type 'unsigned int' but the argument has type 'CCNode *'</p>
+<p class="p3"><span class="Apple-converted-space">      </span>[-Wformat]</p>
+<p class="p3"><span class="Apple-converted-space">  </span>...stringWithFormat:@"&lt;%@ = %08X | Tag = %i&gt;", [self class], self, tag_];</p>
+<p class="p3"><span class="Apple-converted-space">                              </span>~~~~ <span class="Apple-converted-space">                            </span>^~~~</p>
+<p class="p3"><span class="Apple-converted-space">                              </span>%8@</p>
+<p class="p3">Compiling /Users/highvision/Desktop/tweejump/tweejump/libs/cocos2d/CCParticleExamples.m</p>
+<p class="p3">Compiling /Users/highvision/Desktop/tweejump/tweejump/libs/cocos2d/CCParticleSystem.m</p>
+<p class="p3">1 warning generated.</p>
+<p class="p3">Compiling /Users/highvision/Desktop/tweejump/tweejump/libs/cocos2d/CCParticleSystemPoint.m</p>
+<p class="p3">Compiling /Users/highvision/Desktop/tweejump/tweejump/libs/cocos2d/CCParticleSystemQuad.m</p>
+<p class="p3">Compiling /Users/highvision/Desktop/tweejump/tweejump/libs/cocos2d/CCProgressTimer.m</p>
+<p class="p3">Compiling /Users/highvision/Desktop/tweejump/tweejump/libs/cocos2d/CCRenderTexture.m</p>
+<p class="p3">Compiling /Users/highvision/Desktop/tweejump/tweejump/libs/cocos2d/CCRibbon.m</p>
+<p class="p3">Compiling /Users/highvision/Desktop/tweejump/tweejump/libs/cocos2d/CCScene.m</p>
+<p class="p3">/Users/highvision/Desktop/tweejump/tweejump/libs/cocos2d/CCRibbon.m:314:89: warning:<span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-converted-space">      </span>format specifies type 'unsigned int' but the argument has type</p>
+<p class="p3"><span class="Apple-converted-space">      </span>'CCRibbonSegment *' [-Wformat]</p>
+<p class="p3"><span class="Apple-converted-space">  </span>...= %08X | end = %i, begin = %i&gt;", [self class], self, end, begin];</p>
+<p class="p3"><span class="Apple-converted-space">       </span>~~~~ <span class="Apple-converted-space">                                        </span>^~~~</p>
+<p class="p3"><span class="Apple-converted-space">       </span>%8@</p>
+<p class="p3">Compiling /Users/highvision/Desktop/tweejump/tweejump/libs/cocos2d/CCScheduler.m</p>
+<p class="p3">1 warning generated.</p>
+<p class="p3">Compiling /Users/highvision/Desktop/tweejump/tweejump/libs/cocos2d/CCSprite.m</p>
+<p class="p3">Compiling /Users/highvision/Desktop/tweejump/tweejump/libs/cocos2d/CCSpriteBatchNode.m</p>
+<p class="p3">/Users/highvision/Desktop/tweejump/tweejump/libs/cocos2d/CCScheduler.m:125:92: warning:<span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-converted-space">      </span>format specifies type 'unsigned int' but the argument has type 'CCTimer *'</p>
+<p class="p3"><span class="Apple-converted-space">      </span>[-Wformat]</p>
+<p class="p3"><span class="Apple-converted-space">  </span>...= %08X | target:%@ selector:(%@)&gt;", [self class], self, [target class], ...</p>
+<p class="p3"><span class="Apple-converted-space">       </span>~~~~<span class="Apple-converted-space">                                            </span>^~~~</p>
+<p class="p3"><span class="Apple-converted-space">       </span>%8@</p>
+<p class="p3">Compiling /Users/highvision/Desktop/tweejump/tweejump/libs/cocos2d/CCSpriteFrame.m</p>
+<p class="p3">/Users/highvision/Desktop/tweejump/tweejump/libs/cocos2d/CCSprite.m:275:126: warning:<span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-converted-space">      </span>format specifies type 'unsigned int' but the argument has type</p>
+<p class="p3"><span class="Apple-converted-space">      </span>'CCSprite *' [-Wformat]</p>
+<p class="p3"><span class="Apple-converted-space">  </span>...%08X | Rect = (%.2f,%.2f,%.2f,%.2f) | tag = %i | atlasIndex = %i&gt;", [self class], self,</p>
+<p class="p3"><span class="Apple-converted-space">     </span>~~~~<span class="Apple-converted-space">                                                                              </span>^~~~</p>
+<p class="p3"><span class="Apple-converted-space">     </span>%8@</p>
+<p class="p3">/Users/highvision/Desktop/tweejump/tweejump/libs/cocos2d/CCSpriteBatchNode.m:120:77: warning:<span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-converted-space">      </span>format specifies type 'unsigned int' but the argument has type</p>
+<p class="p3"><span class="Apple-converted-space">      </span>'CCSpriteBatchNode *' [-Wformat]</p>
+<p class="p3"><span class="Apple-converted-space">  </span>...stringWithFormat:@"&lt;%@ = %08X | Tag = %i&gt;", [self class], self, tag_ ];</p>
+<p class="p3"><span class="Apple-converted-space">                              </span>~~~~ <span class="Apple-converted-space">                            </span>^~~~</p>
+<p class="p3"><span class="Apple-converted-space">                              </span>%8@</p>
+<p class="p3">Compiling /Users/highvision/Desktop/tweejump/tweejump/libs/cocos2d/CCSpriteFrameCache.m</p>
+<p class="p3">/Users/highvision/Desktop/tweejump/tweejump/libs/cocos2d/CCSpriteFrame.m:67:124: warning:<span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-converted-space">      </span>format specifies type 'unsigned int' but the argument has type</p>
+<p class="p3"><span class="Apple-converted-space">      </span>'CCSpriteFrame *' [-Wformat]</p>
+<p class="p3"><span class="Apple-converted-space">  </span>...%08X | TextureName=%d, Rect = (%.2f,%.2f,%.2f,%.2f)&gt; rotated:%d", [self class], self,</p>
+<p class="p3"><span class="Apple-converted-space">     </span>~~~~<span class="Apple-converted-space">                                                                            </span>^~~~</p>
+<p class="p3"><span class="Apple-converted-space">     </span>%8@</p>
+<p class="p3">Compiling /Users/highvision/Desktop/tweejump/tweejump/libs/cocos2d/CCTMXLayer.m</p>
+<p class="p3">1 warning generated.</p>
+<p class="p3">1 warning generated.</p>
+<p class="p3">1 warning generated.</p>
+<p class="p3">1 warning generated.</p>
+<p class="p3">Compiling /Users/highvision/Desktop/tweejump/tweejump/libs/cocos2d/CCTMXObjectGroup.m</p>
+<p class="p3">/Users/highvision/Desktop/tweejump/tweejump/libs/cocos2d/CCSpriteFrameCache.m:83:95: warning:<span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-converted-space">      </span>format specifies type 'unsigned int' but the argument has type</p>
+<p class="p3"><span class="Apple-converted-space">      </span>'CCSpriteFrameCache *' [-Wformat]</p>
+<p class="p3"><span class="Apple-converted-space">  </span>...= %08X | num of sprite frames =<span class="Apple-converted-space">  </span>%i&gt;", [self class], self, [spriteFrames...</p>
+<p class="p3"><span class="Apple-converted-space">       </span>~~~~ <span class="Apple-converted-space">                                              </span>^~~~</p>
+<p class="p3"><span class="Apple-converted-space">       </span>%8@</p>
+<p class="p3">Compiling /Users/highvision/Desktop/tweejump/tweejump/libs/cocos2d/CCTMXTiledMap.m</p>
+<p class="p3">1 warning generated.</p>
+<p class="p3">Compiling /Users/highvision/Desktop/tweejump/tweejump/libs/cocos2d/CCTMXXMLParser.m</p>
+<p class="p3">Compiling /Users/highvision/Desktop/tweejump/tweejump/libs/cocos2d/CCTexture2D.m</p>
+<p class="p3">Compiling /Users/highvision/Desktop/tweejump/tweejump/libs/cocos2d/CCTextureAtlas.m</p>
+<p class="p3">Compiling /Users/highvision/Desktop/tweejump/tweejump/libs/cocos2d/CCTextureCache.m</p>
+<p class="p3">/Users/highvision/Desktop/tweejump/tweejump/libs/cocos2d/CCTexture2D.m:183:128: warning:<span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-converted-space">      </span>format specifies type 'unsigned int' but the argument has type</p>
+<p class="p3"><span class="Apple-converted-space">      </span>'CCTexture2D *' [-Wformat]</p>
+<p class="p3"><span class="Apple-converted-space">  </span>...%08X | Name = %i | Dimensions = %ix%i | Coordinates = (%.2f, %.2f)&gt;", [self class], self...</p>
+<p class="p3"><span class="Apple-converted-space">     </span>~~~~<span class="Apple-converted-space">                                                                                </span>^~~~</p>
+<p class="p3"><span class="Apple-converted-space">     </span>%8@</p>
+<p class="p3">Compiling /Users/highvision/Desktop/tweejump/tweejump/libs/cocos2d/CCTexturePVR.m</p>
+<p class="p3">/Users/highvision/Desktop/tweejump/tweejump/libs/cocos2d/CCTextureAtlas.m:113:85: warning:<span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-converted-space">      </span>format specifies type 'unsigned int' but the argument has type</p>
+<p class="p3"><span class="Apple-converted-space">      </span>'CCTextureAtlas *' [-Wformat]</p>
+<p class="p3"><span class="Apple-converted-space">  </span>...stringWithFormat:@"&lt;%@ = %08X | totalQuads =<span class="Apple-converted-space">  </span>%i&gt;", [self class], self, ...</p>
+<p class="p3"><span class="Apple-converted-space">                              </span>~~~~ <span class="Apple-converted-space">                                    </span>^~~~</p>
+<p class="p3"><span class="Apple-converted-space">                              </span>%8@</p>
+<p class="p3">1 warning generated.</p>
+<p class="p3">1 warning generated.</p>
+<p class="p3">/Users/highvision/Desktop/tweejump/tweejump/libs/cocos2d/CCTextureCache.m:115:4: warning:<span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-converted-space">      </span>format specifies type 'unsigned int' but the argument has type</p>
+<p class="p3"><span class="Apple-converted-space">      </span>'CCTextureCache *' [-Wformat]</p>
+<p class="p3"><span class="Apple-converted-space">                        </span>self,</p>
+<p class="p3"><span class="Apple-converted-space">                        </span>^~~~</p>
+<p class="p3">Compiling /Users/highvision/Desktop/tweejump/tweejump/libs/cocos2d/CCTileMapAtlas.m</p>
+<p class="p3">1 warning generated.</p>
+<p class="p3">Compiling /Users/highvision/Desktop/tweejump/tweejump/libs/cocos2d/CCTransition.m</p>
+<p class="p3">Compiling /Users/highvision/Desktop/tweejump/tweejump/libs/cocos2d/CCTransitionPageTurn.m</p>
+<p class="p3">Compiling /Users/highvision/Desktop/tweejump/tweejump/libs/cocos2d/CCTransitionRadial.m</p>
+<p class="p3">Compiling /Users/highvision/Desktop/tweejump/tweejump/libs/cocos2d/Platforms/Mac/CCDirectorMac.m</p>
+<p class="p3">Compiling /Users/highvision/Desktop/tweejump/tweejump/libs/cocos2d/Platforms/Mac/CCEventDispatcher.m</p>
+<p class="p3">Compiling /Users/highvision/Desktop/tweejump/tweejump/libs/cocos2d/Platforms/Mac/MacGLView.m</p>
+<p class="p3">Compiling /Users/highvision/Desktop/tweejump/tweejump/libs/cocos2d/Platforms/Mac/MacWindow.m</p>
+<p class="p3">Compiling /Users/highvision/Desktop/tweejump/tweejump/libs/cocos2d/Platforms/iOS/CCDirectorIOS.m</p>
+<p class="p3">Compiling /Users/highvision/Desktop/tweejump/tweejump/libs/cocos2d/Platforms/iOS/CCTouchDispatcher.m</p>
+<p class="p3">Compiling /Users/highvision/Desktop/tweejump/tweejump/libs/cocos2d/Platforms/iOS/CCTouchHandler.m</p>
+<p class="p3">Compiling /Users/highvision/Desktop/tweejump/tweejump/libs/cocos2d/Platforms/iOS/EAGLView.m</p>
+<p class="p3">Compiling /Users/highvision/Desktop/tweejump/tweejump/libs/cocos2d/Platforms/iOS/ES1Renderer.m</p>
+<p class="p3">Compiling /Users/highvision/Desktop/tweejump/tweejump/libs/cocos2d/Platforms/iOS/glu.c</p>
+<p class="p3">Compiling /Users/highvision/Desktop/tweejump/tweejump/libs/cocos2d/Support/CCArray.m</p>
+<p class="p3">Compiling /Users/highvision/Desktop/tweejump/tweejump/libs/cocos2d/Support/CCFileUtils.m</p>
+<p class="p3">/Users/highvision/Desktop/tweejump/tweejump/libs/cocos2d/Platforms/iOS/ES1Renderer.m:188:81: warning:<span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-converted-space">      </span>format specifies type 'unsigned int' but the argument has type</p>
+<p class="p3"><span class="Apple-converted-space">      </span>'ES1Renderer *' [-Wformat]</p>
+<p class="p3"><span class="Apple-converted-space">  </span>...stringWithFormat:@"&lt;%@ = %08X | size = %ix%i&gt;", [self class], self, back...</p>
+<p class="p3"><span class="Apple-converted-space">                              </span>~~~~ <span class="Apple-converted-space">                                </span>^~~~</p>
+<p class="p3"><span class="Apple-converted-space">                              </span>%8@</p>
+<p class="p3">1 warning generated.</p>
+<p class="p3">/Users/highvision/Desktop/tweejump/tweejump/libs/cocos2d/Support/CCArray.m:294:94: warning:<span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-converted-space">      </span>format specifies type 'unsigned int' but the argument has type 'CCArray *'</p>
+<p class="p3"><span class="Apple-converted-space">      </span>[-Wformat]</p>
+<p class="p3"><span class="Apple-converted-space">  </span>...stringWithFormat:@"&lt;%@ = %08X&gt; = ( ", [self class], self];</p>
+<p class="p3"><span class="Apple-converted-space">                              </span>~~~~ <span class="Apple-converted-space">                      </span>^~~~</p>
+<p class="p3"><span class="Apple-converted-space">                              </span>%8@</p>
+<p class="p3">1 warning generated.</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>コンパイル過程で、LLVMっぽいWarningが出ている。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3">Compiling /Users/highvision/Desktop/tweejump/tweejump/libs/cocos2d/Support/CCProfiling.m</p>
+<p class="p3">Compiling /Users/highvision/Desktop/tweejump/tweejump/libs/cocos2d/Support/CGPointExtension.m</p>
+<p class="p3">Compiling /Users/highvision/Desktop/tweejump/tweejump/libs/cocos2d/Support/TGAlib.m</p>
+<p class="p3">Compiling /Users/highvision/Desktop/tweejump/tweejump/libs/cocos2d/Support/TransformUtils.m</p>
+<p class="p3">Compiling /Users/highvision/Desktop/tweejump/tweejump/libs/cocos2d/Support/ZipUtils.m</p>
+<p class="p3">Compiling /Users/highvision/Desktop/tweejump/tweejump/libs/cocos2d/Support/base64.c</p>
+<p class="p3">Compiling /Users/highvision/Desktop/tweejump/tweejump/libs/cocos2d/Support/ccUtils.c</p>
+<p class="p3">Compiling /Users/highvision/Desktop/tweejump/tweejump/libs/cocos2d/cocos2d.m</p>
+<p class="p3">Compiling /Users/highvision/Desktop/tweejump/tweejump/main.m</p>
 <p class="p3">Preprocessing System/verde/config.m.m4</p>
-<p class="p3">Compiling Build/android-armeabi-debug/TestApp/config.m</p>
-<p class="p3">Archiving Build/android-armeabi-debug/TestApp/apk/lib/armeabi/libconfig.a</p>
-<p class="p3">Indexing Build/android-armeabi-debug/TestApp/apk/lib/armeabi/libconfig.a</p>
-<p class="p3">Archiving Build/android-armeabi-debug/KS.TestApp/TestApp/libTestApp.a</p>
-<p class="p3">Indexing Build/android-armeabi-debug/KS.TestApp/TestApp/libTestApp.a</p>
+<p class="p3">Compiling Build/android-armeabi-debug/tweejump/config.m</p>
+<p class="p3">Archiving Build/android-armeabi-debug/tweejump/apk/lib/armeabi/libconfig.a</p>
+<p class="p3">Indexing Build/android-armeabi-debug/tweejump/apk/lib/armeabi/libconfig.a</p>
+<p class="p3">Archiving Build/android-armeabi-debug/com.iplayful.tweejump/tweejump/libtweejump.a</p>
+<p class="p3">Indexing Build/android-armeabi-debug/com.iplayful.tweejump/tweejump/libtweejump.a</p>
+<p class="p3">Linking Build/android-armeabi-debug/tweejump/apk/lib/armeabi/libverde.so</p>
 <p class="p3">Saving build configuration</p>
-<p class="p3">Linking Build/android-armeabi-debug/TestApp/apk/lib/armeabi/libverde.so</p>
 <p class="p3">Packaging resources.</p>
+<p class="p3">Packaging assets/fps_images.png</p>
+<p class="p3">Packaging assets/Icon-Small-50.png</p>
 <p class="p3">Packaging assets/Default.png</p>
-<p class="p3">Packaging assets/Default@2x.png</p>
-<p class="p3">Packaging assets/Default-568h@2x.png</p>
-<p class="p3">Packaging assets/en.lproj/InfoPlist.strings</p>
+<p class="p3">Packaging assets/Icon-72.png</p>
+<p class="p3">Packaging assets/Icon-Small.png</p>
+<p class="p3">Packaging assets/Icon-Small@2x.png</p>
+<p class="p3">Packaging assets/Icon.png</p>
+<p class="p3">Packaging assets/iTunesArtwork</p>
+<p class="p3">Packaging assets/bitmapFont.fnt</p>
+<p class="p3">Packaging assets/bitmapFont.png</p>
+<p class="p3">Packaging assets/changePlayerButton.png</p>
+<p class="p3">Packaging assets/playAgainButton.png</p>
+<p class="p3">Packaging assets/sprites.png</p>
 <p class="p3">Packaging ATTRIBUTION.txt</p>
 <p class="p3">Packaging assets/Info.plist</p>
 <p class="p3">Dexing classes.</p>
@@ -517,11 +702,13 @@
 <p class="p3">Packaging lib/armeabi/libFoundation.so</p>
 <p class="p3">Packaging lib/armeabi/libBridgeKit.so</p>
 <p class="p3">Packaging lib/armeabi/libOpenAL.so</p>
-<p class="p3">Finalizing Build/android-armeabi-debug/TestApp/TestApp-unaligned.apk</p>
+<p class="p3">Finalizing Build/android-armeabi-debug/tweejump/tweejump-unaligned.apk</p>
 <p class="p3">Signing APK with keys</p>
-<p class="p3">Aligning Build/android-armeabi-debug/TestApp/TestApp-signed.apk</p>
+<p class="p3">Aligning Build/android-armeabi-debug/tweejump/tweejump-signed.apk</p>
 <p class="p3">Loading...</p>
 <p class="p3">Waiting for device...</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>で、デバイス側への転送が始まる。</p>
 <p class="p3"><span class="Apple-tab-span">	</span>手元のアレな端末で試したところ、まあ動く。</p>
@@ -538,7 +725,7 @@
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://www.slideshare.net/seasons/apportable-meeting">http://www.slideshare.net/seasons/apportable-meeting</a></p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>で、</p>
-<p class="p3"><span class="Apple-tab-span">	</span>直接転送されるデータの内容に興味や手順に興味が出るよねぇ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>直接転送されるデータの内容や手順に興味が出るよねぇ。</p>
 <p class="p3"><span class="Apple-tab-span">	</span>まとめ中。</p>
 <p class="p2"><br></p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
@@ -546,7 +733,7 @@
 <p class="p3"><span class="Apple-tab-span">	</span>Free<span class="Apple-converted-space">  </span>&lt; 超えられない壁 &lt; Indie &lt; 超えられない壁 &lt; Pro = Enterprise</p>
 <p class="p3"><span class="Apple-tab-span">	</span>なのかなーまだ良く解ってないけど。</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>Indie触ってみた感想だと、UIKit周りが出せるのが最低でもIndieなので、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Indie触ってみた感想だと、UIKit周りが出せるのがIndieからなので、</p>
 <p class="p3"><span class="Apple-tab-span">	</span>それ以下だとUI的な旨味はゼロになる印象。</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>まーUIはルールがー</p>
