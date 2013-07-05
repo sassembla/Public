@@ -11,7 +11,13 @@
     p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
     p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
     p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px Menlo; color: #78492a; background-color: #ebebeb}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px Menlo; background-color: #ebebeb}
+    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px Menlo; color: #3d1d81; background-color: #ebebeb}
     span.s1 {font: 12.0px Helvetica}
+    span.s2 {color: #bb2ca2}
+    span.s3 {color: #000000}
+    span.s4 {color: #703daa}
     span.Apple-tab-span {white-space:pre}
   </style>
 </head>
@@ -399,7 +405,7 @@
 <p class="p3">If the app is using OpenGL ES, does it use ES1 or ES2? (Cocos2D 1.X uses ES1, 2.X uses ES2)</p>
 <p class="p3">[1/2]<span class="Apple-converted-space"> </span></p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>使ってない場合どうこたえろっちゅーねん　→　何も打たずエンターでOKみたいな？</p>
+<p class="p3"><span class="Apple-tab-span">	</span>使ってない場合どうこたえろっちゅーねん　→　何も打たずエンターでOK。</p>
 <p class="p2"><br></p>
 <p class="p3">Should the app initially launch in landscape or portrait orientation? (default: landscape)</p>
 <p class="p3">[L/p]<span class="Apple-converted-space"> </span></p>
@@ -715,8 +721,78 @@
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>UIKit全開なものを変換するとどうなるのか</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>実験中。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>→https://groups.google.com/forum/?fromgroups#!topic/apportable-discuss/jVR7FOa61_U</p>
+<p class="p3"><span class="Apple-tab-span">	</span>StoryBoardからのものは無理。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>xibからのものは出る、、ほんとか？</p>
 <p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>→UIWindowへの直接の追加は無効</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>色指定すら無視された、、上になんもないのに、、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>→xibで追加されるViewへの特定の変更は有効</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>色指定が効いた(ブワッ</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>コード、xibともに効果が確認できた</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ボタンの追加は、xibからならOK</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ただしデフォルト無指定の場合、枠線が出ない。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>素</p>
+<p class="p4"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202013-07-05%2011.09.25.png" alt="スクリーンショット 2013-07-05 11.09.25.png"></p>
+<p class="p3"><span class="Apple-tab-span">	</span>iPhoneSimulator<span class="Apple-tab-span">	</span>640 x <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>と、Android4.1 720 x1280</p>
+<p class="p4"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202013-07-05%2011.13.05.png" alt="スクリーンショット 2013-07-05 11.13.05.png"><img src="%E3%82%B5%E3%82%A4%E3%82%B9%E3%82%99%E6%9C%AA%E8%AA%BF%E6%95%B4.png" alt="サイズ未調整.png"></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>出た。　で、ScreenというかView基底というか、UIWindowに対して処理を書く事で、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>スクリーン比に合わせた変換が出来る。と。</p>
+<p class="p5">#ifdef ANDROID</p>
+<p class="p6"><span class="Apple-converted-space">    </span>[UIScreen mainScreen].currentMode =</p>
+<p class="p6"><span class="Apple-converted-space">    </span>[UIScreenMode emulatedMode:UIScreenAspectFitEmulationMode];</p>
+<p class="p5">#endif</p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、</p>
+<p class="p4"><img src="1__%23$!@%25!%23__%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202013-07-05%2011.13.05.png" alt="1__#$!@%!#__スクリーンショット 2013-07-05 11.13.05.png"><img src="Screenshot-2013-07-05.png" alt="Screenshot-2013-07-05.png"></p>
+<p class="p3"><span class="Apple-tab-span">	</span>比率的にはだいたい一緒になったのでは！！</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>比率的な話でいうと、セットしている「Windowに対して等倍になる」というオプションのおかげで、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>画面サイズ 720 x 1280に対して、xibのレイアウト特性がちゃんと出た状態で描画されている。</p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>→で、ボタン押せるの？</b></p>
+<p class="p6">- (<span class="s2">IBAction</span>)touch:(<span class="s2">id</span>)sender {</p>
+<p class="p7"><span class="s3"><span class="Apple-converted-space">    </span>[</span><span class="s2">self</span><span class="s3">.</span><span class="s4">view</span><span class="s3"> </span>removeFromSuperview<span class="s3">];</span></p>
+<p class="p6">}</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>が効いた。ちゃんと動いてる。ビュー消える。</p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>アニメーションとかはどうなのかなー、UIAnimation試そう。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>→ボタンの背景画像は？</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>出た。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ずれてるように見えるのは、_をフォントで書いているので、フォントサイズの変化によるモノだと思う。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>たぶん前からこうなってるんだけど、背景が出た事で見えるようになった感じ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="s1"><img src="1__%23$!@%25!%23__Screenshot-2013-07-05.png" alt="1__#$!@%!#__Screenshot-2013-07-05.png"></span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>→UIAnimationは？</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>効かないっぽい。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ぐあああああああああああああ惜しいいいいいいいいいいいいいい</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>→Rotationは？</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>iOSと全く同じ、というかxibで指定したデフォルト動作が再現された。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ただ、AutoLayoutと旧式のレイアウトだと、旧式レイアウトのほうがちゃんと表示される気がする。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>比較不足。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Android側で1pxくらい下線がでてるのは、Screenshotの都合っぽい。</p>
+<p class="p4"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202013-07-05%2012.17.00.png" alt="スクリーンショット 2013-07-05 12.17.00.png"><img src="%E7%B8%A6.png" alt="縦.png"></p>
+<p class="p2"><br></p>
+<p class="p4"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202013-07-05%2012.37.41.png" alt="スクリーンショット 2013-07-05 12.37.41.png"><img src="2__%23$!@%25!%23__Screenshot-2013-07-05.png" alt="2__#$!@%!#__Screenshot-2013-07-05.png"></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>→UITableとか、UITextViewとか</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ちゃんと出てる感ある。Cellとかで細かい事したらどうなるかな。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>TextFieldはちゃんとキーボードでたし打てたしイベント伝達もした。</p>
+<p class="p4"><img src="3__%23$!@%25!%23__Screenshot-2013-07-05.png" alt="3__#$!@%!#__Screenshot-2013-07-05.png"></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>apportableに関連したプロジェクトの管理について</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Xcodeプロジェクトがある場所でapportableの各種コマンドを実行するのだけれど、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>.sconsign.dblite</p>
+<p class="p3"><span class="Apple-tab-span">	</span>でいろいろ管理しているっぽい。っていうかXcodeの<span class="s1">proj</span>と同じ階層にぽいっと何か吐かれるので、こう、不味いことになりそう。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p2"><br></p>
 <p class="p3"><b>本題、内部変換的にどうなっているのか</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>ログ見るとだいたい解るような。</p>
@@ -727,6 +803,163 @@
 <p class="p3"><span class="Apple-tab-span">	</span>で、</p>
 <p class="p3"><span class="Apple-tab-span">	</span>直接転送されるデータの内容や手順に興味が出るよねぇ。</p>
 <p class="p3"><span class="Apple-tab-span">	</span>まとめ中。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>アプリケーションパッケージはどうなっているのか</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Android用のパッケージが、下記に吐かれている。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>/Users/highvision/.apportable/SDK/Build</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ここに、android-armeabi-debugフォルダが出来ていて、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>中はこんな感じ。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p4"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202013-07-05%205.06.48.png" alt="スクリーンショット 2013-07-05 5.06.48.png"></p>
+<p class="p3"><span class="Apple-tab-span">	</span>java、java-classes フォルダは　空だった。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>途中の生成に使ってるのかなーって監視してみたけど、特になにも、、</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>apportableコマンドラインをドカッとはりつけ</b></p>
+<p class="p3">highvision:SimpleWindowApp highvision$ apportable -h</p>
+<p class="p3">usage: apportable [-h] [-v [VERBOSE_FLAGS]] [-j [NUM_JOBS]]</p>
+<p class="p3"><span class="Apple-converted-space">                  </span>[--debug-scons DEBUG_SCONS] [--no-xcode] [--no-merge]</p>
+<p class="p3"><span class="Apple-converted-space">                  </span>[--generate] [--target TARGET] [--xcode-project PROJECT]</p>
+<p class="p3"><span class="Apple-converted-space">                  </span>[--xcode-workspace WORKSPACE] [--xcode-config CONFIGURATION]</p>
+<p class="p3"><span class="Apple-converted-space">                  </span>[--xcode-target TARGET] [--xcode-scheme SCHEME]</p>
+<p class="p3"><span class="Apple-converted-space">                  </span>[--xcode-sdk SDK] [--xcode-arch ARCH] [--fast-mode]</p>
+<p class="p3"><span class="Apple-converted-space">                  </span>[--profile PROFILE] [--build-flags BUILD_FLAGS]</p>
+<p class="p3"><span class="Apple-converted-space">                  </span>[--custom-params CUSTOM_PARAMS] [--version]</p>
+<p class="p3"><span class="Apple-converted-space">                  </span>[--tools UPDATE_TOOLS] [--confirm-stable-updates]</p>
+<p class="p3"><span class="Apple-converted-space">                  </span>[--use-clang-version USE_CLANG_VERSION]</p>
+<p class="p3"><span class="Apple-converted-space">                  </span>[--use-gdb-version USE_GDB_VERSION]</p>
+<p class="p3"><span class="Apple-converted-space">                  </span>[--use-sdk-version USE_SDK_VERSION]</p>
+<p class="p3"><span class="Apple-converted-space">                  </span>[--use-ndk-version USE_NDK_VERSION]</p>
+<p class="p3"><span class="Apple-converted-space">                  </span>[--use-vorbistools-version USE_VORBISTOOLS_VERSION]</p>
+<p class="p3"><span class="Apple-converted-space">                  </span>[--use-m4-version USE_M4_VERSION] [--ninja]</p>
+<p class="p2"><span class="Apple-converted-space">                  </span></p>
+<p class="p3"><span class="Apple-converted-space">                  </span>[{load,kill,just_debug,log,clean_assets,just_debug_java,copy_and_debug,build,analyze,update_toolchain,profile,clean,screenshot,copy_and_load,update,just_profile,dump_env,dst_clean,just_load,patch,debug_java,install,debug,clean_device_cache,uninstall}]</p>
+<p class="p2"><br></p>
+<p class="p3">positional arguments:</p>
+<p class="p3"><span class="Apple-converted-space">  </span>{load,kill,just_debug,log,clean_assets,just_debug_java,copy_and_debug,build,analyze,update_toolchain,profile,clean,screenshot,copy_and_load,update,just_profile,dump_env,dst_clean,just_load,patch,debug_java,install,debug,clean_device_cache,uninstall}</p>
+<p class="p3"><span class="Apple-converted-space">                        </span>Invoke a build action. default = build</p>
+<p class="p2"><br></p>
+<p class="p3">optional arguments:</p>
+<p class="p3"><span class="Apple-converted-space">  </span>-h, --help<span class="Apple-converted-space">            </span>show this help message and exit</p>
+<p class="p3"><span class="Apple-converted-space">  </span>-v [VERBOSE_FLAGS], --verbose [VERBOSE_FLAGS]</p>
+<p class="p3"><span class="Apple-converted-space">                        </span>Verbose logging output. (compile,scons,signing,link,ex</p>
+<p class="p3"><span class="Apple-converted-space">                        </span>plain,copy,builders,archive)</p>
+<p class="p3"><span class="Apple-converted-space">  </span>-j [NUM_JOBS], --jobs [NUM_JOBS]</p>
+<p class="p3"><span class="Apple-converted-space">  </span>--debug-scons DEBUG_SCONS</p>
+<p class="p3"><span class="Apple-converted-space">                        </span>Comma-separated list of scons debug options (count,</p>
+<p class="p3"><span class="Apple-converted-space">                        </span>dtree, explain, findlibs, includes, memoizer, memory,</p>
+<p class="p3"><span class="Apple-converted-space">                        </span>objects, presub, stacktrace, stree, time, tree,</p>
+<p class="p3"><span class="Apple-converted-space">                        </span>prepare, duplicate, randomdeps)</p>
+<p class="p3"><span class="Apple-converted-space">  </span>--no-xcode<span class="Apple-converted-space">            </span>Disable Xcode invocations.</p>
+<p class="p3"><span class="Apple-converted-space">  </span>--no-merge<span class="Apple-converted-space">            </span>Disable merging parameters (just use final).</p>
+<p class="p3"><span class="Apple-converted-space">  </span>--generate<span class="Apple-converted-space">            </span>Force re-generation of Xcode derived parameters.</p>
+<p class="p3"><span class="Apple-converted-space">  </span>--target TARGET</p>
+<p class="p3"><span class="Apple-converted-space">  </span>--xcode-project PROJECT</p>
+<p class="p3"><span class="Apple-converted-space">                        </span>Xcode project to generate parameters from (only</p>
+<p class="p3"><span class="Apple-converted-space">                        </span>available on MacOS X).</p>
+<p class="p3"><span class="Apple-converted-space">  </span>--xcode-workspace WORKSPACE</p>
+<p class="p3"><span class="Apple-converted-space">                        </span>Xcode workspace to generate parameters from (only</p>
+<p class="p3"><span class="Apple-converted-space">                        </span>available on MacOS X).</p>
+<p class="p3"><span class="Apple-converted-space">  </span>--xcode-config CONFIGURATION</p>
+<p class="p3"><span class="Apple-converted-space">                        </span>Xcode project configuration.</p>
+<p class="p3"><span class="Apple-converted-space">  </span>--xcode-target TARGET</p>
+<p class="p3"><span class="Apple-converted-space">                        </span>Xcode project target to build.</p>
+<p class="p3"><span class="Apple-converted-space">  </span>--xcode-scheme SCHEME</p>
+<p class="p3"><span class="Apple-converted-space">                        </span>Xcode project scheme to build.</p>
+<p class="p3"><span class="Apple-converted-space">  </span>--xcode-sdk SDK <span class="Apple-converted-space">      </span>Xcode project sdk to build with.</p>
+<p class="p3"><span class="Apple-converted-space">  </span>--xcode-arch ARCH <span class="Apple-converted-space">    </span>Xcode project arch to build for.</p>
+<p class="p3"><span class="Apple-converted-space">  </span>--fast-mode <span class="Apple-converted-space">          </span>Disable header tracking and skip certain time costly</p>
+<p class="p3"><span class="Apple-converted-space">                        </span>steps (note: this may be dangerous!)</p>
+<p class="p3"><span class="Apple-converted-space">  </span>--profile PROFILE <span class="Apple-converted-space">    </span>Build with function profiling enabled.</p>
+<p class="p3"><span class="Apple-converted-space">  </span>--build-flags BUILD_FLAGS</p>
+<p class="p3"><span class="Apple-converted-space">                        </span>Display the build flags for a given file</p>
+<p class="p3"><span class="Apple-converted-space">  </span>--custom-params CUSTOM_PARAMS</p>
+<p class="p3"><span class="Apple-converted-space">                        </span>Add special environment switches for use with</p>
+<p class="p3"><span class="Apple-converted-space">                        </span>conditional merge items. Note: this option is</p>
+<p class="p3"><span class="Apple-converted-space">                        </span>potentially dangerous, use with care!</p>
+<p class="p3"><span class="Apple-converted-space">  </span>--version <span class="Apple-converted-space">            </span>Show version information.</p>
+<p class="p3"><span class="Apple-converted-space">  </span>--tools UPDATE_TOOLS<span class="Apple-converted-space">  </span>Comma-separated list of which tools you want to update</p>
+<p class="p3"><span class="Apple-converted-space">                        </span>(eg: gdb,clang,android-ndk,android-sdk,ninja ). For</p>
+<p class="p3"><span class="Apple-converted-space">                        </span>use with update_toolchain.</p>
+<p class="p3"><span class="Apple-converted-space">  </span>--confirm-stable-updates</p>
+<p class="p3"><span class="Apple-converted-space">                        </span>Automatically choose the stable variants of the</p>
+<p class="p3"><span class="Apple-converted-space">                        </span>toolchain when updating</p>
+<p class="p3"><span class="Apple-converted-space">  </span>--use-clang-version USE_CLANG_VERSION</p>
+<p class="p3"><span class="Apple-converted-space">                        </span>Automatically choose this version of this tool when</p>
+<p class="p3"><span class="Apple-converted-space">                        </span>updating the toolchain.</p>
+<p class="p3"><span class="Apple-converted-space">  </span>--use-gdb-version USE_GDB_VERSION</p>
+<p class="p3"><span class="Apple-converted-space">                        </span>Automatically choose this version of this tool when</p>
+<p class="p3"><span class="Apple-converted-space">                        </span>updating the toolchain.</p>
+<p class="p3"><span class="Apple-converted-space">  </span>--use-sdk-version USE_SDK_VERSION</p>
+<p class="p3"><span class="Apple-converted-space">                        </span>Automatically choose this version of this tool when</p>
+<p class="p3"><span class="Apple-converted-space">                        </span>updating the toolchain.</p>
+<p class="p3"><span class="Apple-converted-space">  </span>--use-ndk-version USE_NDK_VERSION</p>
+<p class="p3"><span class="Apple-converted-space">                        </span>Automatically choose this version of this tool when</p>
+<p class="p3"><span class="Apple-converted-space">                        </span>updating the toolchain.</p>
+<p class="p3"><span class="Apple-converted-space">  </span>--use-vorbistools-version USE_VORBISTOOLS_VERSION</p>
+<p class="p3"><span class="Apple-converted-space">                        </span>Automatically choose this version of this tool when</p>
+<p class="p3"><span class="Apple-converted-space">                        </span>updating the toolchain.</p>
+<p class="p3"><span class="Apple-converted-space">  </span>--use-m4-version USE_M4_VERSION</p>
+<p class="p3"><span class="Apple-converted-space">                        </span>Automatically choose this version of this tool when</p>
+<p class="p3"><span class="Apple-converted-space">                        </span>updating the toolchain.</p>
+<p class="p3"><span class="Apple-converted-space">  </span>--ninja <span class="Apple-converted-space">              </span>Use ninja to build.</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ninja.pyってのがToolChainに入ってたがそれだろうか。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ちなみにninjaはIndieにしか含まれないっぽい。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3">Build actions:</p>
+<p class="p3"><span class="Apple-tab-span">	</span>互いに内包したりしてるタスク集。MavenでいうGoalみたいなの。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-converted-space">  </span><b>build</b>: <span class="Apple-converted-space">          </span>Compile c/c++/objc/objc++/java sources and create</p>
+<p class="p3"><span class="Apple-converted-space">                   </span>application archive.</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ビルド成果っていうかアーカイブが作られる場所が大変特殊で、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>/Users/ユーザー名/.apportable/SDK/Build</p>
+<p class="p3"><span class="Apple-tab-span">	</span>の下に作られる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-converted-space">  </span>install: <span class="Apple-converted-space">        </span>Invoke the &lt;build&gt; phase, and install the application on a</p>
+<p class="p3"><span class="Apple-converted-space">                   </span>connected device/emulator.</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-converted-space">  </span><b>load</b>:<span class="Apple-converted-space">            </span>Invoke the &lt;install&gt; phase and launch the application.</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-converted-space">  </span>uninstall: <span class="Apple-converted-space">      </span>Uninstall app from device.</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-converted-space">  </span>kill:<span class="Apple-converted-space">            </span>Kill running app on device.</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-converted-space">  </span><b>screenshot</b>:<span class="Apple-converted-space">      </span>Take a screenshot and save it into the current directory</p>
+<p class="p2"><br></p>
+<p class="p3">Native Debugging:</p>
+<p class="p3"><span class="Apple-converted-space">  </span>debug: <span class="Apple-converted-space">          </span>Invoke the &lt;load&gt; phase and attach the debugger (gdb).</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-converted-space">  </span>just_debug:<span class="Apple-converted-space">      </span>Launch the application and attach the debugger (no build</p>
+<p class="p3"><span class="Apple-converted-space">                   </span>or install phases are invoked).</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-converted-space">  </span>log: <span class="Apple-converted-space">            </span>Show the system log for the attached device.</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-converted-space">  </span>clean_device_cache: Delete the cache of device libraries.<span class="Apple-converted-space">  </span>Use this if you</p>
+<p class="p3"><span class="Apple-converted-space">                      </span>are having problems debugging on a device.<span class="Apple-converted-space">  </span>Next time</p>
+<p class="p3"><span class="Apple-converted-space">                      </span>you debug, it will redownload all of the device</p>
+<p class="p3"><span class="Apple-converted-space">                      </span>libraries.</p>
+<p class="p2"><br></p>
+<p class="p3">Java Debugging:</p>
+<p class="p3"><span class="Apple-converted-space">  </span>debug_java:<span class="Apple-converted-space">      </span>Invoke the &lt;load&gt; phase and attach the Java debugger (jdb).</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-converted-space">  </span>just_debug_java: Launch the application and attach the Java debugger (no</p>
+<p class="p3"><span class="Apple-converted-space">                   </span>build or install phases are invoked).</p>
+<p class="p2"><br></p>
+<p class="p3">Profiling:</p>
+<p class="p3"><span class="Apple-converted-space">  </span>profile: <span class="Apple-converted-space">        </span>Invoke the &lt;load&gt; phase in profiler mode and load the</p>
+<p class="p3"><span class="Apple-converted-space">                   </span>Profiler tool.</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-converted-space">  </span>just_profile:<span class="Apple-converted-space">    </span>Launch the application in profiler mode and load the</p>
+<p class="p3"><span class="Apple-converted-space">                   </span>Profiler tool (no build or install phases are invoked).</p>
+<p class="p2"><br></p>
+<p class="p3">Toolchain Managment:</p>
+<p class="p3"><span class="Apple-converted-space">  </span>update_toolchain: Update the currently installed toolchain</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-converted-space">  </span>update: <span class="Apple-converted-space">          </span>Update the SDK</p>
 <p class="p2"><br></p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p3"><b>プラン、IndieとかProとかEnterpriseとか</b></p>
@@ -741,6 +974,32 @@
 <p class="p3"><span class="Apple-tab-span">	</span>みたいな話になるけどな。</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p2"><br></p>
+<p class="p3"><b>気になった事</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ARCはどうなってしまうのか</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>問題ないような。</p>
 <p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Javaで追記できるのか</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>できた。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Unityとかは？</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Freeだと無理。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>適当に作ったプロジェクトを動かそうとしたが、apportable load自体でエラーが出た。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Indieだと動かせるのかな。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Storeとかは？</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>組み込みのものがあってそこにブリッジされるみたいなものすごい事がさらっと書いてあったが、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>どうなっているのやら。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>AndroidのVersionごとに微妙に差異があるのをどう解消してるのかな。とか、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>一時保存とかどうしてるのかな、とか、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>リストアとかのときどうするの？とか</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>まとめ</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>かなり根本的な機構から移植というか動作可能コンバートというか、稼働するようになっているので、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>上辺だけの変換ではなく、根っこから誠実に実装されてるんだなーという感じがする。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>UIKitでのレイアウトが生かせるのは、その部分だけ考えても大変有用なのでは。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
 </body>
 </html>
