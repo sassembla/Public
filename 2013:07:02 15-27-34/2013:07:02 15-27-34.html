@@ -788,6 +788,51 @@
 <p class="p4"><img src="3__%23$!@%25!%23__Screenshot-2013-07-05.png" alt="3__#$!@%!#__Screenshot-2013-07-05.png"></p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>→UIWebView</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>xibで他のビューに内包したものだと、ローディングが開始されなかった。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>単独のビューとして生成した場合、ちゃんと機能した。</p>
+<p class="p2"><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>ざっくりと変換OKだったもの</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>OpenGLESでのお絵描き<span class="Apple-tab-span">	</span></b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>OpenAL系</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>AudioFramework系</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>このへんはOKだった。</p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>NSTimerやDate系での時間を計った動作</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>OKだった。</p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>GCD系</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>OKだった。</p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>UIWebview</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="s1">OK</span>だった。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ただし、ビューの入れ子にすると正しく初期化されないぽい。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>浅いレイヤーでベースに対して置く分にはOK。</p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>ざっくりと変換が駄目だったもの</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>日本語</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ラベルとかに貼ると文字化けJK</p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>AFNetworking</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>no visible @interface for 'UIImage' declares the selector "initWithData:scale:"<span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ネットワークとは別の理由で駄目。っぽい。<span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>GPUImage</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>OpenGL系の定数宣言が無くアウトになる。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>unknown type name 'CVOpenGLESTextureCacheRef'</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>unknown type name 'CVPixelBufferRef'</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>unknown type name 'CVOpenGLESTextureRef'</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>unknown type name 'CVPixelBufferRef'</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>プロパティが読めないとかなのかな。</p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>PhotoPicker</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>AVBasicVideoOutput</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>カメラ系は駄目。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ゲームにフォーカスしているからかなーという読み。</p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><b></b><br></p>
 <p class="p3"><b>apportableに関連したプロジェクトの管理について</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>Xcodeプロジェクトがある場所でapportableの各種コマンドを実行するのだけれど、</p>
 <p class="p3"><span class="Apple-tab-span">	</span>.sconsign.dblite</p>
@@ -800,14 +845,10 @@
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Seasonsさんという方がためになる死霊をupしてくださっていました。</p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://www.slideshare.net/seasons/apportable-meeting">http://www.slideshare.net/seasons/apportable-meeting</a></p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>で、</p>
-<p class="p3"><span class="Apple-tab-span">	</span>直接転送されるデータの内容や手順に興味が出るよねぇ。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>まとめ中。</p>
-<p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>アプリケーションパッケージはどうなっているのか</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>Android用のパッケージが、下記に吐かれている。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>/Users/highvision/.apportable/SDK/Build</p>
+<p class="p3"><span class="Apple-tab-span">	</span>/Users/ユーザー名/.apportable/SDK/Build</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>ここに、android-armeabi-debugフォルダが出来ていて、</p>
 <p class="p3"><span class="Apple-tab-span">	</span>中はこんな感じ。</p>
