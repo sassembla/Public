@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1187.39">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #ebebeb}
+    span.s1 {font: 12.0px Helvetica}
+    span.s2 {color: #33a2bd}
+    span.s3 {color: #0433ff}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>Windows7、8でUnity連携</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>制作、販売しているUnityのAssetで、Windowsにも対応しよう、みたいな事をしていた。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>具体的には、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・AssetとUnity以外を特別にインストールしない前提で</p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>・Unityと連携して、特定のタイミングでUnityのビルドを走らせる</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>・メッセージを表示する</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ということがしたかった。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>需要が無いと思っていたし、勝手も解らなかったので、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Windows用にはそのへん用意するつもりが無かったんだが、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>使ってみるとUnityにビルドさせる機構は必須だみたいな話もらったので、はい。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>作る。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>Unityと連携して、特定のタイミングでUnityのビルドを走らせる</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>UnityにそんなAPIは無い。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、<span class="s1">Mac</span>側でも使った手として、アプリケーションがアクティブになるとコンパイルが走る、という特性を悪用する。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>APIがあればぜひそれを使うべきだと思っているが、無い上に有用なのでしょうがない。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>どのくらい有用かは<a href="http://vimeo.com/67494197">この辺</a>を見てほしい。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>WIndows用のexeで、フォーカス変更するのを作る</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>下記メソッドでWindowへとフォーカスを与えることが出来た。</p>
+<p class="p2"><br></p>
+<p class="p4"><span class="s2">IntPtr</span> hWnd = FindWindow(<span class="s3">null</span>, windowTitle);</p>
+<p class="p4"><span class="s3">if</span> (hWnd != <span class="s2">IntPtr</span>.Zero)</p>
+<p class="p4">{</p>
+<p class="p4"><span class="Apple-converted-space">    </span>SetForegroundWindow(hWnd);</p>
+<p class="p4">}</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、上記のwindowTitleをどうしようかと。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>WindowsのアプリケーションごとのWindow名ってものすごい状態なのな。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>プロセス名なら画一的な内容になるので、プロセス名をキーに、そのプロセスが所持している</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Windo<span class="s1">w</span>の名称を取得するようにして、無事動作した。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>最終的にコマンドラインアプリケーションにできた。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>SwitchApp.exe -f app_process_name -t app_process_name</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>アプリケーションの種類をWindowsApplicationに設定する事で、このSwitchApp自体はWindow無しで動作する。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>from と to の間隔が短すぎると、Unityのビルドが始まらないことが多々あった。このへんMacとは違う。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Sleepをいれて、、、場当たり的に、、、こう、、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ただどーーーもSleepはやっぱり駄目みたいで、動いたり動かなかったりする。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>このへんは暫定的に別の方法で解消した。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>リポジトリ</p>
+<p class="p3"><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/WinSwitchApp">https://github.com/sassembla/WinSwitchApp</a></p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b>メッセージを表示する</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>MacだとNotificationCenterとか、Growlとか通知系がけっこうあったので、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>似たようなものを使いたく。</p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>Win8でのToast</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>7ではそういうのは無い、、と思う。無理してつけてもなーもう時代おくr</p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、このへんもアプリケーションにして出すと思う。</p>
+<p class="p2"><b></b><br></p>
+</body>
+</html>
