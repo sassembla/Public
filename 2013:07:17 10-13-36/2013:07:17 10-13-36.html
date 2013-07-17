@@ -10,13 +10,18 @@
     p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px Helvetica}
     p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
     p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
-    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Courier; color: #dd2244}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #ebebeb}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Courier; color: #dd2244; background-color: #ebebeb}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Courier; color: #dd2244}
+    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; color: #ff4013}
+    p.p8 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; color: #ff6251}
     span.s1 {font: 22.0px 'Hiragino Kaku Gothic ProN'}
     span.s2 {font: 12.0px Helvetica}
     span.s3 {font: 12.0px 'Hiragino Kaku Gothic ProN'; color: #000000}
     span.s4 {color: #000000}
     span.s5 {font: 12.0px 'Hiragino Kaku Gothic ProN'}
     span.s6 {font: 12.0px Courier; color: #dd2244}
+    span.s7 {color: #ff4013}
     span.Apple-tab-span {white-space:pre}
   </style>
 </head>
@@ -64,39 +69,67 @@
 <p class="p3"><span class="Apple-tab-span">	</span>っていうかドキュメントォォォォ</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
-<p class="p3">書式</p>
-<p class="p3"><span class="Apple-tab-span">	</span>このAPIから下記データを返すと補完ウインドウが出る。</p>
+<p class="p3"><b>このAPIの使い方</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>他のハンドラAPIと同様、overrideする。</p>
 <p class="p2"><br></p>
-<p class="p4"><span class="s3"><span class="Apple-tab-span">	</span>[</span><span class="s4">(</span>"compile\tcompile fn"<span class="s4">, </span>"compile(${1:source}, ${2:filename}, ${3:mode}${4:[, flags]}${5:[, dont_inherit]})$0"<span class="s4">),</span></p>
-<p class="p3"><span class="Apple-tab-span">	</span>compile(source, filename, mode[, flags][, dont_inherit])]</p>
+<p class="p4">class CaptureEditing(sublime_plugin.EventListener):</p>
+<p class="p4"><span class="Apple-tab-span">	</span>def on_query_completions(self, view, prefix, locations):</p>
+<p class="p5"><span class="s3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>return [</span><span class="s4">(</span>"compile\tcompile fn"<span class="s4">, </span>"compile(${1:source}, ${2:filename}, ${3:mode}${4:[, flags]}${5:[, dont_inherit]})$0"<span class="s4">)</span><span class="s3">]</span></p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>で、表示は</p>
-<p class="p4"><span class="s3"><span class="Apple-tab-span">	</span></span>compile[<span class="s5">タブ</span>]compile fn</p>
-<p class="p3"><span class="s6"><span class="Apple-tab-span">	</span></span>だったので、</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b>書式</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>このAPIから下記のようなlistデータを返すと補完ウインドウが出る。</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>表示されるのは下記</p>
-<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>compile(source, filename, mode[, flags][, dont_inherit])</p>
+<p class="p6"><span class="s3"><span class="Apple-tab-span">	</span>[</span><span class="s4">(</span>"compile\tcompile fn"<span class="s4">, </span>"compile(${1:source}, ${2:filename}, ${3:mode}${4:[, flags]}${5:[, dont_inherit]})$0"<span class="s4">)</span><span class="s3">]</span></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、候補として表示される内容は</p>
+<p class="p6"><span class="s3"><span class="Apple-tab-span">	</span></span>compile[<span class="s5">タブ</span>]compile fn</p>
+<p class="p3"><span class="s6"><span class="Apple-tab-span">	</span></span>になる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>この補完を選択後にコードに入力されるデータは下記になる。</p>
+<p class="p7"><span class="s4"><span class="Apple-tab-span">	</span></span>compile(source, filename, mode[, flags][, dont_inherit])</p>
 <p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
-<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>()の中身はtabで右に移動、space+ta<span class="s2">b</span>で左に移動できる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="s7">()</span>の中身はtabで右に移動、space+ta<span class="s2">b</span>で左に移動できる。</p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>= $マーク+数字で、tabキーでの移動候補になっている、と考えるとしっくりくる。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>で、左の辺は</p>
-<p class="p3"><span class="Apple-tab-span">	</span>メソッドの説明文</p>
+<p class="p3"><b>詳細</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>listの中の各要素が補完候補になっている。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>文字列のtupleになっていて、</p>
+<p class="p2"><br></p>
+<p class="p6"><span class="s3"><span class="Apple-tab-span">	</span></span><span class="s4">(</span>"compile\tcompile fn"<span class="s4">, </span>"compile(${1:source}, ${2:filename}, ${3:mode}${4:[, flags]}${5:[, dont_inherit]})$0"<span class="s4">)</span></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>の最初の値</p>
+<p class="p6"><span class="s3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>"compile\tcompile fn"</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>は、補完の説明文になっている。</p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>返り値、メソッド名とかがいい感じ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>tabで区切ると左端、右端にそれぞれが表示される。</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>次に、右辺は、</p>
-<p class="p3"><span class="Apple-tab-span">	</span>文字列()$0</p>
-<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>全体を入力し終わった際にtabキーで到達できる場所。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>次の値は、</p>
+<p class="p6"><span class="s3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>"compile(${1:source}, ${2:filename}, ${3:mode}${4:[, flags]}${5:[, dont_inherit]})$0"</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>${数字<span class="s2">:</span>パラメータ文字列}</p>
-<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="s2">$</span>が内容を範囲で持つ場合、この書式でパラメータを置き換える動作になる。</p>
-<p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>数字:パラメータ文字列</p>
-<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>これで、その位置に対象文字列が出る。</p>
+<p class="p8"><span class="s4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>文字列()$0</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>この$0は、全体を入力し終わった際に、最後にtabキーで到達できる場所になっている。</p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p8"><span class="s4"><span class="Apple-tab-span">	</span></span>${数字<span class="s2">:</span>パラメータ文字列}<span class="s4"> は、</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="s2">$</span>が内容を範囲で持つ場合、このパラメータ名を枠として、文字入力できる動作になる。</p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><b>ちなみにパラメータ文字列部分を[, 文字列]にすることで、not needを表明できる、みたいなオプションもある。</b></p>
 <p class="p2"><b></b><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>overloadとかのときに使うと良いのかなあ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>overloadとかのときに使うと良い。</p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>使い道</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>と、表示するための情報とかは楽に出せるんだけど、Sublime TextからこのAPIをちゃんと使うには、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>・入力状況から特定のタイミングを検知するようにイベントトリガーを設置する</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>・トリガーが正しいかどうか入力中バッファの状況を見て判断する</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>・データを読んで、補完内容を選出する</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>・補完内容を配列として返す</b></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>というシークエンスが必要で、コレを全部プラグイン内で実行しないといけなくて大変。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>コンパイルの結果を流用できるような規模でないと、とても作れないと思う。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3">簡単なまとめまでに。</p>
