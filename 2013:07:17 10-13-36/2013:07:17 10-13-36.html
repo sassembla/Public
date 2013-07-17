@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1187.39">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Courier; color: #dd2244}
+    span.s1 {font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    span.s2 {font: 12.0px Helvetica}
+    span.s3 {font: 12.0px 'Hiragino Kaku Gothic ProN'; color: #000000}
+    span.s4 {color: #000000}
+    span.s5 {font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    span.s6 {font: 12.0px Courier; color: #dd2244}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>Sublime Text</b><span class="s1"><b>の補完機構の詳細の概略</b></span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Sublime Text シリーズで、補完を出すAPIについて調べるチャンスがあったので、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>纏めておく。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>Sublime Textにおける補完とは</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>こんな感じの見た目で出る、補完お助け機能みたいなの。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>左がメソッドとかクラス名とか。右が返りの型、に”してみた”。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="s2"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202013-07-17%2010.54.12.png" alt="スクリーンショット 2013-07-17 10.54.12.png"></span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>エディタに出てるとこだとこんなの。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="s2"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202013-07-17%2010.55.40.png" alt="スクリーンショット 2013-07-17 10.55.40.png"></span></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>入力選択はSublimeお得意のファジーさを発揮し、補完開始すると、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>tabキーでのパラメータ入力移動とかがある。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="s2"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202013-07-17%2010.56.54.png" alt="スクリーンショット 2013-07-17 10.56.54.png"></span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>EclipseとかIDEのアレと一緒。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>API</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ドキュメントに無い(殺)APIを使う。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>def on_query_completions(self, view, prefix, locations):</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>なんで無いのかForumで問いただして見ているところ。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>動作内容</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span></b>候補のフォーマットがわからん。で、調べたところ、最終的に</p>
+<p class="p3"><span class="Apple-tab-span">	</span><a href="https://gist.github.com/agibsonsw/2030626">https://gist.github.com/agibsonsw/2030626</a></p>
+<p class="p3"><span class="Apple-tab-span">	</span>あたりが参考になった。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>このAPIは、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・特定の形式の(str,str)のtupleが入ったlistを渡すと、それらを補完候補として出す</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・view.run_command("auto_complete") で任意のタイミングで呼び出せる</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・view.run_command("hide_auto_complete") で任意のタイミングで消せる</p>
+<p class="p3"><span class="Apple-tab-span">	</span>という特性がある。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>補完候補に出てさえしまえば、あとはSublimeお得意のファジィーなマッチがエクセレントするので、ラク。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>っていうかドキュメントォォォォ</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3">書式</p>
+<p class="p3"><span class="Apple-tab-span">	</span>このAPIから下記データを返すと補完ウインドウが出る。</p>
+<p class="p2"><br></p>
+<p class="p4"><span class="s3"><span class="Apple-tab-span">	</span>[</span><span class="s4">(</span>"compile\tcompile fn"<span class="s4">, </span>"compile(${1:source}, ${2:filename}, ${3:mode}${4:[, flags]}${5:[, dont_inherit]})$0"<span class="s4">),</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>compile(source, filename, mode[, flags][, dont_inherit])]</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、表示は</p>
+<p class="p4"><span class="s3"><span class="Apple-tab-span">	</span></span>compile[<span class="s5">タブ</span>]compile fn</p>
+<p class="p3"><span class="s6"><span class="Apple-tab-span">	</span></span>だったので、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>表示されるのは下記</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>compile(source, filename, mode[, flags][, dont_inherit])</p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>()の中身はtabで右に移動、space+ta<span class="s2">b</span>で左に移動できる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>= $マーク+数字で、tabキーでの移動候補になっている、と考えるとしっくりくる。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、左の辺は</p>
+<p class="p3"><span class="Apple-tab-span">	</span>メソッドの説明文</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>返り値、メソッド名とかがいい感じ。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>次に、右辺は、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>文字列()$0</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>全体を入力し終わった際にtabキーで到達できる場所。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>${数字<span class="s2">:</span>パラメータ文字列}</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="s2">$</span>が内容を範囲で持つ場合、この書式でパラメータを置き換える動作になる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>数字:パラメータ文字列</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>これで、その位置に対象文字列が出る。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><b>ちなみにパラメータ文字列部分を[, 文字列]にすることで、not needを表明できる、みたいなオプションもある。</b></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>overloadとかのときに使うと良いのかなあ。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3">簡単なまとめまでに。</p>
+</body>
+</html>
