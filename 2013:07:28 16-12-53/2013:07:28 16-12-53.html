@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1187.39">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    span.s1 {font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>SublimeSocketAsset</b><span class="s1"><b>に補完機能つけた</b></span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Sublime Textを使ってUnityのコードを書いていたのだけれど、Win向けだけ+自分の作った部分の補完とかの設定が面倒だったので、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>SublimeSocketに機能追加する形で実装した。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>非同期で動くので、ユーザー操作をロックせず補完が出せる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>速い、はず。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>補完候補の絞り込みとかはそれなりに頑張って作る事になってしまったので、なんというかメンテも含めて、改善しやすい感じに出来たと思う。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Win版</p>
+<p class="p3"><span class="Apple-tab-span">	</span><a href="https://vimeo.com/71184393">https://vimeo.com/71184393</a></p>
+<iframe src="http://player.vimeo.com/video/71184393" width="500" height="244" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe> 
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Mac版</p>
+<p class="p3"><span class="Apple-tab-span">	</span><a href="https://vimeo.com/71184153">https://vimeo.com/71184153</a></p>
+<iframe src="http://player.vimeo.com/video/71184153" width="500" height="244" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>仕組み</b><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Unityが吐き出したdllを解析している。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>候補選定はScalaコンパイラ用に別口で作った機構を流用しつつ、言語が違うので結局似ても似つかなくなった。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>大きく役割分担を分けて書くと、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Sublime Text側</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Sublime Text : View</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>SublimeSocket : 接続機構、viewデータ送付、補完候補の受信</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Unity側</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>SublimeSocketAsset : viewデータ解析、dll解析、補完候補選定、SublimeSocketへと送付</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Unity : 動作環境</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>という感じになっている。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>現状</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Mac,Win向けに調整が終わって、申請済み。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>さてはて。</p>
+<p class="p2"><br></p>
+</body>
+</html>
