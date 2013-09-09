@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1187.39">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 20.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #ebebeb}
+    span.s1 {font: 20.0px Helvetica}
+    span.s2 {font: 12.0px Helvetica}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><span class="s1"><b>Jenkins</b></span><b>氏を優しく</b><span class="s1"><b>n</b></span><b>回連続で走らせるシェル書いた</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b><span class="s2"><span class="Apple-tab-span">	</span></span></p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span>Mac</span>なローカル環境で、Jenkinsさんを使ってベンチを取ろう！みたいな話があって、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・gitにcommitするたびにJenkins氏が目覚めた心で走り出す</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・一回走るごとにどこかに速度を書き込む</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・commitにつき100回連続で走ってほしい</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>というのがあり、なんかRemoteAPIとか組み合わせたら行けそうな気がして書いた。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>プラグイン足すのも面倒で、、はい、、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>そんな残念な脳みその結晶がこれです<span class="Apple-tab-span">	</span></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>L00p.sh</b></p>
+<p class="p4"><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/l00p">https://github.com/sassembla/l00p</a></p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p3"><b>使い方</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>プロジェクトにL00p.shを含み、shellとして実行すると、そのbuildから数えてn回連続で動く。</p>
+<p class="p2"><br></p>
+<p class="p6">sh l00p.sh count.txt http://SOMEWHERE_MR_JENKINS_LIVES/Job/JOBNAME/build 100</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これで、100回連続で、JOBNAMEというjobが走る。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>並列でもないしJobの終了も待てるし中断もラクちん。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>内容</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>第一引数の名前のファイルを作って、そこに何かを一回につき一行書き込む事で</p>
+<p class="p3"><span class="Apple-tab-span">	</span>回数の制御とデータ集めを行っている。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>あ、たぶんMacのbashでしか動かない。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>サーバ上で速度ベンチするわけじゃないので。</p>
+<p class="p2"><b><span class="Apple-tab-span">	</span></b></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>何に使っているの</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>こないだ作ったMac版S2のベンチ計測に使っています。</p>
+</body>
+</html>
