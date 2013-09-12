@@ -1,0 +1,101 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1187.39">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #ebebeb}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #ebebeb; min-height: 18.0px}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    span.s1 {font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    span.s2 {font: 12.0px Helvetica}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>Sherr </b><span class="s1"><b>アップデート</b></span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Macで使える、*.shを放り込むとダブルクリックで使えるようになるアプリ</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Sherr.app を私利私欲に基づいてアップデートした。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/Sherr">https://github.com/sassembla/Sherr</a></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>いちいちnodeとかshellをコマンドラインから叩いたりとかしてるひとにオススメ。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>定期実行とかも可能になった。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>機能追加一覧</b></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>1.放り込むshellに絶対パスでいろいろ書かないと動かないクソ仕様だった</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>放り込んだ*.shを、Sherr.appが置いてあるパスで叩いたのと同じ挙動になるように変更。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>shellからの呼び出し先指定を気にしないでよくなった。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>2.再帰的なshellの呼び出しを行えるようにした</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>shel<span class="s2">l</span>を実行するためのマイクロサーバっぽくなった。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Sherr.app起動中、Sherr.appの中のcontinue.shを外部のshellとかから呼ぶことで、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Sherr.appをもう一度叩いた事になるようにした。つまりいくらでもいつでもネストできる。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p4">sh ./Sherr.app/Contents/Resources/continue.sh</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>たとえば100回実行したい処理があったとして、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ファイルに回数を記録していって、それが100にとどくまで</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>処理 &gt; カウントアップ &gt; continue.shを呼ぶ</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>と繰り返えさせる事で、えらい速さで動く。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>権限がappに準ずるので、ほとんどユーザー動作として動く感じ。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>具体霊</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>100回ベンチを計りたい処理があったとして、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>下記のようなshellを書いて、Sherr.appに喰わせると、高速に100回動いてとまる。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>sample100.sh</p>
+<p class="p4">filename=./record.txt</p>
+<p class="p4">maxCount=100</p>
+<p class="p5"><br></p>
+<p class="p4">if [ -f "${filename}" ]; then</p>
+<p class="p4"><span class="Apple-tab-span">	</span>echo "continue."</p>
+<p class="p4">else</p>
+<p class="p4"><span class="Apple-tab-span">	</span>echo "generate file."</p>
+<p class="p4"><span class="Apple-tab-span">	</span>touch ${filename}</p>
+<p class="p4">fi</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p4"># The behaviour what you want to benchmark</p>
+<p class="p4">pwd</p>
+<p class="p5"><br></p>
+<p class="p4"># get elapsed time &amp; note it.</p>
+<p class="p4">passedTime="だが断る"</p>
+<p class="p5"><br></p>
+<p class="p4">echo $passedTime &gt;&gt; ${filename}</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p4"># count record-line num.</p>
+<p class="p4">countbase=$(wc -l ${filename})</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p4"># trim filename with space.</p>
+<p class="p4">count=${countbase% *}</p>
+<p class="p5"><br></p>
+<p class="p4">if [ ${count} -lt ${maxCount} ]; then</p>
+<p class="p4"><span class="Apple-tab-span">	</span># run next soon. add Token if need.</p>
+<p class="p4"><span class="Apple-tab-span">	</span>sh ./Sherr.app/Contents/Resources/continue.sh</p>
+<p class="p4">fi</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、下記のような嫌がらせみたいなファイルが出来上がっていればOK</p>
+<p class="p3"><span class="Apple-tab-span">	</span>record.txt</p>
+<p class="p6"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202013-09-13%201.53.18.png" alt="スクリーンショット 2013-09-13 1.53.18.png"></p>
+</body>
+</html>
