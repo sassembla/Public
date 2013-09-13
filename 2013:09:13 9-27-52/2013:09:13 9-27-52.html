@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1187.39">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #ebebeb}
+    span.s1 {font: 22.0px Helvetica}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><span class="s1"><b>Mac</b></span><b>で</b><span class="s1"><b>Notifier</b></span><b>を使ってデバッグとか動作確認とか</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>21世紀にもなってアプリから.shを動かす部分のコード書いてるんだけど</p>
+<p class="p3"><span class="Apple-tab-span">	</span>デバッグが面倒くさい。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ので、Notificationを使うようにしたら捗ったよという話。</p>
+<p class="p4"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202013-09-13%2020.44.29.png" alt="スクリーンショット 2013-09-13 20.44.29.png"></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>Shellデバッグの問題点</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>shellのデバッグが面倒でつらい。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>echoとかで頑張る？</p>
+<p class="p3"><span class="Apple-tab-span">	</span>App &gt; .sh起動 &gt; 出力はApp内のパイプ、、とかになっちゃうので。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>色々みづらい。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ファイルとかに書き込む？</p>
+<p class="p3"><span class="Apple-tab-span">	</span>それも面倒だ。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>それら以外の方法で、ある行を通過したらその旨を表示したいなーと考えてたら、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>こんなの作ったのを思い出した。</p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>MacNotifier</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/SublimeSocket3/tree/master/tool/notification">https://github.com/sassembla/SublimeSocket3/tree/master/tool/notification</a></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>コレを使うと、</p>
+<p class="p2"><br></p>
+<p class="p5">open -a MacNotifier.app --args -t title -m message</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、</p>
+<p class="p4"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202013-09-13%2020.38.42.png" alt="スクリーンショット 2013-09-13 20.38.42.png"></p>
+<p class="p3"><span class="Apple-tab-span">	</span>みたいなMacの通知が表示できる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Ruby版で先駆者が居て、bundle入れるのが面倒だったので独自にapp化した。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>これを、「どこまで通ったか」に使えば良いんだ！！</p>
+<p class="p3"><span class="Apple-tab-span">	</span>というだけの話。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>ファイル吐き出しができない環境、ログが見にくい環境で大助かり！全国から喜びの声が</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>以上</p>
+</body>
+</html>
