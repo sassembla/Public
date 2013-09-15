@@ -1,0 +1,124 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1187.39">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; background-color: #ebebeb}
+    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #ebebeb}
+    span.s1 {font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    span.s2 {font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    span.s3 {font: 12.0px Helvetica}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>brew</b><span class="s1"><b>で</b></span><b>Kinect On Mac </b><span class="s1"><b>環境を整える</b></span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p4"><span class="Apple-tab-span">	</span>Mac<span class="s2">で、</span>homebrew<span class="s2">を使って</span>Kinect<span class="s2">環境を整えてみる。</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Portsを使ったサンプルはいっぱいあるのでPortsのひとは回れ右すれば良いと思う。</p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>あくまで単純にKinectをMacから動かそう的な奴なので、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>その先の用途(Unity用のゲームとしてポーズとって何かの入力に使うとか)はココから先の話。</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p3"><b>インストール</b></p>
+<p class="p5"><b></b><br></p>
+<p class="p3"><b>1.libusbをbr</b><span class="s3"><b>ew</b></span><b>から入れる</b></p>
+<p class="p5"><b><span class="Apple-tab-span">	</span></b></p>
+<p class="p6">brew install libusb --universal</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="s3"><span class="Apple-tab-span">	</span>make</span>部分でエラーがでるのは、<span class="s3">/usr/local/include</span>への書き込みを行おうとするため。</p>
+<p class="p3"><span class="s3"><span class="Apple-tab-span">	</span>include</span>フォルダへの搔き込み権限不足でエラー出した。<span class="s3"><span class="Apple-tab-span">	</span></span></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="s3"><span class="Apple-tab-span">	</span>brew</span>は<span class="s3">sudo</span>使わないので、該当のフォルダの権限を変更してから<span class="s3">install</span>実行すると良いと思う。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p4"><b>2.LibFreeNect</b><span class="s2"><b>をgit clone</b></span></p>
+<p class="p4"><span class="Apple-tab-span">	</span><a href="https://github.com/OpenKinect/libfreenect">https://github.com/OpenKinect/libfreenect</a></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p4"><b>3.cmake</b><span class="s2"><b>を入れる</b></span></p>
+<p class="p4"><span class="Apple-tab-span">	</span>LibFreeNect<span class="s2">をビルドするために使う。</span></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="s3"><span class="Apple-tab-span">	</span>MacOSX </span>用のはここから手に入る。</p>
+<p class="p4"><span class="Apple-tab-span">	</span><a href="http://www.cmake.org">http://www.cmake.org</a></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="s3"><span class="Apple-tab-span">	</span></span>自分はCMake <span class="s3">2.8-10</span>で試した。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>4.ビルド</b></p>
+<p class="p3"><span class="s3"><span class="Apple-tab-span">	</span>LibFree</span>Nectをビルドする。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>libFreeNectの入っているフォルダまで行き、</p>
+<p class="p5"><br></p>
+<p class="p7">cmake .</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="s3"><span class="Apple-tab-span">	</span></span>エラーが出る場合、libusbがちゃんと入ってない(libusbの時点でerrorが出てるとか)だと思う。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="s3"><span class="Apple-tab-span">	</span></span>続けてmake</p>
+<p class="p6">highvision:libfreenect highvision$ make</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="s3"><span class="Apple-tab-span">	</span></span>で、</p>
+<p class="p2"><br></p>
+<p class="p6">Scanning dependencies of target freenect</p>
+<p class="p6">[<span class="Apple-converted-space">  </span>4%] Building C object src/CMakeFiles/freenect.dir/core.c.o</p>
+<p class="p6">[<span class="Apple-converted-space">  </span>8%] Building C object src/CMakeFiles/freenect.dir/tilt.c.o</p>
+<p class="p6">(<span class="s2">中略</span>)</p>
+<p class="p6">[100%] Building CXX object wrappers/cpp/CMakeFiles/cppview.dir/cppview.cpp.o</p>
+<p class="p6">Linking CXX executable ../../bin/cppview</p>
+<p class="p6">[100%] Built target cppview</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="s3"><span class="Apple-tab-span">	</span></span>からの、install</p>
+<p class="p7">sudo make install</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="s3"><span class="Apple-tab-span">	</span>LibFree</span>Nectが無事に入った。</p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b>5.試運転</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ココまで来たら、KinectをUSBで<span class="s3">Mac</span>に繋いで、下記から適当に選んで実行するとKinectを自由に動かせる。</p>
+<p class="p5"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>glpclview</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>立体分割(大体この辺の奥行きにあるんじゃねーかなーってところを計算してポリゴンに貼ったみたいに見せる)</p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Preferencesからトラックパッドでのコントロールとかが可能になるので、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>画面サイズ変えつつDrag&amp;Dropとかやってると結構楽しめると思う。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>wでズームイン、sでズームアウトが出来る。</p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>glview</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>標準的な2カメラでの深度色付け表示</p>
+<p class="p5"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>hiview</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>カメラ一つずつを分けて表示</p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>regview</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>被写界深度付きビューが見れる</p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>tiltdemo</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ひたすらKinectの角度が変わる</p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>wavrecord</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>自分の環境だと入ってないよ！ て言われた。</p>
+<p class="p5"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>micview</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>自分の環境だと入ってないよ！ て言われた。</p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>regtest</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>自分の環境だと入ってないよ！ て言われた。</p>
+<p class="p5"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>参考</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>10,8対応</p>
+<p class="p3"><span class="Apple-tab-span">	</span><a href="http://www.codingcolor.com/featured-articles/set-up-kinect-on-osx-10-8-mountain-lion/">http://www.codingcolor.com/featured-articles/set-up-kinect-on-osx-10-8-mountain-lion/</a></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>記事はportだけど、brewからで同様の手順でできた。</p>
+</body>
+</html>
