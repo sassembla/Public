@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1187.39">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #ebebeb}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>news : command line WebSocket client.<span class="Apple-converted-space"> </span></b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>標準入力をそのままWebScoketで流す</p>
+<p class="p3"><span class="Apple-tab-span">	</span>WebSocket Clientを作った。</p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>nsws</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/nsws">https://github.com/sassembla/nsws</a></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>goで書いたのもあって、後でぎっはぶに上げる。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>動機</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>テストから特定のWebSocketサーバに対して、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>シーケンスのある内容を一定のタイミングで送り出すツールがほしかった。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>いちいち繋ぎ直すのもアレだし、一度繋いで適当な動作、というのが希望。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>また、stdinを受ける事でタイミングの問題解決位置を外部からの入力にずらしたい。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>(こうすると外部から一斉に複数のWebSocketClientの入力をコントロールできる。)</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>使い方</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>標準入力を受けて射出。</p>
+<p class="p4">tail -f something.txt | <b>nsws</b> -t ws://127.0.0.1:8823</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>tailで送ってきた内容をlocalのport8823へと回す。</p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>メッセージを直打ちで流して終了</p>
+<p class="p4"><b>nsws</b> -t ws://127.0.0.1:8823 -m "here comes daredevil !!"</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>欲しいなーって思うもの &amp; 欲しいって言われたもの</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・identityを表明するしかけ</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>(ゲームサーバ側から無視されてもいいんだけど、どこのどれが誰なのか、みたいな情報を接続時に送りたいなーっていうのがある。)</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・フィルタリング</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・header/footer(これはmessageに直接入れる方が筋がいいのでは</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+</body>
+</html>
