@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1187.4">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1">Kinect関連のメモ</p>
+<p class="p2"><br></p>
+<p class="p3">下記を参考に、Unityでトラッキングさせる。</p>
+<p class="p3"><a href="http://hameds3d.blogspot.jp/2012/01/how-to-setup-zigfu-and-unity3d-tutorial.html">http://hameds3d.blogspot.jp/2012/01/how-to-setup-zigfu-and-unity3d-tutorial.html</a></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3">さて。</p>
+<p class="p3">普通にサンプルが動いたので、ポーズ認識までやろう。</p>
+<p class="p3">10stock</p>
+<p class="p2"><br></p>
+<p class="p3">・ポーズの入力再現を行う</p>
+<p class="p3"><span class="Apple-tab-span">	</span>AvatarFrontfacing ていうサンプルで、摘出できた。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>こいつを基礎に、入力されるパラメータと連動する動きの入力値を得て、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>って思ったんだけど、これポーズディテクターをなんとかして実装しないと行けないな。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3">・特定のポーズに対して動作するようにする</p>
+<p class="p2"><br></p>
+<p class="p3">・認識部分を取り出す</p>
+<p class="p3">・できれば依存を消す(何してるか解れば消せると思うが。</p>
+<p class="p2"><br></p>
+<p class="p3">Windowsで準備</p>
+<p class="p3"><span class="Apple-tab-span">	</span>この辺がストレートに参考になる感じ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>http://unitygeek.hatenablog.com/entry/2012/09/03/194047</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>http://www.microsoft.com/en-us/kinectforwindowsdev/Start.aspx</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>気になる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>http://kinectrecognizer.codeplex.com</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>巡り巡って、OpenNIか、LibFreeNectを使うのが良さそうだ。</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><a href="https://github.com/OpenKinect/libfreenect">https://github.com/OpenKinect/libfreenect</a></p>
+<p class="p2"><br></p>
+<p class="p3"><b>libfreenect</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>インターフェースがあるよ的な話してるけど、とりあえずインプットだけを支えられれば良いので、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>じゃあどうやってインプットぶち込むの？っていう方法を探す。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>座標データとかがドカッとくるんだろうか。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>OpenNI</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ここを参考に粘り中。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>http://blog.totakke.net/kinect/openni-mac-kinect.html</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+</body>
+</html>
