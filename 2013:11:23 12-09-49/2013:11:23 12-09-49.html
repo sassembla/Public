@@ -47,16 +47,26 @@
 <p class="p3"><span class="Apple-tab-span">	</span>サービス経由で I saw it, boss. みたいなのを受け取る。</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>実際にはサービスにOrderを投げ、Orderが叶う = He said "I saw it." をサービス越しに受け取る、とかになる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>手段はsms、mail、telephone、なんでもいい。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>相手が受け取りたい手段を一度でいいから提示してもらえばいい。</p>
+<p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>人間同士での特定用途での意思確認、意思伝達の自動化が果たせればそれでいい。</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p3"><span class="Apple-tab-span">	</span>その先の、意図の伝達とかは後回し。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
+<p class="p3"><b>実装</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ParseのCloudCodeの中にTwilioとの連携があったので、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>サービス -&gt; ams -&gt; target(人間) -&gt; 、、、みたいにしてみる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>単にメッセージを届ける + retryを自動化する所まで作る。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>最終的な実装としてはParseを離れて、Push型の独立したプロセスを立ち上げる感じになる。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
 <p class="p3"><b>うれしみ</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>つたえること。勝手に伝わること。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>手段はsms、mail、telephone、なんでもいい。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>相手が受け取りたい手段を一度でいいから提示してもらえばいい。</p>
-<p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>伝わることと、伝わった確認が取れる事、またretry/notifyなどを自動化できることに意味がある。</p>
 <p class="p2"><b></b><br></p>
 <p class="p2"><b></b><br></p>
