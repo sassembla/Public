@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1187.4">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #ebebeb}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    span.s1 {font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    span.s2 {font: 12.0px Helvetica}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>Twilio</b><span class="s1"><b>での</b></span><b>sms</b><span class="s1"><b>の使い方</b></span></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Twilio</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://www.twilio.com">http://www.twilio.com</a></p>
+<p class="p2"><b><span class="Apple-tab-span">	</span></b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>を使って、そのへんのスマフォにsmsを送付してみる。</p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span></b>nodeからtwilioが使えて、同じものがParseからも使えるので、足がかりにメモを残しておく。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>電話とかsmsとか動かして感覚みたいときに重宝した。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>今回は特にnode絡みの使い方の話。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>ドキュメント</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><a href="http://twilio.github.io/twilio-node/">http://twilio.github.io/twilio-node/</a></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>前提</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>外部への<span class="s2">sms-</span>messageを投げるために、Proアカウントと、ナンバーが必要。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>つまりタダでは試せないよ！</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>あと、日本の番号からsmsとか送るのは無理。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>また、値段観的に、海外の番号だと$1/mだったのが、日本のだと$5/mだったりしたのも気になった。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b>手順</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>1.アカウント作る。最初は自動的にTrialなアカウントになる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>2.発信用番号を買う(自分はシカゴの番号　+17系　で買った。　この時点でProアカウント必須だったような。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>3.番号を使ってジャパニーズな番号にsms投げる。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>コード</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>下記。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>TwilioのSIDとAccessTokenが必要。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/Persows/blob/master/Twilio/twilio.js">https://github.com/sassembla/Persows/blob/master/Twilio/twilio.js</a></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>Usage</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>nodeで適当にjsとTwilioのtokenとか渡すと良い。</p>
+<p class="p2"><br></p>
+<p class="p4">node twilio,js TwilioSID TwilioToken toNumber fromNumber message</p>
+<p class="p2"><br></p>
+<p class="p5">e.g.</p>
+<p class="p3"><span class="Apple-tab-span">	</span>node twilio.js ACxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx +81xxxxxxxxxxxx +17xxxxxxxxxxx messageForYou</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>再三になるけど、注意点としては、日本の番号からだとsmsできない。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>番号を取得する際、smsが出来るナンバーについぞ出会えなかった。</p>
+<p class="p2"><br></p>
+</body>
+</html>
