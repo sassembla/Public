@@ -36,18 +36,20 @@
 <p class="p3"><span class="Apple-tab-span">	</span><a href="http://twilio.github.io/twilio-node/">http://twilio.github.io/twilio-node/</a></p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
-<p class="p3"><b>前提</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>外部への<span class="s2">sms-</span>messageを投げるために、Proアカウントと、ナンバーが必要。</p>
+<p class="p3"><b>前提条件</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Twilioから外部の端末への<span class="s2">sms-</span>messageを投げるために、Proアカウントと、Twilioでナンバーを買う必要がある。</p>
 <p class="p3"><span class="Apple-tab-span">	</span>つまりタダでは試せないよ！</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
-<p class="p3"><span class="Apple-tab-span">	</span>あと、日本の番号からsmsとか送るのは無理。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>あと、Twilioで買える日本の番号からsmsとか送るのは無理。</p>
 <p class="p3"><span class="Apple-tab-span">	</span>また、値段観的に、海外の番号だと$1/mだったのが、日本のだと$5/mだったりしたのも気になった。</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p3"><b>手順</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>1.アカウント作る。最初は自動的にTrialなアカウントになる。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>2.発信用番号を買う(自分はシカゴの番号　+17系　で買った。　この時点でProアカウント必須だったような。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>3.番号を使ってジャパニーズな番号にsms投げる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>2.Twilioで発信用番号を買う(自分はシカゴの番号　+17系　で買った)　この時点でProアカウント必須だったような。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>3.番号を使って自分のスマフォとかジャパニーズな番号にsmsを投げることができる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>4.手元のn<span class="s2">ode</span>環境にnpmでTwilioの<span class="s2">API</span>をインストールしとく</p>
+<p class="p3"><span class="Apple-tab-span">	</span>5.nodeからTwilioAPIを叩いて発信。その際、Twilioで購入してた番号を使用する。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>コード</b></p>
@@ -57,14 +59,14 @@
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>Usage</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>nodeで適当にjsとTwilioのtokenとか渡すと良い。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>nodeで適当にtwilio.jsとTwilioのSIDとかTOKENとか渡すと良い。</p>
 <p class="p2"><br></p>
 <p class="p4">node twilio,js TwilioSID TwilioToken toNumber fromNumber message</p>
 <p class="p2"><br></p>
 <p class="p5">e.g.</p>
 <p class="p3"><span class="Apple-tab-span">	</span>node twilio.js ACxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx +81xxxxxxxxxxxx +17xxxxxxxxxxx messageForYou</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>再三になるけど、注意点としては、日本の番号からだとsmsできない。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>再三になるけど、注意点としては、Twilioで購入した日本の番号からだとsmsできない。</p>
 <p class="p3"><span class="Apple-tab-span">	</span>番号を取得する際、smsが出来るナンバーについぞ出会えなかった。</p>
 <p class="p2"><br></p>
 </body>
