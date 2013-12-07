@@ -20,19 +20,20 @@
 <p class="p2"><b></b><br></p>
 <p class="p3"><b>概要</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>SharpZipLibを使って、Unity内でデータを圧縮する。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>下記ライブラリが有用。</p>
 <p class="p3"><span class="Apple-tab-span">	</span><a href="https://github.com/icsharpcode/SharpZipLib">https://github.com/icsharpcode/SharpZipLib</a></p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>用途</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>書き溜めたログファイルを圧縮して送りたくなったよ！！</p>
-<p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>という異端な用途を満たしたい欲求からスタート。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>手段</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>ローカルでファイルに吐き出す必要は無いので、</p>
-<p class="p3"><span class="Apple-tab-span">	</span>in : byte [] or file</p>
-<p class="p3"><span class="Apple-tab-span">	</span>out : byte []</p>
+<p class="p3"><span class="Apple-tab-span">	</span>path -&gt; byte []</p>
+<p class="p3"><span class="Apple-tab-span">	</span>byte [] -&gt; byte []</p>
 <p class="p3"><span class="Apple-tab-span">	</span>なものをサクッと用意してみる。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
@@ -104,6 +105,12 @@
 <p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}</p>
 <p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}</p>
 <p class="p4"><span class="Apple-tab-span">	</span>}</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>内容は適当なので、ブラッシュアップとかしたい。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ともあれ</p>
+<p class="p3"><span class="Apple-tab-span">	</span>path -&gt; zipped byte []</p>
+<p class="p3"><span class="Apple-tab-span">	</span>byte [] -&gt; zipped byte []</p>
+<p class="p3"><span class="Apple-tab-span">	</span>が出来る感じ。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>アイドル自由入力行</b></p>
