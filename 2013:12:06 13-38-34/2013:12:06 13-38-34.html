@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1187.4">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px 'Hiragino Kaku Gothic ProN'}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px 'Hiragino Kaku Gothic ProN'; min-height: 20.0px}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px 'Hiragino Kaku Gothic ProN'; background-color: #ebebeb}
+    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px 'Hiragino Kaku Gothic ProN'; background-color: #ebebeb; min-height: 20.0px}
+    p.p8 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px 'Hiragino Kaku Gothic ProN'; color: #ff4013}
+    span.s1 {font: 13.0px Helvetica}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>UnityのWWWで、ファイル送付時にヘッダー情報付加不可みたいな話</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p4"><span class="Apple-tab-span">	</span>WWWで、サクっとファイルアップロードするサンプルを書こうとして詰まったのでメモまでに。</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>そもUnityでWWWを使うのが悪手なんだけど、WWWForm.AddBinaryData(…)　みたいなのを見かけて、</p>
+<p class="p4"><span class="Apple-tab-span">	</span>ああー簡単に書けるんだろうなーきっと、って思ったんだけど、そうでも無かったんだぜばなし。</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p4"><b>実装</b></p>
+<p class="p4"><span class="Apple-tab-span">	</span>下記はOK.</p>
+<p class="p5"><br></p>
+<p class="p6"><span class="Apple-tab-span">	</span>var data = 何かbyte[]なデータ;</p>
+<p class="p6"><span class="Apple-tab-span">	</span>var name = "something.type";</p>
+<p class="p6"><span class="Apple-tab-span">	</span>var dataType = "application/type";</p>
+<p class="p7"><br></p>
+<p class="p6"><span class="Apple-tab-span">	</span>WWWForm form = new WWWForm();</p>
+<p class="p6"><span class="Apple-tab-span">	</span>form.AddBinaryData(name, data, name, dataType);</p>
+<p class="p7"><span class="Apple-tab-span">	</span></p>
+<p class="p6"><span class="Apple-tab-span">	</span>var www = new WWW(url, form);</p>
+<p class="p5"><span class="Apple-tab-span">	</span></p>
+<p class="p4"><span class="Apple-tab-span">	</span>はー簡単っすねえ。</p>
+<p class="p5"><span class="Apple-tab-span">	</span></p>
+<p class="p4"><span class="Apple-tab-span">	</span>通信も簡単に成功する。 multipart postが走る。</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p4"><b><span class="Apple-tab-span">	</span>で、じゃあheaderに細工しようー、と思ったんだ、</b></p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>head<span class="s1">er</span>に key:value みたいなのを入れてみようぜーって。</p>
+<p class="p5"><span class="Apple-tab-span">	</span></p>
+<p class="p6"><span class="Apple-tab-span">	</span>var data = 何かbyte[]なデータ;</p>
+<p class="p7"><br></p>
+<p class="p6"><span class="Apple-tab-span">	</span>WWWForm form = new WWWForm();</p>
+<p class="p6"><span class="Apple-tab-span">	</span>form.AddBinaryData(name, data, name, dataType);</p>
+<p class="p7"><span class="Apple-tab-span">	</span></p>
+<p class="p6"><span class="Apple-tab-span">	</span>var www = new WWW(url, <span class="s1">attachData, headers</span>);// こういうのがあれば良いよね</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>ところが、attachDataを受け入れるスロットが、WWWのコンストラクタには無い。</p>
+<p class="p4"><span class="Apple-tab-span">	</span>WWW(url, data, headers) っていうのはあるけど、dataはbodyの中身になるものだ。</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>っつーことは、<b>WWWForm.AddBinaryData 以外に、ファイルアタッチを行う手段は無いのか！？</b></p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>→ドキュメント見たけど、無いような気がする</p>
+<p class="p4"><span class="Apple-tab-span">	</span>→じゃあ WWWForm.AddBinaryData した後に、headerにheaderの情報を足せれば良いんですね！</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p4"><b>結果</b></p>
+<p class="p8"><span class="Apple-tab-span">	</span>→じゃあ WWWForm.AddBinaryData した後に、formにheaderの情報を足せれば良いんですね！</p>
+<p class="p4"><span class="Apple-tab-span">	</span>そんな方法は無かった。</p>
+<p class="p5"><span class="Apple-tab-span">	</span></p>
+<p class="p5"><br></p>
+<p class="p4"><b>原因</b></p>
+<p class="p4"><span class="Apple-tab-span">	</span>1.ファイルアタッチを行うルートは、WWW(url, form)しかない。</p>
+<p class="p4"><span class="Apple-tab-span">	</span>2.WWWFormの内部のheaderは form.headerでアクセスできるけど、writeは出来ない。</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>よって、ファイルアタッチの時、WWWクラスを使う以上は、headerに何かの情報を足す事が出来ない。</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>、、、なーーんか前、WWWでOAuthとかを通れるようにしたとき、似たような目にあったような気がして、</p>
+<p class="p4"><span class="Apple-tab-span">	</span>そのときはブレイクスルーがあったような気がするんだけど、、、</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>form.headers に書き込みできないのツラい。</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p4"><b>誰か助けて！！ @toru_inoue</b><span class="Apple-tab-span">	</span></p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+</body>
+</html>
