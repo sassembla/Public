@@ -1,0 +1,235 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1187.4">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; color: #127ec6}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px 'Hiragino Kaku Gothic ProN'; color: #127ec6}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    span.s1 {color: #000000}
+    span.s2 {font: 12.0px 'Hiragino Kaku Gothic ProN'; color: #000000}
+    span.s3 {font: 14.0px 'Hiragino Kaku Gothic ProN'}
+    span.s4 {font: 14.0px 'Helvetica Neue'}
+    span.s5 {font: 12.0px Helvetica}
+    span.s6 {font: 12.0px 'Helvetica Neue'; color: #127ec6}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>オレオレAssetをAssetStoreに出して死なないために気をつけること</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>みんなだいすき <a href="http://qiita.com/advent-calendar/2013/unity">Unity Advent Calendar 2013</a> 案件。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>前日 13日は、</p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://qiita.com/shinriyo@github">shinriyo@github</a></span> <span class="s1">さんの</span></p>
+<p class="p5"><span class="s2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://d.hatena.ne.jp/shinriyo/20131213"><span class="s3">せっかくだから俺は</span><span class="s4">13</span><span class="s3">日の金曜日を選ぶぜ！ランキング機能の簡易実装したけー。</span><span class="s4"><span class="Apple-converted-space"> </span></span></a></span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>でした。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、今日は俺 @toru_inoueです。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>カレンダー上だと、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="s5"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202013-12-12%2019.04.31.png" alt="スクリーンショット 2013-12-12 19.04.31.png"></span></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>Sublime TextでのUnity作業の効率化について</b></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>と、言ったな。</p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>あれは<b>嘘だ</b>。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>Unity使いなら誰もが世話になっているであろう AssetStoreに、</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>オレオレAssetを登録するときのAssetのおすすめ構成とか、やっとけポイントについて書く。</b></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>登録に関しては<a href="http://sassembla.github.io/Public/2013:06:21%2020-04-01/2013:06:21%2020-04-01.html">以前書いてる</a>んだけど、今回は</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>どういう構成のAssetを作ると、使い手側としてまだなんぼかマシか</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>どうすれば審査をするUnity側にポカーンとされないか</b></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span></b>みたいな話にするつもり。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ソースはSSA。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>SublimeSocketAsset</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://u3d.as/content/sassembla/sublime-socket-asset/4SP">http://u3d.as/content/sassembla/sublime-socket-asset/4SP</a></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これからAsset売ってやるぜー！！ みたいな誰かの参考になれば。</p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>1.Asset名のフォルダをきっちり切ろう！</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>登録するAsset名で <b>プロジェクト/Assets/</b> 以下にフォルダを切っておくと凄く良い。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>こんな感じ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="s5"><img src="p.png" alt="p.png"></span></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>できるだけ全てのものをAsset名フォルダに納める。</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>できるだけ Assets/Standard Assets フォルダとか Assets/Plugins とかを汚さないようにすると良いと思う。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ログ出力したり、辞書ファイル作るとか、Assetとして動作する上でしょうがなく汚すとしても、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>自作フォルダ内、ようは自分の作ったAsset名フォルダ内に絞れるようにしよう。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>フォルダ名で判断してビルドフェーズが異なってくる系のものも、大概は自前のAsset名フォルダ下にネストしてもなんとかなる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>参考：<a href="http://wiki.unity3d.com/index.php/Special_Folder_Names_in_your_Assets_Folder">http://wiki.unity3d.com/index.php/Special_Folder_Names_in_your_Assets_Folder</a></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>☆Standard ~ 系とかだけは、どうしようも無い気がする。Assets直下でないと作用しない。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ので、このへんは「つかわねーように心がける、設計を変える」とかが最適解な気がする。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>未来の変更の可能性を殺してはならない。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>このへんのはみ出し具合が最悪だと、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>Plugins にいろんなものが置いてあるわ、</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>なんだかわからないけど外部に謎の名前でフォルダ吐いたりするわ、</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>勝手にファイルが書き変わったりするわ、</b></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>そのAssetのUpdateがあったときや、そのAssetを使うのをやめたいときに、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>「あれ、どのフォルダがAsset由来のやつなんだ、、！？　消していいのかコレ、、？！」</p>
+<p class="p3"><span class="Apple-tab-span">	</span>「なんかファイルがいつの間にか上書きされてるんだがァ、、！？」</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>みたいになり、ガチ欝感全開になる。</p>
+<p class="p2"><b><span class="Apple-tab-span">	</span></b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、憎まれこそすれ、ユーザー = 開発者が幸せになれるわけない。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>当然、開発者が幸せになれなければ、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>Assetの開発者にも幸せは訪れない。</b></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>AssetStoreに限らず、この世にはそういうこと考えずに、</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>ガンガンPluginフォルダを汚すようなSDK配ってるゲームプラットフォームとか、SNSとかが、数多ある。</b></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>もーね、<b>殺意駆動が全力全開だよィ☆</b></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>メンテするのは自分じゃなくて、自分を含んだ誰か、なので、憎しみを生まないように気をつけよう。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>2.メニューバーは共有資源なので大事にしよう</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>メニューバーに自前のAsset用の項目をのっけてて、Unityの審査に落ちた事がある。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>~ある日~</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Unity<span class="Apple-tab-span">	</span>「Your Asset has been declined! ウェヒッww」</p>
+<p class="p3"><span class="Apple-tab-span">	</span>俺<span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>「D、、、Decline、、だと、、！？ なんでなんだ Unityィィィーッ！！」</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Unity<span class="Apple-tab-span">	</span>「<b>Please nest your extension under an already existing MenuItem rather than creating your own!</b>」</p>
+<p class="p3"><span class="Apple-tab-span">	</span>俺<span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>「はい。」</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>見てみるとまあ、、はい、、</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>何も無い状態</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span></b><span class="s5"><img src="a.png" alt="a.png"></span></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>+ NGUI<span class="Apple-tab-span">	</span></b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span></b><span class="s5"><img src="b.png" alt="b.png"></span></p>
+<p class="p2"><b><span class="Apple-tab-span">	</span></b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>+Facebo、、、</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span></b><span class="s5"><img src="c.png" alt="c.png"></span></p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>―――のびるッ！！(CV. 子安武人)</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>そしてバーの幅は有限なので、右端のものが見えなくなっ、、なっ、、、</p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>あれだよ、Xamarinとかでよくあるやつだ。</b></p>
+<p class="p6"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202013-12-13%2023.56.24.png" alt="スクリーンショット 2013-12-13 23.56.24.png"></p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>ぶっちゃけ、ショートカットを決める + Assets とか Window に突っ込む、というロジックで大概のものは良い気がする。</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>GUIでのアクセスが多量だったり、表示し続ける必要があるなら、それ用のPaneとかPanelを持つ事を考えた方が良いだろう。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>というわけで、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>オレオレMenu項目、格好悪い。 なるべく使わないで済む方向で考えよう。</p>
+<p class="p2"><b><span class="Apple-tab-span">	</span></b></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>3.READMEをしっかり付けよう！</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>直感的にAssetのすべてがすぐ使えるならまだしも、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>いろいろなAssetが存在してるので、その使用法や常識など、</p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>コモンセンスが全く無いと思ってもらって良い。</b></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・どうやってインストールすればいいのか</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・何をすると何がどうなるAssetなのか</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・どういう風に動いているのが正常なのか</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>などを、Assetの使用を通じて説明する必要がある。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Assetを紹介するサイトっていうかAssetStoreで見せておくのも尤もなんだけど、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ユーザーがUnity上で使うときにどう迷わないようにできるか、というのが本懐なので、</p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>READMEを用意するとか紹介ムービーへのリンク用意するとかAPIリストを用意するとかしよう。</b></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>添付の資料の更新手段がUpdateしかなく、再申請に時間がかかることを考えると、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・リンクが書いてあるファイル</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・リンク先はどっかWebSite</p>
+<p class="p3"><span class="Apple-tab-span">	</span>みたいな構成にするのが一番楽だと思う。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>SSAだと、インストール法とかに最新のSublime Text とかSublimeSocketプラグインが関わってくるので、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>そのへんをWebにぶん投げるようにしている。</p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>4.連絡がつくようにしよう！</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>当然っちゃ当然なんだけど、サポート用に連絡がつくアドレスとかTwitterアカウントを、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>目につくところに書いておく必要がある。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>SSAでは、README内にTwitterアカウントとメールを明記しているけど、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>公開してからいままで<span class="s5">10</span>数件くらいのお問い合わせがメールで来た。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>機能の追加要望とかもメールでくるのがほとんど。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>使ってくれる、要望をくれるひとがチラチラいるのはうれしい事です。はい。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>バグ報告がメインの用途だけどな。</p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>5.フォーラムに乗り出そう！</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Unity AssetStore フォーラムみたいなところがあって、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>いろんなAssetが「俺、これの作者なんだけど聞きたい事ある？」みたいな感じで書き込んでいるので、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>真似れば良いんだと思う。特に損は無さそう。</p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span></b><a href="http://forum.unity3d.com/threads/217116-SublimeSocketAsset?p=1451794#post1451794">http://forum.unity3d.com/threads/217116-SublimeSocketAsset?p=1451794#post1451794</a></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>っていうか自分もさっき作った。</p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>6.どのくらい儲かるのか</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>グへへへへへへへへへ、、、(ゲス顔)</p>
+<p class="p3"><span class="Apple-tab-span">	</span>お察しください。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>自分は、少なくとも月の食費は賄えている。</p>
+<p class="p2"><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>ということで、</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>AssetStoreにAssetを登録してみて、あーこれ必要だなーって思ったことなどを纏めてみた。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>どうすれば売れるか、みたいなのはもっとマジメな人がきっと話してくれると思う。</p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>おまけ</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Unityさん、なんかHaxeのターゲットになったそうで、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Haxe書く→Unity用の何か(C#)にコンパイルされる→Unityで動かせる</p>
+<p class="p3"><span class="Apple-tab-span">	</span>みたいな時代がくるらしいようなアトモスフィアっぽい。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、SublimeSocketAssetをHaxeからの連携込みでやれるようにしてみると楽しいのかなあと思ったり。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>すこしだけお金のにおい。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>個人的には、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Haxe -&gt; C# -&gt; Unity -&gt; PNaCLとか、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>TypeScript -&gt; CLI -&gt; PNaClとかのカオスきわまりない流れに身をぶん投げようとしている友人がいるので、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>エディタ周りでちょっと参加してその行く末を見守ろうかなーと思っている。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>あわよくば TypeScript -&gt; CLI に対してエディタ拡張とかで絡みたい。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>明日は、<a href="http://qiita.com/nobkz"><span class="s6">nobkz</span></a><span class="s6"> </span>さんです。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://qiita.com/advent-calendar/2013/unity">Unity Advent Calendar 2013</a></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+</body>
+</html>
