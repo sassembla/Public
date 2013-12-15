@@ -12,17 +12,26 @@
     p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
     p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; color: #ffffff}
     p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #ebebeb}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; color: #e32400}
     span.s1 {text-shadow: 0.0px 1.0px 0.0px #ffffff}
     span.s2 {color: #000000; text-shadow: 0.0px 1.0px 0.0px #ffffff}
     span.Apple-tab-span {white-space:pre}
   </style>
 </head>
 <body>
-<p class="p1"><b>Haxeって書こうとして何度Hazeってなったか解らないがHaxeでUnityの準備</b></p>
+<p class="p1"><b>[忘年会議, はくらい提督, Haxe-&gt;Unity エディタの準備中]</b></p>
 <p class="p2"><b></b><br></p>
 <p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>忘年会議スタッフの皆様、素晴らしい忘年会議をありがとうございました！</p>
+<p class="p3"><span class="Apple-tab-span">	</span>来年も来たい。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>タイトル前半に意味はありません。あった事を配列に入れただけです。</b></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>HaxeがUnity用のコンパイルに対応したとの事で、動かしてみる。</p>
-<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>最終目的としては、</b><a href="http://u3d.as/content/sassembla/sublime-socket-asset/4SP"><b>SublimeSocketAsset</b></a><b>の Haxe -&gt; Unity対応版を出す。</b></p>
+<p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>日本語の情報源はここ</p>
 <p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://qiita.com/advent-calendar/2013/haxe"><span class="s1">Haxe Advent Calendar 2013</span></a><span class="s2">の14日目の記事</span></p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Unity4.3新機能とか Haxeで何かつくったはなし。(前編 ： Haxeビルドまで。)</p>
@@ -49,8 +58,37 @@
 <p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p3"><b>自分のやりたい事＝Haxe-&gt;C#-&gt;Unityで実行した際のエラーをHaxe上に吐く</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>いろいろパーツ探し中。<span class="Apple-tab-span">	</span></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>HaxeからC#を吐いて、Unityでコンパイルしたり動かしたりしたときのエラーログとかを、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>Haxeのコード上にマッピングしたい。<span class="Apple-tab-span">	</span></b></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>こういうのが必要。</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>コード：</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Haxe -&gt; C#( + compilationTargetMap) -&gt; Unity Compilation</p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>エラー：</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></b>Haxe &lt;- C#( + compilationTargetMap) &lt;- Unity Compilation</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>&lt;- <b>コンパイルエラー発生</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>&lt;- C#上のエラー情報<span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>&lt;- Haxe-&gt;C#への変換マップ</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>&lt;-Haxe上へのエラー表示</b></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ということで、上記の中の矢印、</p>
+<p class="p6"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>&lt;- Haxe-&gt;C#への変換マップ</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>が必要。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Haxe -&gt; JavaScript　とかだと、ソースマップを吐く機構が備わってるのでいいんだけど。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://haxe.org/doc/js/source_debugging">http://haxe.org/doc/js/source_debugging</a></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>他の言語だとどうなってるんだろう。Haxeがその辺標準で持ってると嬉しい。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><a href="https://twitter.com/hakurai">@hakurai</a> 提督に、(忘年会議後に香川まで拉致って)お話を伺ったところ、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Haxe -&gt; Java 機構で、Java化後のコンパイルは必要な筈なので、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Javaのコンパイルエラーが出る -&gt; Haxeコードのこのへんだよ、って機構は存在する筈。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>というステキなお話をいただいた。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>やってみんべー。</p>
 <p class="p2"><br></p>
 </body>
 </html>
