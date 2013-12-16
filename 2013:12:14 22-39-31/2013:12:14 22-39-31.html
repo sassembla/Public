@@ -12,9 +12,14 @@
     p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
     p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; color: #ffffff}
     p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #ebebeb}
-    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; color: #e32400}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px 'Helvetica Neue'; color: #494949; min-height: 16.0px}
+    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px 'Helvetica Neue'; color: #494949}
+    p.p8 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; color: #e32400}
     span.s1 {text-shadow: 0.0px 1.0px 0.0px #ffffff}
     span.s2 {color: #000000; text-shadow: 0.0px 1.0px 0.0px #ffffff}
+    span.s3 {font: 12.0px Helvetica}
+    span.s4 {font: 14.0px 'Helvetica Neue'; color: #494949}
+    span.s5 {font: 14.0px 'Hiragino Kaku Gothic ProN'; color: #494949}
     span.Apple-tab-span {white-space:pre}
   </style>
 </head>
@@ -37,6 +42,12 @@
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Unity4.3新機能とか Haxeで何かつくったはなし。(前編 ： Haxeビルドまで。)</p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://qiita.com/nobkz/items/ce6bbf56d0f0cbad2e13">http://qiita.com/nobkz/items/ce6bbf56d0f0cbad2e13</a></p>
 <p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>とっても参考になる記事だった。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://twitter.com/hakurai">@hakurai</a> 提督に教えていただいた。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ちなみにこの記事で使っているHaxe-&gt;Unity変換のさらに元ネタは下記。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/AxGord/hx-unity3d">https://github.com/AxGord/hx-unity3d</a></p>
+<p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>Haxe、入っていますか</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>もしインストールしていなければ、</p>
@@ -54,6 +65,25 @@
 <p class="p5">haxelib setup</p>
 <p class="p2"><b><span class="Apple-tab-span">	</span></b></p>
 <p class="p3"><b><span class="Apple-tab-span">	</span></b>その後はアドベントカレンダーにそのまま従う感じ。</p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b>一応実用可能か確かめたときのブツ</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>下記に上げておいた。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/Haxe-Unity">https://github.com/sassembla/Haxe-Unity</a></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>アドベントとの差分としては、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・<span class="s3">H</span>axe側でコンパイルする必要ない(っていうかエラーが出まくるだけ)ので、<span class="s4">build.hxml </span><span class="s5">に </span>-D no-compilation を付記した。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・<span class="s4">build.hxml</span><span class="s5">を調整して、</span>csファイルの吐き出し先をAssets以下にするようにした。</p>
+<p class="p6"><br></p>
+<p class="p7"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>build.hxml</b></p>
+<p class="p5">-D no-compilation</p>
+<p class="p5">-lib unity3d</p>
+<p class="p5">-cp src/</p>
+<p class="p5">-cs ../Assets/cs</p>
+<p class="p5">MyClass</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Assets直下に出来るフォルダの名前も、なんか考えた方が良いかもしれない。</p>
 <p class="p2"><br></p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p3"><b>自分のやりたい事＝Haxe-&gt;C#-&gt;Unityで実行した際のエラーをHaxe上に吐く</b></p>
@@ -74,7 +104,7 @@
 <p class="p3"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>&lt;-Haxe上へのエラー表示</b></p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ということで、上記の中の矢印、</p>
-<p class="p6"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>&lt;- Haxe-&gt;C#への変換マップ</b></p>
+<p class="p8"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>&lt;- Haxe-&gt;C#への変換マップ</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>が必要。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>

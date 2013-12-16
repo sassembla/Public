@@ -1,6 +1,8 @@
 {\rtf1\ansi\ansicpg932\cocoartf1187\cocoasubrtf400
-{\fonttbl\f0\fnil\fcharset128 HiraKakuProN-W3;}
-{\colortbl;\red255\green255\blue255;\red230\green230\blue230;\red217\green11\blue0;}
+{\fonttbl\f0\fnil\fcharset128 HiraKakuProN-W3;\f1\fswiss\fcharset0 Helvetica;\f2\fnil\fcharset0 HelveticaNeue;
+}
+{\colortbl;\red255\green255\blue255;\red230\green230\blue230;\red57\green57\blue57;\red217\green11\blue0;
+}
 \paperw11900\paperh16840\margl1440\margr1440\vieww24120\viewh8400\viewkind0
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
 
@@ -28,6 +30,12 @@
 			Unity4.3\'90\'56\'8b\'40\'94\'5c\'82\'c6\'82\'a9 Haxe\'82\'c5\'89\'bd\'82\'a9\'82\'c2\'82\'ad\'82\'c1\'82\'bd\'82\'cd\'82\'c8\'82\'b5\'81\'42(\'91\'4f\'95\'d2 \'81\'46 Haxe\'83\'72\'83\'8b\'83\'68\'82\'dc\'82\'c5\'81\'42)\
 			{\field{\*\fldinst{HYPERLINK "http://qiita.com/nobkz/items/ce6bbf56d0f0cbad2e13"}}{\fldrslt http://qiita.com/nobkz/items/ce6bbf56d0f0cbad2e13}}\
 \
+		\'82\'c6\'82\'c1\'82\'c4\'82\'e0\'8e\'51\'8d\'6c\'82\'c9\'82\'c8\'82\'e9\'8b\'4c\'8e\'96\'82\'be\'82\'c1\'82\'bd\'81\'42\
+		{\field{\*\fldinst{HYPERLINK "https://twitter.com/hakurai"}}{\fldrslt @hakurai}} \'92\'f1\'93\'c2\'82\'c9\'8b\'b3\'82\'a6\'82\'c4\'82\'a2\'82\'bd\'82\'be\'82\'a2\'82\'bd\'81\'42\
+	\
+		\'82\'bf\'82\'c8\'82\'dd\'82\'c9\'82\'b1\'82\'cc\'8b\'4c\'8e\'96\'82\'c5\'8e\'67\'82\'c1\'82\'c4\'82\'a2\'82\'e9Haxe->Unity\'95\'cf\'8a\'b7\'82\'cc\'82\'b3\'82\'e7\'82\'c9\'8c\'b3\'83\'6c\'83\'5e\'82\'cd\'89\'ba\'8b\'4c\'81\'42\
+			{\field{\*\fldinst{HYPERLINK "https://github.com/AxGord/hx-unity3d"}}{\fldrslt https://github.com/AxGord/hx-unity3d}}\
+\
 \
 
 \b Haxe\'81\'41\'93\'fc\'82\'c1\'82\'c4\'82\'a2\'82\'dc\'82\'b7\'82\'a9
@@ -53,6 +61,38 @@
 \cb1 	\
 	
 \b0 \'82\'bb\'82\'cc\'8c\'e3\'82\'cd\'83\'41\'83\'68\'83\'78\'83\'93\'83\'67\'83\'4a\'83\'8c\'83\'93\'83\'5f\'81\'5b\'82\'c9\'82\'bb\'82\'cc\'82\'dc\'82\'dc\'8f\'5d\'82\'a4\'8a\'b4\'82\'b6\'81\'42\
+\
+	\
+
+\b \'88\'ea\'89\'9e\'8e\'c0\'97\'70\'89\'c2\'94\'5c\'82\'a9\'8a\'6d\'82\'a9\'82\'df\'82\'bd\'82\'c6\'82\'ab\'82\'cc\'83\'75\'83\'63
+\b0 \
+	\'89\'ba\'8b\'4c\'82\'c9\'8f\'e3\'82\'b0\'82\'c4\'82\'a8\'82\'a2\'82\'bd\'81\'42\
+		{\field{\*\fldinst{HYPERLINK "https://github.com/sassembla/Haxe-Unity"}}{\fldrslt https://github.com/sassembla/Haxe-Unity}}\
+\
+\
+	\'83\'41\'83\'68\'83\'78\'83\'93\'83\'67\'82\'c6\'82\'cc\'8d\'b7\'95\'aa\'82\'c6\'82\'b5\'82\'c4\'82\'cd\'81\'41\
+	\'81\'45
+\f1 H
+\f0 axe\'91\'a4\'82\'c5\'83\'52\'83\'93\'83\'70\'83\'43\'83\'8b\'82\'b7\'82\'e9\'95\'4b\'97\'76\'82\'c8\'82\'a2(\'82\'c1\'82\'c4\'82\'a2\'82\'a4\'82\'a9\'83\'47\'83\'89\'81\'5b\'82\'aa\'8f\'6f\'82\'dc\'82\'ad\'82\'e9\'82\'be\'82\'af)\'82\'cc\'82\'c5\'81\'41
+\f2\fs28 \cf3 build.hxml 
+\f0 \'82\'c9 
+\fs24 \cf0 -D no-compilation \'82\'f0\'95\'74\'8b\'4c\'82\'b5\'82\'bd\'81\'42\
+	\'81\'45
+\f2\fs28 \cf3 build.hxml
+\f0 \'82\'f0\'92\'b2\'90\'ae\'82\'b5\'82\'c4\'81\'41
+\fs24 \cf0 cs\'83\'74\'83\'40\'83\'43\'83\'8b\'82\'cc\'93\'66\'82\'ab\'8f\'6f\'82\'b5\'90\'e6\'82\'f0Assets\'88\'c8\'89\'ba\'82\'c9\'82\'b7\'82\'e9\'82\'e6\'82\'a4\'82\'c9\'82\'b5\'82\'bd\'81\'42\
+
+\f2\fs28 \cf3 \
+
+\b 		build.hxml
+\f0\b0\fs24 \cf0 \
+\cb2 -D no-compilation\
+-lib unity3d\
+-cp src/\
+-cs ../Assets/cs\
+MyClass\
+\cb1 \
+	Assets\'92\'bc\'89\'ba\'82\'c9\'8f\'6f\'97\'88\'82\'e9\'83\'74\'83\'48\'83\'8b\'83\'5f\'82\'cc\'96\'bc\'91\'4f\'82\'e0\'81\'41\'82\'c8\'82\'f1\'82\'a9\'8d\'6c\'82\'a6\'82\'bd\'95\'fb\'82\'aa\'97\'c7\'82\'a2\'82\'a9\'82\'e0\'82\'b5\'82\'ea\'82\'c8\'82\'a2\'81\'42\
 \
 	\
 
@@ -86,7 +126,7 @@
 \
 		\'82\'c6\'82\'a2\'82\'a4\'82\'b1\'82\'c6\'82\'c5\'81\'41\'8f\'e3\'8b\'4c\'82\'cc\'92\'86\'82\'cc\'96\'ee\'88\'f3\'81\'41\
 
-\b \cf3 				<- Haxe->C#\'82\'d6\'82\'cc\'95\'cf\'8a\'b7\'83\'7d\'83\'62\'83\'76
+\b \cf4 				<- Haxe->C#\'82\'d6\'82\'cc\'95\'cf\'8a\'b7\'83\'7d\'83\'62\'83\'76
 \b0 \cf0 \
 		\'82\'aa\'95\'4b\'97\'76\'81\'42\
 \
