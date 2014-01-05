@@ -10,9 +10,13 @@
 ./outsource/onsen/index.html
 ./outsource/onsen/assets/player/KeynoteDHTMLPlayer.html
 ./outsource/onsen/assets/fallback/index.html
+./ignored/UnityAssetStoreDreamWithSublimeText/index.html
+./ignored/UnityAssetStoreDreamWithSublimeText/assets/player/KeynoteDHTMLPlayer.html
+./ignored/UnityAssetStoreDreamWithSublimeText/assets/fallback/index.html
 ./htmlResource/html_header.html
 ./htmlResource/html_body_tail.html
 ./htmlResource/html_body_head.html
+./2014:01:05 17-59-53/2014:01:05 17-59-53.html
 ./2013:12:14 22-39-31/2013:12:14 22-39-31.html
 ./2013:12:14 00-00-00/2013:12:14 00-00-00.html
 ./2013:12:06 13-38-34/2013:12:06 13-38-34.html
