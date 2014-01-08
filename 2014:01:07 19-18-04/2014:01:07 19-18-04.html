@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1187.4">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    span.s1 {font: 12.0px Helvetica}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>UnityでCrashLogをアレするCrittercism</b></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ユーザーの手元で起こってるデバッグログと向き合おう。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>まあ必要だよね + 自分たちで作るの面倒くさいよねということで、ありもののサービスを使う。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ユーザー側で発生したエラーとかログをサーバに送付して集計してみせよう、<span class="Apple-tab-span">	</span>みたいなの一杯あるけど、今回は特にCrittercismを使ってみた。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>Crittercism</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/crittercism">https://github.com/crittercism</a></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>他の手段</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>選択肢は多く持っておこう。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ということで、こんなのもあったのを紹介。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>BugSense</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://www.bugsense.com/">https://www.bugsense.com/</a></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>おなじようなサービス。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>登録の入力フォームがクソだったので却下した。</p>
+<p class="p2"><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>Crash Reporter</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://u3d.as/content/jeff-brown/crash-reporter/4AH">http://u3d.as/content/jeff-brown/crash-reporter/4AH</a></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>アセット。ログが発生したら、メールでぶん投げる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>$10とのことなのでまあ、はい。小規模ならいいのでは。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>今回の用途</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・iOS/Andro<span class="s1">id</span>用に作ったUnity Appがユーザーの手元でどう動いてるか気になるよね。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・Unity Editor用に作ったAssetが使用者の手元でどう動いてるか気になるよね。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>自分の場合、後者の用途がより気になったりする。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>UnityのEditor用AssetのクラッシュレポートにCrittercismを使うよ的な。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>両方書くけど。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>iOS/Android 用</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Crittercism自体はUnity iOS/Android 用のプラグインを配布してないけど、Github探したらあった。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ちゃんとCrittercism製。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>iOS用</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/crittercism/crittercism-unity-ios">https://github.com/crittercism/crittercism-unity-ios</a></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Android用</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/crittercism/crittercism-unity-android">https://github.com/crittercism/crittercism-unity-android</a></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、うごかしてみたところ、Unity4.1までしか対応してない挙動してた。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>お問い合わせ中。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>Editor用</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Web用のものがそのまま使えた。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>こいつをAsset store にアップするかどうかは、調整中。</p>
+<p class="p2"><br></p>
+</body>
+</html>
