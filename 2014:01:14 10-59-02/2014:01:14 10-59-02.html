@@ -1,0 +1,136 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1187.4">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #ebebeb}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; color: #ff4013; background-color: #ebebeb}
+    span.s1 {font: 12.0px Helvetica}
+    span.s2 {background-color: transparent}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>UnityTestについて</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>AssetStoreにある、UnityのTestToolっぽいもの。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>実際にはなんなんだろう？</p>
+<p class="p3"><span class="Apple-tab-span">	</span>実機だとどう動作するんだろう？</p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b>これは何？</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Assertion、</p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>Assertion Componentってのがあってイイ</b>、、<b>とおもうんだけど、うんまあ、、はい、、</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Unity使ってて不満だったのが、デフォルトのAssertionメソッドが無かった事。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>gameObjectに対してセットするComponentとして、条件を指定する形式の実装がなされている。</p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Componentとして実装されているので、コードベースでやるよりも</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・いつのチェックか</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・何と比べるか</p>
+<p class="p3"><span class="Apple-tab-span">	</span>が、いろいろセットできてよい。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Assertionがそこかしこに書かれるよりはいい、、のかなあ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ちょっと解んないよ。</p>
+<p class="p2"><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>Assertionすると実際どうなるの？ AssertionのExampleを実行してみる</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Assetを入れてみると、Exampleが2つ入っているので、見てみる。</p>
+<p class="p4"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202014-01-14%2011.10.37.png" alt="スクリーンショット 2014-01-14 11.10.37.png"></p>
+<p class="p3"><span class="Apple-tab-span">	</span>AssertionExampleScene.unity を開いてプレイすると、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ボールが画面奥に転がっていって下記Assertion fail の群が出る。</p>
+<p class="p2"><br></p>
+<p class="p5">AssertionException: Sphere assertion failed.</p>
+<p class="p5">(Sphere (UnityEngine.GameObject)).gameObject.renderer CompareToObject (Main Camera (UnityEngine.GameObject)).Camera failed.</p>
+<p class="p5">UnityEngine.Debug:LogException(Exception, Object)</p>
+<p class="p5">UnityTest.Assertions:CheckAssertions(AssertionComponent[]) (at Assets/UnityTestTools/Assertions/Assertions.cs:61)</p>
+<p class="p5">UnityTest.Assertions:CheckAssertions(AssertionComponent) (at Assets/UnityTestTools/Assertions/Assertions.cs:16)</p>
+<p class="p5">UnityTest.AssertionComponent:CheckAssertionFor(CheckMethod) (at Assets/UnityTestTools/Assertions/AssertionComponent.cs:260)</p>
+<p class="p5">UnityTest.AssertionComponent:Update() (at Assets/UnityTestTools/Assertions/AssertionComponent.cs:156)</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Sphereとcameraに関するassertion fail</p>
+<p class="p2"><br></p>
+<p class="p5">AssertionException: Sphere assertion failed.</p>
+<p class="p5">(Sphere (UnityEngine.GameObject)).Transform.position.y CompareToObject (Plane (UnityEngine.GameObject)).Transform.position.y failed.</p>
+<p class="p5">UnityEngine.Debug:LogException(Exception, Object)</p>
+<p class="p5">UnityTest.Assertions:CheckAssertions(AssertionComponent[]) (at Assets/UnityTestTools/Assertions/Assertions.cs:61)</p>
+<p class="p5">UnityTest.Assertions:CheckAssertions(AssertionComponent) (at Assets/UnityTestTools/Assertions/Assertions.cs:16)</p>
+<p class="p5">UnityTest.AssertionComponent:CheckAssertionFor(CheckMethod) (at Assets/UnityTestTools/Assertions/AssertionComponent.cs:260)</p>
+<p class="p5">UnityTest.AssertionComponent:FixedUpdate() (at Assets/UnityTestTools/Assertions/AssertionComponent.cs:162)</p>
+<p class="p3"><span class="Apple-tab-span">	</span>SphereとPlaneのposition.yに関するassertion fail</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これらは、SphereのInspector上で、コンポーネントとしてセットしてあった。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Sphereのコンポーネントに下記2つのAssertion設定がある。</p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="s1"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202014-01-14%2011.20.50.png" alt="スクリーンショット 2014-01-14 11.20.50.png"></span></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>なるほどなー。SphereとMain Cameraとか、SphereとPlaneを比較して、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>それぞれのプロパティの何がどうなったらダメ、とかを指定できる形。</p>
+<p class="p2"><br></p>
+<p class="p3"><b>Assertionのバリエーションはこんな感じ</b></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>何を比較するか</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="s1"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202014-01-14%2011.33.51.png" alt="スクリーンショット 2014-01-14 11.33.51.png"></span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>いつ比較するか</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="s1"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202014-01-14%2011.33.56.png" alt="スクリーンショット 2014-01-14 11.33.56.png"></span></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>試しに、SphereにSphereScript.csというスクリプトを新たにくっつけて、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>パブリックなVector3のパラメータ myVector3 を実装してみたうえで、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="s1"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202014-01-14%2011.37.30.png" alt="スクリーンショット 2014-01-14 11.37.30.png"></span></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Sphereにアタッチ + AssertionComponentを付け加えたところ、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="s1"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202014-01-14%2011.41.38.png" alt="スクリーンショット 2014-01-14 11.41.38.png"></span></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>確かに、SphereScript.myVector をターゲットに指定して、Nullじゃないよね！？　みたいなチェックができる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="s1"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202014-01-14%2011.39.30.png" alt="スクリーンショット 2014-01-14 11.39.30.png"></span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、実行してみると、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>チェックのタイミングをStart時にしたので、もちろんNullなmyVecotrのAssertionは失敗、下記が出た。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p6">ArgumentException: Null was passed to a value-type argument</p>
+<p class="p5">UnityTest.ComparerBaseGeneric`2[UnityEngine.Vector3,UnityEngine.Vector3].Compare (System.Object a, System.Object b) (at Assets/UnityTestTools/Assertions/Comparers/ComparerBase.cs:113)</p>
+<p class="p5">UnityTest.ComparerBase.Compare (System.Object objVal) (at Assets/UnityTestTools/Assertions/Comparers/ComparerBase.cs:44)</p>
+<p class="p5">UnityTest.ActionBase.Compare () (at Assets/UnityTestTools/Assertions/Comparers/ActionBase.cs:30)</p>
+<p class="p5">UnityTest.Assertions.CheckAssertions (UnityTest.AssertionComponent[] assertions) (at Assets/UnityTestTools/Assertions/Assertions.cs:32)</p>
+<p class="p5">UnityTest.Assertions.CheckAssertions (UnityTest.AssertionComponent assertion) (at Assets/UnityTestTools/Assertions/Assertions.cs:16)</p>
+<p class="p5">UnityTest.AssertionComponent.CheckAssertionFor (CheckMethod checkMethod) (at Assets/UnityTestTools/Assertions/AssertionComponent.cs:260)</p>
+<p class="p5">UnityTest.AssertionComponent.Start () (at Assets/UnityTestTools/Assertions/AssertionComponent.cs:103)</p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>インスペクタは別途あり、そこから一覧をみることができる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>適当なIdentityになりうる文字列とかを入れさせてほしいなーっ、、て思うが。<span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>Assertion感</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Good:</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>オブジェクトに対して制約を付けられる</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>タイミング系とかを細かくセットできるのはうれしいなって。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Bad:</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>AssertionのIdentityが付けられない。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>コメントはそれ単体でエラーにならないので否だけど、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>自分は<b>「このAssertionに失敗するってことはこういう不味いことが起こってるんだぜ」</b>とかを、Assertion失敗時に表示したいなー。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>たとえば、</p>
+<p class="p5">Assert(0 &lt; A.transform.position.z, "一瞬たりともAのz位置が0とかマイナスなんてありえない！！" );</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>みたいに書きたい。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Asserti<span class="s1">on</span> Fail 時には、</p>
+<p class="p5"><span class="s2"><span class="Apple-tab-span">	</span>Assertion Failed: </span>"一瞬たりともAのz位置が0とかマイナスなんてありえない！！"<span class="s2">とか出したい。</span></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これはComponent上でセットできても良いと思うんだけどなー。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3">つづきはまた今度書く。</p>
+</body>
+</html>
