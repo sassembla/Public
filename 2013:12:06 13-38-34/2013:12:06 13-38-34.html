@@ -15,18 +15,22 @@
     p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px 'Hiragino Kaku Gothic ProN'; background-color: #ebebeb}
     p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px 'Hiragino Kaku Gothic ProN'; background-color: #ebebeb; min-height: 20.0px}
     p.p8 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px 'Hiragino Kaku Gothic ProN'; color: #ff4013}
-    span.s1 {font: 13.0px Helvetica}
     span.Apple-tab-span {white-space:pre}
   </style>
 </head>
 <body>
-<p class="p1"><b>UnityのWWWで、ファイル送付時にヘッダー情報付加不可みたいな話</b></p>
+<p class="p1"><b>【解決した】UnityのWWWで、ファイル送付時にヘッダー情報付加不可みたいな話</b></p>
 <p class="p2"><br></p>
 <p class="p3"><b>概要</b></p>
 <p class="p4"><span class="Apple-tab-span">	</span>WWWで、サクっとファイルアップロードするサンプルを書こうとして詰まったのでメモまでに。</p>
 <p class="p5"><br></p>
 <p class="p4"><span class="Apple-tab-span">	</span>そもUnityでWWWを使うのが悪手なんだけど、WWWForm.AddBinaryData(…)　みたいなのを見かけて、</p>
 <p class="p4"><span class="Apple-tab-span">	</span>ああー簡単に書けるんだろうなーきっと、って思ったんだけど、そうでも無かったんだぜばなし。</p>
+<p class="p5"><span class="Apple-tab-span">	</span></p>
+<p class="p4"><span class="Apple-tab-span">	</span>↑2014/01/30 1:12:48　書き方変えたらちゃんと動いた。　一体何に嵌っていたんだ俺は、、、</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>参考：</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Unityでtwitterに投稿する方法(API1.1)</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://zi-su.blogspot.jp/2014/01/unitytwitterapi11.html">http://zi-su.blogspot.jp/2014/01/unitytwitterapi11.html</a></p>
 <p class="p5"><br></p>
 <p class="p5"><br></p>
 <p class="p4"><b>実装</b></p>
@@ -48,14 +52,14 @@
 <p class="p5"><br></p>
 <p class="p4"><b><span class="Apple-tab-span">	</span>で、じゃあheaderに細工しようー、と思ったんだ、</b></p>
 <p class="p5"><br></p>
-<p class="p4"><span class="Apple-tab-span">	</span>head<span class="s1">er</span>に key:value みたいなのを入れてみようぜーって。</p>
+<p class="p4"><span class="Apple-tab-span">	</span>headerに key:value みたいなのを入れてみようぜーって。</p>
 <p class="p5"><span class="Apple-tab-span">	</span></p>
 <p class="p6"><span class="Apple-tab-span">	</span>var data = 何かbyte[]なデータ;</p>
 <p class="p7"><br></p>
 <p class="p6"><span class="Apple-tab-span">	</span>WWWForm form = new WWWForm();</p>
 <p class="p6"><span class="Apple-tab-span">	</span>form.AddBinaryData(name, data, name, dataType);</p>
 <p class="p7"><span class="Apple-tab-span">	</span></p>
-<p class="p6"><span class="Apple-tab-span">	</span>var www = new WWW(url, <span class="s1">attachData, headers</span>);// こういうのがあれば良いよね</p>
+<p class="p6"><span class="Apple-tab-span">	</span>var www = new WWW(url, attachData, headers);// こういうのがあれば良いよね</p>
 <p class="p5"><br></p>
 <p class="p4"><span class="Apple-tab-span">	</span>ところが、attachDataを受け入れるスロットが、WWWのコンストラクタには無い。</p>
 <p class="p4"><span class="Apple-tab-span">	</span>WWW(url, data, headers) っていうのはあるけど、dataはbodyの中身になるものだ。</p>
