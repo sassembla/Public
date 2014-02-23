@@ -1,0 +1,230 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1187.4">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #ebebeb; min-height: 18.0px}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #ebebeb}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; color: #323333; background-color: #ebebeb; min-height: 18.0px}
+    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; color: #323333; background-color: #ebebeb}
+    p.p8 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; color: #999988; background-color: #ebebeb}
+    p.p9 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; color: #dd2244; background-color: #ebebeb}
+    p.p10 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; color: #ff4013; background-color: #ebebeb; min-height: 18.0px}
+    p.p11 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; color: #ff4013; background-color: #ebebeb}
+    p.p12 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; color: #3a88fe; background-color: #ebebeb}
+    p.p13 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; color: #ff4013; min-height: 18.0px}
+    p.p14 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; color: #323333; min-height: 18.0px}
+    p.p15 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; color: #323333}
+    p.p16 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px 'Hiragino Kaku Gothic ProN'; background-color: #ebebeb; min-height: 20.0px}
+    p.p17 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px 'Hiragino Kaku Gothic ProN'; background-color: #ebebeb}
+    span.s1 {color: #ff4013}
+    span.s2 {color: #991200}
+    span.s3 {color: #323333}
+    span.s4 {color: #dd2244}
+    span.s5 {color: #000000}
+    span.s6 {color: #3a88fe}
+    span.s7 {color: #0061ff}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>JSONにルールをチョイ足しして実行できるJSON拡張記法 SushiJSON</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>JSON自体はそのままだと値にしかならないが、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>JSONに外部文字列を与えて、単純なパーサーで実行できるようにした。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>その定義とパーサーとサンプルの実行実装をまとめたものがこれ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/SushiJSON">https://github.com/sassembla/SushiJSON</a></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>SushiJSONをもとに、自分用のAPIを定義して実行できる。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>使用例</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>SublimeSocket3</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/SublimeSocket3">https://github.com/sassembla/SublimeSocket3</a></p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Sublime Text のAPIを、この記法でWebSocket越しに実行できるようにした。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>対応するSTのAPIを書き、順などを指定して遠隔実行したり、内部にフィルタなどを構築できる。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ST2用のSublimeSocketにマージ中。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>記法サンプル</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ファイルか、ネットワーク経由のデータで下記みたいな記法のものを送り込み</p>
+<p class="p3">helloworld.txt or <span class="s1">data via network</span></p>
+<p class="p4"><b></b><br></p>
+<p class="p5"><b><span class="Apple-tab-span">	</span></b>helloWorld: {←最外部はquote無し、<b>:</b>付き。 <b>:</b>以降はJSON。</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"message": "hello world!"</p>
+<p class="p5"><span class="Apple-tab-span">	</span>}</p>
+<p class="p4"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>実装サンプル</b></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>こんなかんじの実装を書く事で</p>
+<p class="p6"><b></b><br></p>
+<p class="p7"><b>data = ファイルデータ</b></p>
+<p class="p6"><b></b><br></p>
+<p class="p7"><b>def</b> <span class="s2"><b>runAPI</b></span>(command, params):</p>
+<p class="p6"><br></p>
+<p class="p8"><span class="s3"><span class="Apple-tab-span">	</span></span># print "message" value</p>
+<p class="p7"><span class="Apple-tab-span">	</span><b>if</b> command <b>==</b> <span class="s4">"helloWorld"</span>:</p>
+<p class="p9"><span class="s3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><b>assert</b> </span>"message"<span class="s3"> <b>in</b> params, </span>"helloWorld requires 'message' param."</p>
+<p class="p6"><br></p>
+<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><b>print</b>(params[<span class="s4">"message"</span>])</p>
+<p class="p6"><br></p>
+<p class="p6"><br></p>
+<p class="p7">// run</p>
+<p class="p7">[runAPI(command, params) <b>for</b> command, params <b>in</b> <b>SushiJSONParser.parseFromFile</b>(<span class="s5">data</span>)]</p>
+<p class="p6"><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><b><span class="Apple-tab-span">	</span></b></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>実行結果サンプル</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>動作、結果がでる。</p>
+<p class="p2"><br></p>
+<p class="p4"><br></p>
+<p class="p5">hello world!</p>
+<p class="p4"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3">特徴とか</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b>JSONをAPIへのパラメータとして使用する</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>APIName:{JSON}</p>
+<p class="p2"><b></b><br></p>
+<p class="p10"><b></b><br></p>
+<p class="p11"><b><span class="Apple-tab-span">	</span></b>"APIName": {</p>
+<p class="p11"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"key": "value"</p>
+<p class="p11"><span class="Apple-tab-span">	</span>}</p>
+<p class="p4"><b></b><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>順解釈して実行可</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>parserからだと、 -&gt; で接続したAPIを順に解釈して実行できる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>単純な順実行で、値の共有などは無し。</p>
+<p class="p2"><b></b><br></p>
+<p class="p10"><b></b><br></p>
+<p class="p11"><b><span class="Apple-tab-span">	</span></b>"APIName": {</p>
+<p class="p11"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"key": "value"</p>
+<p class="p11"><span class="Apple-tab-span">	</span>}</p>
+<p class="p11"><span class="Apple-tab-span">	</span>-&gt;"APIName2": {</p>
+<p class="p11"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"key2": "value2"</p>
+<p class="p11"><span class="Apple-tab-span">	</span>}</p>
+<p class="p4"><b></b><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>ネスト可</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span></b>APIの実行後、内部から次のAPIを実行する機構として、"selectors"キーワードを使用する。</p>
+<p class="p3"><b><span class="Apple-tab-span">	</span></b>selectorsの中身は順番で実行されるが、同一selectors内にあるAPI間の値の引き渡しは無し。</p>
+<p class="p2"><b></b><br></p>
+<p class="p10"><b></b><br></p>
+<p class="p11"><b><span class="Apple-tab-span">	</span></b>"APIName1": {</p>
+<p class="p11"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"key1": "value1"</p>
+<p class="p11"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"<b>selectors</b>": [</p>
+<p class="p11"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="s6">{</span></p>
+<p class="p12"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>"APIName2": {</p>
+<p class="p12"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"key2": "value2"</p>
+<p class="p12"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}</p>
+<p class="p11"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="s6">},</span></p>
+<p class="p12"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>{</p>
+<p class="p12"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"APIName3": {</p>
+<p class="p12"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"key3":"value3"</p>
+<p class="p12"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}</p>
+<p class="p12"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}</p>
+<p class="p11"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>]</p>
+<p class="p11"><span class="Apple-tab-span">	</span>}</p>
+<p class="p10"><br></p>
+<p class="p13"><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>API間の値の受け渡しに対してグローバル無し+明示的</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>selectorsを介して実行するAPIのパラメータ部分へと、キーを指定してキー+値の代入ができる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>代入するキーを明示しないと代入されない。</p>
+<p class="p13"><b><span class="Apple-tab-span">	</span></b></p>
+<p class="p10"><b></b><br></p>
+<p class="p11"><b><span class="Apple-tab-span">	</span></b>"APIName1": {</p>
+<p class="p11"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"selectors": [</p>
+<p class="p12"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>{</p>
+<p class="p12"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"APIName2&lt;-<span class="s1">APIName1の結果のキー</span>": {</p>
+<p class="p11"><span class="s7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>//<span class="Apple-converted-space">  </span>+ APIName1の結果のキー: APIName1の結果</p>
+<p class="p12"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}</p>
+<p class="p12"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}</p>
+<p class="p11"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>]</p>
+<p class="p11"><span class="Apple-tab-span">	</span>}</p>
+<p class="p4"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>処理系実装がどの言語でもたぶん簡単</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>処理系はJSONのSerialize/Deserializeが用意されてる言語なら200行くらいで実装できるはず。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ジェネレータがあれば逐次実行も容易。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Pythonでの処理系はこんな感じ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/SushiJSON/blob/master/parser/SushiJSON.py">https://github.com/sassembla/SushiJSON/blob/master/parser/SushiJSON.py</a></p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b>動作系の実装がどの言語でも割と簡単</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>パースとAPIのネスト実行まで含めてこんなかんじに書ける。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/SushiJSON/blob/master/parser/runtimeSample/SampleSushiJSONRunner.py#L18">https://github.com/sassembla/SushiJSON/blob/master/parser/runtimeSample/SampleSushiJSONRunner.py#L18</a></p>
+<p class="p14"><br></p>
+<p class="p6"><b></b><br></p>
+<p class="p7"><b>def</b> <span class="s2"><b>runAPI</b></span>(command, params):</p>
+<p class="p6"><br></p>
+<p class="p8"><span class="s3"><span class="Apple-tab-span">	</span></span># print "message" value</p>
+<p class="p7"><span class="Apple-tab-span">	</span><b>if</b> command <b>==</b> <span class="s4">"helloWorld"</span>:</p>
+<p class="p9"><span class="s3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><b>assert</b> </span>"message"<span class="s3"> <b>in</b> params, </span>"helloWorld requires 'message' param."</p>
+<p class="p6"><br></p>
+<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><b>print</b>(params[<span class="s4">"message"</span>])</p>
+<p class="p6"><br></p>
+<p class="p6"><br></p>
+<p class="p8"><span class="s3"><span class="Apple-tab-span">	</span></span># print "message" then run selectors if "selectors" param is exist in param.</p>
+<p class="p7"><span class="Apple-tab-span">	</span><b>elif</b> command <b>==</b> <span class="s4">"sequence"</span>:</p>
+<p class="p9"><span class="s3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><b>assert</b> </span>"message"<span class="s3"> <b>in</b> params, </span>"sequence requires 'message' param."</p>
+<p class="p9"><span class="s3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>message <b>=</b> </span>"the param of "<span class="s3"> <b>+</b> params[</span>"message"<span class="s3">]</span></p>
+<p class="p6"><br></p>
+<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><b>print</b>(message)</p>
+<p class="p6"><br></p>
+<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>SushiJSONParser<b>.</b>runSelectors(</p>
+<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>params,</p>
+<p class="p9"><span class="s3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>[</span>"message"<span class="s3">],</span></p>
+<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>[message],</p>
+<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>runAPI</p>
+<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>)</p>
+<p class="p6"><br></p>
+<p class="p7">// run</p>
+<p class="p7">[runAPI(command, params) <b>for</b> command, params <b>in</b> SushiJSONParser<b>.</b>parseFromFile(<span class="s5">data</span>)]</p>
+<p class="p6"><br></p>
+<p class="p14"><span class="Apple-tab-span">	</span></p>
+<p class="p15"><span class="Apple-tab-span">	</span>こんなのに対して、次の text を送り込むと、</p>
+<p class="p14"><br></p>
+<p class="p16"><br></p>
+<p class="p17">// sequencial run with selectors</p>
+<p class="p16"><br></p>
+<p class="p17">sequence: {</p>
+<p class="p17"><span class="Apple-tab-span">	</span>"message": "seq1",</p>
+<p class="p16"><br></p>
+<p class="p17"><span class="Apple-tab-span">	</span>// the keyword that is defined in SushiJSON.</p>
+<p class="p17"><span class="Apple-tab-span">	</span>"selectors": [</p>
+<p class="p17"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>{</p>
+<p class="p17"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"helloWorld": {</p>
+<p class="p17"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"message": "hello from selectors"</p>
+<p class="p17"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}</p>
+<p class="p17"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}</p>
+<p class="p17"><span class="Apple-tab-span">	</span>]</p>
+<p class="p17">}</p>
+<p class="p6"><br></p>
+<p class="p14"><br></p>
+<p class="p15"><span class="Apple-tab-span">	</span>結果はこんな感じ</p>
+<p class="p14"><br></p>
+<p class="p7">the param of seq1</p>
+<p class="p7">hello from selectors</p>
+</body>
+</html>
