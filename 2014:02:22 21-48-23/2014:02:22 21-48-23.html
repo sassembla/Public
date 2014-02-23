@@ -27,8 +27,9 @@
     span.s3 {color: #323333}
     span.s4 {color: #dd2244}
     span.s5 {color: #000000}
-    span.s6 {color: #3a88fe}
-    span.s7 {color: #0061ff}
+    span.s6 {font: 12.0px Helvetica}
+    span.s7 {color: #3a88fe}
+    span.s8 {color: #0061ff}
     span.Apple-tab-span {white-space:pre}
   </style>
 </head>
@@ -42,7 +43,18 @@
 <p class="p3"><span class="Apple-tab-span">	</span>その定義とパーサーとサンプルの実行実装をまとめたものがこれ。</p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/SushiJSON">https://github.com/sassembla/SushiJSON</a></p>
 <p class="p4"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>SushiJSONをもとに、自分用のAPIを定義して実行できる。</p>
+<p class="p4"><br></p>
+<p class="p3"><b>できること</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・JSONの外側に文字列を追加するだけで形成可能</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・自分用のAPIを定義して実行できる</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・APIから別のAPIの実行が可能</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>なので、JSONをデータとして受取って動作する機構があった時、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・受取ったデータから<b>特定のパラメータを取り出して動作する</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>みたいなのが、</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>・受取ったデータを元にダイレクトに動作する</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>という形にできる。危ない。</p>
 <p class="p4"><br></p>
 <p class="p4"><br></p>
 <p class="p3"><b>使用例</b></p>
@@ -101,10 +113,41 @@
 <p class="p3"><span class="Apple-tab-span">	</span>APIName:{JSON}</p>
 <p class="p4"><b></b><br></p>
 <p class="p11"><b></b><br></p>
-<p class="p12"><b><span class="Apple-tab-span">	</span></b>APIName: {</p>
-<p class="p12"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"key": "value"</p>
-<p class="p12"><span class="Apple-tab-span">	</span>}</p>
+<p class="p6"><b><span class="Apple-tab-span">	</span></b>APIName: {</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"key": "value"</p>
+<p class="p6"><span class="Apple-tab-span">	</span>}</p>
 <p class="p5"><b></b><br></p>
+<p class="p4"><b></b><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>APIName: から先が<span class="s6">JSON</span>。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>JSONとして解釈できさえすればOK</b>なので、</p>
+<p class="p4"><b></b><br></p>
+<p class="p11"><b></b><br></p>
+<p class="p6"><b><span class="Apple-tab-span">	</span></b>APIName: {</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"keys": [</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"key1",</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"key2",</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"key3"</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>],</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"values": {</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"key1": "value1",</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"key2": "value2",</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"key3": "value3"</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>},</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"something": [</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>{</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"key": "value",</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"array": [</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"key1",</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>100,</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>false</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>]</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>]</p>
+<p class="p6"><span class="Apple-tab-span">	</span>}</p>
+<p class="p5"><b></b><br></p>
+<p class="p4"><b><span class="Apple-tab-span">	</span></b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>など、配列入れたり辞書いれたり値入れたり、自由にできる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>まあこんな引数で動作するAPI厭だが。</p>
 <p class="p4"><b></b><br></p>
 <p class="p4"><b></b><br></p>
 <p class="p3"><b>順解釈して実行可</b></p>
@@ -129,11 +172,11 @@
 <p class="p12"><b><span class="Apple-tab-span">	</span></b>APIName1: {</p>
 <p class="p12"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"key1": "value1"</p>
 <p class="p12"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"<b>selectors</b>": [</p>
-<p class="p12"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="s6">{</span></p>
+<p class="p12"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="s7">{</span></p>
 <p class="p13"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>"APIName2": {</p>
 <p class="p13"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"key2": "value2"</p>
 <p class="p13"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}</p>
-<p class="p12"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="s6">},</span></p>
+<p class="p12"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="s7">},</span></p>
 <p class="p13"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>{</p>
 <p class="p13"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"APIName3": {</p>
 <p class="p13"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"key3":"value3"</p>
@@ -153,7 +196,7 @@
 <p class="p12"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"selectors": [</p>
 <p class="p13"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>{</p>
 <p class="p13"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"APIName2&lt;-<span class="s1">APIName1の結果のキー</span>": {</p>
-<p class="p12"><span class="s7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>//<span class="Apple-converted-space">  </span>+ APIName1の結果のキー: APIName1の結果</p>
+<p class="p12"><span class="s8"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>//<span class="Apple-converted-space">  </span>+ APIName1の結果のキー: APIName1の結果</p>
 <p class="p13"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}</p>
 <p class="p13"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}</p>
 <p class="p12"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>]</p>
