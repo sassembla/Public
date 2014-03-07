@@ -1,0 +1,128 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1187.4">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #ebebeb}
+    span.s1 {font: 12.0px Helvetica}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>SSA 1.7.x is out! そのうちAtomにも対応するつもり。</b></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span></b>SublimeSocketAsset</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://u3d.as/content/sassembla/sublime-socket-asset/4SP">http://u3d.as/content/sassembla/sublime-socket-asset/4SP</a></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>の、最新版 1.7系がついにリリースできた。</p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>合わせて、SublimeTextのプラグインである</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>SublimeSocketのversionもST2, ST3版ともに1.4に上がった。</b></p>
+<p class="p2"><b><span class="Apple-tab-span">	</span></b></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>変更内容としては、どっちかというとSublimeSocketのエディタAPI機能強化と、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>内部で使っていたプログラマブルな設定ファイルのDSL化、DSLとしてのパージがメインだった。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>パージする過程でキバッたメンバーの手によりテストランナーが誕生するとかしてた。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>DSL + テストランナーの仕様と処理系を切り出す事に成功したが、それはこちら。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><b>SushiJSON</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://sassembla.github.io/Public/2014:02:22%2021-48-23/2014:02:22%2021-48-23.html">http://sassembla.github.io/Public/2014:02:22%2021-48-23/2014:02:22%2021-48-23.html</a></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>結果として、ST2、ST3に、動的にプログラマブルな形で新機能を実装できた。</b></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・ログヒストリー機能の追加</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・エラー表示の内部化</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・quickfixの追加</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・プログラマブル</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・テスタブル</p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>Unityの実行時ログのヒストリー表示機能が付いた</b></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>同じ箇所のログをヒストリーとして纏めて表示することができるので、</p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>値の変化とかを超追いやすくなった。</b></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ツールチップUIの有無で表示方法が変化する。</p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>on ST3</b></p>
+<p class="p4"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202014-03-06%203.31.48.png" alt="スクリーンショット 2014-03-06 3.31.48.png"></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>on ST2</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ツールチップが無いから<b>別ビュー</b>で出すようにした。<span class="s1"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202014-03-06%203.27.26.png" alt="スクリーンショット 2014-03-06 3.27.26.png"></span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>いやーーーーマジ便利っすわァーーーー</p>
+<p class="p3"><span class="Apple-tab-span">	</span>値が増えてるか減ってるか、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ココを通ったときのパラメータがどうなってるか、がコードに出せる！</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>エラー表示の内部化</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>こちらもツールチップの利用。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ST2版は別ビューででる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>複数のエラーがある場合は複数の項目が縦に並ぶ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="s1"><img src="cutout.png" alt="cutout.png"></span></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>見やすさ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>なんという見やすさよ。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これがプログラマブルにフィルタとしてセットできるんだぜヒャッホウ。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>quickfixの追加</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>おまけ程度だけど、quickfix可能であれば、該当するエラーのツールチップを押すと</p>
+<p class="p3"><span class="Apple-tab-span">	</span>quickfixが出て、修正が走る。<span class="s1"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202014-03-06%204.57.24.png" alt="スクリーンショット 2014-03-06 4.57.24.png"></span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>プログラマブル</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これらの機構は、全部SushiJSONの組み合わせで書かれている。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>マッチさせたいエラーの定義も、マッチ後どんなAPIをぶったたいてどんな値を使いたいかも、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>JSONみたいな書き方で動かせる。</p>
+<p class="p4"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202014-03-06%2011.05.50.png" alt="スクリーンショット 2014-03-06 11.05.50.png"></p>
+<p class="p3"><span class="Apple-tab-span">	</span>例えば、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・エラーが出たらエディタの特定行を光らせる</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・探知時のパラメータを使ってshellを走らせる</p>
+<p class="p3"><span class="Apple-tab-span">	</span>とかができる。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>一番の用途は、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・エディタへのユーザーのアクション or その後のコンパイラのリアクションを元に何かする</p>
+<p class="p3"><span class="Apple-tab-span">	</span>というところ。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>もちろん、保存したらコンパイル、なんかもここで実現している。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>結果としてタスクランナーみたいなのも可能だけど、ちゃんと特化した奴を使うのが良いとおもう。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ドキュメントはSublimeSocketに追加中。 API名と出力パラメータをリスト化すればDone。</p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>テスタブル</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>テストできる項目の都合で、ほぼST3専用だが、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ST3にSublimeSocket 1.4.0 を入れた状態で、</p>
+<p class="p2"><br></p>
+<p class="p5"><span class="Apple-tab-span">	</span>sublimesocket test</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、テストが走る。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ツールチップとかめっちゃでる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>これ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://vimeo.com/85882769">https://vimeo.com/85882769</a></p>
+<p class="p4"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202014-03-08%208.09.17.png" alt="スクリーンショット 2014-03-08 8.09.17.png"></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>Atomに向けて</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>SushiJSONは実行系がわりと小さく書けるので、Atomでも動かす事が出来ると思う。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>魅力的なツールチップとかが出て来たら対応する。</p>
+<p class="p2"><br></p>
+</body>
+</html>
