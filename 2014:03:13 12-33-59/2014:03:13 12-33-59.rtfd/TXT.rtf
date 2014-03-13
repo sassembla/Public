@@ -1,0 +1,188 @@
+{\rtf1\ansi\ansicpg932\cocoartf1187\cocoasubrtf400
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fnil\fcharset128 HiraKakuProN-W3;}
+{\colortbl;\red255\green255\blue255;\red230\green230\blue230;\red217\green11\blue0;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww15400\viewh11720\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+
+\f0\b\fs44 \cf0 SublimeSocket 
+\f1 \'82\'c5
+\f0 Ruby
+\f1 \'82\'cc\'8e\'c0\'8d\'73\'82\'c6Runtime\'82\'c8\'83\'47\'83\'89\'81\'5b\'82\'cc\'95\'5c\'8e\'a6
+\fs24 \
+\
+\'8a\'54\'97\'76\
+	
+\b0 \'83\'54\'83\'93\'83\'76\'83\'8b\'82\'c6\'82\'b5\'82\'c4\'8d\'ec\'82\'c1\'82\'c4\'82\'dd\'82\'bd\'81\'42\
+	
+\f0 Sublime
+\f1  Text \'82\'c5\'83\'52\'81\'5b\'83\'68\'82\'f0\'95\'db\'91\'b6\'82\'b7\'82\'e9\'82\'c6\'81\'41shell\'82\'aa\'91\'96\'82\'c1\'82\'c4Ruby\'8e\'c0\'8d\'73\'81\'41\
+	\'83\'47\'83\'89\'81\'5b\'82\'aa\'8f\'6f\'82\'ea\'82\'ce\'83\'52\'81\'5b\'83\'68\'8f\'e3\'82\'c9\'83\'47\'83\'89\'81\'5b\'8d\'73\'82\'f0\'95\'5c\'8e\'a6\'82\'b7\'82\'e9\'81\'42\
+\
+	\
+\
+\
+
+\b \'83\'54\'83\'93\'83\'76\'83\'8b\'88\'ea\'8e\'ae
+\b0 \
+	\'83\'52\'81\'5b\'83\'68\'82\'c6\'82\'a9\'88\'ea\'8e\'ae\'82\'aaSublimeSocket3 \'82\'cc\'83\'74\'83\'48\'83\'8b\'83\'5f\'93\'e0\'82\'c9\'93\'fc\'82\'c1\'82\'c4\'82\'a2\'82\'e9\
+\
+
+\b 	hello.rb
+\b0 \
+
+\b 	log.txt
+\b0 \
+
+\b 	rubyFilter.txt
+\b0 \
+		\'95\'db\'91\'b6\'8e\'9e\'82\'cc\'83\'47\'83\'66\'83\'42\'83\'5e\'8b\'93\'93\'ae\
+\
+
+\b 	run.sh
+\b0 \
+		hello.rb\'82\'f0\'8e\'c0\'8d\'73\'82\'b7\'82\'e9shell\
+	\
+	\
+hello.rb\
+\cb2 # show runtime error when save. see ./rubyFilter.txt\
+\
+pauts "hello world"\
+\
+\
+\cb1 \
+	\'8e\'c0\'8d\'73\'91\'ce\'8f\'db\'82\'cc\'83\'8b\'83\'62\'83\'72\'83\'74\'83\'40\'83\'43\'83\'8b	\
+	\'82\'a2\'82\'ab\'82\'c8\'82\'e8typo\'82\'aa\'82\'a0\'82\'e8\'81\'41\'8e\'c0\'8d\'73\'8e\'9e\'82\'c9\'82\'cd\'83\'47\'83\'89\'81\'5b\'82\'f0\'93\'66\'82\'ad\'81\'42\
+\
+\
+log.txt\
+	\'8e\'c0\'8d\'73\'83\'8d\'83\'4f\'82\'aa\'93\'66\'82\'a9\'82\'ea\'82\'e9\'82\'c6\'82\'b1\'82\'eb\'81\'42\
+\
+
+\f0 rubyFilter
+\f1 .txt\
+\cb2 // use RuhSushiJSON for running.\
+// this file is writtern by SushiJSON-lang (https://github.com/sassembla/SushiJSON) \
+\
+showAtLog: \{\
+	"message": "start defining for ruby."\
+\}->defineFilter: \{\
+	"name": "rubyFilter",\
+	"filters": [\
+		\{\
+			// error\
+			// e.g.)hello.rb:3: undefined local variable or method `somethingwrong' for main:Object (NameError)\
+			"(.*?):([0-9].*): (.*)\\n": \{\
+				"injects": \{\
+					"groups[0]": "name",\
+					"groups[1]": "line",\
+					"source": "message"\
+				\},\
+				"selectors": [\
+					\{\
+						"showAtLog<-message": \{\
+\
+						\}\
+					\},\
+					\{\
+						"appendRegion<-name, line, message": \{\
+							"condition": "keyword"\
+						\}\
+					\}\
+				]\
+			\}\
+		\}\
+	]\
+\}->setViewReactor: \{\
+    "react": "on_post_save",\
+    "reactors": [\
+    	\{\
+    		"showAtLog": \{\
+    			"message": "saved."\
+    		\}\
+    	\},\
+    	\{\
+    		"eraseAllRegions": \{\
+    			\
+    		\}\
+    	\},\
+    	\{\
+    		"runShell": \{\
+    			"main": "/bin/sh",\
+    			"": "
+\b \cf3 /Users/highvision/Desktop/rubySample/run.sh
+\b0 \cf0 "\
+    		\}\
+    	\}\
+    ]\
+\}->startTailing: \{\
+	"identity": "sample ruby tail",\
+	"path": "
+\b \cf3 /Users/highvision/Desktop/rubySample/log.txt
+\b0 \cf0 ",\
+	"reactors": [\
+		\{\
+			"filtering<-source": \{\
+				"name": "rubyFilter"\
+			\}\
+		\}\
+	]\
+\}->showAtLog: \{\
+	"message": "ruby setting done."\
+\}\
+\cb1 \
+	\'82\'c5\'82\'af\'82\'a6\'81\'42\'81\'42\'81\'42\
+\
+	
+\b \'95\'db\'91\'b6\'8e\'9e\'82\'c9shell\'82\'cc\'8b\'4e\'93\'ae\'81\'41
+\b0 \
+	
+\b \'83\'47\'83\'89\'81\'5b\'83\'8d\'83\'4f\'82\'c9tail\'83\'6e\'83\'93\'83\'68\'83\'89\'82\'f0\'92\'c7\'89\'c1\'81\'41
+\b0 \
+	
+\b \'83\'47\'83\'89\'81\'5b\'82\'f0\'83\'74\'83\'40\'83\'43\'83\'8b\'8f\'e3\'82\'c9\'95\'5c\'8e\'a6\'81\'41
+\b0 \
+\
+	\'82\'cc3\'82\'c2\'82\'cc\'83\'8a\'83\'41\'83\'4e\'83\'5e\'81\'5b\'82\'f0\'8f\'87\'82\'c9\'83\'5a\'83\'62\'83\'67\'82\'b5\'82\'c4\'82\'a2\'82\'e9\'81\'42\
+
+\b \cf3 	\'90\'d4\'95\'b6\'8e\'9a\'82\'cc\'95\'94\'95\'aa\'82\'c9\'83\'76\'83\'8d\'83\'57\'83\'46\'83\'4e\'83\'67\'83\'70\'83\'58\'82\'aa\'92\'bc\'8f\'91\'82\'ab\'82\'b5\'82\'c4\'82\'a0\'82\'e9\'81\'42
+\b0 \cf0 \
+\
+\
+run.sh\
+\cb2 cwd=`dirname "$\{0\}"`\
+\
+ruby $cwd/hello.rb &> $cwd/log.txt\
+\cb1 	\
+	\'93\'af\'88\'ea\'83\'74\'83\'48\'83\'8b\'83\'5f\'82\'cchello.rb\'82\'f0\'8e\'c0\'8d\'73\'82\'b5\'82\'c4log.txt\'82\'c9\'91\'ab\'82\'b7\'82\'be\'82\'af\'81\'42\
+\
+\
+
+\b \'8e\'c0\'8d\'73
+\b0 \
+	\'81\'45SublimeSocket3\'82\'f0ST3\'82\'ccpackage\'82\'c9\'93\'fc\'82\'ea\'82\'e9\
+	\'81\'45sample/rubySample \'82\'f0\'93\'4b\'93\'96\'82\'c9\'82\'c7\'82\'b1\'82\'a9\'82\'c9\'83\'52\'83\'73\'81\'5b\
+	\'81\'45rubyFilter.txt \'93\'e0\'82\'cc\'83\'70\'83\'58\'82\'f0\'95\'cf\'8d\'58(runShell\'82\'c6startTailing)\
+	\'81\'45CommandPalette > "SublimeSocket: run SushiJSON"\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural
+\cf0 		
+\f0 {{\NeXTGraphic スクリーンショット 2014-03-13 12.58.41.png \width11420 \height1660
+}�}
+\f1 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+\cf0 \
+	\'82\'c5\'81\'41\'88\'c8\'8d\'7e\'81\'41hello.rb \'82\'c9\'8e\'c0\'8d\'73\'8e\'9e\'83\'47\'83\'89\'81\'5b\'82\'aa\'82\'a0\'82\'e9\'82\'c6\'81\'41\'82\'a9\'82\'b1\'82\'f1\'82\'c5\'95\'5c\'8e\'a6\'82\'b3\'82\'ea\'82\'e9\'81\'42\
+
+\f0 {{\NeXTGraphic スクリーンショット 2014-03-13 13.01.36.png \width14760 \height5980
+}�}
+\f1 \
+\
+	\'93\'ae\'8d\'ec\'82\'cd\'91\'53\'95\'94SublimeSocket3\'82\'ccAPI\'82\'a9\'82\'e7\'8e\'c0\'8d\'73\'82\'b5\'82\'c4\'82\'a2\'82\'e9\'82\'be\'82\'af\'82\'c8\'82\'cc\'82\'c5\'81\'41\
+	node\'92\'40\'82\'a2\'82\'bd\'82\'e8gradle\'92\'40\'82\'a2\'82\'bd\'82\'e8\'82\'e0\'8f\'6f\'97\'88\'82\'e9\'82\'c6\'8e\'76\'82\'a4\'81\'42\
+	\
+	\'96\'dc\'98\'5f\'83\'8d\'83\'4f\'82\'a9\'82\'e7\'83\'47\'83\'89\'81\'5b\'82\'be\'82\'b5\'82\'bd\'82\'e8\'81\'42\
+\
+	\
+\'88\'c8\'8f\'e3\'81\'42\
+\
+\
+}

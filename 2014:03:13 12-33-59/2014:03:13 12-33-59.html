@@ -1,0 +1,166 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1187.4">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #ebebeb}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #ebebeb; min-height: 18.0px}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; color: #e32400; background-color: #ebebeb}
+    p.p8 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; color: #e32400}
+    span.s1 {font: 22.0px Helvetica}
+    span.s2 {font: 12.0px Helvetica}
+    span.s3 {font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    span.s4 {color: #000000}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><span class="s1"><b>SublimeSocket </b></span><b>で</b><span class="s1"><b>Ruby</b></span><b>の実行とRuntimeなエラーの表示</b></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span></b>サンプルとして作ってみた。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="s2">Sublime</span> Text でコードを保存すると、shellが走ってRuby実行、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>エラーが出ればコード上にエラー行を表示する。</p>
+<p class="p2"><br></p>
+<iframe src="https://player.vimeo.com/video/88961966" width="500" height="280" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></p>
+<p class="p2"><br></p>
+<p class="p3"><b>サンプル一式</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>コードとか一式がSublimeSocket3 のフォルダ内に入っている</p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>hello.rb</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>log.txt</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>rubyFilter.txt</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>保存時のエディタ挙動</p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>run.sh</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>hello.rbを実行するshell</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3">hello.rb</p>
+<p class="p4"># show runtime error when save. see ./rubyFilter.txt</p>
+<p class="p5"><br></p>
+<p class="p4">pauts "hello world"</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>実行対象のルッビファイル<span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>いきなりtypoがあり、実行時にはエラーを吐く。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3">log.txt</p>
+<p class="p3"><span class="Apple-tab-span">	</span>実行ログが吐かれるところ。</p>
+<p class="p2"><br></p>
+<p class="p6">rubyFilter<span class="s3">.txt</span></p>
+<p class="p4">// use RuhSushiJSON for running.</p>
+<p class="p4">// this file is writtern by SushiJSON-lang (https://github.com/sassembla/SushiJSON)<span class="Apple-converted-space"> </span></p>
+<p class="p5"><br></p>
+<p class="p4">showAtLog: {</p>
+<p class="p4"><span class="Apple-tab-span">	</span>"message": "start defining for ruby."</p>
+<p class="p4">}-&gt;defineFilter: {</p>
+<p class="p4"><span class="Apple-tab-span">	</span>"name": "rubyFilter",</p>
+<p class="p4"><span class="Apple-tab-span">	</span>"filters": [</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>{</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>// error</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>// e.g.)hello.rb:3: undefined local variable or method `somethingwrong' for main:Object (NameError)</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"(.*?):([0-9].*): (.*)\n": {</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"injects": {</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"groups[0]": "name",</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"groups[1]": "line",</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"source": "message"</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>},</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"selectors": [</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>{</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"showAtLog&lt;-message": {</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>},</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>{</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"appendRegion&lt;-name, line, message": {</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"condition": "keyword"</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>]</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}</p>
+<p class="p4"><span class="Apple-tab-span">	</span>]</p>
+<p class="p4">}-&gt;setViewReactor: {</p>
+<p class="p4"><span class="Apple-converted-space">    </span>"react": "on_post_save",</p>
+<p class="p4"><span class="Apple-converted-space">    </span>"reactors": [</p>
+<p class="p4"><span class="Apple-converted-space">    <span class="Apple-tab-span">	</span></span>{</p>
+<p class="p4"><span class="Apple-converted-space">    <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>"showAtLog": {</p>
+<p class="p4"><span class="Apple-converted-space">    <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>"message": "saved."</p>
+<p class="p4"><span class="Apple-converted-space">    <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>}</p>
+<p class="p4"><span class="Apple-converted-space">    <span class="Apple-tab-span">	</span></span>},</p>
+<p class="p4"><span class="Apple-converted-space">    <span class="Apple-tab-span">	</span></span>{</p>
+<p class="p4"><span class="Apple-converted-space">    <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>"eraseAllRegions": {</p>
+<p class="p5"><span class="Apple-converted-space">    <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span></p>
+<p class="p4"><span class="Apple-converted-space">    <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>}</p>
+<p class="p4"><span class="Apple-converted-space">    <span class="Apple-tab-span">	</span></span>},</p>
+<p class="p4"><span class="Apple-converted-space">    <span class="Apple-tab-span">	</span></span>{</p>
+<p class="p4"><span class="Apple-converted-space">    <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>"runShell": {</p>
+<p class="p4"><span class="Apple-converted-space">    <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>"main": "/bin/sh",</p>
+<p class="p7"><span class="s4"><span class="Apple-converted-space">    <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>"": "</span><b>/Users/highvision/Desktop/rubySample/run.sh</b><span class="s4">"</span></p>
+<p class="p4"><span class="Apple-converted-space">    <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>}</p>
+<p class="p4"><span class="Apple-converted-space">    <span class="Apple-tab-span">	</span></span>}</p>
+<p class="p4"><span class="Apple-converted-space">    </span>]</p>
+<p class="p4">}-&gt;startTailing: {</p>
+<p class="p4"><span class="Apple-tab-span">	</span>"identity": "sample ruby tail",</p>
+<p class="p7"><span class="s4"><span class="Apple-tab-span">	</span>"path": "</span><b>/Users/highvision/Desktop/rubySample/log.txt</b><span class="s4">",</span></p>
+<p class="p4"><span class="Apple-tab-span">	</span>"reactors": [</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>{</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"filtering&lt;-source": {</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"name": "rubyFilter"</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}</p>
+<p class="p4"><span class="Apple-tab-span">	</span>]</p>
+<p class="p4">}-&gt;showAtLog: {</p>
+<p class="p4"><span class="Apple-tab-span">	</span>"message": "ruby setting done."</p>
+<p class="p4">}</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>でけえ。。。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>保存時にshellの起動、</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>エラーログにtailハンドラを追加、</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>エラーをファイル上に表示、</b></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>の3つのリアクターを順にセットしている。</p>
+<p class="p8"><b><span class="Apple-tab-span">	</span>赤文字の部分にプロジェクトパスが直書きしてある。</b></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3">run.sh</p>
+<p class="p4">cwd=`dirname "${0}"`</p>
+<p class="p5"><br></p>
+<p class="p4">ruby $cwd/hello.rb &amp;&gt; $cwd/log.txt</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>同一フォルダのhello.rbを実行してlog.txtに足すだけ。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>実行</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・SublimeSocket3をST3のpackageに入れる</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・sample/rubySample を適当にどこかにコピー</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・rubyFilter.txt 内のパスを変更(runShellとstartTailing)</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・CommandPalette &gt; "SublimeSocket: run SushiJSON"</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="s2"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202014-03-13%2012.58.41.png" alt="スクリーンショット 2014-03-13 12.58.41.png"></span></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、以降、hello.rb に実行時エラーがあると、かこんで表示される。</p>
+<p class="p6"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202014-03-13%2013.01.36.png" alt="スクリーンショット 2014-03-13 13.01.36.png"></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>動作は全部SublimeSocket3のAPIから実行しているだけなので、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>node叩いたりgradle叩いたりも出来ると思う。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>勿論ログからエラーだしたり。</p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3">以上。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+</body>
+</html>
