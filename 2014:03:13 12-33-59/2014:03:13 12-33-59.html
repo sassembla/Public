@@ -30,19 +30,22 @@
 <p class="p3"><span class="Apple-tab-span">	</span><span class="s2">Sublime</span> Text でコードを保存すると、shellが走ってRuby実行、</p>
 <p class="p3"><span class="Apple-tab-span">	</span>エラーが出ればコード上にエラー行を表示する。</p>
 <p class="p2"><br></p>
-<iframe src="https://player.vimeo.com/video/88961966" width="500" height="280" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>サンプル一式</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>コードとか一式がSublimeSocket3 のフォルダ内に入っている</p>
 <p class="p2"><br></p>
 <p class="p3"><b><span class="Apple-tab-span">	</span>hello.rb</b></p>
+<p class="p2"><br></p>
 <p class="p3"><b><span class="Apple-tab-span">	</span>log.txt</b></p>
+<p class="p2"><br></p>
 <p class="p3"><b><span class="Apple-tab-span">	</span>rubyFilter.txt</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>保存時のエディタ挙動</p>
-<p class="p2"><br></p>
-<p class="p3"><b><span class="Apple-tab-span">	</span>run.sh</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>hello.rbを実行するshell</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>各ファイルをみていく。</p>
+<p class="p2"><br></p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p3">hello.rb</p>
 <p class="p4"># show runtime error when save. see ./rubyFilter.txt</p>
@@ -132,25 +135,27 @@
 <p class="p3"><span class="Apple-tab-span">	</span><b>エラーをファイル上に表示、</b></p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>の3つのリアクターを順にセットしている。</p>
-<p class="p8"><b><span class="Apple-tab-span">	</span>赤文字の部分にプロジェクトパスが直書きしてある。</b></p>
+<p class="p8"><b><span class="Apple-tab-span">	</span>赤文字の部分にファイルパスが直書きしてある。</b></p>
 <p class="p2"><br></p>
-<p class="p2"><br></p>
-<p class="p3">run.sh</p>
-<p class="p4">cwd=`dirname "${0}"`</p>
-<p class="p5"><br></p>
-<p class="p4">ruby $cwd/hello.rb &amp;&gt; $cwd/log.txt</p>
-<p class="p2"><span class="Apple-tab-span">	</span></p>
-<p class="p3"><span class="Apple-tab-span">	</span>同一フォルダのhello.rbを実行してlog.txtに足すだけ。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>実行</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>・SublimeSocket3をST3のpackageに入れる</p>
-<p class="p3"><span class="Apple-tab-span">	</span>・sample/rubySample を適当にどこかにコピー</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・sample/rubySample フォルダを適当にどこかにコピー</p>
 <p class="p3"><span class="Apple-tab-span">	</span>・rubyFilter.txt 内のパスを変更(runShellとstartTailing)</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/SublimeSocket3/blob/master/samples/rubySample/rubyFilter.txt#L48">https://github.com/sassembla/SublimeSocket3/blob/master/samples/rubySample/rubyFilter.txt#L48</a></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/SublimeSocket3/blob/master/samples/rubySample/rubyFilter.txt#L50">https://github.com/sassembla/SublimeSocket3/blob/master/samples/rubySample/rubyFilter.txt#L50</a></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/SublimeSocket3/blob/master/samples/rubySample/rubyFilter.txt#L57">https://github.com/sassembla/SublimeSocket3/blob/master/samples/rubySample/rubyFilter.txt#L57</a></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>・CommandPalette &gt; "SublimeSocket: run SushiJSON"</p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="s2"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202014-03-13%2012.58.41.png" alt="スクリーンショット 2014-03-13 12.58.41.png"></span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・画面下のバーに入力窓がでるので、<span class="s2">rubyFilter</span>.txtのファイルパスを入れてエンター</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>どこか/<span class="s2">rubyFilter</span>.txt</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>で、以降、hello.rb に実行時エラーがあると、かこんで表示される。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、以降、hello.rb の保存時に自動でに実行され、エラーがあると赤く囲んで表示される。</p>
 <p class="p6"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202014-03-13%2013.01.36.png" alt="スクリーンショット 2014-03-13 13.01.36.png"></p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>動作は全部SublimeSocket3のAPIから実行しているだけなので、</p>
