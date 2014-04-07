@@ -11,12 +11,14 @@
 ./outsource/onsen/index.html
 ./outsource/onsen/assets/player/KeynoteDHTMLPlayer.html
 ./outsource/onsen/assets/fallback/index.html
-./ignored/UnityAssetStoreDreamWithSublimeText/index.html
-./ignored/UnityAssetStoreDreamWithSublimeText/assets/player/KeynoteDHTMLPlayer.html
-./ignored/UnityAssetStoreDreamWithSublimeText/assets/fallback/index.html
+./ignored/DVCS/index.html
+./ignored/DVCS/assets/player/KeynoteDHTMLPlayer.html
+./ignored/DVCS/assets/fallback/index.html
 ./htmlResource/html_header.html
 ./htmlResource/html_body_tail.html
 ./htmlResource/html_body_head.html
+./2014:04:07 14-08-34/2014:04:07 14-08-34.html
+./2014:04:05 21-06-44/2014:04:05 21-06-44.html
 ./2014:03:25 10-05-44/2014:03:25 10-05-44.html
 ./2014:03:18 1-37-53/2014:03:18 1-37-53.html
 ./2014:03:16 15-21-42/2014:03:16 15-21-42.html
