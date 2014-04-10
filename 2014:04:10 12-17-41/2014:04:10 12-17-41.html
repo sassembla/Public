@@ -20,6 +20,9 @@
 <p class="p3"><span class="Apple-tab-span">	</span>戯れ言です。</p>
 <p class="p3"><span class="Apple-tab-span">	</span>UnityがWebPlayerプラグインを捨てるのでハイになって書きました。</p>
 <p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>UnityがWebPlayerプラグイン無しでもブラウザで動くようになる話はこのへん</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://sassembla.github.io/Public/2014:04:08%2013-36-09/2014:04:08%2013-36-09.html">http://sassembla.github.io/Public/2014:04:08%2013-36-09/2014:04:08%2013-36-09.html</a></p>
+<p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>ホント面倒でやめたい事</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>「HTMLからいろいろロードしてJSからいろいろロードしてページ単位とかcacheとかコントロールしてCSSロードして画像がリソースが」</p>
@@ -29,6 +32,52 @@
 <p class="p3"><span class="Apple-tab-span">	</span>コンパイルしたらいい感じに動く、というもののほうが、楽さがあっていいなーと思っている。</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p3"><span class="Apple-tab-span">	</span>で、そこにいろんなゲームエンジンとかがこう、差し込んできた感があり。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>これまでのAltJSがもたらしてきたものがとうとうイイ感じになる</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これまでのAltJSで自分が一番不満だったのは、Viewへのサポート、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>もっというと</p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>HTMLがサポートしている領域でないとブラウザ描画してくれないのですがそのへんにどうアプローチするか</b></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>みたいな話で、まあそりゃそうなんだけど、AltJSで<b>ビューを持とうとした</b>やつはGなんとかくらいしか覚えがない。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>そして、これからもAltJSではブラウザビューが救える予定はないんだろうなーという気になっている。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>AltJSでブラウザでのインターフェース作成が救われたかどうか</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>そんで、えっと、描画？　が、AltJSで楽になった？ みたいな話。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Noでしょ。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>HTMLを吐き出すコードはAltJSから吐けるようになるから、そこから先は楽に、、みたいな感じで。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>構造化できるのはJSまでで、それでももちろんものすごくメリットがあった。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ただ、どこかから先は、HTML、CSS、そのへんに頼らないと表現できない。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>そういうカベに当たる。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>だって今のブラウザ、HTMLが基礎なんだぜ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Hyper Text Markup Language なんだぜ。アクティブなGUIの基礎としてはあまりにあまりだ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>→だもんでHTML5ですよみたいな話だったりするし、そうでなかったりもするし。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、JSだけでこれらHTMLから始まるブラウザインターフェースの全部を御すのは、並大抵のめんどくささじゃないと思っている。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>リソース管理やインターフェース階層構造の所持、管理、イベントのハンドリングとか諸々、を、AltJSとウデ一本で、、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>面倒くさい。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>実際面倒くさい。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>そこに、ゲームエンジン、という、画面全部をゼロから作るのをハナから前提にした差し込みが入ったのが今。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>描画が可能になる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>階層化が可能になる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>2Dリソースの管理が可能になる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>3Dリソースの多大な表現能力がぶん回せる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>サウンドの力に頼る事が出来る。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>コンパイルが可能になる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>しかもゲームエンジン、ゲームがつくれる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>やっと「必要とあらばブラウザインターフェースのルールをコンテンツが作れる」世界になるのかなーと思っている。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>これからの、HTML的にお行儀の良いWebデザインと、HTML的にはお行儀の悪いWebデザインと、壊滅的な混沌を運んでくるヤツ</b></p>
@@ -79,7 +128,7 @@
 <p class="p3"><span class="Apple-tab-span">	</span>浅学な自分が知る限りその走りはGなんとかって会社が買収したWebToolkitってヤツだったんだけど、</p>
 <p class="p3"><span class="Apple-tab-span">	</span>目的はともかく手段と舵取りが最悪だったので未来がなかった。</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>たたかう/にげる　なら、「知った上で逃げる」を選ぶべき代物だった。<span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>たたかう/にげる　なら、「利点と能力を知った上で逃げる」を選ぶべき代物だった。<span class="Apple-tab-span">	</span></p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>でも今度と今後はちょっと違う。2つのポイントで違う。</p>
 <p class="p2"><br></p>
@@ -91,6 +140,24 @@
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>IRにさえ出来れば大概なんとかなる世界になった。</p>
 <p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
 <p class="p2"><br></p>
-<p class="p3">結論はない。</p>
+<p class="p3"><b>LLVM IR的な未来</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>多大だと思うのでそっちに一回変換されてしまえばもう</p>
+<p class="p3"><span class="Apple-tab-span">	</span>なんとでもなると思う。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ほんとの資産は、<b>LLVMへの In も Out も、全てが交換可能</b>なところ。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3">結論も決着もない。</p>
+<p class="p2"><br></p>
+<p class="p3">まあまだ夢で、実際に「ブラウザとそのブラウザを積んでるマシンの差」に苦しみ続ける世界がより顕著になるだけだと思うけど。</p>
+<p class="p3">安売りされてるマシンのおぞましいまでのブラウザ性能に苦しむ人が沢山出る。</p>
+<p class="p2"><br></p>
+<p class="p3">もう出てるけどもっと出る。</p>
+<p class="p2"><br></p>
+<p class="p3">ともあれ第一弾はやっちまったので、楽しめそう。</p>
+<p class="p3">楽しもう。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
 </body>
 </html>
