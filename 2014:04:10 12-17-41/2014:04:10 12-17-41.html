@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1265.19">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>CompilableWebという戯れ言</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>戯れ言です。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>UnityがWebPlayerプラグインを捨てるのでハイになって書きました。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>ホント面倒でやめたい事</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>「HTMLからいろいろロードしてJSからいろいろロードしてページ単位とかcacheとかコントロールしてCSSロードして画像がリソースが」</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>かったるいわ！！！　やりたいことはビュー描画とローディングとアクションなんだよ！！　みたいな話に対して、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>コンパイルしたらいい感じに動く、というもののほうが、楽さがあっていいなーと思っている。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、そこにいろんなゲームエンジンとかがこう、差し込んできた感があり。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>これからの、HTML的にお行儀の良いWebデザインと、HTML的にはお行儀の悪いWebデザインと、壊滅的な混沌を運んでくるヤツ</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>こないだのキョン君のLT大会@tokyoでモン様とかとお話ししてたけど、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>FlashみたいなWebの操作方法をまるっと無視したインターフェースがまた現れるのかなー、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>殺意～みたいな話をしたような覚えがあって、</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>自分は、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>「HTML5勢」</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span> = WebComponentsとかShadowDOMとか、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>HTMLのお行儀自体を拡張して、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>その中で頑張ってモダンになろうとしてる苦労人的仕事人グループ</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>と、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>「良いじゃんそんな構造とか意識しないでも、JSとHTML吐かれれば動くし！　ははは！！」</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>= 最悪HTMLが形作っていた作法さえ破壊しそうな、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>以前のFlashでできたサイトのような操作規範破壊を屁とも思わない</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ユーザーインターフェース濫造グループ</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>の二つの派閥に別れるかなーみたいな予想をしている。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>作法として正しいのは前者、効率は後者が圧倒的になるだろうと思っている。</p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>この分派をしでかす大元は、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>「リソース読み込みのバインディングが<b>自動化される世界</b>と<b>自動化されない世界</b>」</p>
+<p class="p3"><span class="Apple-tab-span">	</span>がばっちり別れる事にあると思って見てる。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>自分はこれらの中間、ただし後者のほうによった形で存在したいと思っている。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>CompilableWebとか</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>たぶん俺が言ってるだけの[コンパイラブルウェブ]って言葉があって、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Compilableな言語で書かれてCompile後はとにかくそんな感じで動くWebApplicationになるんだよってなやつで</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>楽なんだよ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>だってタイミングとか言語の力を使って静的にコンパイルできるんだぜ。チェックし放題だぜ。拡張し放題だぜ。(誇張と悪意がある)</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>もちろん前からあるけど、事情が違ってきてる。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>手法がやっと光さす感じになった</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>浅学な自分が知る限りその走りはGなんとかって会社が買収したWebToolkitってヤツだったんだけど、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>目的はともかく手段と舵取りが最悪だったので未来がなかった。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>たたかう/にげる　なら、「知った上で逃げる」を選ぶべき代物だった。<span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>でも今度と今後はちょっと違う。2つのポイントで違う。</p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>・言語をそのまま置換して云々的なクソッタレなアプローチをとってない。</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>量に比例して遅くなる度合いが酷い。つまりコンパイル/コンバートが無限に遅くなる</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>対応マップがないと変換されない。Latestが伸びにくい。</p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>・変換の途中にLLVMが居る。LLVM IRがある。</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>IRにさえ出来れば大概なんとかなる世界になった。</p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3">結論はない。</p>
+</body>
+</html>
