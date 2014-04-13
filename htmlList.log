@@ -11,12 +11,14 @@
 ./outsource/onsen/index.html
 ./outsource/onsen/assets/player/KeynoteDHTMLPlayer.html
 ./outsource/onsen/assets/fallback/index.html
+./ignored/test.html
 ./ignored/DVCS/index.html
 ./ignored/DVCS/assets/player/KeynoteDHTMLPlayer.html
 ./ignored/DVCS/assets/fallback/index.html
 ./htmlResource/html_header.html
 ./htmlResource/html_body_tail.html
 ./htmlResource/html_body_head.html
+./2014:04:13 15:29:46/2014:04:13 15:29:46.html
 ./2014:04:12 23-15-10/2014:04:12 23-15-10.html
 ./2014:04:11 17-20-16/2014:04:11 17-20-16.html
 ./2014:04:10 12-17-41/2014:04:10 12-17-41.html
