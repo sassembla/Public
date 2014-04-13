@@ -19,14 +19,18 @@
 <p class="p1"><span class="s1"><b>Xamarin</b></span><b>のバグ/仕様で納得いかないところ</b></p>
 <p class="p2"><br></p>
 <p class="p3"><b>概要</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>バグというか仕様かもしれないが、ひでえ感じの感想を抱いたので書いておく。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>Version 4.0.10 (build 5)</p>
-<p class="p3"><span class="Apple-tab-span">	</span>Installation UUID: 0997a671-e5bb-4a9d-a520-cb71ff98b7bc</p>
-<p class="p3"><span class="Apple-tab-span">	</span>Runtime:</p>
-<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Mono 3.2.0 ((no/7c7fcc7)</p>
-<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>GTK 2.24.20</p>
-<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>GTK# (2.12.0.0)</p>
-<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Package version: 302000000</p>
+<p class="p3"><span class="Apple-tab-span">	</span>バグというか仕様かもしれないが、ヒデェ感じの感想を抱いたので書いておく。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Mac OS X 10.9.2</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>XamarinStudio<span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Version 4.0.10 (build 5)</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Installation UUID: 0997a671-e5bb-4a9d-a520-cb71ff98b7bc</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Runtime:</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Mono 3.2.0 ((no/7c7fcc7)</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>GTK 2.24.20</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>GTK# (2.12.0.0)</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Package version: 302000000</p>
 <p class="p4"><br></p>
 <p class="p4"><br></p>
 <p class="p3"><b>別エディタでファイルを編集すると、該当のファイルをXamarinで開いて保存するまでコンパイルに巻き込まれない</b></p>
@@ -37,13 +41,16 @@
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>→</p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ソリューション内の、Xamarinで開いていないファイルを、別エディタで編集する</p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>→</p>
-<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>たとえ別エディタの編集内容にコンパイルエラーがあっても、Xamarinからは平然とコンパイルできる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>たとえ別エディタの編集内容にコンパイルエラーがあっても、Xamarinから開いていなければ、変更前の内容のまま平然とコンパイルできる。</p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>→</p>
-<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Xamarinでわざわざ対象のファイルを開き、かつ保存アクションを行ったあとのみ、</p>
-<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>正確にコンパイルに巻き込まれる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Xamarinで対象のファイルを開き、かつ保存アクションを行ったあとのみ、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>正確にコンパイルに変更後のコードとして巻き込まれる。</p>
 <p class="p4"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>つまりファイルを読み込み直さないって事だね。。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>つまりそこまでしないとファイルを読み込み直さないって事だね。。</p>
 <p class="p3"><span class="Apple-tab-span">	</span>このエディタだけで編集する訳じゃないんだから、ビルド時くらい実ファイルから読もうよ、、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>というか実ファイルをキャッシュとして持つのは一体なぜなんだ。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Xamarinを再起動しても残ってたんだけど、何故。</p>
 <p class="p4"><br></p>
 <p class="p4"><br></p>
 <p class="p3"><b>ステップイン/ステップオーバー実行できないのにステップインボタンがある</b></p>
@@ -51,8 +58,8 @@
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ステップインとか使う。</p>
 <p class="p4"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>これは多分仕様なんだと思うが。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>ステップインやステップオーバーは効かないことが多い。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>っていうか無視されて全部次のbreakがひっかかる挙動になってた。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ステップインやステップオーバーは効かないか、不思議なジャンプをすることが多い。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>1,2,3,5,4,,みたいな。特にメソッドで複数行にわたって引数を書いてるまわりの挙動が怪しい。</p>
 <p class="p4"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>コレはキツいな、、と思った。</p>
 <p class="p4"><br></p>
@@ -62,13 +69,26 @@
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>BreakPointを2つ、10行間隔でセットする。</p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>後方のBreakPointでのみ停止する。</p>
 <p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
-<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>間にifやyieldなどは無い。っていうかあってもおかしい。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>間にifやyieldなどは無い。っていうかあっても、後方のものだけが引っかかるのはおかしい。</p>
 <p class="p4"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>うーんロックだと思う。</p>
 <p class="p3"><span class="Apple-tab-span">	</span>対象のコードがいけないのかな、、</p>
-<p class="p4"><span class="Apple-tab-span">	</span></p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p3"><b>レイアウト設定をリセットする方法が不思議</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>IDEとして多機能をバンドルしてあるので、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ウインドウの位置が気に喰わずIDE内でいろいろ移動項目をするが、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>一通り落ち着いてから「アアーー無駄なカスタマイズだったなー」ってなって</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ウィンドウ位置とかを一括でリセットしたい時、リセットボタンを探したんだけど無くて、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>かわりにこういう答えをもらった。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><a href="http://forums.xamarin.com/discussion/6568/how-to-reset-xamarin-studio-to-defaults">http://forums.xamarin.com/discussion/6568/how-to-reset-xamarin-studio-to-defaults</a></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>→近所の設定ファイルを消せば良いよ</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>なるほど！　うーーーーーんん！！！！</p>
+<p class="p4"><br></p>
 <p class="p4"><b></b><br></p>
 <p class="p3"><b>結論</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>.slnがある場合はVisualStudio使おう。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>C♯で.slnがある場合はVisualStudio使おうと強く思った吉宗であった。</p>
 </body>
 </html>
