@@ -47,7 +47,7 @@
 <p class="p4"><br></p>
 <p class="p4"><br></p>
 <p class="p3"><b>ステップイン/ステップオーバー実行できないのにステップインボタンがある</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>再現方法；</p>
+<p class="p3"><span class="Apple-tab-span">	</span>再現方法：</p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ステップインとか使う。</p>
 <p class="p4"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>これは多分仕様なんだと思うが。</p>
@@ -56,6 +56,17 @@
 <p class="p4"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>コレはキツいな、、と思った。</p>
 <p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p3"><b>BreakPointが効かず貫通される</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>再現方法：</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>BreakPointを2つ、10行間隔でセットする。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>後方のBreakPointでのみ停止する。</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>間にifやyieldなどは無い。っていうかあってもおかしい。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>うーんロックだと思う。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>対象のコードがいけないのかな、、</p>
+<p class="p4"><span class="Apple-tab-span">	</span></p>
 <p class="p4"><b></b><br></p>
 <p class="p3"><b>結論</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>.slnがある場合はVisualStudio使おう。</p>
