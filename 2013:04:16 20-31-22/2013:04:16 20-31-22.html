@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1265.19">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #ebebeb}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #ebebeb; min-height: 18.0px}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>Macに nginx をインストール</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>過去最高にタダのメモ。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>homebrew経由でインストールする</b></p>
+<p class="p2"><b><span class="Apple-tab-span">	</span></b></p>
+<p class="p4">highvision:~ sassembla$ brew install nginx --devel<span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>でOK</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>あとは、下記を参考に起動とか設定とか。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><a href="http://learnaholic.me/2012/10/10/installing-nginx-in-mac-os-x-mountain-lion/">http://learnaholic.me/2012/10/10/installing-nginx-in-mac-os-x-mountain-lion/</a></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>起動</b></p>
+<p class="p4">sudo nginx</p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、8080での起動がなされている。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b>停止</b></p>
+<p class="p4">sudo nginx -s stop</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>設定変更</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ポート番号の変更は、下記設定ファイルを弄る。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>/usr/local/etc/nginx/nginx.conf</p>
+<p class="p2"><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>で、完了の図</b></p>
+<p class="p5"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202013-04-16%2021.01.57.png" alt="スクリーンショット 2013-04-16 21.01.57.png"></p>
+<p class="p3"><span class="Apple-tab-span">	</span>やったねたえちゃん！</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>WebSocketのフォワーディングをしてみる</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>設定は下記を参照</p>
+<p class="p3"><span class="Apple-tab-span">	</span><a href="http://qiita.com/items/484aa9bfb7bc4206ffed">http://qiita.com/items/484aa9bfb7bc4206ffed</a></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>/usr/local/etc/nginx/nginx.conf</p>
+<p class="p2"><br></p>
+<p class="p4"><span class="Apple-converted-space">    </span>server {</p>
+<p class="p4"><span class="Apple-converted-space">        </span>listen <span class="Apple-converted-space">      </span>80;</p>
+<p class="p4"><span class="Apple-converted-space">        </span>server_name<span class="Apple-converted-space">  </span>localhost;</p>
+<p class="p6"><br></p>
+<p class="p4"><span class="Apple-converted-space">        </span>#charset koi8-r;</p>
+<p class="p6"><br></p>
+<p class="p4"><span class="Apple-converted-space">        </span>#access_log<span class="Apple-converted-space">  </span>logs/host.access.log<span class="Apple-converted-space">  </span>main;</p>
+<p class="p6"><br></p>
+<p class="p4"><span class="Apple-converted-space">        </span>location / {</p>
+<p class="p4"><span class="Apple-converted-space">            </span>proxy_pass http://127.0.0.1:8823/;</p>
+<p class="p4"><span class="Apple-converted-space">            </span>proxy_http_version 1.1;</p>
+<p class="p4"><span class="Apple-converted-space">            </span>proxy_set_header Upgrade $http_upgrade;</p>
+<p class="p4"><span class="Apple-converted-space">            </span>proxy_set_header Connection "upgrade";</p>
+<p class="p4"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>かんたんですね。</p>
+</body>
+</html>
