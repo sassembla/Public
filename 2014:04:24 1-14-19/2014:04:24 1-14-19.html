@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1265.19">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    span.s1 {font: 12.0px Helvetica}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>Typetalk Hackでチャットからコードハイライトするやつを作った話</b></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>コレに参加。</p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>Typetalk Hack Tokyo</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></b><a href="http://www.zusaar.com/event/4757003">http://www.zusaar.com/event/4757003</a></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Typetalk上の書き込みから、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Sublime Text上のコードをハイライトしたり開かせたりするやつを作った。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>TypeHighlight</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/TypeHighlight">https://github.com/sassembla/TypeHighlight</a></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Typetalkからいろいろ引っこ抜いてくる部分をCredentialごとガッと削ってupしてある。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>中身</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>1.SublimeSocketプラグイン入りのSublime Textを開く</p>
+<p class="p3"><span class="Apple-tab-span">	</span>2.今回作ったhtmlをブラウザ(Safari, Chrome, 他)で開く</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>すると、ブラウザがTypetalkの特定の部屋へのポーリングを適当に開始して、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>特定フォーマットの書き込みがあったら、Sublime Text上でハイライトされる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>たとえばTypetalk上で</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="s1"><img src="sam.png" alt="sam.png"></span></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>とか書くと、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Sublime Text 上の該当の名前のファイルの該当行が<b>点灯</b>する。</p>
+<p class="p4"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202014-04-24%208.40.32.png" alt="スクリーンショット 2014-04-24 8.40.32.png"></p>
+<p class="p3"><span class="Apple-tab-span">	</span>クリックすると、メッセージが出る。</p>
+<p class="p4"><img src="1__%23$!@%25!%23__%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202014-04-24%208.40.32.png" alt="1__#$!@%!#__スクリーンショット 2014-04-24 8.40.32.png"></p>
+<p class="p3"><span class="Apple-tab-span">	</span>もし、該当のファイルがまだ開いていなかったら、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>別ファイル上からopenさせるポップアップを表示できる。</p>
+<p class="p4"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202014-04-24%208.40.11.png" alt="スクリーンショット 2014-04-24 8.40.11.png"></p>
+<p class="p3"><span class="Apple-tab-span">	</span>強制Openとかも可能だけどやってない。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>会場のwifiに頼らなかったので、128kb/s環境下での初のハッカソンだった。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>完遂できてよかった、</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>感想</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>hack(HHVM)でのTypetalkクライアント</b>あり、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>SmalltalkでのTypetalkクライアント</b>あり、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>Typetalk4s.org</b>あり、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://typetalk4j.org">http://typetalk4j.org</a></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>なんなんだこの濃さは、、！！</p>
+<p class="p3"><span class="Apple-tab-span">	</span>なぜXXXX(意外性のある言語の名前を入れてね！)でそんなことを、、！</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>なんて変態密度なんだ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>そう思うハッカソンだった。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>ステマとブーメラン</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Typetalk最高！！　Streaming APIガンバッてください！！</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+</body>
+</html>
