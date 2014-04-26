@@ -1,0 +1,151 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1265.19">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    span.s1 {font: 12.0px Helvetica}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>ムービーは無理だけどgifだったらGithubにもアップできるよな的な理想を追う</b></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>去年くらいにいっとき盛り上がったような話で、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>yidevでの <a href="https://twitter.com/sonson_twit">@sonson_twit</a> さんのお話によって自分にとってベストな解がみつかった感じがするので纏める。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>githubには動画ファイルはアップできない。まあ重いし帯域が云々だし。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>なので、ムービーからgif画像を切り出してなんとかする、ということが広く行われているよねーんでこのツールいいよ、という話。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>結論だけ言うと、これがとても自分の欲しかった内容にマッチした。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>gifbrew</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://itunes.apple.com/us/app/gif-brewery/id435989461?mt=12">https://itunes.apple.com/us/app/gif-brewery/id435989461?mt=12</a></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>こういうのができた。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="s1"><img src="2014-04-26%2020_21_04.gif" alt="2014-04-26 20_21_04.gif"></span></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>まず基準として、自分の理想のツール条件と理想のフローを列挙する。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>俺が使うツールが満たすべき理想条件の列挙</b></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>1.デフォルトについて</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・デフォルト設定で使える</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>☆☆☆ ツラいツールかどうかの壁 ☆☆☆<span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・デフォルト設定への改変が少なくても済むものを使う</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・デフォルト設定への改変が自動化できる</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>☆☆☆ クソツールの壁 ☆☆☆</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・デフォルト設定がクソ</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・デフォルト設定への改変が自動化できない</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>2.環境について</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・プリインストールされているものが使える<span class="Apple-tab-span">	</span></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>☆☆☆ ガマンの壁 ☆☆☆</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・インストールが楽なものを使う</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>☆☆☆ クソ環境かどうかの壁 ☆☆☆</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・インストールがつらい</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・バグが多い</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>環境については、対症療法が多い環境は逃げろ。とめっちゃ思う。無駄な努力だ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>おそらくその環境でやるべき事ではないんだろう。。。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>今回の理想のフロー</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>1.デスクトップのなにやらを撮影する -&gt;<span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>2.撮影データをgif化する -&gt;<span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>3.字幕をつける -&gt;<span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>4.アップ、パブリッシュする</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これらの行程に使うツールがすべて疎結合だと理想的。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>具体的にはファイルIOが独立してると良い。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>打線を組んでみると</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>1の動画を撮るのに対しては、Macにはウィンドウ単位でmov撮影ができるQuickTimeが入っているので、すべての条件を自動的にクリアできる。</p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>2、 3 が問題で、</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>2、gif化は漠然と「やりたいけどなーーうーーんモチベ沸かねー」という状態だった。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Webツールがあるのは見てて、記録はしてたけど、なんか手が動かなかった。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>なので、VimeoにアップしたembedなURLとかを持ってきてごまかしていた。</p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>そこに今回 光が！！</b></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>3、字幕に関しては、以前は字幕に対してiMovieを使って「これは人類が触るには早すぎるのでは、、」と思うとかしてた。<span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Amaraを見つけたことであっちょっといいかなーっていうかUIはこういうのでいいよなーとか思っていたが、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>結局登録メール届かないので無かった事にした。<span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>あとブラウザバック誤爆して死ぬ環境は地獄だと思う。unbackableほしい。そしてそれはWebではない、Appだ、、</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><b><span class="Apple-tab-span">	</span>そこにも今回 光が！！</b></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>4、pub場所に関しては成果物の形態によりけりで、movファイルであればVimeo、という感じ。gifだったらgithubとか、Dropboxとか。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>YoutubeはGoogle+連携求めてくるしどうでもいいメール一杯送ってくるので無い。</p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><b><span class="Apple-tab-span">	</span></b></p>
+<p class="p3"><b>gifbrew</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>「既に存在する動画ファイルをgifにする」ツール。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://itunes.apple.com/us/app/gif-brewery/id435989461?mt=12">https://itunes.apple.com/us/app/gif-brewery/id435989461?mt=12</a></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>500円する。 だがそれ以上の価値がある。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="s1"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202014-04-26%2017.58.41.png" alt="スクリーンショット 2014-04-26 17.58.41.png"></span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>QuickTimeが吐いたmovファイルに対して処理ができる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>処理の幅が広く、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・crop + resize</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・キャプションセット</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・編集ファイルを吐く(.gifbrew</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・出力されるgifのフレームレート、色情報設定が詳細に可能(弄らず動いたらもっと嬉しかったがアプリ単位で覚えるので許容範囲</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・音！？</p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>こういう編集画面</b></p>
+<p class="p4"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202014-04-26%2017.57.40.png" alt="スクリーンショット 2014-04-26 17.57.40.png"></p>
+<p class="p3"><span class="Apple-tab-span">	</span>追加で、同じUI上でキャプション付けられたりした。 便利ー。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="s1"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202014-04-26%2020.27.02.png" alt="スクリーンショット 2014-04-26 20.27.02.png"></span></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>どうでもいいけど最近帰宅→夜勤→深夜帰宅しては、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>テレビ競争の捕食者が居ないタイミングな深夜4時くらいにHuluでガッチャマンクラウズみてる。1年前を生きてる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>gifファイルへのセッティングも簡単にできるが、できるだけデフォルトでやりたいところ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="s1"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202014-04-26%2020.26.25.png" alt="スクリーンショット 2014-04-26 20.26.25.png"></span></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>また、gif化条件で全フレームをpngでアウトプットができるモードもあり、デスクトップがやられた。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="s1"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202014-04-26%2020.33.06.png" alt="スクリーンショット 2014-04-26 20.33.06.png"></span></p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>こういうのも教えてもらった</b></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>Licecap</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><a href="http://www.cockos.com/licecap/">http://www.cockos.com/licecap/</a></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>窓枠が出て、特定の範囲を撮影しつつgifファイルにする。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="s1"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202014-04-26%2017.48.38.png" alt="スクリーンショット 2014-04-26 17.48.38.png"></span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>撮影しつつそのままgifというのがミソで、手軽。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>謝辞</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ツールを知るきっかけをいただいた <a href="https://twitter.com/sonson_twit">@sonson_twit</a> さん、<a href="https://twitter.com/masanobuimai">@masanobuimai</a> さん、 <a href="https://twitter.com/yusuke">@イケメン</a></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ありがとう。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><span class="Apple-converted-space"> </span></p>
+</body>
+</html>
