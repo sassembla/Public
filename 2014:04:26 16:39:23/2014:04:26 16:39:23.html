@@ -1,0 +1,106 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1265.19">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #ebebeb}
+    span.s1 {font: 12.0px Helvetica}
+    span.s2 {background-color: transparent}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>Vagrant+VirtualBoxでiOS Unityビルド環境をMac中にマルチに作る</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Dockerが流行ってきてる今、Platformから逃げられないの時代遅れだと思いますがまあはい。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Unityが複数立ち上げてるとろくな目に合わないし制御が面倒くさいので</p>
+<p class="p3"><span class="Apple-tab-span">	</span>MacはもともとMac内VMを2台まで立ち上げられるライセンスなこともあるし、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>MacをホストにゲストにMac x 2 を用意して、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Unityプロジェクトの複数同時ビルドを可能にする。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ぶっちゃけ別アプリとして起動すれば叶うんだけど、つまらないので遊ぶ。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>VirtualBoxにMacを入れる</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>以下が参考になる。</p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>[Vagrant &amp; VirtualBox] VirtualBox: guest OS に OS X Mavericks (10.9) をインストールする</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://www.d-wood.com/blog/2014/03/24_5880.html">http://www.d-wood.com/blog/2014/03/24_5880.html</a></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Mac VMをまず１つだけ作る。この時点で2つ作る必要は無い。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>このときのVirtualBox名はVM_NAME、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>内部にインストールするMac OSのユーザー名はVM_INTERNAL_USERNAME とする。</p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>App Store からMavをDL</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>特に何の注意点も無い。</p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>iesdのインストール</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>gem install iesd</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ルートじゃない場合、権限系の調整は必要。</p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>dmgを作る</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>特に何の注意点も無い。</p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>dmgをVirtualBoxに食わせる</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ここではまった。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>メモリを4gbにしたらインストーラ自体が起動しなかった。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>デフォルトサイズの2gbで作って後で変更とかかな。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>VirtualBox内のMacにVagrantからの通信を想定して設定を行う</b></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>VMマネージャ &gt; 設定 &gt; ポートフォワーディング</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="s1"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202014-04-27%201.29.06.png" alt="スクリーンショット 2014-04-27 1.29.06.png"></span></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>とりあえずホストの2222番ポートをゲストの22番ポートに繋ぐ感じにします。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="s1"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202014-04-27%201.28.58.png" alt="スクリーンショット 2014-04-27 1.28.58.png"></span></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>最後にsshログインを可能にする。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>pubキーをゲストに入れて、下記が通過すればOK。</p>
+<p class="p4">ssh VM_INTERNAL_USERNAME@localhost -p 2222</p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ここまでで、Mac VMの用意は完了。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Vagrantで使用する用の準備に入る。</p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>Vagrantをインストール</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><a href="http://www.vagrantup.com/downloads.html">http://www.vagrantup.com/downloads.html</a></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>以上</p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>Vagrant用にパッケージングする</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>以下が参考になる</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>Creating a new Vagrant base box from an existing VM</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://abhishek-tiwari.com/hacking/creating-a-new-vagrant-base-box-from-an-existing-vm">http://abhishek-tiwari.com/hacking/creating-a-new-vagrant-base-box-from-an-existing-vm</a></p>
+<p class="p2"><br></p>
+<p class="p4">vagrant package --base <span class="s2">VM_NAME</span> --output ~/Desktop/Boxies/OUTPUT.box</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b>VagrantからMacインスタンスを起動</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>つづく</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>つづく</p>
+</body>
+</html>
