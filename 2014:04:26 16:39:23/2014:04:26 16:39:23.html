@@ -12,22 +12,21 @@
     p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
     p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #ebebeb}
     span.s1 {font: 12.0px Helvetica}
-    span.s2 {background-color: transparent}
     span.Apple-tab-span {white-space:pre}
   </style>
 </head>
 <body>
-<p class="p1"><b>Vagrant+VirtualBoxでiOS Unityビルド環境をMac中にマルチに作る</b></p>
+<p class="p1"><b>Vagrant+VirtualBoxでUnityビルド環境をMac中にマルチに作る</b></p>
 <p class="p2"><br></p>
 <p class="p3"><b>概要</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>Dockerが流行ってきてる今、Platformから逃げられないの時代遅れだと思いますがまあはい。</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
-<p class="p3"><span class="Apple-tab-span">	</span>Unityが複数立ち上げてるとろくな目に合わないし制御が面倒くさいので</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Unityを複数立ち上げてるとろくな目に合わないしJenkinsからの制御とかが面倒くさいので、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>自動化を容易にするためにやってみる。</p>
+<p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>MacはもともとMac内VMを2台まで立ち上げられるライセンスなこともあるし、</p>
 <p class="p3"><span class="Apple-tab-span">	</span>MacをホストにゲストにMac x 2 を用意して、</p>
-<p class="p3"><span class="Apple-tab-span">	</span>Unityプロジェクトの複数同時ビルドを可能にする。</p>
-<p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>ぶっちゃけ別アプリとして起動すれば叶うんだけど、つまらないので遊ぶ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>同一Unityプロジェクトの複数環境同時ビルドを可能にする。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>VirtualBoxにMacを入れる</b></p>
@@ -86,15 +85,23 @@
 <p class="p3"><span class="Apple-tab-span">	</span><b>Creating a new Vagrant base box from an existing VM</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://abhishek-tiwari.com/hacking/creating-a-new-vagrant-base-box-from-an-existing-vm">http://abhishek-tiwari.com/hacking/creating-a-new-vagrant-base-box-from-an-existing-vm</a></p>
 <p class="p2"><br></p>
-<p class="p4">vagrant package --base <span class="s2">VM_NAME</span> --output ~/Desktop/Boxies/OUTPUT.box</p>
+<p class="p4">vagrant package --base VM_NAME --output ~/Desktop/Boxies/OUTPUT.box</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p3"><b>VagrantからMacインスタンスを起動</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>つづく</p>
+<p class="p3"><span class="Apple-tab-span">	</span>起動後、sshでの接続を行うために、Vagrantが繋ぎに行く対象のポートとかをセットしないといけない。</p>
 <p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>☆このへんいろいろ書く</b></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>あとはもう、Vagrantの軌道にのせるだけ。</p>
 <p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>vagrantファイルを作る<span class="Apple-tab-span">	</span></p>
+<p class="p4">vagrant init ~/Desktop/Boxies/OUTPUT.box</p>
 <p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>起動</p>
+<p class="p4">vagrant up</p>
 <p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
