@@ -16,17 +16,22 @@
   </style>
 </head>
 <body>
-<p class="p1"><b>Vagrant+VirtualBoxでUnityビルド環境をMac中にマルチに作る</b></p>
+<p class="p1"><b>Vagrant+VirtualBoxでMac中にUnityビルド用のMac環境をマルチに作る</b></p>
 <p class="p2"><br></p>
 <p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Vagrant側で同じMac VMを立ち上げまくっておけば、<span class="s1">iOS</span>/Androidとかが同時にビルドできる。</p>
+<p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>Dockerが流行ってきてる今、Platformから逃げられないの時代遅れだと思いますがまあはい。</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p3"><span class="Apple-tab-span">	</span>Unityを複数立ち上げてるとろくな目に合わないしJenkinsからの制御とかが面倒くさいので、</p>
 <p class="p3"><span class="Apple-tab-span">	</span>自動化を容易にするためにやってみる。</p>
-<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p3"><span class="Apple-tab-span">	</span>MacはもともとMac内VMを2台まで立ち上げられるライセンスなこともあるし、</p>
 <p class="p3"><span class="Apple-tab-span">	</span>MacをホストにゲストにMac x 2 を用意して、</p>
 <p class="p3"><span class="Apple-tab-span">	</span>同一Unityプロジェクトの複数環境同時ビルドを可能にする。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>最終的に、ビルド開始 ~ 完了時までを、Vagrantから起動してるMacインスタンスで行う。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Xcodeの設定とかも一つのMacインスタンスでどうにかできるので、ラク。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>VirtualBoxにMacを入れる</b></p>
@@ -34,39 +39,45 @@
 <p class="p3"><b><span class="Apple-tab-span">	</span>[Vagrant &amp; VirtualBox] VirtualBox: guest OS に OS X Mavericks (10.9) をインストールする</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://www.d-wood.com/blog/2014/03/24_5880.html">http://www.d-wood.com/blog/2014/03/24_5880.html</a></p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>Mac VMをまず１つだけ作る。この時点で2つ作る必要は無い。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Mac VMをまず１つだけ作る。この時点で2つ作る必要は無い。boxを作る際の原型にあたる。</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>このときのVirtualBox名はVM_NAME、</p>
-<p class="p3"><span class="Apple-tab-span">	</span>内部にインストールするMac OSのユーザー名はVM_INTERNAL_USERNAME とする。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>このときのVirtualBox名は<b>VM_NAME</b>、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>内部にインストールするMac OSのユーザー名は<b>VM_INTERNAL_USERNAME</b> とする。</p>
 <p class="p2"><br></p>
-<p class="p3"><b><span class="Apple-tab-span">	</span>App Store からMavをDL</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>App Store からMavericksをDL</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>特に何の注意点も無い。</p>
 <p class="p2"><br></p>
 <p class="p3"><b><span class="Apple-tab-span">	</span>iesdのインストール</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>gem install iesd</p>
+<p class="p4">gem install iesd</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ルートじゃない場合、権限系の調整は必要。</p>
 <p class="p2"><br></p>
 <p class="p3"><b><span class="Apple-tab-span">	</span>dmgを作る</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>特に何の注意点も無い。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>iesdを使って<b>Mavericks</b>のdmgを作る。特に何の注意点も無い。</p>
 <p class="p2"><br></p>
 <p class="p3"><b><span class="Apple-tab-span">	</span>dmgをVirtualBoxに食わせる</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ここではまった。</p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>メモリを4gbにしたらインストーラ自体が起動しなかった。</p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>デフォルトサイズの2gbで作って後で変更とかかな。</p>
+<p class="p2"><br></p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b>Mac向けの各種設定を行う</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>いろいろ落としてProvisioningとかCertificateとか。</p>
+<p class="p3"><b><span class="Apple-tab-span">	</span></b><span class="s1">X</span>codeの設定とか、Unityの設定とか。Androidの環境セットとか。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>大変面倒くさいが一回で済む。</p>
+<p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>VirtualBox内のMacにVagrantからの通信を想定して設定を行う</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>あとでVagrantからsshで入るので、port番号を2222番(vagrantがデフォルトでセットするport forwarding 設定)を作る。</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
-<p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>VMマネージャ &gt; 設定 &gt; ポートフォワーディング</p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="s1"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202014-04-27%201.29.06.png" alt="スクリーンショット 2014-04-27 1.29.06.png"></span></p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>とりあえずホストの2222番ポートをゲストの22番ポートに繋ぐ感じにします。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ホストの2222番ポートをゲストの22番ポートに繋ぐ。</p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="s1"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202014-04-27%201.28.58.png" alt="スクリーンショット 2014-04-27 1.28.58.png"></span></p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>最後にsshログインを可能にする。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>pubキーをゲストに入れて、下記が通過すればOK。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ホストマシンから、pubキーをゲストに入れて、sshで入れればOK。</p>
 <p class="p4">ssh VM_INTERNAL_USERNAME@localhost -p 2222</p>
 <p class="p2"><b></b><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>ここまでで、Mac VMの用意は完了。</p>
@@ -79,7 +90,7 @@
 <p class="p3"><span class="Apple-tab-span">	</span>以上</p>
 <p class="p2"><b></b><br></p>
 <p class="p2"><b></b><br></p>
-<p class="p3"><b>Vagrant用にパッケージングする</b></p>
+<p class="p3"><b>VirtualBox上のMacVMをVagrant用にパッケージングする</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>以下が参考になる</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p3"><span class="Apple-tab-span">	</span><b>Creating a new Vagrant base box from an existing VM</b></p>
@@ -89,25 +100,35 @@
 <p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p3"><b>VagrantからMacインスタンスを起動</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>起動後、sshでの接続を行うために、Vagrantが繋ぎに行く対象のポートとかをセットしないといけない。</p>
-<p class="p2"><br></p>
-<p class="p3"><b><span class="Apple-tab-span">	</span>☆このへんいろいろ書く</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>起動後、sshでの接続を行うために、Vagrantが繋ぎに行く設定をセットしないといけない。</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
-<p class="p3"><span class="Apple-tab-span">	</span>あとはもう、Vagrantの軌道にのせるだけ。</p>
-<p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>vagrantファイルを作る<span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>VagrantFile ファイルを作る<span class="Apple-tab-span">	</span></p>
 <p class="p4">vagrant init ~/Desktop/Boxies/OUTPUT.box</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>VagrantFile に以下を追加</p>
+<p class="p4">config.ssh.username = "VM_INTERNAL_USERNAME"</p>
+<p class="p4">config.ssh.private_key_path = <span class="s1">"PATH_OF_SSH_PRIVATE_KEY"</span></p>
+<p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>起動</p>
 <p class="p4">vagrant up</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>で、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、無事sshで接続されて完了することを確かめられると思う。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ここまでで、VagrantからMac VMが使えて、sshで接続できる環境は完成。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Unityのビルド、Xcodeでのプロジェクトコンパイル、その後のflightとかを行うのは、VM側になる。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Unityのシングルプロジェクト問題、Xcodeのビルド環境問題、Androidのビルド環境問題を解決できる感じ。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ビルド後のパッケージのアップロードとかは、そのままVM側で行う処理にしちゃった方が良いと思う。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>つづく</p>
+<p class="p3">以上。</p>
 </body>
 </html>
