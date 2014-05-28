@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1265.19">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>やりたくない事から分類したゲームエンジン考</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>変更可能性にだけ焦点をあててまとめた。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>基本的に「やらないですむならやりたくないクソみたいな努力」をするのがいやなので、そのへんの観点で纏めた。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>レイヤー分け</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ゲームエンジンに対して、次のレイヤーを定義してみる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>下から積み重なっていくもののようなイメージ。</p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>1.基盤性能確保レイヤー</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>＝自由度、性能調整性のあるレイヤー。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ゲームランタイムとしてどの程度の性能を求めるか、っていうのを弄れる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>根っこ。</p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>2.構造化機構レイヤー</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>=構築力、フォーマット維持性を保持してるレイヤー。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>フレームワークとしてどの程度追加構造を構成する能力を求めるか、っていう機能があるところ。</p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>3.ゲームエディタレイヤー</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>=ゲームエディタとしての性能を保持してるレイヤー。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>いかに抽象的にゲームのステップを扱えるか、みたいな機能があるところ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>いろいろなものの隠蔽と、それらをコントロールするデザインが必要。</p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>独断と偏見で既存のエンジン数個をこのレイヤー内に置いてみる</b></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>レイヤー 1-&gt;</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>レイヤー1までだけだと、構造化を自分でやらないといけなくて、FWのメンテコストを自分が負うことになってつらい。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>コードを書く量がメチャメチャ必然的に存在する。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>細かいところまで弄れるので、特化させる足がかりとして有用。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>要はScaffoldみたいな位置。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>このレイヤー1と2の間、1寄りにいるのがCocosシリーズ。</p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>レイヤー 2-&gt;</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>レイヤー2まで備えてると、コードが走るランタイムは隠蔽されている。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>書く場所はプラガブルに用意されており、依然としてコードを書く量がかなり必然的に存在する。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>が、構造化に対するフォーマットは持っている。のと、そのへんのメンテもゲームエンジン側が負ってくれる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ゲームエンジンのコード自体は隠蔽されており、変更が不可能な反面、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>エンジン自体の制約を守ればアップデートでもクソ面倒くさいことにはなりにくいと思う。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>このへんを超えて、次のレイヤー3のちょい手前にいるのがUnity。<span class="Apple-converted-space"> </span></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>レイヤー 3-&gt;</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ゲームエディタの域。3までエディタの域を押し進めてくと、いろいろ隠蔽した上でコントロールすることが可能になる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>もちろん2も内包してるので、コード書いてなにやらも可能。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>GUI天国。一覧性がコードだらけにくらべたらかなり良いと思う。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>このへんにUnrealEngine。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>振り分けてみた感想</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>根っこまで弄れるっていうのは、根っこまで変更した場合、そのメンテコストを負うってことなので、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>面倒くさくなるしゲームエンジン自体の更新に際して非互換生むので俺はパス。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ゲームを作って遊ぶ事に専念したい。基礎のメンテナンスに関わりたくない。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>コンパイルのある、バイナリになる言語でアプリケーションの背骨が作ってあって、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>その他の言語でその上に肉付けができる、っていうのが、区分けが安定するしエンジンのメンテコストを背骨のほうに封印できるので楽。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3">こちらからは以上です。</p>
+</body>
+</html>
