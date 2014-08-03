@@ -1,0 +1,243 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1265.21">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; color: #0088cc}
+    span.s1 {color: #000000}
+    span.s2 {font: 12.0px Helvetica}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>Unity アセットでエディタ外部と連携する裏側</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>夏だ！！　アドベントカレンダーだ！！　ということで</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>Unity アセット真夏のアドベントカレンダー 2014 Summer！</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://unityassetjp.doorkeeper.jp/events/12843">http://unityassetjp.doorkeeper.jp/events/12843</a></p>
+<p class="p2"><br></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>先日は<a href="http://note.mu/yando">yando</a>さんによる「<a href="http://yandod.github.io/unity/2014/08/03/detonator-beyond/">Detonatorと爆発の未来</a>」でした。</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>本日は8/4 の記者、sassembla がお送りします。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>本題</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Unityでコード編集するときに使ってる、自作のAssetがありまして。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>今回は<b>その裏側で、こんなテクニックを使ってるよー</b>、みたいなのを紹介する。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>肝心のAssetはこんなのです。 Unity と Sublime Text を連携するやつ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="s2"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202014-08-03%2014.39.03.png" alt="スクリーンショット 2014-08-03 14.39.03.png"></span></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>AssetStoreに上がってるので良かったらどうぞ！</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://u3d.as/content/sassembla/sublime-socket-asset/4SP">http://u3d.as/content/sassembla/sublime-socket-asset/4SP</a></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>コンパイルエラーをエディタ上に表示したり、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ログをコード上の発生箇所に時系列でマップしたり、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>プロジェクト完全依存な補完出したりできる。<span class="Apple-tab-span">	</span></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>このAssetは Unity Editor(以下Unity)と、Assetそれ自体と、エディタ、そしてエディタ内で動くプラグインで実現されている。</b></p>
+<p class="p2"><b><span class="Apple-tab-span">	</span></b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>主に下記の機能で、Unityとエディタの連携を実現している。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>1.Unityと外部エディタを接続する</p>
+<p class="p3"><span class="Apple-tab-span">	</span>2.Unityにコード全体をコンパイルさせる</p>
+<p class="p3"><span class="Apple-tab-span">	</span>3.Unityに外部プロセスから情報を送り込む</p>
+<p class="p3"><span class="Apple-tab-span">	</span>4.Unityからコンパイル時の情報を引き出す</p>
+<p class="p3"><span class="Apple-tab-span">	</span>5.Unityからコード補完時の情報を引き出す</p>
+<p class="p3"><span class="Apple-tab-span">	</span>6.Unityから引き出した情報をもとに、エディタに働きかける</p>
+<p class="p2"><b><span class="Apple-tab-span">	</span></b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>それぞれ作ってておもしろかったポイントがあるので、順に書いていく。</p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>1.Unityと外部エディタを接続する</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>MonoDevelopと違って、Unityが提供しているアタッチ系の機能を使用していない。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>WinとMacで違ってて大変うっとうしかったためだ。リバースエンジニアリングに近かったし。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>接続にはWebSocketを使ってて、こんな感じ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="s2"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202014-08-03%2016.37.51.png" alt="スクリーンショット 2014-08-03 16.37.51.png"></span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Unity + SublimeSocketAsset がwsクライアントで、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Sublime Text + プラグインがwsサーバになっている。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>なんでwsクライアントなの？</b></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・Unityのエディタはコード変更の旅に毎回全体 = ゲームコードもエディタもコンパイルされ直す -&gt; サーバになれない</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・wsだったら双方向同期/非同期で通信できる</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・Mac/Winとかで統一的な方法が欲しい</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・別サーバで動かしているUnityを使役したいみたいな欲がある(リモートコンパイラ)</p>
+<p class="p2"><b><span class="Apple-tab-span">	</span></b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>みたいなニーズと理由があったため。<b><span class="Apple-tab-span">	</span></b></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Sublime Text + プラグイン側は、wsのクライアントにもサーバにもなれるような構造があるが、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>今回は完全にwsサーバとしてのみ稼働するものを使っている。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>かつ、なぜ<b>wsクライアントなのか？</b>を突き詰めていくと、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Unityの構造との親和性を考えた結果になっている。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Unityの適当なコンパイル構造は下記。</p>
+<p class="p3"><b><span class="Apple-tab-span">	</span></b><span class="s2"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202014-08-03%2016.57.48.png" alt="スクリーンショット 2014-08-03 16.57.48.png"></span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Management Layer (正式名称は知らない)</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>UnityでのC#コードとかのコンパイルほかを管理しているレイヤ。appとかexeとして実行されているコア。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Editor Script Layer<span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>/Editor 名称のフォルダ以下、エディタのパーツとしてコンパイルされるコードが居るレイヤ。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Game Script Layer<span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ゲームのコードとかが居るレイヤ。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>★この図はいろいろ端折ってあるので、詳しくはここをみるといいと思う。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://docs.unity3d.com/Manual/ScriptCompileOrderFolders.html">http://docs.unity3d.com/Manual/ScriptCompileOrderFolders.html</a></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Editorのレイヤには、/Editor フォルダ名で置いたコードをコンパイルする規約があるんだけど、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>言い換えれば毎回Unityのコンパイルに巻き込まれる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>これはゲームスクリプトのレイヤのコンパイルが発生しただけでも、Editorから再度コンパイルされることを指している。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>別に悪いことじゃないんだけど、外部との接続を行う際、ここがネックになる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>保存キーを押すたびに、通信をしていたVM自体がぶっ殺されて新たにコンパイルされて、コネクションが途切れるためだ。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、これは仕組みでどうこうできるものでもなし、流儀だし、なにかするのが悪手に思えたので、</p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>できるだけ再接続しやすい、切断を考慮にいれた通信方式は無いか？</b> という観点から、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>ソケット通信だけどぶっちぎれる前提でデザインされたもの</b>、としてwsを採用した向きが強い。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Unityがエディタ部分のコードをコンパイルした後、そのハンドラを受け取って</p>
+<p class="p3"><span class="Apple-tab-span">	</span>もしリデザインする機会があったら、MQTTを使う。(Sublime Textのプラグイン側には実験中のリポジトリがある。</p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span></b>★ちなみにこうやってみるとEditor -&gt; Gameと順次コンパイルしているように見えるが、いっぺんにコンパイルしているので、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Editorレイヤのコンパイルが終わったら、Game側のコードのコンパイル前にPrecompile処理を仕掛ける、みたいなのはできない。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>強制的に行う処理は可能なんだけど。</p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>2.Unityにコード全体をコンパイルさせる<span class="Apple-tab-span">	</span></b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>接続が確立された Sublime Text エディタでの保存処理をトリガーにして、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Unityにコンパイルを実行させることは、実はめっちゃ難しかった。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>というのも、手段が無い。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Unity Editor には、Editorに表示させたメニューからコードを変更させたり、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>特定のコードをコンパイルさせる手段も存在している、、のだけれど、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これらは Main Thread と呼ばれる Thread からしかコントロールできない。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、Unity Editor 外部からそれら Main Thread に合流してコンパイルを実行する、みたいな処理は存在しない。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ので、とてもDirtyなのだけれど、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>Unity.app/exe へとフォーカスを移すと、Unityはコンパイルを始める</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>という事象を利用している。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="s2"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202014-08-03%2017.46.25.png" alt="スクリーンショット 2014-08-03 17.46.25.png"></span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>まったくもってバカバカしい、、んだけど、これが一番案配がよかった。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>このへんはさすがにプラットフォームごとに互換性が無かったので、同じインターフェースで動くようにコマンドラインツールを用意した。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Mac用</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/SwitchApp">https://github.com/sassembla/SwitchApp</a></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Win用</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/WinSwitchApp">https://github.com/sassembla/WinSwitchApp</a></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>もうちょい正しくマシな手段ができないかなー、と思っている。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ちなみにMonoDevelopでのビルドとの差異はかなり存在していて、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・MonoDevelopはUnityEditorが生成したSlnを使用することでコンパイルパスとかリソースをプロジェクトに組み込んでいて、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>MonoDevelopのコンパイルを、Unityのライブラリのパスとかを使って実行しているに過ぎないので、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Unityでコンパイルしたときとは異なる挙動になる。(まあ問題がある程とは思ってないけど)</p>
+<p class="p2"><b><span class="Apple-tab-span">	</span></b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・フォーカス動かす方法だと、そもUnity Editorにコンパイルを命令しているので、Unityそのもののコンパイルが実行される</p>
+<p class="p2"><b><span class="Apple-tab-span">	</span></b></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、Unity 4.3? 以降だと、コードのhash値かなにかに差分がないとコンパイルされないようになったので、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>コメント内のタイムスタンプのみを更新するファイル、とかを使って、強制的にコンパイルが発生するようにしている。</p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>うーん悪手。</b></p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>3.Unityに外部プロセスから情報を送り込む<span class="Apple-tab-span">	</span></b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>wsでの接続を介して、Sub Thread 扱いで入力を実行できる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>結果として Sub Thread でのUnity Editorのコード実行になるので、例えばAssetのPathをゲットするとか、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Main Thread からしか呼べないよ！ 的なエラーが発生するため、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Main Thread でしか動作できないスクリプトは必然的に全く使えない。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>これが、Unity Editor のGUIに関わるコードなら納得できるんだけど、そうでないにも関わらず Main からしか呼べない、みたいなのが結構ある。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>GetPath系とか。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>また、Sub Thread で来た入力を、そのまま Main Thread へと合流する手段がない。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>エディタで動くコードなので、Coroutineでなんとかする、みたいな合流手段も使えない。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>下図のような感じ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="s2"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202014-08-03%2020.57.02.png" alt="スクリーンショット 2014-08-03 20.57.02.png"></span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>このへんは割と設計に関わる感じになる。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Main Threadでしかできないことを Sub Thread で行うことはできないが、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Sub Thread でも使いたい、Main Thread Method Depend なパラメータがあったら、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Main Thread で実行される InitializeOnLoad 時に取得してstaticなパラメータに入れておくことで、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Main Thread でしか取得できないパラメータへのアクセスが可能っちゃあ可能になっている。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ただ、WebSocketでの入力を、Unityのコンパイル中に受けると、クリティカルなタイミングで Unity Editor 自体が死ぬ。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>何かエラーを出力してくれるとうれしいんだけど、Unity Editor と被コンパイル対象との間に微妙な齟齬があるようで、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>本当にクリティカルなタイミングだと、何のエラーも吐いてくれない。</p>
+<p class="p2"><b><span class="Apple-tab-span">	</span></b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>このへんはそのうち Sub から Main への合流手段が提供されるかもなーと思っている。</p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>4.Unityからコンパイル時の情報を引き出す</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Unity Editor にコンパイル命令を入力できれば、Editorのログファイルにコンパイル状況が書き込まれる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ログファイルはMacとWinでパスが異なるが、複数プロジェクトがあっても基本一つのファイルをみている。</p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>Mac</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Users/Library/Logs/Unity/Editor.log</p>
+<p class="p2"><b><span class="Apple-tab-span">	</span></b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>Windows</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + ¥Local¥Unity¥Editor¥Editor.log</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>このファイルを、Editor側で動くtailのようなTimerロジックから読み込み、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>読み込んだ結果をwsでエディタに送り込んで、コンパイルエラーなどをエディタに表示させている。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>この方法の優れたところは、ログをストリーミングしてコード上に反映させることができるため、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>リアルタイムにコード上のどの値がどう変わったか、をエディタ側に記録できること。</p>
+<p class="p2"><b><span class="Apple-tab-span">	</span></b></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>5.Unityからコード補完時の情報を引き出す</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>コード補完は、Sublime Text から Unity Editor、 Unity Editor から Sublime Text へと、複数の非同期/同期通信を組み合わせて実現している。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="s2"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202014-08-03%2023.36.14.png" alt="スクリーンショット 2014-08-03 23.36.14.png"></span></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Sublime Text からのInputに対して、キャッシュがある場合は高速なoutputを返し、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>キャッシュがない場合は Unity Editor 側で解析と補完情報を出している。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>6.Unityから引き出した情報をもとに、エディタに働きかける</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Sublime Text 側に、入力に応じてエディタの動作を設計できるパイプライン的な設定がなされている。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>内容にはSushiJSONという「JSONを書いたらフローが決定される」DSLを使っている。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>Unity Editor への反逆を通じてわかったこと</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>外部プロセス使ってゲームデータの蓄積とか解析とかをかけると、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>面白いです。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3">明日は、Dvorakはしもと さんです！</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+</body>
+</html>
