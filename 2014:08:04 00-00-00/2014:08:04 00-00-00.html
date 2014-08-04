@@ -44,9 +44,9 @@
 <p class="p3"><span class="Apple-tab-span">	</span>ログをコード上の発生箇所に時系列でマッピングしたり、</p>
 <p class="p3"><span class="Apple-tab-span">	</span>プロジェクト完全依存な補完出したりできる。<span class="Apple-tab-span">	</span></p>
 <p class="p2"><b></b><br></p>
-<p class="p3"><b><span class="Apple-tab-span">	</span>このAssetは Unity Editor(以下Unity)と、連携用のUnityAsset(上記のやつ)と、外部エディタ、そして外部エディタ内で動くプラグインで実現されている。</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>このAssetは Unity Editorと、連携用のUnityAsset(上記のやつ)と、外部エディタ、そして外部エディタ内で動くプラグインで実現されている。</b></p>
 <p class="p2"><b><span class="Apple-tab-span">	</span></b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>主に下記の機能で、Unityと外部エディタの連携を実現している。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>主に次のような機能で、Unityと外部エディタの連携を実現している。</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>1.Unityと外部エディタを接続する</p>
 <p class="p3"><span class="Apple-tab-span">	</span>2.Unityにコード全体をコンパイルさせる</p>
@@ -74,7 +74,7 @@
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>やんごとなき理由があった。</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>・Unityのエディタはコード変更の度に毎回全体 = ゲームコードもエディタもコンパイルされ直す -&gt; サーバになれない</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・Unityのエディタはコード変更の度に毎回全体をコンパイルする = ゲームコードもエディタもコンパイルされ直す -&gt; サーバになれない</p>
 <p class="p3"><span class="Apple-tab-span">	</span>・wsだったら双方向同期/非同期で通信できる</p>
 <p class="p3"><span class="Apple-tab-span">	</span>・Mac/Winとかで統一的な方法が欲しい</p>
 <p class="p3"><span class="Apple-tab-span">	</span>・別サーバで動かしているUnityを使役したいみたいな欲がある(リモートコンパイラ)</p>
@@ -82,13 +82,11 @@
 <p class="p3"><span class="Apple-tab-span">	</span>みたいなニーズと理由があったため。<b><span class="Apple-tab-span">	</span></b></p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>Sublime Text + プラグイン側は、wsのクライアントにもサーバにもなれるような構造があるが、</p>
-<p class="p3"><span class="Apple-tab-span">	</span>今回は完全にwsサーバとしてのみ稼働するものを使っている。</p>
-<p class="p2"><span class="Apple-tab-span">	</span></p>
-<p class="p3"><span class="Apple-tab-span">	</span>かつ、なぜ<b>wsクライアントなのか？</b>を突き詰めていくと、</p>
-<p class="p3"><span class="Apple-tab-span">	</span>Unityの構造との親和性を考えた結果になっている。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>特にサーバになれない理由を、もうちょっとちゃんと紹介する。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>根本的なところは、Unity Editor が持つコードコンパイルの構造にある。</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>Unityの適当なコンパイル構造は下記。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Unity Editor の適当なコンパイル構造は次のような感じ。</p>
 <p class="p3"><b><span class="Apple-tab-span">	</span></b><span class="s2"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202014-08-03%2016.57.48.png" alt="スクリーンショット 2014-08-03 16.57.48.png"></span></p>
 <p class="p3"><span class="Apple-tab-span">	</span>Management Layer (正式名称は知らない)</p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>UnityでのC#コードとかのコンパイルほかを管理しているレイヤ。appとかexeとして実行されているコア。</p>
@@ -114,14 +112,17 @@
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>で、これは仕組みでどうこうできるものでもなし、流儀だし、何かするのが悪手に思えたので、</p>
-<p class="p3"><b><span class="Apple-tab-span">	</span>できるだけ再接続しやすい、切断を考慮にいれた通信方式は無いか？</b> という観点から、</p>
-<p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span><b>ソケット通信だけどぶっちぎれる前提でデザインされたもの</b>、としてwsを採用した向きが強い。</p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>できるだけ再接続しやすい、切断を考慮にいれた通信方式+形態は無いか？</b> という観点から、</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>ぶっちぎれ易い方/にくい方を区別して設定できて、</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>再接続がスムーズにいくようにデザインされてて、</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>かつ規格として実装流通が多いもの</b>、としてwsを採用した向きが強い。</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p2"><b></b><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>Unityがエディタ部分のコードをコンパイルした後、自動的に Sublime Text が動かしているwsサーバへと接続される。</p>
 <p class="p2"><b></b><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>もしリデザインする機会があったら、wsの代わりにMQTTを使う。(Sublime Textのプラグイン側には実験中のリポジトリがある。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>もしリデザインする機会があったら、wsの代わりにMQTTを使う。オーバースペックか、、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>(Sublime Textのプラグイン側には実験中のリポジトリがある。</p>
 <p class="p2"><b></b><br></p>
 <p class="p2"><b></b><br></p>
 <p class="p3"><b><span class="Apple-tab-span">	</span></b>★ちなみにこうやってみるとEditor -&gt; Gameと順次コンパイルしているように見えるが、</p>
@@ -241,6 +242,7 @@
 <p class="p3"><span class="Apple-tab-span">	</span>リアルタイムにコード上のどの値がどう変わったか、をその発生箇所ごとに記録できること。</p>
 <p class="p2"><b><span class="Apple-tab-span">	</span></b></p>
 <iframe src="http://player.vimeo.com/video/102270726?byline=0&amp;portrait=0" width="800" height="400" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+<p class="p2"><b><span class="Apple-tab-span">	</span></b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>動画では、00:45あたりから、Debug.Log(string) 関数に対して、L: という文字列を頭に付与することで、</p>
 <p class="p3"><span class="Apple-tab-span">	</span>「該当ログの実行記録をこの行に時系列順に表示する」ということを行っている。</p>
 <p class="p2"><b><span class="Apple-tab-span">	</span></b></p>
@@ -267,9 +269,12 @@
 <p class="p3"><span class="Apple-tab-span">	</span>Sublime Text からのInputに対して、キャッシュがある場合は高速なoutputを返し、</p>
 <p class="p3"><span class="Apple-tab-span">	</span>キャッシュがない場合は Unity Editor 側で解析と補完情報を出している。</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>ほとんどキャッシュがあるはずが無い感じになる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>編集中のコードを相手にするので、ほとんどキャッシュがあるはずが無い感じになる。</p>
 <p class="p3"><span class="Apple-tab-span">	</span>さらに、コードが中途半端でも解析できないといけない。</p>
-<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>この解析まわりは、NRefactoryをUnity用に大改造することで対応している。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>UnityのC♯のバージョンにあわせて改変しまくったものを使用している。</p>
+<p class="p2"><br></p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p3"><span class="Apple-tab-span">	</span>送り込まれてきたコードは、実際にはまだ未保存のはずで、 Sublime Text のバッファ上にしか無くて、</p>
 <p class="p3"><span class="Apple-tab-span">	</span>key input のたびにドカッとコード全体を送りつけている。</p>
@@ -288,6 +293,9 @@
 <p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
 <p class="p3"><span class="Apple-tab-span">	</span>これらすべてのdllの中から、実際に編集中のコードでusingされている内容を絞り込み、</p>
 <p class="p3"><span class="Apple-tab-span">	</span>型を特定して、補完情報を送付している。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ちなみに件数が膨大になった場合、ある程度の流量になるように補完情報を分割して送付する、みたいなことをしている。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>これによって Sublime Text 側のUI的なロックは無いようになっている。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>6.Unityから引き出した情報をもとに、エディタに働きかける</b></p>
