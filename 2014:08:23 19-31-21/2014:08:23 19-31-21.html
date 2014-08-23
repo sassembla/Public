@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1265.21">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>Unityのプロジェクト内に置いて、Xcodeのプロジェクトを吐き出す奴</b></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>XCodeEditor-for-Unity というのに関してつぶやいてる方が居たので、使ってみた。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Unityのプロジェクトが吐き出すXcodeプロジェクトにいろいろ書き込む奴。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>最初、XcodeでUnity用の.csのコードとかを編集するのを可能にしたのか？！　と戦慄したんだけど、違った。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>よかった、狂気に魅せられた人は居なかったんだな、、！！</p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>XCodeEditor-for-Unity</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>オリジナル</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/dcariola/XCodeEditor-for-Unity">https://github.com/dcariola/XCodeEditor-for-Unity</a></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>4.5で動くようにちょこちょこ手を加えられているフォーク(プルリクマージされるといいのに、、)</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/kyubuns/XCodeEditor-for-Unity">https://github.com/kyubuns/XCodeEditor-for-Unity</a></p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、せっかくなのでそのまま動かせるサンプル込みのフォークを作った。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>こちら。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/XCodeEditor-for-Unity">https://github.com/sassembla/XCodeEditor-for-Unity</a></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>何ができるのか</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>PythonでXcodeのプロジェクトにいろいろやるやつあるじゃないですか、アレ。ほらアレ。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>pbxproj</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/kronenthaler/mod-pbxproj">https://github.com/kronenthaler/mod-pbxproj</a></p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これと同じようなことができそうな感じ。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>pbxproj と比べてなにがうれしいかというと、上記をつかうにはPythonのスクリプトを書く必要があって、これがいろんな要因でいい感じに<b>妖刀化</b>するので、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>そのへんをせめてC♯でなんとかできないかなーというあたり。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>妖刀化する要因</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Unityの仕様上、拡張子無しの PostprocessBuildPlayer ファイルを作ったらそれが使用されるんだけどさ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://docs-jp.unity3d.com/Documentation/Manual/BuildPlayerPipeline.html">http://docs-jp.unity3d.com/Documentation/Manual/BuildPlayerPipeline.html</a></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>こいつの中で、上記のpbxprojを使ってXcodeの書き換えとかよくやるんだけど。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>以下の要因で困ることが多い。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・サードパーティーのやつが使ってて、殴り合うのが面倒くさい</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・コンパイルに巻き込まれないから全体像が見にくい</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・ログ出ししにくくて失敗をフックしづらい</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>このへんがC♯で済めば、まあUnityの機構との親和性でだいたい解決できるし、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>悪手を生成しないで済むようになるよね。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>という。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+</body>
+</html>
