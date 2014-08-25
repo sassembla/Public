@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1265.21">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    span.s1 {font: 12.0px Helvetica}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>Atomのアプリケーションアイコンを変える</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Atom.io のアイコンが嫌いだから変えて使うぜ！！ って話をしてて、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>やってみたらアイコンの変え方がちょっと特殊だったよって言われたんだけど、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>過程で全く違う新しい方法見つけたのでまとめる。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>AtomのアイコンはResources/(中略)/icon名.icns を変えるだけでは一部変化しない</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Mac用のアプリケーションのアイコンを変更するのであれば、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>アプリ(X.app)を右クリック &gt; パッケージの内容を表示 で、アプリケーションフォルダの中身のアイコンのファイルを変更することで対応できる。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>具体的な前科はこのへん。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://sassembla.github.io/Public/2013:01:12%2021-08-16/2013:01:12%2021-08-16.html">http://sassembla.github.io/Public/2013:01:12%2021-08-16/2013:01:12%2021-08-16.html</a></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>んで、どうやらAtomのやつはこの方法だけだと駄目だそうで。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Dock内のアイコンほか、一部のアイコンが変化しないらしい。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、解決策を考えたいねーって駄話してる中で、あたらしい方法を見つけた。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>新☆アイコンを変更する方法</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>1.アイコンを変更したいアプリケーション.appを右クリック→情報を見る</p>
+<p class="p4"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202014-08-25%2015.51.38.png" alt="スクリーンショット 2014-08-25 15.51.38.png"></p>
+<p class="p3"><span class="Apple-tab-span">	</span>2.コレにしたい！というアイコンを用意</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>.icnsファイルであればOK。</p>
+<p class="p4"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202014-08-25%2015.57.51.png" alt="スクリーンショット 2014-08-25 15.57.51.png"></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>3..icnsファイルを、1.で開いた情報ウィンドウの下記の場所に放り込む。D&amp;D。</p>
+<p class="p4"><img src="1__%23$!@%25!%23__%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202014-08-25%2015.51.38.png" alt="1__#$!@%!#__スクリーンショット 2014-08-25 15.51.38.png"></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、めっちゃ簡単にアイコンが以下の範囲で反映された。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>わ あ 。　楽 ゥ 。</p>
+<p class="p4"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202014-08-25%2016.14.28.png" alt="スクリーンショット 2014-08-25 16.14.28.png"></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>結果がこちら</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・Dock内</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="s1"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202014-08-25%2015.35.40.png" alt="スクリーンショット 2014-08-25 15.35.40.png"></span></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・Finder内</p>
+<p class="p4"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202014-08-25%2016.20.09.png" alt="スクリーンショット 2014-08-25 16.20.09.png"></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・あとこことか</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="s1"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202014-08-25%2016.09.51.png" alt="スクリーンショット 2014-08-25 16.09.51.png"></span></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>おまけ</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>特にAtomに関して、下記の拡張子のファイルのアイコンを変更する特性があって、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>.js とか .css のアイコンの見た目が変わる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>そのアイコンは、Atom.app の中にある。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Application/Atom.app のフォルダ内の</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Contents/Resources/file.icns を変更すれば変わる。</p>
+<p class="p2"><b><span class="Apple-tab-span">	</span></b></p>
+<p class="p4"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202014-08-25%2016.37.56.png" alt="スクリーンショット 2014-08-25 16.37.56.png"></p>
+<p class="p3"><span class="Apple-tab-span">	</span>正直、前提として変更しないでほしい感じではある。</p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>今回試したもの</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>こちらの方が作ったアイコンが気に入ったのでうれしさがある。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://dribbble.com/shots/1441364-Atom-Icon">https://dribbble.com/shots/1441364-Atom-Icon</a></p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+</body>
+</html>
