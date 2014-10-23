@@ -1,0 +1,177 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1265.21">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px Menlo; color: #703daa; background-color: #ebebeb}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px Menlo; background-color: #ebebeb; min-height: 13.0px}
+    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px 'Hiragino Kaku Gothic ProN'; color: #008400; background-color: #ebebeb}
+    p.p8 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px Menlo; background-color: #ebebeb}
+    p.p9 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px Menlo; color: #3d1d81; background-color: #ebebeb}
+    p.p10 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #ebebeb; min-height: 18.0px}
+    p.p11 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px Menlo; color: #008400; background-color: #ebebeb}
+    p.p12 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px Menlo; color: #bb2ca2; background-color: #ebebeb}
+    span.s1 {font: 12.0px Helvetica}
+    span.s2 {color: #000000}
+    span.s3 {font: 11.0px Menlo}
+    span.s4 {color: #4f8187}
+    span.s5 {color: #703daa}
+    span.s6 {color: #bb2ca2}
+    span.s7 {color: #3d1d81}
+    span.s8 {color: #d12f1b}
+    span.s9 {font: 11.0px 'Hiragino Kaku Gothic ProN'}
+    span.s10 {letter-spacing: 0.0px}
+    span.s11 {font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>最高のNotificationにしような</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Mac OS Xで使用できるNotificationの話で。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Notification</p>
+<p class="p4"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202014-10-23%2023.50.47.png" alt="スクリーンショット 2014-10-23 23.50.47.png"></p>
+<p class="p3"><span class="Apple-tab-span">	</span>に、ボタンをつけたくなったんだけどどうやんねやろ？　ってなったのとちょっとハマったので備忘録。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Yosemiteで動くかどうかは明日試す。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>Notificationにボタンをつけてテストの再実行</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>JenkinsとかCircleCIとかでテストを実行していて、特定のテストだけ、今ちょっと実行してみたいな、みたいな</p>
+<p class="p3"><span class="Apple-tab-span">	</span>そんな時がある。　</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、まあ、どこかのテストの失敗時にこんなのが出るとするじゃない。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ボタンをつけて実行、とかやると、後からでも特定の失敗したテストだけ好きなときに実行できて便利、みたいな。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>MacアプリなのでSwiftで書いてもよかったんだけどちょっと古いMacもあるんでObj-Cで。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>標準的なボタン無しのNotification</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="s1"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202014-10-24%200.07.31.png" alt="スクリーンショット 2014-10-24 0.07.31.png"></span></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>に、任意の文字表示でボタンをつける(閉じるボタンも着く)</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="s1"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202014-10-24%200.02.30.png" alt="スクリーンショット 2014-10-24 0.02.30.png"></span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>っていう奴を書く。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>基本的なNotificationをObj-Cから出すコード</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>まずボタン無しを出すコードの全体が下記。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p5">NSUserNotificationCenter<span class="s2"> *notifier;</span></p>
+<p class="p6"><br></p>
+<p class="p7"><span class="s3">// </span>どこか初期化ブロック</p>
+<p class="p8">{</p>
+<p class="p9"><span class="s2"><span class="Apple-converted-space">    </span></span><span class="s4">notifier</span><span class="s2"> = [</span><span class="s5">NSUserNotificationCenter</span><span class="s2"> </span>defaultUserNotificationCenter<span class="s2">];</span></p>
+<p class="p8"><span class="Apple-converted-space">    </span><span class="s4">notifier</span>.<span class="s5">delegate</span> = <span class="s6">self</span>;</p>
+<p class="p8">}</p>
+<p class="p6"><br></p>
+<p class="p10"><br></p>
+<p class="p11">/**</p>
+<p class="p7"><span class="s3"><span class="Apple-converted-space"> </span></span>通知</p>
+<p class="p11"><span class="Apple-converted-space"> </span>*/</p>
+<p class="p8">- (<span class="s6">void</span>) notifyToUserWithStatus:(<span class="s6">int</span>)status withTitle:(<span class="s5">NSString</span> *)title message:(<span class="s5">NSString</span> *)message {</p>
+<p class="p5"><span class="s2"><span class="Apple-converted-space">    </span></span>NSUserNotification<span class="s2"> * newUserNotification = [</span>NSUserNotification<span class="s2"> </span><span class="s7">new</span><span class="s2">];</span></p>
+<p class="p8"><span class="Apple-converted-space">    </span>newUserNotification.<span class="s5">title</span> = <span class="s8">@"title"</span>;</p>
+<p class="p8"><span class="Apple-converted-space">    </span>newUserNotification.<span class="s5">subtitle</span> = <span class="s8">@"subtitle"</span>;</p>
+<p class="p8"><span class="Apple-converted-space">    </span>newUserNotification.<span class="s5">informativeText</span> = <span class="s8">@"message"</span>;</p>
+<p class="p6"><span class="Apple-converted-space">    </span></p>
+<p class="p8"><span class="Apple-converted-space">    </span>[<span class="s4">notifier</span> <span class="s7">deliverNotification</span>:newUserNotification];</p>
+<p class="p8">}</p>
+<p class="p6"><br></p>
+<p class="p11">/*</p>
+<p class="p7"><span class="s3"><span class="Apple-converted-space"> </span>Mac</span>の通知センターのデリゲート</p>
+<p class="p11"><span class="Apple-converted-space"> </span>*/</p>
+<p class="p6"><br></p>
+<p class="p11">/**</p>
+<p class="p11"><span class="Apple-converted-space"> </span>notification<span class="s9">がタッチされた場合の挙動</span></p>
+<p class="p11"><span class="Apple-converted-space"> </span>*/</p>
+<p class="p8">- (<span class="s6">void</span>)userNotificationCenter:(<span class="s5">NSUserNotificationCenter</span> *)center didActivateNotification:(<span class="s5">NSUserNotification</span> *)notification {</p>
+<p class="p11"><span class="s2"><span class="Apple-converted-space">    </span></span>// do something</p>
+<p class="p8">}</p>
+<p class="p6"><br></p>
+<p class="p11">/**</p>
+<p class="p7"><span class="s3"><span class="Apple-converted-space"> </span></span>アプリケーション側が<span class="s3">daemon</span>とか<span class="s3">UI</span>を持たないアプリケーションでも、とにかくNotificationを表示するかどうか</p>
+<p class="p11">*/</p>
+<p class="p8">- (<span class="s6">BOOL</span>)userNotificationCenter:(<span class="s5">NSUserNotificationCenter</span> *)center shouldPresentNotification:(<span class="s5">NSUserNotification</span> *)notification {</p>
+<p class="p12"><span class="s2"><span class="Apple-converted-space">    </span></span>return<span class="s2"> </span>true<span class="s2">;</span></p>
+<p class="p8">}</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>notifyToUserWithStatus:withTitle:message: メソッドにいろいろ叩き込むと、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ボタン無しで指定した文字要素でNotificationが出る。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>ボタン付き</b></p>
+<p class="p3"><span class="s9"><span class="Apple-tab-span">	</span></span>notifyToUserWithStatus:withTitle:message: メソッドの中身を下記のように変える。</p>
+<p class="p2"><br></p>
+<p class="p8">- (<span class="s6">void</span>) notifyToUserWithStatus:(<span class="s6">int</span>)status withTitle:(<span class="s5">NSString</span> *)title message:(<span class="s5">NSString</span> *)message {</p>
+<p class="p5"><span class="s2"><span class="Apple-converted-space">    </span></span>NSUserNotification<span class="s2"> * newUserNotification = [</span>NSUserNotification<span class="s2"> </span><span class="s7">new</span><span class="s2">];</span></p>
+<p class="p8"><span class="Apple-converted-space">    </span>newUserNotification.<span class="s5">title</span> = <span class="s8">@"title"</span>;</p>
+<p class="p8"><b><span class="Apple-converted-space">    </span>newUserNotification.</b><span class="s5"><b>actionButtonTitle</b></span><b> = </b><span class="s8"><b>@"button"</b></span><b>;</b></p>
+<p class="p8"><b><span class="Apple-converted-space">    </span>newUserNotification.</b><span class="s5"><b>hasActionButton</b></span><b> = </b><span class="s6"><b>YES</b></span><b>;</b></p>
+<p class="p8"><span class="Apple-converted-space">    </span>newUserNotification.<span class="s5">subtitle</span> = <span class="s8">@"subtitle"</span>;</p>
+<p class="p8"><span class="Apple-converted-space">    </span>newUserNotification.<span class="s5">informativeText</span> = <span class="s8">@"message"</span>;</p>
+<p class="p6"><span class="Apple-converted-space">    </span></p>
+<p class="p8"><span class="Apple-converted-space">    </span>[<span class="s4">notifier</span> <span class="s7">deliverNotification</span>:newUserNotification];</p>
+<p class="p8">}</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>はいはい簡単簡単、って思ったら、実際出ない。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Info.plist に下記プロパティを付け加えると出るようになった。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="s1"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202014-10-24%200.11.39.png" alt="スクリーンショット 2014-10-24 0.11.39.png"></span></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>key:</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="s10">NSUserNotificationAlertStyle</span></p>
+<p class="p2"><span class="s10"></span><br></p>
+<p class="p3"><span class="s10"><span class="Apple-tab-span">	</span>value:</span></p>
+<p class="p3"><span class="s10"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><b>banner</b> or <b>alert</b> or <b>none</b></span></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>参考、Appleの死霊</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://developer.apple.com/library/ios/documentation/general/Reference/InfoPlistKeyReference/Articles/CocoaKeys.html">https://developer.apple.com/library/ios/documentation/general/Reference/InfoPlistKeyReference/Articles/CocoaKeys.html</a></p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>こんな感じ。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="s1"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202014-10-23%2023.55.03.png" alt="スクリーンショット 2014-10-23 23.55.03.png"></span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>まんまNSUser.. みたいなキーで通った。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>コード + 上記plistの設定で、Notificationにボタンがつく。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="s1"><img src="1__%23$!@%25!%23__%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202014-10-24%200.02.30.png" alt="1__#$!@%!#__スクリーンショット 2014-10-24 0.02.30.png"></span></p>
+<p class="p8"><b><span class="Apple-converted-space">    </span>newUserNotification.</b><span class="s5"><b>actionButtonTitle</b></span><b> = </b><span class="s8"><b>@"button"</b></span><b>;</b><span class="s11"><span class="Apple-tab-span">	</span></span></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>でオリジナルのボタンのタイトルを設定しているが、このコードが無かった場合、以下みたいな表示になる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="s1"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202014-10-24%200.21.42.png" alt="スクリーンショット 2014-10-24 0.21.42.png"></span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、ボタンが押されたイベント自体は、以下メソッドで取得できる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>userNotificationCenter:didActivateNotification:</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>以上だが</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>2点問題があって、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>1.一度キーを付け加えたらたとえキーを消しても最後にセットしてあった要素が効き続ける</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>例えばvalueを alert にして、保存、一度実行→キーごと行を消して再度実行、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ってやっても、Notificationからボタンが消えない。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>これバグなんじゃねーかな。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>2.ボタン付けたら消えなくなった</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><b>自動的に消えないので、ずっと画面上に表示されちゃう。</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>全然お手軽なUIじゃなかった。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>信じてたのに！！ スワイプでも消せないし。</p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>というわけでお蔵入りした。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+</body>
+</html>
