@@ -144,8 +144,14 @@
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="s1"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202014-10-23%2023.55.03.png" alt="スクリーンショット 2014-10-23 23.55.03.png"></span></p>
 <p class="p3"><span class="Apple-tab-span">	</span>まんまNSUser.. みたいなキーで通った。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>コード + 上記plistの設定で、Notificationにボタンがつく。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>コード + 上記plistの設定で、ボタンがついたりつかなかったりそも表示されなくなったりする。</p>
 <p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>banner = ボタン無し</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>alert = ボタンあり</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>none = 出なくなる</p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>下は alert + コード側でボタンの文字をセットしたもの。</p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="s1"><img src="1__%23$!@%25!%23__%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202014-10-24%200.02.30.png" alt="1__#$!@%!#__スクリーンショット 2014-10-24 0.02.30.png"></span></p>
 <p class="p8"><b><span class="Apple-converted-space">    </span>newUserNotification.</b><span class="s5"><b>actionButtonTitle</b></span><b> = </b><span class="s8"><b>@"button"</b></span><b>;</b><span class="s11"><span class="Apple-tab-span">	</span></span></p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
@@ -153,6 +159,12 @@
 <p class="p3"><span class="Apple-tab-span">	</span><span class="s1"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202014-10-24%200.21.42.png" alt="スクリーンショット 2014-10-24 0.21.42.png"></span></p>
 <p class="p3"><span class="Apple-tab-span">	</span>で、ボタンが押されたイベント自体は、以下メソッドで取得できる。</p>
 <p class="p3"><span class="Apple-tab-span">	</span>userNotificationCenter:didActivateNotification:</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ただ、Notificationの内容は、Userが設定.appとかから変更できる</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>参考：<a href="https://github.com/Daij-Djan/DDMountainNotifier/issues/3">https://github.com/Daij-Djan/DDMountainNotifier/issues/3</a></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ので、こうセットしたからといって完全にボタンが出せるわけでもない。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>以上だが</b></p>
