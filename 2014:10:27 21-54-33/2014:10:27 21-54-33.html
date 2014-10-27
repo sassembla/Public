@@ -1,0 +1,100 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1265.21">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    span.s1 {font: 22.0px Helvetica}
+    span.s2 {font: 12.0px Helvetica}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>出、出～!</b><span class="s1"><b> Bonjour</b></span><b>で</b><span class="s1"><b>iOS</b></span><b>と</b><span class="s1"><b>Mac</b></span><b>をつなぐタッチインターフェース奴</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>iOSをマウスにするアプリケーションで、BTとかで動くマトモな操作性のやつが無かったので作った。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>主にZBrushを操作する用。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><a href="https://vimeo.com/110065443">https://vimeo.com/110065443</a></p>
+<iframe src="https://player.vimeo.com/video/110065443?byline=0&amp;portrait=0" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>このへんが原義</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://sassembla.github.io/Public/2014:09:14%2014-40-08/2014:09:14%2014-40-08.html">http://sassembla.github.io/Public/2014:09:14%2014-40-08/2014:09:14%2014-40-08.html</a></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>コードはここ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/iMousePadPre">https://github.com/sassembla/iMousePadPre</a></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Swift + BTLEマウス化したものは商品にしか入れないことにした。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Appleの審査に落とされるとかしたら、公開すると思う。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>気づいてみたら、オープンソースにしてもそれがObj-Cのままだと、いずれ来るSwift化のタイミングで面倒くささが出るんで、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>コードをオープンにしてもソンはしないと思った。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>今回のこれは商品のコードとは呼べないが。</p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b>インターフェースの内容について</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>マウスが模倣できればよかった。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>んで、マウスのボタンは最初、タッチポイントとは別々にするつもりだった。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>でもそれだと使いづらくて、考えた結果、</p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>マウスのタッチポイントから相対的な位置を別の指でタッチすると、位置によって右クリックとかを発生させるようにした。</b></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これで、「目で見てないでもタッチインターフェースをマウスのように扱う」ことができる。</p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>こんな感じ。</p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span></b><span class="s2"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202014-10-27%2022.12.30.png" alt="スクリーンショット 2014-10-27 22.12.30.png"></span></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>要は、</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>画面は目で見えないけど、指の相対的な位置関係は自分の手なのでまあ分かる</b> という。</p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>使いづらさを分解する</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>最初こういうのだった。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ボタンが4つ、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>四角いのはキーボード、丸いのはマウスクリック。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>マウスのポインティングはボタン以外を押すことで発生。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="s2"><img src="BzRXSLcCcAEetOe.png-large.png" alt="BzRXSLcCcAEetOe.png-large.png"></span></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>でまあボタン位置を下に持っていけば</p>
+<p class="p3"><span class="Apple-tab-span">	</span>「左手でボタン」</p>
+<p class="p3"><span class="Apple-tab-span">	</span>「右手でマウス移動」</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ってできるんだけど、左手の負荷が最悪に高かった。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>また、<b>観てないと押せない</b>ので、困った。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>というわけで現在のUIになったとさ。</p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b>動画その2</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>vimeoの制限のせいで画質最悪だけど、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>まあ金払ってない俺が悪いのでそのうち奇麗なやつ上げ直す。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>タッチ動作、左クリックと右クリック、ホイル動作も出力できる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><a href="https://vimeo.com/110065491">https://vimeo.com/110065491</a></p>
+<iframe src="https://player.vimeo.com/video/110065491?byline=0&amp;portrait=0" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ZBrushをMBAから使うための良いおもちゃができた。ちょっと満足だ。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+</body>
+</html>
