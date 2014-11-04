@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1265.21">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    span.s1 {font: 22.0px Helvetica}
+    span.s2 {font: 12.0px Helvetica}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><span class="s1"><b>Windows</b></span><b> ゲスト </b><span class="s1"><b>VMWare</b></span><b> 太っていく現象 解決</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>タイトルぐぐりやすくしてみた。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>っていってもアクセス解析とか1mmもやってないが。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ホストがMac OS X</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ゲストがWindows8.1</p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>という状況下で、ゲスト側のいらないファイルをゴミ箱→削除したところ、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ホスト側の容量が全く増えなかったのが発端。</p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b>助けを乞う</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="s2"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202014-11-04%2010.23.36.png" alt="スクリーンショット 2014-11-04 10.23.36.png"></span></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>救われる</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="s2"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202014-11-04%2010.23.53.png" alt="スクリーンショット 2014-11-04 10.23.53.png"></span></p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Qiita</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><b>VMWareのゲストイメージ圧縮方法<span class="Apple-tab-span">	</span></b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://qiita.com/gogonosmarty/items/f13fd3f20c2fffd531d3">http://qiita.com/gogonosmarty/items/f13fd3f20c2fffd531d3</a></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>最終的にqiitaの記事がクリティカルヒットして、ゲストでゴミを消した分(とほかにも何かそれ以上)の容量が帰って来た。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>やったぜ。</p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>手順はQiitaのが詳しいのでサクッと書くと</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・前提として、VMWare tools　をゲストにインストールしておく</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・ゲスト側でcommand prompt -&gt; disk shrink 対象のディスク<span class="Apple-converted-space">  </span>を実行</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>という感じ。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>なんでゲスト側でshrink実行する必要があるんだろ？？</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ちょっと興味深い。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+</body>
+</html>
