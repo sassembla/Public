@@ -1,0 +1,144 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1265.21">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #ebebeb}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #ebebeb; min-height: 18.0px}
+    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #ffb5af}
+    span.s1 {font: 12.0px Helvetica}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>無秩序なif-elseは死ねば良いのに</b></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span></span>ポエムです。</p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p3"><b>無秩序な</b><span class="s1"><b>if-else</b></span><b>は死ねば良いのにと思う理由</b></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>if-else</span>書かなきゃいけないとき、それが</p>
+<p class="p3"><span class="Apple-tab-span">	</span>if {} に対して排他的な要素をelse {} に書かなきゃいけないんだが、</p>
+<p class="p2"><br></p>
+<p class="p5">if situation {</p>
+<p class="p5"><span class="Apple-tab-span">	</span>route A</p>
+<p class="p5">} else {</p>
+<p class="p5"><span class="Apple-tab-span">	</span>route B</p>
+<p class="p5">}</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span></span>なんっつーーーか単純に負けた感じするんだよな。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>状況を読み切れてないというか、打算的ではない感じがする。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>考えるのサボったんじゃねえのみたいな。</p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p3"><b>変更可能性を高く保ちたい</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>自分が感じるif-elseの最高に嫌いなところは、</p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>if-elseなコードは将来の変更可能性を著しく損なう</b> ということにある気がした。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>あとで変更加えるときに</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>「これはelseにくる場合の可能性をどれだけ考慮してるか」</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>っていうのを「変更したくなったその都度、コードから」見ないといけない。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>これはとてもとても面倒臭い。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、読むのが面倒くさい = 取りうる値が自明であることが読みにくいコード = 変更可能性が低いコード、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>という式が自分の中で成立してしまう。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>状態を持ったコードなんかもそうなんだけど、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>状態を持たないコードであっても、値の範囲がパッと読めないだけで苦しくなる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、これをどう改善しようかみたいに考える。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>例を殴って直そう</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>例えば<span class="s1"><span class="Apple-tab-span">	</span></span></p>
+<p class="p5">string a = GetResult</p>
+<p class="p6"><br></p>
+<p class="p5">if a == “something” {</p>
+<p class="p5"><span class="Apple-tab-span">	</span>route A</p>
+<p class="p5">} else {</p>
+<p class="p5"><span class="Apple-tab-span">	</span>route B</p>
+<p class="p5">}</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span></span>みたいなコードがあったとして、<span class="s1">else</span>に来る可能性があるaの中身は、実際なんだろう。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>スッゲー膨大になるよな。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>route Bにくるときのパターンは “somethingではない” くらいの情報しか無い。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これを今から殴りたい。</p>
+<p class="p2"><br></p>
+<p class="p3"><b>自明化</b></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span></span>できればif文に乗ってくる要素がcontextとして一列に並べられるような設計にして、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>かつそれらを選択肢が網羅していることが自明であると嬉しい。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>まずは取り得る選択肢の幅そのものを小さくできないものか。</p>
+<p class="p2"><br></p>
+<p class="p5">enum a = GetResult</p>
+<p class="p6"><br></p>
+<p class="p5">if a == enum .enumA {</p>
+<p class="p5"><span class="Apple-tab-span">	</span>route A</p>
+<p class="p5">} else {</p>
+<p class="p5"><span class="Apple-tab-span">	</span>route B</p>
+<p class="p5"><b><span class="Apple-tab-span">	</span>ここにくるのは少なくともenumに定義された何かっぽい気がする</b></p>
+<p class="p5">}</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>このへんがif-elseの限界で、行き詰まる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、じゃあif捨てよーぜって感じで、switchとかmatchとか。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>この時点で選べない言語が出てくるが気にしない。</p>
+<p class="p2"><br></p>
+<p class="p5">enum a = GetResult</p>
+<p class="p6"><br></p>
+<p class="p5">switch a {</p>
+<p class="p5"><span class="Apple-tab-span">	</span>case enum.enumA:</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>route A</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>break</p>
+<p class="p6"><br></p>
+<p class="p5"><span class="Apple-tab-span">	</span>default:</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>route B</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>break<span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p5">}</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>さらに、取り得る選択肢がexhaustiveな要素だと自動的に明示できるようだと素晴らしい。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>けどこれは出来る言語見たこと無い。</p>
+<p class="p2"><br></p>
+<p class="p5">enum a = GetResult</p>
+<p class="p6"><br></p>
+<p class="p5">switch a {</p>
+<p class="p5"><span class="Apple-tab-span">	</span>case enum.enumA:</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>route A</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>break</p>
+<p class="p6"><br></p>
+<p class="p7"><span class="Apple-tab-span">	</span>default: &lt;- not exhausted yet. enum.enumB, enum.enumC is not used in this block</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>route B</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>break<span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p5">}</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>default(wildcard)があるにも関わらず、ピンクな部分のエラーを出せる言語を自分は知らない。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>っていうかshould exhaustなenumとかがあればそういうのできる言語ありそうな気がする。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ここから先はスピリチュアルな変更を伴う感じの調整が出来る。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>そもそもenumの要素がすべて現れ、かつ使われるような要素になるように</p>
+<p class="p3"><span class="Apple-tab-span">	</span>「考え直す」とか。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>飽きたのでここまでにする。</p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ぶっちゃけコンパイラが賢い言語でswitchとかmatchが使えると平滑にする術が増えるし</p>
+<p class="p3"><span class="Apple-tab-span">	</span>幸せになれるなって感じ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>転じてifの価値は低い。</p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p3">オチは無いです。</p>
+</body>
+</html>
