@@ -12,6 +12,8 @@
     p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
     p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
     p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #ebebeb}
+    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #ebebeb; min-height: 18.0px}
     span.s1 {font: 12.0px Helvetica}
     span.Apple-tab-span {white-space:pre}
   </style>
@@ -27,7 +29,7 @@
 <p class="p4"><br></p>
 <p class="p3"><b>内容</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>以下のような手順で発生する。</p>
-<p class="p5"><img src="cdraw-1.png" alt="cdraw-1.png"></p>
+<p class="p5"><img src="Pasted%20Graphic.tiff" alt="Pasted Graphic.tiff"></p>
 <p class="p3"><span class="Apple-tab-span">	</span>・StoreAppの通信失敗が原因での失敗なのに<span class="s1">User Cancelled</span>扱いにする</p>
 <p class="p3"><span class="Apple-tab-span">	</span>・そのくせ課金は済んでるのでどっかのタイミングでinventoryに購入済み状態でレシートが現れる</p>
 <p class="p2"><br></p>
@@ -37,6 +39,50 @@
 <p class="p3"><span class="Apple-tab-span">	</span>追う。</p>
 <p class="p4"><br></p>
 <p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p3"><b>メモ for </b><a href="https://www.websequencediagrams.com"><b>https://www.websequencediagrams.com</b></a></p>
+<p class="p6">client -&gt;+ playStoreApp: start purchase</p>
+<p class="p7"><br></p>
+<p class="p6">playStoreApp -&gt;+ google: start purchase</p>
+<p class="p7"><br></p>
+<p class="p6">note right of google</p>
+<p class="p7"><br></p>
+<p class="p6">ここで、ユーザーが購入可否を提案され、</p>
+<p class="p6">購入しますか？ ハイ　を押した瞬間に端末をオフラインにすると、</p>
+<p class="p7"><br></p>
+<p class="p6">clientがplayStoreAppから受け取る返答は</p>
+<p class="p6">User Cancelled (-1005) になり、</p>
+<p class="p7"><br></p>
+<p class="p6">さらにplayStoreAppには「購入済み」状態でチケットが発生、</p>
+<p class="p6">その後のclient内でのqueryInventoryとかでの取得で</p>
+<p class="p6">「購入済み」状態で確認できる。</p>
+<p class="p7"><br></p>
+<p class="p6">つまりこれ、課金はされてるのでは？</p>
+<p class="p6">オフラインになって通信失敗したのにUser Cancelledにしたり</p>
+<p class="p6">課金されたりでうん？？？っていう気持ち。</p>
+<p class="p7"><br></p>
+<p class="p6">clientとplayStoreAppの間をプラグインで実現してるんで、</p>
+<p class="p6">その間でUser Cancelledはコードのミスとかで</p>
+<p class="p6">発生しているかもしれないが、</p>
+<p class="p6">チケットが発生するのはどうなのこれ。</p>
+<p class="p6">end note</p>
+<p class="p7"><br></p>
+<p class="p6">google--&gt;-playStoreApp: ???</p>
+<p class="p7"><br></p>
+<p class="p6">note right of playStoreApp</p>
+<p class="p7"><br></p>
+<p class="p6">課金チケット爆誕、</p>
+<p class="p6">以降適当なタイミングで</p>
+<p class="p6">inventoryに現れるようになり、</p>
+<p class="p6">その状態は0 = purchased</p>
+<p class="p6">end note</p>
+<p class="p7"><br></p>
+<p class="p6">playStoreApp--&gt;-client: User Cancelled</p>
+<p class="p7"><br></p>
+<p class="p6">note left of client</p>
+<p class="p6">えっ</p>
+<p class="p6">キャンセルなんかしてねーし</p>
+<p class="p6">end note</p>
 <p class="p4"><br></p>
 </body>
 </html>
