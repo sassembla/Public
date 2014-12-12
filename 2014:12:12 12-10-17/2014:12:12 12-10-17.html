@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1265.21">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    span.s1 {font: 12.0px Helvetica}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>通信障害とGoogle Play Store App</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>Android</span>で通信状況がアレなときに、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="s1">Platform</span>の用意したサーバと連絡がとれないくせに購入できたことにする<span class="s1">Google</span>さんの<span class="s1">PlayStoreApp</span>の仕様最高にロックだぞみたいな事案にあたった。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>きっと悪い夢だ。俺の使ってるプラグインとかコードのバグに違いない。</p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p3"><b>内容</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>以下のような手順で発生する。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="s1"><img src="Pasted%20Graphic.tiff" alt="Pasted Graphic.tiff"></span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・StoreAppの通信失敗が原因での失敗なのに<span class="s1">User Cancelled</span>扱いにする</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・そのくせ課金は済んでるのでどっかのタイミングでinventoryに購入済み状態でレシートが現れる</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span></span>みたいなの闇で楽しい。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>UnityでAndroidのやつ作ってて見つけた挙動なので、Prime31とかのプラグインがUser Cancelled を返してるのかも知れないので、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>追う。</p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+</body>
+</html>
