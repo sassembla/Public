@@ -8,167 +8,168 @@
   <meta name="CocoaVersion" content="1265.21">
   <style type="text/css">
     p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
     p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
-    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
-    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
-    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 20.0px 'Hiragino Kaku Gothic ProN'}
-    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #ebebeb}
-    p.p8 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #ebebeb; min-height: 18.0px}
-    span.s1 {font: 22.0px Helvetica}
-    span.s2 {font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 20.0px 'Hiragino Kaku Gothic ProN'}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #ebebeb}
+    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #ebebeb; min-height: 18.0px}
+    span.s1 {font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    span.s2 {background-color: #ebebeb}
     span.s3 {font: 12.0px Helvetica}
-    span.s4 {background-color: #ebebeb}
     span.Apple-tab-span {white-space:pre}
   </style>
 </head>
 <body>
-<p class="p1"><span class="s1"><b>Unity</b></span><b>で特定のリソースの</b><span class="s1"><b>import</b></span><b>を避ける</b></p>
+<p class="p1"><b>AssetBundleを高速に作る</b></p>
 <p class="p2"><br></p>
 <p class="p3"><b>概要</b></p>
-<p class="p4"><span class="Apple-tab-span">	</span>Unity Advent Calendar 15<span class="s2">日目の記事です。</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Unity Advent Calendar 2014 15日目の記事です。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://qiita.com/advent-calendar/2014/unity">http://qiita.com/advent-calendar/2014/unity</a></p>
 <p class="p2"><br></p>
-<p class="p3"><span class="s3"><span class="Apple-tab-span">	</span>Unity</span>を使う上でめっちゃ困る事象である</p>
-<p class="p3"><span class="s3"><span class="Apple-tab-span">	</span></span>「platformをswitchしたときクッソ重い」</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Unityを使う上でめっちゃ困る事象である</p>
+<p class="p3"><span class="Apple-tab-span">	</span>「platformをswitchしたときクッソ重い」</p>
 <p class="p3"><span class="Apple-tab-span">	</span>を簡単に避ける方法を見つけたので、書く。</p>
-<p class="p5"><br></p>
+<p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>ほんとはAssetStoreに新Assetを入れた(申請中)のを記事にしたかったんだけど、</p>
 <p class="p3"><span class="Apple-tab-span">	</span>むしろこっちの方が良い話だろうという感じ。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>解決したかったこと1</b></p>
-<p class="p3"><span class="s3"><span class="Apple-tab-span">	</span></span>Unityを使って複数プラットフォームでの開発をしていて困ること、のなかで、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Unityを使って複数プラットフォームでの開発をしていて困ること、のなかで、</p>
 <p class="p3"><span class="Apple-tab-span">	</span>「プラットフォーム切り替え時」</p>
 <p class="p3"><span class="Apple-tab-span">	</span>の時間がかかることがかなり上位に来ると思う。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
-<p class="p2"><br></p>
 <p class="p3"><b>既知の有償な手段：fast platform switch を使う</b></p>
 <p class="p3"><b><span class="Apple-tab-span">	</span></b><a href="http://jemast.com/unity/fast-platform-switch">http://jemast.com/unity/fast-platform-switch</a></p>
-<p class="p5"><b></b><br></p>
+<p class="p2"><b></b><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>有償、かつ有効。</p>
-<p class="p5"><b></b><br></p>
-<p class="p5"><b></b><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><b></b><br></p>
 <p class="p3"><b>オルタナティブな手段：拡張子を変える</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>で、もっと簡単に、手軽にできるんじゃねーの？っていうアイデアがこちら。</p>
-<p class="p5"><br></p>
+<p class="p2"><br></p>
 <p class="p3"><b><span class="Apple-tab-span">	</span>「ファイルの拡張子をUnityがどうしようもないものに変える」というもの。</b></p>
-<p class="p5"><b><span class="Apple-tab-span">	</span></b></p>
+<p class="p2"><b><span class="Apple-tab-span">	</span></b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>実際に試してみたところ、マジで実現できた。</p>
-<p class="p6"><b><span class="Apple-tab-span">	</span>のだけど！！！</b></p>
+<p class="p4"><b><span class="Apple-tab-span">	</span>のだけど！！！</b></p>
+<p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>エラーが出る条件があって、</p>
 <p class="p3"><span class="Apple-tab-span">	</span>それを避けようとやってみればみるほど、fast platform switchの手法にメッチャ似てきて、</p>
-<p class="p5"><br></p>
-<p class="p6"><span class="s2"><span class="Apple-tab-span">	</span></span><b>これを公開すると</b></p>
-<p class="p6"><span class="s2"><b><span class="Apple-tab-span">	</span></b></span><b>ただ単に「fast platform switch」に喧嘩を売るだけになってしまう</b></p>
-<p class="p5"><br></p>
+<p class="p2"><br></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span></span><b>これを公開すると</b></p>
+<p class="p4"><span class="s1"><b><span class="Apple-tab-span">	</span></b></span><b>ただ単に「fast platform switch」に喧嘩を売るだけになってしまう</b></p>
+<p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>ということがわかった。</p>
 <p class="p3"><span class="Apple-tab-span">	</span>つまり新規性が無い。</p>
-<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>なんとかして新規性を獲得しようと思ったんだけど無理だった。</p>
+<p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>ので、別の問題を解決することにした。</p>
 <p class="p3"><b><span class="Apple-tab-span">	</span>現在 2014/12/14 23:05:36</b></p>
-<p class="p5"><b></b><br></p>
-<p class="p5"><b></b><br></p>
-<p class="p5"><b></b><br></p>
-<p class="p5"><b></b><br></p>
-<p class="p5"><b></b><br></p>
-<p class="p5"><b></b><br></p>
-<p class="p5"><b></b><br></p>
-<p class="p5"><b></b><br></p>
-<p class="p5"><b></b><br></p>
-<p class="p5"><b></b><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><b></b><br></p>
 <p class="p3"><b>解決したかったこと2</b></p>
-<p class="p6"><b><span class="Apple-tab-span">	</span>AssetBundleを高速に作る</b></p>
-<p class="p5"><br></p>
+<p class="p4"><b><span class="Apple-tab-span">	</span>AssetBundleを高速に作る</b></p>
+<p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>箇条書きにすると、</p>
-<p class="p5"><br></p>
+<p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>1. あるプラットフォーム向けのAssetBundleを作るとき、エディタの環境設定がそのプラットフォームになってしまい、</p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>AssetBundleにしたいファイル以外のファイルも、プラットフォームの変更に巻き込まれて再度importされてしまう。</p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>これはメッチャ遅いし時間掛かってストレスフルなので、再度importされないようにしたい。</p>
-<p class="p5"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p3"><span class="Apple-tab-span">	</span>2. ファイルを移動するようなコードを書きたくない。</p>
-<p class="p5"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p3"><span class="Apple-tab-span">	</span>3. 複数のプラットフォームのAssetBundleを連続で高速に作成したい。</p>
-<p class="p5"><b></b><br></p>
-<p class="p5"><b><span class="Apple-tab-span">	</span></b></p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><b><span class="Apple-tab-span">	</span></b></p>
 <p class="p3"><b><span class="Apple-tab-span">	</span>1が特にわっかりにくいと思うので具体的に説明する。</b></p>
-<p class="p5"><b></b><br></p>
-<p class="p5"><b></b><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><b></b><br></p>
 <p class="p3"><b>説明</b></p>
 <p class="p3"><b><span class="Apple-tab-span">	</span></b>以下のような構成で、AssetBundleにしたいファイルがProject内、Resourcesフォルダ下にあったとしよう。</p>
-<p class="p3"><span class="s3"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202014-12-15%201.44.18.png" alt="スクリーンショット 2014-12-15 1.44.18.png"></span><span class="Apple-tab-span">	</span>AssetBundleにしたい素材が入っているフォルダ <b>BundlizeTarget</b>の中身はこう。</p>
-<p class="p4"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202014-12-15%201.47.10.png" alt="スクリーンショット 2014-12-15 1.47.10.png"></p>
+<p class="p5"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202014-12-15%201.44.18.png" alt="スクリーンショット 2014-12-15 1.44.18.png"></p>
+<p class="p3"><span class="Apple-tab-span">	</span>AssetBundleにしたい素材が入っているフォルダ <b>BundlizeTarget</b>の中身はこう。</p>
+<p class="p5"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202014-12-15%201.47.10.png" alt="スクリーンショット 2014-12-15 1.47.10.png"></p>
 <p class="p3"><span class="Apple-tab-span">	</span>対して、AssetBundleにしたくない素材が入っているフォルダ<b>NeverReImport</b>の中身がこう。</p>
-<p class="p4"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202014-12-15%201.48.44.png" alt="スクリーンショット 2014-12-15 1.48.44.png"></p>
+<p class="p5"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202014-12-15%201.48.44.png" alt="スクリーンショット 2014-12-15 1.48.44.png"></p>
 <p class="p3"><span class="Apple-tab-span">	</span>ここで、<b>BundlizeTargetフォルダの中身だけ</b>を、<b>iOSとかAndroid用に、AssetBundleとして吐き出したい</b>とする。</p>
-<p class="p4"><img src="ad.png" alt="ad.png"></p>
+<p class="p5"><img src="ad.png" alt="ad.png"></p>
 <p class="p3"><b>AssetBundleを作るときの手順のおさらい</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>1. リソースを用意する</p>
 <p class="p3"><span class="Apple-tab-span">	</span>2. スクリプトで以下のようなのを書く</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>var res1 = Resources.Load(Path.Combine(targetFolderName, "Yeaaahhhhh"));</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>var targetPlatform = BuildTarget.iPhone;// Unity5だとiOSになったな～</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>uint crc;</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>if (res1 != null) {</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>BuildPipeline.BuildAssetBundle(</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>res1,</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>null,</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Path.Combine(destinationPath, "Yeaaahhhhh_bundlized"),</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>out crc,</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>BuildAssetBundleOptions.CollectDependencies | BuildAssetBundleOptions.CompleteAssets,</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>targetPlatform</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>);</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}</p>
-<p class="p5"><br></p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>var res1 = Resources.Load(Path.Combine(targetFolderName, "Yeaaahhhhh"));</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>var targetPlatform = BuildTarget.iPhone;// Unity5だとiOSになったな～</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>uint crc;</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>if (res1 != null) {</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>BuildPipeline.BuildAssetBundle(</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>res1,</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>null,</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Path.Combine(destinationPath, "Yeaaahhhhh_bundlized"),</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>out crc,</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>BuildAssetBundleOptions.CollectDependencies | BuildAssetBundleOptions.CompleteAssets,</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>targetPlatform</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>);</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}</p>
+<p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>3. 実行する</p>
 <p class="p3"><span class="Apple-tab-span">	</span>4. 実行後には、エディタのプラットフォーム設定は、<b>BuildPipeline.BuildAssetBundleメソッドの内容で使われたプラットフォーム</b>になっている。</p>
-<p class="p5"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p3"><span class="Apple-tab-span">	</span>つまりどこかで<b>プラットフォームスイッチが発生している。</b></p>
-<p class="p5"><br></p>
-<p class="p5"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>実際にプラットフォームが変更されるのは、3. の内部で、まさに<span class="s4">BuildPipeline.BuildAssetBundle</span>メソッドが実行された瞬間になっている。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>実際にプラットフォームが変更されるのは、3. の内部で、まさに<span class="s2">BuildPipeline.BuildAssetBundle</span>メソッドが実行された瞬間になっている。</p>
 <p class="p3"><span class="Apple-tab-span">	</span>ちなみに例えばAssetBundleの吐き出し先が無いとかでエラーになっても、プラットフォームはスイッチされる。</p>
-<p class="p5"><br></p>
-<p class="p5"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
 <p class="p3"><b>プラットフォームスイッチが発生すると</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>AssetBundleにしたいBundlizedフォルダ以外にも、Assetsより下の素材的なファイルはだいたい根こそぎ、再importされる。</p>
 <p class="p3"><span class="Apple-tab-span">	</span>(ソースコードとか.unityファイルとかは再度importされない。)</p>
-<p class="p5"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p3"><span class="Apple-tab-span">	</span>で、</p>
-<p class="p4"><img src="1__%23$!@%25!%23__%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202014-12-15%201.44.18.png" alt="1__#$!@%!#__スクリーンショット 2014-12-15 1.44.18.png"></p>
+<p class="p5"><img src="1__%23$!@%25!%23__%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202014-12-15%201.44.18.png" alt="1__#$!@%!#__スクリーンショット 2014-12-15 1.44.18.png"></p>
 <p class="p3"><span class="Apple-tab-span">	</span>AssetBundleに変えたくないファイルも、再度importに巻き込まれる。</p>
 <p class="p3"><span class="Apple-tab-span">	</span>そして何より問題なことが一つ。</p>
-<p class="p5"><br></p>
-<p class="p6"><b><span class="Apple-tab-span">	</span>importは、遅い。</b></p>
+<p class="p2"><br></p>
+<p class="p4"><b><span class="Apple-tab-span">	</span>importは、遅い。</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>特にiOS、Android用のimportは、画像、サウンド、3Dモデルなどすべてにおいてクッソ遅いし重い。</p>
-<p class="p5"><br></p>
+<p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>余計なファイルをimportすることは辛い。</p>
 <p class="p3"><span class="Apple-tab-span">	</span>ということは、余計なファイルをimportしないようにすれば、高速化できるのでは？</p>
-<p class="p5"><br></p>
+<p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>っつーことでやってみた。</p>
-<p class="p5"><br></p>
-<p class="p5"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
 <p class="p3"><b>解決策</b></p>
-<p class="p6"><span class="s2"><span class="Apple-tab-span">	</span></span><b>AssetBundleを作る瞬間に、</b></p>
-<p class="p6"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>AssetBundleにしたくないファイル全部の拡張子を、</b></p>
-<p class="p6"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Unityが気にしない物に変更する。</b></p>
-<p class="p5"><br></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span></span><b>AssetBundleを作る瞬間に、</b></p>
+<p class="p4"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>AssetBundleにしたくないファイル全部の拡張子を、</b></p>
+<p class="p4"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Unityが気にしない物に変更する。</b></p>
+<p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>プロジェクトはこちら。</p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/PlatformSwitcher">https://github.com/sassembla/PlatformSwitcher</a></p>
-<p class="p5"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p3"><span class="Apple-tab-span">	</span>名前は気にしないでください。</p>
-<p class="p5"><br></p>
-<p class="p5"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>プロジェクトを適当にDLしてきて、</p>
 <p class="p3"><span class="Apple-tab-span">	</span>メニュー &gt; Window &gt; Bundlize で、Bundlizeフォルダの中身を高速にAssetBundle化する。</p>
 <p class="p3"><span class="Apple-tab-span">	</span>iOS用、Android用の順に、計2つのAssetBundleを、PlatformSwitcher/Bundlized フォルダ内に吐き出す。</p>
-<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="s3"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202014-12-15%202.27.57.png" alt="スクリーンショット 2014-12-15 2.27.57.png"></span></p>
-<p class="p5"><br></p>
+<p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>その際、AssetBundle化が完了するまでの間、NeverReImportフォルダの中身は再度importされない。</p>
 <p class="p3"><span class="Apple-tab-span">	</span>つまり無駄なimportが無く高速。</p>
-<p class="p5"><br></p>
-<p class="p5"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
 <p class="p3"><b>手法解説</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>1. プラットフォームスイッチでimportされる可能性のあるファイルの拡張子をすべて + .deactivate 付きに変える(deactivate化)</p>
 <p class="p3"><span class="Apple-tab-span">	</span>2. 開始前のプラットフォームを記録しておく</p>
@@ -176,325 +177,325 @@
 <p class="p3"><span class="Apple-tab-span">	</span>4. AssetBundleを好きなだけ作る</p>
 <p class="p3"><span class="Apple-tab-span">	</span>5. 3で保存しておいたプラットフォームに戻す(今回はダミーAssetBundleを作ることで無理矢理戻している)</p>
 <p class="p3"><span class="Apple-tab-span">	</span>6. 1で変えたファイルの拡張子を全部戻す</p>
-<p class="p5"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p3"><span class="Apple-tab-span">	</span>ね、簡単でしょう？</p>
-<p class="p5"><br></p>
-<p class="p5"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
 <p class="p3"><b>状況解説</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>実行部分だけだとこんな感じ。</p>
-<p class="p7">using UnityEngine;</p>
-<p class="p7">using UnityEditor;</p>
-<p class="p8"><br></p>
-<p class="p7">using System;</p>
-<p class="p7">using System.IO;</p>
-<p class="p7">using System.Collections.Generic;</p>
-<p class="p8"><br></p>
-<p class="p7">class AssetBundleContainer {</p>
-<p class="p7"><span class="Apple-tab-span">	</span>[MenuItem ("Window/Bundlize", false, 1)]</p>
-<p class="p7"><span class="Apple-tab-span">	</span>static void AssetBundlize () {</p>
-<p class="p8"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>// Bundle化したあとのモノの置き場を適当に作る</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>var destinationPath = "Bundlized";</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>FileController.Renew(destinationPath);</p>
-<p class="p8"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
-<p class="p8"><br></p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>/*</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>deactivate</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>対象が含まれる、すべての「importされると面倒なファイル」を、importされなそうな拡張子にリネームする。</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>*/</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>var deactivateTargetPath = Path.Combine(Application.dataPath, "Resources");</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>var transactionId = Deactivator.DeactivateFilesUnderPath(deactivateTargetPath);</p>
-<p class="p8"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>var targetFolderName = "BundlizeTarget";</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>var targetFolderPath = Path.Combine(deactivateTargetPath, targetFolderName);</p>
-<p class="p8"><br></p>
-<p class="p8"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>// 現在のプラットフォームを記録</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>var beforePlatform = EditorUserBuildSettings.activeBuildTarget;</p>
-<p class="p8"><br></p>
-<p class="p8"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>// AssetBundleにする対象のファイルの拡張子だけを戻す(この場合フォルダ単位で戻している)</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Deactivator.ActivateFilesUnderPath(transactionId, targetFolderPath);</p>
-<p class="p8"><br></p>
-<p class="p8"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>// iOS用にAssetBundleを作成</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>if (true) {</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>var res = Resources.Load(Path.Combine(targetFolderName, "Yeaaahhhhh"));</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>var targetPlatform = BuildTarget.iPhone;// Unity5だとiOSになったな～</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>uint crc;</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>if (res != null) {</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>BuildPipeline.BuildAssetBundle(</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>res,</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>null,</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Path.Combine(destinationPath, "Yeaaahhhhh_bundlized_ios"),</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>out crc,</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>BuildAssetBundleOptions.CollectDependencies | BuildAssetBundleOptions.CompleteAssets,</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>targetPlatform</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>);</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}</p>
-<p class="p8"><br></p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>var afterPlatform1 = EditorUserBuildSettings.activeBuildTarget;</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Debug.Log("after1:" + afterPlatform1);</p>
-<p class="p8"><br></p>
-<p class="p8"><br></p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>// Android用にAssetBundleを作成</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>if (true) {</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>var res = Resources.Load(Path.Combine(targetFolderName, "Yeaaahhhhh"));</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>var targetPlatform = BuildTarget.Android;// Unity5だとiOSになったな～</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>uint crc;</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>if (res != null) {</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>BuildPipeline.BuildAssetBundle(</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>res,</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>null,</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Path.Combine(destinationPath, "Yeaaahhhhh_bundlized_android"),</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>out crc,</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>BuildAssetBundleOptions.CollectDependencies | BuildAssetBundleOptions.CompleteAssets,</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>targetPlatform</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>);</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}</p>
-<p class="p8"><br></p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>var afterPlatform2 = EditorUserBuildSettings.activeBuildTarget;</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Debug.Log("after2:" + afterPlatform2);</p>
-<p class="p8"><br></p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>// リセット</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>if (true) {</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>uint crc;</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>var resetterRes = Resources.Load("dummyText");</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>if (resetterRes != null) {</p>
-<p class="p8"><br></p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>BuildPipeline.BuildAssetBundle(</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>resetterRes,</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>null,</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Path.Combine(destinationPath, "resetter"),</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>out crc,</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>BuildAssetBundleOptions.CollectDependencies | BuildAssetBundleOptions.CompleteAssets,</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>beforePlatform</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>);</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}</p>
-<p class="p8"><br></p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>var afterPlatform3 = EditorUserBuildSettings.activeBuildTarget;</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Debug.Log("after3:" + afterPlatform3);</p>
-<p class="p8"><br></p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>// 無効化していたのを元に戻す</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Deactivator.RollbackTransaction(transactionId);</p>
-<p class="p7"><span class="Apple-tab-span">	</span>}</p>
-<p class="p7">}</p>
-<p class="p8"><br></p>
-<p class="p7">class Importer : UnityEditor.AssetPostprocessor {</p>
-<p class="p7"><span class="Apple-tab-span">	</span>public void OnPreprocessTexture () {</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Debug.LogError("assetPath:" + assetPath);</p>
-<p class="p7"><span class="Apple-tab-span">	</span>}</p>
-<p class="p7">}</p>
-<p class="p5"><br></p>
-<p class="p5"><br></p>
+<p class="p6">using UnityEngine;</p>
+<p class="p6">using UnityEditor;</p>
+<p class="p7"><br></p>
+<p class="p6">using System;</p>
+<p class="p6">using System.IO;</p>
+<p class="p6">using System.Collections.Generic;</p>
+<p class="p7"><br></p>
+<p class="p6">class AssetBundleContainer {</p>
+<p class="p6"><span class="Apple-tab-span">	</span>[MenuItem ("Window/Bundlize", false, 1)]</p>
+<p class="p6"><span class="Apple-tab-span">	</span>static void AssetBundlize () {</p>
+<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>// Bundle化したあとのモノの置き場を適当に作る</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>var destinationPath = "Bundlized";</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>FileController.Renew(destinationPath);</p>
+<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p7"><br></p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>/*</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>deactivate</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>対象が含まれる、すべての「importされると面倒なファイル」を、importされなそうな拡張子にリネームする。</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>*/</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>var deactivateTargetPath = Path.Combine(Application.dataPath, "Resources");</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>var transactionId = Deactivator.DeactivateFilesUnderPath(deactivateTargetPath);</p>
+<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>var targetFolderName = "BundlizeTarget";</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>var targetFolderPath = Path.Combine(deactivateTargetPath, targetFolderName);</p>
+<p class="p7"><br></p>
+<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>// 現在のプラットフォームを記録</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>var beforePlatform = EditorUserBuildSettings.activeBuildTarget;</p>
+<p class="p7"><br></p>
+<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>// AssetBundleにする対象のファイルの拡張子だけを戻す(この場合フォルダ単位で戻している)</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Deactivator.ActivateFilesUnderPath(transactionId, targetFolderPath);</p>
+<p class="p7"><br></p>
+<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>// iOS用にAssetBundleを作成</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>if (true) {</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>var res = Resources.Load(Path.Combine(targetFolderName, "Yeaaahhhhh"));</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>var targetPlatform = BuildTarget.iPhone;// Unity5だとiOSになったな～</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>uint crc;</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>if (res != null) {</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>BuildPipeline.BuildAssetBundle(</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>res,</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>null,</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Path.Combine(destinationPath, "Yeaaahhhhh_bundlized_ios"),</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>out crc,</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>BuildAssetBundleOptions.CollectDependencies | BuildAssetBundleOptions.CompleteAssets,</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>targetPlatform</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>);</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}</p>
+<p class="p7"><br></p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>var afterPlatform1 = EditorUserBuildSettings.activeBuildTarget;</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Debug.Log("after1:" + afterPlatform1);</p>
+<p class="p7"><br></p>
+<p class="p7"><br></p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>// Android用にAssetBundleを作成</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>if (true) {</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>var res = Resources.Load(Path.Combine(targetFolderName, "Yeaaahhhhh"));</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>var targetPlatform = BuildTarget.Android;// Unity5だとiOSになったな～</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>uint crc;</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>if (res != null) {</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>BuildPipeline.BuildAssetBundle(</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>res,</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>null,</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Path.Combine(destinationPath, "Yeaaahhhhh_bundlized_android"),</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>out crc,</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>BuildAssetBundleOptions.CollectDependencies | BuildAssetBundleOptions.CompleteAssets,</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>targetPlatform</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>);</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}</p>
+<p class="p7"><br></p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>var afterPlatform2 = EditorUserBuildSettings.activeBuildTarget;</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Debug.Log("after2:" + afterPlatform2);</p>
+<p class="p7"><br></p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>// リセット</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>if (true) {</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>uint crc;</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>var resetterRes = Resources.Load("dummyText");</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>if (resetterRes != null) {</p>
+<p class="p7"><br></p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>BuildPipeline.BuildAssetBundle(</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>resetterRes,</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>null,</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Path.Combine(destinationPath, "resetter"),</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>out crc,</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>BuildAssetBundleOptions.CollectDependencies | BuildAssetBundleOptions.CompleteAssets,</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>beforePlatform</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>);</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}</p>
+<p class="p7"><br></p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>var afterPlatform3 = EditorUserBuildSettings.activeBuildTarget;</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Debug.Log("after3:" + afterPlatform3);</p>
+<p class="p7"><br></p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>// 無効化していたのを元に戻す</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Deactivator.RollbackTransaction(transactionId);</p>
+<p class="p6"><span class="Apple-tab-span">	</span>}</p>
+<p class="p6">}</p>
+<p class="p7"><br></p>
+<p class="p6">class Importer : UnityEditor.AssetPostprocessor {</p>
+<p class="p6"><span class="Apple-tab-span">	</span>public void OnPreprocessTexture () {</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Debug.LogError("assetPath:" + assetPath);</p>
+<p class="p6"><span class="Apple-tab-span">	</span>}</p>
+<p class="p6">}</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>プラットフォームスイッチが発生すると、再importが発生する。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>再importが発生すると、<span class="s4">OnPreprocessTexture</span>メソッドが呼ばれ、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>再importが発生すると、<span class="s2">OnPreprocessTexture</span>メソッドが呼ばれ、</p>
 <p class="p3"><span class="Apple-tab-span">	</span>Debug.LogErrorが走ってあぶなーーーいっ！　って言ってくれるようになっている。</p>
-<p class="p5"><br></p>
-<p class="p5"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>で、先ほどのフォルダ構成に対して、<span class="Apple-tab-span">	</span></p>
-<p class="p4"><img src="2__%23$!@%25!%23__%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202014-12-15%201.44.18.png" alt="2__#$!@%!#__スクリーンショット 2014-12-15 1.44.18.png"></p>
-<p class="p5"><br></p>
+<p class="p5"><img src="2__%23$!@%25!%23__%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202014-12-15%201.44.18.png" alt="2__#$!@%!#__スクリーンショット 2014-12-15 1.44.18.png"></p>
+<p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>1. プラットフォームスイッチでimportされる可能性のあるファイルの拡張子をすべて + .deactivate 付きに変える(deactivate化)</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>/*</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>deactivate</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>対象が含まれる、すべての「importされると面倒なファイル」を、importされなそうな拡張子にリネームする。</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>*/</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>var deactivateTargetPath = Path.Combine(Application.dataPath, "Resources");</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>var transactionId = Deactivator.DeactivateFilesUnderPath(deactivateTargetPath);</p>
-<p class="p5"><br></p>
-<p class="p5"><br></p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>/*</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>deactivate</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>対象が含まれる、すべての「importされると面倒なファイル」を、importされなそうな拡張子にリネームする。</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>*/</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>var deactivateTargetPath = Path.Combine(Application.dataPath, "Resources");</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>var transactionId = Deactivator.DeactivateFilesUnderPath(deactivateTargetPath);</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>2. 開始前のプラットフォームを記録しておく</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>// 現在のプラットフォームを記録</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>var beforePlatform = EditorUserBuildSettings.activeBuildTarget;</p>
-<p class="p5"><br></p>
-<p class="p5"><br></p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>// 現在のプラットフォームを記録</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>var beforePlatform = EditorUserBuildSettings.activeBuildTarget;</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>3. AssetBundle化したいやつだけdeactivateを解く(activate化)</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>// AssetBundleにする対象のファイルの拡張子だけを戻す(この場合フォルダ単位で戻している)</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Deactivator.ActivateFilesUnderPath(transactionId, targetFolderPath);</p>
-<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
-<p class="p5"><br></p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>// AssetBundleにする対象のファイルの拡張子だけを戻す(この場合フォルダ単位で戻している)</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Deactivator.ActivateFilesUnderPath(transactionId, targetFolderPath);</p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>4. AssetBundleを好きなだけ作る</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>// iOS用にAssetBundleを作成</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>if (true) {</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>var res = Resources.Load(Path.Combine(targetFolderName, "Yeaaahhhhh"));</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>var targetPlatform = BuildTarget.iPhone;// Unity5だとiOSになったな～</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>uint crc;</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>if (res != null) {</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>BuildPipeline.BuildAssetBundle(</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>res,</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>null,</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Path.Combine(destinationPath, "Yeaaahhhhh_bundlized_ios"),</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>out crc,</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>BuildAssetBundleOptions.CollectDependencies | BuildAssetBundleOptions.CompleteAssets,</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>targetPlatform</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>);</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}</p>
-<p class="p8"><br></p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>var afterPlatform1 = EditorUserBuildSettings.activeBuildTarget;</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Debug.Log("after1:" + afterPlatform1);</p>
-<p class="p8"><br></p>
-<p class="p8"><br></p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>// Android用にAssetBundleを作成</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>if (true) {</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>var res = Resources.Load(Path.Combine(targetFolderName, "Yeaaahhhhh"));</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>var targetPlatform = BuildTarget.Android;// Unity5だとiOSになったな～</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>uint crc;</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>if (res != null) {</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>BuildPipeline.BuildAssetBundle(</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>res,</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>null,</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Path.Combine(destinationPath, "Yeaaahhhhh_bundlized_android"),</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>out crc,</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>BuildAssetBundleOptions.CollectDependencies | BuildAssetBundleOptions.CompleteAssets,</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>targetPlatform</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>);</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}</p>
-<p class="p8"><br></p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>var afterPlatform2 = EditorUserBuildSettings.activeBuildTarget;</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Debug.Log("after2:" + afterPlatform2);</p>
-<p class="p5"><br></p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>// iOS用にAssetBundleを作成</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>if (true) {</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>var res = Resources.Load(Path.Combine(targetFolderName, "Yeaaahhhhh"));</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>var targetPlatform = BuildTarget.iPhone;// Unity5だとiOSになったな～</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>uint crc;</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>if (res != null) {</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>BuildPipeline.BuildAssetBundle(</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>res,</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>null,</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Path.Combine(destinationPath, "Yeaaahhhhh_bundlized_ios"),</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>out crc,</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>BuildAssetBundleOptions.CollectDependencies | BuildAssetBundleOptions.CompleteAssets,</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>targetPlatform</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>);</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}</p>
+<p class="p7"><br></p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>var afterPlatform1 = EditorUserBuildSettings.activeBuildTarget;</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Debug.Log("after1:" + afterPlatform1);</p>
+<p class="p7"><br></p>
+<p class="p7"><br></p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>// Android用にAssetBundleを作成</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>if (true) {</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>var res = Resources.Load(Path.Combine(targetFolderName, "Yeaaahhhhh"));</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>var targetPlatform = BuildTarget.Android;</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>uint crc;</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>if (res != null) {</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>BuildPipeline.BuildAssetBundle(</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>res,</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>null,</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Path.Combine(destinationPath, "Yeaaahhhhh_bundlized_android"),</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>out crc,</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>BuildAssetBundleOptions.CollectDependencies | BuildAssetBundleOptions.CompleteAssets,</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>targetPlatform</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>);</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}</p>
+<p class="p7"><br></p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>var afterPlatform2 = EditorUserBuildSettings.activeBuildTarget;</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Debug.Log("after2:" + afterPlatform2);</p>
+<p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ここで、Debug.Logの内容は計2つ出る。(Pro版持ってないとそれはそれでエラー出て怒られる)</p>
-<p class="p5"><span class="Apple-tab-span">	</span></p>
-<p class="p5"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>5. 3で保存しておいたプラットフォームに戻す(今回はダミーAssetBundleを作ることで無理矢理戻している)</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>// リセット</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>if (true) {</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>uint crc;</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>var resetterRes = Resources.Load("dummyText");</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>if (resetterRes != null) {</p>
-<p class="p8"><br></p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>BuildPipeline.BuildAssetBundle(</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>resetterRes,</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>null,</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Path.Combine(destinationPath, "resetter"),</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>out crc,</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>BuildAssetBundleOptions.CollectDependencies | BuildAssetBundleOptions.CompleteAssets,</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>beforePlatform</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>);</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}</p>
-<p class="p8"><br></p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>var afterPlatform3 = EditorUserBuildSettings.activeBuildTarget;</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Debug.Log("after3:" + afterPlatform3);</p>
-<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>// リセット</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>if (true) {</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>uint crc;</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>var resetterRes = Resources.Load("dummyText");</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>if (resetterRes != null) {</p>
+<p class="p7"><br></p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>BuildPipeline.BuildAssetBundle(</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>resetterRes,</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>null,</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Path.Combine(destinationPath, "resetter"),</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>out crc,</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>BuildAssetBundleOptions.CollectDependencies | BuildAssetBundleOptions.CompleteAssets,</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>beforePlatform</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>);</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}</p>
+<p class="p7"><br></p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>var afterPlatform3 = EditorUserBuildSettings.activeBuildTarget;</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Debug.Log("after3:" + afterPlatform3);</p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>実際、プラットフォームの変更は,</p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>EditorUserBuildSettings.SwitchActiveBuildTarget メソッドでも変更可能なんだけど、</p>
-<p class="p5"><br></p>
+<p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ここでなんでAssetBundle作る方法を使っているかというと、</p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>バッチから実行したいから。</p>
-<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>EditorUserBuildSettings.SwitchActiveBuildTarget メソッドはバッチ上では使えない。</p>
-<p class="p5"><br></p>
-<p class="p5"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>6. 1で変えたファイルの拡張子を全部戻す</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>// 無効化していたのを元に戻す</p>
-<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Deactivator.RollbackTransaction(transactionId);</p>
-<p class="p5"><span class="Apple-tab-span">	</span></p>
-<p class="p5"><br></p>
-<p class="p5"><span class="Apple-tab-span">	</span></p>
-<p class="p5"><br></p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>// 無効化していたのを元に戻す</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Deactivator.RollbackTransaction(transactionId);</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>この順で動作すると、importされる内容は、開始時のプラットフォームがPCプラットフォームだった場合、</p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>・iOSプラットフォームに一度変更、BundlizeTarget フォルダ内の画像 Yeaaahhhhh.jpeg だけが変換される</p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>・その後Androidプラットフォームに変更、BundlizeTarget フォルダ内の画像 Yeaaahhhhh.jpeg だけが変換される</p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>・最後にPCプラットフォームに戻り、BundlizeTarget フォルダ内の画像 Yeaaahhhhh.jpeg だけが変換される</p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>・無効化されていた画像が復帰</p>
 <p class="p3"><span class="Apple-tab-span">	</span>という感じになる。</p>
-<p class="p5"><br></p>
+<p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>完璧、、、！！　かに思えたのだが、</p>
-<p class="p5"><br></p>
+<p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>実は最後にぶり返しみたいなのがあって、</p>
-<p class="p3"><span class="Apple-tab-span">	</span>無効化されていた別フォルダのものが復帰後、再度Unity Editor.appにフォーカスをするとかすると、PCプラットフォームとして変換される。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>無効化されていた別フォルダのものが復帰後、再度Unity Editor.appにフォーカスをあてるとかすると、PCプラットフォームとして変換される。</p>
 <p class="p3"><span class="Apple-tab-span">	</span>(PCプラットフォームだと高速っちゃあ高速なので気にはならないが。)</p>
-<p class="p5"><br></p>
+<p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>プラットフォームスイッチに巻き込まれる分の時間は確実に減っている。</p>
-<p class="p5"><span class="Apple-tab-span">	</span></p>
-<p class="p5"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
 <p class="p3"><b>で、実際どのくらい速いの？</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>コマンドラインから実行して時間を計測してみた。</p>
-<p class="p5"><br></p>
+<p class="p2"><br></p>
 <p class="p3"><b><span class="Apple-tab-span">	</span>deactivateあり:</b></p>
-<p class="p7">ts:00:00:0<b>1.9974540 (1.9秒</b></p>
-<p class="p5"><br></p>
-<p class="p5"><br></p>
+<p class="p6">ts:00:00:0<b>1.9974540 (1.9秒</b></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
 <p class="p3"><b><span class="Apple-tab-span">	</span>deactivate無し:</b></p>
-<p class="p7">ts:00:00:0<b>3.9435570 (3.9秒</b></p>
-<p class="p5"><br></p>
-<p class="p5"><br></p>
+<p class="p6">ts:00:00:0<b>3.9435570 (3.9秒</b></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>だいたい2倍なんだけど、、地味だな、、、ファイル数あたり2秒かかってるだけ。</p>
-<p class="p5"><br></p>
-<p class="p5"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
 <p class="p3"><b>試しに邪魔なファイルを増やして実行</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>呪われたみたいな絵面のNeverReImportフォルダ</p>
-<p class="p4"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202014-12-15%202.58.47.png" alt="スクリーンショット 2014-12-15 2.58.47.png"></p>
+<p class="p5"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202014-12-15%202.58.47.png" alt="スクリーンショット 2014-12-15 2.58.47.png"></p>
 <p class="p3"><b><span class="Apple-tab-span">	</span>deactivateあり:</b></p>
-<p class="p7">ts:00:00:0<b>2.8803690 (2.8秒</b></p>
-<p class="p5"><br></p>
-<p class="p5"><br></p>
+<p class="p6">ts:00:00:0<b>2.8803690 (2.8秒</b></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
 <p class="p3"><b><span class="Apple-tab-span">	</span>deactivate無し:</b></p>
-<p class="p7">ts:00:00:<b>50.5550690 (50.5秒</b></p>
-<p class="p5"><br></p>
-<p class="p5"><br></p>
+<p class="p6">ts:00:00:<b>50.5550690 (50.5秒</b></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>速い。(確信)</p>
 <p class="p3"><span class="Apple-tab-span">	</span>deactivateありの0.8秒くらいの増加は何だろう。あとで調べよう。</p>
-<p class="p5"><br></p>
-<p class="p5"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
 <p class="p3"><b>気づき</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>、、、、</p>
-<p class="p5"><br></p>
+<p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>書いてて気づいたんだけど、別にAssetBundleにするやつも、Resource.Loadとかで読み込んだあとだったら、</p>
 <p class="p3"><span class="Apple-tab-span">	</span>deactivateして良かったのでは。</p>
-<p class="p5"><br></p>
+<p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>そしたらその分のimportも無くて、もっと速かったな？？？</p>
-<p class="p5"><b></b><br></p>
-<p class="p5"><b></b><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><b></b><br></p>
 <p class="p3"><b>おまけ小ネタ</b></p>
 <p class="p3"><b><span class="Apple-tab-span">	</span></b>Editor用のScriptを書いていて、「現在の設定」を表示したいときがある。</p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="s3"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202014-12-14%2022.39.34.png" alt="スクリーンショット 2014-12-14 22.39.34.png"></span></p>
 <p class="p3"><span class="Apple-tab-span">	</span>接続状態を表したかったり、</p>
 <p class="p3"><span class="Apple-tab-span">	</span>モードを表したかったり。</p>
-<p class="p5"><br></p>
+<p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>で、このような見た目になるインターフェースをつくってしまったことがあった。</p>
 <p class="p3"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>connect と disconnectが排他でconnect状態だからdisconnectが押せる、とか</b></p>
 <p class="p3"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>現状autoConnectがonだからoffが押せる、とか。</b></p>
-<p class="p5"><b></b><br></p>
+<p class="p2"><b></b><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>メニューからのプルダウンで、状態を表示したいだけなんだけど、こう、なんだ、2つ持たなきゃ行けないという。</p>
 <p class="p3"><span class="Apple-tab-span">	</span>コードの量も多い。</p>
-<p class="p5"><br></p>
+<p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>これが、例えばだけど、こう書くことで単純に解消できた。</p>
-<p class="p5"><br></p>
-<p class="p7">#if UNITY_IPHONE</p>
-<p class="p7">[MenuItem ("Window/changePlatform/Now: iOS Platform", false, 1)]</p>
-<p class="p8"><br></p>
-<p class="p7">#elif UNITY_ANDROID</p>
-<p class="p7">[MenuItem ("Window/changePlatform/Now: Android Platform", false, 1)]</p>
-<p class="p8"><br></p>
-<p class="p7">#elif UNITY_STANDALONE_OSX</p>
-<p class="p7">[MenuItem ("Window/changePlatform/Now: OSX Platform", false, 1)]</p>
-<p class="p8"><br></p>
-<p class="p7">#endif</p>
-<p class="p7">public static void CurrentPlatform () {}// こいつは実際どうでもいい、ただメニューでぶったたかれる関数が必要。気に喰わなければdisableにすればより良い。</p>
-<p class="p5"><b></b><br></p>
+<p class="p2"><br></p>
+<p class="p6">#if UNITY_IPHONE</p>
+<p class="p6">[MenuItem ("Window/changePlatform/Now: iOS Platform", false, 1)]</p>
+<p class="p7"><br></p>
+<p class="p6">#elif UNITY_ANDROID</p>
+<p class="p6">[MenuItem ("Window/changePlatform/Now: Android Platform", false, 1)]</p>
+<p class="p7"><br></p>
+<p class="p6">#elif UNITY_STANDALONE_OSX</p>
+<p class="p6">[MenuItem ("Window/changePlatform/Now: OSX Platform", false, 1)]</p>
+<p class="p7"><br></p>
+<p class="p6">#endif</p>
+<p class="p6">public static void CurrentPlatform () {}// こいつは実際どうでもいい、ただメニューでぶったたかれる関数が必要。気に喰わなければdisableにすればより良い。</p>
+<p class="p2"><b></b><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>compiler directiveで、メニューに出てくる項目を弄ると、</p>
 <p class="p3"><span class="Apple-tab-span">	</span>directiveに何かをセットするようなコードを状態セットのあとにいれるだけで、</p>
 <p class="p3"><span class="Apple-tab-span">	</span>メニューに表示される文言 = <b>状態表示</b>を弄れる。</p>
-<p class="p5"><b></b><br></p>
+<p class="p2"><b></b><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>たとえば上記のコードだと、現在のプラットフォームがPCなら、プルダウンメニューに表示される項目はこんな感じになる。</p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="s3"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202014-12-14%2022.44.53.png" alt="スクリーンショット 2014-12-14 22.44.53.png"></span></p>
 <p class="p3"><span class="Apple-tab-span">	</span>メニューで状態が表示できた。</p>
 <p class="p3"><span class="Apple-tab-span">	</span>この例だとUnity Editor自体の上部バーをみればまあ分かるじゃんって感じなんだけど、</p>
 <p class="p3"><span class="Apple-tab-span">	</span>まあ例として。</p>
-<p class="p5"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p3"><span class="Apple-tab-span">	</span>ちなみにこの方法には欠点があって、</p>
 <p class="p3"><span class="Apple-tab-span">	</span>状態が変わる→コンパイルが発生する、という段取りをこなさないと、compiler directiveが変化せずに表示が変わらない。</p>
-<p class="p5"><span class="Apple-tab-span">	</span></p>
-<p class="p5"><span class="Apple-tab-span">	</span></p>
-<p class="p5"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
 <p class="p3">書き終わった。</p>
 <p class="p3">2014/12/15 3:54:34</p>
 </body>
