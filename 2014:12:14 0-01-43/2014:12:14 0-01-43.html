@@ -11,6 +11,7 @@
     p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
     p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
     p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
     span.s1 {font: 22.0px 'Hiragino Kaku Gothic ProN'}
     span.s2 {font: 12.0px Helvetica}
     span.Apple-tab-span {white-space:pre}
@@ -20,16 +21,27 @@
 <p class="p1"><b>Lapsody</b><span class="s1"><b>と</b></span><b>Reparture</b><span class="s1"><b>とかそういう名前で言語作りたい</b></span></p>
 <p class="p2"><br></p>
 <p class="p3"><b>概要</b></p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>サービスを複数の<span class="s2">peer</span>で構成、連携させて動かすとき、</p>
+<p class="p2"><br></p>
 <p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>フローを制御するのに専念する言語と、</p>
 <p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>フローから逸脱して処理を行い、フローに合流するか消滅するだけの用途の言語を、</p>
 <p class="p3"><span class="Apple-tab-span">	</span>共有領域持ったままシームレスにぶっ叩けるように</p>
-<p class="p3"><span class="Apple-tab-span">	</span>分けて作ると面白いのではないかみたいな話してた。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>意図的に分けて作ると面白いのではないかみたいな話してた。</p>
 <p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p3"><b>由来</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>Lapsodyは「経過」を表すLapseのもじり、</p>
 <p class="p3"><span class="Apple-tab-span">	</span>Repartureは「出発」って意味のDepartureのもじり。</p>
 <p class="p4"><br></p>
 <p class="p4"><span class="Apple-tab-span">	</span></p>
-<p class="p3"><b>仕様</b></p>
+<p class="p3"><b>目的</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>1.サービスの全体フローを一つの言語で見渡しよく描く</p>
+<p class="p3"><span class="Apple-tab-span">	</span>2.合流、離脱を行う処理をフローとは分けて書く</p>
+<p class="p3"><span class="Apple-tab-span">	</span>3.分散環境で面倒くさい「merge」や「abort」を可視化しやすくする</p>
+<p class="p3"><span class="Apple-tab-span">	</span>4.サービスの部分死を可能にする</p>
+<p class="p4"><b></b><br></p>
+<p class="p4"><b></b><br></p>
+<p class="p3"><b>仕様というか気分</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>・分散VMとかで動作して</p>
 <p class="p3"><span class="Apple-tab-span">	</span>・peerを超えるの前提で</p>
 <p class="p3"><span class="Apple-tab-span">	</span>・Lapsody側でループだったりストリームだったりを扱って</p>
@@ -38,6 +50,18 @@
 <p class="p3"><span class="Apple-tab-span">	</span>・それぞれの言語のkeywordにはlmatchとかrmatchみたいにl,rをそれぞれ頭につける</p>
 <p class="p3"><span class="Apple-tab-span">	</span>・2つmodeがある格ゲーキャラみたいな立ち位置を目指す</p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="s2"><img src="temp9507.png" alt="temp9507.png"></span></p>
-<p class="p3"><span class="Apple-tab-span">	</span>いまのところvenn図書けたのと名前考えられたので満足してる。</p>
+<p class="p4"><br></p>
+<p class="p3"><b>動作イメージ</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Lapsodyで機関全体の制御を集中しておこなう。状態は持たず、フローの束をもち、必ず永続する。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Repartureで「一度離反して合流」か「離反してそれっきり」みたいな動作を行う。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Lapsody側とReparture側の中継ポイントにはportみたいなものが配置されて、離脱記録とか合流記録を保持し、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>スケーリングもこのポイントを主点にして行う。<span class="Apple-tab-span">	</span></p>
+<p class="p5"><img src="zu.png" alt="zu.png"></p>
+<p class="p4"><b></b><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これで、意図的に打ちっぱなしや合流が書ける。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>複数のフローを持つようにつくる(一つのサービスに対してLapsodyが複数のインスタンスを持つ)のを禁止したほうがよさそうな</p>
+<p class="p3"><span class="Apple-tab-span">	</span>気がする。</p>
 </body>
 </html>
