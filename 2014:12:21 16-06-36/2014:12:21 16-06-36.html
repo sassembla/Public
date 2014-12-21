@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1265.21">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px Menlo}
+    span.s1 {font: 22.0px Helvetica}
+    span.s2 {font: 12.0px Helvetica}
+    span.s3 {font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><span class="s1"><b>Unity</b></span><b>の地味に勤勉な挙動</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>特に必要の無い地味な知識を提供。</p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p4"><b>import</b><span class="s3"><b>からの</b></span><b>import</b><span class="s3"><b>は発生しない</b></span></p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span>Unity</span>に画像とかを放り込んで発生する読み込み処理について、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>まあ適当にimportとか呼称してるんだけど、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>たとえば<span class="s2">PostProcess</span>or系の処理で、読み込み処理中にファイルを作ったりした場合、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>その瞬間では読み込みが発生しない。　つまり.metaファイルが作られない状態が形成できる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>ネストとか無限ループするのを避けてるっぽい。</p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>安全。</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p3"><b>importの動作</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Project Settings で visible meta files を選んでいる場合は、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>次のような動作が確認できる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・.metaファイルが存在していない場合、読み込みが発生する</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・読み込み後、.metaファイルが作成される</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・内部DBにも登録される(たぶん.metaファイル内でのGUIDとフォルダパスをキーにしてる)</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p3"><b>importのタイミング</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>importの発動するタイミングは以下の通り</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・Unity起動中</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・Unity起動時</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p3"><b>放り込み方による差</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>.metaファイルが無いものに対して、DBへの登録と読み込み、.meta作成が行われる。</p>
+<p class="p5"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>.metaファイルがあったとしても、DBへの登録が存在しない場合がありえる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>たとえばimport後のフォルダをAssetsフォルダ外部に持ち出してUnityを終了し、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Unity起動時にAssets以下の別フォルダに放り込んだ場合。</p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>その場合は、.metaファイルの情報をもとに、importをスキップして読み込んでDB登録してくれるケースと、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>GUIDだけが書き変わってimportをスキップして読み込んでDB登録してくれるケースと、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>importのスキップが発生せず読み直しが発生するケースがある。</p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>GUIDだけが書き変わるケースだと</p>
+<p class="p6">The GUID for Assets/AssetRails/temp/Resources/prefabricate/chara/idol_01 is already in use by Assets/AssetRails/temp/Resources/import/chara/idol_01. Assigning a new guid.</p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>って言われる。</p>
+</body>
+</html>
