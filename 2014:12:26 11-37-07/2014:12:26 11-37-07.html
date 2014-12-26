@@ -31,21 +31,20 @@
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>前提とタイミング</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>コマンドラインからジョブをくみ上げられるようなものを作って、</p>
-<p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>prefabとかの作成をする→そのままAssetBundleを作る</p>
-<p class="p3"><span class="Apple-tab-span">	</span>みたいなときに、複数プラットフォームでのAssetBundleづくりを高速にしたいので、</p>
-<p class="p3"><span class="Apple-tab-span">	</span>プラットフォームスイッチをしても時間がかからない工夫をしてたところで、</p>
-<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>コマンドラインからジョブをくみ上げられるようなものを作っていて、</p>
 <p class="p3"><span class="Apple-tab-span">	</span>prefab作成→AssetBundle作成 時に発生した。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>作成したprefab自体には問題ないが<span class="Apple-tab-span">	</span>、そのままAssetBundle作成にいこうとすると怒られる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>作成したprefab自体には問題ないが、そのまま作成したprefabを使用してAssetBundleすると怒られる。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>発生するのは、BuildPipeline.BuildAssetBundle メソッド実行時。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>回避方法</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>回避方法はある。</p>
 <p class="p3"><span class="Apple-tab-span">	</span>prefab作成、AssetBundle作成ともに、Unityをコマンドラインから使用して動かしているので、コマンドを分けたところ、発生しなくなる。</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>このエラーについての情報が集まれば、エレガントに仕留められると思う。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>このエラーについての情報が集まれば、エレガントに仕留められると思うんだけど。。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>助けてだれか、、！</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>予測</b></p>
