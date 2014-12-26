@@ -11,13 +11,15 @@
     p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
     p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
     p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px Menlo}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #ebebeb}
     span.s1 {font: 22.0px 'Hiragino Kaku Gothic ProN'}
     span.s2 {font: 12.0px 'Hiragino Kaku Gothic ProN'}
     span.Apple-tab-span {white-space:pre}
   </style>
 </head>
 <body>
-<p class="p1"><b>Asset bundles cannot include Editor Objects</b><span class="s1"><b> とは一体</b></span></p>
+<p class="p1"><b>Asset bundles cannot include Editor Objects</b><span class="s1"><b> とは一体【解決済み】</b></span></p>
 <p class="p2"><br></p>
 <p class="p3"><b>概要</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>UnityでのAssetBundleづくり、コマンドラインからAssetBundle作るところで、</p>
@@ -53,5 +55,46 @@
 <p class="p3"><b>予測</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>Unity.appの終了時にしか発生しないイベント、みたいなやつがあって、作成したprefabをどうにかしてるのかなーって思っている。</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>解決編</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Unityのお問い合わせにサンプルプロジェクト込みでぶん投げたら、恐ろしい速さで返答をいただいた。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ちなみにサンプルプロジェクトは依存解決に一個失敗してたんだけどな、、、！</p>
+<p class="p2"><br></p>
+<p class="p4"><span class="s2"><span class="Apple-tab-span">	</span></span>Asset bundles cannot include Editor Objects (Prefab): Assets/AssetRails/temp/Resources/prefabricate/chara/idol_01/prefabricated.prefab.</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>が何を言いたいエラーなのかの説明ももらった。満足だ。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p5"><b>Asset bundles cannot include Editor Objects</b><span class="s2"><b> とは一体</b></span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Unity Japanの中の人いわく、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>「Asset bundles cannot include Editor Objects ~」は、対象とするオブジェクトがメモリ上のみでアセットとして存在しない時に発生します。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>このエラー文ではアセットとして存在しないオブジェクトをエディタオブジェクトと呼んでいます。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>とのこと。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>つまりpredabがメモリ上のものでしかなく、それをAssetBundleにしようとしたのに駄目だった、ということをさすエラーだったわけだ。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>対策</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、実際には処理として、prefabをファイルとして出力したものを読み込んで使用していたのだけれど、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>それだけだと駄目で、prefabをファイルとして吐き出したあと、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>UnityにAsset自体の情報を覚えてもらうメソッド</p>
+<p class="p6">AssetDatabase.SaveAssets()</p>
+<p class="p3"><span class="Apple-tab-span">	</span>を実行する必要があった。という。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、実行してみたらめっちゃうまく行った。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b>回避方法で実現していた内容の真相</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これは実に示唆に富んでいる(って書くとカッコいい気がする)</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>回避方法のところで書いた通り、このエラーは「コマンドラインから再度動かすことで回避できる」ものだった。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>つまり、Unity.exeの終了時に、Unityは自動でAssetDataBase.SaveAssets() メソッドを実行しているんだと思う。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>それらを明示的に使用すればよい、という感じ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>謎が解けてよかった。</p>
+<p class="p2"><br></p>
 </body>
 </html>
