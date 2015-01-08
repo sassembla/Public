@@ -1,0 +1,165 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1265.21">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #ebebeb}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #ebebeb; min-height: 18.0px}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; color: #b51a00; background-color: #ebebeb}
+    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; line-height: 20.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p8 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; color: #e32400; background-color: #ebebeb}
+    span.s1 {color: #e32400}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>UnityでのAssetになった画像ファイルのコピーでインポートを避けることは出来ないという結論</b></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Unityに画像ファイルとかモデルファイルを喰わせる際、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>importが走る。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>んでこれがまあ、数が数千に及ぶファイルだと辛い。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ここでは、対象をpngとかのフォーマットの画像ファイルに限った話をする。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>このimportを発生させずに、素材をUnityに喰わせることはできないか？ということを考えていた。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>結論から言うと、一つのプロジェクトではimportを避けるのは無理だった。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>でも別のテは使えた。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>試した手段を並べる。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>手法1 CopyAsset</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>例えばすでに読みこんだリソースならば、importを再度発生させること無くコピーできるのではないか！？</p>
+<p class="p2"><br></p>
+<p class="p4">AssetDatabase.CopyAsset</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>やってみよう。</p>
+<p class="p2"><br></p>
+<p class="p4">var result = AssetDatabase.CopyAsset("Assets/Resources/import/main.jpg", "Assets/Resources/prefabricate/main.jpg");</p>
+<p class="p4">Debug.Log("result:" + result);</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、これはたしかに読み込まれるんだけど、このあと<span class="s1"><b>importが再度走る。</b></span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>なぜなんだ、、、、っておもったけど、こいつ、画像ファイルとかに対しては、ファイルをコピーするだけの仕様とのこと。ぐぬぬ、、、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>読み込まれたものの概念ごと、ファイル(main.jpg)と設定それ自体をコピーしてほしかったんだけど、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>importは走ってしまう。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>貴様。</p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b>手法2 CreateAsset</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>名前からして作れそう、、、</p>
+<p class="p2"><br></p>
+<p class="p4">var basement = Resources.Load("import/main");</p>
+<p class="p5"><br></p>
+<p class="p4">if (basement) Debug.Log("basement is alive!");</p>
+<p class="p4">else Debug.Log("basement is dead.");</p>
+<p class="p5"><br></p>
+<p class="p4">var duplicated = UnityEngine.Object.Instantiate(basement);</p>
+<p class="p5"><br></p>
+<p class="p4">AssetDatabase.CreateAsset(duplicated, "Assets/Resources/prefabricate/main.jpg");</p>
+<p class="p6"><b>Could not create texture from Assets/Resources/prefabricate/main.jpg: File could not be read</b></p>
+<p class="p7"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>殴られるなど。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>物の本によると、.mat, .anim, .cubemap, .asset のみしか指定できない。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>まあUnityで内部的にも扱えるオブジェクトってなると納得。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>納得、、、、なんだが、、、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>なんだそのエラーは、、、！！！！　読めなくなったよ的なのがでるんだけど、実際にはオメーこれらの拡張子以外つくれねーじゃねーかww</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ありがとう物の本、、って絶版なの、、？</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://amzn.to/1zW3XVp">Unity4 ライブラリ辞典　エディタ編</a></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>手法2.1 なら.assetで</b></p>
+<p class="p4">var basement = Resources.Load("import/main");</p>
+<p class="p5"><br></p>
+<p class="p4">if (basement) Debug.Log("basement is alive!");</p>
+<p class="p4">else Debug.Log("basement is dead.");</p>
+<p class="p5"><br></p>
+<p class="p4">AssetDatabase.CreateAsset(basement, "Assets/Resources/prefabricate/main.asset");</p>
+<p class="p6"><b>Couldn't create asset file because the Texture2D 'main' is already an asset at 'Assets/Resources/import/main.jpg'!</b></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>読み出した物からいきなりCreateしようとすると、読んだ大本の奴とおんなじじゃんって殴られる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>管理してるidそれ自体からのコピーではない、と。</p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>ハイ。</b></p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>手法2.2 ならコピーして</b></p>
+<p class="p4">var basement = Resources.Load("import/main");</p>
+<p class="p5"><br></p>
+<p class="p4">if (basement) Debug.Log("basement is alive!");</p>
+<p class="p4">else Debug.Log("basement is dead.");</p>
+<p class="p5"><br></p>
+<p class="p4">var duplicated = UnityEngine.Object.Instantiate(basement);</p>
+<p class="p5"><br></p>
+<p class="p4">AssetDatabase.CreateAsset(duplicated, "Assets/Resources/prefabricate/main.asset");</p>
+<p class="p5"><br></p>
+<p class="p4">var loadFromDuplicated = Resources.Load("prefabricate/main") as Texture2D;</p>
+<p class="p4">if (loadFromDuplicated) Debug.Log("loadFromDuplicated is alive:" + loadFromDuplicated.name);</p>
+<p class="p4">else Debug.Log("loadFromDuplicated is dead:" + loadFromDuplicated.name);</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>うん、いけるな。importも発生しない。まあjpgじゃなくなってるからな。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>jpgではなくなってしまった。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>jpgではなくなってしまった。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>jpgではなくなってしまった。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>でも出来たしまあリソースとしてはimportしてたときにセットできてるからなまあいいよな(妥協</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>ということで、画像ファイルのコピーを行って再importを避ける手段は無い。</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>packageとかを使えば出来ると思うけどお手軽さからは程遠いな、、まあそれをやってるAssetもあるんだけどさ。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>あとはおまけ。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>番外 AddObjectToAsset</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Assetとして出力する方法で別のかんじで試せるのでは！？</p>
+<p class="p4">// AddObjectToAssetで子オブジェクトを作ることは出来るっちゃあできるけどやっぱりjpgではなくなる</p>
+<p class="p4">var basement = Resources.Load("import/main");</p>
+<p class="p5"><br></p>
+<p class="p4">if (basement) Debug.Log("basement is alive!");</p>
+<p class="p4">else Debug.LogError("basement is dead.");</p>
+<p class="p5"><br></p>
+<p class="p4">var box = ScriptableObject.CreateInstance("Something");</p>
+<p class="p4">AssetDatabase.CreateAsset(box, "Assets/Resources/prefabricate/main.asset");</p>
+<p class="p5"><br></p>
+<p class="p4">var duplicated = UnityEngine.Object.Instantiate(basement);</p>
+<p class="p5"><br></p>
+<p class="p4">AssetDatabase.AddObjectToAsset(duplicated, "Assets/Resources/prefabricate/main.asset");</p>
+<p class="p4">AssetDatabase.SaveAssets();</p>
+<p class="p5"><br></p>
+<p class="p4">var loadFromDuplicated = Resources.Load("prefabricate/main") as Texture2D;</p>
+<p class="p4">if (loadFromDuplicated) Debug.Log("loadFromDuplicated is alive:" + loadFromDuplicated.name);</p>
+<p class="p4">else Debug.Log("loadFromDuplicated is dead:" + loadFromDuplicated.name);</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>出来るが嬉しさは無い。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>番外 AddObjectToAsset その２</b></p>
+<p class="p4">var basement = Resources.Load("import/main");</p>
+<p class="p5"><br></p>
+<p class="p4">if (basement) Debug.Log("basement is alive!");</p>
+<p class="p4">else Debug.LogError("basement is dead.");</p>
+<p class="p5"><br></p>
+<p class="p4">AssetDatabase.AddObjectToAsset(basement, "Assets/Resources/prefabricate/main.asset");</p>
+<p class="p8"><b>You may not change the path if an object is already peristent in another one</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ハイ。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+</body>
+</html>
