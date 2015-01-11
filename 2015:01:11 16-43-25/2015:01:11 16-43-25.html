@@ -15,7 +15,7 @@
   </style>
 </head>
 <body>
-<p class="p1"><b><span class="Apple-converted-space"> </span>JenkinsConf2015行って来た</b></p>
+<p class="p1"><b>JenkinsConf2015行って来た</b></p>
 <p class="p2"><br></p>
 <p class="p3"><b>概要</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>XFDコンテストの話があったはずなんですが1/12(Mon)だと思い込んでて、</p>
@@ -64,6 +64,25 @@
 <p class="p3"><span class="Apple-tab-span">	</span>あとデバッグする際に、その問題をreproduceできるかどうかについても、</p>
 <p class="p3"><span class="Apple-tab-span">	</span>「一度この動作でエラーが出た」というのはとても信頼できる情報源になる。<span class="Apple-tab-span">	</span></p>
 <p class="p3"><span class="Apple-tab-span">	</span>バグが直ったかどうかチェックするのにも、このreproduce力がモノを言うし。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>botのコード、どこに書く？</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ひきつづきilinxさん。講演後に発表者のかたに質問してみた。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Q.テスト用のオートクリアbotのお話されてましたけど、あのbotの動作コードってどこに書いてある感じですか？</p>
+<p class="p3"><span class="Apple-tab-span">	</span>A.ゲーム中にハードコード。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>非常に身につまされる話で、コードの中の方が、「できることが限定されていてbotを動作させるための入力もやりやすい」という感じ。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ゲーム外からの入力のやりにくさには、主に以下の要因がある。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・キー入力の制限について、いつならどんなタイミングでどのボタンが押せるか、というのを外部からコントロールするのは大変極まる</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・画面遷移などのタイミング = 物事が終わったり変わったりした状態の変化をトラックするのが外部からだと面倒、内部からシグナル出すのもまあ面倒</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>簡単に言うと、AI(画像認識と思考と操作)を作りたい訳ではない、という感じ。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>このへんはまだなんかクリエイター間産業とかで成長の伸びしろがあると思う、、んだけど、自分で作りたくはないな。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>ワークフロープラグイン</b></p>
