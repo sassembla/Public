@@ -10,6 +10,7 @@
     p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
     p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
     p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    span.s1 {font: 12.0px Helvetica}
     span.Apple-tab-span {white-space:pre}
   </style>
 </head>
@@ -23,9 +24,25 @@
 <p class="p3"><span class="Apple-tab-span">	</span>気づきだけをメモしておく。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
-<p class="p3"><b>１分で終わらなかったらエラー</b></p>
+<p class="p3"><b>バージョン管理に組み込むためにJenkinsジョブはshellを実行するだけ</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Jenkinsジョブの欄が腐海になるのを防げる手段として常用してたけど、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>やっぱ必須テクニックだよね。<span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>ilinxさんの発表より。資料は下記</p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://www.slideshare.net/swiftnest/jenkins-43394510">http://www.slideshare.net/swiftnest/jenkins-43394510</a></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>職人芸化を防ぐために使えるほか、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Jenkinsでエラーが出る</p>
+<p class="p3"><span class="Apple-tab-span">	</span> -&gt; shell含んでるので各ユーザーの手元でも試せる</p>
+<p class="p3"><span class="Apple-tab-span">	</span> -&gt; それで成功する場合、Jenkinsかユーザーのどっちかがおかしい、などの問題の分割がすみやかに行えるのも利点。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>自分がJenkinsに用途デザイン面で欲しいのは、「複雑になった動作内容をプロジェクトそれ自体に落とす」というのを推奨する仕掛けなんだけど、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>どうすればいいかは思いつかない。別の入り口が必要な気がしている。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>１分で終わらなかったらエラーの話</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ひきつづきilinxさん。</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>n分という指定でいいんだけど、ジョブ起動からn分で終わらなかったらエラーにする、っていう手法はなんかこう、斬新でよかった。</p>
 <p class="p3"><span class="Apple-tab-span">	</span>ようは、十分に高速なんだけどまだ終わらないとしたらおかしい、みたいなジョブを組んで、</p>
@@ -33,6 +50,21 @@
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>その発想は無かった。良い。</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>テストの価値は、運を上げること</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ひきつづきilinxさん。Q&amp;Aで素晴らしい話がでていたので紹介。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ここらへん聞くのに夢中になっててあれなんだが、意訳すると以下のような問答。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Q.コンシューマゲームの作成に関して、自動テストはどのような価値を生んでますか？</p>
+<p class="p3"><span class="Apple-tab-span">	</span>A.デバッガーが運良くその地雷を踏むか踏まないか、という内容に対して、より気づく機会を増やすことができる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>みたいなことをおっしゃってて、このへん超賛成した。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>あとデバッグする際に、その問題をreproduceできるかどうかについても、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>「一度この動作でエラーが出た」というのはとても信頼できる情報源になる。<span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>バグが直ったかどうかチェックするのにも、このreproduce力がモノを言うし。</p>
+<p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>ワークフロープラグイン</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span><a href="https://jenkins-ci.org/content/workflow-plugin-10">https://jenkins-ci.org/content/workflow-plugin-10</a></p>
@@ -46,9 +78,27 @@
 <p class="p3"><span class="Apple-tab-span">	</span>あたりは分かった。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
+<p class="p3"><b>XFDの話</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>XFD (eXtreme feedback device)</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ようは極端にフィードバックする装置で、例えばビルドエラーが出たときにパトランプ回したり、轟音で人を責めたりとかそういうの。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>無視しにくくてかつ解決しようという気にさせる必要がある。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ウザすぎると殺人とかに発展するので良くないと思うが、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>どこまでなら人間は我慢するのか、みたいなのを実践できて大変面白い。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Unityを使ってXFDのプロトタイピングを行っていたのがなんかこう「ああ、2015年になったんだな」みたいな感じした。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Arduinoの電圧問題みたいなのは新しいverで改善されたとかそんな話をあとで聞いた。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
 <p class="p3"><b>Jenkinsについて最近思うこと</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>ランナーなのかマネージャなのか、というあたりで分離できるようになるんじゃないかなーと思っている。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="s1"><img src="Pasted%20Graphic.tiff" alt="Pasted Graphic.tiff"></span></p>
 <p class="p3"><span class="Apple-tab-span">	</span>マスタースレーブ構成じゃなくて群体構成で組めないかなー。全体で一個のアスペクトを持つ的な。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>未分化な細胞が位置に合わせて分化、特性をもって動作していく、みたいな。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>勿論分化はリソースに応じるけど一瞬で、みたいな。</p>
+<p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>まあ妄想です。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
