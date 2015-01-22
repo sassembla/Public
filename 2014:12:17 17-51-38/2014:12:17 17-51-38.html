@@ -59,6 +59,19 @@
 <p class="p3"><span class="Apple-tab-span">	</span>権限調整すれば完了する。</p>
 <p class="p3"><span class="Apple-tab-span">	</span>sudo chown jenkins /var/log/jenkins</p>
 <p class="p4"><span class="Apple-tab-span">	</span></p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>もしJenkins自体の実行権限をjenkins ではなく rootとかに変える場合、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>パッケージでインストールしていると、Jenkinsの起動にはlaunchctlが勝手に組まれているので、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>launchctlに仕込まれているジョブ？ をunloadしたりする必要がある。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://sassembla.github.io/Public/2013:05:13%2016-23-21/2013:05:13%2016-23-21.html">http://sassembla.github.io/Public/2013:05:13%2016-23-21/2013:05:13%2016-23-21.html</a></p>
+<p class="p4"><br></p>
+<p class="p4"><b></b><br></p>
+<p class="p3"><b>それでも死ぬ場合</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>すでに吐いたログファイルを消すと生き返ったりする。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>吐き出すjenkins.logの権限が変わったりすると、上書きできずに死ぬっぽい。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>なんで変わるのかは追えてない。</p>
+<p class="p4"><span class="Apple-tab-span">	</span></p>
+<p class="p4"><span class="Apple-tab-span">	</span></p>
 <p class="p4"><span class="Apple-tab-span">	</span></p>
 </body>
 </html>

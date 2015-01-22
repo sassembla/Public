@@ -1,7 +1,8 @@
 ./web/index.html
 ./source/SublimeSocketAsset/README.html
 ./source/SublimeSocket/How to install SublimeSocket for Sublime Text X.html
-./source/completion/Resources/completion.html
+./source/AssetRails/commandLineArgs.html
+./source/AssetRails/AssetRailsAPIDocument.html
 ./outsource/U11n/index.html
 ./outsource/U11n/assets/player/KeynoteDHTMLPlayer.html
 ./outsource/saikoNoScalaCompiler/index.html
