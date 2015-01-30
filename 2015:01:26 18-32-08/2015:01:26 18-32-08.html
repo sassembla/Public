@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1265.21">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>VMとしてYsemite複数台飼ってて見舞われるトラブルと対処</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>VirtualBoxを使って、Mac OSのライセンス的なものをクリアした上で、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ハイパ～なマシン上で複数台のMac OSを飼育していて、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>こまったことがあったのでメモ。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>GUIでのVMログインに失敗する</b></p>
+<p class="p3">症例:</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ログインに失敗するケースがある。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>症例としては、VM起動 -&gt; パスワードを入れたあと、レインボーアイコンが回り続けて数年が経過しそうな感じになる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>時間が解決する物ではなく、一度発生すると頻発するようになる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>原因は、VirturlBox上だとログイン時のキーチェーンへのアクセスでエラーが出るためっぽい。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>まあノーサポートだし。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3">解決法:</p>
+<p class="p3"><span class="Apple-tab-span">	</span>解決法としては、エラーがでているキーチェーンへのアクセス箇所をなんとか避けるように手を加えてみればよかった。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>具体的には、パスワードを変え、ログイン直後のキーチェーンアクセスへのアクセス方法が変わるように調整する。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>sshからVMにログインし、パスワードを変更、VMを起動しなおしパスワード(変更後)をいれることで、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>キーチェーンが知っている従来のパスワードからの変更に対するお問い合わせ操作が発生する。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>このとき、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>「パスワード変更したね、キーチェーンはそのへんどうしたらいい？」</p>
+<p class="p3"><span class="Apple-tab-span">	</span>っていう画面を出すことで、キーチェーンへのアクセスの内容を上書きすることができ、結果的に起動できる。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3">手順:</p>
+<p class="p3"><span class="Apple-tab-span">	</span>1.sshでHostからGuest(対象のVM)へのログイン後、passwd でパスワード変更</p>
+<p class="p3"><span class="Apple-tab-span">	</span>2.logout</p>
+<p class="p3"><span class="Apple-tab-span">	</span>3.VM再起動</p>
+<p class="p3"><span class="Apple-tab-span">	</span>4.新規パスワードを入力</p>
+<p class="p3"><span class="Apple-tab-span">	</span>5.keychainが「俺が知ってるパスワードから変更が行われたんだけどどうすればいい？」 って聞いてくるので新しいパスワードを入力</p>
+<p class="p3"><span class="Apple-tab-span">	</span>6.GUIでのログインが成功</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3">追記していく。</p>
+<p class="p2"><br></p>
+<p class="p3">はやくコンテナ化がすすむといいなと思った。</p>
+</body>
+</html>
