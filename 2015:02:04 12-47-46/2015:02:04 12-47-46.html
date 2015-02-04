@@ -26,16 +26,26 @@
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>新versionのAssetBundleを入れても旧versionのAssetBundleは消えない</b></p>
+<p class="p2"><br></p>
+<p class="p4">WWW.LoadFromCacheOrDownload(url, version, crc)</p>
+<p class="p3"><span class="Apple-tab-span">	</span>このメソッドの話で、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>新しいAssetBundleを作成、versionに新しい値を希望いっぱいで入れたとする。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>古いAssetBundleはどうなるかな？</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>消えん。直感に反する感じする。</p>
 <p class="p2"><br></p>
+<p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>たとえばあるAssetBundleを version:1 として読み込んでおいたあと、</p>
-<p class="p3"><span class="Apple-tab-span">	</span>同じ名前のAssetBundleを version:2 として読み込むと、</p>
-<p class="p3"><span class="Apple-tab-span">	</span>version 1、2ともにキャッシュに残る。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>同じidentityのAssetBundleを version:2 として読み込むと、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>version 1、2ともにキャッシュに残る。やったぜ！</p>
+<p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>？？？？？ってならない？　俺はなった。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>実際のアプリケーションのサイズを観測したらまあ確かに。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>実際のアプリケーションのサイズを観測したらまあ確かに。増えていた。</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>ただどこを見ても「キャッシュからAssetBundleが消える条件」ってのに</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ただドキュメントのどこを見ても、「cacheからAssetBundleが消える条件」ってのに</p>
 <p class="p3"><span class="Apple-tab-span">	</span>「versionが違うのを取得したら古いのは消える」って書いてないので、はい。</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p3"><span class="Apple-tab-span">	</span>厳密に言うと、versionが<b>上がったら</b>、ではなく、cacheされているのと<b>違ったら</b>、なので、</p>
@@ -49,6 +59,7 @@
 <p class="p3"><span class="Apple-tab-span">	</span>「だったらversionって名前じゃなくてindexとかidとかにすれば良かったのでは？」と思わなくもない。</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>とりあえず現状でのcacheの実装はそういうものなので、まあなんだ、アレだ、アレ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>version値は固定でいいんじゃないかな。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>削除について</b></p>
@@ -69,30 +80,44 @@
 <p class="p3"><span class="Apple-tab-span">	</span>これで、</p>
 <p class="p3"><span class="Apple-tab-span">	</span>新規をDLすれば、最近参照マークがついていない(= 最終参照が古い)ものからゴウンゴウン消えて行く。</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>誤ったcrcを指定して古い( = 上書きされてほしいか、使わなくなったので消したい)AssetBundleを消す、っていう方法もあるけど、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>誤ったcrcを指定して古い( = 使わなくなったので消したい)AssetBundleを消す、っていう方法もあるけど、</p>
 <p class="p3"><span class="Apple-tab-span">	</span>想像する動作構造的に大変なんだかなぁ感があるのでこう、はい。</p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ここで想像してる動作としては、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>・versionが合っててcrcが合ってない -&gt;<span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>urlへと同一のidentityを持つAssetBudleを取得しにいく -&gt;<b> (この時点で保持してうrAssetBundleを消しているのでは？と思ってる。)</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>同じidentityのAssetBundleがあったので取得してcache</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>or</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>同じidentityのAssetBundleがなんか取得できなかったけどまあいいかでFinish エラーが出る</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>みたいなの。ファンキーだなあ、ハハハまさかなハハハ。</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>公式の中の人にその話をすると、100%「いや、、あれは、、現状の結果として消えてるだけなんで、、頼るのは、、危険、、、」みたいなお話をしてくれるので、</p>
-<p class="p3"><span class="Apple-tab-span">	</span>なんだ、アレだ、頼らない方が良いと思う。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>なんだ、アレだ、この削除方法に頼らない方が良いと思う。</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>対して、Maxサイズ指定の心太式を用意しておくと、まあ自動的になるのでラクかなという感じはする。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>同一のAssetBundleの更新はラク</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>さっき紹介したのは削除テクニックではなく、根本的には更新のためのテクニックなので、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>その説明もしておく。</p>
+<p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>根本的に、<b>同じversionでcrcが異なるものを指定した場合で更新できる </b>ので、</p>
-<p class="p3"><span class="Apple-tab-span">	</span>更新であればversionを上げずに(versionというパラメータ名がメッチャ直感に反するが)奇麗にキャッシュから古いのを削除、取得、っていうのができる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>更新であればversionを上げずに(versionというパラメータ名がメッチャ直感に反するが)奇麗にキャッシュから古いのを削除、更新されたものを取得、上書き、っていうのができる。</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p3"><span class="Apple-tab-span">	</span>仕様的に、AssetBundleの一意性はAssetBundleの名前(ファイルに埋め込み)で行われていて、</p>
-<p class="p3"><span class="Apple-tab-span">	</span>URLがどうなっていようと手に入ったAssetBundle自体で一意性を決めているので、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>URLがどうなっていようと手に入ったAssetBundle自体のデータで一意性を決めているので、</p>
 <p class="p2"><br></p>
 <p class="p4">WWW.LoadFromCacheOrDownload(url1, version, crc1)</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>のversion部分で多層的になることはあり得るが、結局はDL後に取得したAssetBundleのIdentityから「同じAssetBundleかどうか」の判断が行われている。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、結局はDL後に取得したAssetBundleのIdentityから「同じAssetBundleかどうか」の判断が行われている。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>（version部分で多層的になることはあり得るが。）</p>
+<p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>で、ただ単に同じAssetBundleを更新したい場合、</p>
 <p class="p2"><br></p>
 <p class="p4">WWW.LoadFromCacheOrDownload(url2, 1, crc2)</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>で、crcが違うはずなので、cacheされているAssetBundleの更新が発生する。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>って書き方で、version値は固定の1、だがcrcが違うはずなので、cacheされているAssetBundleの破棄、取得、cache更新が発生する。</p>
 <p class="p3"><span class="Apple-tab-span">	</span>versionって名前付けた奴出てこい、みたいな気分になるが。</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>更新するのであればこれだけでよくて、なんというかまあ、</p>
@@ -121,7 +146,8 @@
 <p class="p3"><span class="Apple-tab-span">	</span><b>DLサイズ = AssetBundleのサイズ</b> なんだけど、<b>保持サイズ = 展開後のサイズ </b>という。</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p3"><span class="Apple-tab-span">	</span>つまり、AssetBundleのサイズとDL後のサイズには関係がない。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>この辺取得するAPIってあったっけな、、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>この辺取得するAPIってあったっけな、、無かった気がするな、、(手元でいっぺん開けてサイズを見ればいいのでは、という投げやりな感じ)</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>まあそんなこんなで、BuildAssetBundleOptions.UncompressedAssetBundle を指定しない場合、AssetBundleになった際のサイズを測っても意味は無い。</p>
 <p class="p2"><br></p>
