@@ -102,7 +102,7 @@
 <p class="p3"><span class="Apple-tab-span">	</span>さっき紹介したのは削除テクニックではなく、根本的には更新のためのテクニックなので、</p>
 <p class="p3"><span class="Apple-tab-span">	</span>その説明もしておく。</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>根本的に、<b>同じversionでcrcが異なるものを指定した場合で更新できる </b>ので、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>同じversionでcrcが異なるものを指定した場合で対象のAssetBundleのcacheを更新できる </b>ので、</p>
 <p class="p3"><span class="Apple-tab-span">	</span>更新であればversionを上げずに(versionというパラメータ名がメッチャ直感に反するが)奇麗にキャッシュから古いのを削除、更新されたものを取得、上書き、っていうのができる。</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p3"><span class="Apple-tab-span">	</span>仕様的に、AssetBundleの一意性はAssetBundleの名前(ファイルに埋め込み)で行われていて、</p>
@@ -127,29 +127,39 @@
 <p class="p3"><b>AssetBundleがいつ展開状態になるか</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>AssetBundleがDLされ、cacheされ、いつ「Bundle化が解かれるか」みたいな話。</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
-<p class="p3"><span class="Apple-tab-span">	</span>このへんは、App内でAssetBundleがどんな状態で保持されているか、というのと関わってくる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>このへんは、App内でAssetBundleが　<b>いつから、</b>どんな状態で保持されているか、というのと関わってくる。</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
-<p class="p3"><span class="Apple-tab-span">	</span>AssetBundleを作成した際のフラグによって、App内での保持状態が変化する。</p>
-<p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>BuildAssetBundleOptions.UncompressedAssetBundle を指定しなかった場合、</p>
-<p class="p3"><span class="Apple-tab-span">	</span>実端末でのアプリケーションの内部では、cacheが終わったAssetBundleは、</p>
-<p class="p3"><span class="Apple-tab-span">	</span>「AssetBundleファイル単一の状態から、別形式に展開された状態」で保持されている。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>BuildAssetBundleOptions.UncompressedAssetBundle を<b>指定しなかった</b>場合、</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>AssetBundleは、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>DLが終わるまでは圧縮された状態で扱われ、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>実端末でのAppの内部では、「AssetBundleファイルの状態から、別形式に展開された状態」で保持されている。</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>AssetBundleのサイズと、実際の端末内での容量の減り方から確認した。</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>AssetBundle化の効果であるファイルのがっちゃんこと圧縮によって、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>AssetBundle化の効果であるファイルのがっちゃんこ + 圧縮処理によって、</p>
 <p class="p3"><span class="Apple-tab-span">	</span>「AssetBundleの元になっているAsset郡のサイズ合計 &gt; AssetBundleのサイズ」</p>
 <p class="p3"><span class="Apple-tab-span">	</span>みたいな関係になっているのだが、</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>App内にDLしたあとに端末の空き容量ドカッとが減るので、「ああ、展開して保持してるんだな」という感じ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>App内にDLしたあとに端末の空き容量が予想以上にドカッとが減るので、「ああ、展開して保持してるんだな」という感じ。</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span><b>DLサイズ = AssetBundleのサイズ</b> なんだけど、<b>保持サイズ = 展開後のサイズ </b>という。</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p3"><span class="Apple-tab-span">	</span>つまり、AssetBundleのサイズとDL後のサイズには関係がない。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>この辺、展開後のAssetBundleのサイズを取得するAPIってあったっけな、、無かった気がするな、、(手元でいっぺん開けてサイズを見ればいいのでは、という投げやりな感じ)</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>この辺取得するAPIってあったっけな、、無かった気がするな、、(手元でいっぺん開けてサイズを見ればいいのでは、という投げやりな感じ)</p>
+<p class="p3"><span class="Apple-tab-span">	</span>なんでこんなの気にするの？っていうと、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>この展開後のサイズこそ、Appの重量に直結するし、Caching.maximumAvailableDiskSpaceが計算に使っているパラメータだから。</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>まあそんなこんなで、BuildAssetBundleOptions.UncompressedAssetBundle を指定しない場合、AssetBundleになった際のサイズを測っても意味は無い。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>さらに言うと、AssetBundleは作り出すたびにidentity以外のパラメータが変動するので(作成日時とか入ってるんじゃねーかな)、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>もちろんサイズも変動しちゃうので、正確なサイズを出すにはAPIの助けか、展開後のサイズをメモっておく必要がある。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>AssetBundleは作り直すたびに違うサイズになる</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>上記でも触れたけどそういう感じ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>内容は一緒でも、作り直すたびにサイズが変化(誤差レベルだけど確実な変化)、もちろんcrcも変化する。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>感想</b></p>
