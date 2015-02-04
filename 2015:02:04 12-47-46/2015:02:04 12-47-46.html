@@ -11,6 +11,7 @@
     p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
     p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
     p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #ebebeb}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
     span.Apple-tab-span {white-space:pre}
   </style>
 </head>
@@ -23,6 +24,8 @@
 <p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p3"><span class="Apple-tab-span">	</span>Uni本2の内容でコラム欄とかに書いた気でいたんだけど、時間無くて脱落させたままだった。</p>
 <p class="p3"><span class="Apple-tab-span">	</span>Unityのひとに聞いて裏付けがてら列挙する。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>AssetStoreへのアップ用に使っているUnity4.3.7p4の挙動がベースなので、まあなんだ、古いこと書いてるかもしれない。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>新versionのAssetBundleを入れても旧versionのAssetBundleは消えない</b></p>
@@ -30,7 +33,7 @@
 <p class="p4">WWW.LoadFromCacheOrDownload(url, version, crc)</p>
 <p class="p3"><span class="Apple-tab-span">	</span>このメソッドの話で、</p>
 <p class="p3"><span class="Apple-tab-span">	</span>新しいAssetBundleを作成、versionに新しい値を希望いっぱいで入れたとする。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>古いAssetBundleはどうなるかな？</p>
+<p class="p3"><span class="Apple-tab-span">	</span>古いAssetBundleはどうなるか？</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>消えん。直感に反する感じする。</p>
@@ -75,7 +78,7 @@
 <p class="p3"><span class="Apple-tab-span">	</span>具体的には、以下を行う。</p>
 <p class="p3"><span class="Apple-tab-span">	</span>・新規取得するAssetBundleと、残したいAssetBundleを把握できるようにする</p>
 <p class="p3"><span class="Apple-tab-span">	</span>・残したいAssetBundleに参照マークを付ける</p>
-<p class="p3"><span class="Apple-tab-span">	</span>・新規取得するAssetBundleの展開後サイズと、残したいAssetBundleの展開後サイズを合算した値をCaching.maximumAvailableDiskSpaceにセット(ムズイ)</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・新規取得するAssetBundleの展開後サイズと、残したいAssetBundleの解凍後サイズを合算した値をCaching.maximumAvailableDiskSpaceにセット(ムズイ)</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>これで、</p>
 <p class="p3"><span class="Apple-tab-span">	</span>新規をDLすれば、最近参照マークがついていない(= 最終参照が古い)ものからゴウンゴウン消えて行く。</p>
@@ -96,11 +99,18 @@
 <p class="p3"><span class="Apple-tab-span">	</span>なんだ、アレだ、この削除方法に頼らない方が良いと思う。</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>対して、Maxサイズ指定の心太式を用意しておくと、まあ自動的になるのでラクかなという感じはする。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>少なくともユーザーを殺さなくてすみそうだ。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>あるとうれしい機構としては、重量制限はセットすべき物、として制約をかけることができ、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>制約に触れると「アラート出してStreamが流れてくる”親分、この古いやつらどうしやす！？”みたいな問いかけをしてくるメソッドが呼ばれる」</p>
+<p class="p3"><span class="Apple-tab-span">	</span>というのがUnityに積まれるのを期待している。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>フォルダ単位の監視だったらわりかし簡単に作れると思うけど、その手の<b>フォルダを実機内でハンドルする機構</b>を自分で作るの厭なんだよね。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>同一のAssetBundleの更新はラク</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>さっき紹介したのは削除テクニックではなく、根本的には更新のためのテクニックなので、</p>
-<p class="p3"><span class="Apple-tab-span">	</span>その説明もしておく。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>その正しい使い方もメモしておく。</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span><b>同じversionでcrcが異なるものを指定した場合で対象のAssetBundleのcacheを更新できる </b>ので、</p>
 <p class="p3"><span class="Apple-tab-span">	</span>更新であればversionを上げずに(versionというパラメータ名がメッチャ直感に反するが)奇麗にキャッシュから古いのを削除、更新されたものを取得、上書き、っていうのができる。</p>
@@ -157,9 +167,40 @@
 <p class="p3"><span class="Apple-tab-span">	</span>もちろんサイズも変動しちゃうので、正確なサイズを出すにはAPIの助けか、展開後のサイズをメモっておく必要がある。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
-<p class="p3"><b>AssetBundleは作り直すたびに違うサイズになる</b></p>
+<p class="p3"><b>AssetBundleの実機内でのサイズと数バイトの差について</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ちなみに、Unity Editor上で特定のプラットフォーム向けにAssetBundleを作り、cacheした状態のファイルは、Macだと以下の場所にstoreされる。</p>
+<p class="p4">/Users/USER_NAME/Library/Caches/Unity/</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、そこに出てくるファイルはすでにBuildAssetBundleOptions.UncompressedAssetBundle指定無しで作成したAssetBundleだった時のサイズとは異なっている。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>圧縮状態からの展開済みって感じのサイズ。ただしファイル数はまだ1つの状態。</p>
+<p class="p5"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202015-02-05%201.33.14.png" alt="スクリーンショット 2015-02-05 1.33.14.png"></p>
+<p class="p3"><span class="Apple-tab-span">	</span>PROJECT_NAME/フォルダ/AssetBundle(圧縮解除後) とい並びになっている。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>AssetBundleのidentityごとにフォルダが作られる、という訳ではなく、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>AssetBundleのidentity x version の組み合わせで、ファンキーな感じでフォルダが作られる。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>versionの意味を勘違いして1,2,,みたいに上書きするつもりでAssetBundleをキャッシュして読み込むと、ここのフォルダが無限に増えていく。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、内容のファイル名もidみたいな感じなんだけど(上記でいうCAB-863e4~ っていう名前のファイル)、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>実際のiPhoneとかの内部だとサイズに違いがあり、端末内のcacheを食う量はわずかに増える傾向にある気がする。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>たぶんプラットフォームやバージョン、比較対象ごとに違うが、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>iOS8 x Unity4.3だと、エディタで確認できるcacheサイズと比べて、+53byteのサイズ差がでた。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>この53byte、Mac上だと、ちょうど同じフォルダにある__infoってファイルのサイズと一致するのだが、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>はてさて。たぶんconcatされてるとかそういうんじゃねーかな。iOSとか端末内だと先頭にconcatされてて云々とか。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Mac vs 実機でしか計ってないので、他の組み合わせでどうなるかは正直わからない。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>まあ微妙に増えるよって感じな気がする。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>ところでAssetBundleは作り直すたびに違うサイズになる</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>上記でも触れたけどそういう感じ。</p>
 <p class="p3"><span class="Apple-tab-span">	</span>内容は一緒でも、作り直すたびにサイズが変化(誤差レベルだけど確実な変化)、もちろんcrcも変化する。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ただしcache後のサイズは変わらない。構成要素が一緒なんだからまあそう。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>感想</b></p>
