@@ -45,9 +45,12 @@
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>「だったらversionって名前じゃなくてindexとかidとかにすれば良かったのでは？」と思わなくもない。</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>ちなみに消えて行くときは以下のようなルール。</p>
+<p class="p2"><br></p>
+<p class="p3"><b>削除について</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>AssetBudnleがcacheから消えて行くときは以下のようなルール。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・許可されてる最大cache量(Caching.maximumAvailableDiskSpace)をリミットとして、それを超えそうになると消えていく</p>
 <p class="p3"><span class="Apple-tab-span">	</span>・最終参照日時(タイムスタンプ)が古いものから先に消えて行く</p>
-<p class="p3"><span class="Apple-tab-span">	</span>・version 1, 2 で1のほうが参照されたタイムスタンプが新しい場合、2のほうが消される順が速い</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・version 1, 2 で1のほうが参照されたタイムスタンプが新しい場合、2のほうが消される順が速い(っていう感じだった気がする)</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p3"><span class="Apple-tab-span">	</span>このへんを正当っぽい感じで利用して、</p>
 <p class="p3"><span class="Apple-tab-span">	</span>Caching.maximumAvailableDiskSpace を指定することで、ある程度自動的にcacheのサイジングをするのもアリだと思う。</p>
@@ -66,7 +69,14 @@
 <p class="p3"><span class="Apple-tab-span">	</span>心太式を用意しておくと、まあ自動的になるのでラクかなという感じはする。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
-<p class="p3"><b>アプリケーション側で保持されるのは「decompressされた」AssetBundle</b></p>
+<p class="p3"><b>更新はラク</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>根本的に、<b>同じversionでcrcが異なるものを指定した場合で更新できる </b>ので、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>更新であればversionを上げずに(versionというパラメータ名がメッチャ直感に反するが)奇麗にキャッシュから古いのを削除、取得、っていうのができる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>更新するのであればこれだけでよくて、なんというかまあ、削除が大変なだけ。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>アプリケーション側で保持されるのは「decompressされた」状態のリソース</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>このへんが超わかりにくかった記憶がある。</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p3"><span class="Apple-tab-span">	</span>実端末でのアプリケーションの内部では、cacheが終わったAssetBundleは、</p>
@@ -80,6 +90,6 @@
 <p class="p3"><span class="Apple-tab-span">	</span>みたいな関係になっているのだが、まあやたらと減るので、「ああ、展開して保持してるんだな」という感じ。</p>
 <p class="p3"><span class="Apple-tab-span">	</span>DLサイズ = AssetBundleのサイズ なんだけど、保持サイズ = 展開後のもの という。</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
-<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>つまりAssetBundleのサイズを測っても意味は無い。</p>
 </body>
 </html>
