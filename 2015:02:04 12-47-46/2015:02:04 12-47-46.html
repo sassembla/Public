@@ -10,21 +10,24 @@
     p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
     p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
     p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #ebebeb}
     span.Apple-tab-span {white-space:pre}
   </style>
 </head>
 <body>
-<p class="p1"><b>いまさら書けないAssetBundle周りの知見</b></p>
+<p class="p1"><b>いまさら書けないAssetBundleのcache周りの知見</b></p>
 <p class="p2"><br></p>
 <p class="p3"><b>概要</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>UnityのAssetBundleで以前悩んでたことがあったので、</p>
-<p class="p3"><span class="Apple-tab-span">	</span>聞かれて「ああ～～そういえば」ってなったので書いておく。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>UnityのAssetBundleをcacheする機構について、以前悩んでたことがあったんだけど、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>最近人に聞かれて「ああ～～そういえば」ってなったので書いておく。</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
-<p class="p3"><span class="Apple-tab-span">	</span>Uni本2の内容に書いた気でいたんだけど、推敲しきれなくて脱落させたままだった。</p>
-<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Uni本2の内容でコラム欄とかに書いた気でいたんだけど、時間無くて脱落させたままだった。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Unityのひとに聞いて裏付けがてら列挙する。</p>
+<p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>新versionのAssetBundleを入れても旧versionのAssetBundleは消えない</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>消えん。直感に反する感じする。</p>
+<p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>たとえばあるAssetBundleを version:1 として読み込んでおいたあと、</p>
 <p class="p3"><span class="Apple-tab-span">	</span>同じ名前のAssetBundleを version:2 として読み込むと、</p>
 <p class="p3"><span class="Apple-tab-span">	</span>version 1、2ともにキャッシュに残る。</p>
@@ -41,16 +44,19 @@
 <p class="p3"><span class="Apple-tab-span">	</span>、、、、</p>
 <p class="p3"><span class="Apple-tab-span">	</span>、、</p>
 <p class="p3"><span class="Apple-tab-span">	</span>、</p>
-<p class="p3"><span class="Apple-tab-span">	</span>おれはやらないけど。そんな、、なんか、、アレなこと、、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>俺はやらないけど。そんな、、なんか、、アレなこと、、</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>「だったらversionって名前じゃなくてindexとかidとかにすれば良かったのでは？」と思わなくもない。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>とりあえず現状でのcacheの実装はそういうものなので、まあなんだ、アレだ、アレ。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>削除について</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>AssetBudnleがcacheから消えて行くときは以下のようなルール。</p>
+<p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>・許可されてる最大cache量(Caching.maximumAvailableDiskSpace)をリミットとして、それを超えそうになると消えていく</p>
 <p class="p3"><span class="Apple-tab-span">	</span>・最終参照日時(タイムスタンプ)が古いものから先に消えて行く</p>
-<p class="p3"><span class="Apple-tab-span">	</span>・version 1, 2 で1のほうが参照されたタイムスタンプが新しい場合、2のほうが消される順が速い(っていう感じだった気がする)</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・version 1, 2 で1のほうが参照されたタイムスタンプが新しい場合、2のほうが消される順が速い</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p3"><span class="Apple-tab-span">	</span>このへんを正当っぽい感じで利用して、</p>
 <p class="p3"><span class="Apple-tab-span">	</span>Caching.maximumAvailableDiskSpace を指定することで、ある程度自動的にcacheのサイジングをするのもアリだと思う。</p>
@@ -61,35 +67,75 @@
 <p class="p3"><span class="Apple-tab-span">	</span>・新規取得するAssetBundleの展開後サイズと、残したいAssetBundleの展開後サイズを合算した値をCaching.maximumAvailableDiskSpaceにセット(ムズイ)</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>これで、</p>
-<p class="p3"><span class="Apple-tab-span">	</span>新規をDLすれば、参照マークがついていないものからゴウンゴウン消えて行く</p>
+<p class="p3"><span class="Apple-tab-span">	</span>新規をDLすれば、最近参照マークがついていない(= 最終参照が古い)ものからゴウンゴウン消えて行く。</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>誤ったcrcを指定して古い( = 上書きされてほしいか、使わなくなったので消したい)AssetBundleを消す、って言う方法もあるけど、</p>
-<p class="p3"><span class="Apple-tab-span">	</span>なんだかなあ感があるのでこう、はい。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>誤ったcrcを指定して古い( = 上書きされてほしいか、使わなくなったので消したい)AssetBundleを消す、っていう方法もあるけど、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>想像する動作構造的に大変なんだかなぁ感があるのでこう、はい。</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>心太式を用意しておくと、まあ自動的になるのでラクかなという感じはする。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>公式の中の人にその話をすると、100%「いや、、あれは、、現状の結果として消えてるだけなんで、、頼るのは、、危険、、、」みたいなお話をしてくれるので、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>なんだ、アレだ、頼らない方が良いと思う。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>対して、Maxサイズ指定の心太式を用意しておくと、まあ自動的になるのでラクかなという感じはする。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
-<p class="p3"><b>更新はラク</b></p>
+<p class="p3"><b>同一のAssetBundleの更新はラク</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>根本的に、<b>同じversionでcrcが異なるものを指定した場合で更新できる </b>ので、</p>
 <p class="p3"><span class="Apple-tab-span">	</span>更新であればversionを上げずに(versionというパラメータ名がメッチャ直感に反するが)奇麗にキャッシュから古いのを削除、取得、っていうのができる。</p>
-<p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>更新するのであればこれだけでよくて、なんというかまあ、削除が大変なだけ。</p>
-<p class="p2"><br></p>
-<p class="p2"><br></p>
-<p class="p3"><b>アプリケーション側で保持されるのは「decompressされた」状態のリソース</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>このへんが超わかりにくかった記憶がある。</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>仕様的に、AssetBundleの一意性はAssetBundleの名前(ファイルに埋め込み)で行われていて、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>URLがどうなっていようと手に入ったAssetBundle自体で一意性を決めているので、</p>
+<p class="p2"><br></p>
+<p class="p4">WWW.LoadFromCacheOrDownload(url1, version, crc1)</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>のversion部分で多層的になることはあり得るが、結局はDL後に取得したAssetBundleのIdentityから「同じAssetBundleかどうか」の判断が行われている。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、ただ単に同じAssetBundleを更新したい場合、</p>
+<p class="p2"><br></p>
+<p class="p4">WWW.LoadFromCacheOrDownload(url2, 1, crc2)</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、crcが違うはずなので、cacheされているAssetBundleの更新が発生する。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>versionって名前付けた奴出てこい、みたいな気分になるが。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>更新するのであればこれだけでよくて、なんというかまあ、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>使わなくなったAssetBundleの削除に関する事象が大変だなぁという懸念のみが残る。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>AssetBundleがいつ展開状態になるか</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>AssetBundleがDLされ、cacheされ、いつ「Bundle化が解かれるか」みたいな話。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>このへんは、App内でAssetBundleがどんな状態で保持されているか、というのと関わってくる。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>AssetBundleを作成した際のフラグによって、App内での保持状態が変化する。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>BuildAssetBundleOptions.UncompressedAssetBundle を指定しなかった場合、</p>
 <p class="p3"><span class="Apple-tab-span">	</span>実端末でのアプリケーションの内部では、cacheが終わったAssetBundleは、</p>
-<p class="p3"><span class="Apple-tab-span">	</span>「展開された状態」で保持されている。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>「AssetBundleファイル単一の状態から、別形式に展開された状態」で保持されている。</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>これは、AssetBundleのサイズと、実際の端末内での容量の減り方から確認した。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>AssetBundleのサイズと、実際の端末内での容量の減り方から確認した。</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>AssetBundle化の圧縮によって、</p>
-<p class="p3"><span class="Apple-tab-span">	</span>AssetBundleの元になっているAsset郡のサイズ合計 &gt; AssetBundleのサイズ</p>
+<p class="p3"><span class="Apple-tab-span">	</span>AssetBundle化の効果であるファイルのがっちゃんこと圧縮によって、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>「AssetBundleの元になっているAsset郡のサイズ合計 &gt; AssetBundleのサイズ」</p>
+<p class="p3"><span class="Apple-tab-span">	</span>みたいな関係になっているのだが、</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>みたいな関係になっているのだが、まあやたらと減るので、「ああ、展開して保持してるんだな」という感じ。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>DLサイズ = AssetBundleのサイズ なんだけど、保持サイズ = 展開後のもの という。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>App内にDLしたあとに端末の空き容量ドカッとが減るので、「ああ、展開して保持してるんだな」という感じ。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>DLサイズ = AssetBundleのサイズ</b> なんだけど、<b>保持サイズ = 展開後のサイズ </b>という。</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
-<p class="p3"><span class="Apple-tab-span">	</span>つまりAssetBundleのサイズを測っても意味は無い。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>つまり、AssetBundleのサイズとDL後のサイズには関係がない。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>この辺取得するAPIってあったっけな、、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>まあそんなこんなで、BuildAssetBundleOptions.UncompressedAssetBundle を指定しない場合、AssetBundleになった際のサイズを測っても意味は無い。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>感想</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>デフォルトで存在するAPIとしては、AssetBundleは魅力的なんだけど、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ゲームの要件にそぐわない感じでなければ使いたいなあ。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>デフォルトで入ってるので。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>こういうところであんまり頑張りたくない。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3">こちらからは以上です。</p>
 </body>
 </html>
