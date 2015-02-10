@@ -1,0 +1,138 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1265.21">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 20.0px 'Hiragino Kaku Gothic ProN'}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #ebebeb}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #ebebeb; min-height: 18.0px}
+    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #d6d6d6}
+    p.p8 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #d6d6d6; min-height: 18.0px}
+    p.p9 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p10 {margin: 0.0px 0.0px 0.0px 0.0px; font: 28.0px 'Hiragino Kaku Gothic ProN'}
+    span.s1 {font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    span.s2 {font: 12.0px 'Zapf Dingbats'}
+    span.s3 {font: 28.0px 'Zapf Dingbats'}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>AssetRails ~素材インポートからAssetBundles作りまで、commandlineで~</b></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>AssetStoreへと申請してしました。純粋な個人作では第二弾。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>AssetRails</p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<iframe src="https://player.vimeo.com/video/119101571?byline=0&portrait=0" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span><b>～審査中～</b></p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>AssetRails-Support &amp; Sample</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/AssetRails-Support#assetrails-overview">https://github.com/sassembla/AssetRails-Support#assetrails-overview</a></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>使ってみたい人がいたらTwitterで<a href="https://twitter.com/sassembla">@sassembla</a>まで連絡をくれ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>実験体になってくれ。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>ニーズ</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>以下がやりたかった/二度とやりたくなかったので作った。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・1~2個とはいえGUIで設定するの面倒くさい</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・素材をUnityにインポートするところから圧縮まで、作業のフェーズ分け</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・まともさをもった再利用ビリティ</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・どこで失敗したかの明示</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・途中リソースの利用(このへんドキュメントに書き忘れたな?)</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・追加リソースの作成自動化と、過去リソースとのマージ、デプロイ前までの整理</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>などで、今後盛大に自分のためになってくれると思う。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>素材をUnityにインポートするところから圧縮まで、作業のフェーズ分けを行った</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Unityでの各種リソースの扱いは、元からかなりラクだと思うんだけど、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>反復とか量をさばいたり、またそのファイル変化の種類も多岐にわたるので、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>読み込みからの処理を、大きく<b>インポート(import)</b>と<b>プレファブリケート(Prefabricate, 組み立て)</b>に分けた。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>そこにさらに、<b>AssetBundleや独自処理でのbundle化を行う行程(bundlize)</b>を定義して、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>最後にbundle後のファイルを<b>バージョン管理する行程(versioning)</b>を設けてある。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、それらをcommandlineから個別に実行、反復させることができるようにした。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>行程(route)とピッタリなブラウザインターフェース</b></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>たとえばimportだと、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>コード的に、Unityに素材を読み込んだときに走る処理の内容とかを書きやすく、再利用しやすくした。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>具体的には、クラス定義、パラメータ追加がしてあって、こんな感じに書ける。</p>
+<p class="p2"><br></p>
+<p class="p5">public class SampleAssetRailsBasedImporter : AssetRails.ImporterBase {</p>
+<p class="p6"><br></p>
+<p class="p5"><span class="Apple-tab-span">	</span>public override void <b>AssetRailsOnPreprocessTexture</b> () {</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>// Debug.Log("Import:categoryName:" + <b>categoryName</b>);</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>// Debug.Log("Import:bundleName:" + <b>bundleName</b>);</p>
+<p class="p6"><br></p>
+<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>// run import settings for specific category.</p>
+<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>if (<b>categoryName</b> == "characters") {</p>
+<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>UnityEditor.TextureImporter importer = assetImporter as UnityEditor.TextureImporter;</p>
+<p class="p8"><br></p>
+<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>importer.textureType <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>= UnityEditor.TextureImporterType.Image;</p>
+<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>importer.textureFormat <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>= TextureImporterFormat.ARGB16;</p>
+<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}</p>
+<p class="p6"><br></p>
+<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>if (<b>categoryName</b> == "images") {</p>
+<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>UnityEditor.TextureImporter importer = assetImporter as UnityEditor.TextureImporter;</p>
+<p class="p8"><br></p>
+<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>importer.textureType<span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>= UnityEditor.TextureImporterType.Advanced;</p>
+<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>importer.npotScale<span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>= TextureImporterNPOTScale.None;</p>
+<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>importer.isReadable<span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>= true;</p>
+<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>importer.alphaIsTransparency <span class="Apple-tab-span">	</span>= true;</p>
+<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>importer.mipmapEnabled<span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>= false;</p>
+<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>importer.wrapMode<span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>= TextureWrapMode.Repeat;</p>
+<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>importer.filterMode<span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>= FilterMode.Bilinear;</p>
+<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>importer.textureFormat <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>= TextureImporterFormat.ARGB16;</p>
+<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>return;</p>
+<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}</p>
+<p class="p5"><span class="Apple-tab-span">	</span>}</p>
+<p class="p5">}</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>☆categoryName, bundleNameは下の方の「前提」のズを見れば、何されてるかわかると思う。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>また、どこまで動いてんだよ的な把握ができるように、Viewを持たせた。</p>
+<p class="p9"><img src="webInterface.png" alt="webInterface.png"></p>
+<p class="p4"><b><span class="Apple-tab-span">	</span>＼\ パーセンテージでわかるの最高やぞ /／</b></p>
+<p class="p10"><span class="s2"><span class="Apple-tab-span">	</span></span><span class="s3">✌</span><b>('ω'</b><span class="s3">✌</span><b> )三</b><span class="s3">✌</span><b>('ω')</b><span class="s3">✌</span><b>三( </b><span class="s3">✌</span><b>'ω')</b><span class="s3">✌</span><b>"</b></p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>前提</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>下記のようなフォルダ構造を切った。下記のような構造でファイルを置いておけば、あとはAssetRailsが適当にやってくれる。</p>
+<p class="p9"><img src="overview.png" alt="overview.png"></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>Unity5と被ったところ</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>version管理まわりで、versionedList.json ってのを書き出しているが、その内容はUnity5の吐き出すあれとほぼ被った。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ただ、commandline前提で全部組まれたものは見た事無いので、たぶん俺が勝つ(嘘)。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>いや～importとかから自動化する前提で組みたいんだよ。なのでGUIでなにかするのはパスだ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>エクセルとかで管理した素材フォルダさえあれば動く、っていうのが理想だと思っているので。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Script動作を排してないので、動作互換あるから、まあつかってみてよって感じ。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>体験版</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>そのうち作る。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>あ、いいサンプル思いついた。レールの内容固定でlibにしてサンプル作ればいいんだ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ってこの手は結構使えそうな気がする。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+</body>
+</html>
