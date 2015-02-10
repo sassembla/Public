@@ -24,13 +24,12 @@
   </style>
 </head>
 <body>
-<p class="p1"><b>AssetRails ~素材インポートからAssetBundles作りまで、commandlineで~</b></p>
+<p class="p1"><b>AssetRails ~素材読み込みからAssetBundle作りまで、commandlineで~</b></p>
 <p class="p2"><b></b><br></p>
 <p class="p3"><b>概要</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>AssetStoreへと申請してしました。純粋な個人作では第二弾。</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>AssetRails</p>
-<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
 <iframe src="https://player.vimeo.com/video/119101571?byline=0&portrait=0" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 <p class="p4"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span><b>～審査中～</b></p>
 <p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
@@ -125,6 +124,60 @@
 <p class="p3"><span class="Apple-tab-span">	</span>エクセルとかで管理した素材フォルダさえあれば動く、っていうのが理想だと思っているので。</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>Script動作を排してないので、動作互換あるから、まあつかってみてよって感じ。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>圧倒的オリジナリティ</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>コマンドラインでチマチマ実行してもいいんだけど、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>json</b>と<b>toml</b>で書いたrouteをまとめて実行、っていうのもできる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>こんなかんじの書き方のjsonを実行したりできる。</p>
+<p class="p5">[</p>
+<p class="p5"><span class="Apple-converted-space">    </span>{</p>
+<p class="p5"><span class="Apple-converted-space">        </span>"clean": {}</p>
+<p class="p5"><span class="Apple-converted-space">    </span>},</p>
+<p class="p5"><span class="Apple-converted-space">    </span>{</p>
+<p class="p5"><span class="Apple-converted-space">        </span>"setup": {</p>
+<p class="p5"><span class="Apple-converted-space">            </span>"--work-platform": "StandaloneOSXIntel"</p>
+<p class="p5"><span class="Apple-converted-space">        </span>}</p>
+<p class="p5"><span class="Apple-converted-space">    </span>},</p>
+<p class="p5"><span class="Apple-converted-space">    </span>{</p>
+<p class="p5"><span class="Apple-converted-space">        </span>"import": {</p>
+<p class="p5"><span class="Apple-converted-space">            </span>"--dryrun": false,</p>
+<p class="p5"><span class="Apple-converted-space">            </span>"--info": true</p>
+<p class="p5"><span class="Apple-converted-space">        </span>}</p>
+<p class="p5"><span class="Apple-converted-space">    </span>},</p>
+<p class="p5"><span class="Apple-converted-space">    </span>{</p>
+<p class="p5"><span class="Apple-converted-space">        </span>"prefabricate": {</p>
+<p class="p5"><span class="Apple-converted-space">            </span>"-i": true</p>
+<p class="p5"><span class="Apple-converted-space">        </span>}</p>
+<p class="p5"><span class="Apple-converted-space">    </span>},</p>
+<p class="p5"><span class="Apple-converted-space">    </span>{</p>
+<p class="p5"><span class="Apple-converted-space">        </span>"bundlize": {</p>
+<p class="p5"><span class="Apple-converted-space">            </span>"-i": true,</p>
+<p class="p5"><span class="Apple-converted-space">            </span>“--actual-size”: true,// compressedでも実際のサイズがわかるようになる感じ</p>
+<p class="p5"><span class="Apple-converted-space">            </span>"--fast": true</p>
+<p class="p5"><span class="Apple-converted-space">        </span>}</p>
+<p class="p5"><span class="Apple-converted-space">    </span>},</p>
+<p class="p5"><span class="Apple-converted-space">    </span>{</p>
+<p class="p5"><span class="Apple-converted-space">        </span>"versioning": {</p>
+<p class="p5"><span class="Apple-converted-space">            </span>"-i": true,</p>
+<p class="p5"><span class="Apple-converted-space">            </span>"--version": 1,</p>
+<p class="p5"><span class="Apple-converted-space">            </span>"--platform": "iPhone",</p>
+<p class="p5"><span class="Apple-converted-space">            </span>"--crc": true</p>
+<p class="p5"><span class="Apple-converted-space">        </span>}</p>
+<p class="p5"><span class="Apple-converted-space">    </span>},</p>
+<p class="p5"><span class="Apple-converted-space">    </span>{</p>
+<p class="p5"><span class="Apple-converted-space">        </span>"versioning": {</p>
+<p class="p5"><span class="Apple-converted-space">            </span>"-i": true,</p>
+<p class="p5"><span class="Apple-converted-space">            </span>"-v": 1,</p>
+<p class="p5"><span class="Apple-converted-space">            </span>"-p": "WebPlayer",</p>
+<p class="p5"><span class="Apple-converted-space">            </span>"-c": false</p>
+<p class="p5"><span class="Apple-converted-space">        </span>}</p>
+<p class="p5"><span class="Apple-converted-space">    </span>},</p>
+<p class="p5">]</p>
+<p class="p3"><span class="Apple-tab-span">	</span>tomlまだexperimentalだけど。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>がんばりたくないひとにオススメ。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>体験版</b></p>
