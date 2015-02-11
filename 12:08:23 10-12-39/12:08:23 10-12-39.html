@@ -1,0 +1,134 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1265.21">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>フロー記述のオレオレ形式作る</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・処理の並列分岐</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・処理の合流/待機</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・値の受け渡し</p>
+<p class="p3"><span class="Apple-tab-span">	</span>をとあるサーバからサーバ群に渡すために、1ラインで書ける記法が欲しかった。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、探したけど良いのが無かった。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ので、作る話。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>パーサの実装はScala。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>対象</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>jar（内部でshellを制御するものもアリ）</p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>記法</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>A&gt;B,C,D(A:a:c)&gt;E(D:d:e),F(A:a2:f, B:b:f2)&lt;J,K&gt;I(J:j:i)+D&gt;G&gt;H+G&gt;J!Z</b></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Aとかは、JSONで別途記述する、「プロセスオーダー」　いわゆる ジョブ の、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>アイデンティティー。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>プロセスオーダー A</b>があるとき、それはshellとかjarとか通信とか、プロセスidを一つ持つような物事の単位とする。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>JSONで表記する。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>たとえばパラメータとしてAShell exec -key1 value1 -key2 value2　を受け取るshell AShell.shがあるとき、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>{</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"A":{</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"type":"sh"</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"class":"AShell.sh",</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"exec":"exec",</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"kv":{</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"key1":"value1",</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"key2":"value2"</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}</p>
+<p class="p3"><span class="Apple-tab-span">	</span>}</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>解釈は→</p>
+<p class="p3"><span class="Apple-tab-span">	</span>AShell.sh exec -key1 value1 -key2 value2</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>typeがjarだったら、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>java -jar Ashell.jar exec<span class="Apple-converted-space">  </span>-key1 value1 -key2 value2</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>この情報を基礎に動作する。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>→タイプ一覧は下記</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ワンライナーにJSONとして与えれば良い。<span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>ex:</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>{"A": {"class": "AShell","exec": "exec","kv": {"key1": "value1","key2": "value2"}},"B": {"class": "AShell","exec": "exec","kv": {"key1": "value1","key2": "value2"}},"C": {"class": "AShell","exec": "exec","kv": {"key1": "value1","key2": "value2"}}}</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>引数として上書きする分だけ、プロセス間渡しとかを行う形。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>記述規約：</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・&gt;<span class="Apple-tab-span">	</span>で終了時次プロセスに移行</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・(プロセスID:代入元パラメータ:代入先パラメータ)<span class="Apple-tab-span">	</span>D(A:a:c) で、プロセスオーダーDについて、Aのパラメータaをキーcに代入して実行</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・+<span class="Apple-tab-span">	</span>で分岐.+Dとあれば、プロセスオーダーDが終了したら開始される並列分岐</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・&lt;<span class="Apple-tab-span">	</span>で特定プロセスの終了待ち。&lt;J,KでプロセスJ、Kの完了待ちを行う</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・,<span class="Apple-tab-span">	</span>で内容のArray化。複数要素の並列稼働</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>解説：</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>1.AからB,C,D3つの並列、DでA値aをcパラメータとして使用、すべて終わったらEに収束、<span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>D,Fを並列。D値dをeとして使用、FではA値a2をf、B値bをf2として使用。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>完了したらJ、Kの完了が来るまで待機、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Jが着たら実行して処理終了。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>2.D完了時、G,Kへとプロセス分離、H完了後終了。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>3.G完了後、Jへとプロセス分離、J完了後終了。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>4.J,K完了後、Iを実行。J値jをiとして使用。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>5.途中で何があっても、プロセスZが最後に実行される(finally節)。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>パース順：</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>!<span class="Apple-tab-span">	</span>:Filnallyの取得/プロセスオーダー群としてのID配布、コンテキスト生成</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>+<span class="Apple-tab-span">	</span>:並列シーケンスの列挙 -&gt; 各シーケンス化</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>&gt;<span class="Apple-tab-span">	</span>:シーケンスの内容分解、列挙 -&gt; プロセス群化</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>&lt;<span class="Apple-tab-span">	</span>:プロセス群に対するwaitの解釈 -&gt; プロセス群へのwaitのアタッチ</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>,<span class="Apple-tab-span">	</span>:プロセス群のArray化</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>(:::)<span class="Apple-tab-span">	</span>:プロセスに対する予約、パラメータのlazy用意 ここが一番大変そう。</b></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>こんなもんか。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>プロセス自体の詳細は、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・importの記述</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・インスタンスの記述</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・アイデンティティからexec作って実行コードに配置</p>
+<p class="p2"><br></p>
+<p class="p3"><b>ProcessOrderのタイプ一覧</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span></b>process:Mondogrosso互換のプロセス。com,kissaki.mondogrossoパッケージの継承物で、要はimportが可能。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>jar:外部.jarファイル。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>sh:外部shellファイル。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>値のマトリクスは下記表</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>プロセス内の話</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>プロセスIDと、JSONから得た情報</p>
+<p class="p3"><span class="Apple-tab-span">	</span>キーとバリューがあるはず</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>どうやって入力したい？</p>
+<p class="p3"><span class="Apple-tab-span">	</span>←できるだけ可変できるように、かつ確認しやすいように</p>
+<p class="p3"><span class="Apple-tab-span">	</span>←DBに値で持つ</p>
+<p class="p3"><span class="Apple-tab-span">	</span>←ファイルで持つ</p>
+<p class="p3"><span class="Apple-tab-span">	</span>その場合、load方法を指定できれば良いのか。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>→HTTP系までつくるのめんどうだから、Ver1.0系は、愚直にやろう。コピペで行けるし。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+</body>
+</html>

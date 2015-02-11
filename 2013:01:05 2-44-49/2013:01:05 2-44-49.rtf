@@ -1,0 +1,137 @@
+{\rtf1\ansi\ansicpg932\cocoartf1187\cocoasubrtf340
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fnil\fcharset128 HiraKakuProN-W3;\f2\fmodern\fcharset0 Courier;
+}
+{\colortbl;\red255\green255\blue255;\red43\green50\blue64;\red114\green0\blue76;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+
+\f0\b\fs44 \cf0 Datomic
+\f1 \'82\'cc\'8e\'6e\'82\'df\'95\'fb
+\f0\b0\fs24 \
+\
+DL\
+	\
+\
+memory database
+\f1  \'82\'f0\'93\'ae\'82\'a9\'82\'b7
+\f0 \
+
+\f1 	\'83\'74\'83\'48\'83\'8b\'83\'5f\'82\'f0\'93\'4b\'93\'96\'82\'c8\'82\'c6\'82\'b1\'82\'eb\'82\'c9\'88\'da\'93\'ae
+\f0 \
+bin/shell\
+
+\f1 \'8e\'c0\'8d\'73
+\f0 \
+\
+\
+\pard\pardeftab720
+
+\f2 \cf2 uri = \cf3 "datomic:mem://hello"\cf2 ;\
+Peer.createDatabase(uri);\
+conn = Peer.connect(uri);\
+	<datomic.peer.LocalConnection@473fae05>\
+\
+\
+datom = Util.list(\cf3 "db/add"\cf2 , \
+                  Peer.tempid(\cf3 "db.part/user"\cf2 ), \
+                  \cf3 "db/doc"\cf2 ,\
+                  \cf3 "hello world"\cf2 );\
+
+\fs26 \
+resp = conn.transact(Util.list(datom));
+\fs24 \
+\
+db = conn.db();\
+\
+	
+\f1 \'83\'4e\'83\'47\'83\'8a\'82\'f0\'91\'c5\'82\'c1\'82\'c4\'82\'dd\'82\'e9
+\f2 \
+Peer.q(\cf3 "[:find ?entity :where [?entity :db/doc \\"hello world\\"]]"\cf2 , db); \
+\
+	<[[17592186045417]]>\
+\
+	
+\f1 \'82\'c8\'82\'f1\'82\'a9\'92\'6c\'82\'c1\'82\'db\'82\'a2\'95\'a8\'82\'aa\'8b\'41\'82\'c1\'82\'c4\'82\'ab\'82\'bd\'81\'42
+\f2 \
+\
+	
+\f1 \'95\'ca\'82\'cc\'83\'4e\'83\'47\'83\'8a\'82\'f0\'91\'c5\'82\'c1\'82\'c4\'82\'dd\'82\'e9
+\f2 \
+Peer.q(\cf3 "[:find ?entity :where [?entity :db/doc \\"hello\\"]]"\cf2 , db); \
+\
+	<[]>\
+\
+	
+\f1 \'8b\'f3\'82\'aa\'8b\'41\'82\'c1\'82\'c4\'82\'ab\'82\'bd\'81\'42
+\f2 \
+\
+\
+	
+\f1 \'83\'43\'83\'93\'83\'81\'83\'82\'83\'8a\'82\'c8DB\'82\'c5\'82\'b7\'82\'e6\'81\'41\'82\'c1\'82\'c6\'81\'42\
+	\'8e\'9f\'82\'c9\'81\'41Transactor\'82\'f0\'91\'67\'82\'f1\'82\'c5\'82\'dd\'82\'e9\
+\
+
+\b Transactor
+\b0 \
+bin/transactor config/samples/free-transactor-template.properties\
+\
+	\'82\'c5\'81\'41\
+Starting datomic:free://localhost:4334/<DB-NAME>, storing data in: data ...\
+	\'82\'c6\'82\'a9\'8c\'be\'82\'ed\'82\'ea\'82\'e9\'82\'cc\'82\'c5\'81\'41\
+\
+	\'82\'b1\'82\'cc\'96\'bc\'91\'4f\'82\'f0uri\'82\'c6\'82\'b5\'82\'c4\'81\'41\
+	\'90\'e6\'82\'d9\'82\'c7\'82\'cc\'83\'43\'83\'93\'83\'81\'83\'82\'83\'8aDB\'82\'f0\'97\'70\'88\'d3\'82\'b5\'82\'c4\'82\'dd\'82\'e9\'81\'42\
+	\'96\'bc\'91\'4f\'82\'cd\'81\'41hello\'82\'c9\'82\'b5\'82\'bd\'81\'42\
+\
+
+\f2 uri = "
+\f1 datomic:free://localhost:4334/hello
+\f2 ";\
+Peer.createDatabase(uri);\
+conn = Peer.connect(uri);\
+\
+
+\f1 	<\{:db-id "hello-50e71742-772f-4487-9169-9a7e3c7fb196", :unsent-updates-queue 0, :pending-txes 0, :next-t 1000, :basis-t 62, :index-rev 0, :index-root \{:rev 0, :key "50e7174a-8435-4d54-b9d6-715ced46eb45"\}, :log-root \{:rev 0, :key "50e7174a-2ad4-4091-a276-a8e41758d15e"\}\}>\
+\
+	\'82\'b1\'82\'f1\'82\'c8\'82\'f1\'8b\'41\'82\'c1\'82\'c4\'82\'ab\'82\'bd\'81\'42\'90\'e6\'82\'d9\'82\'c7\'8d\'ec\'90\'ac\'82\'b5\'82\'bdtransactor\'82\'aa\'93\'ae\'82\'a2\'82\'c4\'82\'a2\'82\'c4\'81\'41\'82\'bb\'82\'b1\'82\'c9\'90\'da\'91\'b1\'82\'c5\'82\'ab\'82\'bd\'82\'dd\'82\'bd\'82\'a2\'82\'be\'81\'42\
+\
+	\'88\'f8\'82\'ab\'91\'b1\'82\'ab\'8d\'c4\'8c\'bb\
+\
+datom = Util.list("db/add",  Peer.tempid("db.part/user"),  "db/doc", "hello world");\
+
+\f2\fs26 resp = conn.transact(Util.list(datom));\
+
+\f1\fs24 \
+db = conn.db();\
+\
+Peer.q("[:find ?entity :where [?entity :db/doc \\"hello world\\"]]", db);\
+	\'82\'b1\'82\'ea\'82\'cd\'81\'41\'82\'e0\'82\'bf\'82\'eb\'82\'f1\'8e\'ae\'82\'c8\'82\'cc\'82\'c5\'95\'cf\'8c\'60\'89\'c2\'94\'5c\
+Peer.q("[:find ?entity :where [?entity :db/doc \\"hello world\\"]]", conn.db());\
+	\'92\'6c\'82\'c6\'82\'b5\'82\'c4\'8e\'e6\'93\'be\'82\'b5\'82\'bd\'82\'af\'82\'ea\'82\'ce\'81\'41\
+\
+results = Peer.q("[:find ?entity :where [?entity :db/doc \\"hello world\\"]]", conn.db());\
+\
+System.out.println(results.size());\
+1\
+	\'82\'c6\'82\'a9\'81\'41\'88\'b5\'82\'a6\'82\'e9\'81\'42\
+\
+	\'92\'6c\'82\'f0\'8e\'e6\'93\'be\'82\'b7\'82\'e9\'82\'c9\'82\'cd\'81\'41\'82\'dc\'82\'b8ID\'82\'f0\'8e\'e6\'93\'be\
+id = (results.iterator().next()).get(0);\
+\
+	\'82\'cc\'81\'41\'82\'a0\'82\'c6\'81\'41\
+entity = conn.db().entity(id);\
+\
+	\'82\'c5\'81\'41entity\'82\'aa\'8e\'e6\'93\'be\'82\'c5\'82\'ab\'82\'e9\'81\'42\
+	\'82\'bb\'82\'b1\'82\'a9\'82\'e7\'81\'41entity\'82\'c9\'91\'ce\'82\'b7\'82\'e9key-value\'82\'c5\'81\'41\
+name = entity.get(":db/doc"); \
+	\'82\'c6\'82\'a9\'8f\'91\'82\'ad\'82\'c6\'81\'41\
+<hello world>\
+\
+	\'82\'aa\'8b\'41\'82\'c1\'82\'c4\'82\'ab\'82\'bd\'81\'42\
+\
+	\'8a\'c8\'92\'50\'82\'c8\'83\'43\'83\'93\'83\'81\'83\'82\'83\'8aDB\'81\'a8Transactor\'82\'c5\'90\'a2\'8a\'45\'92\'86\'82\'cc\'82\'c7\'82\'b1\'82\'a9\'82\'d6\'81\'42\
+	\'8b\'a6\'92\'b2\'93\'49\'82\'c8\'8e\'64\'91\'67\'82\'dd\'82\'be\'82\'c8\'82\'a0\'81\'42\
+\
+	\
+\
+http://docs.datomic.com/integrating-peer-lib.html}
