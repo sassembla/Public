@@ -174,10 +174,10 @@
 <p class="p3"><span class="Apple-tab-span">	</span>で、そこに出てくるファイルはすでにBuildAssetBundleOptions.UncompressedAssetBundle指定無しで作成したAssetBundleだった時のサイズとは異なっている。</p>
 <p class="p3"><span class="Apple-tab-span">	</span>圧縮状態からの展開済みって感じのサイズ。ただしファイル数はまだ1つの状態。</p>
 <p class="p5"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202015-02-05%201.33.14.png" alt="スクリーンショット 2015-02-05 1.33.14.png"></p>
-<p class="p3"><span class="Apple-tab-span">	</span>PROJECT_NAME/フォルダ/AssetBundle(圧縮解除後) とい並びになっている。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>PROJECT_NAME/フォルダ/AssetBundle(圧縮解除後) という並びになっている。</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>AssetBundleのidentityごとにフォルダが作られる、という訳ではなく、</p>
-<p class="p3"><span class="Apple-tab-span">	</span>AssetBundleのidentity x version の組み合わせで、ファンキーな感じでフォルダが作られる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>AssetBundleのidentityごとにフォルダが作られる、って訳ではなく、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>AssetBundleのidentity x version の組み合わせで、同じAssetBundleなんだけどversion分だけファンキーな感じでフォルダが作られる。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>versionの意味を勘違いして1,2,,みたいに上書きするつもりでAssetBundleをキャッシュして読み込むと、ここのフォルダが無限に増えていく。</p>
