@@ -91,6 +91,7 @@
 <p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>・~ Editor Scriptのコンパイル完了、DLLのロード開始</p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>・InitializeOnLoad Attributeがついてるメソッドの着火</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>・それらの完了</p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>・正式なコンパイル完了</p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>・Update起動開始</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
@@ -101,6 +102,8 @@
 <p class="p3"><span class="Apple-tab-span">	</span>正直Updateが走り出してからInitializeOnLoadが走ってくれると嬉しかった。</p>
 <p class="p3"><span class="Apple-tab-span">	</span>というかその場合は、Updateが走り出してから走らせるようにすればまあそれでいいんだな。</p>
 <p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>最初のUpdateで一度だけ走って消えるようなハンドラでいいよね。</p>
+<p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>UniRxを使ってエディタでのスクリプトを書く場合</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>ちなみに便利で素敵なUniRxを使ってEditorのコードを書く場合、</p>
@@ -110,13 +113,10 @@
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://u3d.as/content/neuecc/uni-rx-reactive-extensions-for-unity/7tT">http://u3d.as/content/neuecc/uni-rx-reactive-extensions-for-unity/7tT</a></p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>UniRxがエディタ上でCoroutineとか回すのに使っているのは上記の EditorApplication.update なので、</p>
-<p class="p3"><span class="Apple-tab-span">	</span>initializeOnLoad 中のメソッドでセットしたりStartCoroutineしようとしても、即着火するとは<b>限らない</b>。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>initializeOnLoad 中のメソッドでセットしたりStartCoroutineしようとしても、即着火はしない。</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
-<p class="p3"><span class="Apple-tab-span">	</span>これ、適当な時間経過で「コンパイル完了しました」ログがでるので、</p>
-<p class="p3"><span class="Apple-tab-span">	</span>initializeOnLoad 中からでも、そのコンパイル完了を把握できれば、</p>
-<p class="p3"><span class="Apple-tab-span">	</span>Updateが走り出すのでUniRxでの機構を即時発火させることができるっちゃあできる。</p>
-<p class="p2"><span class="Apple-tab-span">	</span></p>
-<p class="p3"><span class="Apple-tab-span">	</span>ただマニアックだ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>実際にはInitializeOnLoad のブロックが終了したあとになってはじめてコンパイル完了のタイミングを迎え、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Updateも走るようになるので、そこで初めて着火する。</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>というかUniRxの挙動のおかげで、Updateの開始位置をまともに調べるに至った。</p>
 <p class="p3"><span class="Apple-tab-span">	</span>勉強になった。</p>
