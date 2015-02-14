@@ -1,0 +1,123 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1265.21">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #ebebeb}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #ebebeb; min-height: 18.0px}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px Menlo; background-color: #d6d6d6}
+    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px Menlo; background-color: #ebebeb}
+    p.p8 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px Menlo; background-color: #ebebeb; min-height: 13.0px}
+    span.s1 {font: 11.0px Menlo; background-color: #d6d6d6}
+    span.s2 {font: 11.0px Menlo; background-color: #ebebeb}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>UnityのEditorのUpdateが走り出すのは具体的にいつからなのか</b></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Unityのエディタのなかで、Updateを使用したツールを作っていた際に気になったので調べた。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>該当のAPIはこれ。</p>
+<p class="p2"><br></p>
+<p class="p4">UnityEditor.EditorApplication.update</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>実行開始タイミング</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>最初のUpdateが走るのは、「InitializeOnLoad よりも後」だった。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>InitializeOnLoad を付けておいたstaticクラスのコンパイルが終わり、動作が開始した際には、まだUpdateは走っていない。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>InitializeOnLoad 内ではすでに走っているのかと思っていた。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>公式の死霊に照らし合わせると、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://docs.unity3d.com/412/Documentation/ScriptReference/index.Script_compilation_28Advanced29.html">http://docs.unity3d.com/412/Documentation/ScriptReference/index.Script_compilation_28Advanced29.html</a></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Editor内でのコードのコンパイルが行われるのはコンパイル行程の最後、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>1.Standard系がコンパイルされる</p>
+<p class="p3"><span class="Apple-tab-span">	</span>2.Standard Assets/Editor 系がコンパイルされる</p>
+<p class="p3"><span class="Apple-tab-span">	</span>3.Editor以外がコンパイルされる</p>
+<p class="p3"><span class="Apple-tab-span">	</span>4.Editorがコンパイルされる</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>の、4番よりもさらにあと、コンパイルが終わり、InitializeOnLoad が走っているタイミングでもまだ実行されていない。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>たとえば InitializeOnLoad で処理を開始した場合、まだコンパイル行程が終わっておらず、ログにも「compile終わったわ～～」とか書かれていないので、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ああなるほどそういうこともあるんだなという感じ。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ちなみに最初のUpdateがはしるのは、ログでいうと下記の箇所だった。</p>
+<p class="p2"><br></p>
+<p class="p5"><br></p>
+<p class="p6"><b>IsUpdateRunning?:False</b></p>
+<p class="p7">UnityEngine.Debug:Internal_Log(Int32, String, Object)</p>
+<p class="p7">UnityEngine.Debug:Log(Object)</p>
+<p class="p7">SublimeSocketClient:StartConnect() (at Assets/SublimeSocketAsset/Editor/Scripts/SublimeSocketClient.cs:442)</p>
+<p class="p7">SublimeSocketClient:AutoConnect(String, String) (at Assets/SublimeSocketAsset/Editor/Scripts/SublimeSocketClient.cs:192)</p>
+<p class="p7">SublimeSocketClient:Automate() (at Assets/SublimeSocketAsset/Editor/Scripts/SublimeSocketClient.cs:138)</p>
+<p class="p7">UnityEditorEventHandler:.cctor() (at Assets/SublimeSocketAsset/Editor/Scripts/UnityEditorEventHandler.cs:13)</p>
+<p class="p7">System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor(IntPtr)</p>
+<p class="p7">System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor(RuntimeTypeHandle) (at /Users/builduser/buildslave/mono-runtime-and-classlibs/build/mcs/class/corlib/System.Runtime.CompilerServices/RuntimeHelpers.cs:101)</p>
+<p class="p7">UnityEditor.EditorAssemblies:RunClassConstructors()</p>
+<p class="p7">UnityEditor.EditorAssemblies:SetLoadedEditorAssemblies(Assembly[])</p>
+<p class="p8"><span class="Apple-converted-space"> </span></p>
+<p class="p7">(Filename: Assets/SublimeSocketAsset/Editor/Scripts/SublimeSocketClient.cs Line: 442)</p>
+<p class="p8"><br></p>
+<p class="p7">Requesting http://update.unity3d.com/4.3/ivy.xml</p>
+<p class="p7">Downloading into /var/folders/8r/04ts4kp16yv700w9kdgzpqb80000gn/T/unity/50acea4d-04e3-42c3-8ab1-454a6ea089a9/ivy.xml</p>
+<p class="p8"><br></p>
+<p class="p7">----- Total AssetImport time: 0.161818s, Asset Import: 0.000000s, CacheServerIntegrate: 0.000000s, CacheServer Download: 0.000000s [0 B, nan mb/s], CacheServer Hashing: 0.000304s [0.9 KB, 2.780007 mb/s]</p>
+<p class="p8"><br></p>
+<p class="p7">Mono: successfully reloaded assembly</p>
+<p class="p6"><b>- Completed reload, in<span class="Apple-converted-space">  </span>1.966 seconds</b></p>
+<p class="p7"><b>first update!</b></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>太字のところに注目、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="s1"><b>IsUpdateRunning?:False</b></span>　は InitializeOnLoad で着火しているメソッドの中でupdateにセットしたイベント内でのログ。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="s2"><b>first update! </b></span>が実際に初めてUpdateが走った箇所。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Completeのログが出るまでは、Updateは走らないぽい。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>時系列でまとめると下記のような感じ。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>・~ Editor Scriptのコンパイル完了、DLLのロード開始</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>・InitializeOnLoad Attributeがついてるメソッドの着火</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>・正式なコンパイル完了</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>・Update起動開始</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>は～～～Updateの特性を考えるとしょうがないのか。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>例えば複数の「Updateに依存するEditorScript」があった場合、Updateが走り出したタイミングでDLLのロードが終わっていないと</p>
+<p class="p3"><span class="Apple-tab-span">	</span>相互依存できなくなったりカオスになったりでメチャクチャ困るわけだ。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>正直Updateが走り出してからInitializeOnLoadが走ってくれると嬉しかった。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>というかその場合は、Updateが走り出してから走らせるようにすればまあそれでいいんだな。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>UniRxを使ってエディタでのスクリプトを書く場合</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ちなみに便利で素敵なUniRxを使ってEditorのコードを書く場合、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>UniRx</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/neuecc/UniRx">https://github.com/neuecc/UniRx</a></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://u3d.as/content/neuecc/uni-rx-reactive-extensions-for-unity/7tT">http://u3d.as/content/neuecc/uni-rx-reactive-extensions-for-unity/7tT</a></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>UniRxがエディタ上でCoroutineとか回すのに使っているのは上記の EditorApplication.update なので、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>initializeOnLoad 中のメソッドでセットしたりStartCoroutineしようとしても、即着火するとは<b>限らない</b>。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これ、適当な時間経過で「コンパイル完了しました」ログがでるので、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>initializeOnLoad 中からでも、そのコンパイル完了を把握できれば、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Updateが走り出すのでUniRxでの機構を即時発火させることができるっちゃあできる。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ただマニアックだ。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>というかUniRxの挙動のおかげで、Updateの開始位置をまともに調べるに至った。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>勉強になった。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+</body>
+</html>
