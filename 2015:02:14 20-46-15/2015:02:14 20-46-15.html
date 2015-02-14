@@ -29,9 +29,13 @@
 <p class="p2"><br></p>
 <p class="p4">UnityEditor.EditorApplication.update</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>確認を行った環境は以下。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Mac OS 10.10, 10.9</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Unity 4.3.7 ~ 5.0.0(beta)<span class="Apple-converted-space"> </span></p>
+<p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>実行開始タイミング</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>最初のUpdateが走るのは、「InitializeOnLoad よりも後」だった。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>最初のEditorのUpdateが走るのは、「InitializeOnLoad よりも後」だった。</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>InitializeOnLoad を付けておいたstaticクラスのコンパイルが終わり、動作が開始した際には、まだUpdateは走っていない。</p>
 <p class="p3"><span class="Apple-tab-span">	</span>InitializeOnLoad 内ではすでに走っているのかと思っていた。</p>
@@ -116,6 +120,66 @@
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>というかUniRxの挙動のおかげで、Updateの開始位置をまともに調べるに至った。</p>
 <p class="p3"><span class="Apple-tab-span">	</span>勉強になった。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>おまけ：Updateが、、、死んでる、、、！？？　っていう地獄のような話</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>とあるユーザーさんからのご連絡で判明したんだけど、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Updateに依存したコードを書いてて、着火しない、っていう事態があったそうな。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>状況を聞いた限りだと、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・Mac版Unityで発生(Winで起きるかはしらない)</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・UnityEditorを起動、プロジェクトを開いているのをチラ見したあと、UnityEditor以外のアプリケーションをアクティブにしていた</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・バックグラウンドでコンパイルが完了するのを目視</p>
+<p class="p3"><span class="Apple-tab-span">	</span>っていう状態で、EditorApplication.update が一回も発生しない、という状態が発生したとのこと。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>んでじゃあ再現してみるべ、って試してみたら、下記手順で再現できた。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>1.MonoDevelopとかエディタでコードを書く</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>2.保存</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>3.コンパイルさせるためにUnityEditorをActiveにする(ウインドウとかをマウスクリックするだけでOK)</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>4.MonoDevelopとかエディタにもどる(ウインドウとかをマウスクリックするだけでOK)</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>1~4を高速で行うと、コンパイル完了してもUpdateが発生しない場合がある。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>試したところで20回に一回くらいだった。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>すげー頑張った。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>確かにコンパイル完了してるはずなんだけど、Updateが一度も走らない。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ちなみに心配になってFocusしにいくとUpdateは元気に走り出す。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>推察するに、Unityにフォーカスが移った時、2段階以上の予備動作時間があるみたいだ。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>0.focus -&gt;</p>
+<p class="p3"><span class="Apple-tab-span">	</span>1.コンパイル開始の条件を満たす -&gt;</p>
+<p class="p3"><span class="Apple-tab-span">	</span>2.stay focus -&gt;</p>
+<p class="p3"><span class="Apple-tab-span">	</span>3.Updateが走り出すための条件を満たす</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>みたいな。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>日照時間みたいなものかな、、、</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>3の条件を満たす時間的な要因はよくわかっていない。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>あとたぶんハンドラとかも無いと思う。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>あ、ログに何か出るとかはあるかもしれない、、し、無いかもしれない。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>あれか。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>君はじっと眺めてないと働かない子か。まあいいんだが。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ちなみにコンパイル時間 = プロジェクト規模との相関は不明。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>あと、コマンドラインから起動した場合はどうなっちゃうんだ？</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>AssetRailsでも利用してないから気にはなる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>というわけで、日照時間が極端に短いと、コンパイル完了後にUpdateが走り出さないという事象を確認した。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Unity氏～～～～　もうめんどうくさいからコンパイル開始APIくだされ～～～～</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
