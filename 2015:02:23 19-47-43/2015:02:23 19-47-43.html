@@ -18,11 +18,14 @@
 <p class="p2"><br></p>
 <p class="p3"><b>概要</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>素敵そうなモバイル用DB Realm(レルム)の話を聞きにいった。</p>
-<p class="p2"><br></p>
-<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://realm.connpass.com/event/11815/">http://realm.connpass.com/event/11815/</a></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>タグ #realm_jp</p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p3"><b>Realm is 何</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>モバイル用DB。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>フルスクラッチ、完全新作。SQLiteのラッパーではない。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>フルスクラッチ、完全新規なデータベース。SQLiteのラッパーではない。</p>
 <p class="p3"><span class="Apple-tab-span">	</span>4年かけてる。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
@@ -44,26 +47,36 @@
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span><b>insert</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>RealmはSQLiteより2倍遅いが、Obj-Cバインディング下なのでこの数値。</p>
-<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Realmの内部のC++部分をダイレクトにぶっ叩けば、SQLIteの2倍速い。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Realmの内部のC++部分をダイレクトにぶっ叩けばもっと速い。</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span><b>count, query</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Realmメッチャ速い。(2倍くらい)</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Realmメッチャ速い。(x 2 SQLiteくらい)</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>高機能を保ちながら高速化するの頑張るよみたいな姿勢。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>速さ</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>ディスクに対してのアクセスをもとにして速度を稼いでるっぽい。</p>
 <p class="p3"><span class="Apple-tab-span">	</span>メモリに乗っけない、ファイルに書く、というのを基礎にしている。</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
-<p class="p3"><span class="Apple-tab-span">	</span>確かに複数箇所に分散して云々とかあり得ないならこういう手段というか思い切りはアリだな～。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>確かにサーバ上のDBと違って複数箇所に分散して云々とかあり得ないなら、書き込む対象が絞られてる前提でこういう手段というか思い切りはアリだな～。</p>
 <p class="p3"><span class="Apple-tab-span">	</span>とにかくオンメモリに持たない、っていう手法。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>(と思ったらon-memory-modeもあるらしい)</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>現在進行中のいろいろ</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>sync</p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>sync</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>デバイス間でiCloudみたいなシンクロができるようになる。</p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>なにそれステキ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>→実装方法について詳しく聞く機会を得たので聞いてみたら、実装方法がメチャクチャファンキーだった。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>・Webサービス、クライアントとUDPでデータやり取りしてサーバ上にデータをsync。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>・オフラインでクライアント間の場合は、P2Pな感じでsync</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ぉ、ぉぅ。</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>coreのオープン化</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Webサービスまわりは野望が見え隠れするな。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>coreのオープン化</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>まだバインディング部分(Java, Obj-C/Swift)がOpenになった形なので、コアも。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
