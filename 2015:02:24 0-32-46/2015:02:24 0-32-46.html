@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1265.21">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #ebebeb}
+    span.s1 {font: 19.0px 'Hiragino Kaku Gothic ProN'}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>UnityのPath.Combineの挙動で殺意駆動しよう</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>UnityのPath.Combine関数の挙動がムカつく感じだったので纏めておく。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>MacとWindowsで挙動が異なり、というかWindows版だけおもしろおかしい。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>以下はすべてWindows版での挙動。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>Path.Combine(string a, string b)</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>a,b2つのstrに対して、a/b のようにパスっぽく繋いで返す。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>のだけど、例外的な動作が複数含まれている。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>aの終わりが/である場合</b></p>
+<p class="p4">var c = Path.Combine(“A/”, “B”);</p>
+<p class="p3"><span class="Apple-tab-span">	</span>cには A/B が入る。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>aの終わりが/でない場合</b></p>
+<p class="p4">var c = Path.Combine(“A”, “B”);</p>
+<p class="p3"><span class="Apple-tab-span">	</span>cには <b>A\B が入る。</b>エーバックスラッシュビィーだ。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、当然のようにUnity内では、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Application.dataPath とかが</p>
+<p class="p2"><br></p>
+<p class="p4">C:/somewhere/PROJECT_FOLDER/Assets</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>とか平然と/で区切ったパスを返してくるので、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ここでAssets下のパスとくっつけようとすると、</p>
+<p class="p2"><br></p>
+<p class="p4">var c = Path.Combine(Application.dataPath, “folder/contents”);</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>c -&gt; C:/somewhere/PROJECT_FOLDER/Assets<span class="s1"><b>\</b></span>folder/contents</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>とかになる。<b>\</b>が混じる。苦痛だ。地獄か。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>第一引数には/で終わるstrをいれないと、Mac/Win両方で動くコードにはならない。おま、、</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>例えばパスからファイルを読み込んだりする関数があると、こける。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Path.Combine以外にも\が混じるコードがあるようで、Mac/Winでそれらを大量に扱う場合、中間オブジェクトみたいなの用意して</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Pathを扱った方が良い気がする。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>間違っても/とか\を妄信的にpath delimiterとして使うと詰む。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>bの始まりが/である場合</b></p>
+<p class="p4">var c = Path.Combine(“A”, “/B”)</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>こいつは、<b>/Bになる</b>。A? 知らない子ですね、、、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>C♯でのPath.Combine(str a, str b)の仕様もこうなので、「ヘェ～ふしぎだけどこういうものなんだな」以外の感想は無い。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>きみらフツーはC:とかドライブ指定あるんちゃうんか。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>以上から</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>第一引数の末尾が<b>/か</b>、　また、第二引数の頭が<b>/ではない</b>かどうか、調べて使うと事故が減る。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>気に入らん。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+</body>
+</html>
