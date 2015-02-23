@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1265.21">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>Realm meet up 行ってきた</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>素敵そうなモバイル用DB Realm(レルム)の話を聞きにいった。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>Realm is 何</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>モバイル用DB。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>フルスクラッチ、完全新作。SQLiteのラッパーではない。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>4年かけてる。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>フルスクラッチのモチベーション</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>サーバ側にはめっちゃ大量のDBエンジンが生まれているが、クライアント側には、、、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>SQLiteから10年経っちゃったけど特にない。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>CoreData、SQLiteのORMとしてはいいかんじだけど、、難しい、重い、遅い。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>マルチプラットフォーム的に、Appleのモノなのでまあ、、はい、、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>SQLiteを直に使う？　できるけど、、、ORM的機能を求めていくとCore Dataに近づくだけ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>というかマジで機能が足りないしな、、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ほかにもいろいろな選択肢があるにはあるよな。</p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b>ベンチ</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>iPhone6での動作ベンチ。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>insert</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>RealmはSQLiteより2倍遅いが、Obj-Cバインディング下なのでこの数値。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Realmの内部のC++部分をダイレクトにぶっ叩けば、SQLIteの2倍速い。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>count, query</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Realmメッチャ速い。(2倍くらい)</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>速さ</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ディスクに対してのアクセスをもとにして速度を稼いでるっぽい。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>メモリに乗っけない、ファイルに書く、というのを基礎にしている。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>確かに複数箇所に分散して云々とかあり得ないならこういう手段というか思い切りはアリだな～。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>とにかくオンメモリに持たない、っていう手法。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>現在進行中のいろいろ</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>sync</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>デバイス間でiCloudみたいなシンクロができるようになる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>なにそれステキ。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>coreのオープン化</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>まだバインディング部分(Java, Obj-C/Swift)がOpenになった形なので、コアも。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>質疑応答</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>iOS側、Obj-Cっぽいメソッド名ってこのままなの？</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>→Swiftに書き替える形で名前変更中。</p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>NSFetchResultみたいなものって用意されたりするの？</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>→groupedTableView ってサンプル見てくれみたいな</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/pietbrauer/CarthageRealmUploadFailureExample/tree/master/Carthage.checkout/realm-cocoa/examples/ios/objc/GroupedTableView">https://github.com/pietbrauer/CarthageRealmUploadFailureExample/tree/master/Carthage.checkout/realm-cocoa/examples/ios/objc/GroupedTableView</a></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>→通知に関しては、今頑張ってやってるぜ的。</p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>なんでファイル直書きだと速いの？</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>→in-memory-optionもあるんだけど、説明しよう。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>たとえばSQLiteだと、fetchとかでメモリ上にデータを読み出して、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>その後Deserializeが行われ、、、ていう手間を経るが、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>realmはそのへん省いているので速い。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>速いベンチマーク見せてもらったけど、Realmが遅くなるケースってあるの？</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>→ある。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>insertはSQLiteより遅い。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>処理の部分的には、速いところがちょこちょこある。クエリ組み立てとか。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>現在のシンプルさを保ったままもっと速くするように頑張っている。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+</body>
+</html>
