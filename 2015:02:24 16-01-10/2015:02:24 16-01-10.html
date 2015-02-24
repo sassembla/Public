@@ -1,0 +1,116 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1265.21">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+    span.s1 {font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    span.s2 {font: 12.0px Helvetica}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>Mac VMを飼うガイド</b></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>みんな大好きこれからは廃れるっぽい存在 仮想環境で、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Macの Yosemite VM をMacの中に作ろうぜプロジェクトみたいなのやってたので纏める。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>前提となる環境</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>OS X Yosemiteが入ってるMacマシンに、Yosemite VM を2台入れるような感じ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>VMを2台以上飼う場合は、Mac OS X のライセンスが別途必要になるはず。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>VMの飼育環境を整える</b></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>VMの動作環境として、VirtualBoxをインストール。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>virtualbox</p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>https://www.virtualbox.org/wiki/Downloads</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>YosemiteのインストーラをMac AppStoreからDL。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>[Install OS X Yosemite.app] てやつ。</p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b>Yosemite VM 用のディスクイメージを作り出す</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>以下の3から先を実施</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>Install OS X 10.10 Yosemite in VirtualBox</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://gist.github.com/frdmn/de12c894a385bc8e6bff">https://gist.github.com/frdmn/de12c894a385bc8e6bff</a></p>
+<p class="p2"><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>VMを作成するまえにVirtualBoxで成すべき事</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span></b>ホストオンリーアダプタを必要な個数だけ作成すること。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>VirtualBox &gt; 環境設定 &gt; ネットワーク &gt; ホストオンリーネットワーク を、今後作るVMの数だけ作成しておく。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="s2"><img src="scr0.png" alt="scr0.png"></span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>緑のボタン押すと、vboxnet0 みたいな名前でアダプターが作られるはず。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、内部設定はこんな感じ。作成されたタイミングでユニークなので、いじらないでOK。</p>
+<p class="p3"><b><span class="Apple-tab-span">	</span></b><span class="s2"><img src="%20scr.png" alt=" scr.png"></span></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span></b><span class="s2"><img src="scr2.png" alt="scr2.png"></span></p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>VMが作成用意できたら起動前に速攻でやるべきこと</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・起動前に、VirtualBox &gt; <b>作成したVMの設定</b> &gt; ネットワーク &gt; アダプター2 の割り当てに、ホストオンリーアダプターを指定。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・名前のとこからvboxnet0とかを選ぶ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="s2"><img src="%20host.png" alt=" host.png"></span></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>VM起動時に発生するトラブルシュート</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>Install OS X 10.10 Yosemite in VirtualBox</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://gist.github.com/frdmn/de12c894a385bc8e6bff">https://gist.github.com/frdmn/de12c894a385bc8e6bff</a></p>
+<p class="p2"><br></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>に、</span>Missing Bluetooth Controller Transport-&gt;<span class="s1">対策が描いてあるので対応。</span></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>VirtualBox<span class="s1">の</span>GUI<span class="s1">から</span>Yosemite VM<span class="s1">を完全停止して、</span></p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>VBoxManage modifyvm ‘YosemiteVM’ --cpuidset 1 000206a7 02100800 1fbae3bf bfebfbff</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>を実行。</p>
+<p class="p5"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b>VM起動後の設定</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>起動完了したら以下を行う。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・システム環境設定 &gt; ユーザーとグループ &gt; ログインオプション &gt; 自動ログインをOnに設定する。</p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>homebrew</span>ほか、いろいろなところで困るので、<b>空のパスワードを使ってはいけない。</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ただし後述の問題が発生すると面倒くさいので、自動ログインはOKのほうが良いと思う。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・システム環境設定 &gt; 共有 &gt; リモートログイン をOnにする</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・ホストのsshから入れる事を確認</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ここまでくれば、VMに何があっても安心な感じになる。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>注意点</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>GUIからログインできなくなることがある</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>文字通り、Yosemite VM のログインパスワードをいれても、ログインできなくなる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>具体的に言うと、パスワード入力後、レインボーが回りつづける。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>GUI上でのみ発生するのを確認している。</p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>対策としては、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ログイン画面を失くす。起動、即特定ユーザーでログインできる設定にするとか。</p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>もし陥ってしまった場合の解消法としては、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>・VMを起動、ログイン前の状態で放置</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>・ホストからsshでYosemite VMにログイン</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>・Terminal &gt; passwd でパスワードを変更</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>・VMを再起動</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>・新しいパスワードを入れる</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>とやると、ログインが正常に完了するようになる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>つまりだ、自分はこれで九死に一生みたいな感じになった。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+</body>
+</html>
