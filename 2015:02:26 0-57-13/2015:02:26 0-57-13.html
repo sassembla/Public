@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1265.21">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1">プロジェクト 2501</p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>忙しかった山が一段落 + 趣味も安定稼動したので、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>そうだ、人形使いつくろう！　みたいな感じ。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>複数クライアントでのデバッグと操作介入のツールを作ることにした。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>2501</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/2501">https://github.com/sassembla/2501</a></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b>モチベーション is 何</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・別のゲームに接続しているClient群の監視、制御を行う</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・デバッグ、ゲームサーバからは独立した、Client依存のbotづくり</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>目的と手段</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・内包しているnginxでClient群からのWebSocketを受け、だいたいリアルタイムでClient群についてログる</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・接続しているClientへのコマンド代入を行う</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>(nginxでlua動かして、virtualClientからのコマンドをWebSocket経由でクライアントに送る)</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これができると、また別の意味でのOrchestrationが出来るようになると思う。Orchestration言いたいだけ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>あと個人的に遊びでlua使いたい。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>リアルタイムログもClientOrchestrationも</p>
+<p class="p3"><span class="Apple-tab-span">	</span>本来ゲームサービス側が保持すべき性能なんだけど、なかなか実際の仕事でゲームサーバ側がリアルタイムログ集計、コマンド仮送りをするのが難しい。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>リアルタイムログ集計</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ほとんどのゲームは、動作するのに必要以上のリアルタイムログを必要としない。つまりゲーム本来の目的とは合わない。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ただ単に、サービスが求めるリアルタイム性みたいなのと関係ないデータをゲームサーバに送りつづけることそれ自体が不効率だ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>なのでどっか別のところでリアルタイムに見れるように出来れば面倒さが無い。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>コマンド代入</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>先月？のJenkins Confで少し話していたのだけど、ゲームの自動プレイを行う領域をどこに持つべきか、って話で、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>サーバからOrchestrationできればいいのにねーって話していたが</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・Client-Server間で進捗が別途であること</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・Clientの状態が存在することを考えるとサーバ側が後手に回らざるをえないこと</p>
+<p class="p3"><span class="Apple-tab-span">	</span>とかを加味すると、現実的ではない感じがした。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ので、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・Clientに直結</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・Clientが受け入れ可能な状態とシンクロしたコンテキストを持つ</p>
+<p class="p3"><span class="Apple-tab-span">	</span>という前提で動くものを作ってみたくなった。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>コンテキストまでどうシンクロさせるのか、とかは考え中。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>Why WebSocket</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ブラウザにも繋ぐ事が出来る。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>現在</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>WebSocketServerをUnityで試作した。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Application寄りすぎて使いづらいので、nginxとか内包する感じで再設計する。</p>
+<p class="p2"><br></p>
+</body>
+</html>
