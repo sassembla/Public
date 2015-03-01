@@ -1,0 +1,118 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1265.21">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #ebebeb}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #ebebeb; min-height: 18.0px}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>nginxでLua使ってみる話私的まとめ</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>nginx lua使ってあそぶ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>といいつつ、luaでのコンテキストをWebSocket越えさせる目的がある。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>死霊</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>Using ngx_lua / lua-nginx-module in pixiv</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://www.slideshare.net/harukayon/ngx-lua-public">http://www.slideshare.net/harukayon/ngx-lua-public</a></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>lua-nginx-module を使いこなす</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://qiita.com/kz_takatsu/items/e94805a8e3cc285f9b33">http://qiita.com/kz_takatsu/items/e94805a8e3cc285f9b33</a></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>Nginx で HTTP API 化</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://qiita.com/Hexa/items/cb762d70a741bcc57498">http://qiita.com/Hexa/items/cb762d70a741bcc57498</a></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>nginx + lua-nginx-module の環境構築</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></b><a href="http://qiita.com/futoase/items/4185432667569b6b3f35">http://qiita.com/futoase/items/4185432667569b6b3f35</a></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>OpenResty (nginx + lua) 逆引きメモ</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></b><a href="http://qiita.com/voluntas/items/e86f5fe5b8044c311583">http://qiita.com/voluntas/items/e86f5fe5b8044c311583</a></p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>lua_nginx module</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>こんなの。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/openresty/lua-nginx-module">https://github.com/openresty/lua-nginx-module</a></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>ビルド</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>欲しいのはluaが実行できてあとあとオレオレエンジンとしてコンパイル可能にするコマンドラインツールとしてのnginxなので、いろいろDLして、そろえる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>依存を最小限にするためにRestyそれ自体の使用はしないことを考えている。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>あとであっさり言ってること変わるかもしれない。</p>
+<p class="p2"><b><span class="Apple-tab-span">	</span></b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>というわけでコレクション。</p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>nginx 1.7.10</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://nginx.org/download">http://nginx.org/download</a></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>LuaJIT-2.1</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>cloneして2.1ブランチに切り替えて動かす。</p>
+<p class="p4">git clone http://luajit.org/git/luajit-2.0.git</p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>んだけど、makeしてもlibとか作られないのか、どうすりゃ良いんだろう。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>とりあえず2.0.3をbrewで入れて、そこに入っているlibを使う。nginxの設定ファイルは下記</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>lua-nginx-module</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/openresty/lua-nginx-module/releases/tag/v0.9.15">https://github.com/openresty/lua-nginx-module/releases/tag/v0.9.15</a><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>ngx_devel_kit</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/simpl/ngx_devel_kit/releases/tag/v0.2.19">https://github.com/simpl/ngx_devel_kit/releases/tag/v0.2.19</a></p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b>パラメータ設定してnginxをビルド</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>luajit 2.1のlibはあとで作る。</p>
+<p class="p2"><br></p>
+<p class="p3">build.sh</p>
+<p class="p4">export LUAJIT_LIB=/usr/local/Cellar/luajit/2.0.3_1/lib</p>
+<p class="p4">export LUAJIT_INC=/usr/local/Cellar/luajit/2.0.3_1/include/luajit-2.0</p>
+<p class="p5"><br></p>
+<p class="p4">NGX_DEVEL_KIT="ngx_devel_kit-0.2.19"</p>
+<p class="p4">LUA_NGX_MOD="lua-nginx-module-0.9.15"</p>
+<p class="p5"><br></p>
+<p class="p4"># Here we assume Nginx is to be installed under /opt/nginx/.</p>
+<p class="p4">./configure --prefix=/Users/illusionismine/Desktop/nginx-luajit/b \</p>
+<p class="p4"><span class="Apple-tab-span">	</span>--with-ld-opt='-Wl,-rpath,$LUAJIT_LIB' \</p>
+<p class="p4"><span class="Apple-tab-span">	</span>--add-module=$NGX_DEVEL_KIT \</p>
+<p class="p4"><span class="Apple-tab-span">	</span>--add-module=$LUA_NGX_MOD</p>
+<p class="p5"><br></p>
+<p class="p4">make -j2</p>
+<p class="p4">make install</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、実行すると、</p>
+<p class="p4">sh build.sh</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>無事sbin/nginx が出来た。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>実行してみると、Welcome画面でたのでOK。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>実行とテスト</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>OpenRestyのCLIのやつでサクサクに、、、と思ったのだけれど、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>自分の用途だとSublimeでのコード編集/ビルド時にcurlぶったたくほうが楽だったので、次のスクリプトを書いて終わった。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>コード保存したりビルドするたびにcurlが走るだけ。状態持ってないからまだ後悔してない。</p>
+<p class="p2"><br></p>
+<p class="p3">luaFire.sublime-build</p>
+<p class="p4">{</p>
+<p class="p4"><span class="Apple-tab-span">	</span>"shell_cmd": "curl http://localhost/lua-test"</p>
+<p class="p4">}</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>実行結果はコードの下の方に出る</p>
+<p class="p6"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202015-03-01%2013.02.19.png" alt="スクリーンショット 2015-03-01 13.02.19.png"></p>
+<p class="p3"><b>お楽しみはここからだ</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>luaコンテキストを送信し合うのに興味がある。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+</body>
+</html>
