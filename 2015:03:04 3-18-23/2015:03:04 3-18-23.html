@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1265.21">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>Unity Editor のupdate callbackがYosemiteで減速する現象に勝つ</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Mac OS 10.10 Yosemiteでまじめに頑張ってこなかったので気づくのが遅れたが、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>条件を満たすとUnity Editor のupdate callback の呼ばれる頻度や、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>それ以外のtimer系のThread挙動も軒並みヘタレていくのの原因と解消法が分かったので書く。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>まず間違いなく俺以外困ってないはず。<span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>トリガー</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>次の条件を満たすと、だんだんUnity Editorのあらゆるタイマー的な動作がスローダウンしていく。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・Unity Editor をGUIありで起動中</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・フォーカスをUnity Editor以外にあてる</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・時間経過(20秒以上経過)</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>スローダウンの具体的な内容</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>以下のようなことが起きる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・Editorの update callback が100回/秒なのが1回/秒まで減速、ヘタレる</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・自発的にセットした0.1秒に1回のTimerThreadとかも例外ではなくヘタレる</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>回復手段</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Unity Editor にフォーカスを当てると戻る。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>が、フォーカスを離すとまた減速する。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>原因と回避手段</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>OS X 10.9 Mavericksから追加された機能　App Nap が、Yosemiteになって凶悪になっていたのが原因。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>OS X 10.9 時はフォーカス外しただけだとApp Napの発動条件を満たすことはなかったようなのだが、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>OS X 10.10 以降はフォーカス外すと即App Nap対象になるようだ。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>アプリケーションがApp Nap状態に入ると、どんな動作条件を決めたものであろうとひたすら減速するようだ。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>回避方法はメッチャ単純で、App Napになってほしくないアプリケーション.app &gt; 情報を見る &gt; App Napを切にする でおわり。</p>
+<p class="p4"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202015-03-04%203.31.32.png" alt="スクリーンショット 2015-03-04 3.31.32.png"></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>はい。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>こんなよくわかんないIssueにつきあってくれたUnity Japanの方、どうもありがとうございました。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+</body>
+</html>
