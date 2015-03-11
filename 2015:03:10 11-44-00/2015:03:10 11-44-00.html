@@ -22,8 +22,8 @@
 <p class="p3"><span class="Apple-tab-span">	</span>実験用に簡単に使えるWebSocketバックエンドが欲しかったので、</p>
 <p class="p3"><span class="Apple-tab-span">	</span>ngx + ngx_lua_module からのゴリ押しで作ってみた。</p>
 <p class="p2"><br></p>
-<p class="p3"><b><span class="Apple-tab-span">	</span>sassembla / nginx-luajit</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/nginx-luajit">https://github.com/sassembla/nginx-luajit</a></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>sassembla / nginx-luajit-websocket-pubsuber</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/nginx-luajit-websocket-pubsuber">https://github.com/sassembla/nginx-luajit-websocket-pubsuber</a></p>
 <p class="p2"><br></p>
 <p class="p3"><b>構成</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>nginx 1.7.10</p>
@@ -88,7 +88,7 @@
 <p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>local recv_data, typ, err = wb:recv_frame()</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
-<p class="p3"><b>中央部分と残念なところ</b></p>
+<p class="p3"><b>中央部分と残念なとこ</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>redisでpubsubを使って、client x n -&gt; central, central -&gt; client x n を繋いでいる。</p>
 <p class="p3"><span class="Apple-tab-span">	</span>つまりredisのpubsubが2系統ある。</p>
 <p class="p2"><br></p>
@@ -112,6 +112,30 @@
 <p class="p3"><span class="Apple-tab-span">	</span>3.中央コンテキストでいろいろできる</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p3"><span class="Apple-tab-span">	</span>httpで通信してきただけのやつを停めるのどうなの？　とか、それ起動時に自動的にできないの？ とか、そのへんを模索しているところ。</p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b>副産物</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>期せずしてredisのpub subに依存したが、これによってclient側へのpushの責務がclient connection側に一任されていて、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>送付確認周りをわりと疎結合かつ非同期に作る事が出来た。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>つまり一対多のWebSocketのsendにロックがかかっていない。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>使っててちょっと楽だ。実用に耐えるとは思ってないけど。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>また、redisでの中継でclients - centralを繋いでいるので、clientsからどのpubsubを使うか指定させる事でルームみたいな概念が実現できた。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>なかなかおもしろい。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ロックせず、各自のwhileループで回っている部分自体はまあはいって感じなんだけど、redisのpubsubによってタイムラグは若干出ると思う。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>client側の実装として、udp版やmqtt版みたいなのも作ってみたい。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>まあキューイング部分が全部redisに寄るので、あっさり破綻すると思うけど。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>中間にRabbitMQとかくっつけるのが正しい気がする。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>エラー処理について</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>clientは、エラーが起こった瞬間subscribeをヤメて自沈する。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>というかぶっちゃけredisについて詳しく知らないので、何がどうなってるのかコード追ったりしてみようと思う。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>良く出来てるソフトウェアが多くて助かる。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>とりあえず動かせたので</b></p>
