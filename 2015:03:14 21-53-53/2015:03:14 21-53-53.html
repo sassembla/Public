@@ -1,0 +1,119 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1265.21">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px 'Hiragino Kaku Gothic ProN'}
+    span.s1 {font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>SCTPビルド祭り</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>P2Pに用はないけどrudpよりまともに規格策定されてる気がして気になって触ってみるよ的なやつ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>単にMacに入れるだけならhomebrewにあるのでそれで。はい。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>死霊</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>SCTPによるネットワーキングの向上</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://www.ibm.com/developerworks/jp/linux/library/l-sctp/">http://www.ibm.com/developerworks/jp/linux/library/l-sctp/</a></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>WetRTCでも使われてた。知らなかったなあ、、、知れてよかった。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>コードとかも手に入るのでまず試してみよう。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://gitorious.org/lksctp-tools/lksctp-tools/source/3e107907f11145a63e6faed9831410b8cba98957:src/include/netinet/sctp.h">https://gitorious.org/lksctp-tools/lksctp-tools/source/3e107907f11145a63e6faed9831410b8cba98957:src/include/netinet/sctp.h</a></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>特徴</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://www.asahi-net.or.jp/~aa4t-nngk/ipttut/output/sctpcharacteristics.html">http://www.asahi-net.or.jp/~aa4t-nngk/ipttut/output/sctpcharacteristics.html</a></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>レイアウト</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://www.asahi-net.or.jp/~aa4t-nngk/ipttut/output/sctpheaders.html">http://www.asahi-net.or.jp/~aa4t-nngk/ipttut/output/sctpheaders.html</a></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>SCTPでの1パケットあたりのサイズの話</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>IP<span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>20~40</p>
+<p class="p3"><span class="Apple-tab-span">	</span>UDP<span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>8</p>
+<p class="p3"><span class="Apple-tab-span">	</span>DTLS<span class="Apple-tab-span">	</span>20~40</p>
+<p class="p3"><span class="Apple-tab-span">	</span>SCTP<span class="Apple-tab-span">	</span>28</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、それぞれ最大を取ったとして、116byte</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>対して、SCTPそれ自体のパケットサイズが1280で、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>1164byteくらいが現実解になる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ってハイパフォが言ってた。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>サンプル</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ほぼC、Pythonあり。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>sctpserver サーバ:クライアント</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/viktorchukhantsev/sctpserver">https://github.com/viktorchukhantsev/sctpserver</a></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>sctp-tools その２</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/jtt/sctp-tools">https://github.com/jtt/sctp-tools</a></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>libusrsctp<span class="Apple-tab-span">	</span>Userland SCTP implementation</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/rillian/libusrsctp">https://github.com/rillian/libusrsctp</a></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>pysctp<span class="Apple-tab-span">	</span>SCTP stack for Python</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/philpraxis/pysctp">https://github.com/philpraxis/pysctp</a></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>とりあえず一通り眺めて、Pythonのやつで動かしてみよう。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>sctpserver</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>erlangだ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Vの人いわく、そのまま利用できるものが既に存在してるとのこと。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>そして現在欲しいのはクライアント側なので、検証に使おう。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>pysctp</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ビルド失敗するのでチョット断念。Linuxならうまく行くのかもしれない。ってそうなっちゃうとクライアント困るやん。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>あ、_sctp.cとかあった。ふむむ、、？見間違えてただけか、ヨッシャ突破できるかも。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Python2.7を利用している。</p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span></span>build_ext</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>で、エラーが出ている、ふむ</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>いったんまっさらにしてみよう。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>kext入れないとだめそう。うーーーん、、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>libusrsctp-master の中に入ってるファイルに依存してるっぽい。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>んでこれらはsctpそれ自体をくみ上げるための代物で、つまりMac用のkernel extが無いと駄目っぽいのだった。なるほど。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>→後述するlibusersctpと組み合わせる事で動作させることができそう。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>libusrsctp</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>最新を見たら、最新がGoogleCodeにあったので sassembla / sctp-refimpl に読み込む事にした。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>、、、いらんかったぽい。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>まずこのパッケージ単体で動かしてみることにする。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、大事な事はhistoryに書いておいた。</p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>脱線、iOS上でsctpを有効にする試み</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>なんか問題あるっぽいがどうなったんだろう。Androidとかだとさらにどうなってるんだろう。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://code.google.com/p/webrtc/issues/detail?id=3211">https://code.google.com/p/webrtc/issues/detail?id=3211</a></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>→0.9.0版のlibusrsctpがあった。。。あっそう、、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ぶっちゃけ下記から最新を取得したらメッチャ簡単にビルドできた。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://sctp.fh-muenster.de/sctp-user-land-stack.html">http://sctp.fh-muenster.de/sctp-user-land-stack.html</a></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>はい。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+</body>
+</html>
