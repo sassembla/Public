@@ -1,0 +1,136 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1265.21">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+    span.s1 {font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    span.s2 {font: 12.0px Helvetica}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>Unity5</b><span class="s1"><b>の</b></span><b>Lightmap</b><span class="s1"><b>で遊ぼうというかBake</b></span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>慣れる意味でいろいろな方法でBakeしたりしなかったりしてみる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>一応Githubに上げておいた。</p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>Lgh</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/Lgh">https://github.com/sassembla/Lgh</a></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>パターンバイパターン</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>シーンに置かれたLightのBaking設定、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Sceneに置かれたObjectのLightmap Static 設定、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Lighting &gt; Scene &gt; Ambient GI の設定 をそれぞれ行い、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>どう見えるのかとかを整理してみた。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>比較環境を作り出す手順はすべて一様で、以下。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>1. PlaneとCubeを作る</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>2. CubeをPlaneの子に入れる</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>3. Plane, Light, Lightingのパラメータを変更する</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>4. PlaneのPrefabをつくって新規シーンで読み込み、lightmapの有無を見る</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>全3パラメータ、2x2x2の8パターン。</p>
+<p class="p2"><br></p>
+<p class="p3">1.0_Lrt_nonst_SAGrt<span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>2.0_Lrt_nonst_SAGb</p>
+<p class="p4"><img src="1.png" alt="1.png"><img src="2.png" alt="2.png"></p>
+<p class="p2"><br></p>
+<p class="p3">3.0_Lrt_st_SAGb<span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>4.0_Lb_st_SAGb</p>
+<p class="p4"><img src="3.png" alt="3.png"><img src="4.png" alt="4.png"></p>
+<p class="p2"><br></p>
+<p class="p3">5.0_Lb_st_SAGrt<span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>6.0_Lrt_st_SAGrt</p>
+<p class="p4"><img src="5.png" alt="5.png"><img src="6.png" alt="6.png"></p>
+<p class="p2"><br></p>
+<p class="p3">7.0_Lb_nonst_SAGb<span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>8.0_Lb_nonst_SAGrt</p>
+<p class="p4"><img src="7.png" alt="7.png"><img src="8.png" alt="8.png"></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>結果を表にするとこんな感じ。</p>
+<p class="p4"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202015-03-21%2020.09.55.png" alt="スクリーンショット 2015-03-21 20.09.55.png"></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>オブジェクトの状態をstaticにして、colorが微妙に変わっちゃうのは何でなんだろう。</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p3"><b>とりあえず</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>実際にBakeされたオブジェクトをPrefabにして別シーンに放り込んで、そのシーンのLightのBaking設定をBakedにしてみたところ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>画面左奥のものがBake済みのもの。手前のオブジェクトはstaticではないモノ。</p>
+<p class="p4"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202015-03-20%201.06.00.png" alt="スクリーンショット 2015-03-20 1.06.00.png"></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Lightの設定がBakeなので、Bakeされた物体のみが光源計算されている。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Plane1 &gt; Cubeを動かしても、影が再計算される。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Continuous Baking はcheck入り。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Lighting &gt; Scene &gt; Ambient GI はRealtimeのまま。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ということで、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・よそのSceneでBakeしたPrefabも、lightmapの情報を持ったまま他のシーンに持ち込める</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・その際、Bakeに使ったSceneに関連するファイル(Lightmap-0_comp_dir, Lightmap-0_comp_light)は不要。Prefabから参照されてないみたい。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>Light のBaking設定について</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="s2"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202015-03-19%2022.56.53.png" alt="スクリーンショット 2015-03-19 22.56.53.png"></span></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Light のBaking設定は、</p>
+<p class="p3"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Realtime: </b>なんでもかんでも加算、Bakedなモノでも無差別に明るくなる</p>
+<p class="p3"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Baked: </b>Bakedなモノに干渉しない、他も照らさない</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><b>Mixed:</b> Bakedのモノには干渉しない、他を照らす</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>という結果になる。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>SceneのAmbient GI設定について</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>LightのBaking設定に似ている。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="s2"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202015-03-19%2023.31.32.png" alt="スクリーンショット 2015-03-19 23.31.32.png"></span></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Lighting &gt; Scene &gt; Ambient GIの設定は、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><b>Realtime: </b>なんでもかんでも加算、Bakedなモノでも無差別に明るくなる</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><b>Baked: </b>Bakedなモノに干渉しない、他は照らす</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>という結果になる。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>なぜ時々茶色くなるのか</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>シーンを開き直したら、あれ、茶色い。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="s2"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202015-03-19%2023.02.49.png" alt="スクリーンショット 2015-03-19 23.02.49.png"></span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>みたいな時無いっすか。自分ときどきビビるんだけど。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="s2"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202015-03-19%2023.04.28.png" alt="スクリーンショット 2015-03-19 23.04.28.png"></span></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Lighying &gt; Build するか、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Continuous Baking のチェックを入れると結局Lighting &gt; Buildをやったのと同じになって、色味が戻る。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Continuous Bakingのチェックがすでに入っていても、Sceneを開き直した際に反映されない事があるので、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>チェックを入れ直すと反映される。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="s2"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202015-03-19%2023.06.58.png" alt="スクリーンショット 2015-03-19 23.06.58.png"></span></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>はい。ヌッガーーーー不完全だなァァアアアア！！！！</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>真っ黒になって死ぬ</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>シーンを開くと真っ黒になっててヒッてなる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>こんな感じこんな感じ。</p>
+<p class="p3"><b><span class="Apple-tab-span">	</span></b><span class="s2"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202015-03-19%2023.18.11.png" alt="スクリーンショット 2015-03-19 23.18.11.png"></span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Baked したものだけが真っ黒な状態で表面カリッカリやぞみたいな時がある。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>右の方のキューブが白いのは、こいつはBakeを使ってないから。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>完全なUnityのロードエラーなのでは？？ と思っている。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>このへんも、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Lighying &gt; Build するか、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Continuous Baking のチェックを入れると結局Lighting &gt; Buildをやったのと同じになって、失われた色が戻る。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>やったねたえちゃん！！　なんとか何も問題が無かった事にできそうだよ！</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+</body>
+</html>
