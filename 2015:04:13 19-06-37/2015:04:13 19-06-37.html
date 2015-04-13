@@ -21,7 +21,7 @@
 <p class="p1"><b>Unite2015 RoundTable</b><span class="s1"><b>に巻き込まれた話</b></span></p>
 <p class="p2"><br></p>
 <p class="p3"><b>概要</b></p>
-<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span><a href="http://japan.unity3d.com/blog/press/20150413"><span class="s3">ここ</span></a></span>で某Nさんと自分の写真が使われた<span class="s2">(</span>もちろん合法<span class="s2">)</span>件について、大前さんをおちょくりに行ったらRoundTableに巻き込まれた。</p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span><a href="http://japan.unity3d.com/blog/press/20150413"><span class="s3">ここ</span></a></span>で強火さんと自分の写真が使われた<span class="s2">(</span>もちろん合法<span class="s2">)</span>件について、大前さんをおちょくりに行ったらRoundTableに巻き込まれた。</p>
 <p class="p3"><span class="Apple-tab-span">	</span>AssetBundle編ということで、Cacheとかに物申したいんだけどオラーって感じで絡んだのがよくなかった。</p>
 <p class="p4"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>結果的にはとても面白い。現在進行形で。</p>
@@ -33,6 +33,7 @@
 <p class="p3"><span class="Apple-tab-span">	</span>ヘッダー情報のみをメモリ上に展開、必要なAssetBundle内の必要なファイルのみを読み出せるようになるとのこと。</p>
 <p class="p4"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>圧縮形式はLZMA -&gt; LZHAMになる。5.1から。すげえ、俺何にもしないでいいや。</p>
+<p class="p4"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="s2">LZHAM</span>についていろいろやろうと思ったのが今年のあたま。</p>
 <p class="p3"><span class="Apple-tab-span">	</span>自分は野性の男さんのTwから存在を知った。</p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://twitter.com/yasei_no_otoko/status/564614755499786241">https://twitter.com/yasei_no_otoko/status/564614755499786241</a></p>
@@ -41,25 +42,28 @@
 <p class="p4"><br></p>
 <p class="p4"><b></b><br></p>
 <p class="p3"><b>キャッシュAPIについての不満(from 俺)</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>WWW cacheについて</p>
+<p class="p3"><span class="Apple-tab-span">	</span>WWW LoadCacheOrDownloadについて</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>public static WWW LoadFromCacheOrDownload(string url, int version, uint crc = 0);</p>
+<p class="p4"><br></p>
 <p class="p4"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>versionってあるけどversionじゃないよね、みたいな話。</p>
 <p class="p4"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>過去のを自動的に消す機構が欲しいんですが</p>
+<p class="p3"><span class="Apple-tab-span">	</span>新しいAssetをDLしてincrementされたversion値を与えたら、低いversion値のAssetを自動的に消す機構が欲しいんですが</p>
 <p class="p3"><span class="Apple-tab-span">	</span>→5系でhashって名前に変わったよみたいな話。</p>
 <p class="p4"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>で、過去のが消えないのは残っているんだけど、これ消していいんじゃね？みたいな話。</p>
 <p class="p3"><span class="Apple-tab-span">	</span>→Caching.SetCacheOverrideMode(ver上がったのが入ったら古いのを消すモード) or 消さないモード みたいな。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>ぜひ！！　ぜひ！！！</p>
 <p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ぜひ！！　ぜひ！！！</p>
 <p class="p3"><span class="Apple-tab-span">	</span>デフォルトで使えるものが増えるとうれしいんで！！</p>
 <p class="p4"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>あとUnityの中のひとにも<a href="http://tatsu-zine.com/books/unibook2">Unibook2</a>の俺の章読まれてたので<b>それはとってもうれしいなって感じだ。</b></p>
 <p class="p4"><br></p>
 <p class="p4"><br></p>
-<p class="p3"><b>Cacheしてるファイルが多いとCaching.Readyがtrueになるのが劇遅になる問題</b></p>
+<p class="p3"><b>Cacheしてるファイルが多いとCaching.readyがtrueになるのが劇遅になる問題</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>知らなかった。そんなことあるんだな。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>2000ファイルくらいあると、Caching.Readyになるまでに1秒くらいかかるらしい。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>2000ファイルくらいあると、Caching.readyがtrueになるまでに1秒くらいかかるらしい。</p>
 <p class="p4"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>バグじゃね？とのことで、今後なんかあるんだと思う。</p>
 <p class="p3"><span class="Apple-tab-span">	</span>確かに2000ファイル程度で遅いのなんかおかしい。</p>
@@ -144,6 +148,27 @@
 <p class="p3"><span class="Apple-tab-span">	</span>おかげでDuplicateしてんぞオラってビルドエラーになるんですわ。ええ。ええ。</p>
 <p class="p4"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>デフォルトの力をみせてくれ、、、</p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p3"><b>おまけ：今回の提案での自分のスタンスを書いておく</b></p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・デフォルトで用意されているAPIが素晴らしいならできるだけデフォルトを使う</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>非カスタマイズ厨なので、頑張らないのが正義。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・デフォルトが残念な場合、可能であればデフォルトを素晴らしいものにする</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>逆割れ窓理論。良いものは良い使い手を作り出す。逆にAPIのデフォルトがクソだとそのプラットフォームは大変だ。逃げよう。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・最低限自分が得をする行動、提案をする</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>何処かの誰かが得をするかも、みたいなのはあんま信じない。最低限自分が得をすべき。レベルが低かったら誰かが殴ってくれることを信じている。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・作った人達の意図を最大限探求する</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>使ってみて合わない場合、意図を汲み取り損ねてるだけの可能性が結構ある。そんで意図を知るとなるほどってなる場合がある。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>なるほどってならない場合もある。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・意図が合わないなら初めて作る</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>みたいな。</p>
+<p class="p4"><span class="Apple-tab-span">	</span></p>
+<p class="p4"><br></p>
 <p class="p4"><br></p>
 <p class="p4"><br></p>
 </body>
