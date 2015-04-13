@@ -1,0 +1,150 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1347.57">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    span.s1 {font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    span.s2 {font: 12.0px Helvetica}
+    span.s3 {font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>Unite2015 RoundTable</b><span class="s1"><b>に巻き込まれた話</b></span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span><a href="http://japan.unity3d.com/blog/press/20150413"><span class="s3">ここ</span></a></span>で某Nさんと自分の写真が使われた<span class="s2">(</span>もちろん合法<span class="s2">)</span>件について、大前さんをおちょくりに行ったらRoundTableに巻き込まれた。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>AssetBundle編ということで、Cacheとかに物申したいんだけどオラーって感じで絡んだのがよくなかった。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>結果的にはとても面白い。現在進行形で。</p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p3"><b>AssetBundleの圧縮がDL後に解除される話について</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>端末にDLしたリソース、その場で自動的に展開されてしまうのが運命だったが、5.1から圧縮状態で置くことができるようになる。</p>
+<p class="p4"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ヘッダー情報のみをメモリ上に展開、必要なAssetBundle内の必要なファイルのみを読み出せるようになるとのこと。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>圧縮形式はLZMA -&gt; LZHAMになる。5.1から。すげえ、俺何にもしないでいいや。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="s2">LZHAM</span>についていろいろやろうと思ったのが今年のあたま。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>自分は野性の男さんのTwから存在を知った。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://twitter.com/yasei_no_otoko/status/564614755499786241">https://twitter.com/yasei_no_otoko/status/564614755499786241</a></p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>公式でサポートされるなら、途中まで書いてた記事とコードは不要になったな、、！！　良い。</p>
+<p class="p4"><br></p>
+<p class="p4"><b></b><br></p>
+<p class="p3"><b>キャッシュAPIについての不満(from 俺)</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>WWW cacheについて</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>versionってあるけどversionじゃないよね、みたいな話。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>過去のを自動的に消す機構が欲しいんですが</p>
+<p class="p3"><span class="Apple-tab-span">	</span>→5系でhashって名前に変わったよみたいな話。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、過去のが消えないのは残っているんだけど、これ消していいんじゃね？みたいな話。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>→Caching.SetCacheOverrideMode(ver上がったのが入ったら古いのを消すモード) or 消さないモード みたいな。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ぜひ！！　ぜひ！！！</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>デフォルトで使えるものが増えるとうれしいんで！！</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>あとUnityの中のひとにも<a href="http://tatsu-zine.com/books/unibook2">Unibook2</a>の俺の章読まれてたので<b>それはとってもうれしいなって感じだ。</b></p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p3"><b>Cacheしてるファイルが多いとCaching.Readyがtrueになるのが劇遅になる問題</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>知らなかった。そんなことあるんだな。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>2000ファイルくらいあると、Caching.Readyになるまでに1秒くらいかかるらしい。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>バグじゃね？とのことで、今後なんかあるんだと思う。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>確かに2000ファイル程度で遅いのなんかおかしい。</p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p3"><b>MassProduct作成向けのフローを作って欲しい(from 俺)</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>素材からAssetBundleを作る、みたいなパイプラインがUnityについてくれるとうれしいなという感じ。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Editor上で個々のAssetBundleが作りやすくなることはうれしい、のだが、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>N個のモデル x M個のテクスチャ とかのAssetBundleを用意するか？　Unity上で？？</p>
+<p class="p3"><span class="Apple-tab-span">	</span>という。</p>
+<p class="p4"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>んでそのために今年のお正月を捧げて作ったわけですよ、AssetRailsを。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://www.assetstore.unity3d.com/en/#!/content/27672">https://www.assetstore.unity3d.com/en/#!/content/27672</a></p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ルール、規約ベースでAssetBundleが「素材から」「コマンドラインで」作れるやつ。</p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>無駄に苦しむのが嫌なので、Rail(Plipeline)を作っちゃったんだけど、Unityでそういうのを目指すことは無いんだろうか？</p>
+<p class="p3"><span class="Apple-tab-span">	</span>→なるほど。その方向は考えてなかった。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>→いろんな会社のやつ見て考えてみたい、っていうかAssetRails知らなかった</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>はい。ですよね、、知らんよな、、、見た目ダサいしな、、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>今度プレゼンするよ。</p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p3"><b>5系からTypeTreeがAssetBundleに入るようになったので、後方互換性はあるみたいな話</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>LZMAはLZHAMでも解凍できると思う。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>下位互換はケースによってはやばい(クライアント側が古いみたいなケース)</p>
+<p class="p4"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>なので、クライアント側が古いけどアンパンマン！新しいAssetBundleよ！みたいなことをするとヤバそうという話。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>まあそれはそう。</p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p3"><b>IL2CPPのパッチに関しては4系のほうが適用が早い<span class="Apple-tab-span">	</span></b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>とのこと。</p>
+<p class="p4"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b>5.1</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>時期とか話にでてたけど、詳しくは明日のroom1、 4thセッションで。</p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p3"><b>LoadFromCacheOrDownload と、CreateFromFile</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ヘッダ情報を読みだして、AssetBundle内の本当に必要なものだけを読むようになる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>全部をメモリ上に展開しておくという動作ではなくなる。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>素敵！！　っていうかそういう設計のほうがいいだろJKでもありがとうみたいな感じ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>一つのAssetBundleを作るとき、それらをフルに使いきるべき、使いきれる組み合わせでBundleにすべし、みたいな呪縛が消える。</p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p3"><b>今日言えなかったこと</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>明日もあるんだけど、忘れそうなので書いておく。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>以下2つ。</p>
+<p class="p4"><b></b><br></p>
+<p class="p4"><b></b><br></p>
+<p class="p3"><b>1.Importした画像ファイルをUnity内でノーオーバーヘッドでコピーしたい</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Importが終わったファイルには、Unity内でIDが振られている。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、それはAssetか？というと、Assetではない。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>よってノーオーバーヘッドでのコピーができない。</p>
+<p class="p4"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>コピーができないと、一個のリソースから別のリソースを作るとき、オーバーヘッドが悲しいのでなんというかはい。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>以前試した、ここのあたりが詳しい。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>UnityでのAssetになった画像ファイルのコピーでインポートを避けることは出来ないという結論</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://sassembla.github.io/Public/2015:01:08%2010-26-50/2015:01:08%2010-26-50.html">http://sassembla.github.io/Public/2015:01:08%2010-26-50/2015:01:08%2010-26-50.html</a></p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>こんな問題抱えてるの俺しかいないはず。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、Import済みのリソースをコピーできる(Unity内でのAssetではない物体のDuplicate)とうれしい。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>再Importのオーバーヘッドを減らせる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>それ以外にも、モデルとかに関してもいろいろできるはず。</p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p3"><b>2.標準でJSONライブラリください</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>あのっあのっ</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>何度目だろう。ください、、くだs、、、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>あると、、、その、、、なんだ、、、、楽、、、、、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>というか他のライブラリが含まれているのが面倒くさくてですね、ええ。</p>
+<p class="p4"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>たとえばクソみたいな広告やさんだと、ライブラリのネームスペース変えずにブッコンでくるんですよええ。ええ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>おかげでDuplicateしてんぞオラってビルドエラーになるんですわ。ええ。ええ。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>デフォルトの力をみせてくれ、、、</p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+</body>
+</html>
