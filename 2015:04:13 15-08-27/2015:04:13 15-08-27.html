@@ -58,11 +58,13 @@
 <p class="p3"><span class="Apple-tab-span">	</span>ダイナミック(非static)なおっさんとかにGIを適応させるには、LightProbeを光源が変化しそうな場所に置く。これで、GIの影響(間接光)がstaticでない物体にも反映される。</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>Specular、テカテカしたものに対するGIは、ReflectionProbeを置くことで対応。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>なんもしないと、「あれっ天井がある空間なのにブレスレットが青く光るぞ、、、？！」みたいな目にあう。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>それは天井の向こうの空(CubeMapとか)が写り込んでるんだぜっていう話。</p>
 <p class="p2"><br></p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p3"><b>DirectionalMode</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>物理ベースレンダリングのUity5のデフォルトだと、どの程度光るのか、という情報のみが入ってる。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>で、DirectionalModeを調整すると、追加情報として方向の情報が追加され、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>物理ベースレンダリングのUnity5のデフォルトだと、どの程度光るのか、という情報のみが入ってる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、DirectionalModeの設定を調整すると、追加情報として方向の情報が追加され、</p>
 <p class="p3"><span class="Apple-tab-span">	</span>反射光が当たる物体の法線を生かしたライティングが行われる。</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>Directional Specularにすると、さらにSpecularの情報を追加することができる。</p>
@@ -76,8 +78,10 @@
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>反射の反射についてのオプション</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>メタル球を並べると、映り込む球は「真っ黒で描画される」。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>メタル球を並べると、お互いに映り込む球は「真っ黒で描画される」。</p>
 <p class="p3"><span class="Apple-tab-span">	</span>リフレクションの回数を指定できる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>このへん紙にコピックとかで車のレンダリングしてた身としては身震いする感じ。トラウマで。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>BoxProjection</b></p>
