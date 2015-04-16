@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1347.57">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    span.s1 {font: 22.0px Helvetica}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><span class="s1"><b>Go</b></span><b>でバイナリファイル蓄積型</b><span class="s1"><b>exe</b></span><b>書きたいな</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>バイナリファイルを無限に放り込めて、どこかオンライン上でのファイルDBを構築、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>コマンドラインからhistoryとかrevision指定してそのファイルを引っ張り出せる、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>みたいなものがつくりたいんですわ。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>そう、すべてバイナリ。jpgとかpngとか。バイナリ。差分比較しないやつ。</p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b>モチベーション</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>binファイルのバージョン管理をgitとかに入れたくない。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>そしてフォルダで画像管理とかしたくない。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>そもそも差分管理したくない。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ガンガン放り込めるブラックホールが一つ欲しい。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>放り込んだらどこかにsyncされる、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>最新取得で最新が返ってくる、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>範囲取得で範囲のものが返ってくる、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>みたいなのが理想。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>放り込んだタイミングでrevisionがついて良いと思っている。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ファイルシステム絡みなのでGoで書いてMac/Win動くようになって欲しい。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>比較</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>差分比較はしない。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>が、md5とかで変わったかどうかは見たい。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>変わってなかったらポインタだけ置く。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>名前</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>FileMachineにしよう。</p>
+<p class="p2"><br></p>
+</body>
+</html>
