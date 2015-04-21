@@ -17,10 +17,10 @@
 <p class="p1"><b>Client-Client間のRPCのここが嫌だ</b></p>
 <p class="p2"><br></p>
 <p class="p3"><b>概要</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>対戦ゲームで二人以上が動くゲームでのClient-Client間のRPCは使いどころ無いので死ねみたいな話。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>iOSとかで動く対戦型で二人以上のプレイヤーが動くゲームでのClient-Client間のRPCは使いどころ無いので死ねみたいな話。</p>
 <p class="p3"><span class="Apple-tab-span">	</span>主にself-definedでないRPCについての文句。</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>結論から言うと、対戦ゲームでClient-ClientのPRCを使うべきでは無いと思っている。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>結論から言うと、P2Pでない対戦ゲームでClient-ClientのPRCを使うべきでは無いと思っている。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>Version差で、Client-Serverが引きずられる</b></p>
@@ -69,6 +69,20 @@
 <p class="p3"><span class="Apple-tab-span">	</span>これをClientで行うのがなぜダメか。Serverに実行可能かどうかの判断をする場所がなく、実行中の状態が把握できないからだ。</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p2"><br></p>
+<p class="p3"><b>動かす物事のバランスは、「Serverをまずめっちゃ重く」「Clientを軽く」から始めた方がバランスしやすい</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>最初は計算や描画など、Serverにできない、重たいことをClientにやらせる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>最初からすべてをClientにやらせると、あとでServerにその実装を移す際に困る。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・ClientどうしでRPCするということは、Serverで何もしていない = Serverになんの実装も無い、ということ</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・その処理に同期的な処理(アイテム取るとか移動とか攻撃とかダメージとか要はすべて)が必要になった時、ClientがRPCを止めるのが大変。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Client同士でやっていたことを、Serverが行う必要がでてくるが、その実装はゼロから書く羽目になる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>逆にServerが重い状態から始まれば、「チートされても問題の無い箇所」に対して、どこをClientで行うか、という分散はしやすい。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>もともとServerでやらないでもいいこと、というのをClientに持ってくるのが正しい。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ほら、RPC無駄だろ？みたいな。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
 <p class="p3"><b>まだあるRPCの弊害</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>・チート対策がしづらい</p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>byteで「このClientで実行した」っていうデータを発行してしまうので、偽造されたら一発。</p>
@@ -85,20 +99,6 @@
 <p class="p3"><span class="Apple-tab-span">	</span>・実行がメソッド単位で行われてしまう</p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>APIを組み替える時に常にブービートラップのように事件が起こる。</p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ダイレクトにClientたちの動作が変更されてしまう。仲介役であるServerを絡ませた方がいい。</p>
-<p class="p2"><br></p>
-<p class="p2"><br></p>
-<p class="p3"><b>動かす物事のバランスは、「Serverをまずめっちゃ重く」「Clientを軽く」から始めた方がバランスしやすい</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>最初は計算や描画など、Serverにできない、重たいことをClientにやらせる。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>最初からすべてをClientにやらせると、あとでServerにその実装を移す際に困る。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>・ClientどうしでRPCするということは、Serverで何もしていない = Serverになんの実装も無い、ということ</p>
-<p class="p3"><span class="Apple-tab-span">	</span>・その処理に同期的な処理(アイテム取るとか移動とか攻撃とかダメージとか要はすべて)が必要になった時、ClientがRPCを止めるのが大変。</p>
-<p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>Client同士でやっていたことを、Serverが行う必要がでてくるが、その実装はゼロから書く羽目になる。</p>
-<p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>逆にServerが重い状態から始まれば、「チートされても問題の無い箇所」に対して、どこをClientで行うか、という分散はしやすい。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>もともとServerでやらないでもいいこと、というのをClientに持ってくるのが正しい。</p>
-<p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>ほら、RPC無駄だろ？みたいな。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>一度体験すればRPCがどのくらいクソかわかると思うけど、体験させないとダメ？</b></p>
@@ -141,11 +141,16 @@
 <p class="p3"><span class="Apple-tab-span">	</span>実際には、AとBのミックスで設計することが多い。</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p2"><br></p>
-<p class="p3"><b>Client-Server間のRPCについて</b></p>
+<p class="p3"><b>Client-&gt;Server間のRPCについて</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>フラグ送付ができればいいので、要らないでしょ</p>
 <p class="p3"><span class="Apple-tab-span">	</span>それRPCじゃないほうが後々ラクだよね。</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>なにが悲しくてServer側のメソッドの情報をClientに持たなければいけないのか。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>Server-&gt;Client間のRPCについて</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ClientのVersionに合わせたRPC書くの？</p>
+<p class="p3"><span class="Apple-tab-span">	</span>いらなくね？</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3">こちらからは以上です。</p>
