@@ -1,0 +1,153 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1347.57">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>Client-Client間のRPCのここが嫌だ</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>対戦ゲームで二人以上が動くゲームでのClient-Client間のRPCは使いどころ無いので死ねみたいな話。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>主にself-definedでないRPCについての文句。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>結論から言うと、対戦ゲームでClient-ClientのPRCを使うべきでは無いと思っている。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>Version差で、Client-Serverが引きずられる</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>独自定義した「わけではない」バイナリを送る感じになるので、クライアント間でのバージョン互換性を保持しないとゲームにならない。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>= 全ユーザーのバージョンを保たないといけない</p>
+<p class="p3"><span class="Apple-tab-span">	</span>= サーバ側もその制約を被る。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>-&gt; いろんなバージョンのクライアントの面倒をみる羽目になる</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>それは詰み。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>データサイズが制御できない</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>結論から言うとデータ形式をゲームごとに自分で定義したほうがいい。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>行動コード + 発行者コード + … とか、すべてbyteで書き、できるだけサイズを小さくする。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>っていうのが理想だけど、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>開発中は別に中身がJSONとかでも良いと思う。最終的にサイズを小さく、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Clientから送るものはフラグだけ、とかになる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Serverが送り出すものは、Serverで計算なり発行を決めたデータ になる。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>つまりRPCな必要が無い。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ゲームごとに制御したい物事、そのインターバルは異なる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>間違っても「定義されているものを使う」という発想にならないほうがいい。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>首が絞まってから何かするのは避けてほしい。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>Client-Client間でのRPCは、サーバでの統一がしにくい</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Client-ClientでRPCを行うのは以下のようなケース。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>1.Client A が歩いた</p>
+<p class="p3"><span class="Apple-tab-span">	</span>2.Client Aは、歩いたコマンドを発行(コマンドの対象、タイミングはこの時決まる)</p>
+<p class="p3"><span class="Apple-tab-span">	</span>3.コマンドがサーバに到達</p>
+<p class="p3"><span class="Apple-tab-span">	</span>4.サーバはClient A,B,C,Dに対して、Aが動いたということを通知</p>
+<p class="p3"><span class="Apple-tab-span">	</span>5.Client A,B,C,Dのメソッドが着火され、Client Aが動いたのと同じ状態を作り出す</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これは、サーバが持つべき「ゲームの統一動作」という責務に対して、最悪の結果を生む。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>全Clientがコマンドを受け取ってダイレクトに実行してしまう形になる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>例えば以下の要件は、本来、すべてサーバが担うべきもの。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・コマンドの実行可否を決める</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・コマンドの実行タイミングを決める</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・コマンドの対象を決める</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これをClientで行うのがなぜダメか。Serverに実行可能かどうかの判断をする場所がなく、実行中の状態が把握できないからだ。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>まだあるRPCの弊害</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・チート対策がしづらい</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>byteで「このClientで実行した」っていうデータを発行してしまうので、偽造されたら一発。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Serverで状態をもっていれば、「この状態だったらこの入力があってもNをしてる最中なので無視！！」とかができる。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・サイズが無駄にでかい</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>フラグだったら1byteで済むところ、RPCのシリアライゼーションデータを送る価値って何。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・途中介入がしづらい</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Serverが定義していて把握できるbyte列であれば、「先頭数byteをみれば何だかわかる」という条件があると楽。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>だが、これはRPCじゃあないよね。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>つまりRPCではなく自分でデザインした方がいいよって話。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・実行がメソッド単位で行われてしまう</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>APIを組み替える時に常にブービートラップのように事件が起こる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ダイレクトにClientたちの動作が変更されてしまう。仲介役であるServerを絡ませた方がいい。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>動かす物事のバランスは、「Serverをまずめっちゃ重く」「Clientを軽く」から始めた方がバランスしやすい</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>最初は計算や描画など、Serverにできない、重たいことをClientにやらせる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>最初からすべてをClientにやらせると、あとでServerにその実装を移す際に困る。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・ClientどうしでRPCするということは、Serverで何もしていない = Serverになんの実装も無い、ということ</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・その処理に同期的な処理(アイテム取るとか移動とか攻撃とかダメージとか要はすべて)が必要になった時、ClientがRPCを止めるのが大変。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Client同士でやっていたことを、Serverが行う必要がでてくるが、その実装はゼロから書く羽目になる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>逆にServerが重い状態から始まれば、「チートされても問題の無い箇所」に対して、どこをClientで行うか、という分散はしやすい。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>もともとServerでやらないでもいいこと、というのをClientに持ってくるのが正しい。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ほら、RPC無駄だろ？みたいな。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>一度体験すればRPCがどのくらいクソかわかると思うけど、体験させないとダメ？</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>他のゲームがどうやってるか、どんなFutureを考えているかを見ることで、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ClientベースのRPCが使い物にならない(=実際に使って良いシーンは無い)ことがわかると思う。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>できるだけ無駄な体験に時間を費やしたく無い。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>じゃあRPCではなくどうすれば良いのか</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Server側で、インターバルを持って物事を処理する。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>例えばおしくらまんじゅう有りの、位置が同期するゲームの場合は、以下のようなパターンになる。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>A:厳格なタイプ</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・Clientがフラグを送る(歩く)</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・Client側でそのまま歩くモーションになってもいい</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・Server側がフラグを受け取る</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・Server側のフレームレートで、各プレイヤーから受け取ったフラグを回収</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・Server側で一回のフラグに付きどのくらい歩くかを計算、ぶつかりとかもここで計算</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・ServerからコマンドをClientに発行</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・各Clientがコマンドを受け取り、移動を実行</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Server側にすべての計算結果が残るので、再現も中断も楽勝。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>加えてキャラクター間のぶつかりとかも計算できる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>敵が死ぬとかはこのフェーズで行わないと困る。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>B:あんま厳格でないが速い、失敗しても立て直すタイプ</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・Clientがフラグを送る</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・Server側がフラグを受け取る</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・Serverはフラグから可否のみを計算、フラグを各Clientにできるだけ速く返す</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・Serverは裏でClientと同じ計算をする</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・Clientはフラグを受け取って動く</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・Serverから答え合わせのフレームデータを各Clientに送る</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・Clientはそれを受け取って事実を捻じ曲げ再現する</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Server側には時間差込みで計算結果が残り、かつ最速で動くことができる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>プレイヤーが少ないほどより効率ダメージを受けず、効果が出る。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>実際には、AとBのミックスで設計することが多い。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>Client-Server間のRPCについて</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>フラグ送付ができればいいので、要らないでしょ</p>
+<p class="p3"><span class="Apple-tab-span">	</span>それRPCじゃないほうが後々ラクだよね。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>なにが悲しくてServer側のメソッドの情報をClientに持たなければいけないのか。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3">こちらからは以上です。</p>
+</body>
+</html>
