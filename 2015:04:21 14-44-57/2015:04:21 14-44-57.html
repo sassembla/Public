@@ -62,11 +62,12 @@
 <p class="p3"><span class="Apple-tab-span">	</span>全Clientがコマンドを受け取ってダイレクトに実行してしまう形になる。</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>例えば以下の要件は、本来、すべてサーバが担うべきもの。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・Clientが受け取るコマンドの種類を決める</p>
 <p class="p3"><span class="Apple-tab-span">	</span>・コマンドの実行可否を決める</p>
 <p class="p3"><span class="Apple-tab-span">	</span>・コマンドの実行タイミングを決める</p>
 <p class="p3"><span class="Apple-tab-span">	</span>・コマンドの対象を決める</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>これをClientで行うのがなぜダメか。Serverに実行可能かどうかの判断をする場所がなく、実行中の状態が把握できないからだ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>これをClient主導で行うのがなぜダメか。Serverに実行可能かどうかの判断をする場所がなく、実行中の状態が把握できないからだ。</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p2"><br></p>
 <p class="p3"><b>動かす物事のバランスは、「Serverをまずめっちゃ重く」「Clientを軽く」から始めた方がバランスしやすい</b></p>
