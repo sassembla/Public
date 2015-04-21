@@ -87,6 +87,7 @@
 <p class="p3"><span class="Apple-tab-span">	</span>もともとServerでやらないでもいいこと、というのをClientに持ってくるのが正しい。</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>ほら、RPC無駄だろ？みたいな。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>まあ理想論なんだけど。実際には、全部Server側で実装してから～みたいな無駄なことはしないでいいと思う。ただServer側に倒しておくと、あとで救われる。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>まだあるRPCの弊害</b></p>
@@ -95,7 +96,7 @@
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Serverで状態をもっていれば、「この状態だったらこの入力があってもNをしてる最中なので無視！！」とかができる。</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p3"><span class="Apple-tab-span">	</span>・サイズが無駄にでかい</p>
-<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>フラグだったら1byteで済むところ、RPCのシリアライゼーションデータを送る価値って何。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>フラグだったら1bitで済むところ、RPCのシリアライゼーションデータを丸っと送る価値って何。</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>・途中介入がしづらい</p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Serverが定義していて把握できるbyte列であれば、「先頭数byteをみれば何だかわかる」という条件があると楽。</p>
