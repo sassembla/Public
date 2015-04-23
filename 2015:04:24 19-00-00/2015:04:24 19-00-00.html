@@ -1,0 +1,157 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1347.57">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #ebebeb}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>atom-shellでファイル無限吸い込み機構を作る</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これで話す。</p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>「Electron(旧:Atom-Shell)勉強会 #1」</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://atom-shell.connpass.com/event/13304/">http://atom-shell.connpass.com/event/13304/</a></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>基本的なところは誰かがやるでしょ的な感じで、ツールを一つ作った話。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>FileMachineというのを作った</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>フォルダ内にファイルを放り込んでいくと、リソースを丸っとバージョン管理してくれる代物。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>コマンドラインとGUIから使いたいな！という欲求</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>FileMachine</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/FileMachine">https://github.com/sassembla/FileMachine</a></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>当初goで書いてたんだけど、GUI部分でなんかノらなかったのでAtom-Shellで。</p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>解決する内容</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>大規模マニュファクチュア～で画像とか3dモデルとかのリソースの置き方にする苦労を消し去りたい。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・デザイナさんサーバにガンガンリソース置きよる</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・更新するたび名前変える？　ん？？　そういう病気？？</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・日付フォルダ、、ところであれの最新どこ？　ああ、一ヶ月前の、、名前、、、違ったんだね、、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・「サーバの容量が逼迫されてきました」あのっあのっ21世紀</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>下らん。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>下らなすぎるぞ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ヒューマンがしてはならない無駄な努力だ。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>挙動</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>同じファイルとか放り込みまくってバージョン管理できるアプリケーション。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・ファイルを放りこむとどこかに保存</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・過去のファイルとMD5とか違ったら新しいrevisionを作り出して保存</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・MD5の差がなかったら代わりにproxyfileを置く</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・取り出す際は、最新ファイル全部、とか、revisionを指定して取り出すことができる</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・外部からのアクセスエイリアスを持つ(外部からの特殊なrsyncとか。Web万歳)</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・ファイルIOを直に吐き出して、こんな書き方でファイルの入出力ができてそのまま保存とかできるようにしたい</p>
+<p class="p2"><br></p>
+<p class="p4">filemachine -f some.txt | open -a なんかApp.app</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ようは完全自動採番でコミットメッセージとか無し、差分比較をbin想定に限定したgitみたいなもの。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>分散具合については考え中だけど、分散が実現しないでもいいことができそうなので開発してる。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>現状</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>途中までかいてるとこ。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・とりあえず保存と取り出しまでできればそれでいいかなって</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>実演</p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>1.放り込んだら保存</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ファイルは /Users/runnershigh/Library/Caches/FileMachine に自動複製される。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>2.command+oで最新をすべて吐き出し</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>吐き出し場所としてDesktop指定。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>3.取り出さずに何が入ってるか？Caches以下のファイル見ろファイル。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>/Users/runnershigh/Library/Caches/FileMachine とかに入ってる。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>why atom-shell</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>GUI付きのコマンドラインツールが作りやすいと思った。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>コマンドライン部分のインターフェース作ってないけどあるっぽいの信じてる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>今回の場合は、もともとgoで作ろうと思ってたんだけど、GUIがダルかったのでatom-shellにした。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>GUIいらないなら別に選ぶ必要無いのでは????</p>
+<p class="p3"><span class="Apple-tab-span">	</span>GUIいるならatom-shellでいいのでは?????</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>使って本当によかったと思うところ</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>app.getPath まわりの仕様は本当にいいなと思った。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>プラットフォームごとのよく使うpathを決めてあるのすごく良い。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>マルチプラットフォームでの地獄がよくわかってる人たちが作ってるような気がする</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/atom/electron/blob/master/docs/api/app.md">https://github.com/atom/electron/blob/master/docs/api/app.md</a></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>FileMachineの未来</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・デザイナさんが使えるようなGUI(いれポンだしポン)</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・ちゃんとしたコマンドラインな(まだよくわかってない)</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・どっかにファイル母体をシンクロさせるようにして、サービス化</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・過去のファイルをシュリンクする機構(このままだと無圧縮かつ無限なので差分死する<span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・マネタイズ</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>絶対やったほうがいい。クリエイターは自身のクリエイトのためには金を払う。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>その金で駆動する。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>黄金の回転を目指す。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>これの場合はUnityのAssetStoreかな。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>TODO</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・別名フォルダ入れるとそれ以降そっちを追う楽しいバグ</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ｷｬﾋﾟ(・ω&lt;)<span class="Apple-converted-space"> </span></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・削除してしまったファイル/フォルダを追う機能</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>latest:最新のみ</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>all:消したものも含めて全て</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・吐き出し場所</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>吐き出し場所を指定できるGUIとかあるといいっすね～～　OS標準のこういうのとか。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202015-04-24%204.30.16.png" alt="スクリーンショット 2015-04-24 4.30.16.png"></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・ファイル単体で放り込みたいぞ？</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>一発で場所がわかる名前ならそいつに対するチェックのみ行って受け入れ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>もし複数候補が出れば「どれ上書きすんの？」っていう画面出す。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>あっこれきっと作らない。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・フォルダを放り込むの楽しいデザインである必要がある、、、というかリアクションがない</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・どのフォルダを放り込むか明示しないとな！</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>GUIデザインの問題。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・ファイルの名前変更のトラックを視覚化</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>タイムスリップ的にファイルの変化を追うGUIモードをつくればいいんだと思う。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><img src="Unknown.jpeg" alt="Unknown.jpeg"></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>どちらかというと同じ名前で別のファイル置くのを楽に扱えて人類が受けるペナルティだけ無くしたい。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・いまんとこ全部syncで書いてる</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>なんか、、nodeだったら教義的にはasyncで書くのがいいような気がするが、、、すまないな。</p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span></b>・Win、、、、パス、、、ウッ頭が、、、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>はたしてWindowsでちゃんと動くのか！！？？　どうなってもしらんゾーーーーッ！！</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>atom-shellのことは信じてるが自分の書いたコードがマルチプラットフォームセーフかどうかは試してないから知らん。<b><span class="Apple-tab-span">	</span></b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・アイコン</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>なんかそのうち。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>この辺。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/atom/electron/blob/master/docs/api/native-image.md">https://github.com/atom/electron/blob/master/docs/api/native-image.md</a></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・remoteとのシンクロ</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>remoteとのシンクロとかそのへんをホラ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>セットした状態で配ればいいんじゃないかな。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+</body>
+</html>
