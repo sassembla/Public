@@ -27,7 +27,7 @@
 <p class="p2"><br></p>
 <p class="p3"><b>FileMachineというのを作った</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>フォルダ内にファイルを放り込んでいくと、リソースを丸っとバージョン管理してくれる代物。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>コマンドラインとGUIから使いたいな！という欲求</p>
+<p class="p3"><span class="Apple-tab-span">	</span>GUIから使いたいな！という欲求</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span><b>FileMachine</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/FileMachine">https://github.com/sassembla/FileMachine</a></p>
@@ -54,6 +54,7 @@
 <p class="p3"><span class="Apple-tab-span">	</span>・ファイルを放りこむとどこかに保存</p>
 <p class="p3"><span class="Apple-tab-span">	</span>・過去のファイルとMD5とか違ったら新しいrevisionを作り出して保存</p>
 <p class="p3"><span class="Apple-tab-span">	</span>・MD5の差がなかったら代わりにproxyfileを置く</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・ショートカット(super+oとか)で取り出す</p>
 <p class="p3"><span class="Apple-tab-span">	</span>・取り出す際は、最新ファイル全部、とか、revisionを指定して取り出すことができる</p>
 <p class="p3"><span class="Apple-tab-span">	</span>・外部からのアクセスエイリアスを持つ(外部からの特殊なrsyncとか。Web万歳)</p>
 <p class="p3"><span class="Apple-tab-span">	</span>・ファイルIOを直に吐き出して、こんな書き方でファイルの入出力ができてそのまま保存とかできるようにしたい</p>
@@ -73,18 +74,20 @@
 <p class="p3"><span class="Apple-tab-span">	</span>1.放り込んだら保存</p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ファイルは /Users/runnershigh/Library/Caches/FileMachine に自動複製される。</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>2.command+oで最新をすべて吐き出し</p>
+<p class="p3"><span class="Apple-tab-span">	</span>2.super+oで最新をすべて吐き出し</p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>吐き出し場所としてDesktop指定。</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>3.取り出さずに何が入ってるか？Caches以下のファイル見ろファイル。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>3.取り出さずに何が入ってるか？ super+iでフォルダ開く。</p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>/Users/runnershigh/Library/Caches/FileMachine とかに入ってる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>んっとんっと、、open in finder どうすれば</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>why atom-shell</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>GUI付きのコマンドラインツールが作りやすいと思った。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>コマンドライン部分のインターフェース作ってないけどあるっぽいの信じてる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ブラウザっていうviewにもともと依存した環境。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>GUI付きのツールが作りやすいと思った。</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>今回の場合は、もともとgoで作ろうと思ってたんだけど、GUIがダルかったのでatom-shellにした。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>FileAPIとかあるししかも通信クライアントそのものだったりもするので、今後通信でファイルをなんとかするのも夢がある。(しかもServer/Client両用</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p3"><span class="Apple-tab-span">	</span>GUIいらないなら別に選ぶ必要無いのでは????</p>
 <p class="p3"><span class="Apple-tab-span">	</span>GUIいるならatom-shellでいいのでは?????</p>
@@ -119,14 +122,13 @@
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>latest:最新のみ</p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>all:消したものも含めて全て</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>・吐き出し場所</p>
-<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>吐き出し場所を指定できるGUIとかあるといいっすね～～　OS標準のこういうのとか。</p>
-<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202015-04-24%204.30.16.png" alt="スクリーンショット 2015-04-24 4.30.16.png"></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・ウィンドウからドラッグで取り出したいが？？！！？！？！？！</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ジッサイできるんかな。</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>・ファイル単体で放り込みたいぞ？</p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>一発で場所がわかる名前ならそいつに対するチェックのみ行って受け入れ。</p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>もし複数候補が出れば「どれ上書きすんの？」っていう画面出す。</p>
-<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>あっこれきっと作らない。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ァッこれきっと作らない。</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>・フォルダを放り込むの楽しいデザインである必要がある、、、というかリアクションがない</p>
 <p class="p3"><span class="Apple-tab-span">	</span>・どのフォルダを放り込むか明示しないとな！</p>
@@ -142,7 +144,9 @@
 <p class="p2"><b></b><br></p>
 <p class="p3"><b><span class="Apple-tab-span">	</span></b>・Win、、、、パス、、、ウッ頭が、、、</p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>はたしてWindowsでちゃんと動くのか！！？？　どうなってもしらんゾーーーーッ！！</p>
-<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>atom-shellのことは信じてるが自分の書いたコードがマルチプラットフォームセーフかどうかは試してないから知らん。<b><span class="Apple-tab-span">	</span></b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>atom-shellのことは信じてるが自分の書いたコードがマルチプラットフォームセーフかどうかは試してないから知らん。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>どうぞ。</p>
+<p class="p2"><b><span class="Apple-tab-span">	</span></b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>・アイコン</p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>なんかそのうち。</p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>この辺。</p>
