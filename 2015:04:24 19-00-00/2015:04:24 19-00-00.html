@@ -15,7 +15,7 @@
   </style>
 </head>
 <body>
-<p class="p1"><b>atom-shellでファイル無限吸い込み機構を作る</b></p>
+<p class="p1"><b>atom-shellでファイル無限吸い込み+sync機構を作る</b></p>
 <p class="p2"><br></p>
 <p class="p3"><b>概要</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>これで話す。</p>
@@ -26,8 +26,8 @@
 <p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p2"><br></p>
 <p class="p3"><b>FileMachineというのを作った</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>フォルダ内にファイルを放り込んでいくと、リソースを丸っとバージョン管理してくれる代物。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>GUIから使いたいな！という欲求</p>
+<p class="p3"><span class="Apple-tab-span">	</span>アプリにファイルを放り込んでいくと、リソースを丸っとバージョン管理してくれる代物。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>GUIから使いたい、そして適当に管理してほしい、という欲求を叶える。</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span><b>FileMachine</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/FileMachine">https://github.com/sassembla/FileMachine</a></p>
@@ -49,20 +49,23 @@
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>挙動</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>同じファイルとか放り込みまくってバージョン管理できるアプリケーション。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>フォルダごとリソースを放り込みまくってバージョン管理できるアプリケーション。</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>・ファイルを放りこむとどこかに保存</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・フォルダを放りこむとどこかに保存</p>
 <p class="p3"><span class="Apple-tab-span">	</span>・過去のファイルとMD5とか違ったら新しいrevisionを作り出して保存</p>
 <p class="p3"><span class="Apple-tab-span">	</span>・MD5の差がなかったら代わりにproxyfileを置く</p>
 <p class="p3"><span class="Apple-tab-span">	</span>・ショートカット(super+oとか)で取り出す</p>
 <p class="p3"><span class="Apple-tab-span">	</span>・取り出す際は、最新ファイル全部、とか、revisionを指定して取り出すことができる</p>
-<p class="p3"><span class="Apple-tab-span">	</span>・外部からのアクセスエイリアスを持つ(外部からの特殊なrsyncとか。Web万歳)</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・外部からのアクセスエイリアス、外部へのアクセス経路を持つ(外部からの特殊なrsyncとか。Web万歳)</p>
 <p class="p3"><span class="Apple-tab-span">	</span>・ファイルIOを直に吐き出して、こんな書き方でファイルの入出力ができてそのまま保存とかできるようにしたい</p>
 <p class="p2"><br></p>
 <p class="p4">filemachine -f some.txt | open -a なんかApp.app</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>ようは完全自動採番でコミットメッセージとか無し、差分比較をbin想定に限定したgitみたいなもの。</p>
 <p class="p3"><span class="Apple-tab-span">	</span>分散具合については考え中だけど、分散が実現しないでもいいことができそうなので開発してる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>分散同期に関してはWebRTCが使えると大変ファンキーなのでは？ って一瞬思ったけどいろいろやることあってダメだわ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>atom-shellなら通信手段もサーバ能力もあるし行けると思う。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>現状</b></p>
@@ -135,9 +138,9 @@
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>GUIデザインの問題。</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>・ファイルの名前変更のトラックを視覚化</p>
-<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>タイムスリップ的にファイルの変化を追うGUIモードをつくればいいんだと思う。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>タイムスリップ的にファイルの変化を追うGUIモードをつくればいいんだと思う。ピアノの鍵盤みたいにするか。</p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><img src="Unknown.jpeg" alt="Unknown.jpeg"></p>
-<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>どちらかというと同じ名前で別のファイル置くのを楽に扱えて人類が受けるペナルティだけ無くしたい。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>どちらかというと時系列で同じ名前で別のファイル置くのを楽に扱えて人類が受けるペナルティだけ無くしたい。</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>・いまんとこ全部syncで書いてる</p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>なんか、、nodeだったら教義的にはasyncで書くのがいいような気がするが、、、すまないな。</p>
@@ -155,6 +158,20 @@
 <p class="p3"><span class="Apple-tab-span">	</span>・remoteとのシンクロ</p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>remoteとのシンクロとかそのへんをホラ。</p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>セットした状態で配ればいいんじゃないかな。</p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3">以下メモ</p>
+<p class="p2"><br></p>
+<p class="p3">scopeとか</p>
+<p class="p3"><span class="Apple-tab-span">	</span>どこまでこのclientでファイルを持つか、のscopeがあると便利そう。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>now ~ 1month とか。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>この制約はtime-windowなので、必要があればどんどんスライドしていく。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>proxy fileが最古のものになったりするので、その際は基底(rev -1) とかをremoteから持ってくるといろいろ解決しそう。</p>
+<p class="p2"><br></p>
+<p class="p3">ファイル単位のタイムライン</p>
+<p class="p3"><span class="Apple-tab-span">	</span>見たい。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>perforceみたく表示したい。金になりそう。</p>
+<p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 </body>
