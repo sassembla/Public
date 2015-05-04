@@ -10,6 +10,7 @@
     p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
     p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
     p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #ebebeb}
     span.Apple-tab-span {white-space:pre}
   </style>
 </head>
@@ -26,11 +27,55 @@
 <p class="p3"><span class="Apple-tab-span">	</span>まだα版だよみたいな感じ。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
-<p class="p3"><b>ビルド</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>Mac OS X 10.10.3 で、落としてきたまんまビルドできた。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>依存関係も少ないのかな。</p>
+<p class="p3"><b>make</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>依存が無いのでmakeするだけでokなはず。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>OS X 10.10.3 とかでそのまま動いた。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ビルドしたバイナリはsrc中に出来る。</p>
 <p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>serverたてる</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>disque-server をぶったたくと起動する。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>初期ポートは7711になっている。</p>
+<p class="p3"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202015-05-03%2018.04.15.png" alt="スクリーンショット 2015-05-03 18.04.15.png"></p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>備え付けのc－clientをつなぐ</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>disqueのserverに対して対象となるport指定でclientを起動できる。これがジョブ単位 = nodeになるっぽい。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>disqueのclientは複数のserverに対して通信をすることができる。(multi-masterってこのことか</p>
+<p class="p3"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202015-05-03%2018.11.09.png" alt="スクリーンショット 2015-05-03 18.11.09.png"></p>
+<p class="p3"><span class="Apple-tab-span">	</span>コマンドの単位とかなんかまだ変わりそうな気がする。</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p4">addjob queue body 0</p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、addjobでqueueという名称のキューに対してbodyというメッセージを送っている。 最後の0は timeout<b>。</b></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p4">getjob from queue</p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、queueというキューからメッセージを受け取っている。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Regisのpub-subとかと異なるのは、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・subscribeのための準備がない</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・複数のmasterを持てる</p>
+<p class="p3"><span class="Apple-tab-span">	</span>というあたり。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>複数のmasterに対して誰かがjobを投げて、複数のmasterに対してgetjobしてる誰かが受け取る、という仕組み。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>producerとconsumerそれぞれの動作ができるよ、という感じか。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>んで、multicastがしたい時とかどうやればいいんだろう？</p>
+<p class="p3"><span class="Apple-tab-span">	</span>→addjobする対象を増やす。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>なるほど。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>フルメッシュさ</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>nodeが</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>良いなーと思ったところ</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>client側から指定できる、node自体の溜まってる内容をチェックする仕掛けがあること。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>addjob オプションの maxlen がそれ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>試しに maxlen を2とかにしてaddjobしたら、client側がエラーを得ることができる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>これで、送信者側からキューが詰まってるかどうか楽にわかる。もちろん上位での監視は必要だけど。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
 <p class="p3"><b>lua client</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>nginx-lua-moduleから使うので、書いてる。</p>
 <p class="p3"><span class="Apple-tab-span">	</span>pub-sub両方する。</p>
@@ -41,9 +86,5 @@
 <p class="p3"><span class="Apple-tab-span">	</span>こちらはC#。とある理由で使うので書いてる。</p>
 <p class="p3"><span class="Apple-tab-span">	</span>pub-sub両方する。</p>
 <p class="p3"><span class="Apple-tab-span">	</span>簡単ぽい。</p>
-<p class="p2"><br></p>
-<p class="p2"><br></p>
-<p class="p2"><br></p>
-<p class="p3">続く</p>
 </body>
 </html>

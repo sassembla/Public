@@ -1,0 +1,141 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1347.57">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; color: #212121}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; color: #212121; min-height: 18.0px}
+    span.s1 {font-kerning: none}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>Disqueメモ</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>訳した。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/antirez/disque">https://github.com/antirez/disque</a></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>とりあえず使ってみて俯瞰で訳したみたいな感じなんだけど、ひたすらGoogle翻訳と相性の悪い文章だった、、、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>間違ってそうなところあったら優しく教えて欲しい。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>Give me the details!</b></p>
+<p class="p4"><span class="s1">DISQUEは、プロセスの間でメッセージを交換する中間層として機能する、分散型のフォールトトレラントなメッセージブローカーです。</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1">producerがconsumerに提供されるメッセージを追加します。</span></p>
+<p class="p4"><span class="s1">メッセージキューはしばしば遅延ジョブを処理するために使用されるので、DISQUEはjobという単位をAPIとかドキュメントの中で使っています。</span></p>
+<p class="p4"><span class="s1">とはいえ、実際のjobとは、​​実際には文字列の形で扱われる単なるメッセージなので、いろんなケースで使えると思っています。</span></p>
+<p class="p4"><span class="s1">この文書内では、「job」と「message」が示すものはイコールな感じです。</span></p>
+<p class="p4"><span class="s1">producer-consumer モデルとジョブ・キューはかなり似ているので、悪魔は細部​​に宿るような感じになりました。<span class="Apple-converted-space"> </span></span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1">DISQUEについての詳細は、次のとおりです。</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1">DISQUEは同期的に複製されるジョブ・キューです。</span></p>
+<p class="p4"><span class="s1">キューに新しいjobが追加された際、クライアント(producerかconsumer)がそのjobについて確認できる状態になる前に、メッセージはW個のノードに複製されます。</span></p>
+<p class="p4"><span class="s1">W-1個のノードに障害が発生しても、メッセージを配信することができます。</span></p>
+<p class="p4"><span class="s1">DISQUEは「少なくとも一回」と「最大1回」の両方の配信セマンティクスをサポートしています。</span></p>
+<p class="p4"><span class="s1">「少なくとも一回配信する」、という部分にメッチャ力を入れました。</span></p>
+<p class="p4"><span class="s1">「最大一回」はretry time を0にセットした際の結果実現できる(決して再びメッセージを再キューイングしない) + replication 要素を1にセット(厳密にはこの設定必要ではないんだけど、メッセージの複数のコピーを持つのが無駄なので)という設定で実現できるようになっています。</span></p>
+<p class="p4"><span class="s1">これらはメッセージごとに設定が可能なので、同じキューやノードに対して「少なくとも一回」と「最大一回」という設定を同時に持つことができます。</span></p>
+<p class="p4"><span class="s1">DISQUEは障害のただなかにあっても、「少なくとも一回」配信が可能なように設計されています。</span></p>
+<p class="p4"><span class="s1">これは、「DISQUEは最低でも一つか、それ以上の回数の配信を保証することができるが、可能な限り過剰な配信を回避する」、ということを意味します。</span></p>
+<p class="p4"><span class="s1">DISQUEはすべてのノードが同じ役割を持つ分散型のシステム（マルチマスターとか呼ばれる感じのやつ）です。</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1">producerとconsumerは、彼らが好きなノードに接続することができるし、同じキューに対してのproducer, consumerである必要がありません。自動的に同じノードへの接続を維持します。ノードはロードとクライアントの要求に基づいて、メッセージを交換します。</span></p>
+<p class="p4"><span class="s1">DISQUEはCAP定理でいえばeventuallyに一貫性のあるAPとして利用可能です。</span></p>
+<p class="p4"><span class="s1">少なくとも一つのノードが到達可能であるうちは、producerとconsumerは処理を進めることができます。</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1">DISQUEは非同期コマンドをサポートしていて、これはクライアントにとって低遅延ですが、保証の内容が低下します。</span></p>
+<p class="p4"><span class="s1">例えばproducerがreplication = 3をセットした設定のキューにジョブを追加した際、そのメッセージを追加されたノードが本当にreplication = 3の設定を果たせたかどうかを知る前に処理を返したい感じです。その際、ノードはベストエフォート型の方法で、バックグラウンドでメッセージを複製します。</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1">DISQUEはとあるメッセージに対して、指定されたretry time後にconsumerがメッセージを処理することができなかった(その通知がなかった)場合、自動的にそのメッセージを再キューイングします。</span></p>
+<p class="p4"><span class="s1">consumer側がメッセージを明示的に再キューイングする処理は必要ない感じです。</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1">DISQUEは、consumerが確実にメッセージを処理した(別の言い方をすれば、すでに処理されたジョブを通知する)ということを知るために、明示的な通知手段を用います。</span></p>
+<p class="p4"><span class="s1">DISQUEのキューは、ぶっちゃけベストエフォート型の順序保証を提供します。</span></p>
+<p class="p4"><span class="s1">それぞれのキューはメッセージの順番をその生成時間から決めています。メッセージが作成されたノードのwallclockが基準になります。</span></p>
+<p class="p4"><span class="s1">同じノードで作成されたメッセージは通常、作成された順番で配信される感じです。</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1">異なるnodeの異なるwallclockを基準にしてるので、これはまあ一般的なorderingではないです。例えば、次のようなケース。</span></p>
+<p class="p4"><span class="s1">・メッセージがretry time内で配信されず、ノードのロードバランシングと調停処理を加味して別のノードに再キューイングされた時</span></p>
+<p class="p4"><span class="s1">(この際、consumerは元のメッセージを作ったのとは別のノードから、そのノードが自分のwallclockで作成し直したメッセージを受け取ることになります。)</span></p>
+<p class="p4"><span class="s1">しかしまあ、メッセージが必ずしもランダムな順序で配信されるか、というとそうではなく、通常は最初に作成されたメッセージが最初に配信される感じです。</span></p>
+<p class="p4"><span class="s1">DISQUEは厳格なFIFOのセマンティクスを提供しません。なので、技術的に言えばメッセージキューと呼ばれるべきではありません。正しくは、いい感じのメッセージブローカー、です。</span></p>
+<p class="p4"><span class="s1">しかし、私は現時点では、IT業界でのメッセージキューは多くの場合、あんまり深刻に考えずに、別に順序を保証することが必須ではないもの、、ようはブローカーとして使用されているんじゃないかな～と思っています。</span></p>
+<p class="p4"><span class="s1">その意味で、私はDISQUEをメッセージキューと呼んでいいんじゃないか、って考えています。</span></p>
+<p class="p2"><br></p>
+<p class="p4"><span class="s1">DISQUEはメッセージのコントロールに際して、3つの時間関連のパラメータを提供しています。あと一個、replicationに関するパラメータがあります。</span></p>
+<p class="p4"><span class="s1">これらを使って、job(メッセージ)の以下のような要素がコントロールできます。</span></p>
+<p class="p4"><span class="s1">1. replication 複製: 何個のノードがメッセージの複製を持つか</span></p>
+<p class="p4"><span class="s1">2. delay 遅延: DISQUEがメッセージ成果物を作り、キューにメッセージを入れるまで待機する時間</span></p>
+<p class="p4"><span class="s1">3. retry リトライ: メッセージが配信されずに、もう一度キューイングされるまでにかかる時間</span></p>
+<p class="p4"><span class="s1">4. expire 有効期限: キューの中にメッセージが最大何秒残っていていいか(配信完了、失敗を問わずメッセージ作成からこの時間が経過したらメッセージを消す)</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1">最後に。DISQUEはデフォルトオフなオンディスクでのメッセージ永続化をサポートしていますが、それは1つのデータセンターのセットアップ中の処理や再起動時の処理に便利です。</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p3"><b>ACKs and retries</b></p>
+<p class="p4"><span class="s1">DISQUEでの「少なくとも一回配信」セマンティクスの実装は、特定のケースの障害中でも複数の無用な配信を回避するために設計されています。</span></p>
+<p class="p4"><span class="s1">複数の配達が発生しないことを保証することはできませんが、それでもまあ、最低でも一回といいつつ複数回の配信を許容可能な（または明示的な処理ができる）ケースがあると思ってます。守れるにこしたことはないんですが。</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1">例としては、ユーザーに電子メールを送信するケースです。（ユーザーが重複した電子メールを取得するとか、まあ、それはひどすぎるってほどの出来事ではありませんが、可能な場合は回避するのが大事ですよね。）</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1">複数の配信をできるだけ避けるために、DISQUEはクライアントACKというのを使用しています。</span></p>
+<p class="p4"><span class="s1">consumerはメッセージを正しく処理できた際、その事をDISQUEに伝えます。</span></p>
+<p class="p4"><span class="s1">その際、ACKは複数のノードに複製され、最速で破棄されます。クラスタの中の複数のノードが一つのACKの対象のjobを持っている事は滅多にない状況なので。</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1">メモリ圧力下や、または特定の障害シナリオ下で、ACKは最終的に破棄されます。</span></p>
+<p class="p4"><span class="s1">具体的には以下のようなケースがあります：</span></p>
+<p class="p4"><span class="s1">1. jobが複数のノードに複製されたが、普通は一つのキューに一つのノードがあるだけなので、メモリ内にjobがあるという状態とキューイングしてあるという状態には違いがあります。(???)</span></p>
+<p class="p4"><span class="s1">2. 複数のノードがあるメッセージのコピーを持ち、ACKが得られずに一定の時間が経過した場合、メッセージは再キューイングされます。その際、複数のノードでできるだけ再キューイングが発生しないように努力するようになっています。(なのでACKは結果的に消される、みたいな話？)</span></p>
+<p class="p4"><span class="s1">3. ACKは、networkに断絶がない状態 + なんの失敗もせずにメッセージが処理された状態だと、最終的に最速で、メッセージのクラスタ間での複製とガベコレが行われます。</span></p>
+<p class="p2"><br></p>
+<p class="p3">もしノードがjobのコピーを持っている状態で、特定のconsumerとjobとの間に断絶があり、それでもconsumerからの通知(ACK)がretry設定時間より先に到達した場合、そのACKはきちんと処理され、メッセージの再キューイングを避ける事ができます。</p>
+<p class="p3">同様に、jobは最低でも一つのノードが利用できる場合、ACKを受け取る事ができます。また障害復帰時、そのACKはまだメッセージのコピーを保持している他のノードにも通知されます。</p>
+<p class="p3">このようにACKは、複数回の同じメッセージ配信を避けるべく、何回か複製/再作成が行われる、メッセージが配信されたことの証明になっています。実際。</p>
+<p class="p4"><span class="s1">すでに述べたように、複製や再試行を制御するために、DISQUEジョブは、次の関連プロパティがあります。複製、遅延、再試行、有効期限についてのやつです。</span></p>
+<p class="p4"><span class="s1">retry=0なjobは、キューに「一回のみ」保持されます(このケースだとreplicationが1より大きくても無意味な感じになり、もしセットしたらエラーが出ます&lt;訳注:本当に出るのか試したことないや。何ていうエラーがでるんだろうな&gt;)。</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1">で、そのメッセージは一発で配信されるか、配信失敗して未達のまま残るかします。</span></p>
+<p class="p4"><span class="s1">jobがディスクに保持されている間は、キューはそれらを保持しません。この動作は、永続化設定が何であれ、複数ノードがクラッシュから復帰した際に保証されています。</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1">ただし、たとえばアップグレード時などにシステム管理者によってノードが手動で再起動された際には、キュ​​ーが正しく保持され、この場合はストア/ロード操作がatomicなので、スタートアップ時にリロードされます。この時レースコンディションが発生する可能性はありません(jobがすでにclientに送付され、そのjobが同時にディスクに保存された場合を除く)。</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p3"><b>Fast acknowledges</b></p>
+<p class="p4"><span class="s1">DISQUEは、FASTACKコマンドという「処理されたメッセージを確認するためのより高速なACK」をサポートしています。(これがデフォルトっぽい)</span></p>
+<p class="p4"><span class="s1">到達通知について普通に考えた場合、メッセージがノード間で交換されることから、それはとてもつらい手法になる感じです。</span></p>
+<p class="p4"><span class="s1">通常の通知は以下のような感じです:</span></p>
+<p class="p4"><span class="s1">1. クライアントが1つのノードAにACKJOBを送信</span></p>
+<p class="p4"><span class="s1">2. ノードAは、コピーを持っている他のすべてのノードにSETACKメッセージを送信</span></p>
+<p class="p4"><span class="s1">3. それに対してすべてのノードはGOTACKで答える</span></p>
+<p class="p4"><span class="s1">4. ノードAは、最終的に他のすべてのノードにDELJOBを送信</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1">注：なんらか失敗が発生した場合の実際のガベージコレクションはもっと複雑で、あとでステートマシンの説明が書いてあります。上記の進行で処理時間の99％にあたります。</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1">メッセージが3つのノードに複製されている場合、重複した配信を避けるために真面目に頑張るならば、その到達通知には 1 +2 +2 +2のノード間の通信を必要とします。</span></p>
+<p class="p4"><span class="s1">で、それを代替する「高速ACK」は、信頼性が低いながらとても高速で、より少ないメッセージ交換を行うように考えられています。</span></p>
+<p class="p4"><span class="s1">以下のような感じで動きます。</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1">1. クライアントは1ノードにACKJOBを送信</span></p>
+<p class="p4"><span class="s1">2. 受け取ったノードは対象のjobを破棄、ノードがjobを認識していなかった場合はコピーを持っている可能性のあるすべてのノード か すべてのクラスタに対して対象jobのDELJOBを送信</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1">ネットワークの断絶などによって、配信完了の通知がメッセージのコピーを保持しているノードに到達できない場合、そのノードは復帰時に、「すでに配信され、破棄されたはずのメッセージ」を再度配信してしまう可能性があります。これは、誰もそのメッセージが「すでに配信されたものだ」という情報を持っていないために起こり得ます。</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1">あなたが使用しているネットワークの信頼性が非常に高い場合は、パフォーマンスに対して関心が向いているでしょうし、別に複数回配信されても困らないんじゃないでしょうか。というわけでFASTACKは有効な手段だと思っています。</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p3"><b>Disque and disk persistence</b></p>
+<p class="p3"><b>Job IDs</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>そのうち気がむいたら。</p>
+</body>
+</html>
