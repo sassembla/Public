@@ -15,12 +15,12 @@
   </style>
 </head>
 <body>
-<p class="p1"><b>Disque～～～</b></p>
+<p class="p1"><b>Disqueを使って遊ぶ</b></p>
 <p class="p2"><br></p>
 <p class="p3"><b>概要</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>redis作ってた人が作ってるよ～って言ってた分散メッセージブローカーがgithubにきてた。</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
-<p class="p3"><span class="Apple-tab-span">	</span>disque</p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>disque</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/antirez/disque">https://github.com/antirez/disque</a></p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
@@ -35,56 +35,66 @@
 <p class="p2"><br></p>
 <p class="p3"><b>serverたてる</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>disque-server をぶったたくと起動する。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>初期ポートは7711になっている。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>初期ポートは7711になっている。このへんはconfがついてるのでそのへんと合わせてセットみたいな感じ。</p>
 <p class="p3"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202015-05-03%2018.04.15.png" alt="スクリーンショット 2015-05-03 18.04.15.png"></p>
 <p class="p2"><b></b><br></p>
 <p class="p2"><b></b><br></p>
 <p class="p3"><b>備え付けのc－clientをつなぐ</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>disqueのserverに対して対象となるport指定でclientを起動できる。これがジョブ単位 = nodeになるっぽい。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>disqueのclientは複数のserverに対して通信をすることができる。(multi-masterってこのことか</p>
+<p class="p3"><span class="Apple-tab-span">	</span>disqueのclientは複数のserverに対して通信をすることができる。(multi-masterってこの事か</p>
 <p class="p3"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202015-05-03%2018.11.09.png" alt="スクリーンショット 2015-05-03 18.11.09.png"></p>
 <p class="p3"><span class="Apple-tab-span">	</span>コマンドの単位とかなんかまだ変わりそうな気がする。</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
-<p class="p4">addjob queue body 0</p>
-<p class="p3"><span class="Apple-tab-span">	</span>で、addjobでqueueという名称のキューに対してbodyというメッセージを送っている。 最後の0は timeout<b>。</b></p>
+<p class="p4">addjob queueName messageBody 0</p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、addjobでqueueNameという名称のキューに対してmessageBodyというメッセージを送っている。 最後の0は timeout<b>。</b></p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
-<p class="p4">getjob from queue</p>
-<p class="p3"><span class="Apple-tab-span">	</span>で、queueというキューからメッセージを受け取っている。</p>
+<p class="p4">getjob from queueName</p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、queueNameというキューからメッセージを受け取っている。</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>Regisのpub-subとかと異なるのは、</p>
 <p class="p3"><span class="Apple-tab-span">	</span>・subscribeのための準備がない</p>
-<p class="p3"><span class="Apple-tab-span">	</span>・複数のmasterを持てる</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・複数のmasterを起動時に指定して持てる</p>
 <p class="p3"><span class="Apple-tab-span">	</span>というあたり。</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>複数のmasterに対して誰かがjobを投げて、複数のmasterに対してgetjobしてる誰かが受け取る、という仕組み。</p>
 <p class="p3"><span class="Apple-tab-span">	</span>producerとconsumerそれぞれの動作ができるよ、という感じか。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>仲介として、nodeという単位でメッセージのreplicationとか保持が行われる。</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>んで、multicastがしたい時とかどうやればいいんだろう？</p>
-<p class="p3"><span class="Apple-tab-span">	</span>→addjobする対象を増やす。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>→addjobする対象( = ターゲットとなるqueue)を増やす。</p>
 <p class="p3"><span class="Apple-tab-span">	</span>なるほど。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
-<p class="p3"><b>フルメッシュさ</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>nodeが</p>
-<p class="p2"><br></p>
-<p class="p2"><br></p>
-<p class="p3"><b>良いなーと思ったところ</b></p>
+<p class="p3"><b>ちょっと使って良いなーと思ったところ</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>client側から指定できる、node自体の溜まってる内容をチェックする仕掛けがあること。</p>
 <p class="p3"><span class="Apple-tab-span">	</span>addjob オプションの maxlen がそれ。</p>
 <p class="p3"><span class="Apple-tab-span">	</span>試しに maxlen を2とかにしてaddjobしたら、client側がエラーを得ることができる。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>これで、送信者側からキューが詰まってるかどうか楽にわかる。もちろん上位での監視は必要だけど。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>これで、送信者側からキューが詰まってるかどうか楽にわかる。もちろん上位での監視は別途必要なのだけど。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>機構的に、役割の割り振りをclient-serverでどうやったら最速になるか、というのを、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>多重配信の可能性を残しつつも最低でも一回行う、というのを基礎に組んでいる感じ。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>redsのpub-subとかと比べると、clientのやるべき事がちょっと増えている反面、完結かつ高速になってるんじゃねーかなーという感じ。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>lua client</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>nginx-lua-moduleから使うので、書いてる。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>pub-sub両方する。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>簡単ぽい。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>upstreamに対してpub、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>このクライアントに対してのdownstreamに対してsubを行う。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>制御用の機構として、control用のqueueに対してdownstream queue nameを知らせる必要があるっぽい。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>簡単ぽい。<span class="Apple-tab-span">	</span></p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>Unity client</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>こちらはC#。とある理由で使うので書いてる。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>pub-sub両方する。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>複数のdownstreamのqueueに対してメッセージを投げようと思う。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>upstreamのqueueからは聞きまくる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>制御用の機構としてqueueNameの登録をどっかでうけとらないといけないので、control用のqueueについても聞く。</p>
 <p class="p3"><span class="Apple-tab-span">	</span>簡単ぽい。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
 </body>
 </html>
