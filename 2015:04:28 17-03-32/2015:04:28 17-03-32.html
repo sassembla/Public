@@ -54,11 +54,11 @@
 <p class="p3"><span class="Apple-tab-span">	</span>で、queueNameというキューからメッセージを受け取っている。</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>Regisのpub-subとかと異なるのは、</p>
-<p class="p3"><span class="Apple-tab-span">	</span>・subscribeのための準備がない</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・subscribeのための準備処理がない(メッセージブローカー一筋！　単一用途だからな！)</p>
 <p class="p3"><span class="Apple-tab-span">	</span>・複数のmasterを起動時に指定して持てる</p>
 <p class="p3"><span class="Apple-tab-span">	</span>というあたり。</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>複数のmasterに対して誰かがjobを投げて、複数のmasterに対してgetjobしてる誰かが受け取る、という仕組み。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>複数のmasterに対して誰かがaddjobでjobを投げて、複数のmasterに対してgetjobしてる誰かが受け取る、という仕組み。</p>
 <p class="p3"><span class="Apple-tab-span">	</span>producerとconsumerそれぞれの動作ができるよ、という感じか。</p>
 <p class="p3"><span class="Apple-tab-span">	</span>仲介として、server側で、nodeという単位でメッセージのreplicationとか保持が行われる。</p>
 <p class="p2"><br></p>
@@ -76,13 +76,17 @@
 <p class="p3"><span class="Apple-tab-span">	</span>機構的に、役割の割り振りをclient-serverでどうやったら最速になるか、というのを、</p>
 <p class="p3"><span class="Apple-tab-span">	</span>多重配信の可能性を残しつつも最低でも一回行う、というのを基礎に組んでいる感じ。</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>redsのpub-subとかと比べると、clientのやるべき事がちょっと増えている反面、完結かつ高速になってるんじゃねーかなーという感じ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>順の保持を完璧までは頑張らない + 障害中とかで復帰時に同じメッセージを複数回受信する可能性があり得るため、clientのやるべき事がちょっとある。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>(順の組み立てに関しては諦めていいんじゃないかな～っていう頻度になるような設計に見えた。複数回のほうは何かガード要素を入れる必要がありそう。)</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>トレードオフでわずかなこれらを残した反面、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ある程度簡潔かつ高速になってるんじゃねーかなーという感じ。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>lua client</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>nginx-lua-moduleから使うので、書いてる。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>upstreamに対してpub、</p>
-<p class="p3"><span class="Apple-tab-span">	</span>このクライアントに対してのdownstreamに対してsubを行う。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>upstreamに対してaddjob、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>このクライアントに対してのdownstreamに対してgetjobを行う。</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p3"><span class="Apple-tab-span">	</span>制御用の機構として、control用のqueueに対してdownstream queue nameを知らせる必要があるっぽい。</p>
 <p class="p3"><span class="Apple-tab-span">	</span>簡単ぽい。<span class="Apple-tab-span">	</span></p>
@@ -90,7 +94,7 @@
 <p class="p2"><br></p>
 <p class="p3"><b>Unity client</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>こちらはC#。とある理由で使うので書いてる。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>複数のdownstreamのqueueに対してメッセージを投げようと思う。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>複数のdownstreamのqueueに対してaddjob投げようと思う。</p>
 <p class="p3"><span class="Apple-tab-span">	</span>upstreamのqueueからは聞きまくる。</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>制御用の機構としてqueueNameの登録をどっかでうけとらないといけないので、control用のqueueについても聞く。</p>
