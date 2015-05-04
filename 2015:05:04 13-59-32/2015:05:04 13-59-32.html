@@ -114,9 +114,10 @@
 <p class="p5"><span class="s1"></span><br></p>
 <p class="p5"><span class="s1"></span><br></p>
 <p class="p3"><b>Fast acknowledges</b></p>
-<p class="p4"><span class="s1">DISQUEは、FASTACKコマンドという「処理されたメッセージを確認するためのより高速なACK」をサポートしています。(これがデフォルトっぽい)</span></p>
-<p class="p4"><span class="s1">到達通知について普通に考えた場合、メッセージがノード間で交換されることから、それはとてもつらい手法になる感じです。</span></p>
-<p class="p4"><span class="s1">通常の通知は以下のような感じです:</span></p>
+<p class="p4"><span class="s1">DISQUEは、FASTACKコマンドという「処理されたメッセージを確認するためのより高速なACK」をサポートしています。</span></p>
+<p class="p4"><span class="s1">到達通知についてガチで考えた場合、メッセージがノード間で交換されることから、それはとてもつらい手法になる感じです。</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1">通常のACKコマンドの動作は以下のような感じです:</span></p>
 <p class="p4"><span class="s1">1. クライアントが1つのノードAにACKJOBを送信</span></p>
 <p class="p4"><span class="s1">2. ノードAは、コピーを持っている他のすべてのノードにSETACKメッセージを送信</span></p>
 <p class="p4"><span class="s1">3. それに対してすべてのノードはGOTACKで答える</span></p>
@@ -125,9 +126,9 @@
 <p class="p4"><span class="s1">注：なんらか失敗が発生した場合の実際のガベージコレクションはもっと複雑で、あとでステートマシンの説明が書いてあります。上記の進行で処理時間の99％にあたります。</span></p>
 <p class="p5"><span class="s1"></span><br></p>
 <p class="p4"><span class="s1">メッセージが3つのノードに複製されている場合、重複した配信を避けるために真面目に頑張るならば、その到達通知には 1 +2 +2 +2のノード間の通信を必要とします。</span></p>
-<p class="p4"><span class="s1">で、それを代替する「高速ACK」は、信頼性が低いながらとても高速で、より少ないメッセージ交換を行うように考えられています。</span></p>
-<p class="p4"><span class="s1">以下のような感じで動きます。</span></p>
+<p class="p4"><span class="s1">で、FASTACKは、信頼性が低いながらとても高速で、より少ないメッセージ交換を行うように考えられています。</span></p>
 <p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1">FASTACKは以下のような感じで動きます。</span></p>
 <p class="p4"><span class="s1">1. クライアントは1ノードにACKJOBを送信</span></p>
 <p class="p4"><span class="s1">2. 受け取ったノードは対象のjobを破棄、ノードがjobを認識していなかった場合はコピーを持っている可能性のあるすべてのノード か すべてのクラスタに対して対象jobのDELJOBを送信</span></p>
 <p class="p5"><span class="s1"></span><br></p>
