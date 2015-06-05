@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1347.57">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px 'Hiragino Kaku Gothic ProN'}
+    span.s1 {font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    span.s2 {font-variant-ligatures: no-common-ligatures}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>AssetRailsプレゼンテーション</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>UnityのAssetBundleを、<b>素材から大量に作成するUnityのAsset</b>。</p>
+<p class="p3"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>AssetRails</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://www.assetstore.unity3d.com/en/#!/content/27672">https://www.assetstore.unity3d.com/en/#!/content/27672</a></p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>例えばあるAssetBundleに<b>Prefab</b>と<b>画像</b>と<b>モデル</b>とかが含まれている場合、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>まずは大元になる素材をimport + 特定の処理を施したりして、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>・画像</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>・モデル</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>その後Prefabを作成し、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>・画像</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>・モデル</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>・Prefab</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>特定の組み合わせでAssetBundle化、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>・AssetBundle</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>AssetBundleをServerにアップするためのパッケージング</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>・AssetBundle + 情報ファイル</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>までを一手に引き受けて実行できる。</p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>男は黙って実行</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Assets/AssetRails/Samples/Resources(AssetRails).zip を解凍</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Samples/Resources(AssetRails)フォルダを PROJECT_FOLDER 直下へと移動</p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span></span><span class="s2">sh Assets/AssetRails/Samples/ShellScript/run.sh</span></p>
+<p class="p2"><b><span class="Apple-tab-span">	</span></b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>→PROJECT_FOLDER に、AssetBundleのファイルとフォルダ一式ができてるはず。</b></p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>CommamdLine Args</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>AssetRailsはコマンドラインから動かす。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ので、Jenkinsとかからでも問題なく動く。自動化しような。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>各フェーズでの操作と組み合わせが可能。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/AssetRails-Support/blob/master/CommandLineArgs.md#assetrails-command-line-args">https://github.com/sassembla/AssetRails-Support/blob/master/CommandLineArgs.md#assetrails-command-line-args</a></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>段階的なexport、importが可能なので、やり直さビリティが高い。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>例えばimportしただけのやつを試したり。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>コードで書くTransformer</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>難しいことはコードでやろう。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>やりやすくなるようにAPI化、分割されている。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/AssetRails-Support/blob/master/RunnersAPIDocument.md#assetrails-runners-api-document">https://github.com/sassembla/AssetRails-Support/blob/master/RunnersAPIDocument.md#assetrails-runners-api-document</a></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>Versioningというパッケージング処理</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>過去に作成したAssetBundleと追加部分のAssetBundleを元に、柔軟にリソースを追加、パッケージング、保持できる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/AssetRails-Support/blob/master/Versioning.md#versioning-in-deep">https://github.com/sassembla/AssetRails-Support/blob/master/Versioning.md#versioning-in-deep</a></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>あたらしいversionここで振ることができるんやで。運用に際して楽。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>他</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・すでにimport済みのリソースの.metaを使うことが可能</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>はい。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・実はAssetBundle以外も生成できる</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>コード全部入ってるので特定のExtendが可能</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・versionedList.json はカスタマイズ可能</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>可能っちゃあ可能</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>補記 2015/05/18 20:00</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・Bundlizerから先を切り出せるのではないか</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>いきなり全部はデカすぎる</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・ノードエディタほしいな？</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>あると印象変わるよね</p>
+</body>
+</html>
