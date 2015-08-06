@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1348.17">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    span.s1 {font: 12.0px Helvetica}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>nginx-luaなんちゃらのuuid直した</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ほぼ私信。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>利用していたuuid作成のためのライブラリが時間単位でしかidを作り出せない構造だったくせに、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>os.time()っていうミリ秒のデータではないのを使ってたので、せめて、、、ってことでミリ秒単位に改修した。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>あとサンプルというかテストベッドとして<span class="Apple-tab-span">	</span>まともな見た目にしてみた。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>READMEの内容も更新した。やったね！</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>nginx-luajit-websocket-pubsuber</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/nginx-luajit-websocket-pubsuber">https://github.com/sassembla/nginx-luajit-websocket-pubsuber</a></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>gameContext.html</b></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span></span>サーバ側の実装を起動する。gameContextという名で呼んでいるけど、ようは全Clientから接続される先。</p>
+<p class="p4"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202015-08-06%2019.31.41.png" alt="スクリーンショット 2015-08-06 19.31.41.png"></p>
+<p class="p2"><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>client.html</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>開くとclientとして機能する。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>メッセージ送ったり、gameContextからのpublishを受け付けることができる。</p>
+<p class="p4"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202015-08-06%2019.31.35.png" alt="スクリーンショット 2015-08-06 19.31.35.png"></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3">いやあ、手軽。</p>
+</body>
+</html>
