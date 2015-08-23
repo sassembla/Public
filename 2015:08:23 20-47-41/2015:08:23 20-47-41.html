@@ -1,0 +1,166 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1348.17">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #ebebeb}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #ebebeb; min-height: 18.0px}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>UnityEditorでScriptableObjectをListに仕舞うと楽しいがUndo対応でハマった</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ScriptableObjectをList内に突っ込んだ場合の挙動とUndo、Redoの組み合わせがキッツイ状態を作り出す。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>最小構成作ってみて遊んでみよう、と思ってハマった。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>成果物がこれ。</p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>UndoSample</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/UndoSample">https://github.com/sassembla/UndoSample</a></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>要素</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ScriptableObjectを適当なScriptからCreate、Listに仕舞った場合と、そうでない場合の挙動の差があってハマった。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・ControllerScriptからScriptableObjectをCreate、初期値をセット</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・Registerにその内容をセット、Undo/Redoを可能にする</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・UndoでScriptableObjectが消える</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・RedoでScriptableObjectが復活する</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>のだけど、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>例えばControllerScript側で次のようなコードを書いていたとする。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3">ControlScript.cs</p>
+<p class="p4"><span class="Apple-tab-span">	</span>List&lt;RecordObject&gt; contents;</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>private void CreateContents () {</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>contents = new List&lt;RecordObject&gt;();</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>{</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>var newRecord = ScriptableObject.CreateInstance&lt;RecordObject&gt;();</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>newRecord.data = 100;<span class="Apple-tab-span">	</span></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Undo.RegisterCreatedObjectUndo(newRecord, "Create RecordObject:" + newRecord.GetInstanceID());</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>contents.Add(newRecord);</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}</p>
+<p class="p4"><span class="Apple-tab-span">	</span>}</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>CreateContentsメソッドが呼ばれたタイミングで、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・RecordObjectのリストを作成して新規作成</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・作成したRecordObjectのdataパラメータに100をセット</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・UndoスタックにCreateしたことを記録</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・RecordObjectをcontentsに追加</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>んで、対象となるScriptableObjectを継承したRecordObjectはこんな感じ。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3">RecordObject.cs</p>
+<p class="p4">public class RecordObject : ScriptableObject {</p>
+<p class="p4"><span class="Apple-tab-span">	</span>public int data;</p>
+<p class="p4">}</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、Undo(command + Z)を行うとどうなるか。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>作成されたRecordObjectは破棄される。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>OnDisabledとかメソッドを持っていたらしっかりと呼ばれる。</p>
+<p class="p2"><br></p>
+<p class="p3">RecordObject.cs</p>
+<p class="p4">public class RecordObject : ScriptableObject {</p>
+<p class="p4"><span class="Apple-tab-span">	</span>public int data;</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>private void OnDisable () {</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>data = 1;</p>
+<p class="p4"><span class="Apple-tab-span">	</span>}</p>
+<p class="p4">}</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>例えば data を 1 にする、とかやれば、この場でdataが1になったあとにDisableされる。はず。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、ここで、List&lt;RecordObject&gt; contents に入っているオブジェクトはどうなるのか？っていうと、</p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>影響を受けない。</b></p>
+<p class="p2"><b><span class="Apple-tab-span">	</span></b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>nullにならない。</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>勿論dataは1にならない。</b></p>
+<p class="p2"><b><span class="Apple-tab-span">	</span></b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>DisableされたあとDestroyされてるのでnullになるのでは？ と思ったのだが、<b>Listに直接入れた場合はそうはならない。</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ちなみにListに入れずに、インスタンスを一枚噛ませて保持しようとすると、その場合ScriptableObjectが<b>Undo = Destroy後にnullになった。</b></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>そのケースはListのケースの説明が終わってから書く。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>Listに直接入っているScriptableObjectは大元がUndoで消されたとしても影響を受けない</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Destroyしても元気に活動を続ける ControlScript.cs の List&lt;RecordObject&gt; contents 内のScriptableObject。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>例えば <b>ScriptableObject .GetInstanceID</b> メソッドを実行しても、nullではないので元気にIDを返してくる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>そこで、Redoするとどうなるのか？</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ScriptableObjectのCreateのUndo -&gt; Redoは、ちゃんとScriptableObjectのIDもRedoしてくれる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>つまり<b>Undoで消したScriptableObjectと同じInstanceIDが、Redoで作り出されたScriptableObjectにも振られる、と。</b></p>
+<p class="p2"><b></b><br></p>
+<p class="p4"><b>Create from ScriptController -&gt; この時のInstanceIDが-100</b></p>
+<p class="p4">Undo -&gt; 消える</p>
+<p class="p4"><b>Redo -&gt; InstanceIDが-100で戻る</b></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ところで、手元に残っているListにも、、なんだ、、まだ元気な、、nullになってないScriptableObjectのインスタンスがあってさ、、、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>同じID -100 を返してきたりする。　うーん。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Listに突っ込むことで参照が消えなくなってるみたいなのがあるのかなあ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>とりあえずScriptableObjectはひたすらいろいろ書く羽目になって辛いのでできるだけ特定の用途以外の内容を書かない方向で済ませたい。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>でこれでListに直接入ってるケースは終了。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>んで、</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>Listに入れず、所持オブジェクトを適当に一個作ってそれを管理する場合</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>以下のような構成にすると、ScriptableObjectは、<b>すべての箇所で、</b>Undoのタイミングできちんとnullになる。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3">ControlScript.cs</p>
+<p class="p4"><span class="Apple-tab-span">	</span>List&lt;Content&gt; contents;</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>private void CreateContents () {</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>contents = new List&lt;Content&gt;();</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>contents.Add(new Content());</p>
+<p class="p4"><span class="Apple-tab-span">	</span>}</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>contentsは変わらずListなんだけど中身が下記。</p>
+<p class="p2"><br></p>
+<p class="p3">Content.cs</p>
+<p class="p4">public class Content {</p>
+<p class="p4"><span class="Apple-tab-span">	</span>public readonly string contentId;</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>public readonly int recordObjId;</p>
+<p class="p4"><span class="Apple-tab-span">	</span>public RecordObject recordObj;</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>RecordObjectを持ったインスタンス。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>とすると、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>List&lt;RecordObject&gt; contents<span class="Apple-converted-space">  </span>-&gt; List&lt;Content&gt; contents に変わっただけ、、に見えるんだけど、</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ScriptableObjectであるRecordObject recordObj<span class="Apple-converted-space">  </span>がUndoでnullになるタイミングで、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Contentの保持しているrecordObjもnullになる。</p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>Listに直接入ってるScriptableObjectは影響を受けないのに、</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>Listに入ってるContentが保持してるScriptableObjectは影響を受けることができる。</b></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ああややこしい。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Listに直接ScriptableObjectしまうとなんかなるのはもうなんだ、そんなことしねーよバーーカ！！みたいな気持ちで見なかったことにした。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>おかげで都合のいいUndo/Redoを実装することができた。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ここであげたコードを含むリポジトリを下記に用意した。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>UndoSample</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/UndoSample">https://github.com/sassembla/UndoSample</a></p>
+</body>
+</html>
