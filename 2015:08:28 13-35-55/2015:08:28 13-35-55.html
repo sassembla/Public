@@ -1,0 +1,227 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1348.17">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 17.0px 'Hiragino Kaku Gothic ProN'}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #ebebeb}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #ebebeb; min-height: 18.0px}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>CEDEC2015 Day3 メモとか</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>メモ</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p4"><b>物理ベース時代のライトマップベイク奮闘記</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>シリコンスタジオの方。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>ライトマップの効果</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>最終出力時まで一貫して効果的。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>ワークフローの構築</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>3ds Max + V-Ray</p>
+<p class="p3"><span class="Apple-tab-span">	</span>メンタルレイのノイズが気に入らなかったり時間かかったりなのでV-Ray</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これ資料アップされるの待ち遠しいな</p>
+<p class="p3"><span class="Apple-tab-span">	</span>生成時のいろんなツールのつぎはぎパイプラインすごくつらそう</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>正しいライトマップ</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>V-Rayは物理ベースレンダリング</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ライトマップに書き込まれるべき値</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>GrobalIllumination</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>間接光による値</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>＝</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>間接光による照度</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>あとDirectionalLightの成分とか見てみて云々</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>クオリティ</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ノイズの低減</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ライトマップが適応されているものといないものを明確に分けられている</p>
+<p class="p3"><span class="Apple-tab-span">	</span>たとえばロボとかのディフューズはライトマップのデータから引っ張られている(?)</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>質問してみた</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>どんな言語とかでツールチェーン組めたら幸せな感じがありますか？</p>
+<p class="p3"><span class="Apple-tab-span">	</span>-&gt;なんでも。一貫して安定してれば。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>なるほど</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p4"><b>IoT向け汎用protocol MQTTのリアルタイムゲーム通信利用と実装、そして未来へ…</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>崖っぷちバスターズでの事例</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>技術採用プロセスとか。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>IoTとは</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>はい</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>ネットワークゲームのはなし</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>2010年代のネットワークゲーム</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>高速なインタネット</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>MO/MMO</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>eSports</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>スマフォ</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>常時接続前提のゲームあるよね</p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>環境</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>3/4G</p>
+<p class="p3"><span class="Apple-tab-span">	</span>最低で2MB/sとか</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>崖っぷちバスターズ事例</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>シングルプレイ</p>
+<p class="p3"><span class="Apple-tab-span">	</span>マルチプレイ</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>シングルプレイだとWebAPI</p>
+<p class="p3"><span class="Apple-tab-span">	</span>マルチプレイ</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>バトル部分はリアルタイム、4人</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Bisqueっていう開発基盤をつかっている</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Cocos2Dとかをベースにクロスプラットフォームな</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>前提としての会社の強み、弱み</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Web APIは得意</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>クラウド利用実績とか</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>リアルタイムサーバ、クライアントとかの構築はやったことない</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>目指したこと</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・実装スピード重視</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・1Room 4player ターン制</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・レイテンシ最大1秒</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>プロトタイプの結果、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>クライアントにHostをたて、サーバはメッセージのpub/subに徹するタイプになったぽい</p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>比較検討したもの</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>polling</p>
+<p class="p3"><span class="Apple-tab-span">	</span>WS</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Socket.io</p>
+<p class="p3"><span class="Apple-tab-span">	</span>MQTT</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Platform機能(iOSのやつとか</p>
+<p class="p3"><span class="Apple-tab-span">	</span>商用エンジン</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>インフラ、クライアント、ゲーム性の観点からMQTTを選択</p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>(彼らにとっての)MQTTとは</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>pub/sub</p>
+<p class="p3"><span class="Apple-tab-span">	</span>低速、不安定なネットワークでも動く</p>
+<p class="p3"><span class="Apple-tab-span">	</span>軽量</p>
+<p class="p3"><span class="Apple-tab-span">	</span>QoSあったり</p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>MQTTの解説</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>はい</p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>実装について</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>全体像</b></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span></b>MQTTBrokerServerをBattleInstanceServerとして利用</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Topic -&gt; Room</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Room管理はAPIServer制御</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>マルチプレイバトル</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>WebAPIでマッチング</p>
+<p class="p3"><span class="Apple-tab-span">	</span>マッチング情報をBrokerServer(BattleInstanceServer)へと転送</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Clientの一人がHostになり、SessionMasterとして同期移譲管理</p>
+<p class="p2"><br></p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>broker</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>room</p>
+<p class="p6"><br></p>
+<p class="p5"><span class="Apple-tab-span">	</span>c1<span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>c2<span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>c3</p>
+<p class="p5"><span class="Apple-tab-span">	</span>(Host)</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>(これクライアント側正当性みたいなのクライアント自発的なやつなので、チートしやすそうだな～～～</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>暗号化してようがロジックはクライアントの中にあって暗号化手段は解析できるんで、、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>端末から出るデータの正当性判断要因や拒否機構がどこにも無いのでチートに気づけなそう、、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>なんだけどこのゲームの場合必殺技のコスト無視とかそのへんで出そうなくらいで</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>チートされた場合のダメージと比較して看過してるのかな)</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Hostが落ちた場合は別のClientに移譲する</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>BrokerServerの実装は？</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>一台あたりの性能、コストを最大化したい</p>
+<p class="p3"><span class="Apple-tab-span">	</span>高負荷時の安定性<span class="Apple-tab-span">	</span>あたりを基準に見ている</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>MosquittoとRabbitMQ with MQTT Plugin が候補に残った</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Mosquitto</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>シングルスレッド、クラスタリングする場合は自作</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>RabbitMQ</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>マルチスレッド、クラスタリングあり &lt;- RabbitMQを選択。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>構成案</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Broker Standalone parallel</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>結局パフォーマンス劣化、接続時間のトレードオフなどからクラスタリングせず。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>AWSでのオートスケーリングが効く環境を構築して云々</p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b>アプリケーション編</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>クライアントライブラリの実装の話</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>選定</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>フルスクラッチ or paho or Mosquitto</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ライブラリで使えればいいよねって感じでMosquitto(libmosquitto)を選択。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>BSDソケット使ってるんだけどiOS/Androidでいろいろ問題が。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>→Mosquittoのコードには手を加えないでいいように工夫(Define置き換えとか)</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>トピック一覧</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Common</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ブロードキャスト</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>System</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ブロードキャスト</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Host</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>相互死活判定</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ゲストが投げるとHostに集約される</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Private/ゲストID</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ホストがゲストに対して送付</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>お互いに送れば擬似P2P</p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>QoS</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>アニメーション情報とかはQoS0</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>衝突、必殺技などの必須情報はQoS1</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>最悪でもQoS1のもののみが届けばゲームが成立するのを想定して振り分けている。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>QoS1で送っているものについてはさらに再送をする機構をつけた(?)</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>データ構造</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>msgpack</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>今後はpahoに乗せ換える予定</p>
+<p class="p3"><span class="Apple-tab-span">	</span>あとElixirとか試し中</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+</body>
+</html>
