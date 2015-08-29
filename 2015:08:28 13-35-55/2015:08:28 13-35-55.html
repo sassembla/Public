@@ -123,7 +123,7 @@
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>インフラ、クライアント、ゲーム性の観点からMQTTを選択</p>
 <p class="p2"><br></p>
-<p class="p3"><b><span class="Apple-tab-span">	</span>(彼らにとっての)MQTTとは</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>(ここでの)MQTTとは</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>pub/sub</p>
 <p class="p3"><span class="Apple-tab-span">	</span>低速、不安定なネットワークでも動く</p>
 <p class="p3"><span class="Apple-tab-span">	</span>軽量</p>
@@ -152,14 +152,37 @@
 <p class="p5"><span class="Apple-tab-span">	</span>c1<span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>c2<span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>c3</p>
 <p class="p5"><span class="Apple-tab-span">	</span>(Host)</p>
 <p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>送信するデータはクライアント側で暗号化してる。</p>
+<p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>(これクライアント側正当性みたいなのクライアント自発的なやつなので、チートしやすそうだな～～～</p>
-<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>暗号化してようがロジックはクライアントの中にあって暗号化手段は解析できるんで、、</p>
-<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>端末から出るデータの正当性判断要因や拒否機構がどこにも無いのでチートに気づけなそう、、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>暗号化してようが暗号化ロジックはクライアントの中にあってクライアント開ければ暗号化手段はそのまま利用できるんで、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>この部分の意味はネットワークとかプロキシとかでの中間変更不可という要素に収まるんじゃなかろうか。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>んでクライアントから出たデータをそのままpub/subしちゃうので、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>データの正当性判断要因や拒否機構がどこにも無く、かつクライアント群という全員クライアント状態なので、運営がチートに気づけるチャンスがなさそうな気がする、、</p>
 <p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>もうちょい詳しく書くと、全員クライアントで神視点的なバリデータとか状態変化監視者が不在なので、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>誰がどんなデータを出しても、受け取る側はとりあえず正しいと思うしか無くて受け取っちゃう、みたいなところがある。</p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>なんだけどこのゲームの場合必殺技のコスト無視とかそのへんで出そうなくらいで</p>
-<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>チートされた場合のダメージと比較して看過してるのかな)</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>チートされた場合のダメージと比較して看過してるのかな</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>Hostが落ちた場合は別のClientに移譲する</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>守りたいのが公平さなのか自作のシステム堅牢性なのかみたいな話で、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ぶっちゃけひどい目にあうユーザが居ない(PVP要素がない、協力プレイで味方が強い分には問題ない)のであれば、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>暗号化でシステム堅牢性に目を向けるだけっていうのはメッチャ健全で良いなあと思った。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>)</p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>余談</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>PhotonがClient-ClientRPCとかをサポートしてて使うのすごく楽なんだけど、あれ使ってクライアント群内にHost作るとかそういう感じに進むと</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>PvPとかがあるゲームルールによってはチート情報を全クライアントで無条件にSyncしちゃってそれを誰もValidateできずに</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>最高にキッツイ状態になるので、何事もまずは選択肢増やして使う際に気をつけるべきだなあという感想。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>簡単にそういうのできるソリューションを選べると良いな。</p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>Hostが落ちた場合は別のClientに移譲する</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>これ地味にめっちゃ大変なはず、誰がNext Hostなのかを判断する要素がサーバ側に無いと楽にならないような、、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>WebAPI側で解決してたりするのかな。もしかしたらそうおっしゃっていたかもしれない。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>質問で聞いてみたかった。</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p3"><b><span class="Apple-tab-span">	</span>BrokerServerの実装は？</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>一台あたりの性能、コストを最大化したい</p>
@@ -212,7 +235,8 @@
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>最悪でもQoS1のもののみが届けばゲームが成立するのを想定して振り分けている。</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
-<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>QoS1で送っているものについてはさらに再送をする機構をつけた(?)</p>
+<p class="p3"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>QoS1で送っているものについてはさらに再送をする機構をつけた(?)</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>これどこでコントロールしてるんだろう。サマーレッスンの時間迫ってたので部屋でちゃった。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b><span class="Apple-tab-span">	</span>データ構造</b></p>
@@ -223,5 +247,19 @@
 <p class="p3"><span class="Apple-tab-span">	</span>あとElixirとか試し中</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
+<p class="p4"><b>サマーレッスン</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>整理券失くすとか凄まじいダメさを発揮しつついろいろあって復帰して観れた。<span class="Apple-tab-span">	</span>感謝しかない。。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>箇条書きで</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・人と対面する、っていうシーンなんだけど、これ火力あげるには他人の中の自分、みたいなのの表現が必要で、「これスペックとか表現で突破できるものなのかなあ、、超優秀な表現AI、そのグラフィック表現が必要な世界でメッチャ遠そう」みたいな感想。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・臨場感を感じさせるための工夫みたいなのはなんかしっくりこなかった。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・画質はCBのほうがよかったな～と思いつつ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・ユーザーが何かをしたい、っていうのを引き出す系統ばっかり触ってきたので、そういうタイプじゃないコンテンツだなと思った。PS3の「アフリカ」とかをちょっと思い出す。</p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>自分は「綺麗」っていうパラメータが何かを触る時のモチベーションとして長時間もたないタイプなので、なんか綺麗なだけだとつまらないんだなと思った。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>このへんは女子高生のお部屋モードだったら俺の感想は違ったんだろうか。あんま違わない気がする。</p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>VR、「許されるツッコミやすい隙」みたいなのがあれば、想像力の余地の世界、みたいなのがまた発生しそうな予感がある。</p>
 </body>
 </html>
