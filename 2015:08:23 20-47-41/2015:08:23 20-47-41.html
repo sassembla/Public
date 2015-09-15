@@ -16,7 +16,7 @@
   </style>
 </head>
 <body>
-<p class="p1"><b>UnityEditorでScriptableObjectをListに仕舞うと楽しいがUndo対応でハマった</b></p>
+<p class="p1"><b>UnityEditorでScriptableObjectをListに仕舞うと楽しいがUndo対応でハマった【後、よくした】</b></p>
 <p class="p2"><br></p>
 <p class="p3"><b>概要</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>ScriptableObjectをList内に突っ込んだ場合の挙動とUndo、Redoの組み合わせがキッツイ状態を作り出す。</p>
@@ -162,5 +162,32 @@
 <p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p3"><b><span class="Apple-tab-span">	</span>UndoSample</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/UndoSample">https://github.com/sassembla/UndoSample</a></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>追記</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ScriptableObjectでUndo/Redo管理するのいいよね？って思いつつ、「この辺きもいな」って疑念が消えなかったんだが、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>考え直して綺麗にすることができた。</p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b>re-考え方</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ScriptableObjectをRecordとして分散して持っていたのだが、よう考えたら「上位に一個だけ持って内容をRecord可能にすればいいのでは？」という気持ちになった。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・ScriptableObjectをWindowのOnEnableで作る</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・その下に全データを構築する</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・Recordしたい要素だけSerializeFieldをつける</p>
+<p class="p3"><span class="Apple-tab-span">	</span>という手で行けた。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>こうすることで、上位の一つのRecordだけをUndo/Redo対象にセットできる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>んで、問題として残るのは、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・new -&gt; Undo -&gt; newしたのが消える -&gt; Redo -&gt; newされて消されてたやつがnewされるがその際にはデフォルトのコンストラクタが使われる</p>
+<p class="p3"><span class="Apple-tab-span">	</span>というあたり。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これに関しては Undo.undoRedoPerformed で対象の監視とかをやってRedo後になんとかする、みたいな感じ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>汚い。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>あと、依然としてScriptableObjectがUnityEditorのコンテキスト仕切り直しタイミングで影響を受けてnullになることがあるので、相変わらずそのへんだけ対処する必要がある。まあはい。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
 </body>
 </html>
