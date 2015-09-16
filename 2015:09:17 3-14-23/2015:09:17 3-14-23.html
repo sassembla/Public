@@ -1,0 +1,141 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1348.17">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #ebebeb}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    span.s1 {font: 22.0px Helvetica}
+    span.s2 {font-kerning: none}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><span class="s1"><b>UnityEditor</b></span><b>の</b><span class="s1"><b>Undo/Redo</b></span><b>システムについて【解決編】【最新】のコピーそして完結</b></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>んっと</p>
+<p class="p3"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>これの続き。</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://sassembla.github.io/Public/2015:09:15%2020-56-09/2015:09:15%2020-56-09.html">http://sassembla.github.io/Public/2015:09:15%2020-56-09/2015:09:15%2020-56-09.html</a></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>以下の条件下であれば、ScriptableObjectを自分で用意しないでもUndo/Redoの完璧な追跡ができる感じだった。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>1.EditorWindowを使う</p>
+<p class="p3"><span class="Apple-tab-span">	</span>2.EditorWindowのインスタンスをUndo/Redoの対象とする</p>
+<p class="p3"><span class="Apple-tab-span">	</span>3.Undo/Redoしたいものに [Serializable] か [SerializeField] 句をセットする</p>
+<p class="p3"><span class="Apple-tab-span">	</span>4.複数の箇所から参照される要素はどちらかをプリミティブなものにする</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>実際にAssetGraphの実装でこのUndoの仕組みを使っているが、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>無茶苦茶シンプルなコードでうまくいきそう。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>順に条件の内容を追っていく。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>1.EditorWindowを使う</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>うん、GUI作るときは使うよね。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>2.EditorWindowのインスタンスをUndo/Redoの対象とする</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>EditorWIndowのインスタンスはUnityが管理してくれてる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ScriptableObjectのSubClassだけど、フラグ指定してあるので変なタイミングでnullになったりすることは無い。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>んで、ScriptableObjectのSubClassなので、Undo.RecordObjectに使用できる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Undoしたい変化を行う前に、WindowEditor内で、</p>
+<p class="p2"><br></p>
+<p class="p4">Undo.RecordObject(this, "Move Tack");</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>引き続いてUndoしたい変化を書く。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>それだけ。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>WindowEditorが保持してるListに対してのAddだろうが、RemoveAtだろうが、なんでもなんとかしてくれる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>前の記事で書いてたみたいな自前記録はまったく必要なかった。(どっかミスってて反映されてなかったんだと思う。)</p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b>3.Undo/Redoしたいものに [Serializable] か [SerializeField] 句をセットする</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>EditorWindowのクラスに含まれているものの中で、必要な要素にだけつける。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>たとえば<span class="Apple-converted-space"> </span></p>
+<p class="p2"><br></p>
+<p class="p4">public List&lt;AutoComponent&gt; autos = new List&lt;AutoComponent&gt;();<span class="Apple-converted-space"> </span></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>みたいなのをUndo/Redo可能にしたい場合は、</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p4">[SerializeField] public List&lt;AutoComponent&gt; autos = new List&lt;AutoComponent&gt;();</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>まあ、、当たり前だよな、、みたいな気持ちが出てくるが、SerializeFieldつけるだけで追跡してくれる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>この場合はAutoComponentっていう自作クラスを対象にしているので、AutoComponentクラス内のUndo/Redo対象にしたいものにもSerialize句をセットする簡単なお仕事が出る。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>クラス定義箇所にSerializable句、</p>
+<p class="p4">[Serializable] public class AutoComponent<span class="Apple-converted-space"> </span></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>あとクラス内の追跡したい項目にはSerializeField句を付ける。</p>
+<p class="p4">[SerializeField] private bool active;</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>自分は趣味でprivateとかの前にしてるけど、宣言の真上でももちろん効く。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>[SerializeField]をつけたものがさらに内部にパラメータをもっている場合、それらにも、、っていう感じになる。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>このあたりの理屈はUnityの中の人が書いてくれてる素晴らしい本があるのでそのへんが大変参考になった。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><b>Editor拡張入門</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://anchan828.github.io/editor-manual/">http://anchan828.github.io/editor-manual/</a></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>このへんの属性をつけるにあたって、入れ子になってるのがガンガン続く場合かなり面倒だけど、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>そこかしこでScriptableObjectを継承しまくってパラメータありコンストラクタが全く使えないよかメンテコスト的に劇安い。。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>4.複数の箇所から参照される要素はどちらかをプリミティブなものにする</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>文面からだけだとなんのこっちゃと。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>たとえばこんな感じの構造があったとする。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>EditorWindow<span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="s2">├</span> List&lt;Node&gt; nodes</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="s2">└</span> List&lt;Connection&gt; connections</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Nodeはノードウィンドウ一つ一つの型、ConnectionはNodeの間をつなぐ接続線。</p>
+<p class="p5"><span class="Apple-tab-span">	</span><img src="img.png" alt="img.png"></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ここで、Connectionの中に特定のNodeへの参照をNode startPoint とかの形で保持、とかやってると、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ConnectionのUndo/Redo時に困る。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>たとえば次みたいなコードがある場合だ。</p>
+<p class="p2"><br></p>
+<p class="p3">Connection.cs</p>
+<p class="p4">[SerializeField]Node startPoint;</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>何が起きるか。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>具体的には、いつか、GUI上でNode間にConnectionを追加したあと、Undo -&gt; Redoで再生成されるConnectionの中には、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>「Connectionの中のNodeの参照」があり、こいつの存在のせいで動作がややこしいことになる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>値は保っているんだけど、「作り出してしまう」ので、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>・上位階層から見たら孤立したNodeインスタンスが一個できる感じになる</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>・Connection内から見たら、パラメータは全部合ってるんで異変に気付けない</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>というワンダーランドができてしまう。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>なので、出来るだけ相互参照する要素の内容を小さくする、、みたいな原則を守るようにして、</p>
+<p class="p2"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>Connectionの中でNodeの参照を保持</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>↓</p>
+<p class="p4"><span class="Apple-tab-span">	</span>Connectionの中でNodeのId(string)を保持</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3">Connection.cs</p>
+<p class="p4">[SerializeField]string startPointNodeId;</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>というように変更すると、stringがどう生成されようがNodeのインスタンスが生成されるわけではないので、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>問題なくUndo/Redoが発生させられる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>まあそうしとくべきだったねみたいなところがある。idでコントロールしてて本当によかった。設計の勝利だ。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+</body>
+</html>

@@ -10,19 +10,24 @@
     p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px Helvetica}
     p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
     p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
-    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #ebebeb}
-    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #ebebeb; min-height: 18.0px}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 17.0px 'Hiragino Kaku Gothic ProN'}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #ebebeb}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #ebebeb; min-height: 18.0px}
     span.s1 {font: 22.0px 'Hiragino Kaku Gothic ProN'}
     span.Apple-tab-span {white-space:pre}
   </style>
 </head>
 <body>
-<p class="p1"><b>UnityEditor</b><span class="s1"><b>の</b></span><b>Undo/Redo</b><span class="s1"><b>システムについて【解決編】</b></span></p>
+<p class="p1"><b>UnityEditor</b><span class="s1"><b>の</b></span><b>Undo/Redo</b><span class="s1"><b>システムについて【解決編】【最新】</b></span></p>
 <p class="p2"><br></p>
 <p class="p3"><b>概要</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>UnityEditorのUndo/Redoを管理するシステムについて、</p>
 <p class="p3"><span class="Apple-tab-span">	</span>ScriptableObjectとかを使わないでも後付けで割と楽にUndo管理できるかんじになった。</p>
 <p class="p3"><span class="Apple-tab-span">	</span>採点してほしい。</p>
+<p class="p2"><br></p>
+<p class="p4"><b><span class="Apple-tab-span">	</span>☆この記事に書いてある内容は古くなった。もっともっともっと楽にUndo/Redo実現できた。</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>以下を見ような。</p>
+<p class="p2"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></b></p>
 <p class="p2"><b></b><br></p>
 <p class="p3"><b><span class="Apple-tab-span">	</span>サンプル</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/UndoSample">https://github.com/sassembla/UndoSample</a></p>
@@ -56,18 +61,18 @@
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>次のような場合を想定する。</p>
 <p class="p2"><br></p>
-<p class="p4"><span class="Apple-tab-span">	</span>オブジェクトid Aを生成</p>
-<p class="p4"><span class="Apple-tab-span">	</span> -&gt; オブジェクトid Bを生成、Bはオブジェクトid Aの下にぶら下がるような関係</p>
-<p class="p4"><span class="Apple-tab-span">	</span> -&gt; Undo</p>
-<p class="p4"><span class="Apple-tab-span">	</span> -&gt; オブジェクトid Bが消える</p>
-<p class="p4"><span class="Apple-tab-span">	</span> -&gt; Undo</p>
-<p class="p4"><span class="Apple-tab-span">	</span> -&gt; オブジェクトid Aが消える</p>
-<p class="p4"><span class="Apple-tab-span">	</span> -&gt; Redo</p>
-<p class="p4"><span class="Apple-tab-span">	</span> -&gt; オブジェクトid Aが復活(<b>この際呼ばれるのはデフォルトコンストラクタ</b>)</p>
-<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>出来上がるのはオブジェクトid A’</p>
-<p class="p4"><span class="Apple-tab-span">	</span> -&gt; Redo</p>
-<p class="p4"><span class="Apple-tab-span">	</span> -&gt; オブジェクトid Bを生成、、、するんだけど、オブジェクトAは存在してなくて、呼ばれちゃうのはデフォルトコンストラクタで、、、</p>
-<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>出来上がるのはオブジェクトid B’</p>
+<p class="p5"><span class="Apple-tab-span">	</span>オブジェクトid Aを生成</p>
+<p class="p5"><span class="Apple-tab-span">	</span> -&gt; オブジェクトid Bを生成、Bはオブジェクトid Aの下にぶら下がるような関係</p>
+<p class="p5"><span class="Apple-tab-span">	</span> -&gt; Undo</p>
+<p class="p5"><span class="Apple-tab-span">	</span> -&gt; オブジェクトid Bが消える</p>
+<p class="p5"><span class="Apple-tab-span">	</span> -&gt; Undo</p>
+<p class="p5"><span class="Apple-tab-span">	</span> -&gt; オブジェクトid Aが消える</p>
+<p class="p5"><span class="Apple-tab-span">	</span> -&gt; Redo</p>
+<p class="p5"><span class="Apple-tab-span">	</span> -&gt; オブジェクトid Aが復活(<b>この際呼ばれるのはデフォルトコンストラクタ</b>)</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>出来上がるのはオブジェクトid A’</p>
+<p class="p5"><span class="Apple-tab-span">	</span> -&gt; Redo</p>
+<p class="p5"><span class="Apple-tab-span">	</span> -&gt; オブジェクトid Bを生成、、、するんだけど、オブジェクトAは存在してなくて、呼ばれちゃうのはデフォルトコンストラクタで、、、</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>出来上がるのはオブジェクトid B’</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>オブジェクトid BをRedoしたつもりが、Bの生成にはデフォルトコンストラクタが呼ばれてしまい、</p>
@@ -99,51 +104,51 @@
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>これは<b>要素の途中削除を行わない限り</b>、Undoしたら最大1項目減り、Redoすれば最大1項目増える、という形になる。</p>
 <p class="p2"><br></p>
-<p class="p4"><span class="Apple-tab-span">	</span>こんなリストがあったとして、</p>
-<p class="p4"><span class="Apple-tab-span">	</span>[] (empty</p>
-<p class="p5"><br></p>
-<p class="p4"><span class="Apple-tab-span">	</span>このリストに何かを足す(Do</p>
-<p class="p4"><span class="Apple-tab-span">	</span>[0]</p>
-<p class="p5"><br></p>
-<p class="p4"><span class="Apple-tab-span">	</span>このリストにさらに何かを足す(Do</p>
-<p class="p4"><span class="Apple-tab-span">	</span>[0,1]</p>
-<p class="p5"><br></p>
-<p class="p4"><span class="Apple-tab-span">	</span>このリストに足したのをUndoする</p>
-<p class="p4"><span class="Apple-tab-span">	</span>[0]</p>
-<p class="p5"><span class="Apple-tab-span">	</span></p>
-<p class="p4"><span class="Apple-tab-span">	</span>このリストに足したのをUndoしたのをRedoする</p>
-<p class="p4"><span class="Apple-tab-span">	</span>[0,1]</p>
-<p class="p5"><br></p>
-<p class="p4"><span class="Apple-tab-span">	</span>というかんじに、<b>indexの値と動作の内容は完全に一致させて記録することができる。</b></p>
-<p class="p4"><b><span class="Apple-tab-span">	</span>この関係は増えたり減ったりするのが連続した1次元的な事象である限り崩れない。</b></p>
-<p class="p5"><b></b><br></p>
-<p class="p4"><span class="Apple-tab-span">	</span>要素の途中削除を避ける方法としては、論理削除とかがありえる。(要素からは消さず、ただ見えないことにする等。)</p>
+<p class="p5"><span class="Apple-tab-span">	</span>こんなリストがあったとして、</p>
+<p class="p5"><span class="Apple-tab-span">	</span>[] (empty</p>
+<p class="p6"><br></p>
+<p class="p5"><span class="Apple-tab-span">	</span>このリストに何かを足す(Do</p>
+<p class="p5"><span class="Apple-tab-span">	</span>[0]</p>
+<p class="p6"><br></p>
+<p class="p5"><span class="Apple-tab-span">	</span>このリストにさらに何かを足す(Do</p>
+<p class="p5"><span class="Apple-tab-span">	</span>[0,1]</p>
+<p class="p6"><br></p>
+<p class="p5"><span class="Apple-tab-span">	</span>このリストに足したのをUndoする</p>
+<p class="p5"><span class="Apple-tab-span">	</span>[0]</p>
+<p class="p6"><span class="Apple-tab-span">	</span></p>
+<p class="p5"><span class="Apple-tab-span">	</span>このリストに足したのをUndoしたのをRedoする</p>
+<p class="p5"><span class="Apple-tab-span">	</span>[0,1]</p>
+<p class="p6"><br></p>
+<p class="p5"><span class="Apple-tab-span">	</span>というかんじに、<b>indexの値と動作の内容は完全に一致させて記録することができる。</b></p>
+<p class="p5"><b><span class="Apple-tab-span">	</span>この関係は増えたり減ったりするのが連続した1次元的な事象である限り崩れない。</b></p>
+<p class="p6"><b></b><br></p>
+<p class="p5"><span class="Apple-tab-span">	</span>要素の途中削除を避ける方法としては、論理削除とかがありえる。(要素からは消さず、ただ見えないことにする等。)</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p3"><span class="Apple-tab-span">	</span>この特性を利用して、</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
-<p class="p4"><span class="Apple-tab-span">	</span>オブジェクトid Aを生成</p>
-<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>生成時にint index_of_A(たとえば0)をキー、id値 Aをvalueとして持つ。</p>
-<p class="p5"><br></p>
-<p class="p4"><span class="Apple-tab-span">	</span> -&gt; オブジェクトid Bを生成、Bはオブジェクトid Aの下にぶら下がるような関係</p>
-<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>生成時にint index_of_B(ここではAのindexが0なので、0 + 1 = 1)をキー、id値 Bをvalueとして持つ。</p>
-<p class="p5"><br></p>
-<p class="p4"><span class="Apple-tab-span">	</span> -&gt; Undo</p>
-<p class="p4"><span class="Apple-tab-span">	</span> -&gt; オブジェクトid Bが消える</p>
-<p class="p4"><span class="Apple-tab-span">	</span> -&gt; Undo</p>
-<p class="p4"><span class="Apple-tab-span">	</span> -&gt; オブジェクトid Aが消える</p>
-<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>このあたりの動作では生成時の記録は干渉されず、消えない。</p>
-<p class="p5"><br></p>
-<p class="p4"><span class="Apple-tab-span">	</span> -&gt; Redo</p>
-<p class="p4"><span class="Apple-tab-span">	</span> -&gt; オブジェクトid Aが復活(<b>この際呼ばれるのはデフォルトコンストラクタ</b>)</p>
-<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>出来上がるのはオブジェクトid A’</p>
-<p class="p5"><br></p>
-<p class="p4"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ここで、Redoをトリガーに、A’(indexは0)の内容を、記録をもとに過去存在した A に書き換える。</b></p>
-<p class="p5"><br></p>
-<p class="p4"><span class="Apple-tab-span">	</span> -&gt; Redo</p>
-<p class="p4"><span class="Apple-tab-span">	</span> -&gt; オブジェクトid Bを生成、、、するんだけど、オブジェクトAは存在してなくて、呼ばれちゃうのはデフォルトコンストラクタで、、、</p>
-<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>出来上がるのはオブジェクトid B’</p>
-<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
-<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><b>ここで、Redoをトリガーに、B’(indexは0)の内容を、記録をもとに過去存在した B に書き換える。</b></p>
+<p class="p5"><span class="Apple-tab-span">	</span>オブジェクトid Aを生成</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>生成時にint index_of_A(たとえば0)をキー、id値 Aをvalueとして持つ。</p>
+<p class="p6"><br></p>
+<p class="p5"><span class="Apple-tab-span">	</span> -&gt; オブジェクトid Bを生成、Bはオブジェクトid Aの下にぶら下がるような関係</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>生成時にint index_of_B(ここではAのindexが0なので、0 + 1 = 1)をキー、id値 Bをvalueとして持つ。</p>
+<p class="p6"><br></p>
+<p class="p5"><span class="Apple-tab-span">	</span> -&gt; Undo</p>
+<p class="p5"><span class="Apple-tab-span">	</span> -&gt; オブジェクトid Bが消える</p>
+<p class="p5"><span class="Apple-tab-span">	</span> -&gt; Undo</p>
+<p class="p5"><span class="Apple-tab-span">	</span> -&gt; オブジェクトid Aが消える</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>このあたりの動作では生成時の記録は干渉されず、消えない。</p>
+<p class="p6"><br></p>
+<p class="p5"><span class="Apple-tab-span">	</span> -&gt; Redo</p>
+<p class="p5"><span class="Apple-tab-span">	</span> -&gt; オブジェクトid Aが復活(<b>この際呼ばれるのはデフォルトコンストラクタ</b>)</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>出来上がるのはオブジェクトid A’</p>
+<p class="p6"><br></p>
+<p class="p5"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ここで、Redoをトリガーに、A’(indexは0)の内容を、記録をもとに過去存在した A に書き換える。</b></p>
+<p class="p6"><br></p>
+<p class="p5"><span class="Apple-tab-span">	</span> -&gt; Redo</p>
+<p class="p5"><span class="Apple-tab-span">	</span> -&gt; オブジェクトid Bを生成、、、するんだけど、オブジェクトAは存在してなくて、呼ばれちゃうのはデフォルトコンストラクタで、、、</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>出来上がるのはオブジェクトid B’</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><b>ここで、Redoをトリガーに、B’(indexは0)の内容を、記録をもとに過去存在した B に書き換える。</b></p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>という感じで、コンストラクタの役割を持たせることができる。</p>
 <p class="p2"><br></p>
@@ -184,5 +189,36 @@
 <p class="p3"><b>まとめ</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>EditorWindowにUndo/Redoを積んで、new -&gt; Undo -&gt; Redoさえ追跡できるようになればUndo/Redoめっちゃ簡単だぞ！！</p>
 <p class="p3"><span class="Apple-tab-span">	</span>私は悟りを開いた。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>一巡した世界の果てで「えっそうなの」って叫ぶ</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ということで中の方に読んでいただいたところ、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・ScriptableObjectがnullになるのは、ScriptableObject 内で hideFlags = HideFlags.DontSave; とかやるとnullにならなくなるよ</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>って教えてもらった。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>うおーーー素敵。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>んで、あとは、</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ScriptableObjectをガンガン作る</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span> or<span class="Apple-converted-space"> </span></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>上位に一個記録媒体みたいな役割を置いて下位を自動的に監視する、の2択。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>個人的には上位集約させるほうが枝葉にUndo書くとかがなくなってくれるので好き。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>一定の共通の意味の処理を上位に集約できると、挙動変えたり直すの楽なので、、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>各ScriptableObjectでRecordObject書くのはヤダなあ、、まあ郷に入っては郷に従え。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>そして3週目の世界へ</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>この記事に書いてある内容は古い。<b><span class="Apple-tab-span">	</span></b></p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>以下を見て欲しい。</p>
 </body>
 </html>
