@@ -11,6 +11,9 @@
     p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
     p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
     p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+    span.s1 {font: 12.0px Helvetica}
+    span.s2 {font: 12.0px 'Hiragino Kaku Gothic ProN'}
     span.Apple-tab-span {white-space:pre}
   </style>
 </head>
@@ -64,6 +67,14 @@
 <p class="p3"><b>SubToolの一覧を表示する</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>nキーで、「現在ActiveなSubTool以外の一覧」が表示できる</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>複数のサブパレットを開きっぱなしにする</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Preferences &gt; Interface &gt; Palletes &gt; One Open SubPallete</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>設定を保存する</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Reference &gt; Config &gt; StoreConfig</p>
+<p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>ZSphereをポリゴンに変える</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>1.Tool &gt; Adaptive Skin &gt; Make Adaptive Skin</p>
@@ -84,10 +95,6 @@
 <p class="p3"><b>ツールの色を変える</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>Color &gt; FillObject で色を一括で変えられる。</p>
 <p class="p3"><span class="Apple-tab-span">	</span><img src="color.png" alt="color.png"></p>
-<p class="p2"><br></p>
-<p class="p2"><br></p>
-<p class="p3"><b>設定を保存する</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>Reference &gt; Config &gt; StoreConfig</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>ブラシサイズをズーム具合と連動させる</b></p>
@@ -127,7 +134,7 @@
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>ZSphereを一個ずつ動かす</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>ブラシサイズを1pxにする。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ブラシサイズを1pxにするとかやると楽。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>SubToolにZSphereを足す</b></p>
@@ -137,27 +144,11 @@
 <p class="p3"><b>ツールを合体させる</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>Tool &gt; SubTool &gt; Merge &gt; MergeDown</p>
 <p class="p3"><span class="Apple-tab-span">	</span>まだ試してない</p>
-<p class="p2"><br></p>
-<p class="p2"><br></p>
-<p class="p3"><b>ツールの特定の部分を消す(全体に影響が出る版)</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>1.control + shift でマスク</p>
-<p class="p3"><span class="Apple-tab-span">	</span>2.control + shift + ドラッグでマスク範囲を反転</p>
-<p class="p3"><span class="Apple-tab-span">	</span>3.Tool &gt; Geometry &gt; Modify Topology &gt; Del Hidden</p>
-<p class="p2"><span class="Apple-tab-span">	</span></p>
-<p class="p3"><span class="Apple-tab-span">	</span>☆全体に影響がでないように消す方法はあるのかな？</p>
-<p class="p3"><span class="Apple-tab-span">	</span>→とりあえず消したい部分をマスクしてcontrol + shift (マスクモード)ブラシのTrimCurveを振り回したらなんかできた。</p>
-<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>副作用はよくわからん。</p>
 <p class="p2"><b></b><br></p>
 <p class="p2"><b></b><br></p>
 <p class="p3"><b>左右片方だけのパーツを左右対称に複製する</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>1.Tool &gt; Geometry &gt; Mirror And Weld のボタン上でどの軸に対象にコピーするか選択</p>
 <p class="p3"><span class="Apple-tab-span">	</span>2.ボタン押して実行</p>
-<p class="p2"><br></p>
-<p class="p2"><br></p>
-<p class="p3"><b>This mesh is composed of multiple subdivision levels.~ って出る</b></p>
-<p class="p4"><span class="Apple-tab-span">	</span><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202015-08-16%2021.54.06.png" alt="スクリーンショット 2015-08-16 21.54.06.png"></p>
-<p class="p3"><span class="Apple-tab-span">	</span>SubTool &gt; Freeze SubDivision Levels</p>
-<p class="p3"><span class="Apple-tab-span">	</span>☆この対処法で正しいのかな？　一応ディテール潰れてないから平気だと思うんだが。</p>
 <p class="p2"><b></b><br></p>
 <p class="p2"><b></b><br></p>
 <p class="p3"><b>複数のツールを一つのツールに合体させる</b></p>
@@ -170,15 +161,264 @@
 <p class="p3"><span class="Apple-tab-span">	</span>Move ブラシを使うと楽</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
-<p class="p3"><b>PolyFrameでの分割をやり直すには</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>☆よくわからんな、、聞いてみよう。初期分割が気にくわないんだけどどうすれば、っていう。</p>
-<p class="p2"><br></p>
-<p class="p2"><br></p>
 <p class="p3"><b>ツールの上にペイントする</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>zadd, zsubをオフ</p>
 <p class="p3"><span class="Apple-tab-span">	</span>rgbをオン</p>
 <p class="p3"><span class="Apple-tab-span">	</span>この状態でモデルの上でstandardブラシを動かすと描画できる。</p>
 <p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>ツールの特定の部分を消す</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>いろいろな方法がある。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>bool演算を使ってツールの特定の部分を消す</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Modify Topologyを使ってツールの特定の部分を消す</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Trim系のブラシを使ってツールの特定の部分を消す</p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b>Trim系のブラシを使ってツールの特定の部分を消す</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>(要チェック)</p>
+<p class="p3"><span class="Apple-tab-span">	</span>TrimRectとか。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Subdivision Freezeが必要。ぶっちゃけDel LowerしてSubdivision消してからReconstructしたほうがいいかも。試そう。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>消したSubdivisionを復活させる</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Tool &gt; Geometry &gt; Reconstruct Subdiv</p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>bool演算を使ってツールの特定の部分を消す</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>消したい部分があるツール本体をA、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>消す形状のツールをBとすると、</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>1.Tool &gt; SubTool 上で、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>A</p>
+<p class="p3"><span class="Apple-tab-span">	</span>B</p>
+<p class="p3"><span class="Apple-tab-span">	</span>となるように並べる。</p>
+<p class="p4"><span class="Apple-tab-span">	</span><img src="A-B.png" alt="A-B.png"></p>
+<p class="p5"><br></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>2.B</span>のブーリアン設定を[差]のものにセット</p>
+<p class="p4"><span class="s2"><span class="Apple-tab-span">	</span></span><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202015-08-22%2014.22.29.png" alt="スクリーンショット 2015-08-22 14.22.29.png"></p>
+<p class="p5"><br></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>3.A</span>をDynaMesh化</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Tool &gt; Geometry &gt; DynaMesh &gt; DynaMesh</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>4.Aを選択した状態でMerge</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Tool &gt; SubTool &gt; Merge &gt; MergeDown</p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>5.DynaMeshを更新</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ctrl + ドラッグ</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>やったぜ！</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>PolyFrameでの分割をやり直すには</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>適当にalt で選択してcommand + wすればよさそう。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>反転したコピーを作り出してくっつける</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Tool &gt; Geometry &gt; Modify Topology &gt; Mirror And Weld で軸を指定してコピーができる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>もしコピー後の物体の距離が近ければ、それぞれの断面が接続される。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>☆This mesh is composed of multiple subdivision levels.~ って出る</b></p>
+<p class="p4"><span class="Apple-tab-span">	</span><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202015-08-16%2021.54.06.png" alt="スクリーンショット 2015-08-16 21.54.06.png"></p>
+<p class="p3"><span class="Apple-tab-span">	</span>2択。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>a.Tool &gt; Geometry &gt; Del LowerとかでSubDivisionを一つにしてから実行、そのあとReconstruct Subdiv(試そう)</p>
+<p class="p3"><span class="Apple-tab-span">	</span>b.SubTool &gt; Freeze SubDivision Levels してから実行、実行後に戻す(エッジが落ちたりするケースがあるのでダメ</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>ツールの特定の部分を消す(ポリゴン再生成されるっぽいので全体に影響が出る版)</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>1.control + shift でマスク</p>
+<p class="p3"><span class="Apple-tab-span">	</span>2.control + shift + ドラッグでマスク範囲を反転</p>
+<p class="p3"><span class="Apple-tab-span">	</span>3.Tool &gt; Geometry &gt; Modify Topology &gt; Del Hidden</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ポリゴンの再生成が発生してるっぽくて、ペイントとかにも影響が出る。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>☆全体に影響がでないように消す方法はあるのかな？</p>
+<p class="p3"><span class="Apple-tab-span">	</span>→とりあえず消したい部分をマスクしてcontrol + shift (マスクモード)ブラシのTrimCurveを振り回したらなんかできた。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>副作用はよくわからん。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Boolでやってもよさそう。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>ツールの特定の部分を消す(周りに影響が出ない版)</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span></b>消したい部分をマスクして TrimCurve。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>1.SubDivisionを最低に</p>
+<p class="p3"><span class="Apple-tab-span">	</span>2.Freeze Subdivision</p>
+<p class="p3"><span class="Apple-tab-span">	</span>3.TrimCurveで消す</p>
+<p class="p3"><span class="Apple-tab-span">	</span>4.Freeze Subdivision 解除</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>現在のツールから別のツールを作り出したい</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>別ツールにコピーしたい部分以外を選択、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Tool &gt; SubTool &gt; Split &gt; Split Masked Points</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>☆ポリゴン分割のやり直しがしたい</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>DynaMeshでいけそう、、</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>エッジを立てたい</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>spolish, hpolish ブラシがいい感じ。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>☆先端を尖らせたい</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>(一度やってみて説明を追記すべき)</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Revisionを上げておき、尖らせたい先端を選択</p>
+<p class="p3"><span class="Apple-tab-span">	</span>-&gt; Tool &gt; Masking &gt; Blur</p>
+<p class="p3"><span class="Apple-tab-span">	</span>-&gt; LSym をOn</p>
+<p class="p3"><span class="Apple-tab-span">	</span>-&gt; Scale調整</p>
+<p class="p3"><span class="Apple-tab-span">	</span>-&gt; Move調整</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>☆ポリゴンの繋がりをもとにGroupを再構成する</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>(一度やってみて説明を追記すべき)</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Tool &gt; PolyGroups &gt; Auto Groups</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>☆ポリゴン数情報をもとにGroupを再構成する</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>(一度やってみて説明を追記すべき)</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Tool &gt; PolyGroups &gt; Merge Similar Groups</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>ポリペイントからマスクを作る</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>塗る</p>
+<p class="p3"><span class="Apple-tab-span">	</span>-&gt; Tool &gt; Masking &gt; Mask By Color &gt; Mask By Intencity</p>
+<p class="p3"><span class="Apple-tab-span">	</span>-&gt; Tool &gt; Masking &gt; Sharpen</p>
+<p class="p3"><span class="Apple-tab-span">	</span>等。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>ポリゴンの上にペイントしたい</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>zaddをoff</p>
+<p class="p3"><span class="Apple-tab-span">	</span>-&gt; rgbをon</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>プリミティブをモデリングできるようにする</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Tool &gt; Make Polymesh 3D</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>VIsibilityを変更する</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ctrl + shift + クリックで、対象と連続したポリゴンなどを特定の法則で表示/非表示にするよことができる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ctrl + shiftで使用する選択ツールのタイプによって細かい動作が異なる。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>SelectRectの場合、モデルを選択すると、PolyGroupに基づいた選択を行うことができる</p>
+<p class="p3"><span class="Apple-tab-span">	</span>SelectLassoの場合、モデルの細部まで選択を行うことができる</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>特にSelectLassoの場合、ポリゴンの辺を選ぶことで、その辺を含むポリゴン横一列とかを選択することができる。</p>
+<p class="p4"><span class="s2"><span class="Apple-tab-span">	</span></span><img src="a.png" alt="a.png"></p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p3"><b>ツール上にメッシュを貼ってそこからポリゴンを作りたい</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Topologyブラシを使う。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>1.Topologyブラシを選択</p>
+<p class="p3"><span class="Apple-tab-span">	</span>2.ブラシサイズを10くらいに小さくしておく。小さすぎるとポリゴンメッシュつくれないことがあるらしい。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>3.面を作りたいオリジナルのツールをコピー、SubDivisionが無いツールにする</p>
+<p class="p3"><span class="Apple-tab-span">	</span>4.面を書いていく。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>5.書き終わったらツール上の適当な箇所をクリックすると、ブラシサイズに比例したポリゴンが出来上がる。元のツール部分はマスク状態。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>6.Tool &gt; SubTool &gt; Split &gt; Split Unmasked Points で別ツールとして出力</p>
+<p class="p3"><span class="Apple-tab-span">	</span>7.オリジナルのやつは消しちゃうとか。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="s1"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202015-09-20%201.10.11.png" alt="スクリーンショット 2015-09-20 1.10.11.png"></span></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>交点を作ってそれを結ぶ、っていうののバリエーションが欲しいところ。</p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>特定のツールのポリゴンを両面表示にする</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Tool &gt; Display Properties &gt; Double をon</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>ポリゴンのエッジを維持したい</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ローポリのモデルをDevideしていくと、そのエッジが潰れてしまう。それを防ぎたい。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>マスク -&gt; Tool &gt; Geometry &gt; Crease &gt; Crease で、特定のエッジが保護できる。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>ポリゴンのエッジ保護を解除したい</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>保護しているエッジの保護を解除するには、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Tool &gt; Geometry &gt; Crease &gt; UnCreaseAll</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>個別のポリゴンを融合させるには</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>DynaMesh、BooleanのAddで合体させる。など。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>ZBrushでモーション用のボーンとかつける</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>つけられない。別のソフトを使おう。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>角を保ったままSubdivideをかける</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Tool &gt; Geometry &gt; Smt ボタンをオフにして分割する</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3">やってみよう系</p>
+<p class="p2"><br></p>
+<p class="p3"><b>特定の面を押し出す</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>(やってみよう)</p>
+<p class="p3"><span class="Apple-tab-span">	</span>0. 押し出したい面以外を非表示</p>
+<p class="p3"><span class="Apple-tab-span">	</span>1. 面を移動させる</p>
+<p class="p3"><span class="Apple-tab-span">	</span>2. Tool &gt; Geometry &gt; Edge Loop</p>
+<p class="p3"><span class="Apple-tab-span">	</span>これで、中間部分が補完され、押し出しっぽいことになる。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>適当な境界線にポリゴン点を追加する</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>(やってみよう)</p>
+<p class="p3"><span class="Apple-tab-span">	</span>0. 特定の凸面をマスクする</p>
+<p class="p3"><span class="Apple-tab-span">	</span>1. Tool &gt; Geometry &gt; Edge Loop</p>
+<p class="p3"><span class="Apple-tab-span">	</span>2. マスクの淵に新しいポリゴン点が追加される。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>表示範囲に対してポリグループを割り振る</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>(やってみよう)</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Tool &gt; PolyGroups &gt; Group Visible</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>オブジェクト表面を一周するようなポリゴン分割</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>(やってみよう)</p>
+<p class="p3"><span class="Apple-tab-span">	</span>網目に切るような分割が、表面に対して入る。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>GroupsLoops を使う。ムービーのポリゴン分割の話の30分あたり。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>下のSubDivisionを作り出したい</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Tool &gt; Geometry &gt; Reconstruct Subdiv<span class="Apple-converted-space"> </span></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>なるほどそういう概念だったのか。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3">まだよくわからん系</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3">ToDo</p>
+<p class="p2"><br></p>
+<p class="p3"><b>知り方を得る</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>1.聞ける人を作る、んでその人に聞く。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>2.調べられる源泉を増やす</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ZBrush 4R7 新機能解説</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Z-Notes</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://momonchan574.blog65.fc2.com">http://momonchan574.blog65.fc2.com</a></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://momonchan574.blog65.fc2.com/blog-entry-862.html">http://momonchan574.blog65.fc2.com/blog-entry-862.html</a></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>ZModeler Bridgeって何</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>このへんに詳しそう。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><a href="http://unrealengineand3dcg.blogspot.jp/2015/02/zbrush4r7zmodeler.html">http://unrealengineand3dcg.blogspot.jp/2015/02/zbrush4r7zmodeler.html</a></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>Dynamic Subdivって何</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>動画があった。これか、新機能解説。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><a href="https://www.youtube.com/watch?v=wey8lY9xJf0">https://www.youtube.com/watch?v=wey8lY9xJf0</a></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>モーションつける技術</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>モデリングある程度まで行ったので、モーションを学ぶ。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>プロジェクションについて</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>学びたいな、なぞってみよう。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><a href="http://www.gogogogo.jp/issue/diary/%E4%B8%80%E4%BA%BA%E5%A4%A7%E5%AD%A6/%E3%83%A2%E3%83%87%E3%83%AA%E3%83%B3%E3%82%B0/3834/">http://www.gogogogo.jp/issue/diary/一人大学/モデリング/3834/</a></p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 </body>

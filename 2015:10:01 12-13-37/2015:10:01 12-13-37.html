@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1348.17">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #ebebeb}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #ff8c82}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>Unity on WIndowsで/を使ってるのに\パスが紛れ込む原因がわかった話</b></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Unityが扱おうとするパスは/なのに、\が入ってくるケースを殴りたいみたいな話。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Unity EditorでマルチプラットフォームでうごくAssetとか作ってると、パス周りで以下のような事象にあう。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>Unity自体はパスをどう扱おうとしてるのか</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Unity自体は、MacでもWinでも(自分は試してないけどLinuxでも) ”/“ を返すメソッドが多々ある。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>たとえばAssetのパスを得るメソッドは以下のような感じ。</p>
+<p class="p2"><br></p>
+<p class="p4">var data = Application.dataPath;</p>
+<p class="p2"><br></p>
+<p class="p3">Windows</p>
+<p class="p4">C:/somewhere/projectPath/Assets</p>
+<p class="p2"><br></p>
+<p class="p3">Mac, Linux(たぶん)</p>
+<p class="p4">/somewhere/projectPath/Assets</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Windowsでも/を使っている。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>のだけど、たまに\を返してくる、Unityが面倒をみていないメソッドがある。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>今回はそれの話。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>\を返してくるのは貴様か</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Directory.GetFiles メソッドが、すごく特殊で元気な動きをする。</p>
+<p class="p2"><br></p>
+<p class="p4">Directory.GetFiles(path)</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ものすごく分岐が多い。次のバリエーションを考えてみる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>1. path = “C:/somewhere/”;</p>
+<p class="p3"><span class="Apple-tab-span">	</span>2. path = “C:\\somewhere\\”;</p>
+<p class="p3"><span class="Apple-tab-span">	</span>3. path = “C:/somewhere”;</p>
+<p class="p3"><span class="Apple-tab-span">	</span>4. path = “C:\\somewhere”;</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>こいつを、Directory.GetFiles メソッドの引数として使うと、その結果は以下のような感じになる。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3">1</p>
+<p class="p4">C:/somewhere/a.txt</p>
+<p class="p2"><br></p>
+<p class="p3">2</p>
+<p class="p4">C:\somewhere\a.txt</p>
+<p class="p2"><br></p>
+<p class="p3">3</p>
+<p class="p5">C:/somewhere\a.txt</p>
+<p class="p2"><br></p>
+<p class="p3">4</p>
+<p class="p4">C:\somewhere\a.txt</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>3が地獄。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・入力パラメータの末尾が/であれば、/を使う</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・入力パラメータの末尾が\であれば、\を使う</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・入力パラメータの末尾が/や\で<b>なければ</b>、<b>プラットフォームに依存したデリミタを使う</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>という因果関係があるみたい。アホかやめてくれ。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>Q. なぜ問題が出るのか</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>A. Unity内でファイルを扱う場合、高確率でUnityの定義したメソッドを使う。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>それらは/を使ったパスを返してくる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>そこに上述のGetFilesとかを使うと問題がでてくる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>不用意に引数に使ったら即問題が出てくるので、なかなかつらい。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>Q. そもそも\を使えばいいのでは？</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>A. Mac,Win.Linuxを跨ぎたいので却下。\を受け入れられるのはWinだけ、しかもUnityも/を使ったパスを返してくる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>たとえば設定ファイルとかに\を使うと、おめでとう、Jenkinsやらなにやらで一切動かないものが出来上がる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Windowsでの自動化とかを考えても、Jenkinsが/とか使ってた気がするんでおめでとう感が出てくる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>このメソッドを何の確認もせずに使った上で、Path.Combineとかと組み合わせるとさらなる地獄が出来上がる。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>対(殺傷方および)策</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>対策としては、このメソッド使って得たパスを、必ず “\” -&gt; “/“ へと変えてやることで対処する。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>なぜだ。残念すぎる。</p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>もうちょっと言及しておくと、recursiveにフォルダ中のものを返してくるメソッドとかはもっとかわいそうな感じで、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>全部\で返してくる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Directory.GetFiles()はこれでもまだマシな方なのだ。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>残念すぎる。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+</body>
+</html>
