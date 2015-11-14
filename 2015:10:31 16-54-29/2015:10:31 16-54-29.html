@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1348.17">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>ゲームデータのPreloadabilityを考える</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>特にUnityに限る話ではなく、ゲーム全体とかで言える内容。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・Client側のプラットフォームがゲームをDLしようと試みる</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・データをDLする</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・実際に遊べるようになる</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>っていう動作の間に、<b>ユーザーが実際にその素材を必要とする前に、</b>どこまで何をDLさせるか、っていうのを効率良く制御することを考える。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ある程度は運用スタイルを含んだお話になる。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>Preloadのモチベーション</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ユーザーがゲームをDLしてから、すべての素材をDLしてからゲーム開始、、ってやると、無限の時間がかかってしまう。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ムービー流したりいろいろ、、ユーザーの我慢を促進することは出来るっちゃあ出来るんだけど、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>「そもそもそのリソースを俺が目にすることがあるのだろうか？」っていう素材を、遊ぶ前にDLさせるのはこう、、なんていうか、、辛いよなっていう。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>あとムービーは飛ばすしストーリーはスキップするよな、設定なんかよりカタルシスとかそういうのが欲しいわけだよ(暴言)</b></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>言葉の定義など</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>定義</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>文中では、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Client = クライアント = ユーザーのプレイ端末、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Server = サーバ = プレイ端末からアクセス可能なWebサーバ、として扱う。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Preload = 動作。特定の素材をユーザーがリクエストする前にDLさせること</p>
+<p class="p3"><span class="Apple-tab-span">	</span>という言い方/定義を置いておく。<span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>Clientが扱う素材について</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>素材のキャッシュについて確認できればなんでもいいので、例えば次のようなAPIが作れる状況であれば機能する。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・bool IsCached(string resourceName)</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・bool Cache(byte[] resource)</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>もしもAssetBundleを使う場合は、resourceのところをbundleとかに置き換えると納得しやすいはず。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>実コード上でも説明があると思うのでここで深く考える必要はあまり無い。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ただし、AsstBundleの場合、「Bundleには複数のAssetが含まれている」というポイントがあるので、</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>Preloadすべき素材はどんなものなんだろう？</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Preloadされるべき対象 = 「ユーザーがリクエストする前にDLすべきリソース」 のことを考えてみる。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>1.リリース後、新規に追加された素材</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>たとえばショップに新しいアイテムが追加されていたら、そのアイテムのアイコンとかを、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ショップ画面に移る前に取得する必要があると思う。絶対じゃないけど。事前にどこかで読み込んでおけると良さそうだ。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>2.起動に最低限必要な素材</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ゲームが開始時に表示したりする、最低限必要な素材、っていうのも、Preloadしておくべき素材として扱うことができそうだ。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b>実際の動作を考える</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>単純な素材プリロードの動作は以下みたいな感じになる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>1.ゲーム起動</p>
+<p class="p3"><span class="Apple-tab-span">	</span>(2.現在のバージョンに対してのリソース一覧を取得してくる)☆このへんはAssetBundleやBundleっぽい構成の物だったら必要になる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>3.リソース一覧の素材の中から、ダウンロードしておくべき素材を取得開始</p>
+<p class="p3"><span class="Apple-tab-span">	</span>4.DL画面</p>
+<p class="p3"><span class="Apple-tab-span">	</span>5.完了したら、タイトル画面とかユーザーがコントロール可能な画面を表示</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、Preloadすべき素材についての内容を考える前に、一度シーケンス図にする。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3">っていう記事をUnibook4向けに書いてます。</p>
+</body>
+</html>
