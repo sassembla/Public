@@ -1,0 +1,106 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1348.17">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>Disposabilityについて</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>技術に対しての投資の話、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>「2年後に聞くリスト」っていうのを以前から書いていて、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>あれは</p>
+<p class="p3"><span class="Apple-tab-span">	</span>「投資価値が無い気がする」「厄い」「2年後には存在してないだろうからそのときに聞けばいい。今やるのは時間の無駄」</p>
+<p class="p3"><span class="Apple-tab-span">	</span>「学ぶことがあったが使いたくはない」</p>
+<p class="p3"><span class="Apple-tab-span">	</span>みたいな物事についてした判断を書いたメモになってる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>今回話そうとしてる「Disposability」がない、やらんでもいいものを記録しておくやつ。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>反対に、「Disposabilityが高い」っていうのがどういう状態か、っていうのをメモっておくつもり。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>投資対象を選ぶとき、どんな基準で選ぶか、みたいな話。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>Disposabilityとは</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ざっくり言うと、「負債返済しないで捨ててしまいたい時の捨てやすさ」みたいなものだと思っている。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>「それを使っていて、もしもっといいものが見つかった場合、どの程度の資産を移動して、この技術を捨てることが容易か」みたいなパラメータ。</p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>このパラメータ Disposability が高いと、以下のようなことが可能だと思っている。</p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>利益</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>1.Disposabilityが高いと、この技術や機構を捨てても、価値が失われない or 失われにくい or 失う部分を最小化できる</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>2.Disposabilityが高いと、技術的負債になりにくい(負債になってもサクッと捨てられれば、それはもっとも安価な解消法)</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>逆にこのパラメータが低いと、以下のような損害があると思っている。</p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>損害</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>3.Disposabilityが低いと、この技術や機構と価値が不可分で、移行できない</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>4.Disposabilityが低いと、移行先にも同じような技術、機構を自分で再現する必要があって移行コストが高い</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>5.Disposabilityが低いと、移行先では技術や機構が再現できないので、技術的負債になっても返済するしかない</p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>定義について言いたいことはほぼほぼ以上な感じで、あとはDisposabilityをいつどこで測るか、とか、判例的な判断基準をつらつら書いていく。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>先に断っておくと、このパラメータは言語やプロトコル、プラットフォームには適応されないケースが多く、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>エンジン、フレームワーク、ライブラリとかのレイヤーで、この判断方法をよく活用している。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ようは、「万人が使わない」みたいなものほど、Disposabilityで見たほうがいいんじゃないか、みたいな話。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>いつDisposabilityを測るか</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>新しい何かを見つけて、まず触ってみてからでいいと思う。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>よく「新しいものに飛びついていいのは選ばれた人だけ」みたいな話があってモンニョリするんだけど、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>「いや一瞬でいいから触れよ、メッチャ面白い場合があるぞ」って思うので。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>打率を気にする前にバッターボックスに立てよという感じ。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>触って、なるほどこういうものか、ってトコまでわかったら、あとはDisposabilityを測るためにいろいろ知る作業に入る。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>理解は経験に比例するので、「あっこんなことできるんだ！」っていうのと、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>すぐさま内容をみて、「実装は、、オオオーー泥くせえ、、、クソの匂いがするぜ、、」 or 「あっ凄いこれでこんな事できるんだ素敵！！」って</p>
+<p class="p3"><span class="Apple-tab-span">	</span>判断するフェーズを踏んでも別に構わんと思う。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>あとは「全体としては良いんだけどこの機能にだけは最低限依存したくねえ、、、」みたいなケースの時に、その使用を回避できるかどうかとか。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>部分で嫌な箇所を回避できればそれはそれでいいよね。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>とある技術、機構を使うぜ！って決めたあとにわかる事ももちろんあるんだけど、意図して測ろうとするとまたちょっといいのでは、という程度の話だが。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3">以下判例。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>独自の機構を自前実装で持っているフレームワークとかはDisposability低い</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>学習コスト高い上にそこでしか使えない技術あって、みたいなFWだと、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>損点として3,4,5全てに該当してベストオブ低Disposabilityを叩き出す。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>スメルとしては以下。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・記法をはじめとして色々なオリジナリティある機能を内包、独自実装している</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・その機能が今後プラットフォーム側とかに積まれる想定が無い</p>
+<p class="p3"><span class="Apple-tab-span">	</span>など。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>どっかでも書いたけど、学習デブになるだけでそのままその特異性ごと闇に葬り去られるので関わらないほうがいいと思う。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>Embeddedが強烈すぎるやつはDisposability低い</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>組み込み機構の能力が高すぎるやつは、それを他所で再現するのが大変そうで、ようは資産価値というかDisposabilityがめっちゃ低い気がしてる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>例えばコード全く書かずにGUIだけで動くやつ、とかは、なんていうかその色が強そう。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>自分が書いた「コードじゃないやつ」を元に、同じ事をするのにどれだけの無駄な犠牲を払えばいいか、みたいな尺度。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3">思いついたら足す。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+</body>
+</html>
