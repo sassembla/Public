@@ -1,0 +1,177 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1348.17">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #ebebeb}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #ebebeb; min-height: 18.0px}
+    span.s1 {font-kerning: none}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>UnityEditorのUndoで気をつけることファイナル</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ほぼすべての人類に無関係。十分にロックイン事案。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Undo自体の実装の話はこっち。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>「UnityEditorのUndo/Redoシステムについて【解決編】【最新】のコピーそして完結」</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://sassembla.github.io/Public/2015:09:17%203-14-23/2015:09:17%203-14-23.html">http://sassembla.github.io/Public/2015:09:17%203-14-23/2015:09:17%203-14-23.html</a></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>今回は、なるべく面倒臭く無い方法で、管理される側のオブジェクトに辞書を使ったりする話。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>端的にいうと最後、値をどう持つかで、値の保持にDictionaryを使うと辛い部分があった。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>これはScriptableObjectを全開で使ってても、実際のデータの型に関連するので、例外なくつらい。</p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b>Dictionaryを使うと何が辛いのか</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>辞書 Dictionary をデータ構造に使うと、その部分がUndo効かない。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>抽象的なコード書くと、</p>
+<p class="p2"><br></p>
+<p class="p4"><span class="s1">Undo.RecordObject(this, “Update Dictionary Value”);</span></p>
+<p class="p4"><span class="s1">myDict[“key”] = “val”;</span></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>みたいなことをしても、myDictの値がUndoできない。というかUndo履歴に乗らない。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>[SerializeField] 振ってても、これは別の理由で効かないっぽい。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>同様にList&lt;string&gt; とかに対して、</p>
+<p class="p2"><br></p>
+<p class="p4"><span class="s1">Undo.RecordObject(this, “Update List Value”);</span></p>
+<p class="p4"><span class="s1">myList.Add(“val”);</span></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>とかやると、これは効く。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>違いを追っていく過程でわかったこと</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>いろいろ試していたら、次のようなことがわかった。完全にやっくしぇーびんぐ感があった。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・ISerializationCallbackReceiver とかはUndoとは関係無いっぽい</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>(Undoにはserialize的な特性は必要でも実務として特定のserialize処理が走ることは無いっぽくてISerializationCallbackReceiver実装しても呼ばれない</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・Dict -&gt; List + List に分解するとうまくいく</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Dictionary&lt;string, string&gt; -&gt; List&lt;string&gt; keys + List&lt;string&gt; values に分解したら、Undoは働いた</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・調子に乗ってクラス化 + 型パラメータ化 -&gt; 死ぬ<span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>型パラメータが入るとだめくさい。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>例えば下記のような構成は死ぬ。</p>
+<p class="p2"><br></p>
+<p class="p4">[Serializable] public class SerializablePseudoDictionary&lt;TKey, TValue&gt; {</p>
+<p class="p4"><span class="Apple-tab-span">	</span>[SerializeField] private List&lt;TKey&gt; keys = new List&lt;TKey&gt;();</p>
+<p class="p4"><span class="Apple-tab-span">	</span>[SerializeField] private List&lt;TValue&gt; values = new List&lt;TValue&gt;();</p>
+<p class="p4"><span class="Apple-tab-span">	</span>. . .</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>こういうの定義できると楽だったんだが。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>結論</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>List + GenericならUndo対象にできるので、Dictionary + Generics -&gt; List&lt;string&gt; keys &amp; List&lt;string&gt; values と分解できるようなクラス作ってやると瞬殺できる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>実際AssetGraphで使うことになった。 辞書っぽいもの作ってもUndoに対応できる。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><a href="https://github.com/unity3d-jp/AssetGraph/blob/0.7.6/Assets/AssetGraph/Editor/Libs/SerializablePseudoDictionary.cs">https://github.com/unity3d-jp/AssetGraph/blob/0.7.6/Assets/AssetGraph/Editor/Libs/SerializablePseudoDictionary.cs</a></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3">抜粋。</p>
+<p class="p4">using UnityEngine;</p>
+<p class="p5"><br></p>
+<p class="p4">using System;</p>
+<p class="p4">using System.Linq;</p>
+<p class="p4">using System.Collections.Generic;</p>
+<p class="p5"><br></p>
+<p class="p4">namespace AssetGraph {</p>
+<p class="p4"><span class="Apple-tab-span">	</span>/*</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>string key &amp; string value only.</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>because generic dictionary class cannot undo.</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>write -&gt; Add(k,v) -&gt; new dict -&gt; keys, values</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>read &lt;- ReadonlyDict() &lt;- new dict &lt;- keys, values</p>
+<p class="p4"><span class="Apple-tab-span">	</span>*/</p>
+<p class="p4"><span class="Apple-tab-span">	</span>[Serializable] public class SerializablePseudoDictionary {</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>[SerializeField] private List&lt;string&gt; keys = new List&lt;string&gt;();</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>[SerializeField] private List&lt;string&gt; values = new List&lt;string&gt;();</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>public SerializablePseudoDictionary (Dictionary&lt;string, string&gt; baseDict) {</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>var dict = new Dictionary&lt;string, string&gt;(baseDict);</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>keys = dict.Keys.ToList();</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>values = dict.Values.ToList();</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>public void Add (string key, string val) {</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>var dict = new Dictionary&lt;string, string&gt;();</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>for (var i = 0; i &lt; keys.Count; i++) {</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>var currentKey = keys[i];</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>var currentVal = values[i];</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>dict[currentKey] = currentVal;</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>// add or update parameter.</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>dict[key] = val;</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>keys = new List&lt;string&gt;(dict.Keys);</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>values = new List&lt;string&gt;(dict.Values);</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>public bool ContainsKey (string key) {</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>var dict = new Dictionary&lt;string, string&gt;();</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>for (var i = 0; i &lt; keys.Count; i++) {</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>var currentKey = keys[i];</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>var currentVal = values[i];</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>dict[currentKey] = currentVal;</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>return dict.ContainsKey(key);</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>public Dictionary&lt;string, string&gt; ReadonlyDict () {</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>var dict = new Dictionary&lt;string, string&gt;();</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>if (keys == null) return dict;</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>for (var i = 0; i &lt; keys.Count; i++) {</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>var key = keys[i];</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>var val = values[i];</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>dict[key] = val;</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>return dict;</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}</p>
+<p class="p4"><span class="Apple-tab-span">	</span>}</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>お察しのとおり、read, writeに辞書化を挟んでるんで、使いやすいような気はあんましない。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Undo対象の数が少なかったのと、Undo動作自体を綺麗にまとめておくことができたので、実装と導入と改変は楽だった。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ただUnityとしか関係無い特殊な状況だ。</p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b>感想</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>試してないけどhashとかだとうまく動くんじゃ無いだろうか。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>厄介なのは、Editor以外でもSerializable使っていろんなものをSerialize可能にすることができるんだけど、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>これは結局ゲーム中でも使える手段だぜってところなんだけど、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・ListはOKでDictはダメ</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・Serializableつけてもダメ</p>
+<p class="p3"><span class="Apple-tab-span">	</span>っていうのがある時点で、まあ、独自色強くなるんで、できうる限りゲームでDictのSerializeは使わないほうがいいだろうな、と思った。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ちなみにゲーム中( = 非Editor)の場合は、ISerializationCallbackReceiverまわりの関数が呼ばれるらしい。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Editorではそんなことなかったんで、まあ、はい。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>無理にこういう[Serializable] + 独自Serializer実装するくらいなら、<b>下記を実行するといいと思う。</b></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>a.Unityさんに殴り込んで「Serializableの有効範囲広げてや」って言う</p>
+<p class="p3"><span class="Apple-tab-span">	</span>b.[Serializable] を使ってDictionaryのSerializeが必要な状態を避ける、あるいはDictionary以外のものに対して[Serializable] を使う</p>
+<p class="p3"><span class="Apple-tab-span">	</span>c.[Serializable] を使わず自分で何かに変換する</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>b,cどちらの手段を選ぶにしても、Unityに「お前SerializeField効かない型があるの辛いぞ」っていう話をするのはアリだと思う。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>自分からはします。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+</body>
+</html>
