@@ -12,7 +12,8 @@
     p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
     p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
     p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
-    span.s1 {font: 12.0px Helvetica}
+    span.s1 {font-kerning: none}
+    span.s2 {font: 12.0px Helvetica}
     span.Apple-tab-span {white-space:pre}
   </style>
 </head>
@@ -20,6 +21,9 @@
 <p class="p1"><b>UnityEditor用のUndo入りGUIスケルトン TimeFlowShiki</b></p>
 <p class="p2"><br></p>
 <p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Unity Advent-Calendar 2015 12/10の記事です。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://qiita.com/advent-calendar/2015/unity">http://qiita.com/advent-calendar/2015/unity</a></p>
+<p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>こんなのをGithubに公開した。</p>
 <p class="p4"><span class="Apple-tab-span">	</span><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202015-12-09%2023.22.02.png" alt="スクリーンショット 2015-12-09 23.22.02.png"></p>
 <p class="p5"><span class="Apple-tab-span">	</span></p>
@@ -37,6 +41,15 @@
 <p class="p3"><span class="Apple-tab-span">	</span>Score、Timeline、Tack(鋲) の3階層からなる感じ。</p>
 <p class="p3"><span class="Apple-tab-span">	</span>4年くらい前、Adobeに絶望する以前はAfterEffectを使ってたことがあったので、そのへんの感覚で作った(結果全く似てない気がする</p>
 <p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Score</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="s1">┗ Timeline</span></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span></span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="s1">┗ Tack</span></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="s1">┗ Timeline</span></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span></span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="s1">┗ Tack, Tack</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>一つのScoreにN個のTimelineを持ち、</p>
 <p class="p3"><span class="Apple-tab-span">	</span>一つのTimelineにN個のTackを持つことができる。</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
@@ -44,6 +57,7 @@
 <p class="p3"><span class="Apple-tab-span">	</span>Tackにはtitle, start, end, spanをセットできる。</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>これらのデータは、GUIでの変更発生時にJSONで保存される。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/TimeFlowShiki/blob/master/Assets/TimeFlowShiki/Data/timeflowshiki.json">Assets/TimeFlowShiki/Data/timeflowshiki.json</a></p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p3"><span class="Apple-tab-span">	</span>で、あとはJSONデータをランタイムでどう解釈するか、とかで、まあいろいろできるのではないかな～と思う。</p>
 <p class="p3"><span class="Apple-tab-span">	</span>Editor側にコードを足していろいろクラス吐くとかもできると思う。</p>
@@ -54,14 +68,14 @@
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>・Undo対応(だいたい全部の動作に対応してるんじゃないかしら)</p>
 <p class="p3"><span class="Apple-tab-span">	</span>・Tackの伸び縮み、移動、重ねる、とか</p>
-<p class="p3"><span class="Apple-tab-span">	</span>・Timeline, Tackの追加、削除</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・右クリックでコンテキストメニュー出して、Timelineを追加したり、Tackを追加したりできる</p>
 <p class="p3"><span class="Apple-tab-span">	</span>・Score, Timeline, TackのTitle設定</p>
 <p class="p3"><span class="Apple-tab-span">	</span>・Scoreの最上部にこのフレームに位置してるTackが俯瞰できるミニバーみたいなのが出てる</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・スクロールで無限に右にいける</p>
 <p class="p3"><span class="Apple-tab-span">	</span>・カラフル設定(TimeFlowShikiKitGUISettings.cs/RESOURCE_COLORS_SOURCESの封印を解くとカラフルになる</p>
-<p class="p3"><span class="Apple-tab-span">	</span><span class="s1"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202015-12-09%2022.27.09.png" alt="スクリーンショット 2015-12-09 22.27.09.png"></span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="s2"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202015-12-09%2022.27.09.png" alt="スクリーンショット 2015-12-09 22.27.09.png"></span></p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
-<p class="p3"><span class="Apple-tab-span">	</span>・カーソル上下左右でTackとかTimeline上を移動できる</p>
-<p class="p3"><span class="Apple-tab-span">	</span>・右クリックでコンテキストメニュー出して、Timelineを追加したり、Tackを追加したりできる</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・カーソル上下左右でTackとかTimeline上を移動できる<span class="Apple-tab-span">	</span></p>
 <p class="p3"><span class="Apple-tab-span">	</span>・画像素材はすべてAssets/TimeFlowShiki/Editor/GUI/Res に入っている</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
