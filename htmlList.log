@@ -1,6 +1,8 @@
 ./web/index.html
 ./source/SublimeSocketAsset/README.html
 ./source/SublimeSocket/How to install SublimeSocket for Sublime Text X.html
+./outsource/udon2015/index.html
+./outsource/udon2015/assets/player/KeynoteDHTMLPlayer.html
 ./outsource/U11n/index.html
 ./outsource/U11n/assets/player/KeynoteDHTMLPlayer.html
 ./outsource/testClient.html
@@ -11,9 +13,6 @@
 ./outsource/presentation_S2/index.html
 ./outsource/presentation_S2/assets/player/KeynoteDHTMLPlayer.html
 ./outsource/presentation_S2/assets/fallback/index.html
-./outsource/onsen/index.html
-./outsource/onsen/assets/player/KeynoteDHTMLPlayer.html
-./outsource/onsen/assets/fallback/index.html
 ./outsource/_2015_10_21_10_31_57.html
 ./outsource/2015_10_21_10_31_57.html
 ./ignored/DVCS/index.html
@@ -23,6 +22,7 @@
 ./htmlResource/html_header.html
 ./htmlResource/html_body_tail.html
 ./htmlResource/html_body_head.html
+./2015:12:10 00-00-00/2015:12:10 00-00-00.html
 ./2015:12:04 17-56-48/2015:12:04 17-56-48.html
 ./2015:11:21 16-52-08/2015:11:21 16-52-08.html
 ./2015:11:14 22-16-33/2015:11:14 22-16-33.html
