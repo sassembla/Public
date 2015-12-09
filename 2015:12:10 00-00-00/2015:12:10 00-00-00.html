@@ -12,6 +12,8 @@
     p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
     p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
     p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #ebebeb}
+    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #ebebeb; min-height: 18.0px}
     span.s1 {font-kerning: none}
     span.s2 {font: 12.0px Helvetica}
     span.Apple-tab-span {white-space:pre}
@@ -24,6 +26,10 @@
 <p class="p3"><span class="Apple-tab-span">	</span>Unity Advent-Calendar 2015 12/10の記事です。</p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://qiita.com/advent-calendar/2015/unity">http://qiita.com/advent-calendar/2015/unity</a></p>
 <p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>前日の記事は <a href="https://twitter.com/monry">@monry</a>さんの「<a href="http://qiita.com/monry/items/82fa43a7dd341f4beefb">PostProcessBuildでInfo.plistを編集するための仕組みを作ってみた</a>」でした。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>TimelineっぽいツールのGUI作るの面倒くさかったので公開した</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>こんなのをGithubに公開した。</p>
 <p class="p4"><span class="Apple-tab-span">	</span><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202015-12-09%2023.22.02.png" alt="スクリーンショット 2015-12-09 23.22.02.png"></p>
 <p class="p5"><span class="Apple-tab-span">	</span></p>
@@ -34,20 +40,23 @@
 <p class="p3"><span class="Apple-tab-span">	</span>タイムフローシキと発音する。</p>
 <p class="p3"><span class="Apple-tab-span">	</span>Timeline状のGUIのスケルトンみたいな感じで、用途は特に限定していない。</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>面倒臭いGUIのところはなんかやっといたから、データ使うところとか、データに何かたすのとか頑張ってっていう。どうせゲームごとにちょこちょこ違うでしょ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>面倒臭いGUIのところはなんかやっといたから、データ使うところとか、データに何か足すのとか、使いたい人が自由に頑張って。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>どうせゲームごとにちょこちょこ違うでしょっていう。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>TimeFlowShikiの概念</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>タイムライン状にデータを置いたり長さを変えたりするGUIツール。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>4年くらい前、Adobeに絶望する以前はAfterEffectを使ってたことがあったので、そのへんの感覚で作った</p>
+<p class="p3"><span class="Apple-tab-span">	</span>(Unityの操作系との相性を考えて調整していったら、結果全く似てない感じになった気がする)</p>
+<p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>Score、Timeline、Tack(鋲) の3階層からなる感じ。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>4年くらい前、Adobeに絶望する以前はAfterEffectを使ってたことがあったので、そのへんの感覚で作った(結果全く似てない気がする</p>
 <p class="p2"><br></p>
-<p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>Score</p>
-<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="s1">┗ Timeline</span></p>
-<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span></span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="s1">┗ Tack</span></p>
-<p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="s1">┗ Timeline</span></p>
-<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span></span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="s1">┗ Tack, Tack</span></p>
+<p class="p6"><span class="Apple-tab-span">	</span>Score</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="s1">┗ Timeline</span></p>
+<p class="p6"><span class="s1"><span class="Apple-tab-span">	</span></span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="s1">┗ Tack</span></p>
+<p class="p7"><br></p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="s1">┗ Timeline</span></p>
+<p class="p6"><span class="s1"><span class="Apple-tab-span">	</span></span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="s1">┗ Tack, Tack</span></p>
 <p class="p2"><span class="s1"></span><br></p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>一つのScoreにN個のTimelineを持ち、</p>
@@ -81,6 +90,8 @@
 <p class="p2"><br></p>
 <p class="p3"><b>ライセンス</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>MITなんで適当につかってやってください。</p>
-<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>デザインとかダサいんでどんどん手を加えちゃったりするといいんじゃないか！！</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
 </body>
 </html>
