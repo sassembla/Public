@@ -9,76 +9,82 @@
   <style type="text/css">
     p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Sans'}
     p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
-    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; min-height: 18.0px}
-    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 17.0px 'Hiragino Sans'}
-    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; min-height: 18.0px}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 17.0px 'Hiragino Sans'}
     p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; background-color: #ebebeb}
     p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; background-color: #ebebeb; min-height: 18.0px}
+    span.s1 {font: 12.0px Helvetica}
     span.Apple-tab-span {white-space:pre}
   </style>
 </head>
 <body>
 <p class="p1"><b>週刊Automatineマガジン 1.AutomatineでのCoroutine</b></p>
 <p class="p2"><br></p>
-<p class="p3"><br></p>
-<p class="p4"><b>Coroutineの指針</b></p>
-<p class="p3"><br></p>
-<p class="p5"><b>a.Coroutineを超えてパラメータを扱いたい、、という時にはInitialTypeParamのパラメータを使おう。</b></p>
-<p class="p5"><span class="Apple-tab-span">	</span>1.ロックオン</p>
-<p class="p5"><span class="Apple-tab-span">	</span>2.ロックしてあるやつを殴りに行く</p>
-<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>こういう時には、InitialTypeParam自体や、そのプロパティ、値に「ロックした敵」というパラメータを持つといい。</p>
-<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>実行中の各Coroutineでインスタンスを共有できるので、ロックした敵があったらそのIdを使って～みたいな書き方ができる。</p>
-<p class="p3"><br></p>
-<p class="p5">b.Autoを超えてパラメータを扱いたい、、という時にも、contextのパラメータを使おう。</p>
-<p class="p5"><span class="Apple-tab-span">	</span>初期化時に渡すと楽。</p>
-<p class="p3"><br></p>
-<p class="p5">var context = new Context();</p>
-<p class="p5">auto = new Something&lt;Context, Other&gt;(frame, context);</p>
-<p class="p3"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span></p>
-<p class="p5">c.Coroutineは部品のように細かく分けて作ってもいいけど</p>
-<p class="p5"><span class="Apple-tab-span">	</span>e.g.<span class="Apple-converted-space"> </span></p>
-<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>一番近い敵の方を向く</p>
-<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>敵まで歩いていく</p>
-<p class="p3"><br></p>
-<p class="p5"><span class="Apple-tab-span">	</span>最初はゴチャッと作っちゃっても問題ない。</p>
-<p class="p3"><span class="Apple-tab-span">	</span></p>
-<p class="p5"><span class="Apple-tab-span">	</span>e.g.</p>
-<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>一番近い敵の方に向いてそのまま歩いていって殴る</p>
-<p class="p3"><br></p>
-<p class="p5"><span class="Apple-tab-span">	</span>ただし、名前とコメントをつけるようにしよう。</p>
-<p class="p3"><br></p>
-<p class="p5"><span class="Apple-tab-span">	</span>Coroutineの役割の分解はあとで簡単にできる。まずは動くものを作って、そのあと切り分けるのがカンタン。</p>
-<p class="p3"><br></p>
-<p class="p3"><br></p>
-<p class="p4"><b>Coroutineの解説</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span></p>
-<p class="p5"><b>Coroutineの初期値とパラメータについて</b></p>
-<p class="p5"><span class="Apple-tab-span">	</span>Timeline上に複数のTackを置いた場合、そのTackについているCoroutineが順に実行されるわけだが。</p>
-<p class="p5"><span class="Apple-tab-span">	</span>実行されるCoroutineには、次の2つのパラメータが入る。</p>
-<p class="p3"><br></p>
-<p class="p5"><span class="Apple-tab-span">	</span>1.initialParam、すべてのCoroutineから参照/設定ができるパラメータ</p>
-<p class="p5"><span class="Apple-tab-span">	</span>2.updateParam、auto.Updateの度に更新されるパラメータ</p>
-<p class="p3"><br></p>
-<p class="p3"><br></p>
-<p class="p5"><b>1.initialParam、すべてのCoroutineから参照/設定ができるパラメータ</b></p>
-<p class="p5"><span class="Apple-tab-span">	</span>new時にInitialParamTypeで型指定、initialParamとして渡せる値は、</p>
-<p class="p3"><br></p>
-<p class="p5"><span class="Apple-tab-span">	</span>・Autoのnewの時に、全Coroutineへと渡るパラメータになる</p>
-<p class="p5"><span class="Apple-tab-span">	</span>・全Coroutineからの変更が可能</p>
-<p class="p3"><br></p>
-<p class="p5"><span class="Apple-tab-span">	</span>という特性を持っている。</p>
-<p class="p3"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span></p>
-<p class="p5"><span class="Apple-tab-span">	</span>具体例として、次のようなAutoを初期化するコードがあると、</p>
-<p class="p3"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span></span>毎号集めても何もない。ドキュメント作る時の備忘録。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>今回は、AutomatineでのCoroutineの指針と、Coroutineで扱うパラメータ解説。</p>
+<p class="p2"><br></p>
+<p class="p4"><br></p>
+<p class="p5"><b>Coroutineの指針</b></p>
+<p class="p4"><br></p>
+<p class="p3"><b>Coroutineを超えてパラメータを扱いたい、、という時にはInitialTypeParamのパラメータを使おう</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>1.ロックオン</p>
+<p class="p3"><span class="Apple-tab-span">	</span>2.ロックしてあるやつを殴りに行く</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>こういう時には、InitialTypeParam自体や、そのプロパティ、値に「ロックした敵」というパラメータを持つといい。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>実行中の各Coroutineでインスタンスを共有できるので、ロックした敵があったらそのIdを使って～みたいな書き方ができる。</p>
+<p class="p4"><br></p>
+<p class="p3"><b>Autoを超えてパラメータを扱いたい、、という時にも、contextのパラメータを使おう</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>初期化時に渡すと楽。</p>
+<p class="p4"><br></p>
+<p class="p6">var context = new Context();</p>
+<p class="p6">auto = new Something&lt;Context, Other&gt;(frame, context);</p>
+<p class="p4"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b>Coroutineは部品のように細かく分けて作ってもいいけど、大雑把に作って後で割るのもOK</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>e.g.<span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>一番近い敵の方を向く</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>敵まで歩いていく</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>最初はゴチャッと作っちゃっても問題ない。</p>
+<p class="p4"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>e.g.</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>一番近い敵の方に向いてそのまま歩いていって殴る</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ただし、名前とコメントをつけるようにしよう。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Coroutineの役割の分解は、コードがあんまり分散してないので、あとで簡単にできる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>まずは動くものを作って、そのあと切り分けるのがカンタン。</p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p5"><b>Coroutineで扱うパラメータ解説</b></p>
+<p class="p4"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b>Coroutineの初期値とパラメータについて</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Timeline上に複数のTackを置いた場合、そのTackについているCoroutineが順に実行されるわけだが。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>実行されるCoroutineには、次の2つのパラメータが入る。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>1.initialParam、すべてのCoroutineから参照/設定ができるパラメータ</p>
+<p class="p3"><span class="Apple-tab-span">	</span>2.updateParam、auto.Updateの度に更新されるパラメータ</p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p3"><b>1.initialParam、すべてのCoroutineから参照/設定ができるパラメータ</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>new時にInitialParamTypeで型指定、initialParamとして渡せる値は、</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・Autoのnewの時に、全Coroutineへと渡るパラメータになる</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・全Coroutineからの変更が可能</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>という特性を持っている。</p>
+<p class="p4"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>具体例として、次のようなAutoを初期化するコードがあると、</p>
+<p class="p4"><br></p>
 <p class="p6">auto = new Auto&lt;<b>string</b>, int&gt;(frame, <b>“初期値”</b>);</p>
-<p class="p3"><br></p>
-<p class="p5"><span class="Apple-tab-span">	</span>InitialParamType には string型がセットされ、コンストラクタの第二引数 InitialTypeのパラメータにもstring型の値が入っている。</p>
-<p class="p3"><br></p>
-<p class="p3"><br></p>
-<p class="p5"><span class="Apple-tab-span">	</span>こうすると、このAutoのすべてのTimelineのすべてのTackに対して、Coroutine動作時に渡されるパラメータとして “初期値” という文字列が入る。</p>
-<p class="p3"><br></p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>InitialParamType には string型がセットされ、コンストラクタの第二引数 InitialTypeのパラメータにもstring型の値が入っている。</p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>こうすると、このAutoのすべてのTimelineのすべてのTackに対して、Coroutine動作時に渡されるパラメータとして “初期値” という文字列が入る。</p>
+<p class="p4"><br></p>
 <p class="p6">public partial class RoutineContexts&lt;InitialParamType, UpdateParamType&gt; : RoutineBase&lt;InitialParamType, UpdateParamType&gt; {</p>
 <p class="p7"><span class="Apple-tab-span">	</span></p>
 <p class="p6"><span class="Apple-tab-span">	</span>public IEnumerator TheCoroutine1 (InitialParamType initialParam) {</p>
@@ -93,22 +99,22 @@
 <p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>yield return null;</p>
 <p class="p6"><span class="Apple-tab-span">	</span>}</p>
 <p class="p6">}<span class="Apple-tab-span">	</span></p>
-<p class="p3"><br></p>
-<p class="p3"><br></p>
-<p class="p5"><span class="Apple-tab-span">	</span>もし、InitialParamに自分で定義したクラスのインスタンスを入れた場合、そのインスタンスはそのAuto内のすべてのCoroutineに引き継がれる。</p>
-<p class="p3"><span class="Apple-tab-span">	</span></p>
-<p class="p3"><br></p>
-<p class="p5"><span class="Apple-tab-span">	</span>次のような[パラメータのパッケージ]をクラスとして定義してInitialTypeParamとして使う場合、</p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>もし、InitialParamに自分で定義したクラスのインスタンスを入れた場合、そのインスタンスはそのAuto内のすべてのCoroutineに引き継がれる。</p>
+<p class="p4"><span class="Apple-tab-span">	</span></p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>次のような[パラメータのパッケージ]をクラスとして定義してInitialTypeParamとして使う場合、</p>
 <p class="p6">public class Params {</p>
 <p class="p6"><span class="Apple-tab-span">	</span>public string message;</p>
 <p class="p6">}</p>
-<p class="p3"><br></p>
+<p class="p4"><br></p>
 <p class="p6">auto = new Auto&lt;Params, int&gt;(frame, new Params());</p>
-<p class="p3"><br></p>
-<p class="p5"><span class="Apple-tab-span">	</span>ここで new Params() したインスタンスが、そのAutoの中のすべてのCoroutineからアクセス可能になる。</p>
-<p class="p5"><span class="Apple-tab-span">	</span>どこかのCoroutineで変更を加えると、その変更は他のCoroutineからも参照、変更できる。</p>
-<p class="p3"><br></p>
-<p class="p5"><span class="Apple-tab-span">	</span>次のCoroutine TheCoroutine2で、Paramsインスタンスのmessageという変数に”hello!!”という文字列をセットすると、</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ここで new Params() したインスタンスが、そのAutoの中のすべてのCoroutineからアクセス可能になる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>どこかのCoroutineで変更を加えると、その変更は他のCoroutineからも参照、変更できる。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>次のCoroutine TheCoroutine2で、Paramsインスタンスのmessageという変数に”hello!!”という文字列をセットすると、</p>
 <p class="p6">public partial class RoutineContexts&lt;InitialParamType, UpdateParamType&gt; : RoutineBase&lt;InitialParamType, UpdateParamType&gt; {</p>
 <p class="p7"><span class="Apple-tab-span">	</span></p>
 <p class="p6"><span class="Apple-tab-span">	</span>public IEnumerator TheCoroutine2 (InitialParamType initialParam) {</p>
@@ -119,9 +125,9 @@
 <p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>yield return null;</p>
 <p class="p6"><span class="Apple-tab-span">	</span>}</p>
 <p class="p6">}<span class="Apple-tab-span">	</span></p>
-<p class="p3"><br></p>
-<p class="p5"><span class="Apple-tab-span">	</span>その後に実行されるCoroutineからは、その変更が把握できる。</p>
-<p class="p3"><br></p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>その後に実行されるCoroutineからは、その変更が把握できる。</p>
+<p class="p4"><br></p>
 <p class="p6">public partial class RoutineContexts&lt;InitialParamType, UpdateParamType&gt; : RoutineBase&lt;InitialParamType, UpdateParamType&gt; {</p>
 <p class="p7"><span class="Apple-tab-span">	</span></p>
 <p class="p6"><span class="Apple-tab-span">	</span>public IEnumerator TheCoroutine3 (InitialParamType initialParam) {</p>
@@ -134,37 +140,37 @@
 <p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>yield return null;</p>
 <p class="p6"><span class="Apple-tab-span">	</span>}</p>
 <p class="p6">}<span class="Apple-tab-span">	</span></p>
-<p class="p3"><br></p>
-<p class="p5"><span class="Apple-tab-span">	</span>こんな感じで、initialParamには次のような性質がある。</p>
-<p class="p5"><span class="Apple-tab-span">	</span>・Autoのnewの時に、全Coroutineへと渡るパラメータになる</p>
-<p class="p5"><span class="Apple-tab-span">	</span>・全Coroutineからの参照、変更が可能</p>
-<p class="p3"><br></p>
-<p class="p3"><br></p>
-<p class="p5"><b>2.updateParam、auto.Updateの度に更新されるパラメータ</b></p>
-<p class="p5"><b><span class="Apple-tab-span">	</span></b>Coroutineには、this.updateParam, this.frame などのパラメータが定義されている。</p>
-<p class="p3"><span class="Apple-tab-span">	</span></p>
-<p class="p5"><span class="Apple-tab-span">	</span>これらの値はAutoのアップデートを行うタイミングでセットすることができる。</p>
-<p class="p5"><span class="Apple-tab-span">	</span>例えばこんなクラスを用意し、</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>こんな感じで、initialParamには次のような性質がある。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・Autoのnewの時に、全Coroutineへと渡るパラメータになる</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・全Coroutineからの参照、変更が可能</p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p3"><b>2.updateParam、auto.Updateの度に更新されるパラメータ</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span></b>Coroutineには、this.updateParam, this.frame などのパラメータが定義されている。</p>
+<p class="p4"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これらの値はAutoのアップデートを行うタイミングでセットすることができる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>例えばこんなクラスを用意し、</p>
 <p class="p6">public class Params {</p>
 <p class="p6"><span class="Apple-tab-span">	</span>public string message;</p>
 <p class="p6">}</p>
-<p class="p3"><br></p>
-<p class="p5"><span class="Apple-tab-span">	</span>Autoを次のように初期化した場合、</p>
-<p class="p3"><br></p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Autoを次のように初期化した場合、</p>
+<p class="p4"><br></p>
 <p class="p6">auto = new Auto&lt;string, <b>Params</b>&gt;(frame, “初期化”);</p>
-<p class="p3"><br></p>
-<p class="p5"><span class="Apple-tab-span">	</span>UpdateParamTypeには、Params型を指定してあり、</p>
-<p class="p5"><span class="Apple-tab-span">	</span>この後に実行するauto.Updateで、第二引数としてParams型のインスタンスを実行中のCoroutineへと渡すことができる。</p>
-<p class="p3"><br></p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>UpdateParamTypeには、Params型を指定してあり、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>この後に実行するauto.Updateで、第二引数としてParams型のインスタンスを実行中のCoroutineへと渡すことができる。</p>
+<p class="p4"><br></p>
 <p class="p6">var <b>updateParam</b> = new Params();</p>
 <p class="p6"><b>updateParam.message = “World!” + frame;</b></p>
 <p class="p6">auto.Update(frame,<span class="Apple-converted-space">  </span><b>updateParam</b>)</p>
 <p class="p6">frame++;</p>
-<p class="p3"><span class="Apple-tab-span">	</span></p>
-<p class="p5"><span class="Apple-tab-span">	</span>このUpdateでは、実行開始のタイミング or 実行中のすべてのCoroutineへと、updateParamが入力される。</p>
-<p class="p3"><br></p>
-<p class="p5"><span class="Apple-tab-span">	</span>先ほどのUpdateを実行すると、Coroutineの中のパラメータはこんな感じになる。</p>
-<p class="p3"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>このUpdateでは、実行開始のタイミング or 実行中のすべてのCoroutineへと、updateParamが入力される。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>先ほどのUpdateを実行すると、Coroutineの中のパラメータはこんな感じになる。</p>
+<p class="p4"><br></p>
 <p class="p6">public partial class RoutineContexts&lt;InitialParamType, UpdateParamType&gt; : RoutineBase&lt;InitialParamType, UpdateParamType&gt; {</p>
 <p class="p7"><span class="Apple-tab-span">	</span></p>
 <p class="p6"><span class="Apple-tab-span">	</span>public IEnumerator TheCoroutine4 (InitialParamType initialParam) {</p>
@@ -177,9 +183,9 @@
 <p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>yield return null;</p>
 <p class="p6"><span class="Apple-tab-span">	</span>}</p>
 <p class="p6">}<span class="Apple-tab-span">	</span></p>
-<p class="p3"><br></p>
-<p class="p5"><span class="Apple-tab-span">	</span>また、複数回実行できるようなCoroutineの場合、毎回実行されるたびにupdateParamが更新される。</p>
-<p class="p3"><br></p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>また、複数回実行できるようなCoroutineの場合、毎回実行されるたびにupdateParamが更新される。</p>
+<p class="p4"><br></p>
 <p class="p6">public partial class RoutineContexts&lt;InitialParamType, UpdateParamType&gt; : RoutineBase&lt;InitialParamType, UpdateParamType&gt; {</p>
 <p class="p7"><span class="Apple-tab-span">	</span></p>
 <p class="p6"><span class="Apple-tab-span">	</span>public IEnumerator TheCoroutine4 (InitialParamType initialParam) {</p>
@@ -193,36 +199,36 @@
 <p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}</p>
 <p class="p6"><span class="Apple-tab-span">	</span>}</p>
 <p class="p6">}<span class="Apple-tab-span">	</span></p>
-<p class="p3"><br></p>
-<p class="p5"><span class="Apple-tab-span">	</span>ざっくり書くと、Updateを行うと、実行状態になった全Coroutineにその値がセットされ実行される。</p>
-<p class="p3"><br></p>
-<p class="p5"><span class="Apple-tab-span">	</span>auto.Update(frame, obj)<span class="Apple-tab-span">	</span>――&gt; CoroutineA {this.updateParamにはobjが入っている}</p>
-<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>――&gt; CoroutineB {this.updateParamにはobjが入っている}</p>
-<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>――&gt; CoroutineC {this.updateParamにはobjが入っている}</p>
-<p class="p3"><br></p>
-<p class="p3"><br></p>
-<p class="p5"><span class="Apple-tab-span">	</span>Coroutine中の定義済みの値には、次のものがある。</p>
-<p class="p3"><br></p>
-<p class="p5"><b><span class="Apple-tab-span">	</span>・int frame</b></p>
-<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Update関数で入力したframeが入る。</p>
-<p class="p3"><br></p>
-<p class="p5"><b><span class="Apple-tab-span">	</span>・UpdateParamType updateParam</b></p>
-<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Update関数で入力したupdateParamが入る。</p>
-<p class="p3"><br></p>
-<p class="p5"><b><span class="Apple-tab-span">	</span>・loadCount</b></p>
-<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>このCoroutineの実行回数が入っている。初回0。</p>
-<p class="p3"><br></p>
-<p class="p3"><br></p>
-<p class="p5"><b>まとめ</b></p>
-<p class="p5"><span class="Apple-tab-span">	</span>Coroutineに入ってくるパラメータ、</p>
-<p class="p5"><span class="Apple-tab-span">	</span>・一つのインスタンスをひき回せるInitialParamType</p>
-<p class="p5"><span class="Apple-tab-span">	</span>・毎フレーム更新されるUpdateParamType</p>
-<p class="p5"><span class="Apple-tab-span">	</span>の2つがある。</p>
-<p class="p3"><br></p>
-<p class="p5"><span class="Apple-tab-span">	</span>必要に合わせて使うといいと思う。</p>
-<p class="p3"><br></p>
-<p class="p3"><br></p>
-<p class="p3"><br></p>
-<p class="p3"><br></p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ざっくり書くと、Updateを行うと、実行状態になった全Coroutineにその値がセットされ実行される。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>auto.Update(frame, obj)<span class="Apple-tab-span">	</span>――&gt; CoroutineA {this.updateParamにはobjが入っている}</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>――&gt; CoroutineB {this.updateParamにはobjが入っている}</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>――&gt; CoroutineC {this.updateParamにはobjが入っている}</p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Coroutine中の定義済みの値には、次のものがある。</p>
+<p class="p4"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>・int frame</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Update関数で入力したframeが入る。</p>
+<p class="p4"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>・UpdateParamType updateParam</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Update関数で入力したupdateParamが入る。</p>
+<p class="p4"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>・loadCount</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>このCoroutineの実行回数が入っている。初回0。</p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p3"><b>まとめ</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Coroutineに入ってくるパラメータ、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・一つのインスタンスをひき回せるInitialParamType</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・毎フレーム更新されるUpdateParamType</p>
+<p class="p3"><span class="Apple-tab-span">	</span>の2つがある。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>必要に合わせて使うといいと思う。</p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
 </body>
 </html>
