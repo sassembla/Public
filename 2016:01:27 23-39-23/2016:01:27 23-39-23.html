@@ -1,0 +1,223 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1404.34">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Sans'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px 'Hiragino Sans'; color: #323333; min-height: 20.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px 'Hiragino Sans'; color: #323333}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px 'Hiragino Sans'; color: #323333; background-color: #ebebeb}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px 'Hiragino Sans'; color: #323333; background-color: #ebebeb; min-height: 20.0px}
+    span.s1 {font-kerning: none}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><span class="s1"><b>週刊Automatineマガジン 4.コンディションの更新</b></span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p3"><span class="s1"><b>概要</b></span></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>UpdateでAutoの更新が行われるが、コンディションの更新もそこで行われる。</span></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>ただし、newを使ってAutoを切り替えるときは要注意、みたいな話。</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>ここでは、「コンディションはどうやって変化するのか」というのを解説する。</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>Automatineは各TackにTypeとValueという値のペアをセットすることができる。</span></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>実行中、「このフレーム内ならこういう状態」というのを表現することができるというわけ。</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>で、じゃあ次のタイミングの時、Autoの状態はそれぞれどうなってるの？っていう。</span></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>・Autoを初期化した時</span></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>・AutoをUpdateする前</span></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>・AutoをUpdateした後</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"><span class="Apple-tab-span">	</span></span></p>
+<p class="p3"><span class="s1"><b>初期化時</b></span></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>Autoには3つの初期化方法がある。</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>1.newを使って初期化する</span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>auto = new Auto&lt;I, U&gt;(frame, IValue)</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>2.Autoクラスのinstance method ChangeToWithoutInheritConditions(Auto&lt;I, U&gt; newAuto)) を使う</span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>auto = auto.ChangeToWithoutInheritConditions(new Auto&lt;I, U&gt;(frame, IValue))</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>3.Autoクラスのinstance method ChangeTo(Auto&lt;I, U&gt; newAuto)) を使う</span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>auto = auto.ChangeTo(new Auto&lt;I, U&gt;(frame, IValue))<span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>なぜ初期化に3つも方法があるのかというと、「直前のAutoの状態を引き継ぎたい」というケースがあるため。</span></p>
+<p class="p2"><span class="s1"><span class="Apple-tab-span">	</span></span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>1, 2の方法は、直前のAutoの状態の引き継ぎを行わず、</span></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>3だけは直前のAutoの状態の引き継ぎを行う。</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>ぶっちゃけると、</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p3"><span class="s1"><b><span class="Apple-tab-span">	</span>・最初のAutoを作り出す時はnew</b></span></p>
+<p class="p3"><span class="s1"><b><span class="Apple-tab-span">	</span>・それ以降のAutoを変更したり更新したりするときにはChangeToメソッドを使う</b></span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>というルールで覚えてもらって構わない。理由はこのページで後述する。</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>で、状態の話なんだけど、</span></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>初期化ずみのAutoは、特例として、実行前にもかかわらずConditionを返すことができる。</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>new、ChangeToWithoutInheritConditionsメソッドを使ってAutoを初期化/更新した場合、</span></p>
+<p class="p3"><span class="s1"><b><span class="Apple-tab-span">	</span>実行前のAutoは、無条件に0フレーム目のConditionを返す。</b></span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>対として、</span></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>ChangeToメソッドを使ってAutoを初期化/更新した場合、</span></p>
+<p class="p3"><span class="s1"><b><span class="Apple-tab-span">	</span>実行前のAutoは、直前のAutoのConditionを返す。</b><span class="Apple-tab-span">	</span></span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>この、メソッドによるautoの更新の特性の違いは、実際に使用する際にかなり顕著に出てくることになる。</span></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>具体的には、autoを更新する目的でnewやChangeToWithoutInheritConditionsメソッドを使うと、意図しない挙動を生みやすくなる。</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p3"><span class="s1"><b>Update前</b></span></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>Update前のAutoは、直前のUpdateで設定されたConditionを返す。</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>特に「初期化/更新したばかり」のAutoには特例があり、</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>new、ChangeToWithoutInheritConditionsメソッドを使ってAutoを初期化/更新した場合、</span></p>
+<p class="p3"><span class="s1"><b><span class="Apple-tab-span">	</span>実行前のAutoは、無条件に0フレーム目のConditionを返す。</b></span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>対として、</span></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>ChangeToメソッドを使ってAutoを初期化/更新した場合、</span></p>
+<p class="p3"><span class="s1"><b><span class="Apple-tab-span">	</span>実行前のAutoは、直前のAutoのConditionを返す。</b><span class="Apple-tab-span">	</span></span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p3"><span class="s1"><b>Update後</b></span></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>AutoのUpdateを行うと、そのタイミングに設定された動作を行う。</span></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>もし初めてのUpdateなら、ここで初めて、Auto自体にそのフレームでのConditionが付与されることになる。</span></p>
+<p class="p2"><span class="s1"><span class="Apple-tab-span">	</span></span></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>ここに特例はない。</span></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>例えばその回でAutoの実行が完了する場合でも、最後のタイミングでセットされたConditionは正確に発現する。</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p3"><span class="s1"><b>初期化からUpdateにかけてのConditionを書くとこんな感じ</b></span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>autoの初期化 or 更新から、Updateの流れを書き出してみると、次のような形になる。</span></p>
+<p class="p2"><span class="s1"><span class="Apple-tab-span">	</span></span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>(初期化/更新)</span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>auto = <b>new NewAuto&lt;I, U&gt;(0, IValue)</b></span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>or</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>auto = auto.ChangeToWithoutInheritConditions(<b>new NewAuto&lt;I, U&gt;(0, IValue)</b>)</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>or </span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>auto = auto.ChangeTo(<b>new NewAuto&lt;I, U&gt;(0, IValue)</b>)</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>―<span class="Apple-tab-span">	</span>---<span class="Apple-tab-span">	</span>---</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>(frame = 0)</span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>// auto.Conditions()は0フレーム時の結果を返す(前のAutoのCondition or 新規Autoのデフォルト</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>Update(frame, UValue) (0フレームの適応をしてる</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>// auto.Conditions()は0フレーム時の結果を返す</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>frame++</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>―<span class="Apple-tab-span">	</span>---<span class="Apple-tab-span">	</span>---</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>(frame = 1)</span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>// auto.Conditions()は0フレーム時の結果を返す</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>Update(frame, UValue) (1フレームの適応をしてる</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>// auto.Conditions()は1フレーム時の結果を返す</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>frame++</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>―<span class="Apple-tab-span">	</span>---<span class="Apple-tab-span">	</span>---</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>(frame = 2)</span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>// auto.Conditions()は1フレーム時の結果を返す</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>Update(frame, UValue) (2フレームの適応をしてる</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>// auto.Conditions()は2フレーム時の結果を返す</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>frame++</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>…</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>注目すべきはframe = 0時のところで、</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>(frame = 0)</span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>// auto.Conditions()は0フレーム時の結果を返す(前のAutoのCondition or 新規Autoのデフォルト</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>Update(frame, UValue) (0フレームの適応をしてる</span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>…</span></p>
+<p class="p2"><span class="s1"><span class="Apple-tab-span">	</span></span></p>
+<p class="p2"><span class="s1"><span class="Apple-tab-span">	</span></span></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>0フレーム、autoの　初期化 か 更新 が終わってから一度もUpdateしていない状態でどんなConditionを返すのかが、</span></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>どの方法でautoの初期化をしたかで異なる。</span></p>
+<p class="p2"><span class="s1"><span class="Apple-tab-span">	</span></span></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>new、ChangeToWithoutInheritConditionsメソッドを使ってAutoを初期化/更新した場合、</span></p>
+<p class="p3"><span class="s1"><b><span class="Apple-tab-span">	</span>実行前のAutoは、無条件に0フレーム目のConditionを返す。</b></span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>対として、</span></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>ChangeToメソッドを使ってAutoを初期化/更新した場合、</span></p>
+<p class="p3"><span class="s1"><b><span class="Apple-tab-span">	</span>実行前のAutoは、直前のAutoのConditionを返す。</b><span class="Apple-tab-span">	</span></span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>あっこのコピペ3度目だ。</span></p>
+<p class="p2"><span class="s1"><span class="Apple-tab-span">	</span></span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>状態だけを見ていくと、違いがわかりやすい。</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p3"><span class="s1"><b>newかChangeToWithoutInheritConditionsを使った場合</b></span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>auto = new Auto</span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>auto = auto.ChangeToWithoutInheritConditions(new Auto)</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>―<span class="Apple-tab-span">	</span>---<span class="Apple-tab-span">	</span>---</span></p>
+<p class="p5"><span class="s1"><span class="Apple-tab-span">	</span></span></p>
+<p class="p4"><span class="s1"><b><span class="Apple-tab-span">	</span>実行前のconditionは新Autoの0フレーム目</b></span></p>
+<p class="p5"><span class="s1"><span class="Apple-tab-span">	</span></span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>Update</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>実行後のconditionは新Autoの0フレーム目</span></p>
+<p class="p2"><span class="s1"><span class="Apple-tab-span">	</span></span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p3"><span class="s1"><b>ChangeToを使った場合</b></span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>auto = auto.ChangeTo(new Auto)</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>―<span class="Apple-tab-span">	</span>---<span class="Apple-tab-span">	</span>---</span></p>
+<p class="p5"><span class="s1"><span class="Apple-tab-span">	</span></span></p>
+<p class="p4"><span class="s1"><b><span class="Apple-tab-span">	</span>conditionは旧Autoの最後の状態</b></span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>Update</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>実行後のconditionは新Autoの0フレーム目</span></p>
+<p class="p2"><span class="s1"><span class="Apple-tab-span">	</span></span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>太字部分の差が出る。</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>これは特に、autoの更新を行う際、</span></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>newやChangeToWithoutInheritConditionsを使うと</span></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>「うっかりUpdate前にConditionを取得して連続してないのが帰ってきて困る」みたいな問題を生みやすい。</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>なので、次のルールを鉄則にしておくといい。</span></p>
+<p class="p2"><span class="s1"><span class="Apple-tab-span">	</span></span></p>
+<p class="p3"><span class="s1"><b><span class="Apple-tab-span">	</span>・最初のAutoを作り出す時はnew</b></span></p>
+<p class="p3"><span class="s1"><b><span class="Apple-tab-span">	</span>・それ以降のAutoを変更したり更新したりするときにはChangeToメソッドを使う</b></span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>もちろん意図的に前のAutoのconditionを継がずに0フレーム目を出したい、というケース(猟奇的だ)に対応する場合、</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>単にnewで書くよりは、ChangeToWithoutInheritConditions という長ったらしいメソッドを使うと、より意図を鮮明にできると思うのでオススメ。</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+</body>
+</html>
