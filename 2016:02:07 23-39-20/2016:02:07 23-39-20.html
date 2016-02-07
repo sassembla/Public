@@ -1,0 +1,111 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1404.34">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Sans'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; background-color: #ebebeb}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>link.xml製造機</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>UnityでのWebGLビルドはまだまだまだまだyackだ。今一歩。二歩、三歩。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>UnityでWebGLビルドするのをリモートのマシンでガンガン回してたけど1分切るかどうかって感じで切ないのでボリュームゾーンだけ最適化を試みる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ほぼ手動。この辺Unityが進歩していく過程で自動化されるに決まってて夢はない。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ただし面倒臭い手動の部分をどう単純化 + 自動化するかが楽をするためのコツなんでその辺。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>必要なシーンは、strip engine codeをオンにした時だけ。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>strip engine code on/off時の動作</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>単純に、コンパイルから全てのunity engine codeを消すか否か。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>BuildSettingsのWebGLのこのチェックが付いていると、build resultから全てのUnityEngineがらみのコードが消える。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ビルドは最速、生成されるjsも2.3MB程度になる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ちなみにUnityEngineがらみ以外のものは入るんで、すべてのUnityEngineがらみのものを使わないで書けばそれはそれでいいような気がする。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Webブラウザのjsコンソールで動くゲームとか。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、strip engine codeがonの時、UnityEngineの機能(GUIとか、Unity2DのCanvasとか)を使用しようとすると、実行時に次のようなエラーが出る。</p>
+<p class="p2"><br></p>
+<p class="p4">Could not produce class with ID 223.</p>
+<p class="p4">This could be caused by a class being stripped from the build even though it is needed. Try disabling 'Strip Engine Code' in Player Settings.</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>うん、class with ID 223ってのがないんだね。なんだよそれっていう。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ようはUnityEngineのコードをstripしきっているんでゲーム内で使ってるコードもないですよっていうやつ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>対象のclass with ID 223 っていうのを個別にjs変換に巻き込むことで対応できる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>こういうのBackgroundで動かしておいてくれると嬉しいんだけど。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Unityのドキュメントの方にも<b>「どや？ 辛いやろ？？ 辛いよな？？？ 頑張るから」</b>みたいに書いてあるんで、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>多分そうなっていくんだろうな。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>差</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>あくまで目安として。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>build time<span class="Apple-tab-span">	</span>size</p>
+<p class="p3">strip on<span class="Apple-tab-span">	</span>100%<span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>2.3MB</p>
+<p class="p3">strip off<span class="Apple-tab-span">	</span>133%<span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>5.2MB</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>link.xmlの効果の実験</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>単にビルド速度 vs 規模みたいな感じで、Assets直下にlink.xmlを書くと特定のクラスだけを読み込んで変換してくれる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、linkに書く内容の量と時間の伸びが以下</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>build time<span class="Apple-tab-span">	</span>size</p>
+<p class="p3">strip on<span class="Apple-tab-span">	</span>100%<span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>2.3MB</p>
+<p class="p3">link * 3<span class="Apple-tab-span">	</span>100%<span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>2.3MB</p>
+<p class="p3">link * 10<span class="Apple-tab-span">	</span>121%<span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>4.3MB</p>
+<p class="p3">strip off<span class="Apple-tab-span">	</span>133%<span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>5.2MB</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>すっごくキレイにlinkする数を足すとビルド時間とサイズが増えていく。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>実際にはビルド時間の誤差がそれなりにあるんで正しく比例するもんでもないと思う。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>どのclassを読み込むかで違ってくると思うし適当すぎるclass選択してるんで全く正しくないと思うが、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>まーー小さくしたほうが楽だ。GUI系のコードはわりと軽い傾向がある気がするんで嬉しい。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ちなみにビルドごとにキャッシュが効くのでは？？って思ったが、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>全然そんなことないからなこれ。Scalaのコンパイルのほうが速い(Cleanした後どうこうとは言ってない</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>で、classIdからclass引くのが面倒なので、classId入れたらlink.xml吐くのを作った</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これ。好きにして。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/UniCMS/blob/master/Assets/Backyard/Editor/ClassIdCollector.cs">https://github.com/sassembla/UniCMS/blob/master/Assets/Backyard/Editor/ClassIdCollector.cs</a></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>メニュー項目を一個自作して適宜ぶっ叩くといいと思う。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>例:</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/UniCMS/blob/master/Assets/Backyard/Editor/Publisher.cs">https://github.com/sassembla/UniCMS/blob/master/Assets/Backyard/Editor/Publisher.cs</a></p>
+<p class="p2"><br></p>
+<p class="p4">[MenuItem ("UniCMS/Generate link.xml")]</p>
+<p class="p4">static void GenerateLinkXML () {</p>
+<p class="p4"><span class="Apple-tab-span">	</span>var classIds = new List&lt;int&gt;{223, 108};</p>
+<p class="p4"><span class="Apple-tab-span">	</span>ClassIdCollector.ExportLinkXMLWithUsingClassIds(classIds);</p>
+<p class="p4">}</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ここから自動検出とかは面倒なのでやってない。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>ちなみに5.4 betaでは</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>b4でも特に何にも変わってません。速度も内容もサイズも。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>まあいいや。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Unity使ってWeb作るのの30％くらいはUIが面倒臭いからなんで、そこが許容できるかどうか。あとは構造化と自動化とメンテナビリティ。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+</body>
+</html>
