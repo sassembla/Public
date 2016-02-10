@@ -18,24 +18,47 @@
 <p class="p1"><b>link.xml製造機</b></p>
 <p class="p2"><br></p>
 <p class="p3"><b>概要</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>UnityでのWebGLビルドはまだまだまだまだyackだ。今一歩。二歩、三歩。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>UnityでのWebGLビルドはまだまだまだまだyack。今一歩。二歩、三歩。</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>UnityでWebGLビルドするのをリモートのマシンでガンガン回してたけど1分切るかどうかって感じで切ないのでボリュームゾーンだけ最適化を試みる。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p2"><br></p>
+<p class="p3"><b>strip engine code</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、strip engine codeのチェックを入れると、不要なUnityEngineのコードが根こそぎ消える。のでこれを使いたいが、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>そのままだと実行時必要なコードももちろんないので、最低限必要なものをlink.xmlに書くことになる。</p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>で、classIdからclass引くのが面倒なので、classId入れたらlink.xml吐くのを作った</b></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これ。好きにして。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/UniCMS/blob/master/Assets/Backyard/Editor/ClassIdCollector.cs">https://github.com/sassembla/UniCMS/blob/master/Assets/Backyard/Editor/ClassIdCollector.cs</a></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>メニュー項目を一個自作して適宜ぶっ叩くといいと思う。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>例:</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/UniCMS/blob/master/Assets/Backyard/Editor/Publisher.cs">https://github.com/sassembla/UniCMS/blob/master/Assets/Backyard/Editor/Publisher.cs</a></p>
+<p class="p2"><br></p>
+<p class="p4">[MenuItem ("UniCMS/Generate link.xml")]</p>
+<p class="p4">static void GenerateLinkXML () {</p>
+<p class="p4"><span class="Apple-tab-span">	</span>var classIds = new List&lt;int&gt;{223, 108};</p>
+<p class="p4"><span class="Apple-tab-span">	</span>ClassIdCollector.ExportLinkXMLWithUsingClassIds(classIds);</p>
+<p class="p4">}</p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p3"><span class="Apple-tab-span">	</span>ほぼ手動。この辺Unityが進歩していく過程で自動化されるに決まってて夢はない。</p>
 <p class="p3"><span class="Apple-tab-span">	</span>ただし面倒臭い手動の部分をどう単純化 + 自動化するかが楽をするためのコツなんでその辺。</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>必要なシーンは、strip engine codeをオンにした時だけ。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ここから先は、UnityのWebGLの出力最適化に関するメモ。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>strip engine code on/off時の動作</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>単純に、コンパイルから全てのunity engine codeを消すか否か。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>単純に、コンパイルから全ての未使用のunity engine codeを消すか否か。</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>BuildSettingsのWebGLのこのチェックが付いていると、build resultから全てのUnityEngineがらみのコードが消える。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>BuildSettingsのWebGLのこのチェックが付いていると、build resultから全ての未使用のUnityEngineがらみのコードが消える。</p>
 <p class="p3"><span class="Apple-tab-span">	</span>ビルドは最速、生成されるjsも2.3MB程度になる。</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>ちなみにUnityEngineがらみ以外のものは入るんで、すべてのUnityEngineがらみのものを使わないで書けばそれはそれでいいような気がする。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>Webブラウザのjsコンソールで動くゲームとか。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Webブラウザのjsコンソールで動くゲームとか。なにそれ。</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>で、strip engine codeがonの時、UnityEngineの機能(GUIとか、Unity2DのCanvasとか)を使用しようとすると、実行時に次のようなエラーが出る。</p>
 <p class="p2"><br></p>
@@ -81,30 +104,15 @@
 <p class="p3"><span class="Apple-tab-span">	</span>全然そんなことないからなこれ。Scalaのコンパイルのほうが速い(Cleanした後どうこうとは言ってない</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
-<p class="p3"><b>で、classIdからclass引くのが面倒なので、classId入れたらlink.xml吐くのを作った</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>これ。好きにして。</p>
-<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/UniCMS/blob/master/Assets/Backyard/Editor/ClassIdCollector.cs">https://github.com/sassembla/UniCMS/blob/master/Assets/Backyard/Editor/ClassIdCollector.cs</a></p>
-<p class="p2"><br></p>
-<p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>メニュー項目を一個自作して適宜ぶっ叩くといいと思う。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>例:</p>
-<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/UniCMS/blob/master/Assets/Backyard/Editor/Publisher.cs">https://github.com/sassembla/UniCMS/blob/master/Assets/Backyard/Editor/Publisher.cs</a></p>
-<p class="p2"><br></p>
-<p class="p4">[MenuItem ("UniCMS/Generate link.xml")]</p>
-<p class="p4">static void GenerateLinkXML () {</p>
-<p class="p4"><span class="Apple-tab-span">	</span>var classIds = new List&lt;int&gt;{223, 108};</p>
-<p class="p4"><span class="Apple-tab-span">	</span>ClassIdCollector.ExportLinkXMLWithUsingClassIds(classIds);</p>
-<p class="p4">}</p>
-<p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>ここから自動検出とかは面倒なのでやってない。</p>
-<p class="p2"><br></p>
-<p class="p2"><br></p>
 <p class="p3"><b>ちなみに5.4 betaでは</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>b4でも特に何にも変わってません。速度も内容もサイズも。</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>まあいいや。</p>
 <p class="p3"><span class="Apple-tab-span">	</span>Unity使ってWeb作るのの30％くらいはUIが面倒臭いからなんで、そこが許容できるかどうか。あとは構造化と自動化とメンテナビリティ。</p>
 <p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>動的なクラスの追加</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>なんとかしたい、、、、なんとかならないかな、、、</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 </body>

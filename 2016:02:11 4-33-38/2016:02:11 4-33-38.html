@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1404.34">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Sans'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; background-color: #ebebeb}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>AssetBundle使いつつlink.xmlになにか書くのは無意味なのでは、、？</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Unity 5.3.2p2 WebGLビルドの話題。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>link.xml思ってたより意味なくて笑った。俺が間違っていることを望む。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>前提</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>目的は最初にロードされるシーンの軽量化。次のような手順で動かしてる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・Scene Listにはローダーのみのほぼ空っぽのシーンを置く</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・Strip Engine CodeをOnにする</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・link.xmlに依存を書く</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・AssetBundleに依存コードを使っているクラスを使う(Canvasとか</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>link.xmlにClass情報を記述し、AssetBundleで要素を取得、Instantiateした場合、link.xmlになにを書こうが無駄だった、みたいな話。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>手順</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>link.xmlに特定のオブジェクトのClassId - nameを記述(下記)</p>
+<p class="p4">&lt;linker&gt;</p>
+<p class="p4"><span class="Apple-tab-span">	</span>&lt;assembly fullname="UnityEngine"&gt;</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>&lt;type fullname="UnityEngine.MeshRenderer" preserve="all"/&gt;</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>&lt;type fullname="UnityEngine.BoxCollider" preserve="all"/&gt;</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>&lt;type fullname="UnityEngine.MeshFilter" preserve="all"/&gt;</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>&lt;type fullname="UnityEngine.Canvas" preserve="all"/&gt;</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>&lt;type fullname="UnityEngine.Sprite" preserve="all"/&gt;</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>&lt;type fullname="UnityEngine.CanvasRenderer" preserve="all"/&gt;</p>
+<p class="p4"><span class="Apple-tab-span">	</span>&lt;/assembly&gt;</p>
+<p class="p4">&lt;/linker&gt;</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>WebGLビルドで、特定のオブジェクト(Canvasなど)をAssetBundleから読み出した際に、link.xmlに対象クラスが入っていても、コードがアタッチされない。</p>
+<p class="p2"><br></p>
+<p class="p4">The referenced script on this Behaviour is missing!</p>
+<p class="p3"><span class="Apple-tab-span">	</span>というエラーが出る。ちなみにブラウザ上だけ。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>本来なら、例えばCanvasなら、デフォルトでコンポーネントに含まれている要素があって、それが展開されるはず、、なんだ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>そいつがmissingになる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で。解決方法はあって、「同様のオブジェクトを含んだものをビルド時のScene Listに含んでいるシーンのヒエラルキーに持たせる」とか。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>たとえそのシーンでは使ってなくてもdisableにしておいても、ようは入れておけばいい。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>(他には、Strip Engine CodeをOffにする　とか。前提覆るんで言及しない。)</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これだけで全く同じ手順でもmissingが発生しなくなる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>、、、</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>いや正しいけどさあ</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これが正解の一つであることは別にいいんだよ、だって「コンパイル時に使ってないコードは入らない」んだから。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>WebGLをはじめとして、UnityはあとからAssetBundleとかでコードを足すことができるプラットフォームでもないし(できるのもあるけど無視する。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>link.xmlに期待してたのは、まさにその「コンパイル時には使ってないコードを内包した状態でビルドされ、あとからそれを使用するのを許す」部分だったんだけど。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>なんか書き足すとビルド時のjsに内包されてるっぽい増え方するし、やったぜって思ったんだけどさ。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>なぜ実行時にmissingになるのさ。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>一番マシな解決法が正攻法一発、しかも使ってないリソース足す方法で、なおかつ一番重量を食うっていう、、、ほら、、なんか泣ける。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>結局link.xmlに書こうが書かまいが、シーンに入れておかないとAssetBundleからのロード時に無意味になる、、という感じで、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>っていうかビルド時に含まれるならもうそれで良くて、、使ってなくても、、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>link.xmlになにか書いても意味がなく、link.xmlとは一体、、という疑問がある。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>ちなみに</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ぶっちゃけUnityEngineのコード全部含んでもDL sizeは5.3MBとかだったんで諦めたよ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>そのうち改善 or 解明されるだろ。</p>
+</body>
+</html>
