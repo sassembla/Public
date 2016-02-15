@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1404.34">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #ebebeb}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>週刊Automatineマガジン 5. jsonとかデータからAutoを作る</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Automatineでは、GUIからいろいろ調整したTimelineとかをコードの形で出力することができる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>でもこれだと、変更を加えるたびにいちいちコンパイルしないといけない、、オラそんなのいやだ、、、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>というわけで、AutomatineをGUIで弄る -&gt; jsonデータを吐く -&gt; jsonデータを実行時に読み込む -&gt; 実行 ということができる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>すでにリリースしちゃったゲームの調整すらできるというわけさ。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>データ出力手順</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>GUIの一番右上の「Export As Data」ボタンを押す。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202016-02-15%2022.20.45.png" alt="スクリーンショット 2016-02-15 22.20.45.png"></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>すると、すべてのAutoのデータがjsonとして</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Assets/Automatine/Runtime/Generated/Json フォルダに出力される。</p>
+<p class="p3"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202016-02-15%2022.23.36.png" alt="スクリーンショット 2016-02-15 22.23.36.png"></p>
+<p class="p3"><span class="Apple-tab-span">	</span>拡張子は.jsonになっているため、Assetsフォルダの下だけれど、Unityの影響は受けない。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>これらをサーバなどに置いて、動的にDLしてAutoとして使用することができる。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>使用方法</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>次のようなAutoを使うコードがあったら、</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p4">Auto&lt;int, int&gt; auto = new Atk_Punch&lt;int, int&gt;(frame, 100);</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>次のように書き換えることができる。</p>
+<p class="p2"><br></p>
+<p class="p4">var atk_punchJson = //通信結果やファイル読み出しなどで得たAtk_Punch.jsonの中身</p>
+<p class="p4">var atk_punchData = AutomatineJsonConverter.JsonToAutoData(atk_punchJson);</p>
+<p class="p4">Auto&lt;int, int&gt; auto = Auto&lt;int, int&gt;.RuntimeAutoGenerator(atk_punchData)(frame, 100);</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これで、Atk_Punch.jsonに入っているAutoの情報を、特定の内容のAutoとして初期化することができる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>初期化コストは無視できるくらい小さい。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>(クラスとして持っている場合と負荷を比較したら、もちろんjsonからの変形のほうが負荷が大きいとは思うけれど。)</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>制約</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>この機能によって、jsonを介して、動的にAutoを生成することができる。<span class="Apple-tab-span">	</span>いちいちコンパイルし直さないでも、どこかから最新のAutoの情報を取得して～っていうのが、実機でできたりする。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>素敵。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ただし制約がある。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>なんのことはない、「すでに動いているゲームに対して、動的にコードを追加することはできない」ことに起因する制約がある。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>1.ConditionType, ConditionValueを動的に増やすことはできない</p>
+<p class="p3"><span class="Apple-tab-span">	</span>2.Coroutineを動的に増やすことはできない</p>
+<p class="p3"><span class="Apple-tab-span">	</span>3.Changerを動的に増やすことはできない</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Autoの中にあるTackを移動したり、TackにセットしてあるConditionやCoroutineを切り替えたり、タイミングや長さ、Timelineの数などを変更することは自由自在にできる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ただし、<b>使用される対象であるCoroutineやChanger、ConditionType、ConditionValueについては、これらはデータではなくコードなので、</b>動的に追加することはできない。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>これらはコンパイル時に「あらかじめ」いれておこうね、っていう話になる。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>まーーーUnityそれ自体の制約でもあるし、iOSとかのプラットフォームの制約でもあるし、</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+</body>
+</html>
