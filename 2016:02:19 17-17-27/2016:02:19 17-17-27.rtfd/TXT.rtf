@@ -2,8 +2,8 @@
 {\fonttbl\f0\fnil\fcharset128 HiraginoSans-W4;\f1\fnil\fcharset128 HiraginoSans-W3;\f2\fswiss\fcharset0 Helvetica;
 \f3\fnil\fcharset0 Menlo-Regular;\f4\fnil\fcharset0 Menlo-Bold;}
 {\colortbl;\red255\green255\blue255;\red170\green13\blue145;\red230\green230\blue230;\red196\green26\blue22;
-\red92\green38\blue153;\red28\green0\blue207;\red46\green13\blue110;\red170\green12\blue145;\red28\green2\blue207;
-}
+\red92\green38\blue153;\red28\green0\blue207;\red46\green13\blue110;\red170\green12\blue145;\red230\green230\blue230;
+\red28\green2\blue207;}
 \paperw11900\paperh16840\margl1440\margr1440\vieww19640\viewh8400\viewkind0
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
 
@@ -76,8 +76,9 @@ Filesystem.mm\
 \f3\fs22 \cf8 \cb3 \expnd0\expndtw0\kerning0
 extern\cf0  \cf4 "C"\cf0  \cf8 int\cf0  UnityUpdateNoBackupFlag(\cf8 const\cf0  \cf8 char\cf0 * path, \cf8 int\cf0  setFlag)\
 \{\
-\cf4 \'a0 \'a0\'a0\cf7 NSLog\cf4 (@"setFlag:%d", setFlag);\
-\cf0 \'a0 \'a0 \cf8 int\cf0  FIXED_YES_NUM = \cf9 1\cf0 ;\
+\'a0 \'a0 \cf7 \cb9 \kerning1\expnd0\expndtw0 \CocoaLigature0 NSLog\cf0 (\cf4 @"path:%s, setFlag:%d"\cf0 , path, setFlag);\cf4 \expnd0\expndtw0\kerning0
+\CocoaLigature1 \
+\cf0 \cb3 \'a0 \'a0 \cf8 int\cf0  FIXED_YES_NUM = \cf10 1\cf0 ;\
 \cf7 \'a0 \'a0 \cf8 return\cf7  [[\cf5 NSURL\cf7  fileURLWithPath:[\cf5 NSString\cf7  stringWithUTF8String:path]] setResourceValue:[\cf5 NSNumber\cf7  numberWithBool:FIXED_YES_NUM] forKey:\cf5 NSURLIsExcludedFromBackupKey\cf7  error: \cf8 nil\cf7 ] != \cf8 NO\cf7 ;\
 \cf0 \}
 \f1\fs24 \kerning1\expnd0\expndtw0 \
