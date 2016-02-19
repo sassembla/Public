@@ -17,6 +17,8 @@
     p.p8 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px Menlo; color: #d12f1b; background-color: #ebebeb}
     p.p9 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px Menlo; color: #3d1d81; background-color: #ebebeb}
     p.p10 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px Menlo; background-color: #ebebeb; min-height: 13.0px}
+    p.p11 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; color: #2b2f2f; min-height: 18.0px}
+    p.p12 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; color: #2b2f2f}
     span.s1 {font: 12.0px Helvetica}
     span.s2 {font-variant-ligatures: no-common-ligatures; color: #bb2ca2}
     span.s3 {font-variant-ligatures: no-common-ligatures}
@@ -31,6 +33,7 @@
     span.s12 {font-kerning: none; color: #000000}
     span.s13 {font-kerning: none; color: #272ad8}
     span.s14 {font-kerning: none; color: #703daa}
+    span.s15 {font: 12.0px 'Hiragino Sans'; font-kerning: none; background-color: transparent}
     span.Apple-tab-span {white-space:pre}
   </style>
 </head>
@@ -111,5 +114,25 @@
 <p class="p3"><b>結果</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>Victory~~~~!!</p>
 <p class="p4"><span class="Apple-tab-span">	</span><img src="IMG_0817.PNG" alt="IMG_0817.PNG"></p>
+<p class="p5"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>追記</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>自分でも確認したい人向けに下記を用意した。</p>
+<p class="p11"><span class="s10"></span><br></p>
+<p class="p12"><span class="s10"><span class="Apple-tab-span">	</span>再現サンプルリポジトリ</span></p>
+<p class="p12"><span class="s10"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/ShaderKitchen/tree/assetbundle_debug_sorasu"><span class="s15">https://github.com/sassembla/ShaderKitchen/tree/assetbundle_debug_sorasu</span></a></span></p>
+<p class="p11"><span class="s10"></span><br></p>
+<p class="p11"><span class="s10"></span><br></p>
+<p class="p12"><span class="s10"><span class="Apple-tab-span">	</span>プロジェクトを、ツールバーの Unidon &gt; Publish Site からビルドできる。</span></p>
+<p class="p11"><span class="s10"></span><br></p>
+<p class="p12"><span class="s10"><span class="Apple-tab-span">	</span>ビルド時に、Assetsフォルダと同じ階層に、UnidonWeb/AssetBundle というフォルダ+アセットバンドルが作成されるようになっている。</span></p>
+<p class="p12"><span class="s10"><span class="Apple-tab-span">	</span>実機で動かす際は適当なCDNとかにそれらをアップ、DLするURLを書き換えてみてほしい。</span></p>
+<p class="p11"><span class="s10"></span><br></p>
+<p class="p12"><span class="s10"><span class="Apple-tab-span">	</span>アプリケーション実行時、実行時に自動的に１つのAssetBundleを取得しキャッシュしている。</span></p>
+<p class="p12"><span class="s10"><span class="Apple-tab-span">	</span>キャッシュにはWWW.LoacFromCacheOrDownload を使っている。</span></p>
+<p class="p11"><span class="s10"><span class="Apple-tab-span">	</span></span></p>
+<p class="p12"><span class="s10"><span class="Apple-tab-span">	</span>現在までUnity5.3.2系で確認した結果おかしい感じなので、ほかのバージョンでも動かしたりしてみてほしい。</span></p>
+<p class="p12"><span class="s10"><span class="Apple-tab-span">	</span>誰か。</span></p>
+<p class="p11"><span class="s10"></span><br></p>
 </body>
 </html>
