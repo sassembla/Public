@@ -58,7 +58,7 @@
 <p class="p3"><span class="Apple-tab-span">	</span>AssetBundleをDLしたあと、iOSのアプリケーションキャッシュ内に保存する際のフラグ設定をおこなう内部APIがあったんだけど、</p>
 <p class="p3"><span class="Apple-tab-span">	</span>その設定値がAssetBundle DL時 のみおかしかった。</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>Xcodeでのビルド時に、以下のファイルの関数を使っている。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>該当の処理では、Xcodeでの実機用ビルド時に定義されている以下のファイルの関数を使っている。</p>
 <p class="p2"><br></p>
 <p class="p3">Filesystem.mm</p>
 <p class="p6"><span class="s2">extern</span><span class="s3"> </span><span class="s4">"C"</span><span class="s3"> </span><span class="s2">int</span><span class="s3"> UnityUpdateNoBackupFlag(</span><span class="s2">const</span><span class="s3"> </span><span class="s2">char</span><span class="s3">* path, </span><span class="s2">int</span><span class="s3"> setFlag)</span></p>
@@ -77,7 +77,7 @@
 <p class="p6"><span class="s3">}</span></p>
 <p class="p2"><br></p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
-<p class="p3"><span class="Apple-tab-span">	</span>で、このsetFlag、AssetBundleの保存以外にもいろいろな所からつかっているみたいなんだけど、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、この関数、AssetBundleの保存以外にもいろいろな所からつかっているみたいなんだけど、</p>
 <p class="p3"><span class="Apple-tab-span">	</span>AssetBundleを保存するタイミングのやつだけ、setFlag = 0 (Excludeしない)という感じで来てた。</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>Unity Japanに問い合わせたところめっちゃ早く返答がもらえて、「現状使用している方法が古いので、最新でこんなのどう？」っていうコードサンプルをもらった。</p>
@@ -107,7 +107,7 @@
 <p class="p6"><span class="s10"><b>2016-02-19 17:11:39.526 ProductName[595:201865] path:/var/mobile/Containers/Data/Application/7D89FD21-A2D1-42B6-AE4C-F5559366E4B9/Library/UnityCache/Shared/e540cdd1328b2b21e29a95405c301b9313b7c346/__info, setFlag:1</b></span></p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>setFlag = 0で来てるのが、AssetBundleの保存。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>どっかで逆転か初期値か初期値が入ってないか、な気がする。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>どっかで値が逆転してるか初期値がおかしいか初期値が入ってないか、な気がする。</p>
 <p class="p3"><span class="Apple-tab-span">	</span>Unityへは報告ずみ。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
@@ -134,5 +134,24 @@
 <p class="p12"><span class="s10"><span class="Apple-tab-span">	</span>現在までUnity5.3.2系で確認した結果おかしい感じなので、ほかのバージョンでも動かしたりしてみてほしい。</span></p>
 <p class="p12"><span class="s10"><span class="Apple-tab-span">	</span>誰か。</span></p>
 <p class="p11"><span class="s10"></span><br></p>
+<p class="p11"><span class="s10"></span><br></p>
+<p class="p12"><span class="s10"><b>さらに追記</b></span></p>
+<p class="p12"><span class="s10"><span class="Apple-tab-span">	</span>ちなみにAssetBundleだけなのか？ っていうとさにあらず、</span></p>
+<p class="p12"><span class="s10"><span class="Apple-tab-span">	</span>確証がないが、「LoadFromCacheOrDownload」内で使っている関数を、他のAPIが使用している可能性は調べていない。</span></p>
+<p class="p12"><span class="s10"><span class="Apple-tab-span">	</span>つまり</span></p>
+<p class="p11"><span class="s10"></span><br></p>
+<p class="p12"><span class="s10"><span class="Apple-tab-span">	</span>「自前でAssetBundle保存箇所作ったから平気だぜ～」</span></p>
+<p class="p12"><span class="s10"><span class="Apple-tab-span">	</span>とか</span></p>
+<p class="p11"><span class="s10"></span><br></p>
+<p class="p12"><span class="s10"><span class="Apple-tab-span">	</span>「そもAssetBundleつかってないから平気～～」</span></p>
+<p class="p12"><span class="s10"><span class="Apple-tab-span">	</span>とかは</span></p>
+<p class="p11"><span class="s10"></span><br></p>
+<p class="p12"><span class="s10"><span class="Apple-tab-span">	</span>ありえないかもしれない。</span></p>
+<p class="p11"><span class="s10"></span><br></p>
+<p class="p12"><span class="s10"><span class="Apple-tab-span">	</span>少なくとも自分は自分に影響する範囲のチェックしかしてないので、</span></p>
+<p class="p12"><span class="s10"><span class="Apple-tab-span">	</span>レッツ調査。</span></p>
+<p class="p11"><span class="s10"></span><br></p>
+<p class="p12"><span class="s10"><span class="Apple-tab-span">	</span>なんかわかったら教えて。Twitterとかで。</span></p>
+<p class="p11"><span class="s10"><b></b></span><br></p>
 </body>
 </html>
