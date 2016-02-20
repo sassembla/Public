@@ -38,7 +38,7 @@
   </style>
 </head>
 <body>
-<p class="p1"><b>Unity5.3.2p2~3でAssetBundleがiCloudに入っちゃう暫定対策</b></p>
+<p class="p1"><b>Unity5.3.2p2~4でAssetBundleがiCloudに入っちゃう暫定対策</b></p>
 <p class="p2"><br></p>
 <p class="p3"><b>概要</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>このバージョンだけかどうかはわかんねーけどまとめる。</p>
@@ -52,6 +52,16 @@
 <p class="p5"><br></p>
 <p class="p3"><span class="s1"><span class="Apple-tab-span">	</span></span>親にむかってなんだそのデータは！！！</p>
 <p class="p3"><span class="Apple-tab-span">	</span>取得したAssetBundleが見事にiCloudに載っとる。これは死ぬぞ。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>何がまずいのか</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>何がまずいって、これ万が一AppStoreの申請を通過してしまうと、AssetBundleや自前で用意したリソース保持用のフォルダが</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ユーザーのiCloudに載ってしまう可能性がある。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>AppStoreで審査があるおかげで蹴られて気づいた(人から自分はさらに聞いて調べた)んだが、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>万が一すり抜けると、数ギガ単位のリソースをユーザーのiCloudにアップしてしまう。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>iCloudにはユーザーのデータが従量課金ベースで載っているのがデフォなので、ミスると評判的にも痛い。っていうか死ねるのでは。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>原因と解決法</b></p>
@@ -152,6 +162,11 @@
 <p class="p12"><span class="s10"><span class="Apple-tab-span">	</span>レッツ調査。</span></p>
 <p class="p11"><span class="s10"></span><br></p>
 <p class="p12"><span class="s10"><span class="Apple-tab-span">	</span>なんかわかったら教えて。Twitterとかで。</span></p>
+<p class="p11"><span class="s10"><b></b></span><br></p>
+<p class="p11"><span class="s10"><b></b></span><br></p>
+<p class="p12"><span class="s10"><b>さらにさらに追記</b></span></p>
+<p class="p12"><span class="s10"><span class="Apple-tab-span">	</span>5.3.2p4が来てたんで試してみたけどやっぱまだ増えるわ。次かな、、</span></p>
+<p class="p11"><span class="s10"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></b></span></p>
 <p class="p11"><span class="s10"><b></b></span><br></p>
 </body>
 </html>
