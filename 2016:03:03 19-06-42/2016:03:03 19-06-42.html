@@ -1,0 +1,179 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1404.34">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 20.0px 'Hiragino Sans'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>AWS Lumberyardについてメモ</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>AWS、ゲームエンジン乗っけられるサービス始めたってよ</p>
+<p class="p3"><span class="Apple-tab-span">	</span>動かすのとかチュートリアルは割愛。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>サービス区分</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>まずLumberyardというゲームエンジンがある。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>次に、GameLiftという「LumberyardをAWS上で動かす基盤サービス」みたいなのがある。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>Lumberyard</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>中身はCryEngine。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>forkしたもので、オリジナルに対して投資はしているが買収とかではない。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Client(PC、Consumer、SmartPhone、VRとかで動く)</p>
+<p class="p3"><span class="Apple-tab-span">	</span>スマフォとVRは今後サポート。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ゲームエディタ + ゲームエンジンのオーソドックスな構成。いってみりゃ普通。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ただ、AWSとの連携を抽象化してるレイヤーがあって、強烈な部分も。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>強烈な部分</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Lumberyard上のノードエディタにAWS LambdaとかAWS DynamoDBとかがポンと置ける。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>サービス登録とかは別途、って感じなんだろうけど(試してない)、ゲーム中に動作するノードの部分として、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>1.ここにきたらDynamo上のデータをこのキーで取得</p>
+<p class="p3"><span class="Apple-tab-span">	</span>2.もし値があったらこっちのルート</p>
+<p class="p3"><span class="Apple-tab-span">	</span>3.なかったらこっちのルート</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>とかをノードエディタで書けるのはすごい。超強い。そして怖い。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>かる～～いGUI操作の結末として大量にリクエスト流れそうなんですがそれは。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>まあ慣れの問題だろきっと。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b>GameLift</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Lumberyardを「サーバ上でも」動かすための基盤サービス。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ざっくり次の機能を持つ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・オートスケーリング</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・アクティブ状態のゲームのスワップ</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・ユーザーのIdentify</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・ユーザーの接続、切断のAPI</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・ゲームのステートの生成、破棄などのAPI(ちょっと理解が違うかもしれん)</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・以上</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>はい、強いですね。</p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b>オートスケーリング</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>まーインスタンス足したり引いたり。AWSの真骨頂。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>急な負荷でも大丈夫、ガンガンと、、、ガンガンと、、、</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>アクティブ状態のゲームのスワップ</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>サーバへのデプロイ時にversion値を付加し、「動作しているゲームを別versionのものに切り替えていく」といったことができるっぽい。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>まーアップデートとかデグレードとかをAPI化しましたみたいな話。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ユーザーがActiveなversionへとじわじわ遷移していくのかな。試してないけど。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>まあダウンタイムはないよねって話。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>ユーザーのIdentify</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>GameLiftは上記の機能を持つにあたって、ユーザーのIdentifyを勝手にやってくれるっぽい。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>もっとも「DAU1000あたりいくら」っていう課金条件があるんで、そのためのものだと思うけど。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>次に書く「ユーザーの接続、切断のAPI」とかの基礎としてIdenfityがある印象。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>ユーザーの接続、切断のAPI</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これらのAPIが定義、提供されている。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>発生時にイベントハンドラがなんか言う。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、ところで、これらのAPI、特に接続がミソで、このタイミングでDAUベースでちょいちょい金がでていく。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>ゲームのステートの生成、破棄などのAPI(ちょっと理解が違うかもしれん)</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ユーザーの寿命の他に、ゲームのステートみたいなものの寿命も管理できる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>推奨されてるゲームの形状は、「マッチして短期間で解散するもの」みたいな感じで、永遠に稼働し続けるMMOみたいなものは想定していない。<span class="Apple-tab-span">	</span>このへんはドキュメントにもしつこく書いてあった。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>以上</b></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>そう、以上なんだ。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>接続、切断とかのAPIはある。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>、、、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>、、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>、</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>えっじゃあClient-Server間のゲーム中のデータをやり取りするAPIとかはどうなってるの？ っていう疑問を持った？</p>
+<p class="p3"><span class="Apple-tab-span">	</span>持つよね？？　その疑問持つの俺だけじゃないよね？</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>無い。全くの自由なんだ。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Client(PC上で動くLumberyard) &lt;-&gt; Server(AWS上で動くLumberyard)<span class="Apple-converted-space"> </span></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>この2つのPeerのあいだの情報転送は、</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>接続、切断、ゲームのstate生成とか変更のAPI以外、</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>何にもない。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>君はどんなプロトコルを使っても(多分)いい。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>例えばServer側のLumberyardで全部計算して結果をブロードキャスト(Do you rememberShinra?? )してもいいし、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Client、Server双方で同様のゲームロジックを回して整合性はServer準拠、とかをやってもいい。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>どんなプロトコルでもいいわけだよ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>その、、、Client側とServer側が受け入れられて、AWSに乗っけることができれば。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>StartとEndだけは定義されてメソッドもハンドラも用意されているんで、、、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Cross Peerでのシンクロナイズとか、そういうのもまあ、、やろうと思えば、、できるわけだ、、、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>自分で作れば、、、</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>Lumberyardのソースコードに関する制約</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>無い。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>すべてオープンソース。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>なので、たとえばPhotonみたいな、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>「パケットの形状はこのフォーマットです」</p>
+<p class="p3"><span class="Apple-tab-span">	</span>「開けるのはServerに到達してからです」</p>
+<p class="p3"><span class="Apple-tab-span">	</span>「開いてからしか判断できません」</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>みたいな制約は無い。素敵だ。Unityですらこの辺は制約として持ちそうなんでアレだが。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>っていうか通信部分は基礎以外本当に何も無いもんね！！！</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>しかも改変するのも自由(ただし再配布は禁じる。そりゃな。)</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>おおざっぱなLumberyardに関する制約</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>オンプレミスで動かしても良い。無料。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>AWSで動かしても良い。これも無料。GameLiftなどの構造を利用する分にはDAU単位の課金がつく。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ほかのクラウド事業者やレンタルサーバ上で動かすのは禁止。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>純粋な制約はこの一項のみ。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>他</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>まだいろいろあった気がする。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>腕力と金と暴力を感じる。強い。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>感想</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>LumberyardはAWSに連携できる機能を内包したゲームエンジン。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>GameLiftはそれを使ってGBaaS的な機能を持たせたフレームワーク。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Game Backend as a Service ? Platform?</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>とりあえず知ることができてよかった。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+</body>
+</html>
