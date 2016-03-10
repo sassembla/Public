@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1404.34">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 21.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>JACKまわりパァ～っと見てて思うところ</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>このへんについて、FUDにならないように気をつけて書く。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>資料</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>jackの解説</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://source.android.com/source/jack.html">https://source.android.com/source/jack.html</a></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>jackを使ってjava8の機能を使う話</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://developer.android.com/preview/j8-jack.html#configuration">http://developer.android.com/preview/j8-jack.html#configuration</a></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>紹介当時のjackの解説記事(なんかちょっと内容が古い気がする</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://tools.android.com/tech-docs/jackandjill">http://tools.android.com/tech-docs/jackandjill</a></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>実現され、標準になりそうなもの</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>1 .Something.java -&gt; dex変換</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>.java -&gt; .class -&gt; いろいろ -&gt; .dex</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>だったのが、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>.java -&gt; JACK -&gt; .dex になる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>.classを挟まなくなるので、今まで存在していたみたいな</p>
+<p class="p3"><span class="Apple-tab-span">	</span>「別の言語コンパイルして混ぜて、最終的に.classを吐く」</p>
+<p class="p3"><span class="Apple-tab-span">	</span>みたいなのが適応できないんで、使えなくなる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>例えばscalacとかだと、.javaと.scalaファイルを読んで、.class吐いてたけど、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>これってもう動かせないのでは？っていう。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>でも大丈夫、.jarとか.classからjackへと突っこめるツールチェインはあるんで、なんとかなる！</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>2 .jar -&gt; jil -&gt; .jack or .dex変換</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>おおまかにこう。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>.jar(or .class) -&gt; JILL -&gt; JACK -&gt; .jack or .dex</p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span></b>.jackはJACKでコンパイルしたものを.dexではなくライブラリとして吐き出す場合の拡張子。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>なーんかページによって言ってることが妙な気がするが、自分が参考にしたのはこれ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><a href="https://source.android.com/source/jack.html">https://source.android.com/source/jack.html</a></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>.classからはJILLを介してJayce(独自中間表現)が吐けて、それをJACKでimport、.jackを吐くことができそう。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>ざっと見た感じこんな感じなので</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・.classをビルドに関与させるにはJILLを介さないとダメ、かつライブラリ扱いになりそうなんだけど(.classビルド後じゃないと噛み合わせられないんじゃないかと思うわけだが)</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>それでいいのかな。という感じ。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>例えば.scalaとかをJACKで書いた.javaと共存させたい場合、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ツールチェーンでJACKを通るルートでは.javaが書けるけど、そこから呼び出せるScalaのコードとかは、.javaを編集してる瞬間には.classになってないといけないのでは？？っていう。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>1. Scalaのコード書く</p>
+<p class="p3"><span class="Apple-tab-span">	</span>2. .classにしてJILLに食わせて.jackにしておく</p>
+<p class="p3"><span class="Apple-tab-span">	</span>3. .javaのコードから.jackライブラリで定義されてるScala由来のコードを呼ぶ、とか</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>こうなりそうなんだけど大丈夫すかね</p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>楽観も悲観もしてないようなこと</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>きっとJACKがKotlinとかScalaとかをも内部中間表現(この場合はJayceかな？) -&gt; .dex に変換できるようになる、、、のかな？？</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>そのためにはJACKに「Java + その言語用のコンパイラの性能」が必要になるんだけど、そんなことできるのかな？？</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>というあたりが興味範囲。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>個人的な感想</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>まだなんかビッグニュースがあるそうなんで、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>1.新言語発表！！ モダンなツールチェーンで.dexを吐ける！　.jackも読める！！</p>
+<p class="p3"><span class="Apple-tab-span">	</span>2.JACKは.javaをサポートする最後の独自コンパイラ世代として全てのゴミ拾い(java資産の回収とかリライト)をサポートする</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>みたいな流れだと胸熱だなあと思っている。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>.class -&gt; .dexは本当にろくでもないツールチェーンだと思ってるんでなくなってよかった。</p>
+<p class="p2"><br></p>
+</body>
+</html>
