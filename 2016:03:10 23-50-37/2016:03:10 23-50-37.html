@@ -21,15 +21,20 @@
 <p class="p3"><span class="Apple-tab-span">	</span>なんか間違ってそうだったら <a href="https://twitter.com/toru_inoue">@toru_inoue</a> まで一報ください、、土下座して直す。</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span><b>資料</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>jackの解説</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>JACKの解説</p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://source.android.com/source/jack.html">https://source.android.com/source/jack.html</a></p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>jackを使ってjava8の機能を使う話</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>JACKを使ってjava8の機能を使う話</p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://developer.android.com/preview/j8-jack.html#configuration">http://developer.android.com/preview/j8-jack.html#configuration</a></p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>紹介当時のjackの解説記事(なんかちょっと内容が古い気がする</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>JACKの解説記事(ちょこちょこ表現が違うんでなんかちょっと内容が古い気がする</p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://tools.android.com/tech-docs/jackandjill">http://tools.android.com/tech-docs/jackandjill</a></p>
 <p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b>用語</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Javaの由来が大きく2つに分かれそうなんで、JVMで動く前提のjavacでコンパイルするjavaを<b>JVM java</b>、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>JACKでコンパイルするjavaを<b>JACK java</b>と勝手に呼ぼうと思う。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p2"><br></p>
 <p class="p3"><b>実現され、標準になりそうなもの</b></p>
 <p class="p2"><br></p>
@@ -42,12 +47,12 @@
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>.classを挟まなくなるので、今まで存在していたみたいな</p>
 <p class="p3"><span class="Apple-tab-span">	</span>「別の言語コンパイルして混ぜて、最終的に.classを吐く」</p>
-<p class="p3"><span class="Apple-tab-span">	</span>みたいなのが適応できないんで、使えなくなる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>みたいなのをAndroidでのアプリ開発に使用することができなくなる。</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>例えばscalacとかだと、.javaと.scalaファイルを読んで、.class吐いてたけど、</p>
 <p class="p3"><span class="Apple-tab-span">	</span>これってもう動かせないのでは？っていう。</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
-<p class="p3"><span class="Apple-tab-span">	</span>でも大丈夫、.jarとか.classからjackへと突っこめるツールチェインはあるんで、なんとかなる！</p>
+<p class="p3"><span class="Apple-tab-span">	</span>でも大丈夫、.jarとか.classからjackへと突っこめるツールチェインがあるんで、なんとかなる！</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>2 .jar -&gt; jil -&gt; .jack or .dex変換</b></p>
@@ -64,44 +69,49 @@
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>ざっと見た感じこんな感じなので</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>・.classをビルドに関与させるにはJILLを介さないとダメ、かつライブラリ扱いになりそうなんだけど(確実に.class作成後じゃないと噛み合わせられないんじゃないかと思うわけだが)</p>
+<p class="p3"><span class="Apple-tab-span">	</span>.classをビルドに関与させるにはJILLを介さないとダメ、かつライブラリ扱いになりそうなんだけど(確実に.class作成後じゃないと噛み合わせられないんじゃないかと思うわけだが)</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>それでいいのかな。という感じ。</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>例えば.scalaとかをJACKで書いた.javaと共存させたい場合、</p>
-<p class="p3"><span class="Apple-tab-span">	</span>ツールチェーンでJACKを通るルートでは.javaが書けるけど、そこから呼び出せるScalaのコードとかは、.javaを編集してる瞬間には.classになってないといけないのでは？？っていう。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ツールチェーンでJACKを通るルートでは.javaが書けるけど、そこから呼び出せるScalaのコードとかは、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>.javaを編集してる瞬間にはすでにコンパイル済みの状態で.classになってないといけないのでは？？っていう。</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>1. Scalaのコード書く(このコードはScalaとJavaで書ける)(ただしこの領域で完結している必要がある。理由は後述)</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>具体的なコンパイルフローはこんなの。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>1. Scalaのコード書く(このコードはScalaとJVM javaで書ける)(ただしこの領域で完結している必要がある。理由は後述)</p>
 <p class="p3"><span class="Apple-tab-span">	</span>2. .classにしてJILLに食わせて.jackにしておく</p>
 <p class="p3"><span class="Apple-tab-span">	</span>3. .javaのコードから.jackライブラリで定義されてるScala由来のコードを呼ぶ、とか</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>こうなりそうなんだけど大丈夫すかね</p>
+<p class="p3"><span class="Apple-tab-span">	</span>これ以外のルートがなさそうな気が。</p>
 <p class="p2"><b></b><br></p>
 <p class="p2"><b></b><br></p>
-<p class="p3"><b>困りそうな理由</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>1で書く言語は、そのコンパイル単位で依存関係が閉じていないといけないはず。じゃないと.classにできない。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>なので、3で書くJACK javaのpublic classの参照とかはできないのでは？っていう。(逆は当然できるはず。)</p>
+<p class="p3"><b>上のルートだけだと困りそうな理由</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>上の1で書く言語は、そのコンパイル単位で依存関係が閉じていないといけないはず。じゃないと.classにできない。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>なので、1で書いてるコードから、3で書くJACK javaのpublic classの参照とかはできないのでは？っていう。(逆は当然できるはず。)</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>これはまあ、「.classとか.jarをライブラリにする」っていう作業なんで、そうなんだが、、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>これはまあ、「.classとか.jarをライブラリにする」っていう作業なんで、用途としては合ってる。</p>
 <p class="p2"><b><span class="Apple-tab-span">	</span></b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>Kotlinで自由に書きたい！Java8の終わってるラムダなんかじゃなく！！ みたいな機構には、そのままだと使えなそうで。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、これを律儀に守る限り、Kotlinで自由に書きたい！ アプリケーションのメイン部分をKotlinで！！、みたいな書き方はできなそうで。</p>
 <p class="p3"><span class="Apple-tab-span">	</span>JACKでコンパイルする.javaのほうに、ライブラリに対してハンドラを全力で渡す、みたいなブートストラップを書くのかな？</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>それ、、えっと、、、精神持ちそう？？</p>
+<p class="p3"><span class="Apple-tab-span">	</span>それ、、えっと、、、メインをJACK java以外で書きたい人の精神は耐えられるのかな？？<span class="Apple-converted-space"> </span></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>あっでもライブラリがJACK java以外で便利に書ける+それを合一できるのはすごくいいな。</p>
 <p class="p2"><b></b><br></p>
 <p class="p2"><b></b><br></p>
 <p class="p3"><b>楽観も悲観もしてないようなこと</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>きっとJACKがKotlinとかScalaとかをも内部中間表現(この場合はJayceかな？) -&gt; .dex に変換できるようになる、、、のかな？？</p>
-<p class="p2"><span class="Apple-tab-span">	</span></p>
-<p class="p3"><span class="Apple-tab-span">	</span>そのためにはJACKに「Java + その言語用のコンパイラの性能」が必要になるんだけど、そんなことできるのかな？？</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Androidの公式サポートしてる言語はJavaとかGoなので、それ以外の言語を使うのに関してはもう抵抗がある。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>昔ScalaでAndroid App書いてたけど、やはりとても辛かった。</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>というあたりが興味範囲。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、JACK javaでとりあえずJava継続って感じなので、いいんじゃねーかなーという。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>個人的な感想</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>まだなんかビッグニュースがあるそうなんで、</p>
 <p class="p3"><span class="Apple-tab-span">	</span>1.新言語発表！！ モダンなツールチェーン(まさかここがJACK、、、みたいなのは大いにありそう)で.dexを吐ける！　.jackも読める！！</p>
-<p class="p3"><span class="Apple-tab-span">	</span>2.JACKは.javaをサポートする最後の独自コンパイラ世代として全てのゴミ拾い(java資産の回収とかリライト)をサポートする</p>
+<p class="p3"><span class="Apple-tab-span">	</span>2.JACKは.javaをサポートする最後の独自コンパイラ世代として全てのJava資産の回収とかリライトをサポートする</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>みたいな流れだと胸熱だなあと思っている。</p>
 <p class="p3"><span class="Apple-tab-span">	</span>.class -&gt; .dexは本当にろくでもないツールチェーンだと思ってるんでなくなってよかった。</p>
