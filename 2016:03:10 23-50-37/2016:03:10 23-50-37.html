@@ -18,6 +18,7 @@
 <p class="p2"><br></p>
 <p class="p3"><b>概要</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>このへんについて、FUDにならないように気をつけて書く。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>なんか間違ってそうだったら <a href="https://twitter.com/toru_inoue">@toru_inoue</a> まで一報ください、、土下座して直す。</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span><b>資料</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>jackの解説</p>
@@ -63,7 +64,7 @@
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>ざっと見た感じこんな感じなので</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>・.classをビルドに関与させるにはJILLを介さないとダメ、かつライブラリ扱いになりそうなんだけど(.classビルド後じゃないと噛み合わせられないんじゃないかと思うわけだが)</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・.classをビルドに関与させるにはJILLを介さないとダメ、かつライブラリ扱いになりそうなんだけど(確実に.class作成後じゃないと噛み合わせられないんじゃないかと思うわけだが)</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>それでいいのかな。という感じ。</p>
 <p class="p2"><br></p>
@@ -78,12 +79,12 @@
 <p class="p2"><b></b><br></p>
 <p class="p2"><b></b><br></p>
 <p class="p3"><b>困りそうな理由</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>1で書く言語は、そのコンパイル単位で依存関係が閉じていないといけないはず。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>なので、3で書くjavaのpublic classの参照とかはできないのでは？っていう。(逆は当然できるはず。)</p>
+<p class="p3"><span class="Apple-tab-span">	</span>1で書く言語は、そのコンパイル単位で依存関係が閉じていないといけないはず。じゃないと.classにできない。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>なので、3で書くJACK javaのpublic classの参照とかはできないのでは？っていう。(逆は当然できるはず。)</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>これはまあ、「.classとか.jarをライブラリにする」っていう作業なんで、そうなんだが、、</p>
 <p class="p2"><b><span class="Apple-tab-span">	</span></b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>Kotlinで自由に書きたい！ハンドラとかoverrideしてなんとかほら！！みたいな機構には、そのままだと使えなそうで。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Kotlinで自由に書きたい！Java8の終わってるラムダなんかじゃなく！！ みたいな機構には、そのままだと使えなそうで。</p>
 <p class="p3"><span class="Apple-tab-span">	</span>JACKでコンパイルする.javaのほうに、ライブラリに対してハンドラを全力で渡す、みたいなブートストラップを書くのかな？</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>それ、、えっと、、、精神持ちそう？？</p>
@@ -105,7 +106,8 @@
 <p class="p3"><span class="Apple-tab-span">	</span>みたいな流れだと胸熱だなあと思っている。</p>
 <p class="p3"><span class="Apple-tab-span">	</span>.class -&gt; .dexは本当にろくでもないツールチェーンだと思ってるんでなくなってよかった。</p>
 <p class="p2"><br></p>
-<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>書いてて思ったけどJACKのJはJavaのJだからJACKで別言語コンパイル -&gt; dexはなさそうだな。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>公式の新言語出るといいな。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 </body>
