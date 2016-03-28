@@ -1,7 +1,6 @@
 {\rtf1\ansi\ansicpg932\cocoartf1404\cocoasubrtf340
 {\fonttbl\f0\fnil\fcharset128 HiraKakuProN-W3;}
-{\colortbl;\red255\green255\blue255;\red230\green230\blue230;\red230\green230\blue230;\red49\green49\blue49;
-}
+{\colortbl;\red255\green255\blue255;\red230\green230\blue230;\red49\green49\blue49;}
 \paperw11900\paperh16840\margl1440\margr1440\vieww22540\viewh13340\viewkind0
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
 
@@ -21,53 +20,67 @@
 
 \b \'82\'dc\'82\'b8ubuntu\'8e\'a9\'91\'cc\'82\'f0docker machine\'93\'e0\'82\'c9\'97\'70\'88\'d3
 \b0 \
-\cb2 docker run --name="nginx-luajit-websocket-pubsuber" -it ubuntu:14.04 /bin/bash\
-\cb1 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \cb2 docker run --name="nginx-luajit-websocket-pubsuber" -it ubuntu:14.04 /bin/bash\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \cb1 \
 \
 
 \b \'88\'ea\'89\'9e\'81\'41\'8a\'c2\'8b\'ab\'82\'f0\'8d\'c5\'90\'56\'82\'cc\'82\'e0\'82\'cc\'82\'c9\'82\'b7\'82\'e9
 \b0 \
-\cb2 apt-get -y update\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \cb2 apt-get -y update\
 apt-get -y upgrade\
-\cb1 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \cb1 \
 \
 
 \b usr/local/src/\'82\'c9\'88\'da\'93\'ae
 \b0 \
-\cb2 cd usr/local/src/\
-\cb1 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \cb2 cd usr/local/src/\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \cb1 \
 \pard\pardeftab720\partightenfactor0
 \cf0 \
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
 
 \b \cf0 curl\'82\'a2\'82\'ea\'82\'c4
 \b0 \
-\cb2 apt-get install curl\
-\cb1 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \cb2 apt-get install curl\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \cb1 \
 \
 
 \b nginx\'82\'cc\'83\'5c\'81\'5b\'83\'58\'93\'fc\'82\'ea\'82\'c4
 \b0 \
-\cb2 curl -O http://nginx.org/download/nginx-1.9.12.tar.gz\
-\cb1 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \cb2 curl -O http://nginx.org/download/nginx-1.9.12.tar.gz\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \cb1 \
 \
 
 \b lua-nginx-module\'82\'cc\'83\'5c\'81\'5b\'83\'58\'82\'f0\'93\'fc\'82\'ea\'82\'c4
 \b0 \
-\cb2 mkdir lua-nginx-module\
-cd \cb3 lua-nginx-module\cb2 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \cb2 mkdir lua-nginx-module\
+cd lua-nginx-module\
 curl -L -O https://github.com/openresty/lua-nginx-module/archive/v0.10.2.tar.gz\
 cd ../\
-\cb1 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \cb1 \
 \
 
 \b nginx-devel-kit\'82\'f0DL
 \b0 \
-\cb2 mkdir nginx-devel-kit\
-cd \cb3 nginx-devel-kit\cb2 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \cb2 mkdir nginx-devel-kit\
+cd nginx-devel-kit\
 curl -L -O https://github.com/simpl/ngx_devel_kit/archive/v0.2.19.tar.gz\
 cd ../\
-\cb1 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \cb1 \
 \
 
 \b luajit\'93\'fc\'82\'ea\'82\'e9
@@ -76,7 +89,7 @@ cd ../\
 		http://luajit.org/download.html\
 \
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
-\cf0 \cb3 curl -L -O http://luajit.org/download/LuaJIT-2.1.0-beta2.tar.gz\
+\cf0 \cb2 curl -L -O http://luajit.org/download/LuaJIT-2.1.0-beta2.tar.gz\
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
 \cf0 \cb1 \
 \
@@ -87,22 +100,40 @@ tar -xvzf nginx-1.9.12.tar.gz \'82\'c6\'82\'a9\'81\'42\'97\'8e\'82\'c6\'82\'b5\'
 \
 \
 
-\b Luajit\'82\'f0\'83\'72\'83\'8b\'83\'68
-\b0 \
+\b Luajit\'82\'f0\'83\'72\'83\'8b\'83\'68\
+
+\b0 	lualit\'82\'f0\'83\'72\'83\'8b\'83\'68\'82\'b7\'82\'e9\'82\'bd\'82\'df\'82\'c9\'82\'a2\'82\'eb\'82\'a2\'82\'eb\'93\'fc\'82\'ea\'82\'e9\'81\'42
+\b \
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
-\cf0 \cb2 \CocoaLigature0 apt-get install make\
+
+\b0 \cf0 \cb2 \CocoaLigature0 apt-get install make\
 apt-get install gcc\
-cd LuaJIT-2.1.0-beta2\CocoaLigature1 \
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
-\cf0 luajit_projectpath=$(pwd)\
+\cf0 \cb1 \CocoaLigature1 \
+	\'8e\'9f\'82\'cc\'82\'e6\'82\'a4\'82\'c8build.sh\'82\'f0\'81\'41LuaJIT-2.1.0-beta2\'83\'74\'83\'48\'83\'8b\'83\'5f\'93\'e0\'82\'c9\'8d\'ec\'90\'ac\'82\'b7\'82\'e9\'81\'42\
+\
+build.sh\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \cb2 luajit_projectpath=$(pwd)\
 make\
 make install "PREFIX=$luajit_projectpath"\
-cd ../\
-\cb1 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \cb1 \
 \
 
-\b nginx\'82\'f0\'83\'72\'83\'8b\'83\'68
-\b0 \
+\b nginx\'82\'f0\'83\'72\'83\'8b\'83\'68\
+
+\b0 	nginx\'82\'aa\'88\'cb\'91\'b6\'82\'b5\'82\'c4\'82\'a2\'82\'e9pcre\'82\'c6zlib\'82\'f0\'83\'43\'83\'93\'83\'58\'83\'67\'81\'5b\'83\'8b\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \cb2 \CocoaLigature0 apt-get install libpcre3 libpcre3-dev\
+apt-get install zlib1g-dev
+\b \cb2 \CocoaLigature1 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\b0 \cf0 \cb1 \
+	\'8e\'9f\'82\'cc\'82\'e6\'82\'a4\'82\'c8\'93\'e0\'97\'65\'82\'ccbuild.sh\'82\'f0\'81\'41usr/src/\'83\'74\'83\'48\'83\'8b\'83\'5f\'92\'bc\'89\'ba\'82\'c9\'8d\'ec\'90\'ac(\'8d\'73\'8b\'56\'82\'aa\'82\'ed\'82\'e9\'82\'a2\'81\'42\
+\
+build.sh\
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
 \cf0 \cb2 \CocoaLigature0 PROJECT_PATH=$(pwd) #/usr/src\
 \
@@ -141,30 +172,34 @@ make install\CocoaLigature1 \
 
 \b0 	WebSocket\'82\'c6\'82\'a9\'82\'cc\'83\'52\'81\'5b\'83\'68\'82\'f0\'93\'fc\'82\'ea\'82\'e9\'81\'42\
 \pard\pardeftab720\partightenfactor0
-\cf4 \expnd0\expndtw0\kerning0
-docker-machine scp \'82\'c8\'82\'f1\'82\'bd\'82\'e7\cf0 \kerning1\expnd0\expndtw0 \
+\cf3 \expnd0\expndtw0\kerning0
+docker-machine scp \'82\'c8\'82\'f1\'82\'bd\'82\'e7\
+\pard\pardeftab720\partightenfactor0
+\cf0 \kerning1\expnd0\expndtw0 \
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
 \cf0 	lua\'83\'52\'81\'5b\'83\'68\'82\'cd\'82\'b1\'82\'bf\'82\'e7\
 		{\field{\*\fldinst{HYPERLINK "https://dl.dropboxusercontent.com/u/36583594/outsource/lua.zip"}}{\fldrslt https://dl.dropboxusercontent.com/u/36583594/outsource/lua.zip}}\
 \
-	1.9.x/\'88\'c8\'89\'ba\'82\'c9\'92\'75\'82\'a2\'82\'c4\'81\'41lua\'83\'74\'83\'48\'83\'8b\'83\'5f\'82\'c6\'82\'b5\'82\'c4\'89\'f0\'93\'80\'81\'42\
+	1.9.x/\'88\'c8\'89\'ba\'82\'c9\'92\'75\'82\'a2\'82\'c4\'81\'41lua\'83\'74\'83\'48\'83\'8b\'83\'5f\'82\'c6\'82\'b5\'82\'c4\'89\'f0\'93\'80\'82\'b7\'82\'e9\'82\'be\'82\'af\'81\'42\
 \
 \
 
 \b nginx\'82\'cc\'83\'52\'83\'93\'83\'74\'83\'42\'83\'4f\'90\'dd\'92\'e8\
 
-\b0 	\'82\'b1\'82\'f1\'82\'c8\'8a\'b4\'82\'b6\'81\'42
+\b0 	1.9.x/conf/nginx.conf\'82\'f0\'81\'41luajit\'82\'f0\'8e\'67\'82\'a6\'82\'e9\'82\'e6\'82\'a4\'82\'c8\'8c\'60\'82\'c9\'82\'a2\'82\'b6\'82\'e9\'81\'42\
+	\'82\'b1\'82\'f1\'82\'c8\'8a\'b4\'82\'b6\'81\'42
 \b \
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
 
 \b0 \cf0 \cb2 \CocoaLigature0 #user  nobody;\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
 
-\b worker_processes  auto;
-\b0 \
+\b \cf0 \cb2 worker_processes  auto;
+\b0 \cb2 \
 \
 
-\b error_log  logs/error.log;
-\b0 \
+\b \cb2 error_log  logs/error.log;
+\b0 \cb2 \
 #error_log  logs/error.log  notice;\
 #error_log  logs/error.log  info;\
 \
@@ -191,25 +226,25 @@ http \{\
 \
     #keepalive_timeout  0;\
 
-\b     #keepalive_timeout  65;
-\b0 \
+\b \cb2     #keepalive_timeout  65;
+\b0 \cb2 \
 \
     #gzip  on;\
     # lua_code_cache off;\
 \
 
-\b     # set search paths for pure Lua external libraries (';;' is the default path):
-\b0 \
+\b \cb2     # set search paths for pure Lua external libraries (';;' is the default path):
+\b0 \cb2 \
 
-\b     lua_package_path ";;$prefix/lua/lib/?.lua;";
-\b0 \
+\b \cb2     lua_package_path ";;$prefix/lua/lib/?.lua;";
+\b0 \cb2 \
 \
 
-\b     # set search paths for Lua external libraries written in C (can also use ';;'):
-\b0 \
+\b \cb2     # set search paths for Lua external libraries written in C (can also use ';;'):
+\b0 \cb2 \
 
-\b     # lua_package_cpath ';;$prefix/lua/shared/?.so;';
-\b0 \
+\b \cb2     # lua_package_cpath ';;$prefix/lua/shared/?.so;';
+\b0 \cb2 \
 \
     server \{\
         listen       80;\
@@ -223,25 +258,31 @@ http \{\
             index  index.html index.htm;\
         \}\
 
-\b \
+\b \cb2 \
         # disque client route.\
         location /disque_client \{\
                 content_by_lua_file lua/disque_client.lua;\
         
 \fs22 \}
 \fs24 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
 
-\b0     \}\
+\b0 \cf0 \cb2     \}\
 \}\
-\cb1 	\'91\'be\'8e\'9a\'82\'cc\'82\'c6\'82\'b1\'82\'eb\'82\'aa\'93\'c1\'82\'c9nginx-lua\'82\'cc\'93\'ae\'8d\'ec\'82\'c9\'95\'4b\'97\'76\'82\'c8\'90\'dd\'92\'e8\'81\'42\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \cb1 	\'91\'be\'8e\'9a\'82\'cc\'82\'c6\'82\'b1\'82\'eb\'82\'aa\'93\'c1\'82\'c9nginx-lua\'82\'cc\'93\'ae\'8d\'ec\'82\'c9\'95\'4b\'97\'76\'82\'c8\'90\'dd\'92\'e8\'81\'42\
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
-\cf0 \CocoaLigature1 	\'82\'b1\'82\'cc\'8f\'f3\'91\'d4\'82\'c5\'8b\'4e\'93\'ae\'81\'41/\CocoaLigature0 disque_client \'82\'c9\'83\'41\'83\'4e\'83\'5a\'83\'58\'82\'b7\'82\'e9\'82\'c6\'81\'41nginx-lua\'82\'f0\'8c\'6f\'97\'52\'82\'b5\'82\'c4disque\'82\'d6\'82\'c6\'90\'da\'91\'b1\'82\'b3\'82\'ea\'82\'e9\'81\'42\CocoaLigature1 \
+\cf0 \CocoaLigature1 	\'82\'b1\'82\'cc\'8f\'f3\'91\'d4\'82\'c5\'8b\'4e\'93\'ae\'82\'b7\'82\'e9\'82\'b1\'82\'c6\'82\'aa\'82\'c5\'82\'ab\'82\'e9\'81\'42\
+\
+	\'8b\'4e\'93\'ae\'82\'b5\'82\'bd\'8f\'f3\'91\'d4\'82\'c5\'81\'41nginx\'82\'cc\'91\'d2\'82\'c1\'82\'c4\'82\'e9IP\'82\'cc80\'94\'d4\'83\'7c\'81\'5b\'83\'67/\CocoaLigature0 disque_client \'82\'c9\'83\'41\'83\'4e\'83\'5a\'83\'58\'82\'b7\'82\'e9\'82\'c6\'81\'41WebSocket\'90\'da\'91\'b1\'8c\'e3\'81\'41nginx-lua\'82\'f0\'8c\'6f\'97\'52\'82\'b5\'82\'c4disque\'82\'d6\'82\'c6\'90\'da\'91\'b1\'82\'b3\'82\'ea\'82\'e9\'81\'42\CocoaLigature1 \
 
 \b \
 \
 \'95\'ca\'83\'52\'83\'93\'83\'65\'83\'69\'82\'c9disque\'93\'fc\'82\'ea\'82\'e9
 \b0 \
-	\'8f\'91\'82\'ab\'93\'72\'92\'86(github\'82\'a9\'82\'e7disque\'82\'cc\'83\'52\'81\'5b\'83\'68DL\'82\'b5\'82\'c4\'82\'ab\'82\'c4\'89\'5d\'81\'58\
+	
+\b \'8f\'91\'82\'ab\'93\'72\'92\'86(github\'82\'a9\'82\'e7disque\'82\'cc\'83\'52\'81\'5b\'83\'68DL\'82\'b5\'82\'c4\'82\'ab\'82\'c4\'89\'5d\'81\'58
+\b0 \
 \
 \
 \'82\'a0\'82\'c6\'82\'cd\'81\'41ServerContext\'82\'a9\'82\'e7Disque\'82\'c9\'83\'41\'83\'4e\'83\'5a\'83\'58\'82\'c5\'82\'ab\'82\'ea\'82\'ceOK\'81\'42}

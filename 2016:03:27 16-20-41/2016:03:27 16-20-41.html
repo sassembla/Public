@@ -76,16 +76,26 @@
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>Luajitをビルド</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>lualitをビルドするためにいろいろ入れる。</p>
 <p class="p4"><span class="s1">apt-get install make</span></p>
 <p class="p4"><span class="s1">apt-get install gcc</span></p>
-<p class="p4"><span class="s1">cd LuaJIT-2.1.0-beta2</span></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>次のようなbuild.shを、LuaJIT-2.1.0-beta2フォルダ内に作成する。</p>
+<p class="p2"><br></p>
+<p class="p3">build.sh</p>
 <p class="p4">luajit_projectpath=$(pwd)</p>
 <p class="p4">make</p>
 <p class="p4">make install "PREFIX=$luajit_projectpath"</p>
-<p class="p4">cd ../</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>nginxをビルド</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>nginxが依存しているpcreとzlibをインストール</p>
+<p class="p4"><span class="s1">apt-get install libpcre3 libpcre3-dev</span></p>
+<p class="p4"><span class="s1">apt-get install zlib1g-dev</span></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>次のような内容のbuild.shを、usr/src/フォルダ直下に作成(行儀がわるい。</p>
+<p class="p2"><br></p>
+<p class="p3">build.sh</p>
 <p class="p4"><span class="s1">PROJECT_PATH=$(pwd) #/usr/src</span></p>
 <p class="p5"><span class="s1"></span><br></p>
 <p class="p4"><span class="s1">NGINX_VERSION=1.9.11</span></p>
@@ -120,13 +130,15 @@
 <p class="p3"><b>luaコード</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>WebSocketとかのコードを入れる。</p>
 <p class="p6"><span class="s2">docker-machine scp なんたら</span></p>
+<p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>luaコードはこちら</p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://dl.dropboxusercontent.com/u/36583594/outsource/lua.zip">https://dl.dropboxusercontent.com/u/36583594/outsource/lua.zip</a></p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>1.9.x/以下に置いて、luaフォルダとして解凍。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>1.9.x/以下に置いて、luaフォルダとして解凍するだけ。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>nginxのコンフィグ設定</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>1.9.x/conf/nginx.confを、luajitを使えるような形にいじる。</p>
 <p class="p3"><span class="Apple-tab-span">	</span>こんな感じ。</p>
 <p class="p4"><span class="s1">#user<span class="Apple-converted-space">  </span>nobody;</span></p>
 <p class="p4"><span class="s1"><b>worker_processes<span class="Apple-converted-space">  </span>auto;</b></span></p>
@@ -187,11 +199,13 @@
 <p class="p4"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
 <p class="p4"><span class="s1">}</span></p>
 <p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>太字のところが特にnginx-luaの動作に必要な設定。</span></p>
-<p class="p3"><span class="Apple-tab-span">	</span>この状態で起動、/<span class="s1">disque_client にアクセスすると、nginx-luaを経由してdisqueへと接続される。</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>この状態で起動することができる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>起動した状態で、nginxの待ってるIPの80番ポート/<span class="s1">disque_client にアクセスすると、WebSocket接続後、nginx-luaを経由してdisqueへと接続される。</span></p>
 <p class="p2"><b></b><br></p>
 <p class="p2"><b></b><br></p>
 <p class="p3"><b>別コンテナにdisque入れる</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>書き途中(githubからdisqueのコードDLしてきて云々</p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>書き途中(githubからdisqueのコードDLしてきて云々</b></p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3">あとは、ServerContextからDisqueにアクセスできればOK。</p>
