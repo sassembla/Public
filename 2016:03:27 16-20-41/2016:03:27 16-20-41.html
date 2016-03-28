@@ -1,0 +1,199 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1404.34">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #ebebeb}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #ebebeb; min-height: 18.0px}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; color: #404040}
+    span.s1 {font-variant-ligatures: no-common-ligatures}
+    span.s2 {font-kerning: none}
+    span.s3 {font: 11.0px 'Hiragino Kaku Gothic ProN'; font-variant-ligatures: no-common-ligatures}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>docker/ubuntuにnginx-luajit入れる</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ソースコードから入れてビルドとかそのへん。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>参考になるのはこれ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>lua-nginx-module</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/openresty/lua-nginx-module">https://github.com/openresty/lua-nginx-module</a></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>まずubuntu自体をdocker machine内に用意</b></p>
+<p class="p4">docker run --name="nginx-luajit-websocket-pubsuber" -it ubuntu:14.04 /bin/bash</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>一応、環境を最新のものにする</b></p>
+<p class="p4">apt-get -y update</p>
+<p class="p4">apt-get -y upgrade</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>usr/local/src/に移動</b></p>
+<p class="p4">cd usr/local/src/</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>curlいれて</b></p>
+<p class="p4">apt-get install curl</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>nginxのソース入れて</b></p>
+<p class="p4">curl -O http://nginx.org/download/nginx-1.9.12.tar.gz</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>lua-nginx-moduleのソースを入れて</b></p>
+<p class="p4">mkdir lua-nginx-module</p>
+<p class="p4">cd lua-nginx-module</p>
+<p class="p4">curl -L -O https://github.com/openresty/lua-nginx-module/archive/v0.10.2.tar.gz</p>
+<p class="p4">cd ../</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>nginx-devel-kitをDL</b></p>
+<p class="p4">mkdir nginx-devel-kit</p>
+<p class="p4">cd nginx-devel-kit</p>
+<p class="p4">curl -L -O https://github.com/simpl/ngx_devel_kit/archive/v0.2.19.tar.gz</p>
+<p class="p4">cd ../</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>luajit入れる</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>DL元はここ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>http://luajit.org/download.html</p>
+<p class="p2"><br></p>
+<p class="p4">curl -L -O http://luajit.org/download/LuaJIT-2.1.0-beta2.tar.gz</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>いろいろ解凍</b></p>
+<p class="p3">tar -xvzf nginx-1.9.12.tar.gz とか。落としたやつ全部その場に解凍。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>Luajitをビルド</b></p>
+<p class="p4"><span class="s1">apt-get install make</span></p>
+<p class="p4"><span class="s1">apt-get install gcc</span></p>
+<p class="p4"><span class="s1">cd LuaJIT-2.1.0-beta2</span></p>
+<p class="p4">luajit_projectpath=$(pwd)</p>
+<p class="p4">make</p>
+<p class="p4">make install "PREFIX=$luajit_projectpath"</p>
+<p class="p4">cd ../</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>nginxをビルド</b></p>
+<p class="p4"><span class="s1">PROJECT_PATH=$(pwd) #/usr/src</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1">NGINX_VERSION=1.9.11</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1"># luajit 2.1 is already built.</span></p>
+<p class="p4"><span class="s1">LUAJIT_FOLDER="LuaJIT-2.1.0-beta2"</span></p>
+<p class="p4"><span class="s1">cd $LUAJIT_FOLDER</span></p>
+<p class="p4"><span class="s1">sh build.sh</span></p>
+<p class="p4"><span class="s1">cd ../</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1"># luajit required from Lua-nginx module. set export.</span></p>
+<p class="p4"><span class="s1">export LUAJIT_LIB=$PROJECT_PATH/$LUAJIT_FOLDER/lib</span></p>
+<p class="p4"><span class="s1">export LUAJIT_INC=$PROJECT_PATH/$LUAJIT_FOLDER/include/luajit-2.1</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1"># same folder contains below.</span></p>
+<p class="p4"><span class="s1">NGX_DEVEL_KIT="/usr/src/nginx-devel-kit/ngx_devel_kit-0.2.19"</span></p>
+<p class="p4"><span class="s1">LUA_NGX_MOD="/usr/src/lua-nginx-module/lua-nginx-module-0.10.2"</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1">cd nginx-1.9.12</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1"># make &amp; install nginx to PROJECT_PATH/NGINX_VERSION</span></p>
+<p class="p4"><span class="s1">./configure \</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span>--prefix=$PROJECT_PATH/$NGINX_VERSION \</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span>--with-ld-opt="-Wl,-rpath,$LUAJIT_LIB" \</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span>--add-module=$NGX_DEVEL_KIT \</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span>--add-module=$LUA_NGX_MOD</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1">make -j2</span></p>
+<p class="p4"><span class="s1">make install</span></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>luaコード</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>WebSocketとかのコードを入れる。</p>
+<p class="p6"><span class="s2">docker-machine scp なんたら</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>luaコードはこちら</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://dl.dropboxusercontent.com/u/36583594/outsource/lua.zip">https://dl.dropboxusercontent.com/u/36583594/outsource/lua.zip</a></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>1.9.x/以下に置いて、luaフォルダとして解凍。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>nginxのコンフィグ設定</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>こんな感じ。</p>
+<p class="p4"><span class="s1">#user<span class="Apple-converted-space">  </span>nobody;</span></p>
+<p class="p4"><span class="s1"><b>worker_processes<span class="Apple-converted-space">  </span>auto;</b></span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1"><b>error_log<span class="Apple-converted-space">  </span>logs/error.log;</b></span></p>
+<p class="p4"><span class="s1">#error_log<span class="Apple-converted-space">  </span>logs/error.log<span class="Apple-converted-space">  </span>notice;</span></p>
+<p class="p4"><span class="s1">#error_log<span class="Apple-converted-space">  </span>logs/error.log<span class="Apple-converted-space">  </span>info;</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1">#pid<span class="Apple-converted-space">        </span>logs/nginx.pid;</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1">events {</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">    </span>worker_connections<span class="Apple-converted-space">  </span>1024;</span></p>
+<p class="p4"><span class="s1">}</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1">http {</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">    </span>include <span class="Apple-converted-space">      </span>mime.types;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">    </span>default_type<span class="Apple-converted-space">  </span>application/octet-stream;</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">    </span>#log_format<span class="Apple-converted-space">  </span>main<span class="Apple-converted-space">  </span>'$remote_addr - $remote_user [$time_local] "$request" '</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">    </span>#<span class="Apple-converted-space">                  </span>'$status $body_bytes_sent "$http_referer" '</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">    </span>#<span class="Apple-converted-space">                  </span>'"$http_user_agent" "$http_x_forwarded_for"';</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">    </span>#access_log<span class="Apple-converted-space">  </span>logs/access.log<span class="Apple-converted-space">  </span>main;</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">    </span>sendfile<span class="Apple-converted-space">        </span>on;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">    </span>#tcp_nopush <span class="Apple-converted-space">    </span>on;</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">    </span>#keepalive_timeout<span class="Apple-converted-space">  </span>0;</span></p>
+<p class="p4"><span class="s1"><b><span class="Apple-converted-space">    </span>#keepalive_timeout<span class="Apple-converted-space">  </span>65;</b></span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">    </span>#gzip<span class="Apple-converted-space">  </span>on;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">    </span># lua_code_cache off;</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1"><b><span class="Apple-converted-space">    </span># set search paths for pure Lua external libraries (';;' is the default path):</b></span></p>
+<p class="p4"><span class="s1"><b><span class="Apple-converted-space">    </span>lua_package_path ";;$prefix/lua/lib/?.lua;";</b></span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1"><b><span class="Apple-converted-space">    </span># set search paths for Lua external libraries written in C (can also use ';;'):</b></span></p>
+<p class="p4"><span class="s1"><b><span class="Apple-converted-space">    </span># lua_package_cpath ';;$prefix/lua/shared/?.so;';</b></span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">    </span>server {</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span>listen <span class="Apple-converted-space">      </span>80;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span>server_name<span class="Apple-converted-space">  </span>localhost;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span>#charset koi8-r;</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span>#access_log<span class="Apple-converted-space">  </span>logs/host.access.log<span class="Apple-converted-space">  </span>main;</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span>location / {</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span>root <span class="Apple-converted-space">  </span>html;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span>index<span class="Apple-converted-space">  </span>index.html index.htm;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p5"><span class="s1"><b></b></span><br></p>
+<p class="p4"><span class="s1"><b><span class="Apple-converted-space">        </span># disque client route.</b></span></p>
+<p class="p4"><span class="s1"><b><span class="Apple-converted-space">        </span>location /disque_client {</b></span></p>
+<p class="p4"><span class="s1"><b><span class="Apple-converted-space">                </span>content_by_lua_file lua/disque_client.lua;</b></span></p>
+<p class="p4"><span class="s1"><b><span class="Apple-converted-space">        </span></b></span><span class="s3"><b>}</b></span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p4"><span class="s1">}</span></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>太字のところが特にnginx-luaの動作に必要な設定。</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>この状態で起動、/<span class="s1">disque_client にアクセスすると、nginx-luaを経由してdisqueへと接続される。</span></p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>別コンテナにdisque入れる</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>書き途中(githubからdisqueのコードDLしてきて云々</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3">あとは、ServerContextからDisqueにアクセスできればOK。</p>
+</body>
+</html>
