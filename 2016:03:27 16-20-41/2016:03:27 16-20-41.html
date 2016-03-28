@@ -13,6 +13,7 @@
     p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #ebebeb}
     p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #ebebeb; min-height: 18.0px}
     p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; color: #404040}
+    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px 'Hiragino Kaku Gothic ProN'; min-height: 17.0px}
     span.s1 {font-variant-ligatures: no-common-ligatures}
     span.s2 {font-kerning: none}
     span.s3 {font: 11.0px 'Hiragino Kaku Gothic ProN'; font-variant-ligatures: no-common-ligatures}
@@ -38,8 +39,8 @@
 <p class="p4">apt-get -y upgrade</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
-<p class="p3"><b>usr/local/src/に移動</b></p>
-<p class="p4">cd usr/local/src/</p>
+<p class="p3"><b>/usr/src/に移動</b></p>
+<p class="p4">cd /usr/src/</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>curlいれて</b></p>
@@ -210,9 +211,22 @@
 <p class="p2"><b></b><br></p>
 <p class="p2"><b></b><br></p>
 <p class="p3"><b>別コンテナにdisque入れる</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span><b>書き途中(githubからdisqueのコードDLしてきて云々</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Disqueはここから仕入れてる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/antirez/disque/releases">https://github.com/antirez/disque/releases</a></p>
+<p class="p7"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1">curl -O -L https://github.com/antirez/disque/archive/1.0-rc1.tar.gz</span></p>
+<p class="p4">tar -xvzf <span class="s1">1.0-rc1.tar.gz</span></p>
+<p class="p4"><span class="s1">apt-get install make</span></p>
+<p class="p4"><span class="s1">cd disque-1.0-rc1/</span></p>
+<p class="p4"><span class="s1">make</span></p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
-<p class="p3">あとは、ServerContextからDisqueにアクセスできればOK。</p>
+<p class="p3"><b>Disqueの起動</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>src/<span class="s2">disque-serverを叩くと、デフォルト設定で起動する。</span></p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span>portは7711が使われている。</span></p>
+<p class="p4">/usr/src/<span class="s1">disque-1.0-rc1/disque-server</span></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
 </body>
 </html>
