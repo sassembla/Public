@@ -1,0 +1,348 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1404.46">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Sans'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 17.0px 'Hiragino Sans'; min-height: 26.0px}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 17.0px 'Hiragino Sans'}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 18.0px 'Hiragino Sans'}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>Unite2016に行ってきたぽ</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>今年は平和に過ごす。</p>
+<p class="p4"><b></b><br></p>
+<p class="p5"><b>Profiling</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>profiling-with-instruments</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><a href="http://blogs.unity3d.com/2016/02/01/profiling-with-instruments/">http://blogs.unity3d.com/2016/02/01/profiling-with-instruments/</a></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>Reading the PlayerLoop</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Updateとか</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>PlayerRender</p>
+<p class="p3"><span class="Apple-tab-span">	</span>OnWillRender</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>UI::CanvasManager;;WillRenderCanvases<span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Enlightenのメソッドもあるっぽい。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>StartCoroutine使った場合、実行ブロックが2箇所に分割される</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span></b>初回以降の後半はDelayedCallManager内で呼ばれる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>負荷をみるときに気をつけようねみたいな。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>MemoryProfiler</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>見やすそう。MemoryProfiler</p>
+<p class="p3"><span class="Apple-tab-span">	</span><a href="https://bitbucket.org/Unity-Technologies/memoryprofiler">https://bitbucket.org/Unity-Technologies/memoryprofiler</a></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>DL -&gt; Window -&gt; Open MemoryProfiler Window -&gt; start なんちゃら</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>メモリ、ヒープについて</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>GCは断続的に走ってる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>GC Alloc カラムで観れる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>コレクションを</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>anonymous methods &amp; closuresを避ける</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>毎回初期化しなければいいのではっていう。</p>
+<p class="p2"><br></p>
+<p class="p3"><b>データパーシングについて</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>基本、textのパースに関わるものはすげー遅い。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>3つの方針</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>1.don't parse text</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>bake text to bin ScriptableObject</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ゲームデザインの値とか。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>2.働きを小さく</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>チャンクに分ける</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>必要なとこだけパース</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>3.別スレッド</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Pure C# types only.</p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>Resourcesフォルダの中身は、起動時にインデックスを作っている</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>これは非同期にもできないし回避もできない。遅い。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Resources -&gt; AssetBundle　にすると、特にクソ遅い端末()とかでもスタートアップ時の恩恵があるっぽい。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>Runtime</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Propertyにセットするような値を毎フレームつくるのはやめよう。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>static int とかでキャッシュ扱いにしておくと高速かつ軽量。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>RegExp, StartsWith, EndsWith とかは漏れなく重い。特にReg。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>::Box</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>String_</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>とかのキーワードでプロファイラで探すと見つけやすい。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p6"><b>Graphics</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>Multithreaded Rendering</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>DowbleWide Rendering</p>
+<p class="p3"><span class="Apple-tab-span">	</span>2割くらい高速化できてる印象</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>Cinematic Image Effect</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>SSR</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ScreenSpaceReflection</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>Progressive Light Mapper</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>GI</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p5"><b>Collaborate<span class="Apple-converted-space"> </span></b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>GUI上のボタンから一発でCloudに上がる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>メンバーはinviteで増やせる。</p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p5"><b>60FPS</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>ゲームロジックを別スレッドで実行</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Vitaだと4コアあるんで、1コアを使おうみたいな。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>MainThreadからデータを受け取るところとかが必要 ダブルバッファ自作</p>
+<p class="p3"><span class="Apple-tab-span">	</span>MainThreadからしか使えないAPIは！？　使わない！！ なるほど！！</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ダブルバッファ自作</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ゲーム処理とrender処理のUpdateに分ける。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>GPU</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>vartices直書きできる？らしい。5.4から公開されてるぽい</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>動的なメモリ確保をしない</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>struct使いまくる</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>パフォーマンスメータの話</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>vブランクの開始と終了に近い関数のコールバックを探す</p>
+<p class="p3"><span class="Apple-tab-span">	</span>PSVitaの場合、OnPreCull、OnPreCullで計測。</p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b>RenderThread, GPUは計測困難だった</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>今後に期待</p>
+<p class="p2"><br></p>
+<p class="p3"><b>GCのトリガになるのは？</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Monoの場合は事前にAllocされてるメモリがnewでいっぱいになったら。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>極限すぎる</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>https://github.com/unity3d-jp/AnotherThread</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p5"><b>デバッグテクニック</b></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>ここでは</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>バグ = 思い通りに動かないこと</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>x 例外が出たらバグ、例外がでなければ仕様</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3">どんどん問題の切り分けを行う。<span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>外部接続の確認 -&gt; パラメータ -&gt; プログラムの流れを確認する -&gt; OSを差し替えてみる</p>
+<p class="p2"><br></p>
+<p class="p3">問題を絞り込むまではログ、問題が絞り込めてからはデバッガ</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p5"><b>Marza</b></p>
+<p class="p2"><br></p>
+<p class="p3">いろいろてっく。Tweetひろってあとで拡充する。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p5"><b>2Dの話</b></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>Tiled</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>タイルをならべるの、一個一個並べてると人生が終わる</p>
+<p class="p3"><span class="Apple-tab-span">	</span>タイル選択 -&gt;<span class="Apple-converted-space">  </span>インスペクタからDraw Mode -&gt; Tiled にして、タイル自体の横幅を変更すると、サイズに対してテクスチャで埋めてくれるようになる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>2分が2秒に。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>軸</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>オブジェクト内の軸のありようを変えられるようになってるぽい。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>たとえば見下ろしし視点のゲーム作りたいときとかに使うといいのでは。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>オリジナルタイル作成</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>アトラスを複数のタイルのコレクションから構築できるみたいな話かな。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p5"><b>タイムラインの話</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>Sequencer</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>シーケンサ、アセットベースでいろいろセットしたり動かすことができるタイムラインツール。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Directorと呼ばれるAPIで操作。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ゲーム時間とかそのへんの、どの時間軸を使うのかは選べそう。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>.playable拡張子でファイルとして保存される感じ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>コードからだと、Sequenceクラスのインスタンスという形で読み出したものをDirectorにセットして使う。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>Cinemachine</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>カメラの画角とかを設定、ここで設定した内容をSequencer上にセットして、カメラの移動とかブレンディングみたいなのができるような感じ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>詳細はよくわからんかったがカメラのパンとかに関してもGUIベースで指定できそうで、ぐう有能そう。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>スクラビングでスクリプトのプレビューができるのか</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>毎回ゼロ地点から計算すればあるいは。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>APIからタイムラインを構築することは可能か</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>今はできないけどニーズによっては。<b><span class="Apple-converted-space"> </span></b></p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>AssetBundle化</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>まだできない。今後？</p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>個別に質問</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・コンポーザブル？入れ子にできるか？</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>今後できる。ただし、見づらいから推奨はしない。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・事前定義必須？</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>必須。アイデンティファイはAssetIdとか、Hierarchyにものが載せてある前提な気がする。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・AIみたいに使うのは想定している？</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>特には想定してない。スクリプトくっつけることはできるから頑張れ。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・動的に参加するものを追加できるか？あるグループにキャラを追加、みたいな。<span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>想定してない。事前に足しておこうな！</p>
+<p class="p2"><b><span class="Apple-tab-span">	</span></b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・今はframe単位でロジック動かすのをやってるけど、「この方向に向かうのをこの時間内ずっと行う」みたいなのを考えたい。とのこと。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Coroutineみたいなアイデアだな～と聞きながら思っていた。自作ツールに近そう。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>見えてきたSequencerのモチベーション(作ってる側が目指してるもの)</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・イベントを発効できるAfterEffects</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・シーン単位とかでの使用をメインに据えてそう</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・ムービー、導入モーション、特定のカメラワークとかがメインな用途な気がする。</p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><br></p>
+<p class="p5"><b>マルチシーン</b></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3">Hierarchy上から右クリックメニューで、個別のシーン保存したりできるようになってた。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>GetRootGameObjects</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>GetRootGameObjectsメソッドで、特定のシーンのHierarchyのルートになっている(=Hierに列挙されている)GameObjectを取得することができる。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>gameObject.scene.buildIndex</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>gameObject.scene.buildIndex で、そのGameObjectがどのシーン由来なのか把握することができる。</p>
+<p class="p2"><br></p>
+<p class="p3">便利～～</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p5"><b>シェーダとかの話</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>絵作りの基礎について。Look Devの話。</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>どのくらいのリアル感を、出てくるものすべてに対して揃えるか</p>
+<p class="p3"><span class="Apple-tab-span">	</span>その法則を作りたい。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>質感 = 色、陰影、タッチ</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>マテリアル、ライト、カメラ</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>マテリアル</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>マップ、シェーダ</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ライト</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>直接光、関節光、ホワイトバランス、ソフトネス</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>カメラ</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>HDR、フォーカス、スクリーンスペースでのイメージエフェクト</p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b>ライティングにおけるモチベーション</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>どんなストーリーを持たせるのか(状況、何が起こるかの予告になっている感じ</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>作為的な感じで、特に対象を明るくするとか。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>スライドをもとにコーネルボックスやってみよう。</p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>カラーブリーディング</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>影に壁の色とかが入り込むこと</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>色はライト依存</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>diffuseがどんな色だろうと、ライトで全部変わる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>光の加法混色</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>各ライトの減衰特性</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>DirectionalLight</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>減衰しない。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>PointLight</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>リニアに減衰する</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>AreaLight</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>急激(距離に対して逆二乗)で減衰する</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>GIの設定</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Lighting Windowでやる。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>GIまわりのところがメインで、他はサブっぽい。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>エミッシブを使って云々するとライトみたいな感じになるが、実際にはライトではなくエフェクトっぽい。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>BakeGIのほうがモバイルに向いてる感じ。昼夜を～みたいなのは、Precompiledなやつを使うことになりそう。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>シェーダ</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>PBRValidateっていうツールがある。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>イメージエフェクト</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Scriptになってる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>資料の順番にいろいろ足すといい感じ。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p5"><b>R&amp;Dとか今後のアレ</b></p>
+<p class="p2"><br></p>
+<p class="p3">R&amp;Dとか、今まさに作ってそうなもののはなし。あとメインの質問コーナー</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>(俺)WebSocketとかをサポートする予定はありますか</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ない。</p>
+<p class="p2"><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>(俺)WebViewって各プラットフォームに公式機能としてどうですかね</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ない。<span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>C#の7とかそのいつ対応されそうなの？みたいな話</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>現在のコンパイラのバグ、プロファイラ、とかをみていって、まず6に対応すると思う。その後はその後。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>Webプラグイン死んだんだけど、今後ってWebGL一本なの？どの程度いけんの？</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>割と動くようなフェーズ。</p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>2つ新たにサポ</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>simd</p>
+<p class="p3"><span class="Apple-tab-span">	</span>sharedMemBuff</p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3">カリンググループ</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+</body>
+</html>
