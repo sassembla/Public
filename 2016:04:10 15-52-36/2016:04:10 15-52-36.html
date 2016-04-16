@@ -9,13 +9,17 @@
   <style type="text/css">
     p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
     p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
-    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 20.0px 'Hiragino Kaku Gothic ProN'}
-    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
-    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Zapf Dingbats'}
-    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #ebebeb}
-    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #ebebeb; min-height: 18.0px}
-    li.li4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 20.0px 'Hiragino Kaku Gothic ProN'}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; color: #ff2600}
+    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; color: #ff2600; min-height: 18.0px}
+    p.p8 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Zapf Dingbats'}
+    p.p9 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #ebebeb}
+    p.p10 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #ebebeb; min-height: 18.0px}
+    li.li3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
     span.s1 {font-kerning: none}
+    span.s2 {font: 12.0px Helvetica}
     span.Apple-tab-span {white-space:pre}
     table.t1 {margin: 15.0px 0.0px 15.0px 0.0px; border-collapse: collapse}
     td.td1 {width: 196.0px; background-color: #ffffff; border-style: solid; border-width: 1.0px 1.0px 1.0px 1.0px; border-color: #cccccc #cccccc #cccccc #cccccc; padding: 6.0px 13.0px 6.0px 13.0px}
@@ -31,339 +35,376 @@
 <body>
 <p class="p1"><b>今つくってるやつ x 2</b></p>
 <p class="p2"><br></p>
-<p class="p3"><b>1.ShaderKitchen</b></p>
-<p class="p2"><br></p>
-<p class="p4">逆引きシェーダー辞典。</p>
-<p class="p4">Unityに限らないけど、シェーダーのコードの意味やどんな見た目になるのかを一覧 + 深追いできるサイト。の、プロトタイプ。</p>
-<p class="p2"><br></p>
-<p class="p4"><span class="Apple-tab-span">	</span>プロトタイプのURL</p>
-<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://dl.dropboxusercontent.com/u/36583594/outsource/UnidonWeb/index.html">https://dl.dropboxusercontent.com/u/36583594/outsource/UnidonWeb/index.html</a></p>
-<p class="p2"><br></p>
-<p class="p4"><span class="Apple-tab-span">	</span>・シェーダーを<b>見た目</b>で「あ、これいいな」から選んで、</p>
-<p class="p4"><span class="Apple-tab-span">	</span>・そのシェーダーの<b>コードを、マウスオーバーとかクリックで深追い = 意味とか効果の勉強が</b>できて</p>
-<p class="p4"><span class="Apple-tab-span">	</span>・用意されてるサンプルと同じ<b>UnityPackageのDL</b>ができるんで、手元でも同じ見た目のものが動かせる。</p>
-<p class="p4"><span class="Apple-tab-span">	</span>・リアルタイムにコードを変えて云々は<b>しない</b>。ただしクリックしたコードが描画のどこに影響するかは<b>ドローバッファのアニメーションで見せる</b></p>
-<p class="p4"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202016-04-10%2015.55.09.png" alt="スクリーンショット 2016-04-10 15.55.09.png"></p>
-<p class="p4"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202016-04-10%2015.53.55.png" alt="スクリーンショット 2016-04-10 15.53.55.png"></p>
-<p class="p4"><span class="Apple-tab-span">	</span>・(実装中)Unityで作ってるので、赤い線を左右に自分で動かしつつ、シェーダーの効果を見比べることができる。</p>
-<p class="p4"><img src="half.png" alt="half.png"></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>いろいろ作って遊んでいる。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
-<p class="p4"><span class="Apple-tab-span">	</span>ほか</p>
-<p class="p4"><span class="Apple-tab-span">	</span>・すべてUnity製</p>
-<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Unityのプロジェクトを自動的に分解してWebサイトっぽいデータ構成(index + AssetBundle x Scene)にするツールを作った。</p>
-<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><b>Unidon</b></p>
-<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/Unidon">https://github.com/sassembla/Unidon</a></p>
+<p class="p4"><b>その1.ShaderKitchen</b></p>
 <p class="p2"><br></p>
-<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>このプロジェクト(ShaderKitchen)自体もオープンソース</p>
-<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><b>ShaderKitchen</b></p>
-<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/ShaderKitchen">https://github.com/sassembla/ShaderKitchen</a></p>
+<p class="p3"><span class="Apple-tab-span">	</span>逆引きシェーダー辞典。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Unityに限らないけど、シェーダーのコードの意味やどんな見た目になるのかを一覧 + 深追いできるサイト。の、プロトタイプ。</p>
 <p class="p2"><br></p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b>モチベ</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・見た目からシェーダーの基礎まで深追いしたい</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・シェーダーの勉強するサイト一箇所にしたい</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
+<p class="p3"><b>-&gt; 実装</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・シェーダーを<b>見た目</b>で「あ、これいいな」から選んで、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・そのシェーダーの<b>コードを、マウスオーバーとかクリックで深追い = 意味とか効果の勉強が</b>できて</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・用意されてるサンプルと同じ<b>UnityPackageのDL</b>ができるんで、手元でも同じ見た目のものが動かせる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・リアルタイムにコードを変えて云々は<b>しない</b>。ただしクリックしたコードが描画のどこに影響するかは<b>ドローバッファのアニメーションで見せる</b></p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>プロトタイプのURL</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>☆限界サイズの試験中で20MくらいなのでPCで見てね！ギガ死するよ！！　 (あとupされてるのがdropboxなんで重量的に死にやすいかも)</p>
 <p class="p2"><br></p>
-<p class="p2"><span class="Apple-tab-span">	</span></p>
-<p class="p3"><b>その2 Automatine</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://dl.dropboxusercontent.com/u/36583594/outsource/UnidonWeb/index.html">https://dl.dropboxusercontent.com/u/36583594/outsource/UnidonWeb/index.html</a></p>
+<p class="p2"><br></p>
+<p class="p2"><b><span class="Apple-tab-span">	</span></b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>プロジェクトのURL</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></b><a href="https://github.com/sassembla/ShaderKitchen">https://github.com/sassembla/ShaderKitchen</a></p>
+<p class="p2"><b><span class="Apple-tab-span">	</span></b></p>
 <p class="p2"><b></b><br></p>
-<p class="p4">タイムラインAI作成ツール 。</p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>みため</b></p>
+<p class="p5"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202016-04-10%2015.55.09.png" alt="スクリーンショット 2016-04-10 15.55.09.png"></p>
+<p class="p5"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202016-04-10%2015.53.55.png" alt="スクリーンショット 2016-04-10 15.53.55.png"></p>
 <p class="p2"><br></p>
-<p class="p4">Sequencerとは違った概念で、タイムライン上に状態とかコードを置いて反復できるようにするやつ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・(実装中)Unityで作ってるので、赤い線を左右に自分で動かしつつ、シェーダーの効果を見比べることができる。</p>
+<p class="p5"><img src="half.png" alt="half.png"></p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
-<p class="p4"><b>モチベ</b></p>
-<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>Automatineは、タイムライン上に状態やスクリプトを配置し実行できるユーティリティ。特に次のようなことを簡単に管理するのを目指している。</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ほか</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・すべてUnity製</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Unityのプロジェクトを自動的に分解してWebサイトっぽいデータ構成(index + AssetBundle x Scene)にするツールを作った。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><b>Unidon</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/Unidon">https://github.com/sassembla/Unidon</a></p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p4"><b>その2 Automatine(オートマタイン)</b></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>タイムラインでキャラクタの動作を設定するツール 。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Sequencerとは違った概念で、タイムライン上に状態とかコードを置いて実行できるようにするやつ。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>モチベ</b></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>Automatineは、タイムライン上に状態やスクリプトを配置し実行できるユーティリティ。特に次のようなことを簡単に管理するのを目指している。</span></p>
 <ul class="ul1">
   <ul class="ul2">
-    <li class="li4"><span class="s1">タイムラインでキャラクターやゲーム自体の挙動を制御したい</span></li>
-    <li class="li4"><span class="s1">条件分岐を入れてAIのようなものを作りたい(近くに敵がいたら別のルーチンに移動～とか)</span></li>
-    <li class="li4"><span class="s1">状態を持たせたい、別のタイムラインに引き継ぎたい(Condition)</span></li>
-    <li class="li4"><span class="s1">サーバなど、Unity外でも動かしたい(Portability)</span></li>
-    <li class="li4"><span class="s1">GUIで設定の生成、変更、データ化を行う(Artist Friendly)</span></li>
+    <li class="li3"><span class="s1">タイムラインでキャラクターやゲーム自体の挙動を制御したい</span></li>
+    <li class="li3"><span class="s1">条件分岐を入れてAIのようなものを作りたい(近くに敵がいたら別行動開始！とか)</span></li>
+    <li class="li3">特定のタイミングでこういう状態なんだよ！　みたいな<span class="s1">状態設定を持たせたい</span></li>
+    <li class="li3"><span class="s1">サーバなど、Unity外でも動かしたい</span></li>
+    <li class="li3"><span class="s1">GUIで設定の生成、変更、データ化を行いたい(Artist Friendly~~)</span></li>
   </ul>
 </ul>
 <p class="p2"><span class="s1"><b></b></span><br></p>
 <p class="p2"><span class="s1"><b></b></span><br></p>
-<p class="p4"><span class="s1"><b>こんな見た目</b></span></p>
+<p class="p3"><span class="s1"><b>こんな見た目</b></span></p>
 <p class="p2"><span class="s1"><b><span class="Apple-tab-span">	</span></b></span></p>
-<p class="p4"><span class="s1"><b><span class="Apple-tab-span">	</span></b></span><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202016-04-10%2016.22.21.png" alt="スクリーンショット 2016-04-10 16.22.21.png"></p>
+<p class="p3"><span class="s1"><b><span class="Apple-tab-span">	</span></b></span><span class="s2"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202016-04-10%2016.22.21.png" alt="スクリーンショット 2016-04-10 16.22.21.png"></span></p>
 <p class="p2"><span class="s1"><b></b></span><br></p>
-<p class="p4"><span class="s1"><b>ざっくり言うと</b></span></p>
-<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>ボタンを押す -&gt; 3frame後にキャラが一番近い敵に向かってダッシュ開始</span></p>
-<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>-&gt; 敵めがけてダッシュ(可変フレーム)</span></p>
-<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>-&gt; 十分近くに行ったのでダッシュ解除、惰性のブレーキモーションを10frame</span></p>
-<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>-&gt; 攻撃モーション</span></p>
-<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>-&gt; アニメーションにあわせた待ちフレーム後にダメージ処理</span></p>
-<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>-&gt; 惰性の5frame</span></p>
-<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>-&gt; 最初いた場所を向いて、ダッシュ20frame</span></p>
-<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>-&gt; 元いた位置にたどり着いたら、向きを変えて待機モーションにして、行動終了</span></p>
+<p class="p2"><span class="s1"><b></b></span><br></p>
+<p class="p3"><span class="s1"><b>どんなことを楽にするのか</b></span></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>「数フレーム後に~する」みたいな時間指定での動作をGUIから作れる。</span></p>
 <p class="p2"><span class="s1"></span><br></p>
-<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>みたいな「N frame後に～して、その次は、、」がいっぱいあるコードを手で書きたくないので作った。</span></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>例えば次のような動作「ダッシュ斬り」を考えてみよう。</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>ボタンを押す -&gt; 3frame後にキャラが一番近い敵に向かってダッシュ開始</span></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>-&gt; 敵めがけてダッシュ(可変フレーム)</span></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>-&gt; 十分近くに行ったのでダッシュ解除、惰性のブレーキモーションを10frame</span></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>-&gt; 攻撃モーション</span></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>-&gt; アニメーションにあわせた待ちフレーム後にダメージ処理</span></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>-&gt; 惰性の5frame</span></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>-&gt; 最初いた場所を向いて、ダッシュ20frame</span></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>-&gt; 元いた位置にたどり着いたら、向きを変えて待機モーションにして、行動終了</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>みたいな「N frame後に～して、その次は、、」「もしこうなってたら、その次は、、」がいっぱいあるコードを、GUIからセットできる。</span></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>手で書かなくてよくなる。</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>Automatineを使うと、上記のようなコードの<b>タイミング指定や長さ、やること、状態の調整とか</b>がGUIで完結する。</span></p>
 <p class="p2"><span class="s1"><b></b></span><br></p>
 <p class="p2"><span class="s1"><b></b></span><br></p>
-<p class="p4"><span class="s1"><b>Sequencerとの違い</b></span></p>
-<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>Unity5.4以降でSeqencer(Timeline tool)が入るが、それとは異なる用途を目指している。</span></p>
+<p class="p3"><span class="s1"><b>Sequencerとの違い</b></span></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>Unity5.4以降でSeqencer(Timeline tool)が入るが、それとは異なる用途を目指している。</span></p>
+<p class="p6"><span class="s1"><b><span class="Apple-tab-span">	</span>☆このへんのSequencerのモチベーションの話は、Unite2016で自分が質問&amp;確認した時点での話なので、確定ではなく変わっていくかもしれない。</b></span></p>
+<p class="p7"><span class="s1"><b></b></span><br></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>ざっくり書くとこんな感じ。</span></p>
 <table cellspacing="0" cellpadding="0" class="t1">
   <tbody>
     <tr>
       <td valign="middle" class="td1">
-        <p class="p4"><span class="s1"><b>やりたいこと</b></span></p>
+        <p class="p3"><span class="s1"><b>やりたいこと</b></span></p>
       </td>
       <td valign="middle" class="td2">
-        <p class="p4"><span class="s1"><b>Sequencer</b></span></p>
+        <p class="p3"><span class="s1"><b>Sequencer</b></span></p>
       </td>
       <td valign="middle" class="td3">
-        <p class="p4"><span class="s1"><b>Automatine</b></span></p>
+        <p class="p3"><span class="s1"><b>Automatine</b></span></p>
       </td>
     </tr>
     <tr>
       <td valign="middle" class="td1">
-        <p class="p4"><span class="s1">Assetをタイムラインにセット</span></p>
+        <p class="p3"><span class="s1">Assetをタイムラインにセット</span></p>
       </td>
       <td valign="middle" class="td2">
-        <p class="p5"><span class="s1">✔︎</span></p>
+        <p class="p8"><span class="s1">✔︎</span></p>
       </td>
       <td valign="middle" class="td3">
-        <p class="p4"><span class="s1">-</span></p>
+        <p class="p3"><span class="s1">-</span></p>
       </td>
     </tr>
     <tr>
       <td valign="middle" class="td4">
-        <p class="p4"><span class="s1">シーン単位でタイムライン実行</span></p>
+        <p class="p3"><span class="s1">シーン単位でタイムライン実行</span></p>
       </td>
       <td valign="middle" class="td5">
-        <p class="p5"><span class="s1">✔︎</span></p>
+        <p class="p8"><span class="s1">✔︎</span></p>
       </td>
       <td valign="middle" class="td6">
-        <p class="p5"><span class="s1">✔︎</span></p>
+        <p class="p8"><span class="s1">✔︎</span></p>
       </td>
     </tr>
     <tr>
       <td valign="middle" class="td1">
-        <p class="p4"><span class="s1">キャラ単位でタイムライン実行</span></p>
+        <p class="p3"><span class="s1">キャラ単位でタイムライン実行</span></p>
       </td>
       <td valign="middle" class="td2">
-        <p class="p4"><span class="s1">difficult</span></p>
+        <p class="p3"><span class="s1">difficult</span></p>
       </td>
       <td valign="middle" class="td3">
-        <p class="p5"><span class="s1">✔︎</span></p>
+        <p class="p8"><span class="s1">✔︎</span></p>
       </td>
     </tr>
     <tr>
       <td valign="middle" class="td4">
-        <p class="p4"><span class="s1">一部の動作を繰り返して実行</span></p>
+        <p class="p3"><span class="s1">一部の動作を繰り返して実行</span></p>
       </td>
       <td valign="middle" class="td5">
-        <p class="p4"><span class="s1">-</span></p>
+        <p class="p3"><span class="s1">-</span></p>
       </td>
       <td valign="middle" class="td6">
-        <p class="p5"><span class="s1">✔︎</span></p>
+        <p class="p8"><span class="s1">✔︎</span></p>
       </td>
     </tr>
     <tr>
       <td valign="middle" class="td1">
-        <p class="p4"><span class="s1">状態の保持、管理</span></p>
+        <p class="p3"><span class="s1">状態の保持、管理</span></p>
       </td>
       <td valign="middle" class="td2">
-        <p class="p4"><span class="s1">not suite</span></p>
+        <p class="p3"><span class="s1">do yourself</span></p>
       </td>
       <td valign="middle" class="td3">
-        <p class="p5"><span class="s1">✔︎</span></p>
+        <p class="p8"><span class="s1">✔︎</span></p>
       </td>
     </tr>
     <tr>
       <td valign="middle" class="td4">
-        <p class="p4"><span class="s1">状態遷移の定義、実行</span></p>
+        <p class="p3"><span class="s1">状態遷移の定義、実行</span></p>
       </td>
       <td valign="middle" class="td5">
-        <p class="p4"><span class="s1">-</span></p>
+        <p class="p3"><span class="s1">-</span></p>
       </td>
       <td valign="middle" class="td6">
-        <p class="p5"><span class="s1">✔︎</span></p>
+        <p class="p8"><span class="s1">✔︎</span></p>
       </td>
     </tr>
     <tr>
       <td valign="middle" class="td1">
-        <p class="p4"><span class="s1">スクリプトの実行</span></p>
+        <p class="p3"><span class="s1">スクリプトの実行</span></p>
       </td>
       <td valign="middle" class="td2">
-        <p class="p5"><span class="s1">✔︎</span></p>
+        <p class="p8"><span class="s1">✔︎</span></p>
       </td>
       <td valign="middle" class="td3">
-        <p class="p5"><span class="s1">✔︎</span></p>
+        <p class="p8"><span class="s1">✔︎</span></p>
       </td>
     </tr>
     <tr>
       <td valign="middle" class="td4">
-        <p class="p4"><span class="s1">スクリプトの継続実行</span></p>
+        <p class="p3"><span class="s1">1つのスクリプトを継続実行</span></p>
       </td>
       <td valign="middle" class="td5">
-        <p class="p4"><span class="s1">?</span></p>
+        <p class="p3"><span class="s1">do yourself</span></p>
       </td>
       <td valign="middle" class="td6">
-        <p class="p5"><span class="s1">✔︎</span></p>
+        <p class="p8"><span class="s1">✔︎</span></p>
       </td>
     </tr>
     <tr>
       <td valign="middle" class="td1">
-        <p class="p4"><span class="s1">AIの実装</span></p>
+        <p class="p3"><span class="s1">AIの実装</span></p>
       </td>
       <td valign="middle" class="td2">
-        <p class="p4"><span class="s1">not aimed</span></p>
+        <p class="p3"><span class="s1">not aimed,</span></p>
+        <p class="p3"><span class="s1">do yourself</span></p>
       </td>
       <td valign="middle" class="td3">
-        <p class="p5"><span class="s1">✔︎</span></p>
+        <p class="p8"><span class="s1">✔︎</span></p>
       </td>
     </tr>
   </tbody>
 </table>
 <p class="p2"><span class="s1"></span><br></p>
-<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>Sequencerがシネマティックなシーケンスを制御するのを主なMotivationにしているのに対し、</span></p>
-<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>Automatineはより細かい粒度での「キャラクターやオブジェクトの状態を管理し、スクリプトの実行と継続動作」を実現することを主な目的としている。</span></p>
-<p class="p2"><span class="s1"><span class="Apple-tab-span">	</span></span></p>
-<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>ちなみにAutomatineは実行コード or 実行データ 両方を出力することができる。</span></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>Sequencerがシネマティックなシーケンスを制御するのを主なMotivationにしているのに対し、</span></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>Automatineはより細かい粒度での「キャラクターやオブジェクトの状態を管理し、スクリプトの実行と継続動作」を実現することを主な目的としている。</span></p>
 <p class="p2"><span class="s1"></span><br></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>ようはコンテキストサイズの違いで、Sequencerは<b>「Sneneとか、被写体の群とか、でかいシネマティックなコンテキスト」</b>をコントロール対象にしていて、</span></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>Automatineはもっと小さな粒度の、<b>「インスタンス単位の小さなコンテキスト」</b>をコントロールの対象にしている。</span></p>
+<p class="p2"><span class="s1"><span class="Apple-tab-span">	</span></span></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>わかりやすく書くと、下記のような差がある。</span></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>Sequencerのコントロール対象: <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>オーケストラ指揮者 + ぶら下がってる指揮下の演奏家 x Nの協調動作</span></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>Automatineのコントロール対象: <span class="Apple-tab-span">	</span>演奏家の単独動作</span></p>
+<p class="p2"><span class="s1"><span class="Apple-tab-span">	</span></span></p>
 <p class="p2"><span class="s1"><b></b></span><br></p>
-<p class="p4"><span class="s1"><b>特徴</b></span></p>
-<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>すでに実装されている大きな特徴として次のようなものがある。</span></p>
+<p class="p3"><span class="s1"><b>特徴</b></span></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>すでに実装されている大きな特徴として次のようなものがある。</span></p>
 <ul class="ul1">
   <ul class="ul2">
-    <li class="li4"><span class="s1">MonoBehaviour、Assetへの依存を持たない、ピュアC#コード</span></li>
-    <li class="li4"><span class="s1">実行時、ゲームごとに独自定義した型とインスタンスを組み込むことができる</span></li>
-    <li class="li4"><span class="s1">フレーム単位での状態定義、取得が可能</span></li>
-    <li class="li4"><span class="s1">通常のC＃スクリプトをセットして実行したり、Coroutineの継続的な実行が可能</span></li>
-    <li class="li4"><span class="s1">GUIから、コードを吐き出す or データを吐き出すことが可能(データ形式はJSON他が使用可能)</span></li>
-    <li class="li4"><span class="s1">RuntimeがUnityに依存していないので他のプラットフォームでも動作する</span></li>
+    <li class="li3"><span class="s1">MonoBehaviour、Assetへの依存を持たない、ピュアC#コード</span></li>
+    <li class="li3"><span class="s1">実行時、ゲームごとに独自定義した型とインスタンスを組み込むことができる</span></li>
+    <li class="li3"><span class="s1">フレーム単位での状態定義、取得が可能</span></li>
+    <li class="li3"><span class="s1">通常のC＃スクリプトをセットして実行したり、Coroutine的な、一つのScriptの継続実行が可能</span></li>
+    <li class="li3"><span class="s1">GUIから、コードを吐き出す or データを吐き出すことが可能(データ形式はJSON他が使用可能)</span></li>
+    <li class="li3"><span class="s1">RuntimeがUnityに依存していないので他のプラットフォーム、特にサーバとかでも動作する</span></li>
   </ul>
 </ul>
 <p class="p2"><span class="s1"></span><br></p>
 <p class="p2"><span class="s1"></span><br></p>
-<p class="p4"><span class="s1"><b>実行時のGUIとコード例</b></span></p>
-<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>たとえばで、格ゲーのキックみたいなのを作ろうとすると、こんな感じの見た目で、</span></p>
-<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>・4f目から移動開始、19f目まで移動</span></p>
-<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>・22f目から25f目まで攻撃判定</span></p>
-<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>・0fから39fまでずっとダメージ受ける可能性があり</span></p>
-<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>・22fから31fまではカウンターヒットを受ける可能性があり</span></p>
-<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>・26fから36fまででキックの戻りアクション</span></p>
+<p class="p3"><span class="s1"><b>実行時のGUIとコード例</b></span></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>たとえばで、格ゲーのキックみたいなのを作ろうとすると、こんな感じの見た目で、</span></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>・4f目から移動開始、19f目まで移動</span></p>
 <p class="p2"><span class="s1"></span><br></p>
-<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>みたいな複雑なことができる。</span></p>
-<p class="p4"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202016-04-10%2016.50.30.png" alt="スクリーンショット 2016-04-10 16.50.30.png"></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>・22f目から25f目まで攻撃判定(Damageの列)</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>・0fから39fまでずっと<b>ダメージ受ける可能性</b>があり(Damagedの列)</span></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>・22fから31fまでは<b>カウンターヒット</b>を受ける可能性があり</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>・26fから36fまででキックの戻りアクション</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>みたいな複雑なことの表現がこのGUIだけでできる。</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p5"><span class="Apple-tab-span">	</span><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202016-04-10%2016.50.30.png" alt="スクリーンショット 2016-04-10 16.50.30.png"></p>
 <p class="p2"><span class="s1"></span><br></p>
 <p class="p2"><span class="s1"><span class="Apple-tab-span">	</span></span></p>
-<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>で、実際にゲーム側で使う時のコードは以下のような感じ。</span></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>で、実際にゲーム側で使う時のコードは以下のような感じ。</span></p>
 <p class="p2"><span class="s1"></span><br></p>
 <p class="p2"><span class="s1"></span><br></p>
-<p class="p4"><span class="s1"><b><span class="Apple-tab-span">	</span>定義</b></span></p>
-<p class="p6"><span class="s1">using UnityEngine;</span></p>
-<p class="p6"><span class="s1"><b>using Automatine;</b></span></p>
-<p class="p7"><span class="s1"></span><br></p>
-<p class="p6"><span class="s1">public class Attacker : MonoBehaviour {</span></p>
-<p class="p7"><span class="s1"><span class="Apple-tab-span">	</span></span></p>
-<p class="p6"><span class="s1"><span class="Apple-tab-span">	</span><b>Auto&lt;string, bool&gt; auto;</b></span></p>
+<p class="p3"><span class="s1"><b><span class="Apple-tab-span">	</span>定義</b></span></p>
+<p class="p9"><span class="s1">using UnityEngine;</span></p>
+<p class="p9"><span class="s1"><b>using Automatine;</b></span></p>
+<p class="p10"><span class="s1"></span><br></p>
+<p class="p9"><span class="s1">public class Attacker : MonoBehaviour {</span></p>
+<p class="p10"><span class="s1"><span class="Apple-tab-span">	</span></span></p>
+<p class="p9"><span class="s1"><span class="Apple-tab-span">	</span><b>Auto&lt;string, bool&gt; auto;</b></span></p>
 <p class="p2"><span class="s1"></span><br></p>
 <p class="p2"><span class="s1"><b></b></span><br></p>
-<p class="p4"><span class="s1"><b><span class="Apple-tab-span">	</span>実行</b></span></p>
-<p class="p6"><span class="s1"><span class="Apple-tab-span">	</span>int frame = 0;</span></p>
-<p class="p7"><span class="s1"><span class="Apple-tab-span">	</span></span></p>
-<p class="p6"><span class="s1"><span class="Apple-tab-span">	</span>void Start () {</span></p>
-<p class="p6"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><b>auto = new Kick&lt;string, bool&gt;(frame, "start~!!");</b></span></p>
-<p class="p6"><span class="s1"><span class="Apple-tab-span">	</span>}</span></p>
-<p class="p7"><span class="s1"><span class="Apple-tab-span">	</span></span></p>
-<p class="p6"><span class="s1"><span class="Apple-tab-span">	</span>void Update () {</span></p>
-<p class="p6"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><b>auto.Update(frame, true);</b></span></p>
-<p class="p6"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>frame++;</span></p>
-<p class="p6"><span class="s1"><span class="Apple-tab-span">	</span>}</span></p>
+<p class="p3"><span class="s1"><b><span class="Apple-tab-span">	</span>実行</b></span></p>
+<p class="p9"><span class="s1"><span class="Apple-tab-span">	</span>int frame = 0;</span></p>
+<p class="p10"><span class="s1"><span class="Apple-tab-span">	</span></span></p>
+<p class="p9"><span class="s1"><span class="Apple-tab-span">	</span>void Start () {</span></p>
+<p class="p9"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><b>auto = new Kick&lt;string, bool&gt;(frame, "start~!!");</b></span></p>
+<p class="p9"><span class="s1"><span class="Apple-tab-span">	</span>}</span></p>
+<p class="p10"><span class="s1"><span class="Apple-tab-span">	</span></span></p>
+<p class="p9"><span class="s1"><span class="Apple-tab-span">	</span>void Update () {</span></p>
+<p class="p9"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><b>auto.Update(frame, true);</b></span></p>
+<p class="p9"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>frame++;</span></p>
+<p class="p9"><span class="s1"><span class="Apple-tab-span">	</span>}</span></p>
 <p class="p2"><span class="s1"></span><br></p>
 <p class="p2"><span class="s1"></span><br></p>
-<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>こんな感じのコードを書くと、動く。</span></p>
-<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>で、実行しているautoについて、状態を取得することができる。</span></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>こんな感じのコードを書くと、動く。</span></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>で、実行しているautoについて、状態を取得することができる。</span></p>
 <p class="p2"><span class="s1"></span><br></p>
 <p class="p2"><span class="s1"></span><br></p>
-<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span><b>状態を取得</b></span></p>
-<p class="p6"><span class="s1"><span class="Apple-tab-span">	</span>void Update () {</span></p>
-<p class="p6"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><b>if (auto.ShouldFalldown(frame)) {</b></span></p>
-<p class="p6"><span class="s1"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Debug.LogError("Kickが終わったので何かに切り替える:" + frame);</b></span></p>
-<p class="p6"><span class="s1"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}</b></span></p>
-<p class="p7"><span class="s1"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></b></span></p>
-<p class="p6"><span class="s1"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>if (auto.Contains(AutoConditions.Damage.Lv1)) {</b></span></p>
-<p class="p6"><span class="s1"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Debug.LogError("自分が攻撃を出してる瞬間、この時相手は、、？っていうのが書けるブロック:" + frame);</b></span></p>
-<p class="p6"><span class="s1"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}</b></span></p>
-<p class="p7"><span class="s1"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></b></span></p>
-<p class="p6"><span class="s1"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>if (auto.Contains(AutoConditions.Damaged.CounterHit)) {</b></span></p>
-<p class="p6"><span class="s1"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Debug.LogError("カウンターヒットになる状態:" + frame);</b></span></p>
-<p class="p6"><span class="s1"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}</b></span></p>
-<p class="p7"><span class="s1"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></b></span></p>
-<p class="p6"><span class="s1"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>if (auto.Contains(AutoConditions.Damaged.Normal)) {</b></span></p>
-<p class="p6"><span class="s1"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Debug.LogError("通常やられになる状態:" + frame);</b></span></p>
-<p class="p6"><span class="s1"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}</b></span></p>
-<p class="p7"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span></p>
-<p class="p6"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>auto.Update(frame, true);</span></p>
-<p class="p6"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>frame++;</span></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span><b>状態を取得</b></span></p>
+<p class="p9"><span class="s1"><span class="Apple-tab-span">	</span>void Update () {</span></p>
+<p class="p9"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><b>if (auto.ShouldFalldown(frame)) {</b></span></p>
+<p class="p9"><span class="s1"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Debug.LogError("Kickが終わったので何かに切り替える:" + frame);</b></span></p>
+<p class="p9"><span class="s1"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}</b></span></p>
+<p class="p10"><span class="s1"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></b></span></p>
+<p class="p9"><span class="s1"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>if (auto.Contains(AutoConditions.Damage.Lv1)) {</b></span></p>
+<p class="p9"><span class="s1"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Debug.LogError("自分が攻撃を出してる瞬間、この時相手は、、？っていうのが書けるブロック:" + frame);</b></span></p>
+<p class="p9"><span class="s1"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}</b></span></p>
+<p class="p10"><span class="s1"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></b></span></p>
+<p class="p9"><span class="s1"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>if (auto.Contains(AutoConditions.Damaged.CounterHit)) {</b></span></p>
+<p class="p9"><span class="s1"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Debug.LogError("カウンターヒットになる状態:" + frame);</b></span></p>
+<p class="p9"><span class="s1"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}</b></span></p>
+<p class="p10"><span class="s1"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></b></span></p>
+<p class="p9"><span class="s1"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>if (auto.Contains(AutoConditions.Damaged.Normal)) {</b></span></p>
+<p class="p9"><span class="s1"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Debug.LogError("通常やられになる状態:" + frame);</b></span></p>
+<p class="p9"><span class="s1"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}</b></span></p>
+<p class="p10"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span></p>
+<p class="p9"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>auto.Update(frame, true);</span></p>
+<p class="p9"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>frame++;</span></p>
 <p class="p2"><span class="s1"></span><br></p>
-<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>みたいな感じで書ける。</span></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>みたいな感じで書ける。</span></p>
 <p class="p2"><span class="s1"></span><br></p>
 <p class="p2"><span class="s1"></span><br></p>
-<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>おまけで、</span></p>
-<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>・frameを+しないと動かない</span></p>
-<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>・frameの+が1より多いと、その回数ちゃんと回る = 早送り可能</span></p>
-<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>・定義時にセットしてる型は自分で勝手に決めていいやつで、GUIにアタッチしたコードに渡る</span></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>おまけで、</span></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>・frameを+しないと動かない</span></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>・frameの+が1より多いと、その回数ちゃんと回る = 早送り可能</span></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>・定義時にセットしてる型は自分で勝手に決めていいやつで、GUIにアタッチしたコードに渡る</span></p>
 <p class="p2"><span class="s1"></span><br></p>
-<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>という。</span></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>という。</span></p>
 <p class="p2"><span class="s1"><span class="Apple-tab-span">	</span></span></p>
-<p class="p4"><span class="s1">実行時のログはこんな感じ</span></p>
-<p class="p6"><span class="s1">通常やられになる状態:0</span></p>
-<p class="p6"><span class="s1">通常やられになる状態:1</span></p>
-<p class="p6"><span class="s1">通常やられになる状態:2</span></p>
-<p class="p6"><span class="s1">通常やられになる状態:3</span></p>
-<p class="p6"><span class="s1">通常やられになる状態:4</span></p>
-<p class="p6"><span class="s1">通常やられになる状態:5</span></p>
-<p class="p6"><span class="s1">通常やられになる状態:6</span></p>
-<p class="p6"><span class="s1">通常やられになる状態:7</span></p>
-<p class="p6"><span class="s1">通常やられになる状態:8</span></p>
-<p class="p6"><span class="s1">通常やられになる状態:9</span></p>
-<p class="p6"><span class="s1">通常やられになる状態:10</span></p>
-<p class="p6"><span class="s1">通常やられになる状態:11</span></p>
-<p class="p6"><span class="s1">通常やられになる状態:12</span></p>
-<p class="p6"><span class="s1">通常やられになる状態:13</span></p>
-<p class="p6"><span class="s1">通常やられになる状態:14</span></p>
-<p class="p6"><span class="s1">通常やられになる状態:15</span></p>
-<p class="p6"><span class="s1">通常やられになる状態:16</span></p>
-<p class="p6"><span class="s1">通常やられになる状態:17</span></p>
-<p class="p6"><span class="s1">通常やられになる状態:18</span></p>
-<p class="p6"><span class="s1">通常やられになる状態:19</span></p>
-<p class="p6"><span class="s1">通常やられになる状態:20</span></p>
-<p class="p6"><span class="s1">通常やられになる状態:21</span></p>
-<p class="p6"><span class="s1">通常やられになる状態:22</span></p>
-<p class="p6"><span class="s1">自分が攻撃を出してる瞬間、この時相手は、、？っていうのが書けるブロック:23</span></p>
-<p class="p6"><span class="s1">カウンターヒットになる状態:23</span></p>
-<p class="p6"><span class="s1">自分が攻撃を出してる瞬間、この時相手は、、？っていうのが書けるブロック:24</span></p>
-<p class="p6"><span class="s1">カウンターヒットになる状態:24</span></p>
-<p class="p6"><span class="s1">自分が攻撃を出してる瞬間、この時相手は、、？っていうのが書けるブロック:25</span></p>
-<p class="p6"><span class="s1">カウンターヒットになる状態:25</span></p>
-<p class="p6"><span class="s1">自分が攻撃を出してる瞬間、この時相手は、、？っていうのが書けるブロック:26</span></p>
-<p class="p6"><span class="s1">カウンターヒットになる状態:26</span></p>
-<p class="p6"><span class="s1">カウンターヒットになる状態:27</span></p>
-<p class="p6"><span class="s1">カウンターヒットになる状態:28</span></p>
-<p class="p6"><span class="s1">カウンターヒットになる状態:29</span></p>
-<p class="p6"><span class="s1">カウンターヒットになる状態:30</span></p>
-<p class="p6"><span class="s1">カウンターヒットになる状態:31</span></p>
-<p class="p6"><span class="s1">カウンターヒットになる状態:32</span></p>
-<p class="p6"><span class="s1">通常やられになる状態:33</span></p>
-<p class="p6"><span class="s1">通常やられになる状態:34</span></p>
-<p class="p6"><span class="s1">通常やられになる状態:35</span></p>
-<p class="p6"><span class="s1">通常やられになる状態:36</span></p>
-<p class="p6"><span class="s1">通常やられになる状態:37</span></p>
-<p class="p6"><span class="s1">通常やられになる状態:38</span></p>
-<p class="p6"><span class="s1">通常やられになる状態:39</span></p>
-<p class="p6"><span class="s1">Kickが終わったので何かに切り替える:40</span></p>
-<p class="p6"><span class="s1">通常やられになる状態:40</span></p>
-<p class="p6"><span class="s1">Kickが終わったので何かに切り替える:41</span></p>
-<p class="p6"><span class="s1">Kickが終わったので何かに切り替える:42</span></p>
-<p class="p6"><span class="s1">Kickが終わったので何かに切り替える:43</span></p>
-<p class="p6"><span class="s1">...</span></p>
+<p class="p3"><span class="s1">実行時のログはこんな感じ</span></p>
+<p class="p9"><span class="s1">通常やられになる状態:0</span></p>
+<p class="p9"><span class="s1">通常やられになる状態:1</span></p>
+<p class="p9"><span class="s1">通常やられになる状態:2</span></p>
+<p class="p9"><span class="s1">通常やられになる状態:3</span></p>
+<p class="p9"><span class="s1">通常やられになる状態:4</span></p>
+<p class="p9"><span class="s1">通常やられになる状態:5</span></p>
+<p class="p9"><span class="s1">通常やられになる状態:6</span></p>
+<p class="p9"><span class="s1">通常やられになる状態:7</span></p>
+<p class="p9"><span class="s1">通常やられになる状態:8</span></p>
+<p class="p9"><span class="s1">通常やられになる状態:9</span></p>
+<p class="p9"><span class="s1">通常やられになる状態:10</span></p>
+<p class="p9"><span class="s1">通常やられになる状態:11</span></p>
+<p class="p9"><span class="s1">通常やられになる状態:12</span></p>
+<p class="p9"><span class="s1">通常やられになる状態:13</span></p>
+<p class="p9"><span class="s1">通常やられになる状態:14</span></p>
+<p class="p9"><span class="s1">通常やられになる状態:15</span></p>
+<p class="p9"><span class="s1">通常やられになる状態:16</span></p>
+<p class="p9"><span class="s1">通常やられになる状態:17</span></p>
+<p class="p9"><span class="s1">通常やられになる状態:18</span></p>
+<p class="p9"><span class="s1">通常やられになる状態:19</span></p>
+<p class="p9"><span class="s1">通常やられになる状態:20</span></p>
+<p class="p9"><span class="s1">通常やられになる状態:21</span></p>
+<p class="p9"><span class="s1">通常やられになる状態:22</span></p>
+<p class="p9"><span class="s1">自分が攻撃を出してる瞬間、この時相手は、、？っていうのが書けるブロック:23</span></p>
+<p class="p9"><span class="s1">カウンターヒットになる状態:23</span></p>
+<p class="p9"><span class="s1">自分が攻撃を出してる瞬間、この時相手は、、？っていうのが書けるブロック:24</span></p>
+<p class="p9"><span class="s1">カウンターヒットになる状態:24</span></p>
+<p class="p9"><span class="s1">自分が攻撃を出してる瞬間、この時相手は、、？っていうのが書けるブロック:25</span></p>
+<p class="p9"><span class="s1">カウンターヒットになる状態:25</span></p>
+<p class="p9"><span class="s1">自分が攻撃を出してる瞬間、この時相手は、、？っていうのが書けるブロック:26</span></p>
+<p class="p9"><span class="s1">カウンターヒットになる状態:26</span></p>
+<p class="p9"><span class="s1">カウンターヒットになる状態:27</span></p>
+<p class="p9"><span class="s1">カウンターヒットになる状態:28</span></p>
+<p class="p9"><span class="s1">カウンターヒットになる状態:29</span></p>
+<p class="p9"><span class="s1">カウンターヒットになる状態:30</span></p>
+<p class="p9"><span class="s1">カウンターヒットになる状態:31</span></p>
+<p class="p9"><span class="s1">カウンターヒットになる状態:32</span></p>
+<p class="p9"><span class="s1">通常やられになる状態:33</span></p>
+<p class="p9"><span class="s1">通常やられになる状態:34</span></p>
+<p class="p9"><span class="s1">通常やられになる状態:35</span></p>
+<p class="p9"><span class="s1">通常やられになる状態:36</span></p>
+<p class="p9"><span class="s1">通常やられになる状態:37</span></p>
+<p class="p9"><span class="s1">通常やられになる状態:38</span></p>
+<p class="p9"><span class="s1">通常やられになる状態:39</span></p>
+<p class="p9"><span class="s1">Kickが終わったので何かに切り替える:40</span></p>
+<p class="p9"><span class="s1">通常やられになる状態:40</span></p>
+<p class="p9"><span class="s1">Kickが終わったので何かに切り替える:41</span></p>
+<p class="p9"><span class="s1">Kickが終わったので何かに切り替える:42</span></p>
+<p class="p9"><span class="s1">Kickが終わったので何かに切り替える:43</span></p>
+<p class="p9"><span class="s1">...</span></p>
 <p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>最後に、コード(IEnumeratorメソッド)を各フレームにセットすることができる。</span></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>このへんは近いうちに追記する。</span></p>
 <p class="p2"><span class="s1"></span><br></p>
 </body>
 </html>
