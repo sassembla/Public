@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1404.46">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    li.li3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    span.Apple-tab-span {white-space:pre}
+    ul.ul1 {list-style-type: disc}
+  </style>
+</head>
+<body>
+<p class="p1"><b>Unityの領域なのかC#の領域なのか切り分け</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Unity上でC#を使ってスクリプト書くときとか、「あれ、これってUnity 特有なの？それともC#の言語の話なの？」ってなって、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>最初勉強するときハマったというかどう調べれば良いのかわからなくなったんで、その区分けの話。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>大雑把な区分け</b></p>
+<ul class="ul1">
+  <li class="li3">メソッドがUnityなにやら namespaceに入ってる関数とかクラスは全てUnityマター。なので、検索の時とかに「Unity なにやら」で検索するといい。</li>
+  <li class="li3">コンパイルエラーから察する</li>
+  <li class="li3">動作時エラーから察する</li>
+  <li class="li3">それ以外のヒントのない要素は99%くらいC#マター。なので、C# うんぬんで検索するといい。</li>
+</ul>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>このへんの切り分けで最初困ったこと</b></p>
+<ul class="ul1">
+  <li class="li3">Instantiate, Prefab, Hierarchyの価値観がわからん</li>
+  <li class="li3">StartCoroutineとか、Coroutine って言ってるけどC#ってCoroutineあったっけ、、</li>
+</ul>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>C#とCoroutine</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>端的に言うとC#にCoroutineと呼ばれるものはない。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>IEnumeratorというかIteratorと、yield構文があるので、C#ではGeneratorを簡単に記述することができる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Generatorについてはこのへん。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>http://geekswithblogs.net/BlackRabbitCoder/archive/2010/04/21/more-fun-with-c-iterators-and-generators.aspx</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>(生粋のC#erのひとはもっと良い記事を知ってそうなんで教えて)</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>メソッドブロックを持ち、呼び出すたびにyieldからyieldまでを継続して実行し、値を返すことができる。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Unityでは、特にIEnumeratorを返すメソッドをUnityEngine.StartCoroutine()メソッドに渡すことで、Unityの決めたタイミングでメソッドを実行する、というスタイルで</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ここでは継続的なコンテキストを持つコードを毎フレーム実行する、というCoroutineを実装している。</p>
+<p class="p2"><br></p>
+</body>
+</html>
