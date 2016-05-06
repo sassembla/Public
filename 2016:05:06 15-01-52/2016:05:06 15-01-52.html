@@ -49,10 +49,13 @@
 <p class="p2"><br></p>
 <p class="p3"><b>ドキュメント</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>オンラインにあるのが全てっぽい。</p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>base-rigについて</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://www.cinemachineimagery.com/base-rig/">http://www.cinemachineimagery.com/base-rig/</a></p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
-<p class="p3"><b>訳している。以下。[]の中のは自分のコメント。</b></p>
+<p class="p3"><b>サクッと把握したかったので、特に Base-rigについて のみを以下に訳している。以下。[]の中のは自分のコメント。</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span></b>流し読み + 使いながら訳してるんで、なんかミス見つけたら教えて。</p>
 <p class="p4"><span class="s2"><span class="Apple-tab-span">	</span></span></p>
 <p class="p5"><span class="s2"></span><br></p>
 <p class="p6"><span class="s2"><b>Base Rig:</b></span></p>
@@ -202,7 +205,7 @@
 <p class="p3"><span class="Apple-tab-span">	</span>青い'Soft'フィールドは、被写体がそこに入り込んだ場合はゆっくりと被写体を中心へと追いやるようにできている。</p>
 <p class="p6"><span class="Apple-tab-span">	</span>[中略、細かい挙動の話]</p>
 <p class="p4"><br></p>
-<p class="p6"><span class="Apple-tab-span">	</span>被写体が透明な'the dead zone'フィールドに来ている場合、カメラは被写体の細かい動きを無視する。</p>
+<p class="p6"><span class="Apple-tab-span">	</span>被写体が中心の透明な'the dead zone'フィールドに来ている場合、カメラは被写体の細かい動きを無視する。</p>
 <p class="p6"><span class="Apple-tab-span">	</span>アニメーションによるキャラクターの中心位置の移動とか、移動物理エンジンの微細な振動を無視したりとかするのに使うといいと思う。</p>
 <p class="p4"><br></p>
 <p class="p6"><span class="Apple-tab-span">	</span>被写体をスクリーン上の指定した位置へと押し出す力[原文だとHorizontal/Vertical Soft Dampening]は、長年の経験でこういうデザインになってるよ！</p>
@@ -239,6 +242,25 @@
 <p class="p6"><span class="s2"><b>まとめ</b></span></p>
 <p class="p6"><span class="s2"><span class="Apple-tab-span">	</span>可能性は無限っすわ。[なんかカメラを車Aに乗っけて云々するだけで車Bがめっちゃ綺麗に撮影できるんですよみたいな例]</span></p>
 <p class="p6"><span class="s2"><span class="Apple-tab-span">	</span></span><span class="s4">さ～</span><span class="s2">やってみよう～みたいな話。</span></p>
+<p class="p4"><span class="s2"></span><br></p>
+<p class="p4"><span class="s2"></span><br></p>
+<p class="p6"><span class="s2">訳はここまで。</span></p>
+<p class="p4"><span class="s2"></span><br></p>
+<p class="p4"><span class="s2"></span><br></p>
+<p class="p6"><span class="s2"><b>所感</b></span></p>
+<p class="p6"><span class="s2"><span class="Apple-tab-span">	</span>Transposerだけを使って、自撮りカメラみたいなのをセットしてみたんだけど、次のような設定が瞬殺でできた。</span></p>
+<p class="p4"><span class="s2"></span><br></p>
+<p class="p6"><span class="s2"><span class="Apple-tab-span">	</span>・被写体オブジェクトから一定の位置に、そのオブジェクトを撮影するカメラをセットする</span></p>
+<p class="p6"><span class="s2"><span class="Apple-tab-span">	</span>・カメラは固定ではなく、被写体の移動に伴い、若干遅れて被写体を追ったりする</span></p>
+<p class="p6"><span class="s2"><span class="Apple-tab-span">	</span>・x－z平面上のオブジェクトの移動に伴うカメラ追従は比較的素早く、y軸上のカメラ追従速度はめっちゃゆっくり、、とかが個別にできた。楽かよ、、</span></p>
+<p class="p6"><span class="s2"><span class="Apple-tab-span">	</span>・手ぶれ機能みたいなのを使ってほんのすこーしゆらゆらさせてみたところ、絵のクオリティが上がったので震えていた。ドキュメントにもそのへん熱烈に書いてあった。</span></p>
+<p class="p4"><span class="s2"></span><br></p>
+<p class="p6"><span class="s2"><span class="Apple-tab-span">	</span>カメラの動きに関しての具体的な例は、<a href="http://www.cinemachineimagery.com/examples/">http://www.cinemachineimagery.com/examples/</a> にいっぱい載ってる。</span></p>
+<p class="p4"><span class="s2"><span class="Apple-tab-span">	</span></span></p>
+<p class="p6"><span class="s2"><span class="Apple-tab-span">	</span>スクリーン上でのConstraintのかけ方がうまい。絵面で思いついても実装まで考えると頭痛くなりそうなもんなんだが。この人たちは実現してる。えらい。</span></p>
+<p class="p6"><span class="s2"><span class="Apple-tab-span">	</span>もう俺がMain Cameraを制御するコードを自分で書くことはないと思う。</span></p>
+<p class="p4"><span class="s2"></span><br></p>
+<p class="p4"><span class="s2"></span><br></p>
 <p class="p4"><span class="s2"></span><br></p>
 <p class="p4"><span class="s2"></span><br></p>
 <p class="p4"><span class="s2"></span><br></p>
