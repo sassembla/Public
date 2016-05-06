@@ -1,0 +1,246 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1404.46">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Sans'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; color: #323333; min-height: 18.0px}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; color: #666666; min-height: 18.0px}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; color: #323333}
+    p.p7 {margin: 0.0px 0.0px 0.0px 36.0px; text-indent: -36.0px; font: 12.0px 'Hiragino Sans'; color: #666666}
+    p.p8 {margin: 0.0px 0.0px 0.0px 72.0px; text-indent: -72.0px; font: 12.0px 'Hiragino Sans'; color: #666666}
+    p.p9 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; color: #666666}
+    li.li6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; color: #323333}
+    li.li9 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; color: #666666}
+    span.s1 {font-kerning: none; color: #323333}
+    span.s2 {font-kerning: none}
+    span.s3 {text-decoration: underline ; font-kerning: none}
+    span.s4 {font-kerning: none; color: #666666}
+    span.Apple-tab-span {white-space:pre}
+    ul.ul1 {list-style-type: disc}
+    ul.ul2 {list-style-type: hyphen}
+  </style>
+</head>
+<body>
+<p class="p1"><b>Cinemachine使って遊んでみる</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>AssetStore見てたらついにリリースされていた、Unity用のカメラを制御するっぽいAsset<span class="Apple-converted-space"> </span></p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>Cinemachine</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://www.assetstore.unity3d.com/jp/#!/content/60946">https://www.assetstore.unity3d.com/jp/#!/content/60946</a></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>有償(5月中はearlybird的なセールで$79)。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>さてどうやって使うんだこれ。<span class="s1">っていうことで</span>使いながらドキュメント読んでみた。すげえぞこれ。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>略式紹介</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>カメラのコントロールをするAsset。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>スクリーンのどのへんに被写体が写ってほしいか</b>から逆算してカメラをコントロールすることができる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>すげえ。センスいい。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>ドキュメント</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>オンラインにあるのが全てっぽい。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://www.cinemachineimagery.com/base-rig/">http://www.cinemachineimagery.com/base-rig/</a></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>訳している。以下。[]の中のは自分のコメント。</b></p>
+<p class="p4"><span class="s2"><span class="Apple-tab-span">	</span></span></p>
+<p class="p5"><span class="s2"></span><br></p>
+<p class="p6"><span class="s2"><b>Base Rig:</b></span></p>
+<p class="p6"><span class="s2"><span class="Apple-tab-span">	</span>Cinemachineの基礎で、いろんなモジュール含んでる。</span></p>
+<p class="p4"><span class="s2"><span class="Apple-tab-span">	</span></span></p>
+<p class="p6"><span class="s2"><span class="Apple-tab-span">	</span>Cinemachineは統合されたカメラ制御のシステムなんだが、既存のカメラとも併用できる。</span></p>
+<p class="p6"><span class="s2"><span class="Apple-tab-span">	</span>すでに大量のカメラがあるようなゲームでも、Cinemachineをカットシーン用のカメラとして問題なく導入できる。</span></p>
+<p class="p6"><span class="s2"><span class="Apple-tab-span">	</span>ただ、Cinemachineを使ってゲーム全体のカメラを構成すると、プレイ-&gt;カットシーン-&gt;プレイに戻る、とかがシームレスに作れる。</span></p>
+<p class="p4"><span class="s2"></span><br></p>
+<p class="p4"><span class="s2"></span><br></p>
+<p class="p6"><span class="s2"><b>Base Rigに含まれてるコンポーネント:</b></span></p>
+<p class="p7"><span class="Apple-tab-span">	</span>•<span class="Apple-tab-span">	</span><span class="s2">CinemachineVirtualCamera</span></p>
+<p class="p6"><span class="s2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>カメラ。次のような機構を含んでいる。</span></p>
+<p class="p8"><span class="Apple-tab-span">	</span>•<span class="Apple-tab-span">	</span><span class="s2">Priority</span></p>
+<p class="p6"><span class="s2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>優先度、一番高いカメラが使用される。Important指定をしたカメラはその限りではない？</span></p>
+<p class="p8"><span class="Apple-tab-span">	</span>•<span class="Apple-tab-span">	</span><span class="s2">Noise</span></p>
+<p class="p6"><span class="s2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>パーリンノイズによる手ぶれ。シェイクとか振動とかもある。</span></p>
+<p class="p8"><span class="Apple-tab-span">	</span>•<span class="Apple-tab-span">	</span><span class="s2">Composer</span></p>
+<p class="p6"><span class="s2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>動的に被写体追跡する機構。</span></p>
+<p class="p8"><span class="Apple-tab-span">	</span>•<span class="Apple-tab-span">	</span><span class="s2">Transposer</span></p>
+<p class="p6"><span class="s2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>特定の物体にカメラをマウントするための機構。</span></p>
+<p class="p5"><span class="s2"></span><br></p>
+<p class="p7"><span class="Apple-tab-span">	</span>•<span class="Apple-tab-span">	</span><span class="s2">AUTOGEN_CinemachineRuntime</span></p>
+<p class="p6"><span class="s2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>動作時に生成される、Cinemachineのエンジン。次のような機構を含んでいる。</span></p>
+<p class="p8"><span class="Apple-tab-span">	</span>•<span class="Apple-tab-span">	</span><span class="s2"> Blend Settings</span></p>
+<p class="p6"><span class="s2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>複数のカメラをブレンドする機構。たとえばCameraAとCameraBを4秒間で移り変わり、1秒でCameraAに戻る、みたいなのを作る時、便利。</span></p>
+<p class="p6"><span class="s2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>特に複数のカメラ間でブレンド方法が指定されてない場合、デフォルトのブレンド方法を適応する。</span></p>
+<p class="p5"><span class="s2"></span><br></p>
+<p class="p7"><span class="Apple-tab-span">	</span>•<span class="Apple-tab-span">	</span><span class="s2">Debug</span></p>
+<p class="p6"><span class="s2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>現在アクティブなカメラや、ブレンド中のカメラの情報をみるのに便利。PreferencesからOnにできる。</span></p>
+<p class="p7"><span class="Apple-tab-span">	</span>•<span class="Apple-tab-span">	</span><span class="s2">Preferences</span></p>
+<p class="p6"><span class="s2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Unity &gt; Preferences &gt; Cinemachine で開ける。デバッグモードをOnにしたり、Composerのコンポーネントに色付けしたりターゲットアイコンのサイズをセットできる。</span></p>
+<p class="p4"><span class="s2"></span><br></p>
+<p class="p4"><span class="s2"></span><br></p>
+<p class="p6"><span class="s2"><b>CinemachineVirtualCameraについて:</b></span></p>
+<p class="p6"><span class="s2"><span class="Apple-tab-span">	</span>CinemachineVirtualCameraにはモジュールをセットすることができる。(UnityのComponentとして。)<span class="Apple-converted-space"> </span></span></p>
+<p class="p6"><span class="s2"><span class="Apple-tab-span">	</span>Noise、Composer、Transposer モジュールによって、手ぶれを追加したり、カメラのコンポーズを動的に行ったり、対象を追跡するようなことができる。</span></p>
+<p class="p6"><span class="s2"><span class="Apple-tab-span">	</span>これらはめっちゃ強力で、相互に連携可能。最高のカメラコントロールのために頑張ってある。</span></p>
+<p class="p4"><span class="s2"></span><br></p>
+<p class="p6"><span class="s2"><span class="Apple-tab-span">	</span>Unityでは、activeなカメラが同時に一つしか存在できないんで、効果的なカメラブレンディングには無理があった。</span></p>
+<p class="p6"><span class="s2"><span class="Apple-tab-span">	</span>Cinemachineはまさにそれを克服するために作られてる。</span></p>
+<p class="p6"><span class="s2"><span class="Apple-tab-span">	</span>具体的に言うと、無限にvirtualなカメラをセットでき、それらをブレンドし、Unity内でのたった一つのカメラとして振る舞うことができる。全て自動的にね。</span></p>
+<p class="p5"><span class="s2"></span><br></p>
+<p class="p5"><span class="s2"></span><br></p>
+<p class="p6"><span class="s2"><b>CinemachineVirtualCamera オブジェクトと、そこに含まれるCinemachineVirtualCameraコンポーネントについて:</b></span></p>
+<p class="p6"><span class="s2"><span class="Apple-tab-span">	</span>(Unity上でのvirtualCameraの作り出し方は、Cinemachineインストール済みの状態でHierarchy上で右クリック &gt; Cinemachine &gt; Virtual Camera)</span></p>
+<p class="p4"><span class="s2"></span><br></p>
+<p class="p6"><span class="s2"><span class="Apple-tab-span">	</span>CinemachineVirtualCameraコンポーネント パラメータの詳細:</span></p>
+<p class="p5"><span class="s2"></span><br></p>
+<p class="p9"><span class="s2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Auto Add To Priority Stack</span></p>
+<p class="p6"><span class="s2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>チェック入れると、自動的にオンになり、ブレンドにも使用される。(カットも自動的にされる。) チェックがない場合は、コードから動的に動かす必要がある。</span></p>
+<p class="p9"><span class="s2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Priority</span></p>
+<p class="p9"><span class="s2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Targets:</span></p>
+<ul class="ul1">
+  <ul class="ul2">
+    <ul class="ul2">
+      <li class="li9"><span class="s2">Composer  </span></li>
+      <ul class="ul2">
+        <li class="li6"><span class="s2"><span class="Apple-tab-span">	</span>GameObjectをComposer target枠に放り込むと、このカメラはその対象を被写体として注視する。(詳しくはComposerの項をみよう)</span></li>
+      </ul>
+      <li class="li9"><span class="s2">Transposer </span></li>
+    </ul>
+  </ul>
+</ul>
+<p class="p6"><span class="s2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>GameObjectをTransposer target枠に放り込むと、このカメラはその対象にマウントされた感じで動くようになる。(詳しくはTransposerの項をみよう)</span></p>
+<p class="p5"><span class="s2"></span><br></p>
+<p class="p9"><span class="s2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Offsets</span></p>
+<ul class="ul1">
+  <ul class="ul2">
+    <ul class="ul2">
+      <ul class="ul2">
+        <li class="li9"><span class="s2">Transposer Tracking Offset</span></li>
+        <li class="li9"><span class="s2">Transposer Dampening Offset</span></li>
+        <li class="li9"><span class="s2">Composer Tracking Offset</span></li>
+        <li class="li9"><span class="s2">Composer Dampening Offset</span></li>
+      </ul>
+    </ul>
+  </ul>
+</ul>
+<p class="p6"><span class="s2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>それぞれのオフセット。</span></p>
+<p class="p5"><span class="s2"></span><br></p>
+<p class="p9"><span class="s2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Field Of View Offset</span></p>
+<p class="p6"><span class="s2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>基本的にここでは放置しとくといいパラメータ。Composerモジュール内でセットすると良い。Composerモジュールを使わない場合はここでセットする。</span></p>
+<p class="p5"><span class="s2"></span><br></p>
+<p class="p9"><span class="s2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Dutch Offset</span></p>
+<p class="p6"><span class="s2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>カメラの傾き、チルト。</span></p>
+<p class="p5"><span class="s2"></span><br></p>
+<p class="p9"><span class="s2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Noise Amplitude Scalar</span></p>
+<p class="p9"><span class="s2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Noise Speed Scalar</span></p>
+<p class="p5"><span class="s2"></span><br></p>
+<p class="p9"><span class="s2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Settings</span></p>
+<p class="p6"><span class="s2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>[Cinemachineでは、モジュールごとに自由に名前をつけて設定ファイルを出力しているみたいだ。設定はそこに保存される。</span></p>
+<p class="p6"><span class="s2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>virtualCameraごとに、その設定を使うことができる。あと、Play中にもパラメータを保存できるっていうのがあって、すごくイイ。]</span></p>
+<ul class="ul1">
+  <ul class="ul2">
+    <ul class="ul2">
+      <ul class="ul2">
+        <li class="li9"><span class="s2">Noise Settings  </span></li>
+        <li class="li9"><span class="s2">Composer Settings  </span></li>
+        <li class="li9"><span class="s2">Transposer Settings<span class="Apple-converted-space"> </span></span></li>
+      </ul>
+    </ul>
+  </ul>
+</ul>
+<p class="p5"><span class="s2"></span><br></p>
+<p class="p9"><span class="s2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Show Camera Guides</span></p>
+<p class="p6"><span class="s2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>[Composer モジュールがセットされてるときだけ表示される。]カメラのブレンド用のガイドが表示される。詳しくはComposerモジュールの解説をみよう。</span></p>
+<p class="p5"><span class="s2"></span><br></p>
+<p class="p5"><span class="s2"></span><br></p>
+<p class="p6"><span class="s2"><b>Noise Module</b></span></p>
+<p class="p6"><span class="s2"><span class="Apple-tab-span">	</span>Noise モジュールは多層的なパーリンノイズを使った手ぶれ生成機構で、揺れはComposer モジュールの処理が終わった後に加算される。</span></p>
+<p class="p6"><span class="s2"><span class="Apple-tab-span">	</span>カメラのポジションと回転の制御をする。好きなだけパラメータ追加できるっぽいぞ。</span></p>
+<p class="p6"><span class="s2"><span class="Apple-tab-span">	</span>[確かに好きなだけ追加できた。オェエ]</span></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span></span><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202016-05-06%2016.35.12.png" alt="スクリーンショット 2016-05-06 16.35.12.png"></p>
+<p class="p4"><span class="s2"></span><br></p>
+<p class="p6"><span class="s2"><span class="Apple-tab-span">	</span>手ぶれ生成をリアルにやるのしんどいんだけど、うまくやるとなんか映像に説得力みたいなものが出る。</span></p>
+<p class="p6"><span class="s2"><span class="Apple-tab-span">	</span>[この項の続きはそのうちちゃんと訳す。]</span></p>
+<p class="p2"><br></p>
+<p class="p4"><span class="s2"></span><br></p>
+<p class="p6"><span class="s2"><b>Composer Module</b></span></p>
+<p class="p6"><span class="s2"><span class="Apple-tab-span">	</span><a href="http://www.cinemachineimagery.com/examples/">このモジュールの凄さみたいなのの例</a>が一杯ある。このモジュールは、オブジェクトを動的に追跡する。</span></p>
+<p class="p6"><span class="s2"><span class="Apple-tab-span">	</span>キャラクターのボーンを追跡したり、複数のカメラをブレンドしたりできる。</span></p>
+<p class="p6"><span class="s2"><span class="Apple-tab-span">	</span>被写体がどんな動きをしてようと、対象をcompositional settingsに基づいてカメラに捉えることができる。</span></p>
+<p class="p6"><span class="s2"><span class="Apple-tab-span">	</span>正確に追跡したり、カメラの追尾に減衰率(ようはディレイ)をもたせたりとかできる。</span></p>
+<p class="p4"><span class="s2"><span class="Apple-tab-span">	</span></span></p>
+<p class="p6"><span class="s2"><span class="Apple-tab-span">	</span>Composerモジュールは、被写体がどんなところにあろうと、現実世界で実際に撮影したかのように(イイ感じに追っかけて)3D空間を2Dスクリーンに落とし込む。</span></p>
+<p class="p4"><span class="s2"></span><br></p>
+<p class="p6"><span class="s2"><span class="Apple-tab-span">	</span>縦の追跡ディレイ、横の追跡ディレイとか、個別に、好きにコントロールできるぞ。</span></p>
+<p class="p4"><span class="s2"></span><br></p>
+<p class="p6"><span class="s2"><span class="Apple-tab-span">	</span>内側の四角形(soft regions)に被写体が入っているうちは、Composerモジュールによって微細な動きは無視される。</span></p>
+<p class="p6"><span class="s2"><span class="Apple-tab-span">	</span>被写体が内側の四角形を出た場合、跳ね返るように被写体を追跡する。</span></p>
+<p class="p4"><span class="s2"></span><br></p>
+<p class="p6"><span class="s2"><span class="Apple-tab-span">	</span>さておき、[ここからDeserts of Kharakの苦労話なので中略 <a href="http://store.steampowered.com/app/281610/"><span class="s3">Homeworld: Deserts of Kharak</span></a>]</span></p>
+<p class="p4"><span class="s2"><span class="Apple-tab-span">	</span></span></p>
+<p class="p6"><span class="s2"><span class="Apple-tab-span">	</span>Composer モジュールは次のようにはたらく。</span></p>
+<p class="p4"><span class="s2"><span class="Apple-tab-span">	</span></span></p>
+<p class="p6"><span class="s2"><span class="Apple-tab-span">	</span>まず、</span>撮影する対象(GameObject)を、CinemachineVirtualCameraのインスペクタ上の Composer Camera Target にセットする。</p>
+<p class="p6"><span class="Apple-tab-span">	</span>Unity<span class="s2">の</span>GameObjectならなんでもイイ。複数のキャラクターからできてる集団の中心とかでもいい。</p>
+<p class="p6"><span class="Apple-tab-span">	</span>カメラが追跡する対象になる。</p>
+<p class="p4"><br></p>
+<p class="p6"><span class="Apple-tab-span">	</span>次に、そのオブジェクトがスクリーンのどのへんに写っていてほしいかを設定する。</p>
+<p class="p6"><span class="Apple-tab-span">	</span>[インスペクター上から「カメラが被写体をスクリーン上のどのへんに写すか」パラメータをセットし、Gameビューでそのプレビューができる。]</p>
+<p class="p4"><span class="Apple-tab-span">	</span></p>
+<p class="p6"><span class="Apple-tab-span">	</span>赤い'Hard'フィールドは、被写体がこのゾーンに絶対に入らないという意味で設定できる。フレームの淵とかに被写体が出ないようにセットするのがよくあるパターン。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202016-05-06%2017.24.37.png" alt="スクリーンショット 2016-05-06 17.24.37.png"></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>青い'Soft'フィールドは、被写体がそこに入り込んだ場合はゆっくりと被写体を中心へと追いやるようにできている。</p>
+<p class="p6"><span class="Apple-tab-span">	</span>[中略、細かい挙動の話]</p>
+<p class="p4"><br></p>
+<p class="p6"><span class="Apple-tab-span">	</span>被写体が透明な'the dead zone'フィールドに来ている場合、カメラは被写体の細かい動きを無視する。</p>
+<p class="p6"><span class="Apple-tab-span">	</span>アニメーションによるキャラクターの中心位置の移動とか、移動物理エンジンの微細な振動を無視したりとかするのに使うといいと思う。</p>
+<p class="p4"><br></p>
+<p class="p6"><span class="Apple-tab-span">	</span>被写体をスクリーン上の指定した位置へと押し出す力[原文だとHorizontal/Vertical Soft Dampening]は、長年の経験でこういうデザインになってるよ！</p>
+<p class="p9"><span class="s2"><span class="Apple-tab-span">	</span>[ここからちょっと訳し中。カメラのブレンド=被写体をスクリーンのどこに置くかみたいなのの設定をいっぱい作ってそれらの遷移とかの話がここから先。]</span></p>
+<p class="p4"><span class="s2"><b></b></span><br></p>
+<p class="p4"><span class="s2"><b></b></span><br></p>
+<p class="p6"><span class="s2"><b>Transposer Module</b></span></p>
+<p class="p6"><span class="s2"><span class="Apple-tab-span">	</span>Transposer モジュールは、カメラ自体の位置を動的に変化させる。カメラの位置のみに関連している。</span></p>
+<p class="p6"><span class="s2"><span class="Apple-tab-span">	</span>カメラの回転に関してはComposerモジュールで行い、移動に関してはTransposer モジュールに担当させるととてもいい感じになる。</span></p>
+<p class="p4"><span class="s2"><b></b></span><br></p>
+<p class="p6"><span class="s2"><span class="Apple-tab-span">	</span>[中略、画像があってComposer Camera Targetには被写体、Transposer Camera Targetにはカメラの乗り物としてのオブジェクトを定義するといいぞみたいな話]</span></p>
+<p class="p2"><span class="s2"><b></b></span><br></p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span>Transposerでは、Transposer Camera Targetにセットしたオブジェクトからのローカル座標でのオフセットを軸ごとに指定することができる。</span></p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span>また、各軸に対してDampening[ここでのDampeningはTransposerにセットしたオブジェクトをどれだけ熱心に即座に追うか、というパラメータ]をセットできる。</span></p>
+<p class="p2"><span class="s2"></span><br></p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span>Transposer モジュールにはとてもパワフルな複数のモードがある。</span></p>
+<p class="p5"><span class="s2"></span><br></p>
+<p class="p9"><span class="s2"><span class="Apple-tab-span">	</span>Local Space on Target Assignment:</span></p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Transposer Camera Targetにセットされたオブジェクトに合わせてカメラの位置を動かす。</span></p>
+<p class="p5"><span class="s2"></span><br></p>
+<p class="p9"><span class="s2"><span class="Apple-tab-span">	</span>Local Space Locked Up Vector:</span></p>
+<p class="p3"><span class="s4"><span class="Apple-tab-span">	</span></span><span class="s2"><span class="Apple-tab-span">	</span>Composerでz-rollをセットするとかしない限り、カメラの上方向を固定する。</span></p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>[オフセットを設定してたりすると、オブジェクトの横回転に際してオフセットもオブジェクトを中心に回転したりする。</span></p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>結果としてカメラが回ったみたいに感じるが、実際回っているのはカメラをセットしたオブジェクト、っていう。ややこしい。]</span></p>
+<p class="p5"><span class="s2"></span><br></p>
+<p class="p9"><span class="s2"><span class="Apple-tab-span">	</span>Local Space Locked To Target:</span></p>
+<p class="p3"><span class="s4"><span class="Apple-tab-span">	</span></span><span class="s2"><span class="Apple-tab-span">	</span>Transpose Camera Targetにセットされたオブジェクトのforwardの向き、位置にカメラをセットする。</span></p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>[より具体的に言うと、オブジェクトが回転すればカメラも回転する。Transposer使ってて意図しない挙動してる場合、このへんが原因なことが多い気がする。]</span></p>
+<p class="p5"><span class="s2"></span><br></p>
+<p class="p9"><span class="s2"><span class="Apple-tab-span">	</span>World Space:</span></p>
+<p class="p3"><span class="s4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span><span class="s2">Transpose Camera Targetにセットされたオブジェクトの位置(というか実際にはそこからオフセット分移動した位置)にカメラをセットする。</span></p>
+<p class="p9"><span class="s2"> </span></p>
+<p class="p5"><span class="s2"></span><br></p>
+<p class="p6"><span class="s2"><b>まとめ</b></span></p>
+<p class="p6"><span class="s2"><span class="Apple-tab-span">	</span>可能性は無限っすわ。[なんかカメラを車Aに乗っけて云々するだけで車Bがめっちゃ綺麗に撮影できるんですよみたいな例]</span></p>
+<p class="p6"><span class="s2"><span class="Apple-tab-span">	</span></span><span class="s4">さ～</span><span class="s2">やってみよう～みたいな話。</span></p>
+<p class="p4"><span class="s2"></span><br></p>
+<p class="p4"><span class="s2"></span><br></p>
+<p class="p4"><span class="s2"></span><br></p>
+</body>
+</html>
