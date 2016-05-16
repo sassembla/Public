@@ -1,0 +1,99 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1404.46">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Sans'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; background-color: #ebebeb}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>C#で動くDisqueクライアント Disquuun</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>なんでC#? なんでDisque? とかはまあ気にしない方向で。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これ。</p>
+<p class="p3"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Disquuun</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/Disquuun">https://github.com/sassembla/Disquuun</a></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>まだ最低限の機能が動くだけの状態。テスト書き足すの楽しい。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>モチベーション</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>非同期で良い感じに動くDisqueのクライアントがなかったんで書いた。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>だいたいあるDisqueのクライアントはRedisのコードを流用してるだけで、自分がDisqueでやりたい事(非同期、ループ化)を満たせなかった。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>特にやりたかったのは、「Disqueに溜まっているJobを低燃費で最速で取りに行く方法」とかそのへんで、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Thread持ち出してGETJOB + NOHANGオプションで頑張って取りに行くとかがよくある利用方法だったんだけど、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>疑似コード</p>
+<p class="p4">var thread = new thread(N frame per seconds)</p>
+<p class="p4">thread.Start(GetJob_FromDisqueQueue_WithNoHang)</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これだとThread持たないといけないんだよな。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>しかも変な分解能を所有しちゃう。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Disqueだと、GETJOBはNOHANGオプションつけなければ &amp; Disque内に該当するQueue/Jobが存在しなければ、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>そこでTCPのレスポンス待ちでブロックが発生する。(この辺はDisqueがそういうデザインになってる)</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>その後、誰かがDisqueの該当するQueueにJobを入れれば、ブロックしてたGETJOBはQueueからJobを引き出して帰っていく。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>このパターンがDisqueになんかJobが足された時の最速のGETで、要はGETJOBを投げといて、誰かがADDJOB -&gt; GETJOB帰還、みたいなのを</p>
+<p class="p3"><span class="Apple-tab-span">	</span>実現できると良い感じで。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>それが書きやすいようなインターフェースを備えたDisqueのクライアントが欲しかった。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>で、Loop</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Disquuunでは、Sync、AsyncとLoopという3つの実行パターンを用意してる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Syncはぶっちゃけ誰も使わないと思うんでDeprecateにする予定なんだけど、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>AsyncとLoopは次のようは書き方ができる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Async</p>
+<p class="p4">disquuun.GetJob(data).<b>Async</b>(</p>
+<p class="p4"><span class="Apple-tab-span">	</span>(command, data) =&gt; {</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>// async data receive point.</p>
+<p class="p4"><span class="Apple-tab-span">	</span>}</p>
+<p class="p4">);</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Loop</p>
+<p class="p4">disquuun.GetJob(data).<b>Loop</b>(</p>
+<p class="p4"><span class="Apple-tab-span">	</span>(command, data) =&gt; {</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>// async data receive point.</p>
+<p class="p4"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>return true</b>;</p>
+<p class="p4"><span class="Apple-tab-span">	</span>}</p>
+<p class="p4">);</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Loopだと、非同期で着火するハンドラがtrueを返す限り、<b>同じリクエストをDisqueにむかって投げつける。</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>この場合だと、GetJob(data) が再度非同期でDisqueへと投げつけられる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>DisqueにGETJOBを投げつけるためだけに、Thread(interval)を持ち出したり、Asyncの中に再帰を書かなくて済むようになるというわけ。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>やったぜ！</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>インストールとか使い方</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>readme見て。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>発音</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>でぃすきゅぅぅぅん</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+</body>
+</html>
