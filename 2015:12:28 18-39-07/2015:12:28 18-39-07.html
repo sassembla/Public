@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Style-Type" content="text/css">
   <title></title>
   <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="1404.46">
+  <meta name="CocoaVersion" content="1404.47">
   <style type="text/css">
     p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Sans'}
     p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; min-height: 18.0px}
@@ -37,7 +37,7 @@
 <p class="p4">class WebsiteTasks(TaskSet):</p>
 <p class="p4"><span class="Apple-converted-space">    </span>def on_start(self):</p>
 <p class="p4"><span class="Apple-converted-space">        </span>pass</p>
-<p class="p4"><span class="Apple-converted-space">        </span># self.client.get("/")</p>
+<p class="p4"><span class="Apple-converted-space">        </span># self.client.get("http:127.0.0.1:80/"</p>
 <p class="p4"><span class="Apple-converted-space">        </span># <span class="Apple-converted-space">    </span>, {</p>
 <p class="p4"><span class="Apple-converted-space">        </span># <span class="Apple-converted-space">    </span>"username": "test_user",</p>
 <p class="p4"><span class="Apple-converted-space">        </span># <span class="Apple-converted-space">    </span>"password": ""</p>
@@ -45,8 +45,7 @@
 <p class="p5"><span class="Apple-converted-space">    </span></p>
 <p class="p4"><span class="Apple-converted-space">    </span>@task</p>
 <p class="p4"><span class="Apple-converted-space">    </span>def index(self):</p>
-<p class="p4"><span class="Apple-converted-space">        </span>self.client.get("/")</p>
-<p class="p4"><span class="Apple-converted-space">        </span>#<span class="Apple-converted-space"> </span></p>
+<p class="p4"><span class="Apple-converted-space">        </span>self.client.get("http:127.0.0.1:80/")</p>
 <p class="p5"><br></p>
 <p class="p5"><br></p>
 <p class="p4"><span class="Apple-converted-space">    </span># @task</p>
