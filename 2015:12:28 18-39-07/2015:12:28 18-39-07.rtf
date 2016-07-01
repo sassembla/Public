@@ -1,7 +1,7 @@
 {\rtf1\ansi\ansicpg932\cocoartf1404\cocoasubrtf470
-{\fonttbl\f0\fnil\fcharset128 HiraginoSans-W4;}
-{\colortbl;\red255\green255\blue255;\red230\green230\blue230;}
-\paperw11900\paperh16840\margl1440\margr1440\vieww14060\viewh12440\viewkind0
+{\fonttbl\f0\fnil\fcharset128 HiraginoSans-W4;\f1\fnil\fcharset128 HiraKakuProN-W3;}
+{\colortbl;\red255\green255\blue255;\red230\green230\blue230;\red230\green230\blue230;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww20260\viewh12440\viewkind0
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
 
 \f0\b\fs44 \cf0 locust\'8e\'67\'82\'c1\'82\'c4\'82\'dd\'82\'e9
@@ -60,4 +60,68 @@ class WebsiteUser(HttpLocust):\
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
 \cf0 \cb1 \
 \
-	\'83\'52\'83\'7d\'83\'93\'83\'68\'83\'89\'83\'43\'83\'93\'8e\'c0\'8d\'73\'8c\'e3\'81\'41\'83\'75\'83\'89\'83\'45\'83\'55\'82\'c5\'8a\'4a\'82\'ad\'81\'42}
+	\'83\'52\'83\'7d\'83\'93\'83\'68\'83\'89\'83\'43\'83\'93\'8e\'c0\'8d\'73\'8c\'e3\'81\'41\'83\'75\'83\'89\'83\'45\'83\'55\'82\'c5\'8a\'4a\'82\'ad\'81\'42\
+\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\b \cf0 WebSocket\'82\'f0\'8e\'67\'82\'a2\'82\'bd\'82\'a2
+\b0 \
+	easy_install\'82\'c5WebSocket\'82\'cc\'83\'89\'83\'43\'83\'75\'83\'89\'83\'8a\'82\'f0\'91\'ab\'82\'b7	\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f1 \cf0 \cb2 sudo easy_install websocket-client
+\b \cb2 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\b0 \cf0 \cb1 \
+\
+	job\'83\'74\'83\'40\'83\'43\'83\'8b\'82\'cd\'82\'b1\'82\'f1\'82\'c8\'8a\'b4\'82\'b6\'82\'c5\'81\'42\
+\cb3 from locust import HttpLocust, TaskSet, task\
+\
+class WebsiteTasks(TaskSet):\
+    def on_start(self): \
+        ws = create_connection('ws://127.0.0.1:80/websocket_entrypoint')\
+        self.ws = ws\
+\
+        def _receive():\
+            while True:\
+                res = ws.recv()\
+                print("res", res)\
+                # data = json.loads(res)\
+                # end_at = time.time()\
+                # response_time = int((end_at - data['start_at']) * 1000000)\
+                # request_success.fire(\
+                #     request_type='WebSocket Recv',\
+                #     name='test/ws/echo',\
+                #     response_time=response_time,\
+                #     response_length=len(res),\
+                # )\
+\
+        gevent.spawn(_receive)\
+\
+\
+    def on_quit(self):\
+        self.ws.close()\
+\
+\
+    @task\
+    def index(self):\
+        # print("passing. ")\
+        self.ws.send_binary("body")\
+\
+\
+\
+class WebsiteUser(HttpLocust):\
+    task_set = WebsiteTasks\
+    min_wait = 1000\
+    max_wait = 15000\
+\cb1 \
+	\
+\
+\
+\
+\
+\
+\
+}

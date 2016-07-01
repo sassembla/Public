@@ -12,6 +12,7 @@
     p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'}
     p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; background-color: #ebebeb}
     p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; background-color: #ebebeb; min-height: 18.0px}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #ebebeb}
     span.Apple-tab-span {white-space:pre}
   </style>
 </head>
@@ -61,5 +62,60 @@
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>コマンドライン実行後、ブラウザで開く。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>WebSocketを使いたい</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>easy_installでWebSocketのライブラリを足す<span class="Apple-tab-span">	</span></p>
+<p class="p6">sudo easy_install websocket-client</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>jobファイルはこんな感じで。</p>
+<p class="p4">from locust import HttpLocust, TaskSet, task</p>
+<p class="p5"><br></p>
+<p class="p4">class WebsiteTasks(TaskSet):</p>
+<p class="p4"><span class="Apple-converted-space">    </span>def on_start(self):<span class="Apple-converted-space"> </span></p>
+<p class="p4"><span class="Apple-converted-space">        </span>ws = create_connection('ws://127.0.0.1:80/websocket_entrypoint')</p>
+<p class="p4"><span class="Apple-converted-space">        </span>self.ws = ws</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-converted-space">        </span>def _receive():</p>
+<p class="p4"><span class="Apple-converted-space">            </span>while True:</p>
+<p class="p4"><span class="Apple-converted-space">                </span>res = ws.recv()</p>
+<p class="p4"><span class="Apple-converted-space">                </span>print("res", res)</p>
+<p class="p4"><span class="Apple-converted-space">                </span># data = json.loads(res)</p>
+<p class="p4"><span class="Apple-converted-space">                </span># end_at = time.time()</p>
+<p class="p4"><span class="Apple-converted-space">                </span># response_time = int((end_at - data['start_at']) * 1000000)</p>
+<p class="p4"><span class="Apple-converted-space">                </span># request_success.fire(</p>
+<p class="p4"><span class="Apple-converted-space">                </span># <span class="Apple-converted-space">    </span>request_type='WebSocket Recv',</p>
+<p class="p4"><span class="Apple-converted-space">                </span># <span class="Apple-converted-space">    </span>name='test/ws/echo',</p>
+<p class="p4"><span class="Apple-converted-space">                </span># <span class="Apple-converted-space">    </span>response_time=response_time,</p>
+<p class="p4"><span class="Apple-converted-space">                </span># <span class="Apple-converted-space">    </span>response_length=len(res),</p>
+<p class="p4"><span class="Apple-converted-space">                </span># )</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-converted-space">        </span>gevent.spawn(_receive)</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-converted-space">    </span>def on_quit(self):</p>
+<p class="p4"><span class="Apple-converted-space">        </span>self.ws.close()</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-converted-space">    </span>@task</p>
+<p class="p4"><span class="Apple-converted-space">    </span>def index(self):</p>
+<p class="p4"><span class="Apple-converted-space">        </span># print("passing. ")</p>
+<p class="p4"><span class="Apple-converted-space">        </span>self.ws.send_binary("body")</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p4">class WebsiteUser(HttpLocust):</p>
+<p class="p4"><span class="Apple-converted-space">    </span>task_set = WebsiteTasks</p>
+<p class="p4"><span class="Apple-converted-space">    </span>min_wait = 1000</p>
+<p class="p4"><span class="Apple-converted-space">    </span>max_wait = 15000</p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
 </body>
 </html>
