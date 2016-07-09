@@ -1,0 +1,124 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1404.47">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px 'Hiragino Kaku Gothic ProN'}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px 'Hiragino Kaku Gothic ProN'; background-color: #ebebeb}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px 'Hiragino Kaku Gothic ProN'; min-height: 17.0px}
+    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px 'Hiragino Kaku Gothic ProN'; background-color: #ebebeb; min-height: 17.0px}
+    p.p8 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'}
+    span.s1 {font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    span.s2 {font-variant-ligatures: no-common-ligatures}
+    span.s3 {font: 11.0px 'Hiragino Kaku Gothic ProN'; font-variant-ligatures: no-common-ligatures}
+    span.s4 {font: 12.0px 'Hiragino Sans'}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>CoreCLRで遭遇する楽しいエラーというか滅ぼされたものとかと戦う</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>思ったよりエラーが秩序立って出るのでコレクションしてみた。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>使ってる基本ライブラリはこれ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://dotnet.github.io">https://dotnet.github.io</a></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>対して、実装している対象はこれ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Disquuun</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/Disquuun">https://github.com/sassembla/Disquuun</a></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p4"><span class="s1"><b>いまのところ一番凶悪なエラー </b></span><span class="s2"><b>Could not load file or assembly 'System.Diagnostics.StackTrace</b></span></p>
+<p class="p5"><span class="s2">Unhandled Exception: System.IO.FileLoadException: Could not load file or assembly 'System.Diagnostics.StackTrace, Version=1.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a'. A device attached to the system is not functioning.</span></p>
+<p class="p5"><span class="s2"><span class="Apple-converted-space"> </span>(Exception from HRESULT: 0x8007001F)</span></p>
+<p class="p5"><span class="s2"><span class="Apple-converted-space">   </span>at System.RuntimeTypeHandle.GetTypeByName(String name, Boolean throwOnError, Boolean ignoreCase, Boolean reflectionOnly, StackCrawlMarkHandle stackMark, IntPtr pPrivHostBinder, Boolean loadTypeFromPartialName, ObjectHandleOnStack type, ObjectHandleOnStack keepalive)</span></p>
+<p class="p5"><span class="s2"><span class="Apple-converted-space">   </span>at System.RuntimeTypeHandle.GetTypeByName(String name, Boolean throwOnError, Boolean ignoreCase, Boolean reflectionOnly, StackCrawlMark&amp; stackMark, IntPtr pPrivHostBinder, Boolean loadTypeFromPartialName)</span></p>
+<p class="p5"><span class="s2"><span class="Apple-converted-space">   </span>at System.RuntimeType.GetType(String typeName, Boolean throwOnError, Boolean ignoreCase, Boolean reflectionOnly, StackCrawlMark&amp; stackMark)</span></p>
+<p class="p5"><span class="s2"><span class="Apple-converted-space">   </span>at System.Type.GetType(String typeName, Boolean throwOnError)</span></p>
+<p class="p5"><span class="s2"><span class="Apple-converted-space">   </span>at System.Diagnostics.StackFrameHelper.InitializeSourceInfo(Int32 iSkip, Boolean fNeedFileInfo, Exception exception)</span></p>
+<p class="p5"><span class="s2"><span class="Apple-converted-space">   </span>at System.Diagnostics.StackTrace.CaptureStackTrace(Int32 iSkip, Boolean fNeedFileInfo, Thread targetThread, Exception e)</span></p>
+<p class="p5"><span class="s2"><span class="Apple-converted-space">   </span>at System.Exception.get_Source()</span></p>
+<p class="p5"><span class="s2"><span class="Apple-converted-space">   </span>at System.Exception.InternalPreserveStackTrace()</span></p>
+<p class="p5"><span class="s2"><span class="Apple-converted-space">   </span>at ServerInitializer.Init()</span></p>
+<p class="p5"><span class="s2"><span class="Apple-converted-space">   </span>at ConsoleApplication.Program.Main(String[] args)</span></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>わけがわからないときにでる。内容は、StackTraceの入ってるassemblyが読めない、っていうことを言われて、は？ってなるっていう。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>端的に言うとこれをひいた。</p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>Exception stack is bogus when ulimit is hit. #5782</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/dotnet/coreclr/issues/5782">https://github.com/dotnet/coreclr/issues/5782</a></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>場所がさっぱりわからないことになる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>あっちなみにこのエラーが出ると、プロセスが落ちる。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>StackTraceよもやま話</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>stacktraceに関しての話はこのへんもあっておもしろい。っていうかStackTraceないんで、自分で実行した関数の名前を把握できない。うおお、、、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/dotnet/corefx/issues/1420">https://github.com/dotnet/corefx/issues/1420</a></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p4"><span class="s2"><b>System.IO.IOException: Too many open files</b></span></p>
+<p class="p4"><span class="s2"><span class="Apple-tab-span">	</span>地味にすごく困るエラーがこれ。</span></p>
+<p class="p4"><span class="s2"><span class="Apple-tab-span">	</span>や、Disqueのクライアントごときがこんなエラーだしてちゃいけないんだけどさ、</span></p>
+<p class="p6"><span class="s2"><span class="Apple-tab-span">	</span></span></p>
+<p class="p4"><span class="s2"><span class="Apple-tab-span">	</span>OSで指定してあるFileDescriptorの数を超えてTCPとかのコネクションを貼ろう、ってした場合に上記エラーが出る。</span></p>
+<p class="p4"><span class="s2"><span class="Apple-tab-span">	</span>このパラメータをコード上からいじる、っていう文法がCoreCLR上にまだ<b>ない</b>んで、困っている。</span></p>
+<p class="p6"><span class="s2"></span><br></p>
+<p class="p4"><span class="s2"><span class="Apple-tab-span">	</span>例えばPythonとかだったら、</span></p>
+<p class="p5"><span class="s2">import resource</span></p>
+<p class="p7"><span class="s2"></span><br></p>
+<p class="p5"><span class="s2">resource.setrlimit(</span></p>
+<p class="p5"><span class="s2"><span class="Apple-converted-space">    </span>resource.RLIMIT_CORE,</span></p>
+<p class="p5"><span class="s2"><span class="Apple-converted-space">    </span>(resource.RLIM_INFINITY, resource.RLIM_INFINITY))<span class="Apple-tab-span">	</span></span></p>
+<p class="p6"><span class="s2"><span class="Apple-tab-span">	</span></span></p>
+<p class="p4"><span class="s2"><span class="Apple-tab-span">	</span>みたいな書き方でOSに対してこのプロセスはどんだけのulimitを使うんだよって指定できるんだけど、この辺はCoreCLRだと</span></p>
+<p class="p4"><span class="s2"><span class="Apple-tab-span">	</span><a href="https://github.com/dotnet/coreclr/search?utf8=%E2%9C%93&amp;q=ulimit">https://github.com/dotnet/coreclr/search?utf8=✓&amp;q=ulimit</a></span></p>
+<p class="p4"><span class="s2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>shellでセットしたりしてる以外は、、コードに特になってないような、、？</span></p>
+<p class="p6"><span class="s2"><span class="Apple-tab-span">	</span></span></p>
+<p class="p4"><span class="s2"><span class="Apple-tab-span">	</span>このへんはまあ困っていますね。はい。</span></p>
+<p class="p6"><span class="s2"></span><br></p>
+<p class="p6"><span class="s2"></span><br></p>
+<p class="p4"><span class="s2"><b>Delegate.BeginInvoke/EndInvoke is DEAD</b></span></p>
+<p class="p4"><span class="s2"><span class="Apple-tab-span">	</span>BeginInvokeとかEndInvokeは死にました。やったね？</span></p>
+<p class="p6"><span class="s2"></span><br></p>
+<p class="p4"><span class="s2"><span class="Apple-tab-span">	</span>Unsupportedエラー出そうぜ、っていう話が上がって、叶ってるっぽいんだけどちゃんと出ないことがある。再現したいな～～。</span></p>
+<p class="p4"><span class="s2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/dotnet/coreclr/issues/3811">https://github.com/dotnet/coreclr/issues/3811</a></span></p>
+<p class="p6"><span class="s2"></span><br></p>
+<p class="p6"><span class="s2"><span class="Apple-tab-span">	</span></span></p>
+<p class="p4"><span class="s2"><b>Socketの接続周りがドラマチックになった</b></span></p>
+<p class="p4"><span class="s2"><span class="Apple-tab-span">	</span>Mac上とかでテストしたいな～みたいな時、IPEndPoint を使ってアドレスとかポートを指定しないとSocketをnewするのに失敗する。</span></p>
+<p class="p4"><span class="s2"><span class="Apple-tab-span">	</span>どっかCoreCLRのリポジトリ上にもIssueがあった気がする。</span></p>
+<p class="p6"><span class="s2"></span><br></p>
+<p class="p6"><span class="s2"></span><br></p>
+<p class="p4"><span class="s2"><b>Socketの切断周りがドラマチックになった</b></span></p>
+<p class="p4"><span class="s2"><span class="Apple-tab-span">	</span>socket.CloseとかCloseAsyncとかが全部滅びた。</span></p>
+<p class="p4"><span class="s2"><span class="Apple-tab-span">	</span>Dispose()使おうな。という感じで、これもどこかにIssueが上がってて全容が書いてあった気がする。</span></p>
+<p class="p4"><span class="s2"><span class="Apple-tab-span">	</span>見つけたら書き足す。</span></p>
+<p class="p6"><span class="s2"></span><br></p>
+<p class="p4"><span class="s2"><span class="Apple-tab-span">	</span>実際にDisposeで書き直したところ、処理が軽量なのか問題は出なかった。なんか見逃してる気がしないでもない。</span></p>
+<p class="p6"><span class="s2"></span><br></p>
+<p class="p6"><span class="s2"></span><br></p>
+<p class="p4"><span class="s2"><b>Reflectionにいろいろ足りない</b></span></p>
+<p class="p4"><span class="s2"><span class="Apple-tab-span">	</span>いろいろやってる最中っぽい。</span></p>
+<p class="p8"><span class="s3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/dotnet/corefx/issues/5381"><span class="s4">https://github.com/dotnet/corefx/issues/5381</span></a></span></p>
+<p class="p6"><span class="s2"></span><br></p>
+<p class="p6"><span class="s2"></span><br></p>
+<p class="p6"><span class="s2"></span><br></p>
+<p class="p6"><span class="s2"></span><br></p>
+<p class="p6"><span class="s2"></span><br></p>
+<p class="p6"><span class="s2"></span><br></p>
+<p class="p6"><span class="s2"></span><br></p>
+<p class="p6"><span class="s2"></span><br></p>
+<p class="p6"><span class="s2"></span><br></p>
+<p class="p6"><span class="s2"></span><br></p>
+</body>
+</html>

@@ -1,0 +1,134 @@
+{\rtf1\ansi\ansicpg932\cocoartf1404\cocoasubrtf470
+{\fonttbl\f0\fnil\fcharset128 HiraKakuProN-W3;\f1\fnil\fcharset128 HiraginoSans-W4;}
+{\colortbl;\red255\green255\blue255;\red230\green230\blue230;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww22720\viewh13140\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\b\fs44 \cf0 CoreCLR\'82\'c5\'91\'98\'8b\'f6\'82\'b7\'82\'e9\'8a\'79\'82\'b5\'82\'a2\'83\'47\'83\'89\'81\'5b\'82\'c6\'82\'a2\'82\'a4\'82\'a9\'96\'c5\'82\'da\'82\'b3\'82\'ea\'82\'bd\'82\'e0\'82\'cc\'82\'c6\'82\'a9\'82\'c6\'90\'ed\'82\'a4
+\b0\fs24 \
+\
+
+\b \'8a\'54\'97\'76
+\b0 \
+	\'8e\'76\'82\'c1\'82\'bd\'82\'e6\'82\'e8\'83\'47\'83\'89\'81\'5b\'82\'aa\'92\'81\'8f\'98\'97\'a7\'82\'c1\'82\'c4\'8f\'6f\'82\'e9\'82\'cc\'82\'c5\'83\'52\'83\'8c\'83\'4e\'83\'56\'83\'87\'83\'93\'82\'b5\'82\'c4\'82\'dd\'82\'bd\'81\'42\
+\
+	\'8e\'67\'82\'c1\'82\'c4\'82\'e9\'8a\'ee\'96\'7b\'83\'89\'83\'43\'83\'75\'83\'89\'83\'8a\'82\'cd\'82\'b1\'82\'ea\'81\'42\
+		{\field{\*\fldinst{HYPERLINK "https://dotnet.github.io"}}{\fldrslt https://dotnet.github.io}}\
+\
+\
+	\'91\'ce\'82\'b5\'82\'c4\'81\'41\'8e\'c0\'91\'95\'82\'b5\'82\'c4\'82\'a2\'82\'e9\'91\'ce\'8f\'db\'82\'cd\'82\'b1\'82\'ea\'81\'42\
+		Disquuun\
+			{\field{\*\fldinst{HYPERLINK "https://github.com/sassembla/Disquuun"}}{\fldrslt https://github.com/sassembla/Disquuun}}\
+\
+\
+
+\b \'82\'a2\'82\'dc\'82\'cc\'82\'c6\'82\'b1\'82\'eb\'88\'ea\'94\'d4\'8b\'a5\'88\'ab\'82\'c8\'83\'47\'83\'89\'81\'5b 
+\fs22 \CocoaLigature0 Could not load file or assembly 'System.Diagnostics.StackTrace
+\b0\fs24 \CocoaLigature1 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\fs22 \cf0 \cb2 \CocoaLigature0 Unhandled Exception: System.IO.FileLoadException: Could not load file or assembly 'System.Diagnostics.StackTrace, Version=1.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a'. A device attached to the system is not functioning.\
+ (Exception from HRESULT: 0x8007001F)\
+   at System.RuntimeTypeHandle.GetTypeByName(String name, Boolean throwOnError, Boolean ignoreCase, Boolean reflectionOnly, StackCrawlMarkHandle stackMark, IntPtr pPrivHostBinder, Boolean loadTypeFromPartialName, ObjectHandleOnStack type, ObjectHandleOnStack keepalive)\
+   at System.RuntimeTypeHandle.GetTypeByName(String name, Boolean throwOnError, Boolean ignoreCase, Boolean reflectionOnly, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean loadTypeFromPartialName)\
+   at System.RuntimeType.GetType(String typeName, Boolean throwOnError, Boolean ignoreCase, Boolean reflectionOnly, StackCrawlMark& stackMark)\
+   at System.Type.GetType(String typeName, Boolean throwOnError)\
+   at System.Diagnostics.StackFrameHelper.InitializeSourceInfo(Int32 iSkip, Boolean fNeedFileInfo, Exception exception)\
+   at System.Diagnostics.StackTrace.CaptureStackTrace(Int32 iSkip, Boolean fNeedFileInfo, Thread targetThread, Exception e)\
+   at System.Exception.get_Source()\
+   at System.Exception.InternalPreserveStackTrace()\
+   at ServerInitializer.Init()\
+   at ConsoleApplication.Program.Main(String[] args)\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\fs24 \cf0 \cb1 \CocoaLigature1 \
+	\'82\'ed\'82\'af\'82\'aa\'82\'ed\'82\'a9\'82\'e7\'82\'c8\'82\'a2\'82\'c6\'82\'ab\'82\'c9\'82\'c5\'82\'e9\'81\'42\'93\'e0\'97\'65\'82\'cd\'81\'41StackTrace\'82\'cc\'93\'fc\'82\'c1\'82\'c4\'82\'e9assembly\'82\'aa\'93\'c7\'82\'df\'82\'c8\'82\'a2\'81\'41\'82\'c1\'82\'c4\'82\'a2\'82\'a4\'82\'b1\'82\'c6\'82\'f0\'8c\'be\'82\'ed\'82\'ea\'82\'c4\'81\'41\'82\'cd\'81\'48\'82\'c1\'82\'c4\'82\'c8\'82\'e9\'82\'c1\'82\'c4\'82\'a2\'82\'a4\'81\'42\
+	\'92\'5b\'93\'49\'82\'c9\'8c\'be\'82\'a4\'82\'c6\'82\'b1\'82\'ea\'82\'f0\'82\'d0\'82\'a2\'82\'bd\'81\'42\
+		\
+	
+\b Exception stack is bogus when ulimit is hit. #5782
+\b0 \
+		{\field{\*\fldinst{HYPERLINK "https://github.com/dotnet/coreclr/issues/5782"}}{\fldrslt https://github.com/dotnet/coreclr/issues/5782}}\
+	\
+	\'8f\'ea\'8f\'8a\'82\'aa\'82\'b3\'82\'c1\'82\'cf\'82\'e8\'82\'ed\'82\'a9\'82\'e7\'82\'c8\'82\'a2\'82\'b1\'82\'c6\'82\'c9\'82\'c8\'82\'e9\'81\'42\
+	\'82\'a0\'82\'c1\'82\'bf\'82\'c8\'82\'dd\'82\'c9\'82\'b1\'82\'cc\'83\'47\'83\'89\'81\'5b\'82\'aa\'8f\'6f\'82\'e9\'82\'c6\'81\'41\'83\'76\'83\'8d\'83\'5a\'83\'58\'82\'aa\'97\'8e\'82\'bf\'82\'e9\'81\'42\
+\
+\
+
+\b StackTrace\'82\'e6\'82\'e0\'82\'e2\'82\'dc\'98\'62
+\b0 \
+	stacktrace\'82\'c9\'8a\'d6\'82\'b5\'82\'c4\'82\'cc\'98\'62\'82\'cd\'82\'b1\'82\'cc\'82\'d6\'82\'f1\'82\'e0\'82\'a0\'82\'c1\'82\'c4\'82\'a8\'82\'e0\'82\'b5\'82\'eb\'82\'a2\'81\'42\'82\'c1\'82\'c4\'82\'a2\'82\'a4\'82\'a9StackTrace\'82\'c8\'82\'a2\'82\'f1\'82\'c5\'81\'41\'8e\'a9\'95\'aa\'82\'c5\'8e\'c0\'8d\'73\'82\'b5\'82\'bd\'8a\'d6\'90\'94\'82\'cc\'96\'bc\'91\'4f\'82\'f0\'94\'63\'88\'ac\'82\'c5\'82\'ab\'82\'c8\'82\'a2\'81\'42\'82\'a4\'82\'a8\'82\'a8\'81\'41\'81\'41\'81\'41\
+		{\field{\*\fldinst{HYPERLINK "https://github.com/dotnet/corefx/issues/1420"}}{\fldrslt https://github.com/dotnet/corefx/issues/1420}}\
+\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\b\fs22 \cf0 \CocoaLigature0 System.IO.IOException: Too many open files
+\b0 \
+	\'92\'6e\'96\'a1\'82\'c9\'82\'b7\'82\'b2\'82\'ad\'8d\'a2\'82\'e9\'83\'47\'83\'89\'81\'5b\'82\'aa\'82\'b1\'82\'ea\'81\'42\
+	\'82\'e2\'81\'41Disque\'82\'cc\'83\'4e\'83\'89\'83\'43\'83\'41\'83\'93\'83\'67\'82\'b2\'82\'c6\'82\'ab\'82\'aa\'82\'b1\'82\'f1\'82\'c8\'83\'47\'83\'89\'81\'5b\'82\'be\'82\'b5\'82\'c4\'82\'bf\'82\'e1\'82\'a2\'82\'af\'82\'c8\'82\'a2\'82\'f1\'82\'be\'82\'af\'82\'c7\'82\'b3\'81\'41\
+	\
+	OS\'82\'c5\'8e\'77\'92\'e8\'82\'b5\'82\'c4\'82\'a0\'82\'e9FileDescriptor\'82\'cc\'90\'94\'82\'f0\'92\'b4\'82\'a6\'82\'c4TCP\'82\'c6\'82\'a9\'82\'cc\'83\'52\'83\'6c\'83\'4e\'83\'56\'83\'87\'83\'93\'82\'f0\'93\'5c\'82\'eb\'82\'a4\'81\'41\'82\'c1\'82\'c4\'82\'b5\'82\'bd\'8f\'ea\'8d\'87\'82\'c9\'8f\'e3\'8b\'4c\'83\'47\'83\'89\'81\'5b\'82\'aa\'8f\'6f\'82\'e9\'81\'42\
+	\'82\'b1\'82\'cc\'83\'70\'83\'89\'83\'81\'81\'5b\'83\'5e\'82\'f0\'83\'52\'81\'5b\'83\'68\'8f\'e3\'82\'a9\'82\'e7\'82\'a2\'82\'b6\'82\'e9\'81\'41\'82\'c1\'82\'c4\'82\'a2\'82\'a4\'95\'b6\'96\'40\'82\'aaCoreCLR\'8f\'e3\'82\'c9\'82\'dc\'82\'be
+\b \'82\'c8\'82\'a2
+\b0 \'82\'f1\'82\'c5\'81\'41\'8d\'a2\'82\'c1\'82\'c4\'82\'a2\'82\'e9\'81\'42\
+\
+	\'97\'e1\'82\'a6\'82\'cePython\'82\'c6\'82\'a9\'82\'be\'82\'c1\'82\'bd\'82\'e7\'81\'41\
+\pard\pardeftab720\partightenfactor0
+\cf0 \cb2 import resource\
+\
+resource.setrlimit(\
+    resource.RLIMIT_CORE,\
+    (resource.RLIM_INFINITY, resource.RLIM_INFINITY))	\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \cb1 	\
+	\'82\'dd\'82\'bd\'82\'a2\'82\'c8\'8f\'91\'82\'ab\'95\'fb\'82\'c5OS\'82\'c9\'91\'ce\'82\'b5\'82\'c4\'82\'b1\'82\'cc\'83\'76\'83\'8d\'83\'5a\'83\'58\'82\'cd\'82\'c7\'82\'f1\'82\'be\'82\'af\'82\'cculimit\'82\'f0\'8e\'67\'82\'a4\'82\'f1\'82\'be\'82\'e6\'82\'c1\'82\'c4\'8e\'77\'92\'e8\'82\'c5\'82\'ab\'82\'e9\'82\'f1\'82\'be\'82\'af\'82\'c7\'81\'41\'82\'b1\'82\'cc\'95\'d3\'82\'cdCoreCLR\'82\'be\'82\'c6\
+	{\field{\*\fldinst{HYPERLINK "https://github.com/dotnet/coreclr/search?utf8=%E2%9C%93&q=ulimit"}}{\fldrslt https://github.com/dotnet/coreclr/search?utf8=\uc0\u10003 &q=ulimit}}\
+		shell\'82\'c5\'83\'5a\'83\'62\'83\'67\'82\'b5\'82\'bd\'82\'e8\'82\'b5\'82\'c4\'82\'e9\'88\'c8\'8a\'4f\'82\'cd\'81\'41\'81\'41\'83\'52\'81\'5b\'83\'68\'82\'c9\'93\'c1\'82\'c9\'82\'c8\'82\'c1\'82\'c4\'82\'c8\'82\'a2\'82\'e6\'82\'a4\'82\'c8\'81\'41\'81\'41\'81\'48\
+	\
+	\'82\'b1\'82\'cc\'82\'d6\'82\'f1\'82\'cd\'82\'dc\'82\'a0\'8d\'a2\'82\'c1\'82\'c4\'82\'a2\'82\'dc\'82\'b7\'82\'cb\'81\'42\'82\'cd\'82\'a2\'81\'42\
+\
+\
+
+\b Delegate.BeginInvoke/EndInvoke is DEAD
+\b0 \
+	BeginInvoke\'82\'c6\'82\'a9EndInvoke\'82\'cd\'8e\'80\'82\'c9\'82\'dc\'82\'b5\'82\'bd\'81\'42\'82\'e2\'82\'c1\'82\'bd\'82\'cb\'81\'48\
+\
+	Unsupported\'83\'47\'83\'89\'81\'5b\'8f\'6f\'82\'bb\'82\'a4\'82\'ba\'81\'41\'82\'c1\'82\'c4\'82\'a2\'82\'a4\'98\'62\'82\'aa\'8f\'e3\'82\'aa\'82\'c1\'82\'c4\'81\'41\'8a\'90\'82\'c1\'82\'c4\'82\'e9\'82\'c1\'82\'db\'82\'a2\'82\'f1\'82\'be\'82\'af\'82\'c7\'82\'bf\'82\'e1\'82\'f1\'82\'c6\'8f\'6f\'82\'c8\'82\'a2\'82\'b1\'82\'c6\'82\'aa\'82\'a0\'82\'e9\'81\'42\'8d\'c4\'8c\'bb\'82\'b5\'82\'bd\'82\'a2\'82\'c8\'81\'60\'81\'60\'81\'42\
+		{\field{\*\fldinst{HYPERLINK "https://github.com/dotnet/coreclr/issues/3811"}}{\fldrslt https://github.com/dotnet/coreclr/issues/3811}}\
+\
+	\
+
+\b Socket\'82\'cc\'90\'da\'91\'b1\'8e\'fc\'82\'e8\'82\'aa\'83\'68\'83\'89\'83\'7d\'83\'60\'83\'62\'83\'4e\'82\'c9\'82\'c8\'82\'c1\'82\'bd
+\b0 \
+	Mac\'8f\'e3\'82\'c6\'82\'a9\'82\'c5\'83\'65\'83\'58\'83\'67\'82\'b5\'82\'bd\'82\'a2\'82\'c8\'81\'60\'82\'dd\'82\'bd\'82\'a2\'82\'c8\'8e\'9e\'81\'41IPEndPoint \'82\'f0\'8e\'67\'82\'c1\'82\'c4\'83\'41\'83\'68\'83\'8c\'83\'58\'82\'c6\'82\'a9\'83\'7c\'81\'5b\'83\'67\'82\'f0\'8e\'77\'92\'e8\'82\'b5\'82\'c8\'82\'a2\'82\'c6Socket\'82\'f0new\'82\'b7\'82\'e9\'82\'cc\'82\'c9\'8e\'b8\'94\'73\'82\'b7\'82\'e9\'81\'42\
+	\'82\'c7\'82\'c1\'82\'a9CoreCLR\'82\'cc\'83\'8a\'83\'7c\'83\'57\'83\'67\'83\'8a\'8f\'e3\'82\'c9\'82\'e0Issue\'82\'aa\'82\'a0\'82\'c1\'82\'bd\'8b\'43\'82\'aa\'82\'b7\'82\'e9\'81\'42\
+\
+\
+
+\b Socket\'82\'cc\'90\'d8\'92\'66\'8e\'fc\'82\'e8\'82\'aa\'83\'68\'83\'89\'83\'7d\'83\'60\'83\'62\'83\'4e\'82\'c9\'82\'c8\'82\'c1\'82\'bd
+\b0 \
+	socket.Close\'82\'c6\'82\'a9CloseAsync\'82\'c6\'82\'a9\'82\'aa\'91\'53\'95\'94\'96\'c5\'82\'d1\'82\'bd\'81\'42\
+	Dispose()\'8e\'67\'82\'a8\'82\'a4\'82\'c8\'81\'42\'82\'c6\'82\'a2\'82\'a4\'8a\'b4\'82\'b6\'82\'c5\'81\'41\'82\'b1\'82\'ea\'82\'e0\'82\'c7\'82\'b1\'82\'a9\'82\'c9Issue\'82\'aa\'8f\'e3\'82\'aa\'82\'c1\'82\'c4\'82\'c4\'91\'53\'97\'65\'82\'aa\'8f\'91\'82\'a2\'82\'c4\'82\'a0\'82\'c1\'82\'bd\'8b\'43\'82\'aa\'82\'b7\'82\'e9\'81\'42\
+	\'8c\'a9\'82\'c2\'82\'af\'82\'bd\'82\'e7\'8f\'91\'82\'ab\'91\'ab\'82\'b7\'81\'42\
+\
+	\'8e\'c0\'8d\'db\'82\'c9Dispose\'82\'c5\'8f\'91\'82\'ab\'92\'bc\'82\'b5\'82\'bd\'82\'c6\'82\'b1\'82\'eb\'81\'41\'8f\'88\'97\'9d\'82\'aa\'8c\'79\'97\'ca\'82\'c8\'82\'cc\'82\'a9\'96\'e2\'91\'e8\'82\'cd\'8f\'6f\'82\'c8\'82\'a9\'82\'c1\'82\'bd\'81\'42\'82\'c8\'82\'f1\'82\'a9\'8c\'a9\'93\'a6\'82\'b5\'82\'c4\'82\'e9\'8b\'43\'82\'aa\'82\'b5\'82\'c8\'82\'a2\'82\'c5\'82\'e0\'82\'c8\'82\'a2\'81\'42\
+\
+\
+
+\b Reflection\'82\'c9\'82\'a2\'82\'eb\'82\'a2\'82\'eb\'91\'ab\'82\'e8\'82\'c8\'82\'a2
+\b0 \
+	\'82\'a2\'82\'eb\'82\'a2\'82\'eb\'82\'e2\'82\'c1\'82\'c4\'82\'e9\'8d\'c5\'92\'86\'82\'c1\'82\'db\'82\'a2\'81\'42\
+		{\field{\*\fldinst{HYPERLINK "https://github.com/dotnet/corefx/issues/5381"}}{\fldrslt 
+\f1\fs24 \CocoaLigature1 https://github.com/dotnet/corefx/issues/5381}}\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+}
