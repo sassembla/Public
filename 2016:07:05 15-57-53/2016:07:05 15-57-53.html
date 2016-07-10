@@ -1,0 +1,138 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1404.47">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Sans'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; background-color: #ebebeb}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; background-color: #ebebeb; min-height: 18.0px}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>１つのプロジェクト内でCoreCLRのビルドとUnityのビルドを共存させる</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>あまり完璧ではない形だが実現できた。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>やりたいことは、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・Unityでクライアントを書く</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・CoreCLRでサーバとかを書く</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・双方に跨る形で、データとかロジックのコードを共有する</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・Unityのコンパイルに合わせてCoreCLR側もコンパイルする</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・Unityの実行にあわせてサーバ起動する</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>とかそんな感じ。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Unityの使っている.Net 3.5っていう古代の生物と、CoreCLRだと、それなりに差異の数がある。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>環境による差分</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>.Net 3.5のころに存在するいろんな機能が「よい実装方法や手法ではなかった」という理由でCoreCLR側でガンガン滅ぼされている。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>詳しくはだいたいこっちに書いた。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><b>CoreCLRで遭遇する楽しいエラーというか滅ぼされたものとかと戦う</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://sassembla.github.io/Public/2016:07:09%2014-04-11/2016:07:09%2014-04-11.html">http://sassembla.github.io/Public/2016:07:09%2014-04-11/2016:07:09%2014-04-11.html</a></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>で、今回実現できたフォルダ構成</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>こんな構成。Unityと外部とでコードを共有する仕掛けになっている。</p>
+<p class="p2"><br></p>
+<p class="p4">UnityProjectFolder/</p>
+<p class="p4"><b><span class="Apple-tab-span">	</span>Assets/</b></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>いろいろクライアント専用コード</p>
+<p class="p5"><b></b><br></p>
+<p class="p4"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>XrossPeer/</b></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>クライアントとサーバで共有されているコード</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><b>Peered/</b></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>このPeer=クライアントでだけ改変が必要なコード</p>
+<p class="p5"><br></p>
+<p class="p4"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Editor/</b></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>この機構を動かすためのコード。</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>主にコードの複製とサーバ側のコードのコンパイル、起動、再起動とかをハンドラの形で提供する。</p>
+<p class="p5"><br></p>
+<p class="p4"><b><span class="Apple-tab-span">	</span>ServerContext/</b></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>いろいろサーバ専用コード</p>
+<p class="p5"><b></b><br></p>
+<p class="p4"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>XrossPeer/</b><span class="Apple-tab-span">	</span></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>クライアントとサーバで共有されているコード</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><b>Peered</b></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>このPeer=サーバでだけ改変が必要なコード</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>この機構のためにXrossPeerというAssetを開発して使っている。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Assets/XrossPeerフォルダにはクライアント側の共有コードが置かれ、Peeredフォルダには「クライアントとサーバで異なるライブラリを使ったりする場合の差異のあるコード」を置く想定。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>具体的には、例えばJSONのエンコード/デコードについて、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・クライアントではUnityのJsonUtilityを使う</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・サーバではJson.netを使う</p>
+<p class="p3"><span class="Apple-tab-span">	</span>などの場合に、共通のインターフェースを使うコードは各XrossPeerフォルダ直下に置いておいて、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Peered直下にはそれぞれのライブラリを使用するコード(型や引数などのインターフェースは共通で、実装のみを変えたもの)を用意する。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>このPeeredフォルダの内容は自動的にはコピーされないので、局所的なライブラリとか、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>.Net3.5 ~ CoreCLR間で互換性のないメソッドとか記法を各Peered内に隠蔽することができる。</b></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>こいつを開発してる動機はまさにこの<b>Peeredフォルダ</b>にあって、今後Unityのバージョンが上がろうが、動作するプラットフォームとしてのクライアント/サーバの差は絶対に出るし、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>例えばJsonUtilityが良い例なんだけど、C++実装されてるアレらを超えるクライアント側ライブラリって中々無いわけで。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>それを綺麗に分ける方法をずっと探していて、これを作った、という感じ。</p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b>コードのミラーリング機構あり</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>単に、クライアント -&gt; サーバ、　サーバ -&gt; クライアントへと、Peeredフォルダは除外した上でXrossPeerフォルダの中のコードを上書きする、という機構。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ただし、これだとどっちのコードをいじっているのかわからなくなるので、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>差分検出機とコードの末尾に強制的に.client.csとか.server.csって付くように調整してある。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>XrossPeer内に置いた全ての.csコードの拡張子は、そのPeerの属する名前に拡張子が改造される。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>この機能はUnityのエディタ機能拡張として実装した。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>Peerの抽象化</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ここまで散々Peer = クライアント/サーバの二軸みたいに書いていたが、別に「UnityのAssets以下にあるものと、その他のもの」くらいの最大的な区別しかなく、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ざっくり言うと</p>
+<p class="p3"><span class="Apple-tab-span">	</span>UnityのAssetsの中にあるPeer A と、フォルダBに展開されているPeer B、フォルダCに展開されているPeer C、、 みたいな拡張も可能にしている。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>まあ普通複数のPeerを同時に動かすことは無いと思うんだけど、例えばバーチャルクライアントみたいなものをでっち上げたい時に役に立つ。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>上の例だとA, B, Cっていう合計3つのPeerがあるが、このうちAを実際にプレイするクライアント、Bを僚機、Cをサーバ、みたいに振り分けることも可能なようにしてある。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>サーバの起動コントロール</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>自分が作っているものの都合上、次のフックポイントがあると便利だった。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・特定のPeerのコードのコンパイルを行う(コントロールできるのはUnity外のみ、ようはCoreCLR系。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・特定のPeerのコンパイルの成否をどっかに吐く(単に書き出すだけになると思うが</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・特定のPeerのプロセスを起動</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・特定のPeerのプロセスを再起動</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>このへんはAssetStoreに出して通った健全？な手法があるんで俺そういうのやっててよかったなあと思った。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>依存してるもの</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>モロにCoreCLRのexeに依存しちゃってるので、その辺を整理整頓する方法を考え中。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>同梱するわけにはいかねえべえ、、、</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>コード</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ここ。 そのうちアップされる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><b>XrossPeer</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/XrossPeer">https://github.com/sassembla/XrossPeer</a></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>試験中の奴はRolePlayingChatっていうのに含まれている。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><b>RolePlayingChat</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/RolePlayingChat">https://github.com/sassembla/RolePlayingChat</a></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+</body>
+</html>
