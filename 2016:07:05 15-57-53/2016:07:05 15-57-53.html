@@ -47,38 +47,58 @@
 <p class="p2"><br></p>
 <p class="p4">UnityProjectFolder/</p>
 <p class="p4"><b><span class="Apple-tab-span">	</span>Assets/</b></p>
-<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>いろいろクライアント専用コード</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>いろいろクライアント専用コードを置くことができる。当たり前。</p>
 <p class="p5"><b></b><br></p>
 <p class="p4"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>XrossPeer/</b></p>
-<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>クライアントとサーバで共有されているコード</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>このへんに、クライアントとサーバで共有されているコードを置くことができる。</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>拡張子は自動的に~.client.cs になる。</p>
 <p class="p5"><br></p>
-<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><b>Peered/</b></p>
-<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>このPeer=クライアントでだけ改変が必要なコード</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><b>XrossPeer_Peered/</b></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>このPeer=クライアントでだけ改変が必要なコードを置く場所。</p>
 <p class="p5"><br></p>
-<p class="p4"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Editor/</b></p>
-<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>この機構を動かすためのコード。</p>
-<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>主にコードの複製とサーバ側のコードのコンパイル、起動、再起動とかをハンドラの形で提供する。</p>
+<p class="p4"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>XrossPeer_Util/</b></p>
+<p class="p4"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>XrossPeerUtilility.cs</b></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ログを吐いたりするための、全環境共通のロガー。</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>どのPeerでも使えるようになってないといけない、あんまり頑張らないロガー。</p>
+<p class="p5"><br></p>
+<p class="p4"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Editor/</b></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>この機構を動かすためのコードを置く場所。XrossPeerの提供者 ＝ 自分が書いたコードしか置かれない前提の場所。</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>PeerがUnityのAssets以下にあるときにしか評価されないので、Unity以外のPeerへは出力されない。</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>主にコードの複製とサーバ側のコードのコンパイル、起動、再起動とかをハンドラの形で提供する。</p>
 <p class="p5"><br></p>
 <p class="p4"><b><span class="Apple-tab-span">	</span>ServerContext/</b></p>
-<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>いろいろサーバ専用コード</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>いろいろサーバPeerで動作するコードを置く場所。Assetsフォルダと同じ階層で、つまりUnityのコンパイルする対象外。</p>
 <p class="p5"><b></b><br></p>
 <p class="p4"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>XrossPeer/</b><span class="Apple-tab-span">	</span></p>
-<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>クライアントとサーバで共有されているコード</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>このへんに、クライアントとサーバで共有されているコード</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>拡張子は自動的に~.servercontext.cs とかになる。</p>
 <p class="p5"><br></p>
-<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><b>Peered</b></p>
-<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>このPeer=サーバでだけ改変が必要なコード</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><b>XrossPeer_Peered/</b></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>このPeer=クライアントでだけ改変が必要なコード</p>
+<p class="p5"><br></p>
+<p class="p4"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>XrossPeer_Util/</b></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><b>XrossPeerUtilility.cs</b></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Assets/XrossPeer/XrossPeer_Utilフォルダ内と同じもの。</p>
+<p class="p5"><br></p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>この機構のためにXrossPeerというAssetを開発して使っている。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>Assets/XrossPeerフォルダにはクライアント側の共有コードが置かれ、Peeredフォルダには「クライアントとサーバで異なるライブラリを使ったりする場合の差異のあるコード」を置く想定。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Assets/XrossPeerフォルダにはクライアント側の共有コードが置かれ、<b>XrossPeer_Peered</b>フォルダには「クライアントとサーバで異なるライブラリを使ったりする場合の差異のあるコード」を置く想定。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>他に、全Peerで共通のUtilとしてログ機能とかを提供する。共通で出て欲しいログとかを書くとしたらこの辺になりそう。環境ごとのログ実装の差し替えも可能。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>XrossPeer_Peeredについて</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>何を置くのを想定してるかというと、</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>具体的には、例えばJSONのエンコード/デコードについて、</p>
 <p class="p3"><span class="Apple-tab-span">	</span>・クライアントではUnityのJsonUtilityを使う</p>
 <p class="p3"><span class="Apple-tab-span">	</span>・サーバではJson.netを使う</p>
-<p class="p3"><span class="Apple-tab-span">	</span>などの場合に、共通のインターフェースを使うコードは各XrossPeerフォルダ直下に置いておいて、</p>
-<p class="p3"><span class="Apple-tab-span">	</span>Peered直下にはそれぞれのライブラリを使用するコード(型や引数などのインターフェースは共通で、実装のみを変えたもの)を用意する。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>などの場合に、共通のインターフェースを使うコードは各<b>XrossPeer_Peered</b>フォルダ直下に置いておいて、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>XrossPeer_Peered</b>直下にはそれぞれのライブラリを使用するコード(型や引数などのインターフェースは共通で、実装のみを変えたもの)を用意する。</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
-<p class="p3"><span class="Apple-tab-span">	</span>このPeeredフォルダの内容は自動的にはコピーされないので、局所的なライブラリとか、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>この<b>XrossPeer_Peered</b>フォルダの内容は自動的にはコピーされないので、局所的なライブラリとか、</p>
 <p class="p3"><span class="Apple-tab-span">	</span><b>.Net3.5 ~ CoreCLR間で互換性のないメソッドとか記法を各Peered内に隠蔽することができる。</b></p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p3"><span class="Apple-tab-span">	</span>こいつを開発してる動機はまさにこの<b>Peeredフォルダ</b>にあって、今後Unityのバージョンが上がろうが、動作するプラットフォームとしてのクライアント/サーバの差は絶対に出るし、</p>
@@ -119,6 +139,14 @@
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>依存してるもの</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>CoreCLR環境が整ってないと、CoreCLR側がコンパイルできない。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>MacだろうとWinだろうと一瞬で環境が用意できる。だいたい3分もあればマジでできる。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>参考：</p>
+<p class="p3"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>「.NET Coreとツール類の今」</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://docs.com/bonprosoft/4626/net-core">https://docs.com/bonprosoft/4626/net-core</a></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>モロにCoreCLRのexeに依存しちゃってるので、その辺を整理整頓する方法を考え中。</p>
 <p class="p3"><span class="Apple-tab-span">	</span>同梱するわけにはいかねえべえ、、、</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
