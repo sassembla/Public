@@ -1,0 +1,180 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1404.47">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #ebebeb}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    span.s1 {font-variant-ligatures: no-common-ligatures}
+    span.s2 {font: 12.0px Helvetica}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>OpenSourceになってるCoherentUI1.xをとりあえずUnity5系で動かす</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>2系はなんか欲しいものから違う気がしたので、オープンソースになってる1.xについて、view-touchインターフェースの部分だけ追おうと思った。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>環境は</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Mac OS X 10.11.15</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>iOS 9.3.2</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Unity 5.4.0 f1</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>欲しいのは</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・任意のViewをテクスチャに変換する機構</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・テクスチャに対してタッチとかをイベントとして伝達する機構</p>
+<p class="p3"><span class="Apple-tab-span">	</span>の2つ。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>結論から言うと動かせたんだけど「これじゃねーな」って感じがしたんでCoherentからは撤退する。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>インストール</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Unityに入れて動かす前に、pythonでビルドする必要がある。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Macで実行するとiOS版、Winで実行するとAndroid版が作られるみたいだ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>超過渡期の産物の匂い。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、swigがpcreに依存してたりする。入ってねーっつーの。</p>
+<p class="p2"><br></p>
+<p class="p4"><span class="s1">### SWIG error output:</span></p>
+<p class="p4"><span class="s1">dyld: Library not loaded: /opt/local/lib/libpcre.1.dylib</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">  </span>Referenced from: /Users/tartetatin/Desktop/CoherentUIMobileOpenSource/Tools/DotNETWrapperGenerator/swig-2.0.9/swig-ios</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">  </span>Reason: image not found</span></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="s1">brew install pcreで、適当に入れて動かしてみる。</span></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>で、下記行あたりでひっかかる。</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>subprocess.check_call(['/Applications/Xamarin Studio.app/Contents/MacOS/mdtool',</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">                 </span>'build', projectPath, '-c:Release'])</span></p>
+<p class="p2"><span class="s1"><span class="Apple-tab-span">	</span></span></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>Xamarin要るんかワレ。ほお、、、</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>で、本当に使っているのかなこれ？っていう。一応避けて(コメントアウトして)ビルドすると、Swig自体は動いたようで、ビルド成功してライブラリいっぱい吐いていた。</span></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>なるほど。スキップしちゃったんだけどこれmdtoolないと正しく動かない気がするな。</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p3"><span class="s1"><b>いろんな行の意味を追う</b></span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">    </span>subprocess.check_call(</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span>['python', 'Src/DotNet/MobileNet/ReplaceHandleRefForIOS.py', '--base', '.'])</span></p>
+<p class="p2"><span class="s1"><span class="Apple-tab-span">	</span></span></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>参照の書き換えをやってるみたいな。C＃コードを直にいじってるのかな。</span></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>いろいろ置換してるっぽい。</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>subprocess.check_call(['/Applications/Xamarin Studio.app/Contents/MacOS/mdtool',</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">                 </span>'build', projectPath, '-c:Release'])</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>ここでは、projectPathに置いてあるC#コードをビルドしてるっぽい。なんでだろって思ったけど置換まわりと関係がありそう。</span></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>なるほどな～～Xamarinのmdtool依存決定的っぽい。</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>Xamarin入れた上でmdtoolを使って複数のコードからdllが作れた。</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>そのdllにいろいろ含まれてて、それを使ってUnity側のビルドが通るとかを確認した。</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>で、このdllを作る工程を無視したい。</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>projectPathは、</span></p>
+<p class="p4"><span class="s1">Src/DotNet/MobileNet/CoherentUIMobileNetIOS.sln</span></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>なので、まあその中身を使えばいいのです。</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"><span class="Apple-tab-span">	</span></span></p>
+<p class="p3"><span class="s1"><b>実機で動かす</b></span></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>動かせると思うところまで来た。組み合わせ問題(ライブラリと.aオブジェクトの対応問題)が各アーキテクチャで出るので、ビルドするところも自動化しておかないとな～みたいな感じになる。</span></p>
+<p class="p2"><span class="s1"><span class="Apple-tab-span">	</span></span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p3"><span class="s1"><b>問題</b></span></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>__ZN13ScreenManager12SetupDisplayEi</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>Simulatorの場合、ビルド時にぜったいうまく動いてない感がある。</span></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>実行時にこいつがないって言われる。</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>Deviceの場合、そもそもビルドに失敗する。</span></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>なんの条件があるんだか、、、</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>Deviceでビルド通したほうがいい気がする。</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p3"><span class="s1"><b>デバッグビルドでDevice</b></span></p>
+<p class="p3"><span class="s1"><b><span class="Apple-tab-span">	</span>「ビルドの度に元プロジェクトを消す」</b></span></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>ってやったらうまくいった。謎い。再現しよう。</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p3"><span class="s1"><b>サンプルについて</b></span></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>MobileInputは、viewをカメラ前に展開して、それがオブジェクトへのインプットを制御するっていう系統。</span></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>HTMLで作ったUIをカメラ前面に展開して、その状態をブラウザが保持、イベント伝達のオン/オフ切り替えと、実際にオン &amp;&amp; ビュー上のオブジェとUIの重なってる領域をタップしたらオブジェが動く、とかをやってのけている。</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>カメラに張り付いているビューは、CoherentUIView.csをカメラインスタンスにくっつけたもの。こっちにはInput要素の扱いがあり、</span></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>Take All | Take None | Transparent の三択。</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>Take All だと吸収して貫通させない、 Transparentだと吸収せず通過させる、みたいな感じかな。</span></p>
+<p class="p2"><span class="s1"><span class="Apple-tab-span">	</span></span></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>カメラに張り付くんじゃなくてオブジェクトに張り付いて欲しいんだが。</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>で、もう一個のサンプル <b>MobileSurface.unity </b>のほうでは、回転するペラ1のテクスチャにブラウザの画像を出していた。</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>MobuleSurfaceView.csを起点にして、テクスチャをサーフェスに貼るってことで動作してるみたいだ。</span></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>内部で使われてるのはMobileSurfaceView。</span></p>
+<p class="p2"><span class="s1"><span class="Apple-tab-span">	</span></span></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>で、なんでかレンダラの参照が切れてて、それを指定しないといけない。動く組み合わせを見つけた。</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>このスクリプトに対して、</span></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>GUIにしたかったんだけど、表示されるだけでインプットを受け付けてくれない。ので、前出のCoherentUIViewが物体に貼り付けられればそれで良い感じ。</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p3"><span class="s1"><b>クラス</b><span class="Apple-tab-span">	</span></span></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>CoherentUIView.cs</span></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>と</span></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>MobileSurfaceView.cs</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>の二択になっていて、前者はそのままカメラを探して乗っ取るみたいなことをしてる。</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p3"><span class="s1"><b>結果</b></span></p>
+<p class="p5"><span class="s2"><span class="Apple-tab-span">	</span>GUI</span>表示しつつ適当なキューブ<span class="s2">(</span>回転する<span class="s2">)</span>の上にタッチ反応する<span class="s2">WebView</span>置けた。</p>
+<p class="p6"><span class="Apple-tab-span">	</span><img src="IMG_1576.PNG" alt="IMG_1576.PNG"></p>
+<p class="p3"><span class="s1"><b>依存分解</b></span></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>欲しいものは、</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>これ、依存を分解していくと、</span></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>・dll</span></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>・iOS用の.aファイルに依存(ここは結局独自のWebView実装を持ってないみたい。各プラットフォームのものを使っている?)</span></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>・mmファイル一個をPluginに置くことでUnityとWebViewをリンクさせてる</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>とかなんで、dllはまあC#のコードに分解できるとして、そっから先だな～～ .aファイルの負ってる役割の部分はこれこのままやるにはすごく辛い予感。</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p3"><span class="s1"><b>一応代替案がみつかったので動かしてみる</b></span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>CEF3とそのMono用のラッパー。</span></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>https://github.com/cefsharp/CefSharp</span></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>https://bitbucket.org/xilium/xilium.cefglue/wiki/Home</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>ぶっちゃけChromium動かせるならそのほうが良い。</span></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>ポイントとタッチはどうやってるかわかったんで、まあ積めば良いよねっていう。</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p3"><span class="s1"><b>資料</b></span></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>http://klabgames.tech.blog.jp.klab.com/archives/1051659722.html</span></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>http://www.insaneunity.com/blog/2014/02/14/more-on-wtw-ui-cef3-integration/</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p3"><span class="s1"><b>ほか</b></span></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>https://github.com/jdierckx/UnityBerkeliumPlugin</span></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>https://github.com/sepehr-laal/UnityChromiumPlugin</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+</body>
+</html>
