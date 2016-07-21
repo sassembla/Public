@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1404.47">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Sans'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>QUICについていろいろまとめ</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>勉強になる部分はあるのか。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>そもそもUDPで通信するのを積んでみたいよね～っていう感じで。</p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>資料</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://docs.google.com/presentation/d/15e1bLKYeN56GL1oTJSF9OZiUsI-rcxisLo9dEyDkWQs/edit#slide=id.gc34025b9a_0_0">https://docs.google.com/presentation/d/15e1bLKYeN56GL1oTJSF9OZiUsI-rcxisLo9dEyDkWQs/edit#slide=id.gc34025b9a_0_0</a></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>QUICって何</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>multiplexedな接続をUDP上に構築するプロトコル</p>
+<p class="p3"><span class="Apple-tab-span">	</span>encあり</p>
+<p class="p3"><span class="Apple-tab-span">	</span>低レイテンシ</p>
+<p class="p3"><span class="Apple-tab-span">	</span>XOR FECでパケロス対策</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>比較対象</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>TCP + TLSよりGood。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>どのへんが？</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・接続</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>0 ~ 1RTT</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・Streaming-level and Connection-level flow contrrol</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>？ そういうパラメータ内部に持って頑張ってますよってだけの話なのかな。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・FEC recovery</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>パケロス対応</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Forward error correction<span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://d.hatena.ne.jp/ASnoKaze/20160301/1456761476">http://d.hatena.ne.jp/ASnoKaze/20160301/1456761476</a></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・Multipath</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>MultipatTCPと同じような、複数の接続を持って冗長化とかその辺かな、、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://en.wikipedia.org/wiki/Multipath_TCP">https://en.wikipedia.org/wiki/Multipath_TCP</a></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://www.vunity.com/quic-multipath/">https://www.vunity.com/quic-multipath/</a></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>どこからモチベーション感じるか</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>RTTが少ない、一つの接続内でのデータフローを最適化できそう(このへんはHTTP/2での知見)みたいなところか。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>パーツを見てて知りたいな～と思うところとしては、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・どうやって順番保護してるんだろ</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・Multipathどうやってるんだろ(複数接続の連携は何かあるのかな？ っていうかこれがmultiplexedの内容か。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>このへんか。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Chromiumのコード読むチャンスがちょっとあるんでやってみよう。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>あと読むならこれ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/google/proto-quic">https://github.com/google/proto-quic</a></p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>linux上で動かしてやってみるかな。</p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+</body>
+</html>
