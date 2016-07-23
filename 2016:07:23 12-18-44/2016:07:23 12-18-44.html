@@ -1,0 +1,132 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1404.47">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Sans'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>UnityとCoreCLRのはなし</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Unibook振り返り＋夏のLT大会！</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://eventdots.jp/event/593863">http://eventdots.jp/event/593863</a></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>LTで申し込んだと思ってたら違ってた。しまった、、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>隙があったのでやって良いとのことなんで代打。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>プレゼンモードはこちら</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://dl.dropboxusercontent.com/u/36583594/outsource/UnityAndCoreCLR/index.html">https://dl.dropboxusercontent.com/u/36583594/outsource/UnityAndCoreCLR/index.html</a></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>DotNet Core</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>C#の<b>最新</b>バージョンがMacとかLinuxとかWindowsで動く</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>最新？</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Unityで使ってるC#はDotNet3.5をMonoが実装したやつをUnityがさらに独自のセンスでチョイスしたやつ</p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>DotNet 3.5 Unity ver</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・mscorlib.dllっていうごった煮dllで動いてる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Macだと、実体はUnity.appのフォルダの中のこのへんのどれか</p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・シングルスレッドで動かしたり、IEnumeratorでコルーチン使って動かす分にはまー問題ない</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・反面、例えば通信とかでマルチスレッドにしたりとかメインスレッドに合流したりとかが面倒</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>頑張って実装した猛者とかもいる</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Spicy Pixel Concurrency Kit <a href="https://www.assetstore.unity3d.com/en/#!/content/3586">https://www.assetstore.unity3d.com/en/#!/content/3586</a></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>UniRx <a href="https://www.assetstore.unity3d.com/jp/#!/content/17276">https://www.assetstore.unity3d.com/jp/#!/content/17276</a></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・メインスレッドで動作することを完全に放棄してマルチスレッドの化け物になった猛者とかもいる(それでも動く</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>AnotherThread <a href="https://github.com/unity3d-jp/AnotherThread">https://github.com/unity3d-jp/AnotherThread</a></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>対して、DotNet Core は</p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>DotNet Core</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></b><a href="https://github.com/dotnet/coreclr">https://github.com/dotnet/coreclr</a></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・言語的にはC#の最先端、DotNet 4.6</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・mscorlibの代わりにcorefxっていう<b>完全新作ライブラリ群</b>を使う。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>どのくらい完全新作かというと一部C#2.0とかで足されたものを抹消して全プラットフォームごとに別実装対応 + あわせてインターフェースかわるくらい新作</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・Taskっつーのがあって便利</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・いろんなプラットフォームでコンパイルできる</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>例えばどんな差があるの</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Socket(TCPとかを扱う低レベルAPI)の切断用のAPIが 10個以上 -&gt; 1個 になったりした。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>かっこいい、、、、！！！</p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b>UnityもDotNet Foundation に入ったんで、そのうちCoreCLRとかベースで動くようになる? のか？？</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Unite Tokyo会場で聞いた時にはまずC#5.0、その後C#6..　みたいに対応するよって言ってた。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>待ってればいいんだよな～～っていう。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>今できることは？</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>DotNet Coreが出たことで、クライアントもサーバもC#で書ける</p>
+<p class="p3"><span class="Apple-tab-span">	</span>→やってみたい、、、やってみたくない、、、？</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>できたよ？</b></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>リアルタイム対戦ゲーム</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>1 vs 1<span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>1台 500円/月レベルの信じられない低スペックサーバで<b>数百人まで同時接続</b>可能</p>
+<p class="p3"><span class="Apple-tab-span">	</span>全部C#</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>クライアント：Unity</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>サーバ：DotNet Core 1.0</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>全部C#の利点って？</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>例えばゲームロジックをクライアントとサーバで共有できる</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Unity独自のAPIを使わない前提</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>自分で簡単な判定ロジック作って使ったりとか</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>データ構造の定義を完全共有できる</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>クライアント -&gt; サーバへとデータ送るじゃないですか。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>その時のデータ形式、例えば</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><b>クライアント = Unity内で、クラス -&gt; インスタンス -&gt; JSON とか変形</b>するじゃないですか。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>受け取った側(サーバ)でも<span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><b>サーバ = DotNet Core内で、JSON -&gt; インスタンス -&gt; クラスとか変形</b>したいですよね。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ようは<b>クラス定義の.cs</b>をクライアント &lt;-&gt; サーバで貫通させたいよねっていう。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>これできると楽です。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>速い</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ぶっちゃけソケット周りの動作に関してはWindowsで動かすよりLinux/Mac上で動かしたほうがえらい高速な気がしている。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>動作速度速い。かつ、恐ろしい環境でもかなり安定して動作する。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>(もう3~4ヶ月動かしてるけど変なエラーに出会えない)</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>っていうか</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>1つのまともな言語でサーバとクライアント両方書けて(かたっぽはまだDotNet3.5っていう古代魚だが)</p>
+<p class="p3"><span class="Apple-tab-span">	</span>コンパイルがあってMacでもLinuxでもWindowsでもネイティブ吐き出しができて、かなり良い速度で動かせる言語+環境になってしまったのでは....？</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>調整中で公開できるもの</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>XrossPeerっていう、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>クライアント：Unity</p>
+<p class="p3"><span class="Apple-tab-span">	</span>サーバ：DotNet Core 1.0</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>とかを可能にするツール。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>checked it out!</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><b>１つのプロジェクト内でCoreCLRのビルドとUnityのビルドを共存させる</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://sassembla.github.io/Public/2016:07:05%2015-57-53/2016:07:05%2015-57-53.html">http://sassembla.github.io/Public/2016:07:05%2015-57-53/2016:07:05%2015-57-53.html</a></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><b>XrossPeer</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/XrossPeer">https://github.com/sassembla/XrossPeer</a></p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+</body>
+</html>
