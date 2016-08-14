@@ -10,6 +10,9 @@
     p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Sans'}
     p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; min-height: 18.0px}
     p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; background-color: #ebebeb}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; background-color: #ebebeb; min-height: 18.0px}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; background-color: #d6d6d6}
     span.s1 {font: 12.0px Helvetica}
     span.Apple-tab-span {white-space:pre}
   </style>
@@ -39,6 +42,73 @@
 <p class="p3"><b><span class="Apple-tab-span">	</span>Miyamasu</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/Miyamasu">https://github.com/sassembla/Miyamasu</a></p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>次のようなコードで非同期の結果を待てる</b></p>
+<p class="p2"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>[MTest] public void SampleSuccessAsync () {</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>var done = false;</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>/*</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>the sample case which method own their thread and done with asynchronously.</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>*/</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>{</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>var endPoint = new IPEndPoint(IPAddress.Parse("0.0.0.0"), 80);</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>var socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>var connectArgs = new SocketAsyncEventArgs();</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>connectArgs.AcceptSocket = socket;</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>connectArgs.RemoteEndPoint = endPoint;</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>connectArgs.Completed += new EventHandler&lt;SocketAsyncEventArgs&gt;(</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>(obj, args) =&gt; {</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>// failed or succeded, done will be true.</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>done = true;</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>);</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>// next Async operation will be done really soon in async.</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>socket.ConnectAsync(connectArgs);</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">        </span>/*</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>wait while 1st parameter "Func&lt;bool&gt; isCompleted" returns true.</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>in this case, "done" flag become true when async operation is done.</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>2nd parameter "1" means waiting 1 seconds.</p>
+<p class="p4"><span class="Apple-converted-space">       <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span> </span>*/<span class="Apple-converted-space"> </span></p>
+<p class="p6"><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">      </span><b>WaitUntil</b>(</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>() =&gt; done,<span class="Apple-converted-space"> </span></p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>1</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>);</p>
+<p class="p4"><span class="Apple-tab-span">	</span>}</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>WaitUntil(Action&lt;bool&gt; waitFor, int waitSeconds)</b>行が面白いところで、この行で条件付きの待ちを行っている。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>この時の条件は、<b>doneがtrueになるまで1秒間待つ</b>、というもの。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>MainThreadでしか実行できない要素をテスト</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>こんな感じに書ける。</p>
+<p class="p4"><span class="Apple-tab-span">	</span>[MTest] public void SampleSuccessAsyncOnMainThread () {</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>var dataPath = string.Empty;</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>/*</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>sometimes we should test the method which can only run in Unity's MainThread.</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>this async operation will be running in Unity's Main Thread.</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>*/</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Action onMainThread = () =&gt; {</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>dataPath = UnityEngine.Application.dataPath;// this code is only available Unity's MainThread.</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>};</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>RunOnMainThread(onMainThread);</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>/*</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>wait until "dataPath" is not null or empty.</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>*/<span class="Apple-converted-space"> </span></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>WaitUntil(() =&gt; !string.IsNullOrEmpty(dataPath), 1);</p>
+<p class="p4"><span class="Apple-tab-span">	</span>}</p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>RunOnMainThread(Action)</b>っていうメソッドで、特定のコードを特定の順でほぼMainThread(実際にはUnityEditorのupdate)で実行できる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>上のテストは、Action onMainThreadをMainThreadで実行し、その実行が終わるまでの間、WaitUntilで待つ。</p>
+<p class="p2"><b></b><br></p>
 <p class="p2"><b></b><br></p>
 <p class="p3"><b>画像は最近宮益坂にできたコメダの宮益坂 ミックスサンド</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>名前に悩んでたらちょうどこれ食ってたのでMiyamasuにした。</p>

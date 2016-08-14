@@ -1,6 +1,6 @@
 {\rtf1\ansi\ansicpg932\cocoartf1404\cocoasubrtf470
 {\fonttbl\f0\fnil\fcharset128 HiraginoSans-W4;\f1\fswiss\fcharset0 Helvetica;}
-{\colortbl;\red255\green255\blue255;}
+{\colortbl;\red255\green255\blue255;\red230\green230\blue230;\red205\green205\blue205;}
 \paperw11900\paperh16840\margl1440\margr1440\vieww23220\viewh14260\viewkind0
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
 
@@ -32,13 +32,94 @@
 	\
 
 \b 	Miyamasu\
-\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
 
-\b0 \cf0 		{\field{\*\fldinst{HYPERLINK "https://github.com/sassembla/Miyamasu"}}{\fldrslt https://github.com/sassembla/Miyamasu}}\
+\b0 		{\field{\*\fldinst{HYPERLINK "https://github.com/sassembla/Miyamasu"}}{\fldrslt https://github.com/sassembla/Miyamasu}}\
 	\
-\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\
 
-\b \cf0 \
+\b \'8e\'9f\'82\'cc\'82\'e6\'82\'a4\'82\'c8\'83\'52\'81\'5b\'83\'68\'82\'c5\'94\'f1\'93\'af\'8a\'fa\'82\'cc\'8c\'8b\'89\'ca\'82\'f0\'91\'d2\'82\'c4\'82\'e9
+\b0 \
+\
+\cb2 	[MTest] public void SampleSuccessAsync () \{\
+		var done = false;\
+\
+		/*\
+			the sample case which method own their thread and done with asynchronously.\
+		*/\
+		\{\
+			var endPoint = new IPEndPoint(IPAddress.Parse("0.0.0.0"), 80);\
+\
+			var socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);\
+			var connectArgs = new SocketAsyncEventArgs();\
+			connectArgs.AcceptSocket = socket;\
+			connectArgs.RemoteEndPoint = endPoint;\
+			connectArgs.Completed += new EventHandler<SocketAsyncEventArgs>(\
+				(obj, args) => \{\
+					// failed or succeded, done will be true.\
+					done = true;\
+				\}\
+			);\
+\
+			// next Async operation will be done really soon in async.\
+			socket.ConnectAsync(connectArgs);\
+		\}\
+\
+	        /*\
+			wait while 1st parameter "Func<bool> isCompleted" returns true.\
+			in this case, "done" flag become true when async operation is done.\
+\
+			2nd parameter "1" means waiting 1 seconds.\
+       		 */ \
+\cb3 	       
+\b WaitUntil
+\b0 (\
+			() => done, \
+			1\
+		);\
+\cb2 	\}\
+\cb1 	\
+
+\b 	WaitUntil(Action<bool> waitFor, int waitSeconds)
+\b0 \'8d\'73\'82\'aa\'96\'ca\'94\'92\'82\'a2\'82\'c6\'82\'b1\'82\'eb\'82\'c5\'81\'41\'82\'b1\'82\'cc\'8d\'73\'82\'c5\'8f\'f0\'8c\'8f\'95\'74\'82\'ab\'82\'cc\'91\'d2\'82\'bf\'82\'f0\'8d\'73\'82\'c1\'82\'c4\'82\'a2\'82\'e9\'81\'42\
+	\'82\'b1\'82\'cc\'8e\'9e\'82\'cc\'8f\'f0\'8c\'8f\'82\'cd\'81\'41
+\b done\'82\'aatrue\'82\'c9\'82\'c8\'82\'e9\'82\'dc\'82\'c51\'95\'62\'8a\'d4\'91\'d2\'82\'c2
+\b0 \'81\'41\'82\'c6\'82\'a2\'82\'a4\'82\'e0\'82\'cc\'81\'42\
+\
+\
+
+\b MainThread\'82\'c5\'82\'b5\'82\'a9\'8e\'c0\'8d\'73\'82\'c5\'82\'ab\'82\'c8\'82\'a2\'97\'76\'91\'66\'82\'f0\'83\'65\'83\'58\'83\'67\
+
+\b0 	\'82\'b1\'82\'f1\'82\'c8\'8a\'b4\'82\'b6\'82\'c9\'8f\'91\'82\'af\'82\'e9\'81\'42
+\b \
+
+\b0 \cb2 	[MTest] public void SampleSuccessAsyncOnMainThread () \{\
+		var dataPath = string.Empty;\
+\
+		/*\
+			sometimes we should test the method which can only run in Unity's MainThread.\
+			this async operation will be running in Unity's Main Thread.\
+		*/\
+		Action onMainThread = () => \{\
+			dataPath = UnityEngine.Application.dataPath;// this code is only available Unity's MainThread.\
+		\};\
+\
+		RunOnMainThread(onMainThread);\
+\
+		/*\
+			wait until "dataPath" is not null or empty.\
+		*/ \
+		WaitUntil(() => !string.IsNullOrEmpty(dataPath), 1);\
+	\}
+\b \
+
+\b0 \cb1 \
+
+\b 	RunOnMainThread(Action)
+\b0 \'82\'c1\'82\'c4\'82\'a2\'82\'a4\'83\'81\'83\'5c\'83\'62\'83\'68\'82\'c5\'81\'41\'93\'c1\'92\'e8\'82\'cc\'83\'52\'81\'5b\'83\'68\'82\'f0\'93\'c1\'92\'e8\'82\'cc\'8f\'87\'82\'c5\'82\'d9\'82\'daMainThread(\'8e\'c0\'8d\'db\'82\'c9\'82\'cdUnityEditor\'82\'ccupdate)\'82\'c5\'8e\'c0\'8d\'73\'82\'c5\'82\'ab\'82\'e9\'81\'42\
+	\'8f\'e3\'82\'cc\'83\'65\'83\'58\'83\'67\'82\'cd\'81\'41Action onMainThread\'82\'f0MainThread\'82\'c5\'8e\'c0\'8d\'73\'82\'b5\'81\'41\'82\'bb\'82\'cc\'8e\'c0\'8d\'73\'82\'aa\'8f\'49\'82\'ed\'82\'e9\'82\'dc\'82\'c5\'82\'cc\'8a\'d4\'81\'41WaitUntil\'82\'c5\'91\'d2\'82\'c2\'81\'42\
+
+\b \
+\
 \'89\'e6\'91\'9c\'82\'cd\'8d\'c5\'8b\'df\'8b\'7b\'89\'76\'8d\'e2\'82\'c9\'82\'c5\'82\'ab\'82\'bd\'83\'52\'83\'81\'83\'5f\'82\'cc\'8b\'7b\'89\'76\'8d\'e2 \'83\'7e\'83\'62\'83\'4e\'83\'58\'83\'54\'83\'93\'83\'68\
 
 \b0 	\'96\'bc\'91\'4f\'82\'c9\'94\'59\'82\'f1\'82\'c5\'82\'bd\'82\'e7\'82\'bf\'82\'e5\'82\'a4\'82\'c7\'82\'b1\'82\'ea\'90\'48\'82\'c1\'82\'c4\'82\'bd\'82\'cc\'82\'c5Miyamasu\'82\'c9\'82\'b5\'82\'bd\'81\'42
@@ -47,9 +128,8 @@
 \f1\b0 {{\NeXTGraphic IMG_1646.JPG \width20160 \height15120
 }¬}
 \f0\b \
-\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
 
-\b0 \cf0 \
+\b0 \
 	\'94\'fc\'96\'a1\'82\'b5\'82\'a2\'82\'aa\'94\'6e\'8e\'ad\'82\'c5\'82\'a9\'82\'a2\'81\'42\
 	\'8e\'ca\'82\'c1\'82\'c4\'82\'e9\'95\'94\'95\'aa\'82\'c5\'91\'53\'91\'cc\'82\'cc\'94\'bc\'95\'aa\'82\'ad\'82\'e7\'82\'a2\'81\'42\
 \
