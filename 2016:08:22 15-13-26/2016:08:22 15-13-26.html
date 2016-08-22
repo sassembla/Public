@@ -31,16 +31,16 @@
 <p class="p3"><span class="s1"><b>mapping</b></span></p>
 <p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>こんな書き方ができる。</span></p>
 <p class="p4"><span class="s1">var buildMap = new AssetBundleBuild[2];</span></p>
-<p class="p2"><span class="s1"></span><br></p>
+<p class="p5"><span class="s1"></span><br></p>
 <p class="p4"><span class="s1">// set bundle name and contained contents to map for No 0.</span></p>
 <p class="p4"><span class="s1">{</span></p>
 <p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>var bundle_0AssetPaths = new string[1];</span></p>
 <p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>bundle_0AssetPaths[0] = "Assets/scr1.png";</span></p>
-<p class="p2"><span class="s1"></span><br></p>
+<p class="p5"><span class="s1"></span><br></p>
 <p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>buildMap[0].assetBundleName = "bundle_0.assetbundle";</span></p>
 <p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>buildMap[0].assetNames = bundle_0AssetPaths;</span></p>
 <p class="p4"><span class="s1">}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
+<p class="p5"><span class="s1"></span><br></p>
 <p class="p4"><span class="s1">// No 1.</span></p>
 <p class="p4"><span class="s1">{</span></p>
 <p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>var bundle_1AssetPaths = new string[1];</span></p>
@@ -49,7 +49,7 @@
 <p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>buildMap[1].assetBundleName = "bundle_1.assetbundle";</span></p>
 <p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>buildMap[1].assetNames = bundle_1AssetPaths;</span></p>
 <p class="p4"><span class="s1">}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
+<p class="p5"><span class="s1"></span><br></p>
 <p class="p4"><span class="s1">BuildPipeline.BuildAssetBundles("somewhere", buildMap, BuildAssetBundleOptions.None, BuildTarget.iOS);</span></p>
 <p class="p2"><span class="s1"></span><br></p>
 <p class="p2"><span class="s1"></span><br></p>
@@ -63,16 +63,16 @@
 <p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>依存関係とかはどうすれば良いんだろう？ -&gt; 指定して実行してみた</span></p>
 <p class="p2"><span class="s1"></span><br></p>
 <p class="p4"><span class="s1">var buildMap = new AssetBundleBuild[3];</span></p>
-<p class="p2"><span class="s1"></span><br></p>
+<p class="p5"><span class="s1"></span><br></p>
 <p class="p4"><span class="s1">// set bundle name and contained contents to map for No 0.</span></p>
 <p class="p4"><span class="s1">{</span></p>
 <p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>var bundle_0AssetPaths = new string[1];</span></p>
 <p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>bundle_0AssetPaths[0] = </span><span class="s2">"Assets/scr1.png"</span><span class="s1">;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
+<p class="p5"><span class="s1"></span><br></p>
 <p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>buildMap[0].assetBundleName = "bundle_0.assetbundle";</span></p>
 <p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>buildMap[0].assetNames = bundle_0AssetPaths;</span></p>
 <p class="p4"><span class="s1">}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
+<p class="p5"><span class="s1"></span><br></p>
 <p class="p4"><span class="s1">// No 1.</span></p>
 <p class="p4"><span class="s1">{</span></p>
 <p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>var bundle_1AssetPaths = new string[1];</span></p>
@@ -81,17 +81,17 @@
 <p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>buildMap[1].assetBundleName = "bundle_1.assetbundle";</span></p>
 <p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>buildMap[1].assetNames = bundle_1AssetPaths;</span></p>
 <p class="p4"><span class="s1">}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
+<p class="p5"><span class="s1"></span><br></p>
 <p class="p4"><span class="s1">// No 2. depends on same asset in No 0 and 1.</span></p>
 <p class="p4"><span class="s1">{</span></p>
 <p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>var bundle_2AssetPaths = new string[2];</span></p>
 <p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>bundle_2AssetPaths[0] = </span><span class="s2">"Assets/scr1.png"</span><span class="s1">;</span></p>
 <p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>bundle_2AssetPaths[1] = </span><span class="s3">"Assets/scr2.png"</span><span class="s1">;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
+<p class="p5"><span class="s1"></span><br></p>
 <p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>buildMap[2].assetBundleName = "bundle_2.assetbundle";</span></p>
 <p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>buildMap[2].assetNames = bundle_2AssetPaths;</span></p>
 <p class="p4"><span class="s1">}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
+<p class="p5"><span class="s1"></span><br></p>
 <p class="p4"><span class="s1">BuildPipeline.BuildAssetBundles("somewhere", buildMap, BuildAssetBundleOptions.None, BuildTarget.iOS);</span></p>
 <p class="p2"><span class="s1"></span><br></p>
 <p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>青、オレンジそれぞれが同じAssetを指している。</span></p>
@@ -106,7 +106,19 @@
 <p class="p2"><span class="s1"></span><br></p>
 <p class="p2"><span class="s1"></span><br></p>
 <p class="p3"><span class="s1"><b>解決法</b></span></p>
-<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>解決できないと思ってたら解決法あった。</span></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>buildMapを使った場合の依存の書き方はなくって、</span></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>依存は勝手に解決される、というのが答えだった。</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>概念的には、</span></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>・依存は勝手に解決される</span></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>・オリジナルを明示することはできないので、どこに依存Assetが入るかを指定する方法はない</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>という感じだった。</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>具体的な例を用意中。</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
 <p class="p2"><span class="s1"></span><br></p>
 <p class="p2"><span class="s1"></span><br></p>
 </body>
