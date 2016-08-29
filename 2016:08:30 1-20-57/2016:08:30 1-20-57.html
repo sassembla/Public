@@ -1,0 +1,130 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1404.47">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Sans'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; background-color: #ebebeb}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>DisqueのTTLとRetryについて</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>TTLとRetry組み合わせた際の挙動がよくわかってなかったのでメモっておく。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Disqueはなんか分散ジョブキュー。</p>
+<p class="p3"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Disque</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/antirez/disque">https://github.com/antirez/disque</a></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>使ってるクライアントは自作のDisquuun。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><b>Disquuun</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/Disquuun">https://github.com/sassembla/Disquuun</a></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>TTL</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Time To Live なのでDisque-serverに登録したジョブの生存時間。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Disqueの場合はAddJobコマンドのオプションでジョブ追加の都度指定する。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Disquuunの場合だと次のようなコードになる。</p>
+<p class="p4">disquuun.AddJob("queueName", new byte[]{0,1,2}, 0, "TTL", 1);</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>TTLの単位はsecなので、これでDisque-server側にこのジョブは、ジョブがキュー"queueName"に追加されて1秒経つと消滅する。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ただし、デフォルトのDisqueの設定だと、こういったタイマーに関する分解能が10hz(秒間10回)程度になっているので、わりとやんわりとした動作になっている。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ちなみにTTLを指定しなかった場合のデフォルト値は 1day = 86400sec とか。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>Retry</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>リトライ、なんかちゃんと向き合っていなかったのだけれど、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Retry値は、一定時間 or GetJobされるもackされなかったジョブが、再びキューに入るまでの時間を指定するパラメータになっている。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>指定はDisquuunの場合だと次のようなコードになる。</p>
+<p class="p4">disquuun.AddJob("queueName", new byte[]{0,1,2}, 0, "RETRY", 1);</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>この辺の挙動はテストケース書いたんで具体的にこうなるんだぜみたいな例がある。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/Disquuun/blob/master/DisquuunTest/Tests_1.cs#L64">https://github.com/sassembla/Disquuun/blob/master/DisquuunTest/Tests_1.cs#L64</a></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Retryの値に関する仕様は以下のようになってるらしい。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・デフォルト値は5分</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>一度GetJobされてから5分経ったら、再装填が発生する。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・0ならば"<b>最大で1回送付</b>"モードになる</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>んでGetJobが発生したら実際にどうなるの？っていうと、これが面白かったので後述する。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・0より大きい数値ならば単位はsecで、この秒数が過ぎたら再装填が発生する</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>この値の指定と効果には特例があって、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>TTLが指定してあり、かつ、TTL x 0.1(sec) &lt; RETRY指定値(デフォの場合は5min)の場合、RETRY値はTTL x 0.1(sec) に指定される。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>例えばTTLを5分にした場合、5x60sec(TTL) x 0.1 &lt; 5x60sec(RETRY) なので、RETRY値は自動的に 5x60sec(TTL) x 0.1になる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>なにがなんでもRETRYさせたいらしい。まあ明示的に指定してるんだしな。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>最大で1回送付 モードになるって実際にはどういう挙動なの？</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ここまでで、TTLでジョブの寿命が、Retryでジョブの再装填が制御できることがわかった。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、例えば次のような指定をした場合どうなるのか。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>case1.Retry = 0</p>
+<p class="p3"><span class="Apple-tab-span">	</span>case2.TTL = 10sec</p>
+<p class="p3"><span class="Apple-tab-span">	</span>case3.Retry = 0 + TTL = 10sec</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>case1.Retry = 0</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Retryが0なので、GetJobしたらackしないでも二度とキューに現れない。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ジョブ自体はどうなっちゃうんだろう？</p>
+<p class="p2"><br></p>
+<p class="p4">var len0 = DisquuunDeserializer.Qlen(disquuun.Qlen("queueName").DEPRICATED_Sync());</p>
+<p class="p3"><span class="Apple-tab-span">	</span>このlen0は確かに0になる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>が、</p>
+<p class="p2"><br></p>
+<p class="p4">var info = DisquuunDeserializer.Info(disquuun.Info().DEPRICATED_Sync());</p>
+<p class="p4">var restJobCount = info.jobs.registered_jobs;</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>infoから取得するrestJobCountは、これなんと<b>1件</b>になる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>残っとるんかワレ。しかも二度と"queueName"には登らないだと、、、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>別にRetry = 0時のみの特殊な挙動ではなくて、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Retryの値がなんであれ、例えばRetry指定をしてない場合は、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・5分経つまでキューの外で待つ(qlenは0を返す</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・じゃあどこにいるの、っていうと、Infoでは見えるどこかにいる</p>
+<p class="p3"><span class="Apple-tab-span">	</span>という挙動になるみたいだ。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ちなみにRetry = 0だと、再装填は発生しない + TTL未指定なので、TTLデフォルトの１日が経過するのを待って死ぬ感じ。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>case2.TTL = 10sec</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Retryがデフォ5min -&gt; TTLの10%より小さいので、RetryはTTLの10% = 1secになる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>つまりGetJobとかが発生すると、1秒で復帰してくる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Disqueのフレームレートがデフォルト10hzなので、まあ10秒間の寿命の中できっちり10回再装填されることは無いと思うけれど、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>なるほど1秒で再装填されるのか、、と思うと感慨深い。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>case3.Retry = 0 + TTL = 10sec</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>というわけで、Retryを明示的に0にセットし、TTLを10secにした場合、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・ジョブは一度GetJobされたりすると、キューからは外れる</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・Retry = 0なので二度とキューに再装填されない</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・TTLが10secなので10秒したら死ぬ</p>
+<p class="p3"><span class="Apple-tab-span">	</span>というのが起こる。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3">以上。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+</body>
+</html>
