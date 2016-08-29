@@ -44,7 +44,7 @@
 <p class="p2"><br></p>
 <p class="p3"><b>Retry</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>リトライ、なんかちゃんと向き合っていなかったのだけれど、</p>
-<p class="p3"><span class="Apple-tab-span">	</span>Retry値は、一定時間 or GetJobされるもackされなかったジョブが、再びキューに入るまでの時間を指定するパラメータになっている。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Retry値は、GetJobされたジョブが、再びキューに入るまでの時間を指定するパラメータになっている。</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>指定はDisquuunの場合だと次のようなコードになる。</p>
 <p class="p4">disquuun.AddJob("queueName", new byte[]{0,1,2}, 0, "RETRY", 1);</p>
