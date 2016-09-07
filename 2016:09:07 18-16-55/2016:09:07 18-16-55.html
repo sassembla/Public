@@ -1,0 +1,141 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1404.47">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Sans'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; background-color: #ebebeb}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; background-color: #ebebeb; min-height: 18.0px}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; background-color: #d6d6d6}
+    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>nodeでmaterial ui使う</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>パパッとセッティングしたい。と思ってたんだけど、、、結局WebPackに依存しないとダメなのか。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>実行はnodeでやりたいんで、混ぜられないものかと考えてた。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>最終的にできた。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>このへんを参考にした。</p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>webpack+React+material-uiの環境を最小手順で作成</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://qiita.com/takaki@github/items/724d97a20d3ae194ded4">http://qiita.com/takaki@github/items/724d97a20d3ae194ded4</a></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>webpack is 何</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>依存関係を記述するとそれを解決できるようにゴインゴイン動くツール。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>importって書けるの楽だよね、、っていう。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>プロジェクト作成</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>適当にフォルダを作って、</p>
+<p class="p4">npm init</p>
+<p class="p4">npm install -g webpack</p>
+<p class="p4">npm install --save react react-dom babel-preset-react babel-loader babel-core</p>
+<p class="p4">npm install --save babel-preset-es2015</p>
+<p class="p4">npm install --save material-ui</p>
+<p class="p2"><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>要素を作成。</b></p>
+<p class="p3">touch index.html</p>
+<p class="p3">mkdir src</p>
+<p class="p3">touch src/index.js</p>
+<p class="p3">touch webpack.config.js</p>
+<p class="p3">touch .babelrc</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>index.html</p>
+<p class="p4">&lt;!DOCTYPE html&gt;</p>
+<p class="p4">&lt;html&gt;</p>
+<p class="p5"><br></p>
+<p class="p4">&lt;head&gt;</p>
+<p class="p4"><span class="Apple-converted-space">  </span>&lt;title&gt;Webpack Excercise&lt;/title&gt;</p>
+<p class="p4"><span class="Apple-converted-space">  </span>&lt;meta charset="UTF-8"&gt;</p>
+<p class="p4"><span class="Apple-converted-space">  </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</p>
+<p class="p5"><br></p>
+<p class="p4">&lt;/head&gt;</p>
+<p class="p5"><br></p>
+<p class="p4">&lt;body&gt;</p>
+<p class="p4"><span class="Apple-converted-space">  </span>&lt;div id="content"&gt; Content &lt;/div&gt;</p>
+<p class="p4"><span class="Apple-converted-space">  </span>&lt;script src="<b>static/bundle.js</b>" charset="utf-8"&gt;&lt;/script&gt;</p>
+<p class="p4">&lt;/body&gt;</p>
+<p class="p5"><br></p>
+<p class="p4">&lt;/html&gt;</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>bundle.jsってのがまあ、WebPackで作り出される結果ファイルなのね。出力されるファイルの名前や場所の指定はwebpack.config.jsでやってる。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>webpack.config.js</p>
+<p class="p4">module.exports = {</p>
+<p class="p4"><span class="Apple-converted-space">  </span>entry: {</p>
+<p class="p4"><span class="Apple-converted-space">    </span>jsx: "./src/index.js"</p>
+<p class="p4"><span class="Apple-converted-space">  </span>},</p>
+<p class="p4"><span class="Apple-converted-space">  </span>output: {</p>
+<p class="p4"><span class="Apple-converted-space">    </span>path: <b>__dirname + "/static"</b>,</p>
+<p class="p4"><span class="Apple-converted-space">    </span>filename: "bundle.js"</p>
+<p class="p4"><span class="Apple-converted-space">  </span>},</p>
+<p class="p4"><span class="Apple-converted-space">  </span>module: {</p>
+<p class="p4"><span class="Apple-converted-space">    </span>loaders: [</p>
+<p class="p4"><span class="Apple-converted-space">      </span>{ test: /\.js$/,<span class="Apple-converted-space">  </span>loader: "<b>babel-loader</b>", exclude: /node_modules/ }</p>
+<p class="p4"><span class="Apple-converted-space">    </span>]</p>
+<p class="p4"><span class="Apple-converted-space">  </span>}</p>
+<p class="p4">}</p>
+<p class="p3"><span class="Apple-tab-span">	</span>outputのとこで、いろいろやったファイルをstatic/bundle.jsに出力するようになってるぽい。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、この中で、さらにコンパイラとしてbabelが指定されてる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>babelの設定ファイルは下記。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>.babelrc</p>
+<p class="p4">{ "presets": ["react", "es2015"] }</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>こんな感じでいいっぽい。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>そーかー jsxのコンパイラがbabelに入ったってこういうことなのか。</p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>コンパイル対象となる.jsは、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>index.js</p>
+<p class="p4">var React = require('react');</p>
+<p class="p4">var ReactDOM = require('react-dom');</p>
+<p class="p5"><br></p>
+<p class="p6">import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';</p>
+<p class="p6">import RaisedButton from 'material-ui/RaisedButton';</p>
+<p class="p5"><br></p>
+<p class="p4">ReactDOM.render(</p>
+<p class="p4"><span class="Apple-tab-span">	</span>&lt;div&gt;</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>&lt;MuiThemeProvider&gt;</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>&lt;RaisedButton label="Default" /&gt;</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>&lt;/MuiThemeProvider&gt;</p>
+<p class="p4"><span class="Apple-tab-span">	</span>&lt;/div&gt;,</p>
+<p class="p4"><span class="Apple-tab-span">	</span>document.getElementById('content')</p>
+<p class="p4">);</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>濃い時のところのimportが使いたいがために、ここまでの苦労を、、、うーーん、、時代があるなあ、、もっと楽になってくれ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、ここまでいくと、</p>
+<p class="p2"><br></p>
+<p class="p4">webpack --progress --color</p>
+<p class="p3"><span class="Apple-tab-span">	</span>でindex.jsがゴインゴインとコンパイルできる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>結果的にブラウザでindex.htmlを開くと、</p>
+<p class="p2"><br></p>
+<p class="p7"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202016-09-07%2019.27.47.png" alt="スクリーンショット 2016-09-07 19.27.47.png"></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>やったぜ。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>保存するたびにWebpacで自動的に</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>今回はやらないことにした。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>nodeでサーブしてるサービスと連携したいので、ウザい。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>index.jsからnodeにアクセスするのが書けるので、データのプッシュとかローディングについてはそれで解決する。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+</body>
+</html>

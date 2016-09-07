@@ -1,0 +1,227 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1404.47">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Sans'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; background-color: #ebebeb}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>nodeを使って2501サーバの簡易模倣</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ビューを持ち出すわけにいかなかったので、でっち上げる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>写真もダメだったすまん。</p>
+<p class="p2"><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>構成</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>2501Slave Client x N</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Unity + WS</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>WebSocket経由でlua scriptを実行することができる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>デバッグ中のみ必要で、リリースビルドに含むと審査に落ちる。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>2501(PuppetMaster) + Slaveyard Server</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>node</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Clientの操作コンテキスト管理と、群体制御、結果/モニタリング機能を受け持つ。</p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>ブラウザ</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>2501の挙動はブラウザから見れる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>また、ブラウザから群体/個体に対してluaその他で制御コードやbotを送り込むことができる。</p>
+<p class="p2"><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>できること</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・群体制御/個体制御</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・スクショ好きな時に/自動化</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・スクリプト実行(履歴はGUIに持たせてもいいしサーバに持たせてもいいし</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・Tail</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・エラープルーフ(スクリプト実行エラーがでてもまあ端末は死なない</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・ボット常駐</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・現在のゲームのコンテキストに則ったメソッド実行</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・実行可能メソッド抽出</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・メソッド待ち構え処理</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>群体制御/個体制御</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>接続してる全端末に向けて処理を並列でぶっとばせる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・自動的に適当な画面まで進む、とかができる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・ある端末をリーダーにしてその端末と同じ処理を他の端末に流して同期とかできる。</p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b>スクショ好きな時に/自動化</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>低負荷かつ異様に高速なスクリーンショット。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ファイル吐き出し or DB</p>
+<p class="p3"><span class="Apple-tab-span">	</span>(ReactのUIに表示したかったがまにあわんかった)</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p4">SCREENSHOTボタン押す</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>スクリプト実行(履歴はGUIに持たせてもいいしサーバに持たせてもいいし</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>luaから端末内の制御メソッドを叩ける。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>scriptは端末側の都合のいいタイミングで実行されるので、端末ごとの入力ズレはほぼない。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ちなみに全てのスクリプトは、coroutineとかを書かない限り同一のフレームで同期的に実行される。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>coroutineとか書くとフレームをまたいで実行できる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>つまり適当なスパンで端末のメソッドを叩ける。</p>
+<p class="p2"><br></p>
+<p class="p4">backbone.Screenshot()</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>Tail</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>端末全部に対してTailを仕掛けられる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>実際にはもっと頻度は低いので、負荷は低い。(頻度は指定できる</p>
+<p class="p2"><br></p>
+<p class="p4">TAILボタン押して端末動かす</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Titleで放置したり、遷移先でAとかボタン押したり。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>エラープルーフ(スクリプト実行エラーがでてもまあ端末は死なない</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>まあはい。ゲームの邪魔はしない。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>ボット常駐</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>定期イベントでなんかするbotとかを書ける。luaだし。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>こないだMackerelのイベント行った時に面白かったんでパクった。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>現在のゲームのコンテキストに則ったメソッド実行</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ゲーム内のインスタンスをluaから実行できる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>例えば TitleScript型のインスタンスと、そのメソッド があったら、TitleScript.メソッド(引数) という記法でluaから実行できる。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>引数があるメソッドもぶったたける。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>これによって、uGUIとかUnityで主流なGUIのメソッドは、ほぼすべて裏側から叩ける。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>実行可能メソッド抽出</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>現在のUnityのコンテキストで実行可能なインスタンス一覧と、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>そのインスタンスが保有している実行可能な関数一覧を取得する。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>(UIがアレなんだけどまあプレゼン。)</p>
+<p class="p4">availables ボタン -&gt;</p>
+<p class="p4">backbone.ReturnAllAvailables("CameraScript")</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>この返り値が、このCameraScriptインスタンスで、現在実行可能なメソッド集。</p>
+<p class="p4">availables.targetInstanceName:<b>CameraScript</b> methodSignatures:</p>
+<p class="p4">Awake(),</p>
+<p class="p4"><b>BackToTitle(),</b></p>
+<p class="p4"><b>ButtonTapped(System.String key),</b></p>
+<p class="p4">Invoke(System.String methodName, System.Single time),</p>
+<p class="p4">InvokeRepeating(System.String methodName, System.Single time, System.Single repeatRate),</p>
+<p class="p4">CancelInvoke(),</p>
+<p class="p4">CancelInvoke(System.String methodName),</p>
+<p class="p4">IsInvoking(System.String methodName),</p>
+<p class="p4">IsInvoking(),</p>
+<p class="p4">StartCoroutine(System.String methodName, System.Object value),</p>
+<p class="p4">StartCoroutine(System.String methodName),</p>
+<p class="p4">StopCoroutine(System.String methodName),</p>
+<p class="p4">StopAllCoroutines(),</p>
+<p class="p4">GetComponent(System.String type),</p>
+<p class="p4">CompareTag(System.String tag),</p>
+<p class="p4">SendMessageUpwards(System.String methodName, System.Object value),</p>
+<p class="p4">SendMessageUpwards(System.String methodName),</p>
+<p class="p4">SendMessage(System.String methodName, System.Object value),</p>
+<p class="p4">SendMessage(System.String methodName),</p>
+<p class="p4">BroadcastMessage(System.String methodName, System.Object parameter),</p>
+<p class="p4">BroadcastMessage(System.String methodName),</p>
+<p class="p4">ToString(),</p>
+<p class="p4">GetInstanceID(),</p>
+<p class="p4">GetHashCode(),</p>
+<p class="p4">Equals(System.Object o),</p>
+<p class="p4">GetType()</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>わんさか返してくる。で、これは<b>全部</b>実行できる。</p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>試しにTailした上で、ButtonTapped(string)を実行してみよう。</p>
+<p class="p4">CameraScript.ButtonTapped("hello, devices.")</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Tail結果にログが出たはず。</p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>メソッド待ち構え処理</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>特定のメソッドの実行まで潜伏、メソッドの実行をトリガーにluaを実行することができる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>(UIがないけどまあできる。)</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>インスタンスを沈める</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Backbone.Regist 関数を使って、任意のinstanceをゲーム中に2501に登録、そのインスタンスのメソッドを</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ある程度自由に実行できる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>具体的には、publicで引数が string/number/bool ほか なメソッドを、luaからナチュラルにぶったたける。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>前提として、適度にUIのインスタンスを</p>
+<p class="p4">Backbone.Register(this);// thisは、たとえば Title クラスのインスタンス。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>とかで沈める。Awakeとかで沈めとくといいと思う。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ここを自動化するのは安全性の面から考えてない。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これで、uGUIのボタンの動作とかを、luaから</p>
+<p class="p4">Title.GoToGame()</p>
+<p class="p3"><span class="Apple-tab-span">	</span>みたいな感じでぶったたける。</p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b>luaで実行できる利点</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・クライアント内にluaコンテキストを持てる</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>状態保持でき、それがC#側に波及しない。サンドボックスからの制御になるので状態を捨てやすい。</p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・coroutineを使って、適当なフレーム遅延を引き起こした上でGUIが裏から叩ける</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>coroutine最高という気持ち<span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>今回のGUI作成のよもやまばなし</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>超ひさしぶりにnode触る。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>満たしてて欲しい要件は、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>サーバ：</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>・ws接続とhttp接続を受ける(wsのためのhttp getとかはws側のライブラリで処理できるととても良い</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>・binary受け取れる</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>・メモリ上に画像バイナリガンガン格納する -&gt; 適当なフォルダに吐く</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>・モニタはそれを取得、表示する</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>クライアント</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>・luaが動く(execute用途、bot用途</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>とかか。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>React + node + Webpack + Material UIでやろう(死亡フラグ</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>ws使う</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>あ、FileServerみたいなのがある、、、まじか、、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>開いて読むとこまではつかえたんだけどこれアップローダだな、要らね、、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>とりあえず接続可能になるとこまでやろう。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>-&gt; 32ビット以上のサイズを受け付けられない。ああ、、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>-&gt; 単にリミットしてあった。スクリーンショットのサイズは必ず64bitあたりになるんで、まあ、はい。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>解除してしまったところ動いた。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>OK。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>今回のGUI</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>適当にReactで作ってみた。<b>めっちゃ勉強になった。</b></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3">ちょっと試してみたい:http/2</p>
+<p class="p3">node.js http/2</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3">ちょっと試してみたい、grpc。</p>
+<p class="p3">https://github.com/google/dorusu-js</p>
+<p class="p3">https://github.com/grpc/grpc/tree/master/examples/node</p>
+<p class="p2"><br></p>
+</body>
+</html>

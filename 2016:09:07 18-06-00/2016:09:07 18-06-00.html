@@ -1,0 +1,447 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1404.47">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Sans'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; background-color: #ebebeb}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; background-color: #ebebeb; min-height: 18.0px}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; background-color: #d6d6d6}
+    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>MaterialUI使ってみる</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>このページを参考に動かしてみる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://blog.takanabe.tokyo/2015/12/11/1778/">http://blog.takanabe.tokyo/2015/12/11/1778/</a></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>最終的には、左右のペーン、右ペーン内にリストで項目表示、みたいな画面が作りたい。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>プロジェクトつくる</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>まずはnpm管理下のプロジェクトを作成。</p>
+<p class="p4">mkdir mat</p>
+<p class="p4">cd mat<span class="Apple-converted-space"> </span></p>
+<p class="p4">npm init</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>package.jsonに次を記載</p>
+<p class="p4">{</p>
+<p class="p4"><span class="Apple-converted-space">  </span>"name": "mat",</p>
+<p class="p4"><span class="Apple-converted-space">  </span>"version": "1.0.0",</p>
+<p class="p4"><span class="Apple-converted-space">  </span>"description": "",</p>
+<p class="p4"><span class="Apple-converted-space">  </span>"main": "index.js",</p>
+<p class="p4"><span class="Apple-converted-space">  </span>"scripts": {</p>
+<p class="p4"><span class="Apple-converted-space">    </span>"test": "echo \"Error: no test specified\" &amp;&amp; exit 1",</p>
+<p class="p4"><b><span class="Apple-converted-space">    </span>"start": "webpack-dev-server --hot --inline --progress --colors",</b></p>
+<p class="p4"><b><span class="Apple-converted-space">    </span>"build": "webpack --progress --colors"</b></p>
+<p class="p4"><span class="Apple-converted-space">  </span>},</p>
+<p class="p4"><b><span class="Apple-converted-space">  </span>"devDependencies": {</b></p>
+<p class="p4"><b><span class="Apple-converted-space">    </span>"babel-core": "^5.8.25",</b></p>
+<p class="p4"><b><span class="Apple-converted-space">    </span>"babel-eslint": "^4.1.3",</b></p>
+<p class="p4"><b><span class="Apple-converted-space">    </span>"babel-loader": "^5.3.2",</b></p>
+<p class="p4"><b><span class="Apple-converted-space">    </span>"babel-runtime": "^5.8.25",</b></p>
+<p class="p4"><b><span class="Apple-converted-space">    </span>"css-loader": "^0.19.0",</b></p>
+<p class="p4"><b><span class="Apple-converted-space">    </span>"eslint": "^1.6.0",</b></p>
+<p class="p4"><b><span class="Apple-converted-space">    </span>"eslint-loader": "^1.1.0",</b></p>
+<p class="p4"><b><span class="Apple-converted-space">    </span>"eslint-plugin-react": "^3.5.1",</b></p>
+<p class="p4"><b><span class="Apple-converted-space">    </span>"fbjs": "^0.2.1",</b></p>
+<p class="p4"><b><span class="Apple-converted-space">    </span>"file-loader": "^0.8.4",</b></p>
+<p class="p4"><b><span class="Apple-converted-space">    </span>"style-loader": "^0.12.4",</b></p>
+<p class="p4"><b><span class="Apple-converted-space">    </span>"webpack": "^1.12.2",</b></p>
+<p class="p4"><b><span class="Apple-converted-space">    </span>"webpack-dev-server": "^1.12.0",</b></p>
+<p class="p4"><b><span class="Apple-converted-space">    </span>"webpack-hot-middleware": "^2.2.0"</b></p>
+<p class="p4"><b><span class="Apple-converted-space">  </span>},</b></p>
+<p class="p4"><b><span class="Apple-converted-space">    </span>"dependencies": {</b></p>
+<p class="p4"><b><span class="Apple-converted-space">    </span>"classnames": "^2.1.2",</b></p>
+<p class="p4"><b><span class="Apple-converted-space">    </span>"fbjs": "^0.3.2",</b></p>
+<p class="p4"><b><span class="Apple-converted-space">    </span>"material-ui": "^0.13.0",</b></p>
+<p class="p4"><b><span class="Apple-converted-space">    </span>"react": "^0.14.0",</b></p>
+<p class="p4"><b><span class="Apple-converted-space">    </span>"react-addons-create-fragment": "^0.14.0",</b></p>
+<p class="p4"><b><span class="Apple-converted-space">    </span>"react-addons-pure-render-mixin": "^0.14.0",</b></p>
+<p class="p4"><b><span class="Apple-converted-space">    </span>"react-addons-transition-group": "^0.14.0",</b></p>
+<p class="p4"><b><span class="Apple-converted-space">    </span>"react-addons-update": "^0.14.0",</b></p>
+<p class="p4"><b><span class="Apple-converted-space">    </span>"react-dom": "^0.14.0",</b></p>
+<p class="p4"><b><span class="Apple-converted-space">    </span>"react-hot-loader": "^1.3.0",</b></p>
+<p class="p4"><b><span class="Apple-converted-space">    </span>"react-redux": "^3.1.0",</b></p>
+<p class="p4"><b><span class="Apple-converted-space">    </span>"react-tap-event-plugin": "^0.2.0",</b></p>
+<p class="p4"><b><span class="Apple-converted-space">    </span>"redux": "^3.0.2"</b></p>
+<p class="p4"><b><span class="Apple-converted-space">  </span>},</b></p>
+<p class="p4"><span class="Apple-converted-space">  </span>"author": "",</p>
+<p class="p4"><span class="Apple-converted-space">  </span>"license": "ISC"</p>
+<p class="p4">}</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、</p>
+<p class="p4">npm install</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>次に、webpack.config.jsを作成して、、いろいろ書きこむ。</p>
+<p class="p4">module.exports = {</p>
+<p class="p4"><span class="Apple-converted-space">  </span>context: __dirname,</p>
+<p class="p4"><span class="Apple-converted-space">  </span>entry: {</p>
+<p class="p4"><span class="Apple-converted-space">    </span>jsx: "./src/index.jsx",</p>
+<p class="p4"><span class="Apple-converted-space">    </span>css: "./src/main.css",</p>
+<p class="p4"><span class="Apple-converted-space">    </span>html: "./src/index.html",</p>
+<p class="p4"><span class="Apple-converted-space">  </span>},</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-converted-space">  </span>output: {</p>
+<p class="p4"><span class="Apple-converted-space">    </span>path: __dirname + "/static",</p>
+<p class="p4"><span class="Apple-converted-space">    </span>filename: "bundle.js",</p>
+<p class="p4"><span class="Apple-converted-space">  </span>},</p>
+<p class="p4"><span class="Apple-converted-space">  </span>module: {</p>
+<p class="p4"><span class="Apple-converted-space">    </span>preLoaders: [</p>
+<p class="p4"><span class="Apple-converted-space">        </span>//Eslint loader</p>
+<p class="p4"><span class="Apple-converted-space">      </span>{ test: /\.jsx?$/, exclude: /node_modules/, loader: "eslint-loader"},</p>
+<p class="p4"><span class="Apple-converted-space">    </span>],</p>
+<p class="p4"><span class="Apple-converted-space">    </span>loaders: [</p>
+<p class="p4"><span class="Apple-converted-space">      </span>{ test: /\.html$/, loader: "file?name=[name].[ext]" },</p>
+<p class="p4"><span class="Apple-converted-space">      </span>{ test: /\.css$/, loader: "file?name=[name].[ext]" },</p>
+<p class="p4"><span class="Apple-converted-space">      </span>{ test: /\.jsx?$/, exclude: /node_modules/, loaders: ["react-hot","babel-loader"]},</p>
+<p class="p4"><span class="Apple-converted-space">    </span>],</p>
+<p class="p4"><span class="Apple-converted-space">  </span>},</p>
+<p class="p4"><span class="Apple-converted-space">  </span>resolve: {</p>
+<p class="p4"><span class="Apple-converted-space">    </span>extensions: ['', '.js', '.jsx']</p>
+<p class="p4"><span class="Apple-converted-space">  </span>},</p>
+<p class="p4"><span class="Apple-converted-space">  </span>eslint: {</p>
+<p class="p4"><span class="Apple-converted-space">    </span>configFile: './.eslintrc'</p>
+<p class="p4"><span class="Apple-converted-space">  </span>},</p>
+<p class="p4">};</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>eslintって何、ってなってるけどとりあえずやってみる。</p>
+<p class="p4">touch .eslintrc</p>
+<p class="p2"><br></p>
+<p class="p4">{</p>
+<p class="p4"><span class="Apple-converted-space">  </span>"env": {</p>
+<p class="p4"><span class="Apple-converted-space">    </span>"es6": true,</p>
+<p class="p4"><span class="Apple-converted-space">    </span>"browser": true,</p>
+<p class="p4"><span class="Apple-converted-space">    </span>"node": true</p>
+<p class="p4"><span class="Apple-converted-space">  </span>},</p>
+<p class="p4"><span class="Apple-converted-space">  </span>"rules": {</p>
+<p class="p4"><span class="Apple-converted-space">    </span>"curly": 0,</p>
+<p class="p4"><span class="Apple-converted-space">    </span>"comma-dangle": [2, "never"],</p>
+<p class="p4"><span class="Apple-converted-space">    </span>"comma-spacing": 0,</p>
+<p class="p4"><span class="Apple-converted-space">    </span>"eqeqeq": [2, "allow-null"],</p>
+<p class="p4"><span class="Apple-converted-space">    </span>"key-spacing": 0,</p>
+<p class="p4"><span class="Apple-converted-space">    </span>"no-underscore-dangle": 0,</p>
+<p class="p4"><span class="Apple-converted-space">    </span>"no-unused-expressions": 0,</p>
+<p class="p4"><span class="Apple-converted-space">    </span>"no-shadow": 0,</p>
+<p class="p4"><span class="Apple-converted-space">    </span>"no-shadow-restricted-names": 0,</p>
+<p class="p4"><span class="Apple-converted-space">    </span>"no-extend-native": 0,</p>
+<p class="p4"><span class="Apple-converted-space">    </span>"no-var": 2,</p>
+<p class="p4"><span class="Apple-converted-space">    </span>"new-cap": 0,</p>
+<p class="p4"><span class="Apple-converted-space">    </span>"quotes": 0,</p>
+<p class="p4"><span class="Apple-converted-space">    </span>"semi-spacing": 0,</p>
+<p class="p4"><span class="Apple-converted-space">    </span>"space-unary-ops": 0,</p>
+<p class="p4"><span class="Apple-converted-space">    </span>"space-infix-ops": 0,</p>
+<p class="p4"><span class="Apple-converted-space">    </span>"consistent-return": 0,</p>
+<p class="p4"><span class="Apple-converted-space">    </span>"strict": 0</p>
+<p class="p4"><span class="Apple-converted-space">  </span>},</p>
+<p class="p4"><span class="Apple-converted-space">  </span>"parser": "babel-eslint",</p>
+<p class="p4"><span class="Apple-converted-space">  </span>"plugins": [</p>
+<p class="p4"><span class="Apple-converted-space">    </span>"react"</p>
+<p class="p4"><span class="Apple-converted-space">  </span>],</p>
+<p class="p4"><span class="Apple-converted-space">  </span>"ecmaFeatures": {</p>
+<p class="p4"><span class="Apple-converted-space">    </span>"arrowFunctions": true,</p>
+<p class="p4"><span class="Apple-converted-space">    </span>"jsx": true</p>
+<p class="p4"><span class="Apple-converted-space">  </span>}</p>
+<p class="p4">}<span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ああ、babel、、なるほど、、コンパイラの起動とかの設定なのか。概念としてはlint、っていう。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>srcフォルダを作って、中にindex.htmlとか置く</p>
+<p class="p4">mkdir src</p>
+<p class="p4">touch ./src/index.html</p>
+<p class="p4">touch ./src/index.jsx</p>
+<p class="p4">touch ./src/main.css</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、npm run buildで、package.jsonで指定したbuildコマンドを実行。</p>
+<p class="p4">npm run build</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>おお、、なんかコンパイルできたぞ、、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、次に、index.jsxにいろいろ書いたりするんだけど、だいたいかいてあるまま進められる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ただそのままだと動かなかったので、App.jsxだけ手を加えた。</p>
+<p class="p4"><b>import React, { Component, PropTypes } from "react";</b></p>
+<p class="p4"><b>import { bindActionCreators } from 'redux';</b></p>
+<p class="p4">import { connect } from 'react-redux';</p>
+<p class="p4">import Header from '../components/Header';</p>
+<p class="p4">import MainSection from '../components/MainSection';</p>
+<p class="p5"><br></p>
+<p class="p4">class App extends Component {</p>
+<p class="p4"><span class="Apple-converted-space">  </span>render() {</p>
+<p class="p4"><span class="Apple-converted-space">    </span>return (</p>
+<p class="p4"><span class="Apple-converted-space">      </span>&lt;div&gt;</p>
+<p class="p4"><span class="Apple-converted-space">        </span>&lt;Header /&gt;</p>
+<p class="p4"><span class="Apple-converted-space">        </span>&lt;MainSection /&gt;</p>
+<p class="p4"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p4"><span class="Apple-converted-space">    </span>);</p>
+<p class="p4"><span class="Apple-converted-space">  </span>}</p>
+<p class="p4">}</p>
+<p class="p5"><br></p>
+<p class="p4">export default App;</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Material UIの作成は、componentsフォルダを作っていろいろファイル置いて、そこにReactComponentを記述しがてら行う。</p>
+<p class="p4">mkdir components</p>
+<p class="p4">touch ./components/Header.jsx</p>
+<p class="p4">touch ./components/MainSection.jsx</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Header.jsx</p>
+<p class="p4">import React, { PropTypes, Component } from 'react';</p>
+<p class="p5"><br></p>
+<p class="p4">import mui, {<b>AppBar</b>} from 'material-ui';</p>
+<p class="p4">const ThemeManager = require('material-ui/lib/styles/theme-manager');</p>
+<p class="p6">import MyRawTheme from '../src/material_ui_raw_theme_file'</p>
+<p class="p5"><br></p>
+<p class="p4">class Header extends Component {</p>
+<p class="p4"><span class="Apple-converted-space">  </span>static get childContextTypes() {</p>
+<p class="p4"><span class="Apple-converted-space">    </span>return { muiTheme: React.PropTypes.object };</p>
+<p class="p4"><span class="Apple-converted-space">  </span>}</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-converted-space">  </span>getChildContext(){</p>
+<p class="p4"><span class="Apple-converted-space">    </span>return {<span class="Apple-converted-space">  </span>muiTheme: ThemeManager.getMuiTheme(MyRawTheme)};</p>
+<p class="p4"><span class="Apple-converted-space">  </span>}</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-converted-space">  </span>render() {</p>
+<p class="p4"><span class="Apple-converted-space">    </span>return (</p>
+<p class="p4"><span class="Apple-converted-space">      </span>&lt;header className="header"&gt;</p>
+<p class="p4"><span class="Apple-converted-space">        </span>&lt;h1&gt;AppBar Component&lt;/h1&gt;</p>
+<p class="p4"><span class="Apple-converted-space">        </span>&lt;<b>AppBar</b> title="React + Redux + Material UI Boilerplate" /&gt;</p>
+<p class="p4"><span class="Apple-converted-space">      </span>&lt;/header&gt;</p>
+<p class="p4"><span class="Apple-converted-space">    </span>);</p>
+<p class="p4"><span class="Apple-converted-space">  </span>}</p>
+<p class="p4">}</p>
+<p class="p5"><br></p>
+<p class="p4">export default Header;</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これでAppBarが出る。ほうほう。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>細かい設定値はちょっと濃い行で、ファイルを使って指定している。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>(面倒なのでオフってみた。)</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>次に、MainSection.jsx</p>
+<p class="p4">import React, { Component, PropTypes } from 'react';</p>
+<p class="p4">import mui, {CircularProgress,</p>
+<p class="p4"><span class="Apple-converted-space">             </span>Tabs,</p>
+<p class="p4"><span class="Apple-converted-space">             </span>Tab,</p>
+<p class="p4"><span class="Apple-converted-space">             </span>DatePicker</p>
+<p class="p4"><span class="Apple-converted-space">            </span>} from 'material-ui';</p>
+<p class="p5"><br></p>
+<p class="p4">class MainSection extends Component {</p>
+<p class="p4"><span class="Apple-converted-space">  </span>render() {</p>
+<p class="p4"><span class="Apple-converted-space">    </span>return (</p>
+<p class="p4"><span class="Apple-converted-space">      </span>&lt;div&gt;</p>
+<p class="p4"><span class="Apple-converted-space">        </span>&lt;h1&gt;Progress Component&lt;/h1&gt;</p>
+<p class="p4"><span class="Apple-converted-space">        </span>&lt;CircularProgress mode="indeterminate" size={1.5} /&gt;</p>
+<p class="p4"><span class="Apple-converted-space">        </span>&lt;CircularProgress mode="indeterminate" color={"red"} size={2} /&gt;</p>
+<p class="p4"><span class="Apple-converted-space">        </span>&lt;br/&gt;</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-converted-space">        </span>&lt;h1&gt;Tab Component&lt;/h1&gt;</p>
+<p class="p4"><span class="Apple-converted-space">        </span>&lt;Tabs&gt;</p>
+<p class="p4"><span class="Apple-converted-space">          </span>&lt;Tab label="Tab One" value="0" /&gt;</p>
+<p class="p4"><span class="Apple-converted-space">          </span>&lt;Tab label="Tab Two" value="1" /&gt;</p>
+<p class="p4"><span class="Apple-converted-space">          </span>&lt;Tab label="Tab Three" value="2" /&gt;</p>
+<p class="p4"><span class="Apple-converted-space">        </span>&lt;/Tabs&gt;</p>
+<p class="p4"><span class="Apple-converted-space">        </span>&lt;br/&gt;</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-converted-space">        </span>&lt;h1&gt;DatePicker Component&lt;/h1&gt;</p>
+<p class="p4"><span class="Apple-converted-space">        </span>&lt;DatePicker hintText="Portrait Dialog" /&gt;</p>
+<p class="p4"><span class="Apple-converted-space">        </span>&lt;br/&gt;</p>
+<p class="p4"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p4"><span class="Apple-converted-space">    </span>);</p>
+<p class="p4"><span class="Apple-converted-space">  </span>}</p>
+<p class="p4">}</p>
+<p class="p5"><br></p>
+<p class="p4">export default MainSection;</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、ここまで書いたあと、npm start すると、ウォッチ状態になる + サーバ起動して、ブラウザで観れるようになる。</p>
+<p class="p4">npm start</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p7"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202016-09-07%2015.02.45.png" alt="スクリーンショット 2016-09-07 15.02.45.png"></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>とりあえず2016/09/07現在でも動いてくれてよかった。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>reduxって一体なにで、何してるんだろう、っていうのを後で追う。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>MaterialUIでテーブルを表示してみる</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><a href="http://www.material-ui.com/#/components/table">http://www.material-ui.com/#/components/table</a> から、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>コードを見る(&lt;&gt;マークを押す) -&gt; components フォルダにTableExampleSimple.jsxっていう名前でファイルを作る。</p>
+<p class="p2"><br></p>
+<p class="p4">import React from 'react';</p>
+<p class="p4">import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui';// 末尾を'material-ui'に変更してパスを合わせてる</p>
+<p class="p5"><br></p>
+<p class="p4">const TableExampleSimple = () =&gt; (</p>
+<p class="p4"><span class="Apple-converted-space">  </span>&lt;Table&gt;</p>
+<p class="p4"><span class="Apple-converted-space">    </span>&lt;TableHeader&gt;</p>
+<p class="p4"><span class="Apple-converted-space">      </span>&lt;TableRow&gt;</p>
+<p class="p4"><span class="Apple-converted-space">        </span>&lt;TableHeaderColumn&gt;ID&lt;/TableHeaderColumn&gt;</p>
+<p class="p4"><span class="Apple-converted-space">        </span>&lt;TableHeaderColumn&gt;Name&lt;/TableHeaderColumn&gt;</p>
+<p class="p4"><span class="Apple-converted-space">        </span>&lt;TableHeaderColumn&gt;Status&lt;/TableHeaderColumn&gt;</p>
+<p class="p4"><span class="Apple-converted-space">      </span>&lt;/TableRow&gt;</p>
+<p class="p4"><span class="Apple-converted-space">    </span>&lt;/TableHeader&gt;</p>
+<p class="p4"><span class="Apple-converted-space">    </span>&lt;TableBody&gt;</p>
+<p class="p4"><span class="Apple-converted-space">      </span>&lt;TableRow&gt;</p>
+<p class="p4"><span class="Apple-converted-space">        </span>&lt;TableRowColumn&gt;1&lt;/TableRowColumn&gt;</p>
+<p class="p4"><span class="Apple-converted-space">        </span>&lt;TableRowColumn&gt;John Smith&lt;/TableRowColumn&gt;</p>
+<p class="p4"><span class="Apple-converted-space">        </span>&lt;TableRowColumn&gt;Employed&lt;/TableRowColumn&gt;</p>
+<p class="p4"><span class="Apple-converted-space">      </span>&lt;/TableRow&gt;</p>
+<p class="p4"><span class="Apple-converted-space">      </span>&lt;TableRow&gt;</p>
+<p class="p4"><span class="Apple-converted-space">        </span>&lt;TableRowColumn&gt;2&lt;/TableRowColumn&gt;</p>
+<p class="p4"><span class="Apple-converted-space">        </span>&lt;TableRowColumn&gt;Randal White&lt;/TableRowColumn&gt;</p>
+<p class="p4"><span class="Apple-converted-space">        </span>&lt;TableRowColumn&gt;Unemployed&lt;/TableRowColumn&gt;</p>
+<p class="p4"><span class="Apple-converted-space">      </span>&lt;/TableRow&gt;</p>
+<p class="p4"><span class="Apple-converted-space">      </span>&lt;TableRow&gt;</p>
+<p class="p4"><span class="Apple-converted-space">        </span>&lt;TableRowColumn&gt;3&lt;/TableRowColumn&gt;</p>
+<p class="p4"><span class="Apple-converted-space">        </span>&lt;TableRowColumn&gt;Stephanie Sanders&lt;/TableRowColumn&gt;</p>
+<p class="p4"><span class="Apple-converted-space">        </span>&lt;TableRowColumn&gt;Employed&lt;/TableRowColumn&gt;</p>
+<p class="p4"><span class="Apple-converted-space">      </span>&lt;/TableRow&gt;</p>
+<p class="p4"><span class="Apple-converted-space">      </span>&lt;TableRow&gt;</p>
+<p class="p4"><span class="Apple-converted-space">        </span>&lt;TableRowColumn&gt;4&lt;/TableRowColumn&gt;</p>
+<p class="p4"><span class="Apple-converted-space">        </span>&lt;TableRowColumn&gt;Steve Brown&lt;/TableRowColumn&gt;</p>
+<p class="p4"><span class="Apple-converted-space">        </span>&lt;TableRowColumn&gt;Employed&lt;/TableRowColumn&gt;</p>
+<p class="p4"><span class="Apple-converted-space">      </span>&lt;/TableRow&gt;</p>
+<p class="p4"><span class="Apple-converted-space">    </span>&lt;/TableBody&gt;</p>
+<p class="p4"><span class="Apple-converted-space">  </span>&lt;/Table&gt;</p>
+<p class="p4">);</p>
+<p class="p5"><br></p>
+<p class="p4"><b>export default TableExampleSimple;</b></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、export句てのがあるのに初めて気づいた。ほう。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>containersフォルダのApp.jsx側を以下のように変更</p>
+<p class="p4">import React, { Component, PropTypes } from "react";</p>
+<p class="p4">import { bindActionCreators } from 'redux';</p>
+<p class="p4">import { connect } from 'react-redux';</p>
+<p class="p4">import Header from '../components/Header';</p>
+<p class="p4">import MainSection from '../components/MainSection';</p>
+<p class="p4"><b>import TableExampleSimple from '../components/TableExampleSimple'</b></p>
+<p class="p5"><br></p>
+<p class="p4">class App extends Component {</p>
+<p class="p4"><span class="Apple-converted-space">        </span>// &lt;Header /&gt;</p>
+<p class="p4"><span class="Apple-converted-space">        </span>// &lt;MainSection /&gt;</p>
+<p class="p4"><span class="Apple-converted-space">  </span>render() {</p>
+<p class="p4"><span class="Apple-converted-space">    </span>return (</p>
+<p class="p4"><span class="Apple-converted-space">      </span>&lt;div&gt;</p>
+<p class="p4"><span class="Apple-converted-space">      <span class="Apple-tab-span">	</span></span>&lt;TableExampleSimple /&gt;</p>
+<p class="p4"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p4"><span class="Apple-converted-space">    </span>);</p>
+<p class="p4"><span class="Apple-converted-space">  </span>}</p>
+<p class="p4">}</p>
+<p class="p5"><br></p>
+<p class="p4">export default App;</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>import句で、コンポーネントの要素 from ファイルパス みたいに指定できるんだな。なるほど。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、App コンポーネントはUIの根っことして、index.jsxから参照されている。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p4">import React from "react";</p>
+<p class="p4">import ReactDOM from "react-dom";</p>
+<p class="p4">import injectTapEventPlugin from "react-tap-event-plugin";</p>
+<p class="p5"><br></p>
+<p class="p6">import App from '../containers/App';</p>
+<p class="p5"><br></p>
+<p class="p4">//Needed for React Developer Tools</p>
+<p class="p4">window.React = React;</p>
+<p class="p5"><br></p>
+<p class="p4">//Needed for onTouchTap</p>
+<p class="p4">//Can go away when react 1.0 release</p>
+<p class="p4">//Check this repo:</p>
+<p class="p4">//https://github.com/zilverline/react-tap-event-plugin</p>
+<p class="p4">injectTapEventPlugin();</p>
+<p class="p5"><br></p>
+<p class="p4">ReactDOM.render(</p>
+<p class="p6"><span class="Apple-converted-space">  </span>&lt;App /&gt;,</p>
+<p class="p4"><span class="Apple-converted-space">  </span>document.getElementById("root")</p>
+<p class="p4">);</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>色つきの部分での接続はこういう理屈になってたんだなーー把握。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3">表示はこんな風になった。</p>
+<p class="p2"><br></p>
+<p class="p7"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202016-09-07%2017.16.00.png" alt="スクリーンショット 2016-09-07 17.16.00.png"></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、これあの、、手でJSXに書き直さないといけないの？</p>
+<p class="p3"><span class="Apple-tab-span">	</span>TableExampleSimple.jsx</p>
+<p class="p4">import React from 'react';</p>
+<p class="p4">import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui';</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p4">const TableExampleSimple = () =&gt; (</p>
+<p class="p4"><span class="Apple-converted-space">  </span>&lt;Table&gt;</p>
+<p class="p4"><span class="Apple-converted-space">    </span>&lt;TableHeader&gt;</p>
+<p class="p4"><span class="Apple-converted-space">      </span>&lt;TableRow&gt;</p>
+<p class="p4"><span class="Apple-converted-space">        </span>&lt;TableHeaderColumn&gt;ID&lt;/TableHeaderColumn&gt;</p>
+<p class="p4"><span class="Apple-converted-space">        </span>&lt;TableHeaderColumn&gt;Name&lt;/TableHeaderColumn&gt;</p>
+<p class="p4"><span class="Apple-converted-space">        </span>&lt;TableHeaderColumn&gt;Status&lt;/TableHeaderColumn&gt;</p>
+<p class="p4"><span class="Apple-converted-space">      </span>&lt;/TableRow&gt;</p>
+<p class="p4"><span class="Apple-converted-space">    </span>&lt;/TableHeader&gt;</p>
+<p class="p4"><span class="Apple-converted-space">    </span>&lt;TableBody&gt;</p>
+<p class="p4"><span class="Apple-converted-space">      </span>&lt;TableRow&gt;</p>
+<p class="p4"><span class="Apple-converted-space">        </span>&lt;TableRowColumn&gt;1&lt;/TableRowColumn&gt;</p>
+<p class="p4"><span class="Apple-converted-space">        </span>&lt;TableRowColumn&gt;John Smith&lt;/TableRowColumn&gt;</p>
+<p class="p4"><span class="Apple-converted-space">        </span>&lt;TableRowColumn&gt;Employed&lt;/TableRowColumn&gt;</p>
+<p class="p4"><span class="Apple-converted-space">      </span>&lt;/TableRow&gt;</p>
+<p class="p4"><span class="Apple-converted-space">      </span>&lt;TableRow&gt;</p>
+<p class="p4"><span class="Apple-converted-space">        </span>&lt;TableRowColumn&gt;2&lt;/TableRowColumn&gt;</p>
+<p class="p4"><span class="Apple-converted-space">        </span>&lt;TableRowColumn&gt;Randal White&lt;/TableRowColumn&gt;</p>
+<p class="p4"><span class="Apple-converted-space">        </span>&lt;TableRowColumn&gt;Unemployed&lt;/TableRowColumn&gt;</p>
+<p class="p4"><span class="Apple-converted-space">      </span>&lt;/TableRow&gt;</p>
+<p class="p4"><span class="Apple-converted-space">      </span>&lt;TableRow&gt;</p>
+<p class="p4"><span class="Apple-converted-space">        </span>&lt;TableRowColumn&gt;3&lt;/TableRowColumn&gt;</p>
+<p class="p4"><span class="Apple-converted-space">        </span>&lt;TableRowColumn&gt;Stephanie Sanders&lt;/TableRowColumn&gt;</p>
+<p class="p4"><span class="Apple-converted-space">        </span>&lt;TableRowColumn&gt;Employed&lt;/TableRowColumn&gt;</p>
+<p class="p4"><span class="Apple-converted-space">      </span>&lt;/TableRow&gt;</p>
+<p class="p4"><span class="Apple-converted-space">      </span>&lt;TableRow&gt;</p>
+<p class="p4"><span class="Apple-converted-space">        </span>&lt;TableRowColumn&gt;4&lt;/TableRowColumn&gt;</p>
+<p class="p4"><span class="Apple-converted-space">        </span>&lt;TableRowColumn&gt;Steve Brown&lt;/TableRowColumn&gt;</p>
+<p class="p4"><span class="Apple-converted-space">        </span>&lt;TableRowColumn&gt;Employed&lt;/TableRowColumn&gt;</p>
+<p class="p4"><span class="Apple-converted-space">      </span>&lt;/TableRow&gt;</p>
+<p class="p4"><span class="Apple-converted-space">    </span>&lt;/TableBody&gt;</p>
+<p class="p4"><span class="Apple-converted-space">  </span>&lt;/Table&gt;</p>
+<p class="p4">);</p>
+<p class="p5"><br></p>
+<p class="p4">export default TableExampleSimple;</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3">UIの表示してるプロジェクトと、nodeのプロジェクトをどうマージするか</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ぶっちゃけ通信周りとかはnodeのほうが取り回しが楽なんだけど、package.jsonにあるような要素の中から、webpackとreduxを省いても</p>
+<p class="p3"><span class="Apple-tab-span">	</span>無事にjsxからコードが生成できると思うのだがどうか、、まあ今回は無理かな。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>exportの別の書き方</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>こんな風に書くこともできた。</p>
+<p class="p4">import React, { Component, PropTypes } from "react";</p>
+<p class="p4">import {TextField} from 'material-ui';</p>
+<p class="p5"><br></p>
+<p class="p4"><b>export default </b>class TextFieldExampleSimple extends Component {</p>
+<p class="p4"><span class="Apple-converted-space">  </span>render() {</p>
+<p class="p4"><span class="Apple-converted-space">    </span>return (</p>
+<p class="p4"><span class="Apple-converted-space">      </span>&lt;div&gt;</p>
+<p class="p4"><span class="Apple-converted-space">        </span>&lt;TextField</p>
+<p class="p4"><span class="Apple-converted-space">          </span>hintText="+-&gt; lua codes for devices here."</p>
+<p class="p4"><span class="Apple-converted-space">          </span>multiLine={true}</p>
+<p class="p4"><span class="Apple-converted-space">          </span>rows={3}</p>
+<p class="p4"><span class="Apple-converted-space">          </span>rowsMax={10}</p>
+<p class="p4"><span class="Apple-converted-space">          </span>fullWidth={true}</p>
+<p class="p4"><span class="Apple-converted-space">        </span>/&gt;</p>
+<p class="p4"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p4"><span class="Apple-converted-space">    </span>);</p>
+<p class="p4"><span class="Apple-converted-space">  </span>}</p>
+<p class="p4">}</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>用途に応じてって感じかな。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>reduxって何で何してんの</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>react-reduxとreduxがそれぞれ依存(package.json)にあって、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>つづく。</p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+</body>
+</html>

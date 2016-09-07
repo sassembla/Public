@@ -1,0 +1,514 @@
+{\rtf1\ansi\ansicpg932\cocoartf1404\cocoasubrtf470
+{\fonttbl\f0\fnil\fcharset128 HiraginoSans-W4;\f1\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;\red230\green230\blue230;\red205\green205\blue205;\red230\green230\blue230;
+}
+\paperw11900\paperh16840\margl1440\margr1440\vieww12080\viewh10800\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\b\fs44 \cf0 MaterialUI\'8e\'67\'82\'c1\'82\'c4\'82\'dd\'82\'e9
+\b0\fs24 \
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\b \cf0 \'8a\'54\'97\'76
+\b0 \
+	\'82\'b1\'82\'cc\'83\'79\'81\'5b\'83\'57\'82\'f0\'8e\'51\'8d\'6c\'82\'c9\'93\'ae\'82\'a9\'82\'b5\'82\'c4\'82\'dd\'82\'e9\'81\'42\
+		{\field{\*\fldinst{HYPERLINK "http://blog.takanabe.tokyo/2015/12/11/1778/"}}{\fldrslt http://blog.takanabe.tokyo/2015/12/11/1778/}}\
+\
+	\'8d\'c5\'8f\'49\'93\'49\'82\'c9\'82\'cd\'81\'41\'8d\'b6\'89\'45\'82\'cc\'83\'79\'81\'5b\'83\'93\'81\'41\'89\'45\'83\'79\'81\'5b\'83\'93\'93\'e0\'82\'c9\'83\'8a\'83\'58\'83\'67\'82\'c5\'8d\'80\'96\'da\'95\'5c\'8e\'a6\'81\'41\'82\'dd\'82\'bd\'82\'a2\'82\'c8\'89\'e6\'96\'ca\'82\'aa\'8d\'ec\'82\'e8\'82\'bd\'82\'a2\'81\'42\
+\
+\
+
+\b \'83\'76\'83\'8d\'83\'57\'83\'46\'83\'4e\'83\'67\'82\'c2\'82\'ad\'82\'e9
+\b0 \
+	\'82\'dc\'82\'b8\'82\'cdnpm\'8a\'c7\'97\'9d\'89\'ba\'82\'cc\'83\'76\'83\'8d\'83\'57\'83\'46\'83\'4e\'83\'67\'82\'f0\'8d\'ec\'90\'ac\'81\'42\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \cb2 mkdir mat\
+cd mat \
+npm init\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \cb1 \
+	package.json\'82\'c9\'8e\'9f\'82\'f0\'8b\'4c\'8d\'da\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \cb2 \{\
+  "name": "mat",\
+  "version": "1.0.0",\
+  "description": "",\
+  "main": "index.js",\
+  "scripts": \{\
+    "test": "echo \\"Error: no test specified\\" && exit 1",\
+
+\b     "start": "webpack-dev-server --hot --inline --progress --colors",\
+    "build": "webpack --progress --colors"\
+
+\b0   \},
+\b \
+  "devDependencies": \{\
+    "babel-core": "^5.8.25",\
+    "babel-eslint": "^4.1.3",\
+    "babel-loader": "^5.3.2",\
+    "babel-runtime": "^5.8.25",\
+    "css-loader": "^0.19.0",\
+    "eslint": "^1.6.0",\
+    "eslint-loader": "^1.1.0",\
+    "eslint-plugin-react": "^3.5.1",\
+    "fbjs": "^0.2.1",\
+    "file-loader": "^0.8.4",\
+    "style-loader": "^0.12.4",\
+    "webpack": "^1.12.2",\
+    "webpack-dev-server": "^1.12.0",\
+    "webpack-hot-middleware": "^2.2.0"\
+  \},\
+    "dependencies": \{\
+    "classnames": "^2.1.2",\
+    "fbjs": "^0.3.2",\
+    "material-ui": "^0.13.0",\
+    "react": "^0.14.0",\
+    "react-addons-create-fragment": "^0.14.0",\
+    "react-addons-pure-render-mixin": "^0.14.0",\
+    "react-addons-transition-group": "^0.14.0",\
+    "react-addons-update": "^0.14.0",\
+    "react-dom": "^0.14.0",\
+    "react-hot-loader": "^1.3.0",\
+    "react-redux": "^3.1.0",\
+    "react-tap-event-plugin": "^0.2.0",\
+    "redux": "^3.0.2"\
+  \},
+\b0 \
+  "author": "",\
+  "license": "ISC"\
+\}\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \cb1 \
+	\'82\'c5\'81\'41\
+\pard\pardeftab720\partightenfactor0
+\cf0 \cb2 npm install\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \cb1 \
+	\'8e\'9f\'82\'c9\'81\'41webpack.config.js\'82\'f0\'8d\'ec\'90\'ac\'82\'b5\'82\'c4\'81\'41\'81\'41\'82\'a2\'82\'eb\'82\'a2\'82\'eb\'8f\'91\'82\'ab\'82\'b1\'82\'de\'81\'42\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \cb2 module.exports = \{\
+  context: __dirname,\
+  entry: \{\
+    jsx: "./src/index.jsx",\
+    css: "./src/main.css",\
+    html: "./src/index.html",\
+  \},\
+\
+  output: \{\
+    path: __dirname + "/static",\
+    filename: "bundle.js",\
+  \},\
+  module: \{\
+    preLoaders: [\
+        //Eslint loader\
+      \{ test: /\\.jsx?$/, exclude: /node_modules/, loader: "eslint-loader"\},\
+    ],\
+    loaders: [\
+      \{ test: /\\.html$/, loader: "file?name=[name].[ext]" \},\
+      \{ test: /\\.css$/, loader: "file?name=[name].[ext]" \},\
+      \{ test: /\\.jsx?$/, exclude: /node_modules/, loaders: ["react-hot","babel-loader"]\},\
+    ],\
+  \},\
+  resolve: \{\
+    extensions: ['', '.js', '.jsx']\
+  \},\
+  eslint: \{\
+    configFile: './.eslintrc'\
+  \},\
+\};\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \cb1 	\
+	eslint\'82\'c1\'82\'c4\'89\'bd\'81\'41\'82\'c1\'82\'c4\'82\'c8\'82\'c1\'82\'c4\'82\'e9\'82\'af\'82\'c7\'82\'c6\'82\'e8\'82\'a0\'82\'a6\'82\'b8\'82\'e2\'82\'c1\'82\'c4\'82\'dd\'82\'e9\'81\'42\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \cb2 touch .eslintrc\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \cb1 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \cb2 \{\
+  "env": \{\
+    "es6": true,\
+    "browser": true,\
+    "node": true\
+  \},\
+  "rules": \{\
+    "curly": 0,\
+    "comma-dangle": [2, "never"],\
+    "comma-spacing": 0,\
+    "eqeqeq": [2, "allow-null"],\
+    "key-spacing": 0,\
+    "no-underscore-dangle": 0,\
+    "no-unused-expressions": 0,\
+    "no-shadow": 0,\
+    "no-shadow-restricted-names": 0,\
+    "no-extend-native": 0,\
+    "no-var": 2,\
+    "new-cap": 0,\
+    "quotes": 0,\
+    "semi-spacing": 0,\
+    "space-unary-ops": 0,\
+    "space-infix-ops": 0,\
+    "consistent-return": 0,\
+    "strict": 0\
+  \},\
+  "parser": "babel-eslint",\
+  "plugins": [\
+    "react"\
+  ],\
+  "ecmaFeatures": \{\
+    "arrowFunctions": true,\
+    "jsx": true\
+  \}\
+\}	\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \cb1 \
+	\'82\'a0\'82\'a0\'81\'41babel\'81\'41\'81\'41\'82\'c8\'82\'e9\'82\'d9\'82\'c7\'81\'41\'81\'41\'83\'52\'83\'93\'83\'70\'83\'43\'83\'89\'82\'cc\'8b\'4e\'93\'ae\'82\'c6\'82\'a9\'82\'cc\'90\'dd\'92\'e8\'82\'c8\'82\'cc\'82\'a9\'81\'42\'8a\'54\'94\'4f\'82\'c6\'82\'b5\'82\'c4\'82\'cdlint\'81\'41\'82\'c1\'82\'c4\'82\'a2\'82\'a4\'81\'42\
+\
+	src\'83\'74\'83\'48\'83\'8b\'83\'5f\'82\'f0\'8d\'ec\'82\'c1\'82\'c4\'81\'41\'92\'86\'82\'c9index.html\'82\'c6\'82\'a9\'92\'75\'82\'ad\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \cb2 mkdir src\
+touch ./src/index.html\
+touch ./src/index.jsx\
+touch ./src/main.css\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \cb1 \
+	\'82\'c5\'81\'41npm run build\'82\'c5\'81\'41package.json\'82\'c5\'8e\'77\'92\'e8\'82\'b5\'82\'bdbuild\'83\'52\'83\'7d\'83\'93\'83\'68\'82\'f0\'8e\'c0\'8d\'73\'81\'42\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \cb2 npm run build\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \cb1 \
+	\'82\'a8\'82\'a8\'81\'41\'81\'41\'82\'c8\'82\'f1\'82\'a9\'83\'52\'83\'93\'83\'70\'83\'43\'83\'8b\'82\'c5\'82\'ab\'82\'bd\'82\'bc\'81\'41\'81\'41\
+\
+	\'82\'c5\'81\'41\'8e\'9f\'82\'c9\'81\'41index.jsx\'82\'c9\'82\'a2\'82\'eb\'82\'a2\'82\'eb\'8f\'91\'82\'a2\'82\'bd\'82\'e8\'82\'b7\'82\'e9\'82\'f1\'82\'be\'82\'af\'82\'c7\'81\'41\'82\'be\'82\'a2\'82\'bd\'82\'a2\'82\'a9\'82\'a2\'82\'c4\'82\'a0\'82\'e9\'82\'dc\'82\'dc\'90\'69\'82\'df\'82\'e7\'82\'ea\'82\'e9\'81\'42\
+\
+	\'82\'bd\'82\'be\'82\'bb\'82\'cc\'82\'dc\'82\'dc\'82\'be\'82\'c6\'93\'ae\'82\'a9\'82\'c8\'82\'a9\'82\'c1\'82\'bd\'82\'cc\'82\'c5\'81\'41App.jsx\'82\'be\'82\'af\'8e\'e8\'82\'f0\'89\'c1\'82\'a6\'82\'bd\'81\'42\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\b \cf0 \cb2 import React, \{ Component, PropTypes \} from "react";\
+import \{ bindActionCreators \} from 'redux';\
+
+\b0 import \{ connect \} from 'react-redux';\
+import Header from '../components/Header';\
+import MainSection from '../components/MainSection';\
+\
+class App extends Component \{\
+  render() \{\
+    return (\
+      <div>\
+        <Header />\
+        <MainSection />\
+      </div>\
+    );\
+  \}\
+\}\
+\
+export default App;\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \cb1 \
+	Material UI\'82\'cc\'8d\'ec\'90\'ac\'82\'cd\'81\'41components\'83\'74\'83\'48\'83\'8b\'83\'5f\'82\'f0\'8d\'ec\'82\'c1\'82\'c4\'82\'a2\'82\'eb\'82\'a2\'82\'eb\'83\'74\'83\'40\'83\'43\'83\'8b\'92\'75\'82\'a2\'82\'c4\'81\'41\'82\'bb\'82\'b1\'82\'c9ReactComponent\'82\'f0\'8b\'4c\'8f\'71\'82\'b5\'82\'aa\'82\'c4\'82\'e7\'8d\'73\'82\'a4\'81\'42\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \cb2 mkdir components\
+touch ./components/Header.jsx\
+touch ./components/MainSection.jsx\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \cb1 \
+	Header.jsx\
+\pard\pardeftab720\partightenfactor0
+\cf0 \cb2 import React, \{ PropTypes, Component \} from 'react';\
+\
+import mui, \{
+\b AppBar
+\b0 \} from 'material-ui';\
+const ThemeManager = require('material-ui/lib/styles/theme-manager');\
+\pard\pardeftab720\partightenfactor0
+\cf0 \cb3 import MyRawTheme from '../src/material_ui_raw_theme_file'\
+\pard\pardeftab720\partightenfactor0
+\cf0 \cb2 \
+class Header extends Component \{\
+  static get childContextTypes() \{\
+    return \{ muiTheme: React.PropTypes.object \};\
+  \}\
+\
+  getChildContext()\{\
+    return \{  muiTheme: ThemeManager.getMuiTheme(MyRawTheme)\};\
+  \}\
+\
+  render() \{\
+    return (\
+      <header className="header">\
+        <h1>AppBar Component</h1>\
+        <
+\b AppBar
+\b0  title="React + Redux + Material UI Boilerplate" />\
+      </header>\
+    );\
+  \}\
+\}\
+\
+export default Header;\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \cb1 \
+	\'82\'b1\'82\'ea\'82\'c5AppBar\'82\'aa\'8f\'6f\'82\'e9\'81\'42\'82\'d9\'82\'a4\'82\'d9\'82\'a4\'81\'42\
+	\'8d\'d7\'82\'a9\'82\'a2\'90\'dd\'92\'e8\'92\'6c\'82\'cd\'82\'bf\'82\'e5\'82\'c1\'82\'c6\'94\'5a\'82\'a2\'8d\'73\'82\'c5\'81\'41\'83\'74\'83\'40\'83\'43\'83\'8b\'82\'f0\'8e\'67\'82\'c1\'82\'c4\'8e\'77\'92\'e8\'82\'b5\'82\'c4\'82\'a2\'82\'e9\'81\'42\
+	(\'96\'ca\'93\'7c\'82\'c8\'82\'cc\'82\'c5\'83\'49\'83\'74\'82\'c1\'82\'c4\'82\'dd\'82\'bd\'81\'42)\
+\
+	\'8e\'9f\'82\'c9\'81\'41MainSection.jsx\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \cb2 import React, \{ Component, PropTypes \} from 'react';\
+import mui, \{CircularProgress,\
+             Tabs,\
+             Tab,\
+             DatePicker\
+            \} from 'material-ui';\
+\
+class MainSection extends Component \{\
+  render() \{\
+    return (\
+      <div>\
+        <h1>Progress Component</h1>\
+        <CircularProgress mode="indeterminate" size=\{1.5\} />\
+        <CircularProgress mode="indeterminate" color=\{"red"\} size=\{2\} />\
+        <br/>\
+\
+        <h1>Tab Component</h1>\
+        <Tabs>\
+          <Tab label="Tab One" value="0" />\
+          <Tab label="Tab Two" value="1" />\
+          <Tab label="Tab Three" value="2" />\
+        </Tabs>\
+        <br/>\
+\
+        <h1>DatePicker Component</h1>\
+        <DatePicker hintText="Portrait Dialog" />\
+        <br/>\
+      </div>\
+    );\
+  \}\
+\}\
+\
+export default MainSection;\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \cb1 \
+	\'82\'c5\'81\'41\'82\'b1\'82\'b1\'82\'dc\'82\'c5\'8f\'91\'82\'a2\'82\'bd\'82\'a0\'82\'c6\'81\'41npm start \'82\'b7\'82\'e9\'82\'c6\'81\'41\'83\'45\'83\'48\'83\'62\'83\'60\'8f\'f3\'91\'d4\'82\'c9\'82\'c8\'82\'e9 + \'83\'54\'81\'5b\'83\'6f\'8b\'4e\'93\'ae\'82\'b5\'82\'c4\'81\'41\'83\'75\'83\'89\'83\'45\'83\'55\'82\'c5\'8a\'cf\'82\'ea\'82\'e9\'82\'e6\'82\'a4\'82\'c9\'82\'c8\'82\'e9\'81\'42\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \cb2 npm start\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \cb1 	\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f1 \cf0 {{\NeXTGraphic スクリーンショット 2016-09-07 15.02.45.png \width14180 \height14640
+}�}\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0 \cf0 \
+\
+	\'82\'c6\'82\'e8\'82\'a0\'82\'a6\'82\'b82016/09/07\'8c\'bb\'8d\'dd\'82\'c5\'82\'e0\'93\'ae\'82\'a2\'82\'c4\'82\'ad\'82\'ea\'82\'c4\'82\'e6\'82\'a9\'82\'c1\'82\'bd\'81\'42\
+\
+	redux\'82\'c1\'82\'c4\'88\'ea\'91\'cc\'82\'c8\'82\'c9\'82\'c5\'81\'41\'89\'bd\'82\'b5\'82\'c4\'82\'e9\'82\'f1\'82\'be\'82\'eb\'82\'a4\'81\'41\'82\'c1\'82\'c4\'82\'a2\'82\'a4\'82\'cc\'82\'f0\'8c\'e3\'82\'c5\'92\'c7\'82\'a4\'81\'42\
+\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\b \cf0 MaterialUI\'82\'c5\'83\'65\'81\'5b\'83\'75\'83\'8b\'82\'f0\'95\'5c\'8e\'a6\'82\'b5\'82\'c4\'82\'dd\'82\'e9
+\b0 \
+	{\field{\*\fldinst{HYPERLINK "http://www.material-ui.com/#/components/table"}}{\fldrslt http://www.material-ui.com/#/components/table}} \'82\'a9\'82\'e7\'81\'41\
+	\'83\'52\'81\'5b\'83\'68\'82\'f0\'8c\'a9\'82\'e9(<>\'83\'7d\'81\'5b\'83\'4e\'82\'f0\'89\'9f\'82\'b7) -> components \'83\'74\'83\'48\'83\'8b\'83\'5f\'82\'c9TableExampleSimple.jsx\'82\'c1\'82\'c4\'82\'a2\'82\'a4\'96\'bc\'91\'4f\'82\'c5\'83\'74\'83\'40\'83\'43\'83\'8b\'82\'f0\'8d\'ec\'82\'e9\'81\'42\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \cb2 import React from 'react';\
+import \{Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn\} from 'material-ui';// \'96\'96\'94\'f6\'82\'f0'material-ui'\'82\'c9\'95\'cf\'8d\'58\'82\'b5\'82\'c4\'83\'70\'83\'58\'82\'f0\'8d\'87\'82\'ed\'82\'b9\'82\'c4\'82\'e9\
+\
+const TableExampleSimple = () => (\
+  <Table>\
+    <TableHeader>\
+      <TableRow>\
+        <TableHeaderColumn>ID</TableHeaderColumn>\
+        <TableHeaderColumn>Name</TableHeaderColumn>\
+        <TableHeaderColumn>Status</TableHeaderColumn>\
+      </TableRow>\
+    </TableHeader>\
+    <TableBody>\
+      <TableRow>\
+        <TableRowColumn>1</TableRowColumn>\
+        <TableRowColumn>John Smith</TableRowColumn>\
+        <TableRowColumn>Employed</TableRowColumn>\
+      </TableRow>\
+      <TableRow>\
+        <TableRowColumn>2</TableRowColumn>\
+        <TableRowColumn>Randal White</TableRowColumn>\
+        <TableRowColumn>Unemployed</TableRowColumn>\
+      </TableRow>\
+      <TableRow>\
+        <TableRowColumn>3</TableRowColumn>\
+        <TableRowColumn>Stephanie Sanders</TableRowColumn>\
+        <TableRowColumn>Employed</TableRowColumn>\
+      </TableRow>\
+      <TableRow>\
+        <TableRowColumn>4</TableRowColumn>\
+        <TableRowColumn>Steve Brown</TableRowColumn>\
+        <TableRowColumn>Employed</TableRowColumn>\
+      </TableRow>\
+    </TableBody>\
+  </Table>\
+);\
+\
+
+\b export default TableExampleSimple;
+\b0 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \cb1 	\
+	\'82\'c5\'81\'41export\'8b\'e5\'82\'c4\'82\'cc\'82\'aa\'82\'a0\'82\'e9\'82\'cc\'82\'c9\'8f\'89\'82\'df\'82\'c4\'8b\'43\'82\'c3\'82\'a2\'82\'bd\'81\'42\'82\'d9\'82\'a4\'81\'42\
+\
+	containers\'83\'74\'83\'48\'83\'8b\'83\'5f\'82\'ccApp.jsx\'91\'a4\'82\'f0\'88\'c8\'89\'ba\'82\'cc\'82\'e6\'82\'a4\'82\'c9\'95\'cf\'8d\'58\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \cb2 import React, \{ Component, PropTypes \} from "react";\
+import \{ bindActionCreators \} from 'redux';\
+import \{ connect \} from 'react-redux';\
+import Header from '../components/Header';\
+import MainSection from '../components/MainSection';\
+
+\b import TableExampleSimple from '../components/TableExampleSimple'
+\b0 \
+\
+class App extends Component \{\
+        // <Header />\
+        // <MainSection />\
+  render() \{\
+    return (\
+      <div>\
+      	<TableExampleSimple />\
+      </div>\
+    );\
+  \}\
+\}\
+\
+export default App;\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \cb1 \
+	import\'8b\'e5\'82\'c5\'81\'41\'83\'52\'83\'93\'83\'7c\'81\'5b\'83\'6c\'83\'93\'83\'67\'82\'cc\'97\'76\'91\'66 from \'83\'74\'83\'40\'83\'43\'83\'8b\'83\'70\'83\'58 \'82\'dd\'82\'bd\'82\'a2\'82\'c9\'8e\'77\'92\'e8\'82\'c5\'82\'ab\'82\'e9\'82\'f1\'82\'be\'82\'c8\'81\'42\'82\'c8\'82\'e9\'82\'d9\'82\'c7\'81\'42\
+	\'82\'c5\'81\'41App \'83\'52\'83\'93\'83\'7c\'81\'5b\'83\'6c\'83\'93\'83\'67\'82\'cdUI\'82\'cc\'8d\'aa\'82\'c1\'82\'b1\'82\'c6\'82\'b5\'82\'c4\'81\'41index.jsx\'82\'a9\'82\'e7\'8e\'51\'8f\'c6\'82\'b3\'82\'ea\'82\'c4\'82\'a2\'82\'e9\'81\'42\
+	\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \cb2 import React from "react";\
+import ReactDOM from "react-dom";\
+import injectTapEventPlugin from "react-tap-event-plugin";\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \cb3 import App from '../containers/App';\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \cb2 \
+//Needed for React Developer Tools\
+window.React = React;\
+\
+//Needed for onTouchTap\
+//Can go away when react 1.0 release\
+//Check this repo:\
+//https://github.com/zilverline/react-tap-event-plugin\
+injectTapEventPlugin();\
+\
+ReactDOM.render(\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \cb3   <App />,\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \cb2   document.getElementById("root")\
+);\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \cb1 \
+	\'90\'46\'82\'c2\'82\'ab\'82\'cc\'95\'94\'95\'aa\'82\'c5\'82\'cc\'90\'da\'91\'b1\'82\'cd\'82\'b1\'82\'a4\'82\'a2\'82\'a4\'97\'9d\'8b\'fc\'82\'c9\'82\'c8\'82\'c1\'82\'c4\'82\'bd\'82\'f1\'82\'be\'82\'c8\'81\'5b\'81\'5b\'94\'63\'88\'ac\'81\'42\
+	\
+\'95\'5c\'8e\'a6\'82\'cd\'82\'b1\'82\'f1\'82\'c8\'95\'97\'82\'c9\'82\'c8\'82\'c1\'82\'bd\'81\'42\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f1 \cf0 {{\NeXTGraphic スクリーンショット 2016-09-07 17.16.00.png \width22320 \height10360
+}�}\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0 \cf0 \
+\
+	\'82\'c5\'81\'41\'82\'b1\'82\'ea\'82\'a0\'82\'cc\'81\'41\'81\'41\'8e\'e8\'82\'c5JSX\'82\'c9\'8f\'91\'82\'ab\'92\'bc\'82\'b3\'82\'c8\'82\'a2\'82\'c6\'82\'a2\'82\'af\'82\'c8\'82\'a2\'82\'cc\'81\'48\
+	TableExampleSimple.jsx\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \cb2 import React from 'react';\
+import \{Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn\} from 'material-ui';\
+\
+\
+const TableExampleSimple = () => (\
+  <Table>\
+    <TableHeader>\
+      <TableRow>\
+        <TableHeaderColumn>ID</TableHeaderColumn>\
+        <TableHeaderColumn>Name</TableHeaderColumn>\
+        <TableHeaderColumn>Status</TableHeaderColumn>\
+      </TableRow>\
+    </TableHeader>\
+    <TableBody>\
+      <TableRow>\
+        <TableRowColumn>1</TableRowColumn>\
+        <TableRowColumn>John Smith</TableRowColumn>\
+        <TableRowColumn>Employed</TableRowColumn>\
+      </TableRow>\
+      <TableRow>\
+        <TableRowColumn>2</TableRowColumn>\
+        <TableRowColumn>Randal White</TableRowColumn>\
+        <TableRowColumn>Unemployed</TableRowColumn>\
+      </TableRow>\
+      <TableRow>\
+        <TableRowColumn>3</TableRowColumn>\
+        <TableRowColumn>Stephanie Sanders</TableRowColumn>\
+        <TableRowColumn>Employed</TableRowColumn>\
+      </TableRow>\
+      <TableRow>\
+        <TableRowColumn>4</TableRowColumn>\
+        <TableRowColumn>Steve Brown</TableRowColumn>\
+        <TableRowColumn>Employed</TableRowColumn>\
+      </TableRow>\
+    </TableBody>\
+  </Table>\
+);\
+\
+export default TableExampleSimple;\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \cb1 \
+\
+UI\'82\'cc\'95\'5c\'8e\'a6\'82\'b5\'82\'c4\'82\'e9\'83\'76\'83\'8d\'83\'57\'83\'46\'83\'4e\'83\'67\'82\'c6\'81\'41node\'82\'cc\'83\'76\'83\'8d\'83\'57\'83\'46\'83\'4e\'83\'67\'82\'f0\'82\'c7\'82\'a4\'83\'7d\'81\'5b\'83\'57\'82\'b7\'82\'e9\'82\'a9\
+	\'82\'d4\'82\'c1\'82\'bf\'82\'e1\'82\'af\'92\'ca\'90\'4d\'8e\'fc\'82\'e8\'82\'c6\'82\'a9\'82\'cdnode\'82\'cc\'82\'d9\'82\'a4\'82\'aa\'8e\'e6\'82\'e8\'89\'f1\'82\'b5\'82\'aa\'8a\'79\'82\'c8\'82\'f1\'82\'be\'82\'af\'82\'c7\'81\'41package.json\'82\'c9\'82\'a0\'82\'e9\'82\'e6\'82\'a4\'82\'c8\'97\'76\'91\'66\'82\'cc\'92\'86\'82\'a9\'82\'e7\'81\'41webpack\'82\'c6redux\'82\'f0\'8f\'c8\'82\'a2\'82\'c4\'82\'e0\
+	\'96\'b3\'8e\'96\'82\'c9jsx\'82\'a9\'82\'e7\'83\'52\'81\'5b\'83\'68\'82\'aa\'90\'b6\'90\'ac\'82\'c5\'82\'ab\'82\'e9\'82\'c6\'8e\'76\'82\'a4\'82\'cc\'82\'be\'82\'aa\'82\'c7\'82\'a4\'82\'a9\'81\'41\'81\'41\'82\'dc\'82\'a0\'8d\'a1\'89\'f1\'82\'cd\'96\'b3\'97\'9d\'82\'a9\'82\'c8\'81\'42\
+\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\b \cf0 export\'82\'cc\'95\'ca\'82\'cc\'8f\'91\'82\'ab\'95\'fb
+\b0 \
+	\'82\'b1\'82\'f1\'82\'c8\'95\'97\'82\'c9\'8f\'91\'82\'ad\'82\'b1\'82\'c6\'82\'e0\'82\'c5\'82\'ab\'82\'bd\'81\'42\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \cb4 import React, \{ Component, PropTypes \} from "react";\
+import \{TextField\} from 'material-ui';\
+\
+
+\b export default 
+\b0 class TextFieldExampleSimple extends Component \{\
+  render() \{\
+    return (\
+      <div>\
+        <TextField\
+          hintText="+-> lua codes for devices here."\
+          multiLine=\{true\}\
+          rows=\{3\}\
+          rowsMax=\{10\}\
+          fullWidth=\{true\}\
+        />\
+      </div>\
+    );\
+  \}\
+\}\
+\cb1 \
+	\'97\'70\'93\'72\'82\'c9\'89\'9e\'82\'b6\'82\'c4\'82\'c1\'82\'c4\'8a\'b4\'82\'b6\'82\'a9\'82\'c8\'81\'42\
+\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\b \cf0 redux\'82\'c1\'82\'c4\'89\'bd\'82\'c5\'89\'bd\'82\'b5\'82\'c4\'82\'f1\'82\'cc
+\b0 \
+	react-redux\'82\'c6redux\'82\'aa\'82\'bb\'82\'ea\'82\'bc\'82\'ea\'88\'cb\'91\'b6(package.json)\'82\'c9\'82\'a0\'82\'c1\'82\'c4\'81\'41\
+	\'82\'c2\'82\'c3\'82\'ad\'81\'42\
+\
+	}
