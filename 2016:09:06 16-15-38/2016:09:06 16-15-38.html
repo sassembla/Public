@@ -1,0 +1,400 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1404.47">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Sans'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; background-color: #ebebeb}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; background-color: #d6d6d6}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; background-color: #ebebeb; min-height: 18.0px}
+    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; color: #ff40ff; background-color: #ebebeb}
+    span.s1 {color: #ff2600}
+    span.s2 {color: #0433ff}
+    span.s3 {color: #ff40ff}
+    span.s4 {color: #000000}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>今更Reactことはじめ</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>React + MaterialUIで適当にウェッサイ作る。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>SSRで動いてるのはすでに自社とかでもあったんだけど、全部自分で最初から描いてみよ、ってなるのは初。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>UnityのWebGLで作ってもいいんだけど、せっかくだからやってみようと思う。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>次こういう機会があったら、試しにAngular2を使ってみよう(微レ存</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ちなみにパパっと使う上ではReact大満足。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>StarterKit</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Facebookが作ってるスターターキットがあったので使う。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://facebook.github.io/react/docs/getting-started.html">https://facebook.github.io/react/docs/getting-started.html</a></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>こいつにはオフラインでもreactのフローが動くように幾つかのjsファイルが含まれている。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>build/</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>react-dom-server.js</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>react-dom-server.min.js</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>react-dom.js</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>react-dom.min.js</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>react-with-addons.js</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>react-with-addons.min.js</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>react.js</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>react.min.js<span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これらだけで動かせる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>jsxのコンパイルだけは、下記watchを働かせるために、どこかから仕入れてきていた。</p>
+<p class="p4">jsx --watch src/ build/</p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>どっからもってきた(npm install ? )したのかよくわかってない。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>GUI要素をJavaScriptで書く</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>書けるのな～～楽な～～～～～。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ReactDOMってのがグローバルに存在してるんで、htmlに書いてある適当な要素に対して、</p>
+<p class="p4">&lt;!DOCTYPE html&gt;</p>
+<p class="p4">&lt;html&gt;</p>
+<p class="p4"><span class="Apple-converted-space">  <span class="Apple-tab-span">	</span></span>&lt;head&gt;</p>
+<p class="p4"><span class="Apple-converted-space">  <span class="Apple-tab-span">	</span>  <span class="Apple-tab-span">	</span></span>&lt;meta charset="UTF-8" /&gt;</p>
+<p class="p4"><span class="Apple-converted-space">  <span class="Apple-tab-span">	</span>  <span class="Apple-tab-span">	</span></span>&lt;title&gt;Hello React!&lt;/title&gt;</p>
+<p class="p4"><span class="Apple-converted-space">  <span class="Apple-tab-span">	</span>  <span class="Apple-tab-span">	</span></span>&lt;script src="build/react.js"&gt;&lt;/script&gt;</p>
+<p class="p4"><span class="Apple-converted-space">  <span class="Apple-tab-span">	</span>  <span class="Apple-tab-span">	</span></span>&lt;script src="build/react-dom.js"&gt;&lt;/script&gt;</p>
+<p class="p4"><span class="Apple-converted-space">  <span class="Apple-tab-span">	</span>  <span class="Apple-tab-span">	</span></span>&lt;script src="https://npmcdn.com/babel-core@5.8.38/browser.min.js"&gt;&lt;/script&gt;</p>
+<p class="p4"><span class="Apple-converted-space">  <span class="Apple-tab-span">	</span>  <span class="Apple-tab-span">	</span></span>&lt;script type="text/babel" src="src/helloworld.js"&gt;&lt;/script&gt;</p>
+<p class="p4"><span class="Apple-converted-space">  <span class="Apple-tab-span">	</span></span>&lt;/head&gt;</p>
+<p class="p4"><span class="Apple-converted-space">  <span class="Apple-tab-span">	</span></span>&lt;body&gt;</p>
+<p class="p4"><span class="Apple-converted-space">  <span class="Apple-tab-span">	</span>  <span class="Apple-tab-span">	</span></span>&lt;div id="<b>example</b>"&gt;&lt;/div&gt;</p>
+<p class="p4"><span class="Apple-converted-space">  <span class="Apple-tab-span">	</span></span>&lt;/body&gt;</p>
+<p class="p4">&lt;/html&gt;<span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>下記でGUI要素をJavaScriptからアタッチできる。</p>
+<p class="p4">ReactDOM.render(</p>
+<p class="p4"><span class="Apple-tab-span">	</span>&lt;CommentBox /&gt;,</p>
+<p class="p4"><span class="Apple-tab-span">	</span>document.getElementById('<b>example</b>')</p>
+<p class="p4">);</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、アタッチする要素CommentBoxについては、これもjsから書ける。</p>
+<p class="p4">var CommentBox = <b>React.createClass</b>({</p>
+<p class="p4"><span class="Apple-tab-span">	</span>render: function() {</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>return (</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>&lt;div className="commentBox"&gt;</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>&lt;h1&gt;Comments&lt;/h1&gt;</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>&lt;CommentList /&gt;</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>&lt;CommentForm /&gt;</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>&lt;/div&gt;</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>);</p>
+<p class="p4"><span class="Apple-tab-span">	</span>}</p>
+<p class="p4">});</p>
+<p class="p3"><span class="Apple-tab-span">	</span>render関数が描画される。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>これらcreateClass関数で生成した要素は、コンポーネントという単位の雛形になる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>コンポーネント名としては、変数名があてがわれる。(上の場合だとCommentBoxっていうコンポーネントになる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>JSXで書いたrender関数の要素には、他のコンポーネントを入れ子にすることができる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>このコンポーネント間の参照の解釈タイミングは実際の実行時のため、コンポーネントを書いてる位置は問題にならない。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ただし、ReactDOM.render内で参照されるコンポーネントについては、必ず全ての参照がReactDOM.renderが呼ばれる前に解決されている必要がある。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>つまりReactDOM.render関数は最後に書こうなという感じ。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>入れ子になってる要素 CommentListとかCommentFormは、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>同じようにcreateClass関数で作成できる。</p>
+<p class="p4">var CommentForm = React.createClass({</p>
+<p class="p4"><span class="Apple-tab-span">	</span>render: function() {</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>return (</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>&lt;div className="commentForm"&gt;</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Hello, world! I am a CommentForm.</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>&lt;/div&gt;</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>);</p>
+<p class="p4"><span class="Apple-tab-span">	</span>}</p>
+<p class="p4">});</p>
+<p class="p2"><br></p>
+<p class="p4">var CommentList = React.createClass({</p>
+<p class="p4"><span class="Apple-tab-span">	</span>render: function() {</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>return (</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>&lt;div className="commentList"&gt;</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>&lt;Comment author="Pete Hunt"&gt;This is one comment&lt;/Comment&gt;</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>&lt;Comment author="Jordan Walke"&gt;This is *another* comment&lt;/Comment&gt;</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>&lt;/div&gt;</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>);</p>
+<p class="p4"><span class="Apple-tab-span">	</span>}</p>
+<p class="p4">});</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>なんて楽なんだ、、、、</p>
+<p class="p2"><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>エラーの出方</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>例えば var Commentって書かれるべきクラスをComm<b>m</b>entとかtypoした場合、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>CommentListから参照できない要素があるよっていうエラーが出る。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>データを適応する</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>上記でベタが記してあるCommentListの中身を、jsonから読むようにする。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>まずデータを用意して、</p>
+<p class="p4">var data = [</p>
+<p class="p4"><span class="Apple-tab-span">	</span>{id: 1, author: "Pete Hunt", text: "This is one comment from json."},</p>
+<p class="p4"><span class="Apple-tab-span">	</span>{id: 2, author: "Jordan Walke", text: "This is *another* comment<span class="Apple-converted-space">  </span>from json"}</p>
+<p class="p4">];</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>次にデータを使うところまでの経路にデータ読み込む旨を書いていく。</p>
+<p class="p4">ReactDOM.render(</p>
+<p class="p4"><span class="Apple-tab-span">	</span>&lt;CommentBox<b> data={data} </b>/&gt;,</p>
+<p class="p4"><span class="Apple-tab-span">	</span>document.getElementById('example')</p>
+<p class="p4">);</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>CommentBoxにデータを入れてるんで、CommentBoxにもデータをCommentListへと伝播するためのコードを書く。</p>
+<p class="p4">var CommentBox = React.createClass({</p>
+<p class="p4"><span class="Apple-tab-span">	</span>render: function() {</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>return (</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>&lt;div className="commentBox"&gt;</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>&lt;h1&gt;Comments&lt;/h1&gt;</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>&lt;CommentList<b> data={this.props.data}</b> /&gt;</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>&lt;CommentForm /&gt;</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>&lt;/div&gt;</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>);</p>
+<p class="p4"><span class="Apple-tab-span">	</span>}</p>
+<p class="p4">});</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>CommentListにデータを渡したいので、data = {this.props.data} とか書く。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>下流のパラメータ名 = {this.props.上流からのデータの名前} という記法で、データのマッピングがされるみたいだ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ここでのthisはこれ、CommentBoxのインスタンスなのかな。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、それを受けるCommentListは、</p>
+<p class="p4">var CommentList = React.createClass({</p>
+<p class="p4"><span class="Apple-tab-span">	</span>render: function() {</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><b>var commentNodes = this.props.data.map(function(comment) {</b></p>
+<p class="p4"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>return (</b></p>
+<p class="p5"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>&lt;Comment author={comment.author} key={</b><span class="s1"><b>comment.id</b></span><b>}&gt;</b></p>
+<p class="p5"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>{comment.text}</b></p>
+<p class="p5"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>&lt;/Comment&gt;</b></p>
+<p class="p4"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>);</b></p>
+<p class="p4"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>});</b></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>return (</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>&lt;div className="commentList"&gt;</p>
+<p class="p4"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>{commentNodes}</b></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>&lt;/div&gt;</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>);</p>
+<p class="p4"><span class="Apple-tab-span">	</span>}</p>
+<p class="p4">});</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>この要素に渡ってくる、props内のdataという名前のパラメータに対して、JSXでDOM要素を返す関数を、組み込みのmap関数で適応する。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ようはCommentのリストを作り出している。らくちんかよ。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>濃い要素の部分はJSXでCommentクラスの描画可能なパラメータを返してきてて、これがそのまま、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>はるばるReactDOM.renderから渡ってきたjsonデータの中身の展開部分になっている。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Commentコンポーネントに対し、author、key、textをそれぞれ取り出して使用している。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>author=author、key=id、で、このkey部分が特にコンポーネントで固定された意味を持っている。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>っていうかkeyは自前定義ではなく、propsには初めから、virtualDOM用の要素としてkeyというパラメータが用意されている。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>mapとかでリストを作り出す際に、uniqueを発揮するためにセットする必要がある。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>差分更新のために、リストの要素にもunique性が必要な訳だ。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>keyはそのuniqueをReact側が把握するために使用する。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、最終的に{commentNodes}をreturnして終わり。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>無事にビューへとデータが反映される。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>すげーなーーこれ。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>パラメータをサーバから持ってくる = APIを呼んでその値を入れるには？</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>いろんなパラメータ、状態、遷移を、なんかしっかりしたハンドラの仕組みによってものすごく折りたためる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・取得元のurlを外部から与える形にできることによって、データ取得のソースの記述を外部化できる</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・初期値をセットできる</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・コンポーネントごとの挙動をそのurlパラメータに依存し、実行時処理の関数化ができる</p>
+<p class="p2"><br></p>
+<p class="p4">var CommentBox = React.createClass({</p>
+<p class="p4"><b><span class="Apple-tab-span">	</span>loadCommentsFromServer: function() {</b></p>
+<p class="p4"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>$.ajax({</b></p>
+<p class="p4"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>url: this.props.url,</b></p>
+<p class="p4"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>dataType: 'json',</b></p>
+<p class="p4"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>cache: false,</b></p>
+<p class="p4"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>success: function(data) {</b></p>
+<p class="p4"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>this.setState({data: data});</b></p>
+<p class="p4"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}.bind(this),</b></p>
+<p class="p4"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>error: function(xhr, status, err) {</b></p>
+<p class="p4"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>console.error(this.props.url, status, err.toString());</b></p>
+<p class="p4"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}.bind(this)</b></p>
+<p class="p4"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>});<span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></b></p>
+<p class="p4"><b><span class="Apple-tab-span">	</span>},</b></p>
+<p class="p6"><br></p>
+<p class="p4"><b><span class="Apple-tab-span">	</span>getInitialState: function() {</b></p>
+<p class="p4"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>return {data: []};</b></p>
+<p class="p4"><b><span class="Apple-tab-span">	</span>},</b></p>
+<p class="p6"><br></p>
+<p class="p4"><b><span class="Apple-tab-span">	</span>componentDidMount: function() {</b></p>
+<p class="p4"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>this.loadCommentsFromServer();</b></p>
+<p class="p4"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>setInterval(this.loadCommentsFromServer, this.props.pollInterval);</b></p>
+<p class="p4"><b><span class="Apple-tab-span">	</span>},</b></p>
+<p class="p6"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>render: function() {</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>return (</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>&lt;div className="commentBox"&gt;</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>&lt;h1&gt;Comments&lt;/h1&gt;</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>&lt;CommentList data={this.<b>state</b>.data} /&gt;</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>&lt;CommentForm /&gt;</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>&lt;/div&gt;</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>);</p>
+<p class="p4"><span class="Apple-tab-span">	</span>}</p>
+<p class="p4">});</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>上から順に、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>loadCommentsFromServerっていう自前の関数定義をして、jQuery使ってデータを取得、成功したらdataに対してdataを反映。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>getInitialStateっていう<b>組み込み</b>の関数定義をして、デフォルトのdata値をセット、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>componentDidMountっていう<b>組み込み</b>の関数定義をして、このコンポーネントがマウントされた際、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>loadCommentsFromServerを呼び出してdataに入力するjsonを取得、アタッチする。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>render関数の中身にも変更があり、初期値としてセットした空のデータをまず読ませるために、this.<b>state.data</b>を使っている。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ちなみにここでjqueryに依存してるけどサンプルがそうなってるだけなんでReact自体にjQuery依存はない。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>(で、jQuery経由のsetStateでwarningが出るんですがこれは一体どうすればいいのか。)</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>新しいコメントの入力を行う機構を作りこむ</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>入力が行われたら、新しいCommentをサーバに送り込むことになる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>イベントの着火自体はCommentFormで行われるので、その入力を上位CommentBoxとかに届けたい。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>変更 = コメントの追加があった際、親であるCommentBoxから、子であるCommentListに要素を加えることになるため、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>親コンポーネントに何らかの方法でデータを伝達、処理させる必要がある。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ComentBoxでonCommentSubmitというプロパティを自作して、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>下位のCommentFormに渡してCommentFormから入力時にCommentBoxの関数を実行できるようにする。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>小さな範囲での密結合を生んでこれを解決している。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p4">var CommentForm = React.createClass({</p>
+<p class="p4"><span class="Apple-tab-span">	</span>getInitialState: function() {</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>return {author: '', text: ''};</p>
+<p class="p4"><span class="Apple-tab-span">	</span>},</p>
+<p class="p4"><span class="Apple-tab-span">	</span><b>handleAuthorChange: function(e) {</b></p>
+<p class="p4"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>this.setState({author: e.target.value});</b></p>
+<p class="p4"><b><span class="Apple-tab-span">	</span>},</b></p>
+<p class="p6"><b></b><br></p>
+<p class="p4"><b><span class="Apple-tab-span">	</span>handleTextChange: function(e) {</b></p>
+<p class="p4"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>this.setState({text: e.target.value});</b></p>
+<p class="p4"><b><span class="Apple-tab-span">	</span>},</b></p>
+<p class="p6"><br></p>
+<p class="p4"><b><span class="Apple-tab-span">	</span></b><span class="s1"><b>handleSubmit</b></span><b>: function(e) {</b></p>
+<p class="p4"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>e.preventDefault();</b></p>
+<p class="p6"><b></b><br></p>
+<p class="p4"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>// 入力をvalidate</b></p>
+<p class="p4"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>var author = this.state.author.trim();</b></p>
+<p class="p4"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>var text = this.state.text.trim();</b></p>
+<p class="p4"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>if (!text || !author) {</b></p>
+<p class="p4"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>return;</b></p>
+<p class="p4"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}</b></p>
+<p class="p4"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>this.props.</b><span class="s2"><b>onCommentSubmit</b></span><b>(JSON.stringify({author: author, text: text}));</b></p>
+<p class="p4"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>this.setState({author: '', text: ''});</b></p>
+<p class="p4"><b><span class="Apple-tab-span">	</span>},</b></p>
+<p class="p6"><b></b><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>render: function() {</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>return (</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>&lt;form className="commentForm" onSubmit={<span class="s1"><b>this.handleSubmit</b></span>}&gt;</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>&lt;input</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>type="text"</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>placeholder="Your name"</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>value={this.state.author}</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>onChange={this.handleAuthorChange}</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>/&gt;</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>&lt;input</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>type="text"</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>placeholder="Say something..."</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>value={this.state.text}</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>onChange={this.handleTextChange}</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>/&gt;</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>&lt;input type="submit" value="Post" /&gt;</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>&lt;/form&gt;</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>);</p>
+<p class="p4"><span class="Apple-tab-span">	</span>}</p>
+<p class="p4">});<span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>nameとtextというテキストインプット2つをformで囲い、onSubmitにhandleSubmit関数をセットする。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>明示的にthisが使えるのが嬉しい。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>最終的にonSubmit関数内で、propsで渡ってくる関数<span class="s2">onCommentSubmit</span>を実行している。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>onCommentSubmit関数は、CommentFormの親であるCommentBoxから渡している。</p>
+<p class="p2"><br></p>
+<p class="p4">var CommentBox = React.createClass({</p>
+<p class="p4"><span class="Apple-tab-span">	</span>loadCommentsFromServer: function() {</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>$.ajax({</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>url: this.props.url,</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>dataType: 'json',</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>type: 'GET',</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>cache: false,</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>success: function(data) {</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>this.setState({data: data});// これがいけないぽい。</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}.bind(this),</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>error: function(xhr, status, err) {</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>console.error(this.props.url, status, err.toString());</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}.bind(this)</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>});<span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p4"><span class="Apple-tab-span">	</span>},</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="s3"><b>handleCommentSubmit</b></span><b>: function(comment) {</b></p>
+<p class="p4"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>$.ajax({</b></p>
+<p class="p4"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>url: this.props.url,</b></p>
+<p class="p4"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>dataType: 'json',</b></p>
+<p class="p4"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>type: 'POST',</b></p>
+<p class="p4"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>data: comment,</b></p>
+<p class="p4"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>success: function(data) {</b></p>
+<p class="p4"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>this.setState({data: data});</b></p>
+<p class="p4"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}.bind(this),</b></p>
+<p class="p4"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>error: function(xhr, status, err) {</b></p>
+<p class="p4"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>console.error(this.props.url, status, err.toString());</b></p>
+<p class="p4"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}.bind(this)</b></p>
+<p class="p4"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>});</b></p>
+<p class="p4"><b><span class="Apple-tab-span">	</span>},</b></p>
+<p class="p4"><span class="Apple-tab-span">	</span>getInitialState: function() {</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>return {data: []};</p>
+<p class="p4"><span class="Apple-tab-span">	</span>},</p>
+<p class="p4"><span class="Apple-tab-span">	</span>componentDidMount: function() {</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>this.loadCommentsFromServer();</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>setInterval(this.loadCommentsFromServer, this.props.pollInterval);</p>
+<p class="p4"><span class="Apple-tab-span">	</span>},</p>
+<p class="p4"><span class="Apple-tab-span">	</span>render: function() {</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>return (</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>&lt;div className="commentBox"&gt;</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>&lt;h1&gt;Comments&lt;/h1&gt;</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>&lt;CommentList data={this.state.data} /&gt;</p>
+<p class="p7"><span class="s4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>&lt;CommentForm </span><span class="s2"><b>onCommentSubmit</b></span><span class="s4">={</span><b>this.handleCommentSubmit</b><span class="s4">} /&gt;</span></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>&lt;/div&gt;</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>);</p>
+<p class="p4"><span class="Apple-tab-span">	</span>}</p>
+<p class="p4">});</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>onCommentSubmitというラベルで、CommentBoxのhandleCommentSubmit関数が接続されている。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>最終的に渡ってきたcommentデータがpostされ、結果がsetStateを呼び出し、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>変更が加えられたdataはそのままCommentListへと伝達される。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>便利＝～～</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>nodeとかサーバで動かすには</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>React routerとかが便利そう。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://qiita.com/koba04/items/737c783f1189355e053f">http://qiita.com/koba04/items/737c783f1189355e053f</a></p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b>ServerSideRendering</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>サーバ側でReact動かして完成したHTML(実際には動的な可変要素を含む)を返す技術。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>htmlだけを返してローディングさせるのと対比されている。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+</body>
+</html>
