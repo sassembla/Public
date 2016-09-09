@@ -1,0 +1,163 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1404.47">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Sans'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+    span.s1 {font: 12.0px Helvetica}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>ワイヤレスヘッドフォンとかに関する自由とか制約とか機構について</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>iPhone7からヘッドフォンジャック(ミニプラグ)がなくなるので、ワイヤレスヘッドフォン使う人増えそうで。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ここ4年くらいずーっとワイヤレスヘッドフォン使ってた上で知ったいろんな機構とかをまとめて説明しようと思う。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ワイヤレスヘッドフォンとスマフォOSとミュージックアプリ、複数の組み合わせがありえて、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>その動作には様々な制約や自由、操作方法、通知機構、動作機構がある。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>それらを適当にまとめようっていう腹。</p>
+<p class="p2"><br></p>
+<p class="p3"><b>要素</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>適当に次のような要素がある。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ワイヤレスヘッドフォンまわりの機構とかについて、この機構はこの組み合わせだとついてたよ～、みたいな</p>
+<p class="p3"><span class="Apple-tab-span">	</span>具体的な記録を、自分が体験したものだけに関してまとめていく。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>OS</b> iOS/Androidとか</p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>端末</b> iPhoneとかNexusとか</p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>ワイヤレスヘッドフォン種類</b> ワイヤレスなんだけど線あり/なし とか</p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>メーカー</b> BOSEとかEARINとかBeatsとか</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3">っていいつつ、まずは有線のヘッドフォンまわりについて書かせてもらう。音質とかについては触れない。やっててくれ。</p>
+<p class="p2"><br></p>
+<p class="p3"><b>ワイヤレスじゃない場合の機能・機構</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>次のような機構が入っている組み合わせがあるので使うといいと思う。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>1.プラグを抜いたら音が止まる</p>
+<p class="p3"><span class="Apple-tab-span">	</span>2.出力機器「ごと」の音量設定</p>
+<p class="p3"><span class="Apple-tab-span">	</span>3.再生中に新規に出力機器を追加したら、その機器で続きから鳴る</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ワイヤレスなオーディオ機構は、ワイヤレスじゃないオーディオ機構の延長線上にある感じで、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ワイヤレスでない環境で動かない機構はワイヤレスな機構でももちろん動かない。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>つまり<b>ワイヤレスでない時点でゴミな場合</b>は<b>ワイヤレスになってもその環境は改善されない</b>可能性があるってことだね！！</p>
+<p class="p3"><span class="Apple-tab-span">	</span>というかほぼ確実に改善されないので「俺はろくでもない方を使っていたんだなあ」とでも思ってくれ。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>そんなミニプラグと再生機器にまつわる機能・機構、順に細かく書いていこう。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>1.プラグを抜いたら音が止まる</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>そのまんまプラグを抜いたら音が止まるかどうか。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>iOSとか一部のAndroid端末(これOS関係ないんじゃないかな、作ったメーカーとか時期がカスかどうかの二択)は、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>音楽再生中にプラグを抜くと音が止まる。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>この動作は使っているアプリによっても影響を受ける感じなのだけれど、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・音楽系：止まる</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・動画系：スピーカーを変えて流れ続ける</p>
+<p class="p3"><span class="Apple-tab-span">	</span>という動作の差はある感じ。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>2.出力機器「ごと」の音量設定</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>iPhoneとかMacBookとかだと、音声出力の機器単位で細かく再生音量を記録してくれている。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>なので、有線でプラグ刺した時に、その機器を判別して音量がセットされる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Androidはどうだったっけな、、、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>本体スピーカーの音量設定とは別に音量がセットされるので、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・本体音量はゼロ</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・特定のスピーカー(ヘッドフォン)をつないだ時の音量をいじる</p>
+<p class="p3"><span class="Apple-tab-span">	</span>というふうにしておくと、AV見てる時に嫁さんがプラグを抜いてワァーオ みたいな状況にならないで済む。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>3.再生中に新規に出力機器を追加したら、その機器で続きから鳴る</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>家でiPhoneとかから据え置きのBTスピーカーとかに接続して音楽流してて、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>さて出かけるか、ってなった時に、プラグにヘッドフォンさすとそこから今聞いてる音がそのまま出る。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>シームレスなお出かけ体験ができるかどうか、、っていう向きもあるけど、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>プラグをさせば不用意に流れ出したアニソンとかを物理的な手段でもって一瞬で封印できるという大事な一面もある。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>この1~3を満たしてる組み合わせだと、下記のワイヤレスヘッドフォンをつないでいる場合の挙動が上乗せされる感じになる。</b></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>というかここまでの条件すら満たしてない環境があったら、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>それはもうワイヤレスヘッドフォンでも劣悪な環境と言っても過言ではない(過言)</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>ワイヤレスな場合でさらに追加される機能・機構</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>4.接続、切断したらビープ音が鳴る</p>
+<p class="p3"><span class="Apple-tab-span">	</span>5.OSの画面に電池残量や接続具合が出る</p>
+<p class="p3"><span class="Apple-tab-span">	</span>6.専用アプリで電池残量や接続状態がわかる</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>この辺は本当に選んだワイヤレスヘッドフォンごとに挙動が異なる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ミニプラグという物理的なインターフェースの殻を失ってしまってめっちゃフリーダム。</p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b>4.接続、切断したらビープ音が鳴る</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>鳴るやつと鳴らないやつがある。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>BOSEはこの辺大変優秀だった</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>繋がっても鳴るし、切断しても鳴るし、音量変えるだけでも小さなビープ音出たし。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ほか</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>だいたい音がでない。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>体験としてはまあいいんだけど、完全無線(左右の端末が線でつながってない)EARINとかが凄まじくて、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>片側だけ切断したときのリカバーがめっちゃくちゃ甘い。片側だけ停止したりする。しかもそのまま流れる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>お前切断くらい検知して音流したまま自動復旧しろやっていう感じになる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ちなみに一時停止とかかけると復旧するケースと、一度ケースにしまわないと復旧しないケースがある。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>90%くらいは一時停止で復旧する。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>5.OSの画面に電池残量や接続具合が出る</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ヘッドフォンの左右の端末が有線で繋がっている機器の場合、ほぼ確実にOS上に「ヘッドフォンのバッテリー表記」が追加表示される。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>これは接続/切断の目安にもなるので、すごくいいと思う。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>このへんはBTがバッテリーに関する項目を持ってたから共通認識的な感じで表示が出せてるんだと思う。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>下記画像みたいなのが画面のどこか、時計の横とかに出る。</p>
+<p class="p4"><span class="Apple-tab-span">	</span><img src="icon.png" alt="icon.png"></p>
+<p class="p5"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>が、EARINに代表されるような左右独立型の端末が生まれてから、状況が変わった。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>左右独立型の場合、これが、、まあ、、EARINなんだけど、電池表示がOS画面に一切出ない。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>なんと通知欄にも出ない。</p>
+<p class="p4"><span class="Apple-tab-span">	</span><img src="aaa.png" alt="aaa.png"></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>6.専用アプリで電池残量や接続状態がわかる<span class="Apple-tab-span">	</span></b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>5を解消するための機構というか。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>専用Appで接続状態、バッテリー状態とか低音強調とか左右のバランスとか弄れる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="s1"><img src="IMG_1877.PNG" alt="IMG_1877.PNG"></span></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>というか専用アプリ以外から状況がわからないと言った方がいい。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>この辺はヘッドフォンごとのカスタマイズ<span class="Apple-tab-span">	</span>に繋がるんで、いいところもあるんじゃねーーかなーーと思いつつ、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>デフォルトで使える有用な道具が大好きなのでカスタマイズ厨乙みたいなカスタムしないと使い物にならない物体は避けたいところ。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>操作方法について</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ワイヤー(左右端末間での有線での接続)があるならそのへんにボタンが来たりする。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ので、物理的な操作が割と楽にできるので良い。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>左◯-----この辺にあるやつ ------------------◯右</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、左右独立型はどうなの？っていうと、インターフェースが無い or あるんだけど押せるか？？これ？？？　っていう。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>AppleWatchとか使ってるとiPhone上のミュージックアプリの音量とか曲送りとか自由にできるので自分はこれでいいやっていう気分だけど、どうするのが一般化するんだろうね。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>サウンドアプリ連携専用のBT時計装置とか？ ありそう。</p>
+<p class="p2"><br></p>
+</body>
+</html>
