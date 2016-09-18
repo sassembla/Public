@@ -1,0 +1,160 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1404.47">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Sans'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 17.0px 'Hiragino Sans'}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; background-color: #ebebeb}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; background-color: #ebebeb; min-height: 18.0px}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>Unity iOS/Androidの実行時に関数のswapを行いたかった</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>結果的には、C#の実行環境?としてのIL2CPPの挙動と、C#元来の動作の違いを噛み締めることになった。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>知れたので満足している。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>なお別の方法で関数のスワップはできる。めっちゃ泥臭い方法で。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>試したこと</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>1.iOS/Androidでの実行上のメソッドの入れ替え。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>2.IL生成と実行</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>結果</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>methodInfoからポインタを引っ張ってunsafeな感じで複数のメソッドのポインタをswapすることはできる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>が、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>現状のIL2CPPだと、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・変わるのはmethodInfoのポインタのみ</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・変えられるmethodInfoは対象メソッドが"一切"実行される前のもののみ</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>という制約にぶち当たった。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>また、IL生成と実行はDelegateを作って実行しようとするとUnsupportedで詰む感じだった。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>どういう制約だったか順に書いていく。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p4"><b>1.iOS/Androidでの実行上のメソッドの入れ替え。</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>次のようなコードを書く</b></p>
+<p class="p5">var baseMethod_MethodInfo = typeof(BaseClass).GetMethod("BaseMethod", BindingFlags.Instance | BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public);</p>
+<p class="p5">var newMethod_MethodInfo = typeof(NewClass).GetMethod("NewMethod", BindingFlags.Instance | BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public);</p>
+<p class="p6"><br></p>
+<p class="p5">RuntimeHelpers.PrepareMethod(baseMethod_MethodInfo.MethodHandle);</p>
+<p class="p5">RuntimeHelpers.PrepareMethod(newMethod_MethodInfo.MethodHandle);</p>
+<p class="p6"><br></p>
+<p class="p5">unsafe {</p>
+<p class="p5"><span class="Apple-tab-span">	</span>// ready void* pointers.</p>
+<p class="p5"><span class="Apple-tab-span">	</span>var basePointer = baseMethodInfo.MethodHandle.Value.ToPointer();</p>
+<p class="p5"><span class="Apple-tab-span">	</span>var newPointer = newMethod_MethodInfo.MethodHandle.Value.ToPointer();</p>
+<p class="p6"><span class="Apple-tab-span">	</span></p>
+<p class="p5"><span class="Apple-tab-span">	</span>// swap method pointer, *base ---&gt; *new.</p>
+<p class="p5"><span class="Apple-tab-span">	</span>*((Int64*)new IntPtr(basePointer).ToPointer()) = *((Int64*)new IntPtr(newPointer).ToPointer());</p>
+<p class="p5">}</p>
+<p class="p6"><br></p>
+<p class="p5">var baseInstance = new BaseClass();</p>
+<p class="p5"><b>baseInstance.BaseMethod();// エディタではNewMethodが実行されるが、実機では元のBaseMethodが実行される。。。</b></p>
+<p class="p6"><br></p>
+<p class="p5">baseMethod_MethodInfo.Invoke(baseInstance, new object[]{});// この呼び方だと実機でもエディタでもNewMethodが実行される。</p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>変わるのはmethodInfoのポインタのみ</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>GetMethodとかから取得したmethodInfoと、インスタンスが保持しているメソッドのポインタが異なるため、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>swapさせても書き換わるのはmethodInfoの関数だけだった。</p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>太字の箇所</b>がその証明。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これがエディタとかの環境だと、methodInfoから得たポインタに対してswapを行った時点で、既存のインスタンスのメソッドとかのポインタも全て書き換わる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>最初試した時は、swapしたポインタの元であるmethodInfoからメソッド実行をした際、swapを観測した時点で「おっこれいけるやんけ」とか思ったんだけど、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>インスタンスからの実行だと旧来のメソッドの内容が呼ばれてしまう。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>IL2CPP上だと、コンパイル済みの時点で、インスタンス化されてから参照されるクラス情報と、インスタンス化時のクラス情報とに接続がないとか</p>
+<p class="p3"><span class="Apple-tab-span">	</span>そういうんじゃねーかな～と思っている。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>まあゲームエンジンからC++のポインタぶっ叩いてるだけだからな、、関係性はある程度動けばそれで良いでしょ的な。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ナチュラルボーンC#erな人とかには耐え難い差になりそう。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>このへん、.Net Foundationに入った今後、どうなるんだろう.</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ちなみにUnity5.5b1まで試したけど、実行状態は変わらなかった。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>インスタンス自体のメソッドのポインタをすげ替えるっていうことをすればいけると思うが。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>現状の仕組みの上で頑張るのなんかダメな努力な気がするんでパス。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>変えられるmethodInfoは対象メソッドが"一切"実行される前のもののみ</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>日本語が難しい。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>methodInfoをIL2CPP上で扱うときに面白かったのが、「methodのswapが可能なのはそのmethodを一度でも実行する前」みたいな制約があることだった。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>例えばmethodInfoを得る前に対象のmethodをどこかのインスタンスで実行してしまうと、そのmethodのswapは不可能になる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>swapを実行しても結果が出ない。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>なんかまああれですよ、実行時にテーブル作ったりしてるんじゃない？って思っていた。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Unityエディタ上でも発生するので、なんかおもしろ制約があるんだろう。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>これについては、swap実行前に対象のmethodを実行しない、という前提が作れれば回避することができた。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>逆に言えば、この制約を回避できたせいで、「うおーーいけるやろーー」って思ってしまったのが悲しかった。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p4"><b>2.IL生成と実行</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>生成まではできるんだけど実行のためのDelegateが作り出せない</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これはもうはっきりエラーが出る箇所があって、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>DynamicMethodクラスのCreateDelegateメソッドで即死する。</p>
+<p class="p2"><br></p>
+<p class="p5">var dMethod = new DynamicMethod("test", typeof(void), new Type[]{});</p>
+<p class="p6"><br></p>
+<p class="p5">var il = dMethod.GetILGenerator();</p>
+<p class="p5">il.EmitWriteLine("hello!!");</p>
+<p class="p5">il.Emit(OpCodes.Ret);</p>
+<p class="p6"><br></p>
+<p class="p5">var testDelegate = (Test.TestDelegate)dMethod.<b>CreateDelegate</b>(typeof(Test.TestDelegate));</p>
+<p class="p5">testDelegate();</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>とかやると、CreateDelegateの時点でunsurpported吐いて同期的に死ぬ。</p>
+<p class="p2"><br></p>
+<p class="p5">testDelegate error:System.NotSupportedException: /Users/builduser/buildslave/unity/build/Tools/il2cpp/il2cpp/libil2cpp/icalls/mscorlib/System.Reflection.Emit/DynamicMethod.cpp(21) : Unsupported internal call for IL2CPP:DynamicMethod::create_dynamic_method - <b>System.Reflection.Emit is not supported.</b></p>
+<p class="p5"><span class="Apple-converted-space">  </span>at System.Reflection.Emit.DynamicMethod.CreateDynMethod () [0x00000] in &lt;filename unknown&gt;:0<span class="Apple-converted-space"> </span></p>
+<p class="p5"><span class="Apple-converted-space">  </span>at System.Reflection.Emit.DynamicMethod.CreateDelegate (System.Type delegateType) [0x00000] in &lt;filename unknown&gt;:0<span class="Apple-converted-space"> </span></p>
+<p class="p5"><span class="Apple-converted-space">  </span>at Project2501.Shadowing.Maining () [0x00000] in &lt;filename unknown&gt;:0<span class="Apple-converted-space"> </span></p>
+<p class="p5">Project2501.Shadowing:Maining()</p>
+<p class="p3"><span class="Apple-tab-span">	</span>太字の部分が主な死因。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、これがちょっと曲者で、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>実は</p>
+<p class="p5">var dMethod = new DynamicMethod("test", typeof(void), new Type[]{});</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>この行の時点ですでに死が確定してて、上記の実行まで行っていようがいなかろうが、</p>
+<p class="p5">Unhandled Exception: System.NotSupportedException: /Users/builduser/buildslave/unity/build/Tools/il2cpp/il2cpp/libil2cpp/icalls/mscorlib/System.Reflection.Emit/DynamicMethod.cpp(26) : Unsupported internal call for IL2CPP:DynamicMethod::destroy_dynamic_method - System.Reflection.Emit is not supported.</p>
+<p class="p5"><span class="Apple-converted-space">  </span>at System.Reflection.Emit.DynamicMethod.Finalize () [0x00000] in &lt;filename unknown&gt;:0<span class="Apple-converted-space"> </span></p>
+<p class="p5">UnityEngine.UnhandledExceptionHandler:PrintException(String, Exception)</p>
+<p class="p5">UnityEngine.UnhandledExceptionHandler:HandleUnhandledException(Object, UnhandledExceptionEventArgs)</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>が人知れず出る。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>new DynamicMethod実行の行をtry-catchで囲もうが出るので、なんだろ、、うん、、、みたいな感じ。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>つまりまあ無理だ。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ちなみにこのエラーがでてもアプリケーション自体は元気に動き続ける。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>なぜなのか。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+</body>
+</html>
