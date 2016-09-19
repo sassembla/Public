@@ -13,9 +13,7 @@
     p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 17.0px 'Hiragino Sans'}
     p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; background-color: #ebebeb}
     p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; background-color: #ebebeb; min-height: 18.0px}
-    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; color: #ff2600; background-color: #d6d6d6}
-    p.p8 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; color: #ff2600; background-color: #ebebeb}
-    span.s1 {color: #000000}
+    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; color: #ff2600; background-color: #ebebeb}
     span.Apple-tab-span {white-space:pre}
   </style>
 </head>
@@ -73,32 +71,32 @@
 <p class="p5"><span class="Apple-tab-span">	</span>}</p>
 <p class="p5">}</p>
 <p class="p6"><br></p>
-<p class="p5">// method-pointer-swapping method</p>
-<p class="p5">var baseMethod_MethodInfo = typeof(BaseClass).GetMethod("BaseMethod", BindingFlags.Instance | BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public);</p>
-<p class="p5">var newMethod_MethodInfo = typeof(NewClass).GetMethod("NewMethod", BindingFlags.Instance | BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public);</p>
+<p class="p5">// method for swapping method pointers.</p>
+<p class="p5">var baseMethod_MethodInfo = typeof(BaseClass).GetMethod("BaseMethod");</p>
+<p class="p5">var newMethod_MethodInfo = typeof(NewClass).GetMethod("NewMethod");</p>
 <p class="p6"><br></p>
-<p class="p5">RuntimeHelpers.PrepareMethod(baseMethod_MethodInfo.MethodHandle);</p>
-<p class="p5">RuntimeHelpers.PrepareMethod(newMethod_MethodInfo.MethodHandle);</p>
+<p class="p5">var baseIntPtr = baseMethod_MethodInfo.MethodHandle.Value;</p>
+<p class="p5">var newIntPtr = newMethod_MethodInfo.MethodHandle.Value;</p>
 <p class="p6"><br></p>
 <p class="p5">unsafe {</p>
 <p class="p5"><span class="Apple-tab-span">	</span>// ready void* pointers.</p>
-<p class="p5"><span class="Apple-tab-span">	</span>var basePointer = baseMethod_MethodInfo.MethodHandle.Value.ToPointer();</p>
-<p class="p5"><span class="Apple-tab-span">	</span>var newPointer = newMethod_MethodInfo.MethodHandle.Value.ToPointer();</p>
+<p class="p5"><span class="Apple-tab-span">	</span>var basePointer = baseIntPtr.ToPointer();</p>
+<p class="p5"><span class="Apple-tab-span">	</span>var newPointer = newIntPtr.ToPointer();</p>
 <p class="p6"><span class="Apple-tab-span">	</span></p>
 <p class="p5"><span class="Apple-tab-span">	</span>// swap method pointer, *base ---&gt; *new.</p>
-<p class="p5"><span class="Apple-tab-span">	</span>*((Int64*)new IntPtr(basePointer).ToPointer()) = *((Int64*)new IntPtr(newPointer).ToPointer());</p>
+<p class="p5"><span class="Apple-tab-span">	</span>*((Int64*)basePointer) = *((Int64*)newPointer);</p>
 <p class="p5">}</p>
 <p class="p6"><br></p>
 <p class="p5">var baseInstance = new BaseClass();</p>
-<p class="p7"><span class="s1"><b>baseInstance.BaseMethod();</b>// </span>エディタではNewMethodが実行されるが、実機では元のBaseMethodが実行される。。。</p>
+<p class="p5"><b>baseInstance.BaseMethod();</b>// エディタではNewMethodが実行されるが、実機では元のBaseMethodが実行される。。。</p>
 <p class="p6"><br></p>
 <p class="p5">baseMethod_MethodInfo.Invoke(baseInstance, new object[]{});// この呼び方だと実機でもエディタでもNewMethodが実行される。</p>
 <p class="p2"><b></b><br></p>
 <p class="p2"><b></b><br></p>
-<p class="p3"><b>変わるのはmethodInfoのポインタのみ</b></p>
+<p class="p3"><b>IL2CPP上だと、変わるのはmethodInfoのポインタのみ</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>GetMethodとかから取得したmethodInfoと、インスタンスが保持しているメソッドのポインタが異なるため、</p>
 <p class="p3"><span class="Apple-tab-span">	</span>swapさせても書き換わるのはmethodInfoの関数だけだった。</p>
-<p class="p3"><b><span class="Apple-tab-span">	</span>太字の箇所</b>がその証明。</p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>太字の箇所</b>での呼び出しで、実機とエディタでは動作に差が出る。</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>これがエディタとかの環境だと、methodInfoから得たポインタに対してswapを行った時点で、既存のインスタンスのメソッドとかのポインタも全て書き換わる。</p>
 <p class="p2"><br></p>
@@ -122,7 +120,7 @@
 <p class="p5">Pointers:Start() (at Assets/Pointers.cs:24)</p>
 <p class="p2"><b></b><br></p>
 <p class="p3"><b><span class="Apple-tab-span">	</span>実機上(iOS)</b></p>
-<p class="p8">BaseMethod.</p>
+<p class="p7">BaseMethod.</p>
 <p class="p5">Pointers:PointerSwap()</p>
 <p class="p5">Pointers:Start()</p>
 <p class="p6"><span class="Apple-converted-space"> </span></p>
@@ -221,6 +219,10 @@
 <p class="p3"><span class="Apple-tab-span">	</span>IL生成は無理っぽいので諦めようと思っているのだけれど、swapは頑張ってみたい。</p>
 <p class="p3"><span class="Apple-tab-span">	</span>間違いが知りたい。</p>
 <p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>追記　swapに関して試して効果がなかったこと</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・API Compatibilityを2.0にする</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
