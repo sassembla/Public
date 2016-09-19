@@ -13,6 +13,9 @@
     p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 17.0px 'Hiragino Sans'}
     p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; background-color: #ebebeb}
     p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; background-color: #ebebeb; min-height: 18.0px}
+    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; color: #ff2600; background-color: #d6d6d6}
+    p.p8 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; color: #ff2600; background-color: #ebebeb}
+    span.s1 {color: #000000}
     span.Apple-tab-span {white-space:pre}
   </style>
 </head>
@@ -24,11 +27,12 @@
 <p class="p3"><span class="Apple-tab-span">	</span>知れたので満足している。</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>なお別の方法で関数のスワップはできる。めっちゃ泥臭い方法で。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>自分のやり方が間違っている可能性が強いので、記録までに。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>試したこと</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>1.iOS/Androidでの実行上のメソッドの入れ替え。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>2.IL生成と実行</p>
+<p class="p3"><span class="Apple-tab-span">	</span>1.iOS/Androidでのポインタのスワップによる実行時メソッドの入れ替え -&gt; 失敗</p>
+<p class="p3"><span class="Apple-tab-span">	</span>2.IL生成と実行 -&gt; 失敗</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p2"><br></p>
 <p class="p3"><b>結果</b></p>
@@ -47,9 +51,29 @@
 <p class="p3"><span class="Apple-tab-span">	</span>どういう制約だったか順に書いていく。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
-<p class="p4"><b>1.iOS/Androidでの実行上のメソッドの入れ替え。</b></p>
+<p class="p3"><b>サンプルプロジェクト</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>一連の動作を試したサンプルプロジェクトを下記にアップした。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>MainSceneというシーンでPlayすると、動作が行われる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>エディタと実機で動作が異なる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/Pointers">https://github.com/sassembla/Pointers</a></p>
 <p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p4"><b>1.iOS/Androidでの実行上のメソッドの入れ替え -&gt; 失敗</b></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p3"><b>次のようなコードを書く</b></p>
+<p class="p5">public class BaseClass {</p>
+<p class="p5"><span class="Apple-tab-span">	</span>public void BaseMethod() {</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Debug.LogError("BaseMethod.");</p>
+<p class="p5"><span class="Apple-tab-span">	</span>}</p>
+<p class="p5">}</p>
+<p class="p6"><br></p>
+<p class="p5">public class NewClass {</p>
+<p class="p5"><span class="Apple-tab-span">	</span>public void NewMethod() {</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Debug.Log("NewMethod!");</p>
+<p class="p5"><span class="Apple-tab-span">	</span>}</p>
+<p class="p5">}</p>
+<p class="p6"><br></p>
+<p class="p5">// method-pointer-swapping method</p>
 <p class="p5">var baseMethod_MethodInfo = typeof(BaseClass).GetMethod("BaseMethod", BindingFlags.Instance | BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public);</p>
 <p class="p5">var newMethod_MethodInfo = typeof(NewClass).GetMethod("NewMethod", BindingFlags.Instance | BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public);</p>
 <p class="p6"><br></p>
@@ -66,7 +90,7 @@
 <p class="p5">}</p>
 <p class="p6"><br></p>
 <p class="p5">var baseInstance = new BaseClass();</p>
-<p class="p5"><b>baseInstance.BaseMethod();// エディタではNewMethodが実行されるが、実機では元のBaseMethodが実行される。。。</b></p>
+<p class="p7"><span class="s1"><b>baseInstance.BaseMethod();</b>// </span>エディタではNewMethodが実行されるが、実機では元のBaseMethodが実行される。。。</p>
 <p class="p6"><br></p>
 <p class="p5">baseMethod_MethodInfo.Invoke(baseInstance, new object[]{});// この呼び方だと実機でもエディタでもNewMethodが実行される。</p>
 <p class="p2"><b></b><br></p>
@@ -81,19 +105,56 @@
 <p class="p3"><span class="Apple-tab-span">	</span>最初試した時は、swapしたポインタの元であるmethodInfoからメソッド実行をした際、swapを観測した時点で「おっこれいけるやんけ」とか思ったんだけど、</p>
 <p class="p3"><span class="Apple-tab-span">	</span>インスタンスからの実行だと旧来のメソッドの内容が呼ばれてしまう。</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ログで見るとこんな感じ。</p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>エディタ上</b></p>
+<p class="p5">NewMethod!</p>
+<p class="p5">UnityEngine.Debug:Log(Object)</p>
+<p class="p5">BaseClass:BaseMethod() (at Assets/Pointers.cs:16)</p>
+<p class="p5">Pointers:PointerSwap() (at Assets/Pointers.cs:45)</p>
+<p class="p5">Pointers:Start() (at Assets/Pointers.cs:24)</p>
+<p class="p6"><br></p>
+<p class="p5">NewMethod!</p>
+<p class="p5">UnityEngine.Debug:Log(Object)</p>
+<p class="p5">BaseClass:BaseMethod() (at Assets/Pointers.cs:16)</p>
+<p class="p5">System.Reflection.MethodBase:Invoke(Object, Object[])</p>
+<p class="p5">Pointers:PointerSwap() (at Assets/Pointers.cs:47)</p>
+<p class="p5">Pointers:Start() (at Assets/Pointers.cs:24)</p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>実機上(iOS)</b></p>
+<p class="p8">BaseMethod.</p>
+<p class="p5">Pointers:PointerSwap()</p>
+<p class="p5">Pointers:Start()</p>
+<p class="p6"><span class="Apple-converted-space"> </span></p>
+<p class="p5">(Filename: /Users/builduser/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)</p>
+<p class="p6"><br></p>
+<p class="p5">NewMethod!</p>
+<p class="p5">System.Reflection.MonoMethod:Invoke(Object, BindingFlags, Binder, Object[], CultureInfo)</p>
+<p class="p5">Pointers:PointerSwap()</p>
+<p class="p5">Pointers:Start()</p>
+<p class="p6"><span class="Apple-converted-space"> </span></p>
+<p class="p5">(Filename: /Users/builduser/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>赤いところがまあ、、問題なわけで。実機ではメソッド呼び出し先がswapされていない。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>IL2CPP上だと、コンパイル済みの時点で、インスタンス化されてから参照されるクラス情報と、インスタンス化時のクラス情報とに接続がないとか</p>
-<p class="p3"><span class="Apple-tab-span">	</span>そういうんじゃねーかな～と思っている。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>そういうんじゃねーかな～と思っている。methodHandleから取得したポインタへの操作が反映されないっていう。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>もしくはポインタの位置が全然異なるとかなのかな。だったらそれ追えれば良いんだけど。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ちなみにUnity5.5b1まで試したけど、実行状態は変わらなかった。</p>
+<p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>まあゲームエンジンからC++のポインタぶっ叩いてるだけだからな、、関係性はある程度動けばそれで良いでしょ的な。</p>
 <p class="p3"><span class="Apple-tab-span">	</span>ナチュラルボーンC#erな人とかには耐え難い差になりそう。</p>
 <p class="p3"><span class="Apple-tab-span">	</span>このへん、.Net Foundationに入った今後、どうなるんだろう.</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>ちなみにUnity5.5b1まで試したけど、実行状態は変わらなかった。</p>
-<p class="p2"><br></p>
-<p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>インスタンス自体のメソッドのポインタをすげ替えるっていうことをすればいけると思うが。</p>
 <p class="p3"><span class="Apple-tab-span">	</span>現状の仕組みの上で頑張るのなんかダメな努力な気がするんでパス。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>この状態が限界なのか、それとも自分がどこかでミスをしているのか、、、気になる。</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p2"><br></p>
 <p class="p3"><b>変えられるmethodInfoは対象メソッドが"一切"実行される前のもののみ</b></p>
@@ -111,10 +172,10 @@
 <p class="p3"><span class="Apple-tab-span">	</span>逆に言えば、この制約を回避できたせいで、「うおーーいけるやろーー」って思ってしまったのが悲しかった。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
-<p class="p4"><b>2.IL生成と実行</b></p>
+<p class="p4"><b>2.IL生成と実行 -&gt; 失敗</b></p>
 <p class="p2"><br></p>
-<p class="p3"><b>生成まではできるんだけど実行のためのDelegateが作り出せない</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>これはもうはっきりエラーが出る箇所があって、</p>
+<p class="p3"><b>IL生成まではできるんだけど実行のためのDelegateが作り出せない</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これはもうIL生成時にはっきりエラーが出る箇所があって、</p>
 <p class="p3"><span class="Apple-tab-span">	</span>DynamicMethodクラスのCreateDelegateメソッドで即死する。</p>
 <p class="p2"><br></p>
 <p class="p5">var dMethod = new DynamicMethod("test", typeof(void), new Type[]{});</p>
@@ -152,6 +213,13 @@
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>ちなみにこのエラーがでてもアプリケーション自体は元気に動き続ける。</p>
 <p class="p3"><span class="Apple-tab-span">	</span>なぜなのか。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>とりあえずこの方法での実行時IL生成は無理でした。というまとめまでに。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>結論</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>IL生成は無理っぽいので諦めようと思っているのだけれど、swapは頑張ってみたい。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>間違いが知りたい。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
