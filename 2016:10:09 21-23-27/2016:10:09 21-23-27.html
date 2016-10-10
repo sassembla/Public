@@ -1,0 +1,221 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1404.47">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; color: #323333}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px 'Hiragino Kaku Gothic ProN'; background-color: #ebebeb}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #ebebeb}
+    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    span.s1 {font-kerning: none; background-color: #f7f7f7}
+    span.s2 {font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    span.s3 {font-variant-ligatures: no-common-ligatures}
+    span.s4 {font: 11.0px 'Hiragino Kaku Gothic ProN'; font-variant-ligatures: no-common-ligatures}
+    span.s5 {font-variant-ligatures: no-common-ligatures; background-color: #ebebeb}
+    span.s6 {font: 12.0px 'Hiragino Kaku Gothic ProN'; font-variant-ligatures: no-common-ligatures; background-color: transparent}
+    span.s7 {font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures}
+    span.s8 {font: 11.0px 'Hiragino Sans'; font-variant-ligatures: no-common-ligatures}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>DockerでLaravel動かす</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>まずToDoをまとめると、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・Docker入れる</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・適当にphpとMySQLのimage用意する</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・それらのコンテナ起動</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・phpコンテナにLaravel入れる</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・適当なLarabelプロジェクト作る</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・アクセス</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>参考。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://qiita.com/kukimo/items/c044ad42fffac062e2f5">http://qiita.com/kukimo/items/c044ad42fffac062e2f5</a></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>絶対に絶対にPHP書きたくないがなんか特定の認証について知りたいのでやってみる。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>Lamp環境入れる</b></p>
+<p class="p4"><span class="s1">docker run -p 80:80 --name php -d php:5.6-apache</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>こんな感じで。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Apacheっていうのが気にくわんがまあいいや。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>起動しているプロセスの情報は、docker ps -a で確認できる。</p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b>Docker内のフォルダをhostとshareする</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>できるっぽいな？</p>
+<p class="p3"><span class="Apple-tab-span">	</span>っていうかそれできないと辛くてな。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>-&gt; exec コマンドがあるおかげで、なんか楽になってるっぽいぞ。ふむ？</p>
+<p class="p3"><span class="Apple-tab-span">	</span><a href="http://stackoverflow.com/questions/25446055/how-to-edit-a-file-dynamically-in-a-running-docker-container?noredirect=1&amp;lq=1">http://stackoverflow.com/questions/25446055/how-to-edit-a-file-dynamically-in-a-running-docker-container?noredirect=1&amp;lq=1</a></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>-&gt; Dockerから手元のフォルダを指す方法があった。これでいいな、、、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>手元に適当なフォルダを作り、</p>
+<p class="p5"><span class="s2"><span class="Apple-converted-space"> </span></span><span class="s3">/Users/tartetatin/Desktop/LaravelServer</span></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>docker run で、コンテナ内の特定のパスを、ホストの特定のパスと接続する。</p>
+<p class="p6">docker run -p 80:80 -v /<span class="s4">Users/tartetatin/Desktop/LaravelServer</span>:/var/www/html --name php -d php:5.6-apache</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これで、/var/www/htmlはapacheのデフォルトのドキュメントルートなので、ホストからDockerへのhttpリクエスト時に手元のフォルダが差されるようになった。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>楽ジャーーーーン。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>ホスト&lt;-&gt;コンテナ間のファイルコピー</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><a href="http://qiita.com/gologo13/items/7e4e404af80377b48fd5">http://qiita.com/gologo13/items/7e4e404af80377b48fd5</a></p>
+<p class="p3"><span class="Apple-tab-span">	</span>双方向でできるようになってた。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>わーーーい！！</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>コンテナを起動する</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>nameがかぶるんで、古いやつを適当に消さないといけない感じがする。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>nameの概念を忘れた。なんだっけ、、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>name -&gt; imageから作成されたcontainerにつけられてるid。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>containerはimageから生成され、起動中/終了中 などの状態を持っているので、nameで個々を区別する。</p>
+<p class="p2"><br></p>
+<p class="p6">docker start name</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、すでに作成されたコンテナを起動できる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>docker run -&gt; imageからcontainerを作る</p>
+<p class="p3"><span class="Apple-tab-span">	</span>docer start/stop container -&gt; containerを起動したり停めたり</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>containerを指定するには、nameをつけておくといいよねっていう感じ。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>作成したコンテナにTerminalで入る</b></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p6">docker exec -ti mysql bash<span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>なんかかなり楽になってない？　いいね～～</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>Dockerfile作ってPHPの入ってるコンテナを作り直す</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>適当なパスにDockerfile作る。</p>
+<p class="p2"><br></p>
+<p class="p5"><span class="s2">touch </span><span class="s3">/Users/tartetatin/Desktop/LaravelServer/Dockerfile</span></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Dockerfile</p>
+<p class="p6">FROM php:5.6-apache</p>
+<p class="p6">RUN apt-get update &amp;&amp; docker-php-ext-install pdo_mysql mysqli mbstring</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>zip入れてcomposer入れてcomposerを移動してる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>それを元に、新たにPHPコンテナ立ち上げ。</p>
+<p class="p2"><br></p>
+<p class="p6">docker build -t php:custom <span class="s3">/Users/tartetatin/Desktop/LaravelServer/</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>なるほどな～～これで特定のimageをもとに、特定の構成で立ち上げられるimageが作成される。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>MySQLの言語設定をUTF-8にして立ち上げる</b></p>
+<p class="p3"><span class="s3"><span class="Apple-tab-span">	</span>なんか世知辛い事情によって、MySQLの文字コードはデフォルトではLatinらしい。</span></p>
+<p class="p3"><span class="s3"><span class="Apple-tab-span">	</span>で、</span><span class="s5">/Users/tartetatin/Desktop/LaravelServer/mysql/conf.d</span><span class="s3">を作っておいて、MySQLの起動時に呼ばれるファイルの代わりに読み込ませる。</span></p>
+<p class="p2"><span class="s3"></span><br></p>
+<p class="p6"><span class="s3">docker run --name mysql -v /Users/tartetatin/Desktop/LaravelServer/mysql:/etc/mysql/conf.d -e MYSQL_ROOT_PASSWORD=pass -d mysql:5.7</span></p>
+<p class="p2"><span class="s3"></span><br></p>
+<p class="p2"><span class="s3"></span><br></p>
+<p class="p3"><span class="s3"><b>PHPとMySQLのコンテナを立ち上げて協調動作させる</b></span></p>
+<p class="p3"><span class="s3"><span class="Apple-tab-span">	</span>先ほど作ったphp:customと、mysql:mysql を協調動作させる。</span></p>
+<p class="p3"><span class="s3"><span class="Apple-tab-span">	</span>MySQLのコンテナはlinkで立ち上がるわけでは無いみたいだ。事前に立ち上げておかないといけないのか、、なんか方法がないのかな。</span></p>
+<p class="p2"><span class="s3"></span><br></p>
+<p class="p6"><span class="s3">docker run -p 80:80 -v </span>/<span class="s4">Users/tartetatin/Desktop/LaravelServer</span><span class="s3">:/var/www/html --link mysql:mysql --name php -d php:custom</span></p>
+<p class="p2"><span class="s3"></span><br></p>
+<p class="p3"><span class="s3"><span class="Apple-tab-span">	</span>で、立ち上がっているコンテナ一覧は、</span></p>
+<p class="p6"><span class="s3">docker ps -a</span></p>
+<p class="p6"><span class="s3">CONTAINER ID<span class="Apple-converted-space">        </span>IMAGE <span class="Apple-converted-space">              </span>COMMAND<span class="Apple-converted-space">                  </span>CREATED <span class="Apple-converted-space">            </span>STATUS<span class="Apple-converted-space">              </span>PORTS<span class="Apple-converted-space">                </span>NAMES</span></p>
+<p class="p6"><span class="s3">fd0ee19fa1f2<span class="Apple-converted-space">        </span>php:custom<span class="Apple-converted-space">          </span>"apache2-foreground" <span class="Apple-converted-space">    </span>2 minutes ago <span class="Apple-converted-space">      </span>Up 2 minutes<span class="Apple-converted-space">        </span>0.0.0.0:80-&gt;80/tcp <span class="Apple-converted-space">  </span>php</span></p>
+<p class="p6"><span class="s3">aa9bed662161<span class="Apple-converted-space">        </span>mysql:5.7 <span class="Apple-converted-space">          </span>"docker-entrypoint.sh" <span class="Apple-converted-space">  </span>24 minutes ago<span class="Apple-converted-space">      </span>Up 24 minutes <span class="Apple-converted-space">      </span>3306/tcp <span class="Apple-converted-space">            </span>mysql</span></p>
+<p class="p2"><span class="s3"><span class="Apple-tab-span">	</span></span></p>
+<p class="p3"><span class="s3"><span class="Apple-tab-span">	</span>いい感じっぽい。</span></p>
+<p class="p2"><span class="s3"><span class="Apple-tab-span">	</span></span></p>
+<p class="p3"><span class="s3"><span class="Apple-tab-span">	</span>MySQLは動いてるんだろうか？</span></p>
+<p class="p3"><span class="s3"><span class="Apple-tab-span">	</span>php:customで作ったコンテナに入って、/etc/hosts/を確認してみると、MySQLの情報があるっぽい。</span></p>
+<p class="p2"><span class="s3"></span><br></p>
+<p class="p6"><span class="s3">docker exec -ti php bash</span></p>
+<p class="p6"><span class="s3">cat /etc/hosts</span></p>
+<p class="p6"><span class="s3">127.0.0.1<span class="Apple-tab-span">	</span>localhost</span></p>
+<p class="p6"><span class="s3">::1<span class="Apple-tab-span">	</span>localhost ip6-localhost ip6-loopback</span></p>
+<p class="p6"><span class="s3">fe00::0<span class="Apple-tab-span">	</span>ip6-localnet</span></p>
+<p class="p6"><span class="s3">ff00::0<span class="Apple-tab-span">	</span>ip6-mcastprefix</span></p>
+<p class="p6"><span class="s3">ff02::1<span class="Apple-tab-span">	</span>ip6-allnodes</span></p>
+<p class="p6"><span class="s3">ff02::2<span class="Apple-tab-span">	</span>ip6-allrouters</span></p>
+<p class="p6"><span class="s3">172.17.0.2<span class="Apple-tab-span">	</span>mysql 2df3c79ac7b2</span></p>
+<p class="p6"><span class="s3">172.17.0.3<span class="Apple-tab-span">	</span>&lt;phpが動いてるコンテナのID&gt;</span></p>
+<p class="p2"><span class="s3"></span><br></p>
+<p class="p3"><span class="s3"><span class="Apple-tab-span">	</span>ふむふむ。mysql含まれてるからいいっぽい。</span></p>
+<p class="p2"><span class="s3"></span><br></p>
+<p class="p2"><span class="s3"><span class="Apple-tab-span">	</span></span></p>
+<p class="p3"><span class="s3"><b>composerインストール</b></span></p>
+<p class="p3"><span class="s3"><span class="Apple-tab-span">	</span>phpの依存関係とかをアレするツールとして、composerをphpコンテナに入れる。</span></p>
+<p class="p3"><span class="s3"><span class="Apple-tab-span">	</span>どうやんの。</span></p>
+<p class="p3"><span class="s3"><span class="Apple-tab-span">	</span>この辺を参考に。</span></p>
+<p class="p3"><span class="s3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://kore1server.com/175"><span class="s6">https://kore1server.com/175</span></a></span></p>
+<p class="p2"><span class="s3"></span><br></p>
+<p class="p6"><span class="s3">curl -sS https://getcomposer.org/installer | php</span></p>
+<p class="p6"><span class="s3">mv composer.phar /usr/local/bin/composer</span></p>
+<p class="p2"><span class="s3"><span class="Apple-tab-span">	</span></span></p>
+<p class="p3"><span class="s3"><span class="Apple-tab-span">	</span>あとunzipとか入ってねえな、、、要る。</span></p>
+<p class="p6"><span class="s3">apt-get install zip</span></p>
+<p class="p3"><span class="s3"><span class="Apple-tab-span">	</span>これY/nでるんで困ってるんだけどDockerfileとかで自動化するにはどうすればいいの。</span></p>
+<p class="p2"><span class="s3"></span><br></p>
+<p class="p2"><span class="s3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span></p>
+<p class="p3"><span class="s3"><b>Laravelでの最初のプロジェクト作り</b></span></p>
+<p class="p2"><span class="s3"><span class="Apple-tab-span">	</span></span></p>
+<p class="p6"><span class="s3">composer global require "laravel/installer=~1.1"</span></p>
+<p class="p6"><span class="s3">composer create-project laravel/laravel MyFirstLaravel</span></p>
+<p class="p2"><span class="s3"></span><br></p>
+<p class="p3"><span class="s3"><span class="Apple-tab-span">	</span>行けたっぽさがある。</span></p>
+<p class="p2"><span class="s3"></span><br></p>
+<p class="p3"><span class="s3"><span class="Apple-tab-span">	</span>で、とりあえずMySQLとかの設定をしないといけないが、無視してアクセスしてみよう。</span></p>
+<p class="p3"><span class="s3"><span class="Apple-tab-span">	</span>127.0.0.1では、Apacheの設定を放置したままなのでforbiddenが見えてる状態。</span></p>
+<p class="p2"><span class="s3"></span><br></p>
+<p class="p3"><span class="s3"><span class="Apple-tab-span">	</span>で。ここから、設定を変更していく。</span></p>
+<p class="p3"><span class="s3"><span class="Apple-tab-span">	</span>・Apacheのデフォルトを、Laravelのデフォルトパスへと変更</span></p>
+<p class="p3"><span class="s3"><span class="Apple-tab-span">	</span>・MySQLのIPの指定</span></p>
+<p class="p2"><span class="s3"></span><br></p>
+<p class="p2"><span class="s3"></span><br></p>
+<p class="p3"><span class="s3"><b>設定はMyFirlstLaravelのフォルダにあるっぽい</b></span></p>
+<p class="p3"><span class="s3"><span class="Apple-tab-span">	</span>.envファイルがそれ。</span></p>
+<p class="p2"><span class="s3"></span><br></p>
+<p class="p3"><span class="s3"><span class="Apple-tab-span">	</span>まず、ホストからLaravelのindexにアクセスできるようにしてみよう。</span></p>
+<p class="p2"><span class="s3"></span><br></p>
+<p class="p3"><span class="s3"><span class="Apple-tab-span">	</span>Apacheのデフォルトアクセスパスを、Laravelのデフォルトを指すように変更する。</span></p>
+<p class="p3"><span class="s3"><span class="Apple-tab-span">	</span>apacheの該当設定のconfは以下にあるはず。</span></p>
+<p class="p6"><span class="s3">/etc/apache2/sites-available/000-default.conf</span></p>
+<p class="p2"><span class="s3"></span><br></p>
+<p class="p3"><span class="s3"><span class="Apple-tab-span">	</span>このファイルを一度hostへとコピーして、もう一度コンテナへとコピー。</span></p>
+<p class="p2"><span class="s3"></span><br></p>
+<p class="p6"><span class="s3">docker cp </span><span class="s7">&lt;php</span><span class="s8">が動いてるコンテナの</span><span class="s7">ID&gt;</span><span class="s3">:/etc/apache2/sites-available/000-default.conf </span>/<span class="s4">Users/tartetatin/Desktop/LaravelServer/apache2/</span><span class="s3">000-default.conf</span></p>
+<p class="p2"><span class="s3"></span><br></p>
+<p class="p3"><span class="s3"><span class="Apple-tab-span">	</span>で、コピッてきたconfの該当行を書き換える。</span></p>
+<p class="p2"><span class="s3"></span><br></p>
+<p class="p6"><span class="s3">DocumentRoot /var/www/html/MyFirstLaravel/public</span></p>
+<p class="p2"><span class="s3"></span><br></p>
+<p class="p2"><span class="s3"></span><br></p>
+<p class="p3"><span class="s3"><span class="Apple-tab-span">	</span>編集したファイルをコピーでHost -&gt; Containerへと戻して、</span></p>
+<p class="p6"><span class="s3">docker cp </span>/<span class="s4">Users/tartetatin/Desktop/LaravelServer/apache2/</span><span class="s3">000-default.conf </span><span class="s7">&lt;php</span><span class="s8">が動いてるコンテナの</span><span class="s7">ID&gt;</span><span class="s3">:/etc/apache2/sites-available/000-default.conf</span></p>
+<p class="p2"><span class="s3"></span><br></p>
+<p class="p2"><span class="s3"><span class="Apple-tab-span">	</span></span></p>
+<p class="p3"><span class="s3"><span class="Apple-tab-span">	</span>phpの動いてるコンテナで、apacheの再起動</span></p>
+<p class="p6"><span class="s3">apachectl -k graceful</span></p>
+<p class="p2"><span class="s3"></span><br></p>
+<p class="p3"><span class="s3"><span class="Apple-tab-span">	</span>これで、apacheへとアクセスした時に、Laravelのパスへとアクセスできるようになった。</span></p>
+<p class="p3"><span class="s3"><span class="Apple-tab-span">	</span>127.0.0.1にアクセスすると、確かにいい感じにインデックス表示された。まだMySQL動いてないんだけど。</span></p>
+<p class="p7"><span class="Apple-tab-span">	</span><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202016-10-10%2017.33.10.png" alt="スクリーンショット 2016-10-10 17.33.10.png"></p>
+<p class="p3"><span class="s3"><span class="Apple-tab-span">	</span>このコンフィグいじるとかその辺もなんかDockerfileに書き込めるといいんだろうなあ。と思うが面倒臭いのでいい。</span></p>
+<p class="p2"><span class="s3"><span class="Apple-tab-span">	</span></span></p>
+<p class="p2"><span class="s3"><b></b></span><br></p>
+<p class="p3"><span class="s3"><b>MySQLの設定</b></span></p>
+<p class="p3"><span class="s3"><span class="Apple-tab-span">	</span>次に、MySQLのパスを指定してみる。どうせなんか必要なんだろうし。、、必要なのか？</span></p>
+<p class="p3"><span class="s3"><span class="Apple-tab-span">	</span>laravelの.envを書き換えればいいんだと思う。まあ面倒だから一度この辺で帰ろう。</span></p>
+<p class="p2"><span class="s3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span></p>
+</body>
+</html>
