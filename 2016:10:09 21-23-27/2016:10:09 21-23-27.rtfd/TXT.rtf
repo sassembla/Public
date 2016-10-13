@@ -124,7 +124,7 @@ RUN apt-get update && docker-php-ext-install pdo_mysql mysqli mbstring\
 \b0 \
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
 \cf0 \CocoaLigature0 	\'82\'c8\'82\'f1\'82\'a9\'90\'a2\'92\'6d\'90\'68\'82\'a2\'8e\'96\'8f\'ee\'82\'c9\'82\'e6\'82\'c1\'82\'c4\'81\'41MySQL\'82\'cc\'95\'b6\'8e\'9a\'83\'52\'81\'5b\'83\'68\'82\'cd\'83\'66\'83\'74\'83\'48\'83\'8b\'83\'67\'82\'c5\'82\'cdLatin\'82\'e7\'82\'b5\'82\'a2\'81\'42\
-	\'82\'c5\'81\'41\cb5 /Users/tartetatin/Desktop/LaravelServer/mysql/conf.d\cb1 \'82\'f0\'8d\'ec\'82\'c1\'82\'c4\'82\'a8\'82\'a2\'82\'c4\'81\'41MySQL\'82\'cc\'8b\'4e\'93\'ae\'8e\'9e\'82\'c9\'8c\'c4\'82\'ce\'82\'ea\'82\'e9\'83\'74\'83\'40\'83\'43\'83\'8b\'82\'cc\'91\'e3\'82\'ed\'82\'e8\'82\'c9\'93\'c7\'82\'dd\'8d\'9e\'82\'dc\'82\'b9\'82\'e9\'81\'42\
+	\'82\'c5\'81\'41\cb4 /Users/tartetatin/Desktop/LaravelServer/mysql/conf.d\cb1 \'82\'f0\'8d\'ec\'82\'c1\'82\'c4\'82\'a8\'82\'a2\'82\'c4\'81\'41MySQL\'82\'cc\'8b\'4e\'93\'ae\'8e\'9e\'82\'c9\'8c\'c4\'82\'ce\'82\'ea\'82\'e9\'83\'74\'83\'40\'83\'43\'83\'8b\'82\'cc\'91\'e3\'82\'ed\'82\'e8\'82\'c9\'93\'c7\'82\'dd\'8d\'9e\'82\'dc\'82\'b9\'82\'e9\'81\'42\
 \
 \cb4 docker run --name mysql -v /Users/tartetatin/Desktop/LaravelServer/mysql:/etc/mysql/conf.d -e MYSQL_ROOT_PASSWORD=pass -d mysql:5.7\
 \cb1 \
@@ -135,9 +135,9 @@ RUN apt-get update && docker-php-ext-install pdo_mysql mysqli mbstring\
 	\'90\'e6\'82\'d9\'82\'c7\'8d\'ec\'82\'c1\'82\'bdphp:custom\'82\'c6\'81\'41mysql:mysql \'82\'f0\'8b\'a6\'92\'b2\'93\'ae\'8d\'ec\'82\'b3\'82\'b9\'82\'e9\'81\'42\
 	MySQL\'82\'cc\'83\'52\'83\'93\'83\'65\'83\'69\'82\'cdlink\'82\'c5\'97\'a7\'82\'bf\'8f\'e3\'82\'aa\'82\'e9\'82\'ed\'82\'af\'82\'c5\'82\'cd\'96\'b3\'82\'a2\'82\'dd\'82\'bd\'82\'a2\'82\'be\'81\'42\'8e\'96\'91\'4f\'82\'c9\'97\'a7\'82\'bf\'8f\'e3\'82\'b0\'82\'c4\'82\'a8\'82\'a9\'82\'c8\'82\'a2\'82\'c6\'82\'a2\'82\'af\'82\'c8\'82\'a2\'82\'cc\'82\'a9\'81\'41\'81\'41\'82\'c8\'82\'f1\'82\'a9\'95\'fb\'96\'40\'82\'aa\'82\'c8\'82\'a2\'82\'cc\'82\'a9\'82\'c8\'81\'42\
 \
-\cb4 docker run -p 80:80 -v \CocoaLigature1 /
+\cb4 docker run -p 80:80 -v \cb4 \CocoaLigature1 /
 \fs22 \CocoaLigature0 Users/tartetatin/Desktop/LaravelServer
-\fs24 :/var/www/html --link mysql:mysql --name php -d php:custom\
+\fs24 \cb4 :/var/www/html --link mysql:mysql --name php -d php:custom\
 \cb1 \
 	\'82\'c5\'81\'41\'97\'a7\'82\'bf\'8f\'e3\'82\'aa\'82\'c1\'82\'c4\'82\'a2\'82\'e9\'83\'52\'83\'93\'83\'65\'83\'69\'88\'ea\'97\'97\'82\'cd\'81\'41\
 \cb4 docker ps -a\
@@ -153,7 +153,7 @@ aa9bed662161        mysql:5.7           "docker-entrypoint.sh"   24 minutes ago 
 \pard\pardeftab720\partightenfactor0
 \cf0 \cb4 docker exec -ti php bash\
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
-\cf0 cat /etc/hosts\
+\cf0 \cb4 cat /etc/hosts\
 127.0.0.1	localhost\
 ::1	localhost ip6-localhost ip6-loopback\
 fe00::0	ip6-localnet\
@@ -217,12 +217,12 @@ composer create-project laravel/laravel MyFirstLaravel\
 	\'82\'b1\'82\'cc\'83\'74\'83\'40\'83\'43\'83\'8b\'82\'f0\'88\'ea\'93\'78host\'82\'d6\'82\'c6\'83\'52\'83\'73\'81\'5b\'82\'b5\'82\'c4\'81\'41\'82\'e0\'82\'a4\'88\'ea\'93\'78\'83\'52\'83\'93\'83\'65\'83\'69\'82\'d6\'82\'c6\'83\'52\'83\'73\'81\'5b\'81\'42\
 \
 \cb4 docker cp 
-\f1\fs22 <php
+\f1\fs22 \cb4 <php
 \f2 \'82\'aa\'93\'ae\'82\'a2\'82\'c4\'82\'e9\'83\'52\'83\'93\'83\'65\'83\'69\'82\'cc
 \f1 ID>
-\f0\fs24 :\cb5 /etc/apache2/sites-available/000-default.conf\cb4  \CocoaLigature1 /
+\f0\fs24 \cb4 :/etc/apache2/sites-available/000-default.conf \cb4 \CocoaLigature1 /
 \fs22 \CocoaLigature0 Users/tartetatin/Desktop/LaravelServer/apache2/
-\fs24 \cb5 000-default.conf\cb4 \
+\fs24 \cb4 000-default.conf\
 \cb1 \
 	\'82\'c5\'81\'41\'83\'52\'83\'73\'83\'62\'82\'c4\'82\'ab\'82\'bdconf\'82\'cc\'8a\'59\'93\'96\'8d\'73\'82\'f0\'8f\'91\'82\'ab\'8a\'b7\'82\'a6\'82\'e9\'81\'42\
 \
@@ -230,13 +230,13 @@ composer create-project laravel/laravel MyFirstLaravel\
 \cb1 \
 \
 	\'95\'d2\'8f\'57\'82\'b5\'82\'bd\'83\'74\'83\'40\'83\'43\'83\'8b\'82\'f0\'83\'52\'83\'73\'81\'5b\'82\'c5Host -> Container\'82\'d6\'82\'c6\'96\'df\'82\'b5\'82\'c4\'81\'41\
-\cb4 docker cp \CocoaLigature1 /
+\cb4 docker cp \cb4 \CocoaLigature1 /
 \fs22 \CocoaLigature0 Users/tartetatin/Desktop/LaravelServer/apache2/
-\fs24 000-default.conf 
-\f1\fs22 <php
+\fs24 \cb4 000-default.conf 
+\f1\fs22 \cb4 <php
 \f2 \'82\'aa\'93\'ae\'82\'a2\'82\'c4\'82\'e9\'83\'52\'83\'93\'83\'65\'83\'69\'82\'cc
 \f1 ID>
-\f0\fs24 :/etc/apache2/sites-available/000-default.conf\
+\f0\fs24 \cb4 :/etc/apache2/sites-available/000-default.conf\
 \cb1 \
 	\
 	php\'82\'cc\'93\'ae\'82\'a2\'82\'c4\'82\'e9\'83\'52\'83\'93\'83\'65\'83\'69\'82\'c5\'81\'41apache\'82\'cc\'8d\'c4\'8b\'4e\'93\'ae\
@@ -251,9 +251,22 @@ composer create-project laravel/laravel MyFirstLaravel\
 \f0 \CocoaLigature0 \
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
 \cf0 	\'82\'b1\'82\'cc\'83\'52\'83\'93\'83\'74\'83\'42\'83\'4f\'82\'a2\'82\'b6\'82\'e9\'82\'c6\'82\'a9\'82\'bb\'82\'cc\'95\'d3\'82\'e0\'82\'c8\'82\'f1\'82\'a9Dockerfile\'82\'c9\'8f\'91\'82\'ab\'8d\'9e\'82\'df\'82\'e9\'82\'c6\'82\'a2\'82\'a2\'82\'f1\'82\'be\'82\'eb\'82\'a4\'82\'c8\'82\'a0\'81\'42\'82\'c6\'8e\'76\'82\'a4\'82\'aa\'96\'ca\'93\'7c\'8f\'4c\'82\'a2\'82\'cc\'82\'c5\'82\'a2\'82\'a2\'81\'42\
-	\
+\
+\
+
+\b \'82\'b1\'82\'cc\'8f\'f3\'91\'d4\'82\'cc\'83\'52\'83\'93\'83\'65\'83\'69\'82\'a9\'82\'e7image\'82\'f0\'8d\'ec\'82\'c1\'82\'c4\'82\'a8\'82\'ad
+\b0 \
+	\'82\'b1\'82\'b1\'82\'dc\'82\'c5\'82\'c5php\'82\'cc\'83\'52\'83\'93\'83\'65\'83\'69\'82\'f0stop\'82\'b3\'82\'b9\'82\'c4\'81\'41\'92\'e2\'8e\'7e\'82\'b5\'82\'bd\'83\'52\'83\'93\'83\'65\'83\'69\'82\'a9\'82\'e7laravel:basic\'82\'c6\'82\'a2\'82\'a4\'96\'bc\'91\'4f\'82\'c5image\'82\'f0\'8d\'ec\'82\'c1\'82\'c4\'82\'a8\'82\'ad\'81\'42\
+\
+\cb5 docker commit php laravel:basic\
+\cb1 	\'88\'c8\'8d\'7e\'82\'cd\'82\'b1\'82\'a2\'82\'c2\'82\'f0\'8b\'4e\'93\'ae\'82\'b3\'82\'b9\'82\'bd\'82\'e8\'8e\'7e\'82\'df\'82\'bd\'82\'e8\'82\'b7\'82\'ea\'82\'ce\'82\'a2\'82\'a2\'8a\'b4\'82\'b6\'81\'42\
 
 \b \
+
+\b0 \cb5 docker run -p 80:80 -v /Users/tartetatin/Desktop/LaravelServer:/var/www/html --link mysql:mysql --name laravel -d laravel:basic
+\b \
+\cb1 \
+\
 MySQL\'82\'cc\'90\'dd\'92\'e8
 \b0 \
 	\'8e\'9f\'82\'c9\'81\'41MySQL\'82\'cc\'83\'70\'83\'58\'82\'f0\'8e\'77\'92\'e8\'82\'b5\'82\'c4\'82\'dd\'82\'e9\'81\'42\'82\'c7\'82\'a4\'82\'b9\'82\'c8\'82\'f1\'82\'a9\'95\'4b\'97\'76\'82\'c8\'82\'f1\'82\'be\'82\'eb\'82\'a4\'82\'b5\'81\'42\'81\'41\'81\'41\'95\'4b\'97\'76\'82\'c8\'82\'cc\'82\'a9\'81\'48\
