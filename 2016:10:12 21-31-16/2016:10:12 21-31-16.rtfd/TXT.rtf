@@ -1,0 +1,474 @@
+{\rtf1\ansi\ansicpg932\cocoartf1404\cocoasubrtf470
+{\fonttbl\f0\fnil\fcharset128 HiraKakuProN-W3;}
+{\colortbl;\red255\green255\blue255;\red230\green230\blue230;\red230\green230\blue230;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww21920\viewh14560\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\b\fs44 \cf0 Docker Autobahn\'8a\'c2\'8b\'ab + wss + BouncyCastle C#
+\b0\fs24 \
+\
+
+\b \'8a\'54\'97\'76
+\b0 \
+	\'82\'b1\'82\'ea\
+		{\field{\*\fldinst{HYPERLINK "http://autobahn.ws"}}{\fldrslt http://autobahn.ws}}\
+\
+	\'82\'aa\'93\'ae\'82\'ad\'8a\'c2\'8b\'ab\'82\'f0Docker\'82\'c5\'8d\'ec\'82\'c1\'82\'c4\'81\'41\'93\'4b\'93\'96\'82\'c9\'93\'ae\'82\'a9\'82\'b7\'81\'42\'8e\'e5\'82\'c9Tls\'8e\'fc\'82\'e8\'82\'c6\'82\'a9\'81\'42\
+	C#\'91\'a4\'82\'cdWebSocket(\'90\'b6\'83\'5c\'83\'50\'83\'62\'83\'67\'82\'c5\'97\'56\'82\'da\'82\'a4\'82\'cc\'89\'ef) + BouncyCastle\'89\'f0\'93\'c7\'89\'f1\'81\'42\
+\
+	Docker\'82\'c5\'82\'ccAutobahn\'93\'ae\'8d\'ec\'8a\'c2\'8b\'ab\'82\'cc\'8d\'ec\'90\'ac\'82\'a9\'82\'e7\'81\'41C#\'82\'c5\'82\'ccBouncyCastle\'82\'cc\'8e\'67\'82\'a2\'95\'fb\'94\'ad\'8c\'40\'81\'41TLS\'92\'ca\'82\'b5\'82\'c4Handshake\'82\'dc\'82\'c5\'82\'f0\'82\'e2\'82\'e9\'89\'48\'96\'da\'82\'c9\'82\'c8\'82\'c1\'82\'bd\'81\'42\
+\
+\
+
+\b \'93\'ae\'8b\'40
+\b0 \
+	\'8e\'a9\'8d\'ec\'82\'ccC# WebSocket\'83\'89\'83\'43\'83\'75\'83\'89\'83\'8a\'81\'75WebuSocket\'81\'76\'82\'c5\'81\'41WebSocket\'82\'cc\'83\'65\'83\'58\'83\'67\'82\'bf\'82\'e1\'82\'f1\'82\'c6\'92\'ca\'82\'b5\'82\'bd\'82\'b1\'82\'c6\'82\'bb\'82\'a4\'82\'a2\'82\'a6\'82\'ce\'96\'b3\'82\'a2\'82\'e6\'82\'cb\'82\'c1\'82\'c4\'82\'a2\'82\'a4\'8a\'b4\'82\'b6\'81\'42\
+\
+\
+
+\b \'8f\'80\'94\'f5
+\b0 \
+	\
+\cb2 docker pull python\
+\cb1 	\'82\'b1\'82\'ea\'82\'c5\'93\'fc\'82\'e9\'8a\'c2\'8b\'ab\'82\'c1\'82\'c4\'82\'c7\'82\'f1\'82\'c8\'82\'cc\'82\'c8\'82\'f1\'82\'be\'82\'eb\'82\'a4\'81\'42Python3\'82\'be\'82\'c6\'8a\'f0\'82\'b5\'82\'a2\'82\'f1\'82\'be\'82\'af\'82\'c7\'81\'42\
+	-> 3.5\'82\'be\'82\'c1\'82\'bd\'81\'42\'82\'e2\'82\'c1\'82\'bd\'82\'cb\'81\'49\
+\
+	container\'97\'a7\'82\'bf\'8f\'e3\'82\'b0\'82\'c4\
+\cb2 docker run -ti -d --name python python:latest\
+\cb1 \
+\
+	bash\'8b\'4e\'93\'ae\'82\'b5\'82\'c4\'93\'fc\'82\'e9\
+\cb2 docker exec -ti python bash\
+\cb1 \
+\
+
+\b Autobahn\'93\'ae\'82\'a9\'82\'b7\
+
+\b0 	TLS\'82\'c5\'93\'ae\'82\'ad\'83\'54\'83\'93\'83\'76\'83\'8b\'82\'aa\'82\'a0\'82\'e9\'82\'f1\'82\'c5\'81\'41\'82\'b1\'82\'ea\'82\'aa\'93\'ae\'82\'a9\'82\'b9\'82\'ea\'82\'ce\'8d\'73\'82\'af\'82\'bb\'82\'a4\'81\'42\
+	\'93\'4b\'93\'96\'82\'c9\'83\'5c\'81\'5b\'83\'58\'82\'f0\'83\'7a\'83\'58\'83\'67\'82\'c9\'92\'75\'82\'a2\'82\'c4\'81\'41\'93\'ae\'82\'a9\'82\'b9\'82\'e9\'82\'e6\'82\'a4\'82\'c9\'82\'b5\'82\'c4\'82\'dd\'82\'e6\'82\'a4\'81\'42\
+\
+\cb2 docker run -ti -d --name python -v /Users/tartetatin/Desktop/pythonServer:/usr/local/src python:latest\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \cb1 	\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 	 Autobahn\'82\'cc\'94\'f5\'82\'a6\'95\'74\'82\'af\'82\'cc\'83\'54\'81\'5b\'83\'6f\'82\'f0\'93\'ae\'82\'a9\'82\'b7\'82\'bd\'82\'df\'82\'c9\'81\'41\'82\'a2\'82\'eb\'82\'a2\'82\'eb\'88\'cb\'91\'b6\'82\'aa\'91\'ab\'82\'e8\'82\'c8\'82\'a2\'82\'cc\'82\'c5\'93\'fc\'82\'ea\'82\'e9\'81\'42\
+\cb2 pip install autobahn\
+pip install twisted\
+pip install pyopenssl\
+pip install txaio\
+pip install service_identity\
+\cb1 \
+\
+	\'82\'dc\'82\'beport\'8a\'4a\'82\'af\'82\'c4\'82\'c8\'82\'a9\'82\'c1\'82\'bd\'81\'41\'81\'41\'88\'ea\'93\'78\'83\'43\'83\'81\'81\'5b\'83\'57\'82\'c9\'97\'8e\'82\'c6\'82\'b7\'82\'cc\'82\'aa\'82\'a2\'82\'a2\'82\'cc\'82\'a9\'82\'c8\'81\'41\'81\'41commit\'82\'b5\'82\'bf\'82\'e1\'82\'a8\'82\'a4\'81\'41\'81\'41\
+\cb2 docker commit python autobahn:latest\
+\cb1 \
+\
+
+\b \'82\'c6\'82\'a2\'82\'a4\'82\'ed\'82\'af\'82\'c5\'81\'41\'83\'7a\'83\'58\'83\'67\'82\'a9\'82\'e7\'90\'da\'91\'b1
+\b0 \
+\
+\cb2 docker run -ti -p 8000:8000 -p 9000:9000 -d --name autobahn -v /Users/tartetatin/Desktop/pythonServer:/usr/local/src autobahn:latest\
+\cb1 \
+	8000\'94\'d4\'82\'cdHTTP\'81\'419000\'94\'d4\'82\'cdWebSocket\'82\'cc\'8e\'f3\'82\'af\'8c\'fb\'82\'c9\'82\'b5\'82\'c4\'82\'e9\'81\'42\
+	\'82\'c5\'81\'41\
+	\'83\'75\'83\'89\'83\'45\'83\'55\'82\'c58000\'94\'d4\'82\'f0\'8a\'4a\'82\'ad\'82\'c6\'81\'41certificate\'93\'fc\'82\'ea\'82\'c8\'82\'e6\'81\'60\'82\'c1\'82\'c4\'82\'a2\'82\'a4\'83\'8a\'83\'93\'83\'4e\'82\'f0\'8e\'a6\'82\'b5\'82\'c4\'82\'ad\'82\'ea\'82\'e9\'81\'42\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 {{\NeXTGraphic スクリーンショット 2016-10-13 15.10.14.png \width14260 \height7620
+}�}\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \
+\
+	\'82\'bb\'82\'cc\'82\'dc\'82\'dc\'83\'75\'83\'89\'83\'45\'83\'55\'82\'c59000\'94\'d4\'82\'f0\'8a\'4a\'82\'ad\'82\'c6\'81\'41\'82\'b1\'82\'b1\'82\'cdWebSocket\'82\'ccEndPoint\'82\'be\'82\'e6\'81\'60\'82\'c1\'82\'c4\'8c\'be\'82\'ed\'82\'ea\'82\'e9\'81\'42\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 {{\NeXTGraphic スクリーンショット 2016-10-13 15.10.21.png \width14260 \height7620
+}�}\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \
+	\'82\'c5\'81\'42\
+	\'83\'75\'83\'89\'83\'45\'83\'55\'82\'c5\'93\'4b\'93\'96\'82\'c8WebSocket\'83\'4e\'83\'89\'83\'43\'83\'41\'83\'93\'83\'67\'8f\'91\'82\'a2\'82\'c4\'90\'da\'91\'b1\'82\'f0wss://127.0.0.1:9000\'82\'c5\'8d\'73\'82\'a4\'82\'c6\'81\'41 \cb2 OSStatus Error -9807: Invalid certificate chain\cb1  \'82\'aa\'8f\'6f\'82\'e9\'81\'42	\'82\'d3\'82\'de\'81\'42\'82\'dc\'82\'a0\'8a\'6d\'82\'a9\'82\'c9\'81\'42\'83\'49\'83\'8c\'83\'49\'83\'8c\'8f\'d8\'96\'be\'8f\'91\'82\'be\'82\'b5\'81\'42\
+\
+	\'83\'75\'83\'89\'83\'45\'83\'55\'82\'f0\'90\'e0\'93\'be\'82\'b7\'82\'e9\'82\'cc\'82\'cd\'92\'fa\'82\'df\'82\'c4\'81\'41C#\'82\'ccSocket\'82\'c5\'82\'cc\'90\'da\'91\'b1\'82\'f0\'8d\'6c\'82\'a6\'82\'e9\'81\'42\
+	\'82\'b1\'82\'b1\'82\'c5\'96\'e2\'91\'e8\'82\'c9\'82\'d4\'82\'bf\'93\'96\'82\'bd\'82\'e9\'81\'42\
+\
+\
+
+\b SslStream\'82\'f0\'8e\'67\'82\'a6\'82\'ceTLS\'82\'c5Autobahn\'82\'c6\'82\'cc\'90\'da\'91\'b1\'82\'cd\'82\'c5\'82\'ab\'82\'e9\'82\'f1\'82\'be\'82\'af\'82\'c7\'81\'41\'82\'b1\'82\'eaTLS1.0\'82\'b6\'82\'e1\'82\'f1\'81\'42\'82\'a0\'82\'c6SslStream\'82\'cb\'82\'a5\'81\'41\'81\'41\'81\'41
+\b0 \
+	C#\'82\'c6\'82\'a2\'82\'a4\'82\'a9\'81\'42.Net Framework\'82\'c9\'82\'cdSslStream\'82\'c6\'82\'a2\'82\'a4\'81\'41SSL\'8c\'6e\'82\'cc\'93\'ae\'8d\'ec\'82\'f0handshake\'82\'a9\'82\'e7send/receive\'82\'dc\'82\'c5\'82\'dc\'82\'e9\'82\'c1\'82\'c6\'88\'f9\'82\'dd\'8d\'9e\'82\'f1\'82\'beAPI\'82\'aa\'91\'b6\'8d\'dd\'82\'b7\'82\'e9\'81\'42\
+	\
+	\'91\'b6\'8d\'dd\'82\'b7\'82\'e9\'82\'f1\'82\'be\'82\'af\'82\'c7\'82\'b3\'81\'60\'81\'60\'81\'60\'81\'42\'95\'4b\'82\'b8
+\b NetworkStream
+\b0 \'82\'f0\'8e\'67\'82\'a4\'8e\'c0\'91\'95\'82\'c9\'82\'c8\'82\'c1\'82\'bf\'82\'e1\'82\'a4\'81\'42\
+	\
+	\'82\'c5\'81\'41\'8d\'ec\'82\'c1\'82\'c4\'82\'e9WebuSocket\'82\'c1\'82\'c4\'82\'a2\'82\'a4WebSocket\'83\'4e\'83\'89\'83\'43\'83\'41\'83\'93\'83\'67\'82\'cd\'81\'41Socket\'82\'f0\'8e\'67\'82\'c1\'82\'c4\'82\'a2\'82\'eb\'82\'a2\'82\'eb\'82\'e2\'82\'c1\'82\'c4\'82\'e9\'82\'cc\'82\'c5\'81\'41NetworkStream\'82\'c9\'97\'8e\'82\'bf\'82\'bd\'82\'e7\'95\'89\'82\'af\'82\'be\'82\'c6\'8e\'76\'82\'c1\'82\'c4(ry\
+\
+	Socket\'82\'a9\'82\'e7NetworkStream\'82\'f0\'8e\'e6\'82\'e8\'8f\'6f\'82\'b5\'82\'c4SslStream\'82\'c9\'8c\'71\'82\'ae\'81\'41\'82\'c6\'82\'a9\'82\'cd\'82\'dc\'82\'a0\'81\'41\'92\'b4\'8a\'c8\'92\'50\'82\'c9\'82\'c5\'82\'ab\'82\'e9\'82\'f1\'82\'be\'82\'af\'82\'c7\'81\'41Stream\'82\'ccAPI\'82\'aa\'8b\'43\'82\'c9\'90\'48\'82\'ed\'82\'f1\'81\'42\
+	\'94\'f1\'93\'af\'8a\'faAPI\'8e\'67\'82\'a4\'82\'c9\'8c\'88\'82\'dc\'82\'c1\'82\'c4\'82\'e9\'82\'f1\'82\'be\'82\'af\'82\'c7\'81\'41Task\'8e\'67\'82\'a4\'82\'f1\'82\'c5\'95\'4b\'82\'b8Thread\'82\'c5\'82\'ab\'82\'bf\'82\'e1\'82\'a4\'82\'b5\'81\'42\
+	\
+\
+	Socket\'82\'c5\'82\'c8\'82\'f1\'82\'c6\'82\'a9\'82\'b5\'82\'bd\'82\'a2\'82\'c8\'81\'60\'82\'c1\'82\'c4\'82\'c8\'82\'c1\'82\'c4\'81\'41\'82\'a2\'82\'eb\'82\'f1\'82\'c8\'95\'fb\'8c\'fc\'82\'f0\'92\'54\'82\'b5\'82\'bd\'81\'42\
+\
+	\
+
+\b \'82\'d4\'82\'c1\'82\'bf\'82\'e1\'82\'af\'82\'e2\'82\'e8\'82\'bd\'82\'a2\'82\'b1\'82\'c6
+\b0 \
+	\'81\'45TLS protocol\'82\'c5\'82\'cc\'83\'54\'81\'5b\'83\'6f\'82\'c6\'82\'cc\'82\'e2\'82\'e8\'82\'c6\'82\'e8\'82\'cd\'81\'41\'82\'b4\'82\'c1\'82\'ad\'82\'e8\'8c\'be\'82\'a4\'82\'c6\'82\'bb\'82\'a4\'82\'a2\'82\'a4\'93\'ae\'8d\'ec\'82\'f0\'82\'b7\'82\'e9 state machine \'82\'aa\'8e\'e8\'82\'c9\'82\'cd\'82\'a2\'82\'ea\'82\'ce\'82\'e6\'82\'a2\'81\'42\
+	\'81\'45\'83\'43\'83\'93\'83\'5e\'81\'5b\'83\'74\'83\'46\'81\'5b\'83\'58\'82\'c6\'82\'b5\'82\'c4\'81\'41TCP\'82\'c5\'8e\'e6\'93\'be\'82\'b5\'82\'bdbyte[]\'82\'f0\'95\'fa\'82\'e8\'8d\'9e\'82\'de\'82\'c6\'81\'41TLS\'82\'cchandshake\'82\'f0\'82\'b5\'82\'bd\'82\'e8\'81\'41handshake\'8d\'cf\'82\'dd\'82\'c5\'82\'a0\'82\'ea\'82\'cedecrypted\'82\'c8byte[]\'82\'f0\'93\'66\'82\'ab\'8f\'6f\'82\'b7\'8b\'40\'8d\'5c\'82\'aa\'82\'a0\'82\'e9\'81\'41\'81\'41\'82\'cd\'82\'b8\
+\
+	\'82\'c5\'81\'41\'92\'54\'82\'b5\'82\'bd\'82\'e7.Net Framework\'82\'c9\'82\'cd\'82\'bb\'82\'a4\'82\'a2\'82\'a4\'82\'cc\'82\'c8\'82\'a9\'82\'c1\'82\'bd\'81\'42\
+\
+	\'8d\'a2\'82\'c1\'82\'bd\'82\'b1\'82\'c6\'82\'c9\'81\'41.Net Framework\'82\'c9\'82\'cd\'81\'41
+\b TLS\'82\'f0\'88\'b5\'82\'a6\'82\'e9state machine \'82\'aa\'96\'b3\'82\'a2\'81\'42
+\b0 \
+	Java\'82\'c5\'82\'a2\'82\'a4SSLEngine\'82\'dd\'82\'bd\'82\'a2\'82\'c8\'82\'e2\'82\'c2\'81\'42\
+	\
+	\'82\'c8\'82\'f1\'82\'c5\'82\'cb\'81\'5b\'81\'5b\'81\'5b\'82\'f1\'82\'be\'82\'eb\'82\'a4\'81\'42SslStream\'82\'c5\'82\'dd\'82\'f1\'82\'c8\'96\'9e\'91\'ab\'82\'b5\'82\'c4\'82\'f1\'82\'cc\'81\'48 \'96\'7b\'93\'96\'81\'48\
+	\'82\'c5\'81\'41\'82\'a2\'82\'eb\'82\'a2\'82\'eb\'92\'54\'82\'b5\'89\'f1\'82\'c1\'82\'c4\'81\'41OpenSSL\'82\'ccC#\'83\'89\'83\'62\'83\'70\'8c\'a9\'82\'bd\'82\'e8\'81\'41\'83\'49\'81\'5b\'83\'76\'83\'93\'83\'5c\'81\'5b\'83\'58\'82\'c8\'89\'bd\'82\'a9\'82\'c6\'82\'a9\'8c\'a9\'82\'c4\'82\'c4\'81\'41\
+	\'8d\'c5\'8f\'49\'93\'49\'82\'c9BouncyCastle\'82\'c9\'82\'bd\'82\'c7\'82\'e8\'92\'85\'82\'a2\'82\'bd\'81\'42\
+	\
+\
+
+\b \'82\'bb\'82\'f1\'82\'c8BouncyCastle
+\b0 \
+	{\field{\*\fldinst{HYPERLINK "https://www.bouncycastle.org/csharp/index.html"}}{\fldrslt https://www.bouncycastle.org/csharp/index.html}}\
+\
+	github\'8f\'e3\'82\'c9\'82\'e0\'82\'a0\'82\'e9\'81\'42\
+		{\field{\*\fldinst{HYPERLINK "https://github.com/bcgit/bc-csharp"}}{\fldrslt https://github.com/bcgit/bc-csharp}}\
+\
+\
+	\'81\'41\'81\'41\'81\'41\'90\'4d\'82\'b6\'82\'e7\'82\'ea\'82\'c8\'82\'a2\'82\'b1\'82\'c6\'82\'c9API document\'82\'aa\'96\'b3\'82\'a2\'82\'f1\'82\'be\'82\'e6\'82\'cb\'81\'42\'82\'c8\'82\'ba\'82\'be\'82\'eb\'82\'a4\'82\'cb\'81\'42\
+	test\'82\'c6\'82\'a9\'93\'c7\'82\'de\'82\'b1\'82\'c6\'82\'c9\'82\'c8\'82\'c1\'82\'bd\'81\'42\
+\pard\pardeftab720\partightenfactor0
+\cf0 \
+\
+
+\b \'82\'c6\'82\'a2\'82\'a4\'82\'ed\'82\'af\'82\'c5BouncyCastle\'82\'f0\'93\'c7\'82\'de
+\b0 \
+	\'82\'dc\'82\'b8\'82\'cd\'8a\'d6\'8c\'57\'82\'a0\'82\'e8\'82\'bb\'82\'a4\'82\'c8TlsTestCase.cs\'82\'f0\'8c\'a9\'82\'c4\'82\'dd\'82\'e9\'81\'42\
+		{\field{\*\fldinst{HYPERLINK "https://github.com/bcgit/bc-csharp/blob/master/crypto/test/src/crypto/tls/test/TlsTestCase.cs"}}{\fldrslt https://github.com/bcgit/bc-csharp/blob/master/crypto/test/src/crypto/tls/test/TlsTestCase.cs}}\
+\
+\
+	\'82\'a2\'82\'eb\'82\'a2\'82\'eb\'82\'a0\'82\'e9\'82\'c8\'81\'60\'81\'60\'8a\'79\'82\'b5\'82\'bb\'82\'a4\'82\'c8\'82\'cc\'81\'42\
+	WriteHandshakeMessage\
+\
+	blocking\'83\'82\'81\'5b\'83\'68\'82\'c5\'82\'cc\'82\'dd\'8e\'67\'82\'a6\'82\'e9Stream\'82\'c6\'82\'a9\
+\
+	public virtual void OfferInput(byte[] input) \'82\'b1\'82\'c1\'82\'bf\'82\'cd\'83\'6d\'83\'93\'83\'75\'83\'8d\'83\'62\'83\'4c\'83\'93\'83\'4f\'91\'4f\'92\'f1\'82\'c5\'82\'b5\'82\'a9\'8e\'67\'82\'a6\'82\'c8\'82\'a2\'82\'e7\'82\'b5\'82\'a2\'81\'42\'83\'66\'81\'5b\'83\'5e\'82\'f0\'91\'97\'82\'e9\'82\'c1\'82\'db\'82\'a2\'81\'42\
+	public virtual void OfferOutput(byte[] buffer, int offset, int length) \'83\'66\'81\'5b\'83\'5e\'82\'f0\'8e\'f3\'82\'af\'8e\'e6\'82\'e9\'82\'c1\'82\'db\'82\'a2\'81\'42\
+\
+\
+	-> stream\'82\'f0\'88\'f8\'90\'94\'82\'c9\'8e\'9d\'82\'c2TlsClientProtocol\'83\'52\'83\'93\'83\'58\'83\'67\'83\'89\'83\'4e\'83\'5e\'82\'cd\'91\'53\'95\'94\'83\'75\'83\'8d\'83\'62\'83\'4c\'83\'93\'83\'4f\'82\'c5\'81\'41\
+		SecureRandom\'82\'be\'82\'af\'82\'f0\'88\'f8\'90\'94\'82\'c9\'8e\'9d\'82\'c2TlsClientProtocol\'83\'52\'83\'93\'83\'58\'83\'67\'83\'89\'83\'4e\'83\'5e\'82\'aa\'83\'6d\'83\'93\'83\'75\'83\'8d\'83\'62\'83\'4c\'83\'93\'83\'4f\'82\'be\'82\'c1\'82\'bd\'81\'42\
+\
+	-> \'82\'bb\'82\'e0\'82\'bb\'82\'e0\'83\'75\'83\'8d\'83\'62\'83\'4c\'83\'93\'83\'4f\'83\'82\'81\'5b\'83\'68\'82\'c1\'82\'c4\'82\'c8\'82\'f1\'82\'c8\'82\'cc\'81\'48\
+		\'82\'a0\'82\'c6\'82\'c5\'82\'ed\'82\'a9\'82\'e9\'82\'b1\'82\'c6\'82\'be\'82\'aa\'81\'41stream\'82\'f0\'8e\'67\'82\'c1\'82\'bd\'93\'fc\'8f\'6f\'97\'cd\'89\'42\'95\'c1\'82\'aa\'82\'c5\'82\'ab\'82\'c4\'82\'a2\'82\'e9\'82\'e0\'82\'cc\'82\'f0blocking\'81\'41 \
+		stream\'82\'f0\'8e\'67\'82\'ed\'82\'b8\'8e\'a9\'95\'aa\'82\'c5byte[]\'93\'fc\'82\'ea\'82\'bd\'82\'e8\'8f\'6f\'82\'b5\'82\'bd\'82\'e8\'82\'c5\'82\'ab\'82\'e9state machine\'82\'c6\'82\'b5\'82\'c4\'82\'cc\'97\'98\'97\'70\'96\'40\'82\'cc\'82\'b1\'82\'c6\'82\'f0non-blocking \'82\'c6\'8c\'c4\'82\'f1\'82\'c5\'82\'a2\'82\'e9\'82\'e6\'82\'a4\'82\'be\'82\'c1\'82\'bd\'81\'42\
+\
+
+\b 		\'82\'bb\'82\'ea\'82\'cdblocking\'82\'c6\'82\'a2\'82\'a4\'8a\'54\'94\'4f\'82\'be\'82\'eb\'82\'a4\'82\'a9\'81\'41\'81\'41\'81\'41
+\b0 \
+\
+\
+	\'82\'c7\'82\'a4\'82\'e2\'82\'e7\'81\'41\'89\'b4\'82\'aa\'97\'7e\'82\'b5\'82\'a2\'82\'e0\'82\'cc\'82\'cdnon-blocking mode\'82\'e7\'82\'b5\'82\'a2\'81\'42\
+\
+\
+	\'82\'b1\'82\'ea\'82\'c6\'82\'e8\'82\'a0\'82\'a6\'82\'b8\'82\'c7\'82\'a4\'82\'e2\'82\'c1\'82\'c4ip/port\'8e\'77\'92\'e8\'82\'b7\'82\'e9\'82\'f1\'82\'be\'82\'eb\'82\'a4\'81\'42\
+	-> byte[]\'82\'c5\'82\'cc\'83\'43\'83\'93\'83\'76\'83\'62\'83\'67\'81\'41\'83\'41\'83\'45\'83\'67\'83\'76\'83\'62\'83\'67\'82\'f0\'97\'5e\'82\'a6\'82\'e9\'82\'c6\'81\'41\'93\'e0\'95\'94\'8f\'f3\'91\'d4\'82\'aa\'8f\'9f\'8e\'e8\'82\'c9\'91\'4a\'88\'da\'82\'b7\'82\'e9\'82\'c1\'82\'c4\'82\'a2\'82\'a4\'83\'58\'81\'5b\'83\'70\'81\'5b\'83\'67\'83\'93\'83\'60\'83\'4c\'83\'7d\'83\'56\'83\'93\'82\'be\'82\'b1\'82\'ea\'81\'42\
+		\'81\'41\'81\'41\'82\'bd\'82\'cc\'82\'de\'83\'68\'83\'4c\'83\'85\'83\'81\'83\'93\'83\'67\'82\'c9\'8f\'91\'82\'a2\'82\'c4\'82\'c4\'82\'ad\'82\'ea\'81\'42\'8d\'c5\'8d\'82\'82\'be\'82\'bc\'82\'b1\'82\'cc\'8b\'40\'94\'5c\'81\'42\'82\'c1\'82\'c4\'82\'a2\'82\'a4\'82\'a9\'82\'c8\'82\'f1\'82\'c5C#\'83\'49\'83\'8a\'83\'57\'83\'69\'83\'8b\'82\'c9\'82\'cd\'91\'b6\'8d\'dd\'82\'b5\'82\'c8\'82\'a2\'82\'f1\'82\'be\'82\'e6\'82\'b1\'82\'a4\'82\'a2\'82\'a4\'82\'cc\'81\'42\
+		(SslStream\'82\'cdstream\'82\'c9\'82\'c8\'82\'c1\'82\'bf\'82\'e1\'82\'a4\'82\'cc\'82\'c5\'82\'b1\'82\'cc\'95\'d3\'89\'42\'95\'c1\'82\'c5\'82\'ab\'82\'c4\'82\'e9\'82\'f1\'82\'be\'82\'af\'82\'c7\'81\'41\'89\'42\'95\'c1\'82\'b5\'82\'b7\'82\'ac\'82\'c4\'82\'c4socket\'82\'c6\'95\'b9\'97\'70\'82\'c5\'82\'ab\'82\'c8\'82\'a2\'81\'42\
+\
+\
+
+\b test code\'82\'a9\'82\'e7\'8e\'67\'82\'a2\'95\'fb\'82\'f0\'93\'c7\'82\'dd\'89\'f0\'82\'ad
+\b0 \
+	\'82\'b1\'82\'cc\'95\'d3\'82\'cc\'83\'52\'81\'5b\'83\'68\'82\'aa\'8e\'51\'8d\'6c\'82\'c9\'82\'c8\'82\'c1\'81\'41\'81\'41\'82\'bd\'82\'e7\'82\'e6\'82\'a9\'82\'c1\'82\'bd\'82\'f1\'82\'be\'82\'af\'82\'c7\'81\'42\
+	\'82\'b1\'82\'cc\'83\'52\'81\'5b\'83\'68\'82\'c5\'82\'b5\'82\'a9non-blocking mode \'82\'aa\'8f\'6f\'82\'c4\'82\'ab\'82\'c4\'82\'c8\'82\'a9\'82\'c1\'82\'bd\'82\'cc\'82\'c5\'81\'41\'82\'b1\'82\'ea\'82\'b5\'82\'a9\'8e\'51\'8d\'6c\'82\'c9\'82\'c8\'82\'e9\'82\'e0\'82\'cc\'82\'aa\'82\'c8\'82\'a9\'82\'c1\'82\'bd\'82\'c6\'8c\'be\'82\'c1\'82\'bd\'82\'d9\'82\'a4\'82\'aa\'82\'a2\'82\'a2\'81\'42\
+		{\field{\*\fldinst{HYPERLINK "https://github.com/bcgit/bc-csharp/blob/master/crypto/test/src/crypto/tls/test/TlsProtocolNonBlockingTest.cs"}}{\fldrslt https://github.com/bcgit/bc-csharp/blob/master/crypto/test/src/crypto/tls/test/TlsProtocolNonBlockingTest.cs}}\
+\
+\
+
+\b BouncyCastle\'82\'ccAPI\'82\'f0\'8e\'67\'82\'c1\'82\'bd\'83\'54\'83\'93\'83\'76\'83\'8b
+\b0 \
+	C#\'82\'ccSocket\'82\'c5\'82\'cc\'90\'da\'91\'b1\'82\'a9\'82\'e7\'91\'97\'8e\'f3\'90\'4d\'82\'dc\'82\'c5\'81\'41\'82\'dc\'82\'c6\'82\'df\'82\'c4\'8f\'91\'82\'ad\'81\'42\
+	\'96\'7b\'93\'96\'82\'c9\'82\'ed\'82\'a9\'82\'e8\'82\'c9\'82\'ad\'82\'a2API\'82\'be\'82\'c1\'82\'bd\'81\'42\'82\'b1\'82\'a4\'82\'a2\'82\'a4\'83\'65\'83\'58\'83\'67\'82\'a9\'83\'68\'83\'4c\'83\'85\'83\'81\'83\'93\'83\'67\'82\'aa\'82\'a0\'82\'ea\'82\'ce\'82\'df\'82\'c1\'82\'bf\'82\'e1\'8a\'c8\'92\'50\'82\'c9\'8d\'cf\'82\'f1\'82\'be\'81\'42\
+\
+	\
+	\'83\'4e\'83\'89\'83\'43\'83\'41\'83\'93\'83\'67\'91\'a4\'82\'cc\'83\'52\'81\'5b\'83\'68\'82\'c5\'81\'41Socket\'82\'f0\'8e\'67\'82\'c1\'82\'c4\'83\'54\'81\'5b\'83\'6f\'82\'c9\'90\'da\'91\'b1\'81\'41TLS\'82\'c5\'82\'ccnego\'82\'c6\'82\'a9\'82\'b5\'82\'c4\'81\'41TLS handshake\'82\'aa\'8f\'49\'82\'ed\'82\'e9\'82\'c6\'82\'b1\'82\'eb\'82\'dc\'82\'c5\'82\'cc\'83\'54\'83\'93\'83\'76\'83\'8b\'82\'aa\'89\'ba\'8b\'4c\'81\'42\
+	\'82\'a8\'82\'dc\'82\'af\'82\'c5\'81\'41handshake\'8c\'e3\'82\'c9\'83\'66\'81\'5b\'83\'5e\'82\'cc\'91\'97\'8e\'f3\'90\'4d\'82\'f0\'82\'b5\'82\'c4\'82\'a2\'82\'e9\'81\'42\
+\
+	\'83\'5a\'83\'4c\'83\'85\'83\'8a\'83\'65\'83\'42\'93\'49\'82\'c9\'82\'cd\'83\'4b\'83\'6f\'83\'4b\'83\'6f\'82\'c8\'82\'cc\'82\'c5\'81\'41\'82\'dc\'82\'f1\'82\'dc\'8e\'67\'82\'c1\'82\'c4\'8e\'80\'82\'c8\'82\'c8\'82\'a2\'82\'e6\'82\'a4\'82\'c9\'8b\'43\'82\'f0\'82\'c2\'82\'af\'82\'c4\'82\'cb\'81\'42\
+\
+\
+
+\b 	\'83\'4e\'83\'89\'83\'43\'83\'41\'83\'93\'83\'67\'91\'a4\'82\'cc\'91\'4f\'92\'f1
+\b0 \
+	\'81\'45DefaultTlsClient\'82\'f0\'8a\'67\'92\'a3\'82\'b5\'82\'bdMyTlsClient\'83\'4e\'83\'89\'83\'58\'82\'f0\'92\'e8\'8b\'60\'82\'b5\'82\'c4\'82\'a0\'82\'e9\'81\'42(\'93\'c6\'8e\'a9\'82\'ccTlsAuthentication\'82\'f0\'95\'d4\'82\'b7\'83\'81\'83\'5c\'83\'62\'83\'68\'82\'f0\'8e\'c0\'91\'95\'82\'b7\'82\'e9\'95\'4b\'97\'76\'82\'aa\'82\'a0\'82\'e9\'82\'cc\'82\'c5\'92\'e8\'8b\'60\'95\'4b\'90\'7b)\
+	\'81\'45MyTlsClient\'93\'e0\'82\'c9\'81\'41MyTlsAuthentication\'83\'4e\'83\'89\'83\'58\'82\'f0\'92\'e8\'8b\'60\'82\'b5\'82\'c4\'82\'a0\'82\'e9\'81\'42(TlsAuthentication\'82\'aaabstract\'82\'c8\'82\'cc\'82\'c5\'8e\'c0\'91\'95\'95\'4b\'90\'7b)\
+\
+
+\b 	\'83\'54\'81\'5b\'83\'6f\'91\'a4\'82\'cc\'91\'4f\'92\'f1
+\b0 \
+	\'81\'45\'82\'b1\'82\'b1\'82\'c5\'83\'65\'83\'58\'83\'67\'82\'c9\'8e\'67\'82\'c1\'82\'bd\'83\'54\'81\'5b\'83\'6f\'82\'cd\'81\'41TLS1.2\'82\'aa\'92\'9d\'82\'ea\'82\'e9\'83\'54\'81\'5b\'83\'6f\'81\'42\
+	\'81\'45\'83\'54\'81\'5b\'83\'6f\'82\'cd\'81\'41handshake\'82\'aa\'8f\'49\'82\'ed\'82\'c1\'82\'bd\'8c\'e3\'82\'c9\'83\'4e\'83\'89\'83\'43\'83\'41\'83\'93\'83\'67\'82\'a9\'82\'e7\'91\'97\'82\'e7\'82\'ea\'82\'c4\'82\'ab\'82\'bd\'83\'66\'81\'5b\'83\'5e\'82\'aa\'82\'a0\'82\'ea\'82\'ce\'81\'41\'82\'bb\'82\'cc\'82\'dc\'82\'dc\'83\'4e\'83\'89\'83\'43\'83\'41\'83\'93\'83\'67\'82\'c9\'95\'d4\'82\'b7\'82\'c6\'82\'a2\'82\'a4\'8e\'64\'97\'6c\'81\'42\
+\
+	\
+\cb3 using Org.BouncyCastle.Crypto.Tls;\
+\pard\pardeftab720\partightenfactor0
+\cf0 \cb2 using Org.BouncyCastle.Security;\
+using Org.BouncyCastle.Utilities;\
+\pard\pardeftab720\partightenfactor0
+\cf0 \cb3 using System;\
+using System.Collections.Generic;\
+\pard\pardeftab720\partightenfactor0
+\cf0 \cb2 using System.Net;\
+using System.Net.Sockets;\
+\pard\pardeftab720\partightenfactor0
+\cf0 \cb3 using System.Text;\
+\
+public class MyTlsClient : DefaultTlsClient \{\
+	\
+	internal TlsSession mSession;\
+\
+	internal WebuSocketTlsClient (TlsSession session) \{\
+		this.mSession = session;\
+	\}\
+\
+	public override TlsSession GetSessionToResume () \{\
+		return this.mSession;\
+	\}\
+\
+	public override void NotifyAlertRaised (byte alertLevel, byte alertDescription, string message, Exception cause) \{\
+		Debug.LogError("TLS client raised alert: " + AlertLevel.GetText(alertLevel) + ", " + AlertDescription.GetText(alertDescription));\
+		if (message != null) \{\
+			Debug.LogError("> " + message);\
+		\}\
+		if (cause != null) \{\
+			Debug.LogError(cause);\
+		\}\
+	\}\
+\
+	public override void NotifyAlertReceived (byte alertLevel, byte alertDescription) \{\
+		Debug.LogError("TLS client received alert: " + AlertLevel.GetText(alertLevel) + ", " + AlertDescription.GetText(alertDescription));\
+	\}\
+\
+	public override void NotifyServerVersion (ProtocolVersion serverVersion) \{\
+		base.NotifyServerVersion(serverVersion);\
+		// Debug.LogError("TLS client negotiated " + serverVersion);\
+	\}\
+\
+	public override TlsAuthentication GetAuthentication () \{\
+		return new \cb2 MyTlsAuthentication\cb3 (mContext);\
+	\}\
+\
+\
+	private class MyTlsAuthentication : TlsAuthentication \{\
+		private readonly TlsContext mContext;\
+\
+		internal WebuSocketTlsAuthentication (TlsContext context) \{\
+			this.mContext = context;\
+		\}\
+\
+		public void NotifyServerCertificate (Certificate serverCertificate) \{\
+			// X509CertificateStructure[] chain = serverCertificate.GetCertificateList();\
+			// Console.WriteLine("TLS client received server certificate chain of length " + chain.Length);\
+			// for (int i = 0; i != chain.Length; i++) \{\
+			// 	X509CertificateStructure entry = chain[i];\
+			// 	// TODO Create fingerprint based on certificate signature algorithm digest\
+			// 	Console.WriteLine("    fingerprint:SHA-256 " + TlsTestUtilities.Fingerprint(entry) + " (" + entry.Subject + ")");\
+			// \}\
+			// \'82\'c8\'82\'f1\'82\'e0\'82\'b5\'82\'c4\'82\'c8\'82\'a2\'81\'42cert\'82\'aa\'90\'b3\'82\'b5\'82\'a2\'82\'a9\'82\'c7\'82\'a4\'82\'a9\'81\'41\'83\'60\'83\'46\'83\'62\'83\'4e\'82\'b5\'82\'c8\'82\'a2\'82\'c6\'82\'a2\'82\'af\'82\'c8\'82\'a2\'82\'cd\'82\'b8\'81\'42\
+		\}\
+\
+		public TlsCredentials GetClientCredentials (CertificateRequest certificateRequest) \{\
+			byte[] certificateTypes = certificateRequest.CertificateTypes;\
+			if (certificateTypes == null || !Arrays.Contains(certificateTypes, ClientCertificateType.rsa_sign)) \{\
+				return null;\
+			\}\
+\
+			// return TlsTestUtilities.LoadSignerCredentials(mContext, certificateRequest.SupportedSignatureAlgorithms, SignatureAlgorithm.rsa, "x509-client.pem", "x509-client-key.pem");\
+			return null;\
+		\}\
+	\}\
+\
+	public override void NotifyHandshakeComplete () \{\
+		base.NotifyHandshakeComplete();\
+\
+		TlsSession newSession = mContext.ResumableSession;\
+		if (newSession != null) \{\
+			// byte[] newSessionID = newSession.SessionID;\
+			// string hex = Hex.ToHexString(newSessionID);\
+\
+			// if (this.mSession != null && Arrays.AreEqual(this.mSession.SessionID, newSessionID)) \{\
+			// 	Debug.LogError("Resumed session: " + hex);\
+			// \} else \{\
+			// 	Debug.LogError("Established session: " + hex);\
+			// \}\
+\
+			this.mSession = newSession;\
+		\}\
+\
+		Debug.LogError("handshake\'8f\'49\'82\'ed\'82\'c1\'82\'bd\'81\'41\'82\'b1\'82\'cc\'82\'d6\'82\'f1\'82\'aa\'94\'f1\'93\'af\'8a\'fa\'82\'c9\'8c\'c4\'82\'ce\'82\'ea\'82\'e9\'82\'c1\'82\'db\'82\'a2\'82\'cc\'82\'c5\'81\'41WebSocket\'82\'cchandshake\'82\'f0\'8c\'c4\'82\'d4\'82\'ab\'82\'c1\'82\'a9\'82\'af\'82\'c9\'82\'c5\'82\'ab\'82\'e9\'82\'a9\'82\'e0\'82\'b5\'82\'ea\'82\'c8\'82\'a2\'81\'42");\
+	\}\
+\}\
+\
+\
+// client connection starts from here.\
+\
+var endPoint = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 9000);\
+\
+var socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);\
+\
+// connect socket to server peer.\
+socket.Connect(endPoint.Address, endPoint.Port);\
+\
+/*\
+	ready for tls handshake.\
+\
+	tlsClientProtocol contans the state machine,\
+	 which can generate "byte[] data" for negotiating TSL protocol with server.\
+*/\
+var tlsClientProtocol = new TlsClientProtocol(new SecureRandom());\
+\
+// "Connect" means not connect to server. connect means initalize tlsClientProtocol in non-blocking mode.\
+tlsClientProtocol.Connect(new MyTlsClient(null));\
+\
+// first, send ClientHello to server.\
+\{\
+	// get ClientHello byte data from tlsClientProtocol instance and send it to server.\
+	var buffer = new byte[tlsClientProtocol.GetAvailableOutputBytes()];\
+	tlsClientProtocol.ReadOutput(buffer, 0, buffer.Length);\
+\
+	// send it to server through socket.\
+	socket.Send(buffer);\
+\}\
+\
+// wait response data from server.\
+\{\
+	while (socket.Available == 0) \{\}\
+	var available = socket.Available; \
+	var responseFromServer = new byte[available];\
+	socket.Receive(responseFromServer);\
+	\
+	// set received data to tlsClientProtocol by "OfferInput" method.\
+	// tls handshake phase will progress.\
+	tlsClientProtocol.OfferInput(responseFromServer);\
+\
+	// and next handshake data can be get from tlsClientProtocol.\
+	var buffer = new byte[tlsClientProtocol.GetAvailableOutputBytes()];\
+	tlsClientProtocol.ReadOutput(buffer, 0, buffer.Length);\
+\
+	// send it to server.\
+	socket.Send(buffer);\
+\}\
+\
+// wait response data from server.\
+\{\
+	while (socket.Available == 0) \{\}\
+	var available = socket.Available;\
+	var assumedBuffer = new byte[available];\
+	socket.Receive(assumedBuffer);\
+\
+	// set received data to tlsClientProtocol by "OfferInput" method.\
+	// tls handshake phase will become completed! in this client side. \
+	tlsClientProtocol.OfferInput(assumedBuffer);\
+\
+	// send ClientFinish data to server.\
+	var buffer = new byte[tlsClientProtocol.GetAvailableOutputBytes()];\
+	tlsClientProtocol.ReadOutput(buffer, 0, buffer.Length);\
+	socket.Send(buffer);\
+\}\
+\
+// tls session is established! yay!!\
+\
+// sending data.\
+\{\
+	var helloString = "hello, tls.";\
+	var helloBytes = Encoding.UTF8.GetBytes(helloString);\
+\
+	tlsClientProtocol.OfferOutput(helloBytes, 0, helloBytes.Length);\
+\
+	var count = tlsClientProtocol.GetAvailableOutputBytes();\
+	var buffer = new byte[count];\
+	tlsClientProtocol.ReadOutput(buffer, 0, buffer.Length);\
+\
+	socket.Send(buffer);\
+\}\
+\
+// receiving data.\
+// assume that server returns client sended data like echo.\
+\{\
+	while (socket.Available == 0) \{\}\
+	var available = socket.Available;\
+\
+	var receiveBuffer = new byte[available];\
+	socket.Receive(receiveBuffer);\
+\
+	tlsClientProtocol.OfferInput(receiveBuffer);\
+\
+	var len = tlsClientProtocol.GetAvailableInputBytes();\
+	var receivedDecryptedBytes = new byte[len];\
+	tlsClientProtocol.ReadInput(receivedDecryptedBytes, 0, receivedDecryptedBytes.Length);\
+	\
+	Debug.LogError("server returned:" + Encoding.UTF8.GetString(receivedDecryptedBytes));\
+\}\
+\cb1 	\
+\
+
+\b \'82\'c6\'82\'a2\'82\'a4\'82\'ed\'82\'af\'82\'c5\'8e\'67\'82\'a2\'95\'fb\'82\'aa\'82\'ed\'82\'a9\'82\'c1\'82\'bd\'82\'cc\'82\'c5\'81\'41WebSocket\'82\'ccHandShake\'82\'dc\'82\'c5\'8a\'ae\'90\'ac
+\b0 \
+	\'82\'c5\'81\'41WebuSocket\'82\'c5\'82\'cd\'95\'73\'8a\'ae\'91\'53\'82\'c8\'83\'66\'81\'5b\'83\'5e\'82\'aa\'97\'88\'82\'bd\'8f\'ea\'8d\'87\'81\'41\'82\'bb\'82\'ea\'82\'f0\'94\'6a\'8a\'fc\'82\'b5\'82\'bd\'82\'a2\'81\'42\
+	\'95\'73\'8a\'ae\'91\'53\'82\'c8\'83\'66\'81\'5b\'83\'5e = \'93\'72\'92\'86\'82\'c5\'93\'72\'90\'d8\'82\'ea\'82\'c4\'91\'97\'82\'e7\'82\'ea\'82\'c4\'82\'ad\'82\'e9\'83\'66\'81\'5b\'83\'5e\'81\'42\
+	\
+	WebuSocket\'82\'c5\'82\'cd\'81\'41\'82\'b7\'82\'c5\'82\'c9C#\'82\'ccSocketArgs\'82\'cc\'83\'6f\'83\'62\'83\'74\'83\'40\'82\'aa\'82\'a0\'82\'e9\'82\'cc\'82\'c5\'81\'41\'82\'bb\'82\'cc\'83\'6f\'83\'62\'83\'74\'83\'40\'82\'c9\'83\'66\'81\'5b\'83\'5e\'82\'f0\'97\'ad\'82\'df\'82\'bd\'82\'dc\'82\'dc\'81\'41\
+	\'83\'66\'81\'5b\'83\'5e\'91\'53\'91\'cc\'82\'aaWebSocket\'82\'ccframe\'82\'c6\'82\'b5\'82\'c4\'93\'c7\'82\'df\'82\'e9\'82\'e6\'82\'a4\'82\'c9\'82\'c8\'82\'e9\'82\'dc\'82\'c5\'93\'c7\'82\'dd\'8f\'6f\'82\'b3\'82\'c8\'82\'a2\'82\'c6\'82\'a2\'82\'a4\'90\'ed\'97\'aa\'82\'f0\'8e\'e6\'82\'c1\'82\'c4\'82\'a2\'82\'e9\'81\'42\
+\
+	\'82\'c5\'81\'41\'82\'b1\'82\'ea\'82\'c6\'81\'41bc\'82\'ccTlsProtocol\'82\'cc\'8e\'c0\'91\'95\'82\'c6\'82\'cc\'91\'8a\'90\'ab\'82\'aa\'88\'ab\'82\'a2\'81\'42\
+	\
+	tlsProtocol\'81\'41\'93\'e0\'95\'94\'82\'c5\'8a\'ae\'91\'53\'82\'c9\'83\'66\'81\'5b\'83\'5e\'82\'f0\'83\'52\'83\'73\'81\'5b\'82\'b5\'82\'c4\'93\'ae\'82\'a2\'82\'c4\'82\'a2\'82\'e9\'81\'42\
+	\'83\'66\'81\'5b\'83\'5e\'82\'f0\'93\'c7\'82\'dd\'8d\'9e\'82\'dc\'82\'b9\'82\'e9\'82\'c6\'81\'41\'82\'bb\'82\'ea\'82\'cdinputStream\'82\'c9\'93\'cb\'82\'c1\'8d\'9e\'82\'dc\'82\'ea\'82\'e9\'81\'42\'82\'c5\'81\'41\'92\'86\'93\'72\'94\'bc\'92\'5b\'82\'c8\'83\'66\'81\'5b\'83\'5e\'82\'aa\'97\'88\'82\'bd\'8f\'ea\'8d\'87\'81\'41TLS\'82\'cc\'95\'9c\'8d\'86\'82\'c9\'8e\'b8\'94\'73\'82\'b5\'81\'41\'83\'66\'81\'5b\'83\'5e\'82\'cd\'93\'e0\'95\'94\'82\'c9\'8e\'63\'82\'e9\'81\'42\
+	bc\'82\'c6\'82\'b5\'82\'c4\'82\'cd\'81\'41\'82\'bb\'82\'b1\'82\'c9\'90\'56\'82\'b5\'82\'a2\'83\'66\'81\'5b\'83\'5e\'82\'f0\'91\'ab\'82\'b7\'82\'be\'82\'af\'82\'c5\'93\'ae\'82\'ad\'82\'e6\'82\'a4\'82\'c9\'82\'b5\'82\'bd\'82\'a2\'82\'e7\'82\'b5\'82\'a2\'81\'42\
+\
+	\'82\'c5\'81\'41WebuSocket\'82\'c6\'82\'b5\'82\'c4\'82\'cd\'82\'bb\'82\'cc\'83\'4c\'83\'83\'83\'62\'83\'56\'83\'85\'8b\'40\'8d\'5c\'82\'aa\'8e\'d7\'96\'82\'82\'c5\'81\'41\'82\'bb\'82\'a2\'82\'c2\'82\'f0\'94\'6a\'8a\'fc\'82\'b5\'82\'bd\'82\'a2\'81\'42\'82\'c5\'82\'ab\'82\'e9\'82\'cc\'82\'a9\'82\'c8\'81\'60\'81\'60\
+\
+	\'83\'54\'83\'43\'83\'59\'82\'aa0\'82\'c9\'82\'c8\'82\'c1\'82\'bd\'82\'e7\'81\'41WebSocket\'82\'cc\'83\'74\'83\'8c\'81\'5b\'83\'80\'82\'e0\'95\'73\'91\'ab\'82\'b5\'82\'c4\'82\'a2\'82\'e9\'82\'e0\'82\'cc\'82\'c6\'82\'b5\'82\'c4\'88\'b5\'82\'a4\'82\'b1\'82\'c6\'82\'cd\'82\'c5\'82\'ab\'82\'e9\'81\'42\
+	\'82\'b7\'82\'c5\'82\'c9\'93\'fc\'82\'c1\'82\'c4\'82\'a2\'82\'e9\'82\'e0\'82\'cc\'82\'f0\'8f\'c1\'82\'b9\'82\'e9\'82\'a9\'81\'48\
+	-> inputStream\'82\'ccSkip\'82\'aa\'82\'bb\'82\'cc\'97\'70\'93\'72\'82\'c9\'8e\'67\'82\'a6\'82\'bb\'82\'a4\'82\'be\'82\'af\'82\'c7\'81\'41\'82\'b1\'82\'ea\'82\'a4\'81\'5b\'81\'5b\'81\'5b\'82\'f1\'82\'f1\'81\'41\'81\'41\'81\'41\'82\'c7\'82\'b1\'82\'a9\'82\'e7\'82\'e0\'92\'40\'82\'a9\'82\'ea\'82\'c4\'82\'e9\'8c\'60\'90\'d5\'82\'aa\'96\'b3\'82\'a2\'81\'42\
+\
+	BouncyCastle\'82\'f0\'95\'cf\'8d\'58\'82\'b7\'82\'e9\'82\'cc\'94\'f0\'82\'af\'82\'bd\'82\'a2\'82\'c8\'81\'41\'81\'41\'81\'41Discard\'82\'c6\'82\'a9\'82\'e0\'82\'c8\'82\'b3\'82\'bb\'82\'a4\'82\'be\'82\'b5\'82\'c8\'81\'41\'81\'41\
+\
+	-> \'83\'8a\'83\'5a\'83\'62\'83\'67\'82\'f0\'8e\'c0\'91\'95\'82\'b7\'82\'e9\'82\'cc\'8a\'c8\'92\'50\'82\'be\'82\'c1\'82\'bd\'81\'42\
+		\'93\'e0\'95\'94\'82\'c9\'97\'70\'88\'d3\'82\'b5\'82\'c4\'82\'a0\'82\'c1\'82\'bdinput\'97\'70\'82\'ccstream\'82\'c9\'91\'ce\'82\'b5\'82\'c4\'81\'41ClientTlsProtocol\'82\'f0\'8c\'70\'8f\'b3\'82\'b7\'82\'e9\'82\'b1\'82\'c6\'82\'c5\'92\'c7\'89\'c1\'82\'b5\'82\'bd\'83\'81\'83\'5c\'83\'62\'83\'68\'82\'a9\'82\'e7inputStream.Skip(N)\'82\'f0\'8c\'c4\'82\'d4\'82\'b1\'82\'c6\'82\'c5\'91\'ce\'8f\'88\'82\'c5\'82\'ab\'82\'bd\'81\'42\
+\
+	\'82\'c5\'81\'41\'8e\'9f\'82\'cc\'90\'ed\'97\'aa\'82\'aa\'90\'ac\'97\'a7\'82\'b7\'82\'e9\'81\'42\
+\
+	1.\'92\'b7\'82\'b3\'82\'aa\'91\'ab\'82\'e8\'82\'c8\'82\'a2\'83\'66\'81\'5b\'83\'5e\'82\'aa\'97\'88\'82\'bd\'8f\'ea\'8d\'87\'81\'41TLSProtocol\'82\'f0\'92\'ca\'82\'b7\'82\'c6\'81\'41available = 0\'82\'aa\'95\'d4\'82\'c1\'82\'c4\'82\'ad\'82\'e9\
+	2.available\'82\'aa0\'82\'cc\'8f\'ea\'8d\'87\'81\'41\'82\'bb\'82\'cc\'83\'66\'81\'5b\'83\'5e\'82\'cdTLS\'93\'49\'82\'c9\'83\'5f\'83\'81\'82\'c8\'82\'f1\'82\'c5\'81\'41WebSocket\'82\'ccframe\'82\'c6\'82\'b5\'82\'c4\'82\'e0\'94\'46\'82\'df\'82\'c8\'82\'a2\'82\'b1\'82\'c6\'82\'c9\'82\'b7\'82\'e9\'81\'42\
+		-> tls input\'82\'f0\'83\'8a\'83\'5a\'83\'62\'83\'67\'82\'b5\'82\'bd\'8f\'e3\'82\'c5\'81\'41\'8d\'c4\'93\'78\'83\'66\'81\'5b\'83\'5e\'82\'aa\'97\'88\'82\'e9\'82\'cc\'82\'f0\'91\'d2\'82\'c2\'81\'42\
+\
+	3.available\'82\'aa0\'82\'c5\'82\'c8\'82\'a2\'83\'66\'81\'5b\'83\'5e\'82\'cc\'8f\'ea\'8d\'87\'81\'41TLS\'93\'49\'82\'c9\'82\'cdOK\'82\'c8\'82\'f1\'82\'c5\'81\'41\'95\'9c\'8d\'86\'82\'c5\'82\'ab\'82\'bd\'83\'66\'81\'5b\'83\'5e\'82\'f0ws frame\'82\'c6\'82\'b5\'82\'c4\'93\'57\'8a\'4a\'82\'b5\'82\'e6\'82\'a4\'82\'c6\'82\'b7\'82\'e9\'81\'42\
+	4.ws\'82\'ccframe\'93\'57\'8a\'4a\'82\'c9\'8e\'b8\'94\'73\'82\'b5\'82\'bd\'8f\'ea\'8d\'87\'81\'41\'93\'57\'8a\'4a\'90\'ac\'8c\'f7\'82\'b7\'82\'e9\'82\'dc\'82\'c5\'83\'66\'81\'5b\'83\'5e\'82\'cd\'83\'6f\'83\'62\'83\'74\'83\'40\'82\'c9\'8e\'63\'82\'c1\'82\'bd\'8f\'f3\'91\'d4\'82\'c9\'82\'c8\'82\'e9\'81\'42\
+		-> tls input\'82\'f0\'83\'8a\'83\'5a\'83\'62\'83\'67\'82\'b7\'82\'e9\'95\'4b\'97\'76\'82\'cd\'96\'b3\'82\'a2\'82\'cd\'82\'b8\'81\'42\'8e\'9f\'97\'88\'82\'bd\'83\'66\'81\'5b\'83\'5e\'82\'c9\'82\'c2\'82\'a2\'82\'c4\'82\'cc\'8f\'88\'97\'9d\'82\'cd\'81\'411\'82\'a9\'82\'e7\'8e\'c0\'8d\'73\'82\'b3\'82\'ea\'82\'e9\'82\'cc\'82\'c5\'81\'42\
+\
+	\'96\'7b\'93\'96\'82\'cd\'81\'41bc\'82\'cc\'92\'86\'82\'c5\'83\'4c\'83\'83\'83\'62\'83\'56\'83\'85\'82\'b7\'82\'e9\'82\'cc\'82\'e0\'82\'e2\'82\'df\'82\'b3\'82\'b9\'82\'bd\'82\'a2\'81\'42\'82\'c7\'82\'b1\'82\'dc\'82\'c5\'93\'c7\'82\'f1\'82\'be\'82\'a9\'82\'c1\'82\'c4\'82\'a2\'82\'a4\'83\'43\'83\'93\'83\'66\'83\'62\'83\'4e\'83\'58\'82\'f0\'91\'80\'82\'ea\'82\'e9\'82\'c6\'82\'a2\'82\'a2\'82\'f1\'82\'be\'82\'af\'82\'c7\'81\'42\
+	\'93\'e0\'95\'94\'82\'c9\'88\'ea\'93\'78\'83\'52\'83\'73\'81\'5b\'82\'aa\'91\'96\'82\'c1\'82\'bf\'82\'e1\'82\'a4\'82\'cc\'82\'cd\'96\'7b\'93\'96\'82\'c9\'90\'68\'82\'a2\'82\'c8\'81\'60\'81\'60\'81\'60\'81\'60\'81\'60\'81\'60\'81\'60\'81\'60\'81\'60\
+\
+	-> \'82\'b1\'82\'cc\'82\'d6\'82\'f1\'82\'e0\'8f\'91\'82\'ab\'8a\'b7\'82\'a6\'82\'e7\'82\'ea\'82\'bb\'82\'a4\'81\'42\'82\'a2\'82\'a2\'82\'cb\'81\'49\'81\'49\
+\
+\
+
+\b \'8b\'b3\'8c\'50
+\b0 \
+	\'82\'de\'82\'e2\'82\'dd\'82\'c9internal\'82\'f0\'8e\'67\'82\'a2\'82\'dc\'82\'ad\'82\'e7\'82\'c8\'82\'a2\'82\'c6\'82\'a2\'82\'a4BouncyCastle\'82\'cc\'90\'6c\'82\'e7\'82\'cc\'95\'fb\'90\'6a\'82\'cc\'82\'a8\'82\'a9\'82\'b0\'82\'c5\'97\'7e\'82\'b5\'82\'a2\'82\'e0\'82\'cc\'8d\'ec\'82\'ea\'82\'bd\'81\'42\
+	\'82\'c8\'82\'f1\'82\'c5\'83\'68\'83\'4c\'83\'85\'83\'81\'83\'93\'83\'67\'82\'aa\'82\'c8\'82\'a2\'82\'f1\'82\'be\'82\'eb\'82\'a4\'81\'42\'94\'df\'82\'b5\'82\'a2\'81\'42\
+\
+	\'82\'a0\'82\'c6\'81\'41\'82\'c8\'82\'f1\'82\'c5byte\'82\'f0\'93\'66\'82\'ab\'8f\'6f\'82\'b7\'82\'e6\'82\'a4\'82\'c8Tls state machine \'82\'aaC#\'95\'57\'8f\'80\'82\'c9\'96\'b3\'82\'a2\'82\'cc\'81\'48\
+	SslStream\'82\'be\'82\'af\'82\'c5\'96\'9e\'91\'ab\'82\'c8\'82\'cc\'81\'48\
+\
+	\'81\'41\'81\'41\'82\'c6\'82\'a2\'82\'a4\'8b\'5e\'96\'e2\'82\'cd\'92\'4e\'82\'a9\'82\'a0\'82\'cc\'81\'41\'81\'41\'82\'ba\'82\'d0\'81\'41\'81\'41\'8b\'b3\'82\'a6\'82\'c4\'82\'ad\'82\'be\'82\'b3\'82\'a2\'81\'41\'81\'41\'81\'41\
+\
+	Task\'8e\'67\'82\'ed\'82\'b8\'82\'c9\'82\'bb\'82\'ea\'82\'e7\'82\'f0\'83\'52\'83\'93\'83\'67\'83\'8d\'81\'5b\'83\'8b\'82\'c5\'82\'ab\'82\'e9API\'82\'aa\'83\'58\'83\'62\'83\'51\'81\'5b\'95\'6e\'8e\'e3\'82\'c8\'82\'f1\'82\'c5\'81\'41thread\'88\'ea\'90\'d8\'8d\'ec\'82\'e7\'82\'b8\'83\'70\'83\'74\'83\'48\'81\'5b\'83\'7d\'83\'93\'83\'58\'97\'7e\'82\'b5\'82\'a2\'8e\'9e\'82\'c9\'90\'68\'82\'a9\'82\'c1\'82\'bd\'81\'42\
+\
+	thread\'88\'ea\'82\'c2\'82\'e0\'8d\'ec\'82\'e7\'82\'b8\'82\'c9\'8d\'cf\'82\'dc\'82\'b9\'82\'e7\'82\'ea\'82\'e9\'82\'c8\'82\'e7\'82\'bb\'82\'c1\'82\'bf\'82\'cc\'82\'d9\'82\'a4\'82\'aa\'82\'e6\'82\'ad\'82\'c8\'82\'a2\'81\'48\
+\
+\
+\
+\
+}

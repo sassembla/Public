@@ -1,0 +1,438 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1404.47">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #ebebeb}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #ebebeb; min-height: 18.0px}
+    span.s1 {background-color: #ebebeb}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>Docker Autobahn環境 + wss + BouncyCastle C#</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これ</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://autobahn.ws">http://autobahn.ws</a></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>が動く環境をDockerで作って、適当に動かす。主にTls周りとか。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>C#側はWebSocket(生ソケットで遊ぼうの会) + BouncyCastle解読回。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>DockerでのAutobahn動作環境の作成から、C#でのBouncyCastleの使い方発掘、TLS通してHandshakeまでをやる羽目になった。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>動機</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>自作のC# WebSocketライブラリ「WebuSocket」で、WebSocketのテストちゃんと通したことそういえば無いよねっていう感じ。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>準備</b></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p4">docker pull python</p>
+<p class="p3"><span class="Apple-tab-span">	</span>これで入る環境ってどんなのなんだろう。Python3だと嬉しいんだけど。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>-&gt; 3.5だった。やったね！</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>container立ち上げて</p>
+<p class="p4">docker run -ti -d --name python python:latest</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>bash起動して入る</p>
+<p class="p4">docker exec -ti python bash</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>Autobahn動かす</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>TLSで動くサンプルがあるんで、これが動かせれば行けそう。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>適当にソースをホストに置いて、動かせるようにしてみよう。</p>
+<p class="p2"><br></p>
+<p class="p4">docker run -ti -d --name python -v /Users/tartetatin/Desktop/pythonServer:/usr/local/src python:latest</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span> Autobahnの備え付けのサーバを動かすために、いろいろ依存が足りないので入れる。</p>
+<p class="p4">pip install autobahn</p>
+<p class="p4">pip install twisted</p>
+<p class="p4">pip install pyopenssl</p>
+<p class="p4">pip install txaio</p>
+<p class="p4">pip install service_identity</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>まだport開けてなかった、、一度イメージに落とすのがいいのかな、、commitしちゃおう、、</p>
+<p class="p4">docker commit python autobahn:latest</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>というわけで、ホストから接続</b></p>
+<p class="p2"><br></p>
+<p class="p4">docker run -ti -p 8000:8000 -p 9000:9000 -d --name autobahn -v /Users/tartetatin/Desktop/pythonServer:/usr/local/src autobahn:latest</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>8000番はHTTP、9000番はWebSocketの受け口にしてる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ブラウザで8000番を開くと、certificate入れなよ～っていうリンクを示してくれる。</p>
+<p class="p3"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202016-10-13%2015.10.14.png" alt="スクリーンショット 2016-10-13 15.10.14.png"></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>そのままブラウザで9000番を開くと、ここはWebSocketのEndPointだよ～って言われる。</p>
+<p class="p3"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202016-10-13%2015.10.21.png" alt="スクリーンショット 2016-10-13 15.10.21.png"></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ブラウザで適当なWebSocketクライアント書いて接続をwss://127.0.0.1:9000で行うと、 <span class="s1">OSStatus Error -9807: Invalid certificate chain</span> が出る。<span class="Apple-tab-span">	</span>ふむ。まあ確かに。オレオレ証明書だし。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ブラウザを説得するのは諦めて、C#のSocketでの接続を考える。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ここで問題にぶち当たる。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>SslStreamを使えばTLSでAutobahnとの接続はできるんだけど、これTLS1.0じゃん。あとSslStreamねぇ、、、</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>C#というか。.Net FrameworkにはSslStreamという、SSL系の動作をhandshakeからsend/receiveまでまるっと飲み込んだAPIが存在する。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>存在するんだけどさ～～～。必ず<b>NetworkStream</b>を使う実装になっちゃう。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、作ってるWebuSocketっていうWebSocketクライアントは、Socketを使っていろいろやってるので、NetworkStreamに落ちたら負けだと思って(ry</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>SocketからNetworkStreamを取り出してSslStreamに繋ぐ、とかはまあ、超簡単にできるんだけど、StreamのAPIが気に食わん。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>非同期API使うに決まってるんだけど、Task使うんで必ずThreadできちゃうし。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Socketでなんとかしたいな～ってなって、いろんな方向を探した。</p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b>ぶっちゃけやりたいこと</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・TLS protocolでのサーバとのやりとりは、ざっくり言うとそういう動作をする state machine が手にはいればよい。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・インターフェースとして、TCPで取得したbyte[]を放り込むと、TLSのhandshakeをしたり、handshake済みであればdecryptedなbyte[]を吐き出す機構がある、、はず</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、探したら.Net Frameworkにはそういうのなかった。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>困ったことに、.Net Frameworkには、<b>TLSを扱えるstate machine が無い。</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>JavaでいうSSLEngineみたいなやつ。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>なんでねーーーんだろう。SslStreamでみんな満足してんの？ 本当？</p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、いろいろ探し回って、OpenSSLのC#ラッパ見たり、オープンソースな何かとか見てて、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>最終的にBouncyCastleにたどり着いた。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>そんなBouncyCastle</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><a href="https://www.bouncycastle.org/csharp/index.html">https://www.bouncycastle.org/csharp/index.html</a></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>github上にもある。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/bcgit/bc-csharp">https://github.com/bcgit/bc-csharp</a></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>、、、信じられないことにAPI documentが無いんだよね。なぜだろうね。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>testとか読むことになった。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>というわけでBouncyCastleを読む</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>まずは関係ありそうなTlsTestCase.csを見てみる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/bcgit/bc-csharp/blob/master/crypto/test/src/crypto/tls/test/TlsTestCase.cs">https://github.com/bcgit/bc-csharp/blob/master/crypto/test/src/crypto/tls/test/TlsTestCase.cs</a></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>いろいろあるな～～楽しそうなの。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>WriteHandshakeMessage</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>blockingモードでのみ使えるStreamとか</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>public virtual void OfferInput(byte[] input) こっちはノンブロッキング前提でしか使えないらしい。データを送るっぽい。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>public virtual void OfferOutput(byte[] buffer, int offset, int length) データを受け取るっぽい。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>-&gt; streamを引数に持つTlsClientProtocolコンストラクタは全部ブロッキングで、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>SecureRandomだけを引数に持つTlsClientProtocolコンストラクタがノンブロッキングだった。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>-&gt; そもそもブロッキングモードってなんなの？</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>あとでわかることだが、streamを使った入出力隠蔽ができているものをblocking、<span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>streamを使わず自分でbyte[]入れたり出したりできるstate machineとしての利用法のことをnon-blocking と呼んでいるようだった。</p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>それはblockingという概念だろうか、、、</b></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>どうやら、俺が欲しいものはnon-blocking modeらしい。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これとりあえずどうやってip/port指定するんだろう。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>-&gt; byte[]でのインプット、アウトプットを与えると、内部状態が勝手に遷移するっていうスーパートンチキマシンだこれ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>、、たのむドキュメントに書いててくれ。最高だぞこの機能。っていうかなんでC#オリジナルには存在しないんだよこういうの。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>(SslStreamはstreamになっちゃうのでこの辺隠蔽できてるんだけど、隠蔽しすぎててsocketと併用できない。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>test codeから使い方を読み解く</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>この辺のコードが参考になっ、、たらよかったんだけど。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>このコードでしかnon-blocking mode が出てきてなかったので、これしか参考になるものがなかったと言ったほうがいい。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/bcgit/bc-csharp/blob/master/crypto/test/src/crypto/tls/test/TlsProtocolNonBlockingTest.cs">https://github.com/bcgit/bc-csharp/blob/master/crypto/test/src/crypto/tls/test/TlsProtocolNonBlockingTest.cs</a></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>BouncyCastleのAPIを使ったサンプル</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>C#のSocketでの接続から送受信まで、まとめて書く。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>本当にわかりにくいAPIだった。こういうテストかドキュメントがあればめっちゃ簡単に済んだ。</p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>クライアント側のコードで、Socketを使ってサーバに接続、TLSでのnegoとかして、TLS handshakeが終わるところまでのサンプルが下記。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>おまけで、handshake後にデータの送受信をしている。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>セキュリティ的にはガバガバなので、まんま使って死なないように気をつけてね。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>クライアント側の前提</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・DefaultTlsClientを拡張したMyTlsClientクラスを定義してある。(独自のTlsAuthenticationを返すメソッドを実装する必要があるので定義必須)</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・MyTlsClient内に、MyTlsAuthenticationクラスを定義してある。(TlsAuthenticationがabstractなので実装必須)</p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>サーバ側の前提</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・ここでテストに使ったサーバは、TLS1.2が喋れるサーバ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・サーバは、handshakeが終わった後にクライアントから送られてきたデータがあれば、そのままクライアントに返すという仕様。</p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p4">using Org.BouncyCastle.Crypto.Tls;</p>
+<p class="p4">using Org.BouncyCastle.Security;</p>
+<p class="p4">using Org.BouncyCastle.Utilities;</p>
+<p class="p4">using System;</p>
+<p class="p4">using System.Collections.Generic;</p>
+<p class="p4">using System.Net;</p>
+<p class="p4">using System.Net.Sockets;</p>
+<p class="p4">using System.Text;</p>
+<p class="p5"><br></p>
+<p class="p4">public class MyTlsClient : DefaultTlsClient {</p>
+<p class="p5"><span class="Apple-tab-span">	</span></p>
+<p class="p4"><span class="Apple-tab-span">	</span>internal TlsSession mSession;</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>internal WebuSocketTlsClient (TlsSession session) {</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>this.mSession = session;</p>
+<p class="p4"><span class="Apple-tab-span">	</span>}</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>public override TlsSession GetSessionToResume () {</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>return this.mSession;</p>
+<p class="p4"><span class="Apple-tab-span">	</span>}</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>public override void NotifyAlertRaised (byte alertLevel, byte alertDescription, string message, Exception cause) {</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Debug.LogError("TLS client raised alert: " + AlertLevel.GetText(alertLevel) + ", " + AlertDescription.GetText(alertDescription));</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>if (message != null) {</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Debug.LogError("&gt; " + message);</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>if (cause != null) {</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Debug.LogError(cause);</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}</p>
+<p class="p4"><span class="Apple-tab-span">	</span>}</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>public override void NotifyAlertReceived (byte alertLevel, byte alertDescription) {</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Debug.LogError("TLS client received alert: " + AlertLevel.GetText(alertLevel) + ", " + AlertDescription.GetText(alertDescription));</p>
+<p class="p4"><span class="Apple-tab-span">	</span>}</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>public override void NotifyServerVersion (ProtocolVersion serverVersion) {</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>base.NotifyServerVersion(serverVersion);</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>// Debug.LogError("TLS client negotiated " + serverVersion);</p>
+<p class="p4"><span class="Apple-tab-span">	</span>}</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>public override TlsAuthentication GetAuthentication () {</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>return new MyTlsAuthentication(mContext);</p>
+<p class="p4"><span class="Apple-tab-span">	</span>}</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>private class MyTlsAuthentication : TlsAuthentication {</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>private readonly TlsContext mContext;</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>internal WebuSocketTlsAuthentication (TlsContext context) {</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>this.mContext = context;</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>public void NotifyServerCertificate (Certificate serverCertificate) {</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>// X509CertificateStructure[] chain = serverCertificate.GetCertificateList();</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>// Console.WriteLine("TLS client received server certificate chain of length " + chain.Length);</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>// for (int i = 0; i != chain.Length; i++) {</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>// <span class="Apple-tab-span">	</span>X509CertificateStructure entry = chain[i];</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>// <span class="Apple-tab-span">	</span>// TODO Create fingerprint based on certificate signature algorithm digest</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>// <span class="Apple-tab-span">	</span>Console.WriteLine("<span class="Apple-converted-space">    </span>fingerprint:SHA-256 " + TlsTestUtilities.Fingerprint(entry) + " (" + entry.Subject + ")");</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>// }</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>// なんもしてない。certが正しいかどうか、チェックしないといけないはず。</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>public TlsCredentials GetClientCredentials (CertificateRequest certificateRequest) {</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>byte[] certificateTypes = certificateRequest.CertificateTypes;</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>if (certificateTypes == null || !Arrays.Contains(certificateTypes, ClientCertificateType.rsa_sign)) {</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>return null;</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>// return TlsTestUtilities.LoadSignerCredentials(mContext, certificateRequest.SupportedSignatureAlgorithms, SignatureAlgorithm.rsa, "x509-client.pem", "x509-client-key.pem");</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>return null;</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}</p>
+<p class="p4"><span class="Apple-tab-span">	</span>}</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>public override void NotifyHandshakeComplete () {</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>base.NotifyHandshakeComplete();</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>TlsSession newSession = mContext.ResumableSession;</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>if (newSession != null) {</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>// byte[] newSessionID = newSession.SessionID;</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>// string hex = Hex.ToHexString(newSessionID);</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>// if (this.mSession != null &amp;&amp; Arrays.AreEqual(this.mSession.SessionID, newSessionID)) {</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>// <span class="Apple-tab-span">	</span>Debug.LogError("Resumed session: " + hex);</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>// } else {</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>// <span class="Apple-tab-span">	</span>Debug.LogError("Established session: " + hex);</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>// }</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>this.mSession = newSession;</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Debug.LogError("handshake終わった、このへんが非同期に呼ばれるっぽいので、WebSocketのhandshakeを呼ぶきっかけにできるかもしれない。");</p>
+<p class="p4"><span class="Apple-tab-span">	</span>}</p>
+<p class="p4">}</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p4">// client connection starts from here.</p>
+<p class="p5"><br></p>
+<p class="p4">var endPoint = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 9000);</p>
+<p class="p5"><br></p>
+<p class="p4">var socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);</p>
+<p class="p5"><br></p>
+<p class="p4">// connect socket to server peer.</p>
+<p class="p4">socket.Connect(endPoint.Address, endPoint.Port);</p>
+<p class="p5"><br></p>
+<p class="p4">/*</p>
+<p class="p4"><span class="Apple-tab-span">	</span>ready for tls handshake.</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>tlsClientProtocol contans the state machine,</p>
+<p class="p4"><span class="Apple-tab-span">	</span> which can generate "byte[] data" for negotiating TSL protocol with server.</p>
+<p class="p4">*/</p>
+<p class="p4">var tlsClientProtocol = new TlsClientProtocol(new SecureRandom());</p>
+<p class="p5"><br></p>
+<p class="p4">// "Connect" means not connect to server. connect means initalize tlsClientProtocol in non-blocking mode.</p>
+<p class="p4">tlsClientProtocol.Connect(new MyTlsClient(null));</p>
+<p class="p5"><br></p>
+<p class="p4">// first, send ClientHello to server.</p>
+<p class="p4">{</p>
+<p class="p4"><span class="Apple-tab-span">	</span>// get ClientHello byte data from tlsClientProtocol instance and send it to server.</p>
+<p class="p4"><span class="Apple-tab-span">	</span>var buffer = new byte[tlsClientProtocol.GetAvailableOutputBytes()];</p>
+<p class="p4"><span class="Apple-tab-span">	</span>tlsClientProtocol.ReadOutput(buffer, 0, buffer.Length);</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>// send it to server through socket.</p>
+<p class="p4"><span class="Apple-tab-span">	</span>socket.Send(buffer);</p>
+<p class="p4">}</p>
+<p class="p5"><br></p>
+<p class="p4">// wait response data from server.</p>
+<p class="p4">{</p>
+<p class="p4"><span class="Apple-tab-span">	</span>while (socket.Available == 0) {}</p>
+<p class="p4"><span class="Apple-tab-span">	</span>var available = socket.Available;<span class="Apple-converted-space"> </span></p>
+<p class="p4"><span class="Apple-tab-span">	</span>var responseFromServer = new byte[available];</p>
+<p class="p4"><span class="Apple-tab-span">	</span>socket.Receive(responseFromServer);</p>
+<p class="p5"><span class="Apple-tab-span">	</span></p>
+<p class="p4"><span class="Apple-tab-span">	</span>// set received data to tlsClientProtocol by "OfferInput" method.</p>
+<p class="p4"><span class="Apple-tab-span">	</span>// tls handshake phase will progress.</p>
+<p class="p4"><span class="Apple-tab-span">	</span>tlsClientProtocol.OfferInput(responseFromServer);</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>// and next handshake data can be get from tlsClientProtocol.</p>
+<p class="p4"><span class="Apple-tab-span">	</span>var buffer = new byte[tlsClientProtocol.GetAvailableOutputBytes()];</p>
+<p class="p4"><span class="Apple-tab-span">	</span>tlsClientProtocol.ReadOutput(buffer, 0, buffer.Length);</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>// send it to server.</p>
+<p class="p4"><span class="Apple-tab-span">	</span>socket.Send(buffer);</p>
+<p class="p4">}</p>
+<p class="p5"><br></p>
+<p class="p4">// wait response data from server.</p>
+<p class="p4">{</p>
+<p class="p4"><span class="Apple-tab-span">	</span>while (socket.Available == 0) {}</p>
+<p class="p4"><span class="Apple-tab-span">	</span>var available = socket.Available;</p>
+<p class="p4"><span class="Apple-tab-span">	</span>var assumedBuffer = new byte[available];</p>
+<p class="p4"><span class="Apple-tab-span">	</span>socket.Receive(assumedBuffer);</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>// set received data to tlsClientProtocol by "OfferInput" method.</p>
+<p class="p4"><span class="Apple-tab-span">	</span>// tls handshake phase will become completed! in this client side.<span class="Apple-converted-space"> </span></p>
+<p class="p4"><span class="Apple-tab-span">	</span>tlsClientProtocol.OfferInput(assumedBuffer);</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>// send ClientFinish data to server.</p>
+<p class="p4"><span class="Apple-tab-span">	</span>var buffer = new byte[tlsClientProtocol.GetAvailableOutputBytes()];</p>
+<p class="p4"><span class="Apple-tab-span">	</span>tlsClientProtocol.ReadOutput(buffer, 0, buffer.Length);</p>
+<p class="p4"><span class="Apple-tab-span">	</span>socket.Send(buffer);</p>
+<p class="p4">}</p>
+<p class="p5"><br></p>
+<p class="p4">// tls session is established! yay!!</p>
+<p class="p5"><br></p>
+<p class="p4">// sending data.</p>
+<p class="p4">{</p>
+<p class="p4"><span class="Apple-tab-span">	</span>var helloString = "hello, tls.";</p>
+<p class="p4"><span class="Apple-tab-span">	</span>var helloBytes = Encoding.UTF8.GetBytes(helloString);</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>tlsClientProtocol.OfferOutput(helloBytes, 0, helloBytes.Length);</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>var count = tlsClientProtocol.GetAvailableOutputBytes();</p>
+<p class="p4"><span class="Apple-tab-span">	</span>var buffer = new byte[count];</p>
+<p class="p4"><span class="Apple-tab-span">	</span>tlsClientProtocol.ReadOutput(buffer, 0, buffer.Length);</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>socket.Send(buffer);</p>
+<p class="p4">}</p>
+<p class="p5"><br></p>
+<p class="p4">// receiving data.</p>
+<p class="p4">// assume that server returns client sended data like echo.</p>
+<p class="p4">{</p>
+<p class="p4"><span class="Apple-tab-span">	</span>while (socket.Available == 0) {}</p>
+<p class="p4"><span class="Apple-tab-span">	</span>var available = socket.Available;</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>var receiveBuffer = new byte[available];</p>
+<p class="p4"><span class="Apple-tab-span">	</span>socket.Receive(receiveBuffer);</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>tlsClientProtocol.OfferInput(receiveBuffer);</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>var len = tlsClientProtocol.GetAvailableInputBytes();</p>
+<p class="p4"><span class="Apple-tab-span">	</span>var receivedDecryptedBytes = new byte[len];</p>
+<p class="p4"><span class="Apple-tab-span">	</span>tlsClientProtocol.ReadInput(receivedDecryptedBytes, 0, receivedDecryptedBytes.Length);</p>
+<p class="p5"><span class="Apple-tab-span">	</span></p>
+<p class="p4"><span class="Apple-tab-span">	</span>Debug.LogError("server returned:" + Encoding.UTF8.GetString(receivedDecryptedBytes));</p>
+<p class="p4">}</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>というわけで使い方がわかったので、WebSocketのHandShakeまで完成</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、WebuSocketでは不完全なデータが来た場合、それを破棄したい。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>不完全なデータ = 途中で途切れて送られてくるデータ。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>WebuSocketでは、すでにC#のSocketArgsのバッファがあるので、そのバッファにデータを溜めたまま、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>データ全体がWebSocketのframeとして読めるようになるまで読み出さないという戦略を取っている。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、これと、bcのTlsProtocolの実装との相性が悪い。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>tlsProtocol、内部で完全にデータをコピーして動いている。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>データを読み込ませると、それはinputStreamに突っ込まれる。で、中途半端なデータが来た場合、TLSの復号に失敗し、データは内部に残る。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>bcとしては、そこに新しいデータを足すだけで動くようにしたいらしい。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、WebuSocketとしてはそのキャッシュ機構が邪魔で、そいつを破棄したい。できるのかな～～</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>サイズが0になったら、WebSocketのフレームも不足しているものとして扱うことはできる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>すでに入っているものを消せるか？</p>
+<p class="p3"><span class="Apple-tab-span">	</span>-&gt; inputStreamのSkipがその用途に使えそうだけど、これうーーーんん、、、どこからも叩かれてる形跡が無い。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>BouncyCastleを変更するの避けたいな、、、Discardとかもなさそうだしな、、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>-&gt; リセットを実装するの簡単だった。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>内部に用意してあったinput用のstreamに対して、ClientTlsProtocolを継承することで追加したメソッドからinputStream.Skip(N)を呼ぶことで対処できた。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、次の戦略が成立する。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>1.長さが足りないデータが来た場合、TLSProtocolを通すと、available = 0が返ってくる</p>
+<p class="p3"><span class="Apple-tab-span">	</span>2.availableが0の場合、そのデータはTLS的にダメなんで、WebSocketのframeとしても認めないことにする。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>-&gt; tls inputをリセットした上で、再度データが来るのを待つ。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>3.availableが0でないデータの場合、TLS的にはOKなんで、復号できたデータをws frameとして展開しようとする。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>4.wsのframe展開に失敗した場合、展開成功するまでデータはバッファに残った状態になる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>-&gt; tls inputをリセットする必要は無いはず。次来たデータについての処理は、1から実行されるので。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>本当は、bcの中でキャッシュするのもやめさせたい。どこまで読んだかっていうインデックスを操れるといいんだけど。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>内部に一度コピーが走っちゃうのは本当に辛いな～～～～～～～～～</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>-&gt; このへんも書き換えられそう。いいね！！</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>教訓</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>むやみにinternalを使いまくらないというBouncyCastleの人らの方針のおかげで欲しいもの作れた。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>なんでドキュメントがないんだろう。悲しい。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>あと、なんでbyteを吐き出すようなTls state machine がC#標準に無いの？</p>
+<p class="p3"><span class="Apple-tab-span">	</span>SslStreamだけで満足なの？</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>、、という疑問は誰かあの、、ぜひ、、教えてください、、、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Task使わずにそれらをコントロールできるAPIがスッゲー貧弱なんで、thread一切作らずパフォーマンス欲しい時に辛かった。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>thread一つも作らずに済ませられるならそっちのほうがよくない？</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+</body>
+</html>
