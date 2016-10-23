@@ -1,0 +1,128 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1404.47">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Sans'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>MuroAnime行ってた</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://eventdots.jp/event/599488">https://eventdots.jp/event/599488</a></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>どうやって作ったか、どういう構成要素になってて、このエフェクトの狙いは？とか<span class="Apple-tab-span">	</span>とても細かく聞ける会だった。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>ミクさん奴</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>Qiitaに上がってる</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://qiita.com/MuRo_CG/items/c417ef6d6cbeed3dd42b">http://qiita.com/MuRo_CG/items/c417ef6d6cbeed3dd42b</a></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>テクスチャの調整</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>頑張って階調落とす</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>胸とかの線は描いてた</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>ライティングの調整</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>光源を意識する。固定光源</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>顔と体とか、かなり細かくライトを分けてる。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>ImageEffectを使ってみる</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>フレア、ディフュージョン(ブルーム)とかよく使う。</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>3Dは絵が固くなりやすい=エッジが強く出るので、それをブルームでぼかすとかそのへん。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>フレア</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>画面前に板ポリ置く</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>アンチエイリアス</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>QualitySettingでFantasic指定してアンチエイリアシング強くしてる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>トゥーンの場合は元絵の時点でアンチかけておかないといけなかった。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ポストエフェクトだとジャギッた絵にアンチがかかる。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>Bloom二回入れてる</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>発光、ぼかしの2段階にしてる</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>まとめて出来ない？</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>-&gt;背景の光と、キャラクターの輪郭線とかに出るような光を一緒くたにつくれなかった</p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>白黒化してバランスを見る</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>カラースケール フィルタ</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>24fps</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>アニメ準拠。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>手前にミク、遠景のビル</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>偽ビル</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>遠景、超大量のビル</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>グレースケールのノイズテクスチャをパーリンとかで作って、そいつをTerrainとして読み込んで立体化</p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>偽ライト</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ビル群の隙間から光が出る</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>-&gt; それっぽいフレア用のテクスチャ置いてる</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>10年代っぽい回転しながら落下奴</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>kode80さんの雲を生成する奴とか使ってた。</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://kode80.com/blog/">http://kode80.com/blog/</a></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>色味とかシーンの組み立て</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>夕日にはいろんな色が含まれるよねっていう感じでColorScaleとかで調節</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>雲に紫色</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>キャラクターの姿勢とかは別の方向からみるのを度外視した仰け反り</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>別にこっちからしか映らないし、、</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>参考にしたりしてる資料の話</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>MSC</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><a href="http://msc-jp.biz">http://msc-jp.biz</a></p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>アニメ用語集</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://msc-jp.biz/material_html/terms_A.html">http://msc-jp.biz/material_html/terms_A.html</a></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>まとまっていてとてもいい。</p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>撮影虎之穴</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>GAINAXのウェブページでグレンラガンのエフェクトの解説がいっぱいあったらしい。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>インターネットアーカイブにはある。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>最終回あたりの解説リンクがこれ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://web.archive.org/web/20151108140630/http://www.gainax.co.jp/anime/gurren-lagann/tora.html">https://web.archive.org/web/20151108140630/http://www.gainax.co.jp/anime/gurren-lagann/tora.html</a></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>2016/3月にはもうなくなってしまっていたらしい。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>水たまりのアレとか</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>AssetStoreのUBER shader</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://www.assetstore.unity3d.com/jp/#!/content/39959">https://www.assetstore.unity3d.com/jp/#!/content/39959</a></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>Q&amp;A</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>キャプチャってどうやってるんです？</p>
+<p class="p3"><span class="Apple-tab-span">	</span>-&gt; ShadowPlay</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://www.nvidia.co.jp/object/geforce-experience-shadow-play-jp.html">http://www.nvidia.co.jp/object/geforce-experience-shadow-play-jp.html</a></p>
+<p class="p2"><br></p>
+</body>
+</html>
