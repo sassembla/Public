@@ -1,0 +1,152 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1504.6">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #ebebeb}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #ffffff; min-height: 18.0px}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #ffffff}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>JWTについての学び</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>この辺見て勉強する。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://jwt.io/introduction/">https://jwt.io/introduction/</a></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>RFC 7519</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://tools.ietf.org/html/rfc7519">https://tools.ietf.org/html/rfc7519</a></p>
+<p class="p2"><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>なんのためのものなのか</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Auth、InformationExchange とある。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><a href="https://jwt.io/introduction/">https://jwt.io/introduction/</a></p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b>構成要素</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>header, payload, signatureの三つ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>すべてオリジナルはJSON形式。実際の値になるときには暗号化されたりしている。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>header</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>typeとアルゴリズムの指定記述が入る。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>type(キーはtyp)にはJWT、アルゴリズム指定(キーはalg)にはアルゴリズムの種類が入る。</p>
+<p class="p4">{</p>
+<p class="p4"><span class="Apple-converted-space">  </span>"alg": "HS256",</p>
+<p class="p4"><span class="Apple-converted-space">  </span>"typ": "JWT"</p>
+<p class="p4">}</p>
+<p class="p5"><br></p>
+<p class="p6"><span class="Apple-tab-span">	</span>この値はBase64エンコードされる。</p>
+<p class="p5"><span class="Apple-tab-span">	</span></p>
+<p class="p5"><span class="Apple-tab-span">	</span></p>
+<p class="p6"><b>payload</b></p>
+<p class="p6"><span class="Apple-tab-span">	</span>エンティティ。claimsというパラメータを含む。</p>
+<p class="p5"><span class="Apple-tab-span">	</span></p>
+<p class="p6"><span class="Apple-tab-span">	</span>claimsは3タイプに分かれる。</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Reserved, Public, Private</p>
+<p class="p5"><br></p>
+<p class="p6"><span class="Apple-tab-span">	</span><b>Reserved</b></p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>JWTで定義されている定義済みのclaims。</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>例えばiss(issuer)、exp(expiration time)、sub(subject) とか。</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>3文字。このへんからコンパクトにしたいらしい。</p>
+<p class="p5"><br></p>
+<p class="p6"><span class="Apple-tab-span">	</span><b>Public</b></p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>IANA JSON Web Token Registryとかの定義されてるもの。</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p5"><br></p>
+<p class="p6"><span class="Apple-tab-span">	</span><b>Private<span class="Apple-converted-space"> </span></b></p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>カスタム。公には共有せず、サービス内とかで共有すべきもの。</p>
+<p class="p5"><br></p>
+<p class="p6"><span class="Apple-tab-span">	</span>payloadのサンプルはこんな感じ。</p>
+<p class="p4">{</p>
+<p class="p4"><span class="Apple-converted-space">  </span>"sub": "1234567890",</p>
+<p class="p4"><span class="Apple-converted-space">  </span>"name": "John Doe",</p>
+<p class="p4"><span class="Apple-converted-space">  </span>"admin": true</p>
+<p class="p4">}</p>
+<p class="p5"><span class="Apple-tab-span">	</span></p>
+<p class="p6"><span class="Apple-tab-span">	</span>これもBase64エンコードされる。</p>
+<p class="p5"><span class="Apple-tab-span">	</span></p>
+<p class="p5"><br></p>
+<p class="p6"><b>signature</b></p>
+<p class="p6"><span class="Apple-tab-span">	</span>作成するにはエンコードされたheaderとpayloadとシークレット、</p>
+<p class="p6"><span class="Apple-tab-span">	</span>headerに記述されたアルゴリズムが必要で、それらを使ってsignしたものがsignatureになる。</p>
+<p class="p5"><br></p>
+<p class="p6"><span class="Apple-tab-span">	</span>具体例としてHMACSHA256を使ってsignatureを作るコードは次のような感じになる。</p>
+<p class="p4">HMACSHA256(</p>
+<p class="p4"><span class="Apple-converted-space">  </span>base64UrlEncode(header) + "." +</p>
+<p class="p4"><span class="Apple-converted-space">  </span>base64UrlEncode(payload),</p>
+<p class="p4"><span class="Apple-converted-space">  </span>secret)</p>
+<p class="p5"><br></p>
+<p class="p6"><span class="Apple-tab-span">	</span>ふむふむ。headerをエンコードしたもの + “.” + payloadをエンコードしたものを、secretをキーに使ってHMACSHA256にかければいいと。</p>
+<p class="p5"><br></p>
+<p class="p6"><span class="Apple-tab-span">	</span>こうして作成されたsignatureは、経路でデータ改ざんがされなかったことの保証や、誰がこのデータ(JWT)の発行者かなどを保証するために使われる。</p>
+<p class="p5"><br></p>
+<p class="p6"><span class="Apple-tab-span">	</span>で、ここまでの成果物は、次の通りになる。</p>
+<p class="p5"><br></p>
+<p class="p6"><span class="Apple-tab-span">	</span>header(encoded)</p>
+<p class="p6"><span class="Apple-tab-span">	</span>payload(encoded)</p>
+<p class="p6"><span class="Apple-tab-span">	</span>secret</p>
+<p class="p6"><span class="Apple-tab-span">	</span>signature</p>
+<p class="p5"><br></p>
+<p class="p6"><span class="Apple-tab-span">	</span>で、これらを次の形でつなげる。</p>
+<p class="p5"><span class="Apple-tab-span">	</span></p>
+<p class="p6"><span class="Apple-tab-span">	</span>header(encoded) + ”.” + payload(encoded) + “.” + signature</p>
+<p class="p5"><br></p>
+<p class="p6"><span class="Apple-tab-span">	</span>ふむふむ</p>
+<p class="p6"><span class="Apple-tab-span">	</span>・headerに書いてあるアルゴリズムとsecretを事前に知らなければ復号できない</p>
+<p class="p6"><span class="Apple-tab-span">	</span>という感じか。</p>
+<p class="p5"><br></p>
+<p class="p5"><span class="Apple-tab-span">	</span></p>
+<p class="p6"><b>動作について</b></p>
+<p class="p6"><span class="Apple-tab-span">	</span>ユーザーが持っていたcredentialでログインできたら、サーバーはJWTをユーザーに渡す。</p>
+<p class="p6"><span class="Apple-tab-span">	</span>ユーザーはサーバーにアクセスする際、AuthorizationヘッダにJWTを乗せる必要がある。</p>
+<p class="p5"><br></p>
+<p class="p6"><span class="Apple-tab-span">	</span>その際Bearerスキーマでセットして送る。</p>
+<p class="p4">Authorization: Bearer &lt;token&gt;</p>
+<p class="p5"><br></p>
+<p class="p6"><span class="Apple-tab-span">	</span>こうするとサーバーのメモリ上にも一切ユーザー関連のデータが残らないのでステートレスにできるよねっていう話。</p>
+<p class="p5"><br></p>
+<p class="p5"><span class="Apple-tab-span">	</span></p>
+<p class="p6"><b>JWTの利点</b></p>
+<p class="p6"><span class="Apple-tab-span">	</span>SimpleWebToken(SWT), SAML(Security Assertion Markup Language)と比較してる。</p>
+<p class="p5"><br></p>
+<p class="p6"><span class="Apple-tab-span">	</span>JSONはXMLより簡潔なので、エンコードされたサイズも小さい。</p>
+<p class="p6"><span class="Apple-tab-span">	</span>で、まあ、SAMLより小さい。これはHTTPとかでデータをやり取りするのに適してると思う。</p>
+<p class="p5"><br></p>
+<p class="p6"><span class="Apple-tab-span">	</span>セキュリティの観点で、SWTは対称暗号でのHMACしか選べない。</p>
+<p class="p6"><span class="Apple-tab-span">	</span>でもJWTやSAMLでは公開暗号がsigningに使える(X509)。</p>
+<p class="p6"><span class="Apple-tab-span">	</span>その上で、JSON使ってやったほうが楽だよねみたいな。</p>
+<p class="p5"><br></p>
+<p class="p6"><span class="Apple-tab-span">	</span>JSONパーサはこの世にいっぱいあるんでXML(要はSAML)よりいいよねみたいな話。</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p6"><b>Auth0について</b></p>
+<p class="p6"><span class="Apple-tab-span">	</span>オースゼロ、っていう会社かこれ。</p>
+<p class="p6"><span class="Apple-tab-span">	</span>なんかAPIを提供するのを商売にしてるっぽい。</p>
+<p class="p5"><span class="Apple-tab-span">	</span></p>
+<p class="p5"><br></p>
+<p class="p6"><b>横道、認証と認可について</b></p>
+<p class="p6"><span class="Apple-tab-span">	</span><a href="http://dev.classmethod.jp/security/authentication-and-authorization/">http://dev.classmethod.jp/security/authentication-and-authorization/</a></p>
+<p class="p5"><br></p>
+<p class="p6"><span class="Apple-tab-span">	</span>認証=Authentication：誰かを確かめること</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>例：adminなのかどうか判断する</p>
+<p class="p5"><br></p>
+<p class="p6"><span class="Apple-tab-span">	</span>認可=Authorization：権限、許可を与えること</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>例：切符を持っているので電車に乗っていい<span class="Apple-tab-span">	</span></p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p6"><b>実用例</b></p>
+<p class="p6"><span class="Apple-tab-span">	</span>https://www.toptal.com/web/cookie-free-authentication-with-json-web-tokens-an-example-in-laravel-and-angularjs</p>
+<p class="p5"><br></p>
+<p class="p5"><span class="Apple-tab-span">	</span></p>
+</body>
+</html>
