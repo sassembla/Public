@@ -22,14 +22,18 @@
 <p class="p1"><b>Java、JDKをインストールせずに使ったり捨てたり</b></p>
 <p class="p2"><br></p>
 <p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ろくなアンインストーラが無い上にあなたとJavaインストーラは変な挙動するので本当にJavaインストールしたくない。</p>
 <p class="p3"><span class="Apple-tab-span">	</span>結論として、あなたとJavaを見ずにJavaをそのへんに入れたり捨てたりが容易にできるようになった。</p>
 <p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>なので正しい題としては、「あなたとJavaを見ずにJavaをそのへんのフォルダにインストールする」になる。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>ある程度の経緯</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>ホストマシン(Mac)にJavaをインストールすると通知とか管理が本当にウザいので、</p>
 <p class="p3"><span class="Apple-tab-span">	</span>JDKをDocker側に入れてホストマシンからはそれを使うようにしたい。という感じで考えていた。</p>
-<p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>ろくなアンインストーラが無い上に変な挙動するので本当にインストールしたくない。</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p3"><span class="Apple-tab-span">	</span>Dockerをつかってどうこうするのはまあよく考えたら無理で、代替を探していろいろやった話。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>そのうちもっとちゃんと隔離したい。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>今回の用途、Dockerだとなぜ適さなかったのか</b></p>
@@ -117,8 +121,19 @@
 <p class="p6"><br></p>
 <p class="p6"><br></p>
 <p class="p7"><span class="Apple-tab-span">	</span>無事javaがそのへんに置けましたね。よかったよかった。</p>
-<p class="p7"><span class="Apple-tab-span">	</span>これで環境を汚されずに済む。</p>
+<p class="p7"><span class="Apple-tab-span">	</span>これでおもしろインストーラを一切実行せずに、ホスト環境を汚されずに済む。そして捨てやすい。</p>
 <p class="p6"><br></p>
 <p class="p6"><br></p>
+<p class="p7"><b>使い方</b></p>
+<p class="p7"><span class="Apple-tab-span">	</span>いちいち下記をやってもいいし、</p>
+<p class="p4">export JAVA_HOME=どこか/tmp/Contents/Home/</p>
+<p class="p6"><br></p>
+<p class="p7"><span class="Apple-tab-span">	</span>bashrcとかをいじってもいいと思う。</p>
+<p class="p7"><span class="Apple-tab-span">	</span>自分は必要な時だけ必要なので、これでいい。</p>
+<p class="p6"><br></p>
+<p class="p6"><br></p>
+<p class="p7"><b>動くの？</b></p>
+<p class="p7"><span class="Apple-tab-span">	</span>動くよ。</p>
+<p class="p8"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202016-12-05%2021.14.00.png" alt="スクリーンショット 2016-12-05 21.14.00.png"></p>
 </body>
 </html>
