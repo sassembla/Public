@@ -11,20 +11,28 @@
     p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
     p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
     p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #ebebeb}
-    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #ffffff; min-height: 18.0px}
-    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #ffffff}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #ebebeb; min-height: 18.0px}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #ffffff; min-height: 18.0px}
+    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #ffffff}
+    p.p8 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; background-color: #ffffff}
     span.Apple-tab-span {white-space:pre}
   </style>
 </head>
 <body>
-<p class="p1"><b>Java、JREをインストールせずに使ったり捨てたり</b></p>
+<p class="p1"><b>Java、JDKをインストールせずに使ったり捨てたり</b></p>
 <p class="p2"><br></p>
 <p class="p3"><b>概要</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>ホストマシン(Mac)にJava関連インストールすると管理がウザいので、</p>
-<p class="p3"><span class="Apple-tab-span">	</span>JREをDocker側に入れてホストマシンからはそれを使うようにしたい。という感じで考えていた。</p>
-<p class="p2"><span class="Apple-tab-span">	</span></p>
-<p class="p3"><span class="Apple-tab-span">	</span>Dockerをつかってどうこうするのはまあ無理で(悲しい)、Macに備え付けのVolumeっていう概念だとなんとかなりそうな気がしている。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>結論として、あなたとJavaを見ずにJavaをそのへんに入れたり捨てたりが容易にできるようになった。</p>
 <p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ホストマシン(Mac)にJavaをインストールすると通知とか管理が本当にウザいので、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>JDKをDocker側に入れてホストマシンからはそれを使うようにしたい。という感じで考えていた。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ろくなアンインストーラが無い上に変な挙動するので本当にインストールしたくない。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Dockerをつかってどうこうするのはまあよく考えたら無理で、代替を探していろいろやった話。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>今回の用途、Dockerだとなぜ適さなかったのか</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>Dockerの-vでのボリュームだと、</p>
 <p class="p3"><span class="Apple-tab-span">	</span>・Macの特定のフォルダ以下のパスを</p>
 <p class="p3"><span class="Apple-tab-span">	</span>・Dockerのコンテナの特定のフォルダに接続する</p>
@@ -37,24 +45,80 @@
 <p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Mac(</p>
 <p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>特定path</p>
 <p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>)</p>
-<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>)</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
 <p class="p4"><span class="Apple-tab-span">	</span>)</p>
-<p class="p5"><br></p>
-<p class="p6"><span class="Apple-tab-span">	</span>という、「DockerからMacの特定パスにアクセスできる」という機能なわけで、</p>
-<p class="p6"><span class="Apple-tab-span">	</span>今回自分が欲しかったのは下記。</p>
-<p class="p5"><br></p>
+<p class="p6"><br></p>
+<p class="p7"><span class="Apple-tab-span">	</span>という、「DockerからMacの特定パスにアクセスできる」という機能なわけで、</p>
+<p class="p7"><span class="Apple-tab-span">	</span>今回自分が欲しかったのは下記。</p>
+<p class="p6"><br></p>
 <p class="p4">アクセス方向 -&gt;<span class="Apple-converted-space"> </span></p>
 <p class="p4"><span class="Apple-tab-span">	</span>Mac(</p>
 <p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>特定path -&gt;<span class="Apple-converted-space"> </span></p>
 <p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Docker(</p>
-<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>特定path</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>特定path(ここにJava入れて云々)</p>
 <p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>)</p>
-<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>)</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
 <p class="p4"><span class="Apple-tab-span">	</span>)</p>
-<p class="p5"><br></p>
-<p class="p6"><span class="Apple-tab-span">	</span>で、まあ、これは仮想化というかパーティショニングみたいな概念で、</p>
-<p class="p6"><span class="Apple-tab-span">	</span>そもそもDockerじゃなくてもいいじゃんみたいな感じに落ち着いた。</p>
-<p class="p5"><br></p>
-<p class="p5"><span class="Apple-tab-span">	</span></p>
+<p class="p6"><br></p>
+<p class="p7"><span class="Apple-tab-span">	</span>で、まあ、これはDockerコンテナの仕事ではなく、ホストOSに対するパーティショニングみたいな概念で、</p>
+<p class="p7"><span class="Apple-tab-span">	</span>そもそもDockerじゃなくてもいいじゃんみたいな感じに落ち着いた。Javaまわりいろいろ多いので、できれば隔離したかった。</p>
+<p class="p6"><br></p>
+<p class="p7"><span class="Apple-tab-span">	</span>戦略としては、</p>
+<p class="p7"><span class="Apple-tab-span">	</span>・Macの特定フォルダ以下にJDKが入ったフォルダを置く</p>
+<p class="p7"><span class="Apple-tab-span">	</span>だけ。</p>
+<p class="p6"><br></p>
+<p class="p6"><span class="Apple-tab-span">	</span></p>
+<p class="p7"><b>まずJDKインストーラを分解します</b></p>
+<p class="p7"><span class="Apple-tab-span">	</span>できればOracleのサイトから何かDLするのすらやりたくなかったんだけど、</p>
+<p class="p7"><span class="Apple-tab-span">	</span>こればっかりはしょうがないのでOracleのサイトからJDKのインストーラをDLしてくる。</p>
+<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html">http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html</a></p>
+<p class="p6"><br></p>
+<p class="p6"><br></p>
+<p class="p7"><span class="Apple-tab-span">	</span>dmgしかない。ここにtarなどがあればここからの苦労は本当に必要ない。ちなみにJREはtarで配布されてる。なぜなの。</p>
+<p class="p6"><br></p>
+<p class="p6"><br></p>
+<p class="p7"><b>分解工程</b></p>
+<p class="p7"><span class="Apple-tab-span">	</span>まずはどこでもいいので、tmpフォルダを用意して、その中にJDKのインストーラを分解したものを出力</p>
+<p class="p4">mkdir tmp</p>
+<p class="p6"><span class="Apple-tab-span">	</span></p>
+<p class="p7"><span class="Apple-tab-span">	</span>この状態で、DLしてきたJDKのdmgをダブルクリックし、/Volumeでアクセスできるようにする。</p>
+<p class="p8"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202016-12-05%2019.59.28.png" alt="スクリーンショット 2016-12-05 19.59.28.png"></p>
+<p class="p6"><br></p>
+<p class="p7"><span class="Apple-tab-span">	</span>デスクトップにこういうのが表示された状態で、packageutilを使ってインストーラの中身をtmp内に展開する。</p>
+<p class="p6"><br></p>
+<p class="p4">cd tmp</p>
+<p class="p4">pkgutil --expand<span class="Apple-converted-space">  </span>/Volumes/JDK\ 8\ Update\ 111/JDK\ 8\ Update\ 111.pkg ./jdkpkg</p>
+<p class="p6"><br></p>
+<p class="p7"><span class="Apple-tab-span">	</span>これで、JDKの中身がtmpフォルダに展開される。</p>
+<p class="p6"><span class="Apple-tab-span">	</span></p>
+<p class="p8"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202016-12-05%2020.02.46.png" alt="スクリーンショット 2016-12-05 20.02.46.png"></p>
+<p class="p7"><span class="Apple-tab-span">	</span>さらにpkgが出てきたので分解する。</p>
+<p class="p7"><span class="Apple-tab-span">	</span>javaappletまだ積んでるのか。そちらは要らないので無視する。</p>
+<p class="p6"><br></p>
+<p class="p7"><span class="Apple-tab-span">	</span>jdk180111.pkgを分解する。</p>
+<p class="p6"><br></p>
+<p class="p7"><span class="Apple-tab-span">	</span>なんでpkgからpkg出てくるんだろ？っていう疑念は当たりで、このpkgに対してpkgutilを使うと失敗する。</p>
+<p class="p6"><span class="Apple-tab-span">	</span></p>
+<p class="p7"><span class="Apple-tab-span">	</span>で、</p>
+<p class="p7"><span class="Apple-tab-span">	</span>これは拡張子はpkgなんだけどどうやらpkgではないという。なにしてんの。</p>
+<p class="p6"><br></p>
+<p class="p7"><span class="Apple-tab-span">	</span>いろいろ探してたら先駆者がいた。先駆者の人たちどんな気持ちでこのテクニックにたどり着いたんだろう。</p>
+<p class="p6"><br></p>
+<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><b>How to install java 7 on mac in custom location?</b></p>
+<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://stackoverflow.com/questions/15217200/how-to-install-java-7-on-mac-in-custom-location">http://stackoverflow.com/questions/15217200/how-to-install-java-7-on-mac-in-custom-location</a></p>
+<p class="p6"><span class="Apple-tab-span">	</span></p>
+<p class="p7"><span class="Apple-tab-span">	</span>というわけで、このpkgはこれ、pkgではなくGZipされたCPIOファイルだそうで。へぇ。なんで.pkgなんだ、、、</p>
+<p class="p6"><br></p>
+<p class="p4">cpio -i &lt; ./jdkpkg/jdk180111.pkg/Payload</p>
+<p class="p6"><br></p>
+<p class="p6"><br></p>
+<p class="p7"><span class="Apple-tab-span">	</span>やったぜ。</p>
+<p class="p7"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202016-12-05%2020.40.41.png" alt="スクリーンショット 2016-12-05 20.40.41.png"></p>
+<p class="p6"><br></p>
+<p class="p6"><br></p>
+<p class="p7"><span class="Apple-tab-span">	</span>無事javaがそのへんに置けましたね。よかったよかった。</p>
+<p class="p7"><span class="Apple-tab-span">	</span>これで環境を汚されずに済む。</p>
+<p class="p6"><br></p>
+<p class="p6"><br></p>
 </body>
 </html>
