@@ -30,8 +30,9 @@
 <p class="p2"><br></p>
 <p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>これはね～～もうねーーーいいおもちゃだよ＝＝＝～～</p>
 <p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>チートシート作ってる。</p>
+<p class="p4"><img src="safe_image4.png" alt="safe_image4.png"></p>
 <p class="p2"><br></p>
-<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>画像はあとで追加する。</p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>操作のチートシート用の画像をあとで追加するつもり。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>簡単に</b><span class="s2"><b>add</b></span><b>とremoveを切り替えるには</b></p>
@@ -73,6 +74,90 @@
 <p class="p3"><b>テンプレート</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>いまんとこできなそうなので、なんか一枚レイヤーに絵を書いてからやるとよさそう。</p>
 <p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p3"><b>パーツを分割する</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>カットが対応する。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>が、ちょっと癖があって面白い。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>特にシンメトリモードみたいなのの時に、一本のシンメトリな棒の端に対してカットを行うと、パーツが地続きかどうかで</p>
+<p class="p3"><span class="Apple-tab-span">	</span>分割されるレイヤ構造が変わる。</p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>具体例は後で追加する。</p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>この癖は事前に設計にいれておかないと面倒臭そう。</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p3"><b>ポリゴンのポイントを掴みたい</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ない。その辺ごっそり捨てる設計になってるっぽい。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>盛る/削るというUIに終始してる。</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p3"><b>色をつける方法</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>素材自体に色をつける場合と、ポリゴンに対して色を塗る方法の2パターンがある。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>両方とも解像度(ポリゴン密度)的には差がないみたいなんだけど、きちんと塗り分けしたい場合は出力した後にテクスチャで頑張る、みたいなのが必要そう。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>いくらなんでもパーツ単位で色を全部分けるとかするとポリゴン数が不味い。</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p3"><b>外部ツールによるリトポとの相性</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ZBrushで試してみたい。まだ未調整。ToDo。</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p3"><b>ここからおまけ：Mediumでのモデリング最速化を考える</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>例えばZBrushとかだと身近に先駆者がいて、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>その人に教えてもらうことで「こういうのが作りたい場合はこう作ると楽」みたいなのが聞けてよかった。</p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、Mediumでもそういうのを探してみようと思う。</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p3"><b>要件定義</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・用途を持ったモデルを</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・形状に対して</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・サクッと作る</p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>みたいな技術は、とにかく数をこなしたい時にとても良い。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>イテレーション回数をあげてクオリティを出したい時に試みるといいこと、っていうのはMediumにもあると思ってる。</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p3"><b>具体的にはどんな要素がありそうか</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ここでは、「いい感じのバランスを作り出すために試行する」という言葉を縮めて「尺を取る」にしている。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ざっくり次のショートハンドがありそう。順は実行順を意図したものではない。</p>
+<p class="p5"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>1.パーツ構成の尺を取る</p>
+<p class="p3"><span class="Apple-tab-span">	</span>2.全体/全身の尺を取る</p>
+<p class="p3"><span class="Apple-tab-span">	</span>3.ボリュームの尺を取る</p>
+<p class="p3"><span class="Apple-tab-span">	</span>4.カラーリングの尺を取る</p>
+<p class="p5"><span class="Apple-tab-span">	</span></p>
+<p class="p5"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b>1.パーツ構成の尺を取る</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>どんなツールを後続に使って何をするか、という部分に依存しそう。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>自分の場合は「ゲームで使う」なので、モーションが入ったりいろいろする。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>レイヤー分けとかが影響しそうなんだけど今の所ムクで一発パーツで作った場合と比べて何がベストなんだろ的な試行錯誤中。</p>
+<p class="p5"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ようは保留。</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p3"><b>2.全体/全身の尺を取る</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>現在注力するとすぐ成果がでそうな分野。</p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>特にMediumの場合、1レイヤー使って下書きみたいなのをやると良さそう。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・棒で長さの尺を取る</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・何かでパーツごとの広さの尺を取る</p>
+<p class="p3"><span class="Apple-tab-span">	</span>とかで考えて見るか。</p>
+<p class="p5"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>スタンプを使うことで記号化してバランス見るのを簡略化、みたいなのも答えかもしれない。</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p3"><b>3.ボリュームの尺を取る</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Mediumの場合、マスクみたいな概念が一切ないので、レイヤー分けが全てという感じになる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>例えば隣接したパーツが影響を受けてしまうので、そういうのはレイヤー分ける時にすでに織り込んでおかないと辛そう。</p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>また、ユニット単位みたいなのに対してスナップ、っていう概念もないので、一度動かしたパーツを元の位置に戻すのもしんどい感じがする。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>この辺はもうファジーなツールと割り切ってしまうのも手かもしれない(どうせズレる)</p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>でもカチッとしたものを作りたい場合どうすればいいんだろう。</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p5"><span class="Apple-tab-span">	</span></p>
 <p class="p5"><br></p>
 <p class="p5"><br></p>
 </body>
