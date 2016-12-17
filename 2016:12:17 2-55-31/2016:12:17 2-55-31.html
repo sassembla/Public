@@ -10,8 +10,12 @@
     p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Sans'}
     p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; min-height: 18.0px}
     p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'}
-    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
-    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; background-color: #ebebeb}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; background-color: #ebebeb; min-height: 18.0px}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; background-color: #ffffff; min-height: 18.0px}
+    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; background-color: #ffffff}
+    p.p8 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; background-color: #ffffff; min-height: 14.0px}
+    p.p9 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; background-color: #ffffff}
     span.s1 {font: 12.0px Helvetica}
     span.Apple-tab-span {white-space:pre}
   </style>
@@ -37,32 +41,64 @@
 <p class="p3"><span class="Apple-tab-span">	</span>管理の手間というか躓きポイントはあまりない。というかこういうのがないとSingletonとか怖くて使えないよね。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
+<p class="p3"><b>デフォルト性能</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>シーン間を超えたデータの保持を行うことができる。</p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><b></b><br></p>
 <p class="p3"><b>おまけ特性 その1</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>UnityではMonoBehaviourのセットされたGameObjectを作っておくとMainThreadでMonoBehaviourの特定のメソッドが実行される。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>で、Singletonにしたいクラスにもなったりする。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、割と、Singletonにしたいクラス = MonoBehaviourというケースがあったりする。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>(自分で設計する場合はまずありえないんだけど、これはこれで、作ってわかる面白い副産物であった。後述のUpdateOnceとか。)</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>今回作ったクラスでは、あらかじめUnityのMonoBehaviourを扱うようにしているので、</p>
 <p class="p3"><span class="Apple-tab-span">	</span>SingletonにしたいクラスにUpdateとかを定義しておくと、ちゃんとMonoBehaviourで呼ばれるタイミングで呼ばれる。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
-<p class="p3"><b>おまけ特性 その２</b></p>
-<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span></span>登録すると、Hierarchy上でどのクラスのSingleton特性をもっているかが目視できる。</p>
-<p class="p4"><br></p>
-<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span></span>最初は空なんだけど、</p>
-<p class="p5"><span class="Apple-tab-span">	</span><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202016-12-17%202.50.24.png" alt="スクリーンショット 2016-12-17 2.50.24.png"></p>
-<p class="p4"><br></p>
-<p class="p4"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>MySingletonクラスのシングルトンでもあるときはこんな感じ。</p>
-<p class="p5"><span class="Apple-tab-span">	</span><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202016-12-17%202.52.01.png" alt="スクリーンショット 2016-12-17 2.52.01.png"></p>
-<p class="p4"><br></p>
-<p class="p4"><br></p>
-<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span></span>はい。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>このMonoBehaviour特性のせいで、MainThreadで特定のハンドラでもって特定の処理を1度だけ行う、みたいなのを実行できる。</p>
 <p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>例えば次のようなコードで、<b>生成されてから一度だけUpdate関数が動くクラス</b> を投げ込めばいい。</p>
 <p class="p2"><br></p>
-<p class="p3"><b>葛藤</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>名前について、SingletonBed (つんくさんの歌)って言う名前にしようかと思ったんだけど思いとどまった。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>褒めてくれ。</p>
-<p class="p2"><br></p>
-<p class="p2"><br></p>
+<p class="p4">/*</p>
+<p class="p4"><span class="Apple-tab-span">	</span>Updateだけが定義してある、SingletonHolder.Baseを拡張したクラス</p>
+<p class="p4">*/</p>
+<p class="p4">public class <b>UpdateOnce</b> : SingletonHolder.Base {</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-converted-space">    </span>public override void Update () {</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-converted-space">        </span>Debug.Log("hello!!”);</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-converted-space">        </span>SingletonHolder.Delete&lt;<b>UpdateOnce</b>&gt;();// ここでこの型のsingletonが解除されるので、このUpdateの処理がMainThreadで一度だけ行われることになる。</p>
+<p class="p4"><span class="Apple-converted-space">    </span>}</p>
+<p class="p5"><br></p>
+<p class="p4">}</p>
+<p class="p5"><br></p>
+<p class="p4">// どっかでUpdateOnceクラスのシングルトンを取得 -&gt; UpdateOnceのインスタンスがsingleton化され、実行されるようになる</p>
+<p class="p4">SingletonHolder.Get&lt;UpdateOnce&gt;();</p>
+<p class="p5"><br></p>
+<p class="p6"><br></p>
+<p class="p7"><span class="Apple-tab-span">	</span>おおーー思ったより便利かも。</p>
+<p class="p7"><span class="Apple-tab-span">	</span>UniRxのMainThreadDispatcherと原理は一緒。</p>
+<p class="p6"><br></p>
+<p class="p6"><br></p>
+<p class="p7"><b>おまけ特性 その２</b></p>
+<p class="p7"><span class="s1"><span class="Apple-tab-span">	</span></span>登録すると、Hierarchy上でどのクラスのSingleton特性をもっているかが目視できる。</p>
+<p class="p8"><br></p>
+<p class="p7"><span class="s1"><span class="Apple-tab-span">	</span></span>最初は空なんだけど、</p>
+<p class="p9"><span class="Apple-tab-span">	</span><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202016-12-17%202.50.24.png" alt="スクリーンショット 2016-12-17 2.50.24.png"></p>
+<p class="p8"><br></p>
+<p class="p8"><br></p>
+<p class="p7"><span class="Apple-tab-span">	</span>MySingletonクラスのシングルトンでもあるときはこんな感じ。</p>
+<p class="p9"><span class="Apple-tab-span">	</span><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202016-12-17%202.52.01.png" alt="スクリーンショット 2016-12-17 2.52.01.png"></p>
+<p class="p8"><br></p>
+<p class="p8"><br></p>
+<p class="p7"><span class="s1"><span class="Apple-tab-span">	</span></span>はい。うん、みやすい。</p>
+<p class="p6"><br></p>
+<p class="p6"><br></p>
+<p class="p7"><b>葛藤</b></p>
+<p class="p7"><span class="Apple-tab-span">	</span>名前について、SingletonBed (つんく♂さんの歌のタイトルのパクリ)って名前にしようかと思ったんだけど思いとどまった。</p>
+<p class="p7"><span class="Apple-tab-span">	</span>褒めてくれ。</p>
+<p class="p6"><br></p>
+<p class="p6"><br></p>
 </body>
 </html>
