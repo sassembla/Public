@@ -19,6 +19,18 @@
     p.p10 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; background-color: #ffffff; min-height: 18.0px}
     p.p11 {margin: 0.0px 0.0px 0.0px 0.0px; line-height: 15.0px; font: 12.0px 'Hiragino Sans'; background-color: #ffffff}
     p.p12 {margin: 0.0px 0.0px 0.0px 0.0px; line-height: 15.0px; font: 12.0px 'Hiragino Sans'; background-color: #ffffff; min-height: 18.0px}
+    p.p13 {margin: 0.0px 0.0px 0.0px 0.0px; line-height: 15.0px; font: 12.0px Helvetica; background-color: #ffffff}
+    p.p14 {margin: 0.0px 0.0px 0.0px 0.0px; line-height: 15.0px; font: 12.0px Helvetica; background-color: #ffffff; min-height: 14.0px}
+    p.p15 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; background-color: #ffffff}
+    p.p16 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; background-color: #ffffff; min-height: 14.0px}
+    p.p17 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Courier; background-color: #ebebeb}
+    p.p18 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Courier; background-color: #ebebeb; min-height: 16.0px}
+    p.p19 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px 'Hiragino Sans'; background-color: #ebebeb}
+    span.s1 {font: 12.0px Helvetica}
+    span.s2 {font: 12.0px 'Hiragino Sans'}
+    span.s3 {font-kerning: none}
+    span.s4 {font: 13.0px Courier; font-kerning: none}
+    span.s5 {font: 13.0px 'Hiragino Sans'; font-kerning: none}
     span.Apple-tab-span {white-space:pre}
   </style>
 </head>
@@ -32,7 +44,7 @@
 <p class="p3"><span class="Apple-tab-span">	</span>昨日は(この項目はまだ確定されていない)</p>
 <p class="p3"><span class="Apple-tab-span">	</span>明日は(この項目はまだ確定されていない)</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>AssetBundleとかUnityのAssetの設定とかをとにかく力強く楽に扱えるツール「AssetBundleGraph」の話をする。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>AssetBundleとかUnityのAssetの設定とかをとにかく力強く楽に扱えるツール「AssetBundleGraph(ABG)」の話をする。</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>あと実は、このページはUnibook 総集編からも参照されている。</p>
 <p class="p2"><br></p>
@@ -155,16 +167,257 @@
 <p class="p11"><span class="Apple-tab-span">	</span>まず、グラフを右クリックして、Loaderノードを置く。</p>
 <p class="p11"><span class="Apple-tab-span">	</span><img src="0.png" alt="0.png"></p>
 <p class="p12"><span class="Apple-tab-span">	</span></p>
-<p class="p11"><span class="Apple-tab-span">	</span>クリックすると、Inspector</p>
+<p class="p11"><span class="Apple-tab-span">	</span>クリックすると、Inspectorが開く。で、ここでは、Assets/Game/Images っていうフォルダにサンプルとしてユニティちゃんとかの画像が置いてあるので、</p>
+<p class="p11"><span class="Apple-tab-span">	</span>その画像を読み込む(Loadする)ようにしてみる。</p>
 <p class="p11"><span class="Apple-tab-span">	</span><img src="1.png" alt="1.png"></p>
+<p class="p11"><span class="Apple-tab-span">	</span>ちなみにAssets/Game/Imagesの中身はこんな感じ。画像いろいろ。</p>
+<p class="p11"><span class="Apple-tab-span">	</span><span class="s1"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202016-12-22%202.02.36.png" alt="スクリーンショット 2016-12-22 2.02.36.png"></span></p>
 <p class="p12"><br></p>
+<p class="p11"><span class="Apple-tab-span">	</span>次に、グラフを右クリックしてImportSettingsノードを追加。</p>
+<p class="p13"><span class="s2"><span class="Apple-tab-span">	</span></span><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202016-12-22%201.59.58.png" alt="スクリーンショット 2016-12-22 1.59.58.png"></p>
+<p class="p11"><span class="s1"><span class="Apple-tab-span">	</span></span>選択すると、<span class="s1">Inspector</span>にこんな感じの見慣れないボタンが表示される。</p>
+<p class="p11"><span class="s1"><span class="Apple-tab-span">	</span></span>で、Configure Import Settings ボタンを押すと、</p>
+<p class="p13"><span class="s2"><span class="Apple-tab-span">	</span></span><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202016-12-22%201.59.59.png" alt="スクリーンショット 2016-12-22 1.59.59.png"></p>
+<p class="p14"><span class="Apple-tab-span">	</span></p>
+<p class="p11"><span class="s1"><span class="Apple-tab-span">	</span>Loader</span>がロードしてきた画像のInspectorに切り替わる。</p>
+<p class="p11"><span class="Apple-tab-span">	</span>さてとりあえず設定を弄ろう。</p>
+<p class="p13"><span class="s2"><span class="Apple-tab-span">	</span></span><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202016-12-22%202.00.12.png" alt="スクリーンショット 2016-12-22 2.00.12.png"></p>
+<p class="p11"><span class="s1"><span class="Apple-tab-span">	</span>Advanced</span>に変えて、いろいろ変えて、、、</p>
+<p class="p13"><span class="Apple-tab-span">	</span><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202016-12-22%202.01.51.png" alt="スクリーンショット 2016-12-22 2.01.51.png"></p>
+<p class="p14"><span class="Apple-tab-span">	</span></p>
+<p class="p11"><span class="s1"><span class="Apple-tab-span">	</span></span>で、設定を適応させる。ここまでは通常通りのImportSettingsの手順。</p>
+<p class="p15"><span class="Apple-tab-span">	</span><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202016-12-22%202.02.01.png" alt="スクリーンショット 2016-12-22 2.02.01.png"></p>
+<p class="p16"><br></p>
+<p class="p9"><span class="s1"><span class="Apple-tab-span">	</span></span>AssetBundleGraph実行！！(右のほうのBuildボタンを押す</p>
+<p class="p9"><span class="Apple-tab-span">	</span><span class="s1"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202016-12-23%203.23.40.png" alt="スクリーンショット 2016-12-23 3.23.40.png"></span></p>
+<p class="p16"><span class="Apple-tab-span">	</span></p>
+<p class="p16"><span class="Apple-tab-span">	</span></p>
+<p class="p9"><span class="s1"><span class="Apple-tab-span">	</span></span>そして、先ほどの画像が置いてあるフォルダを覗いてみると、、</p>
+<p class="p15"><span class="Apple-tab-span">	</span><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202016-12-22%202.02.36.png" alt="スクリーンショット 2016-12-22 2.02.36.png"></p>
+<p class="p16"><span class="Apple-tab-span">	</span></p>
+<p class="p9"><span class="s1"><span class="Apple-tab-span">	</span></span>すべての画像のセッティングが、先ほどセットした一枚の設定とクリソツになっている！</p>
+<p class="p15"><span class="Apple-tab-span">	</span><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202016-12-22%202.02.41.png" alt="スクリーンショット 2016-12-22 2.02.41.png"></p>
+<p class="p16"><br></p>
+<p class="p9"><span class="s1"><b><span class="Apple-tab-span">	</span></b></span><b>やったぜ！</b></p>
+<p class="p16"><br></p>
+<p class="p9"><span class="s1"><span class="Apple-tab-span">	</span></span>置いたノードは2つだけだが、</p>
+<p class="p9"><span class="Apple-tab-span">	</span>・特定のフォルダにある画像全部に対して同じ設定を行う</p>
+<p class="p9"><span class="Apple-tab-span">	</span>というのが瞬殺できた。</p>
+<p class="p10"><br></p>
+<p class="p9"><span class="Apple-tab-span">	</span>応用としては、</p>
+<p class="p9"><span class="Apple-tab-span">	</span>複数のフォルダの画像を、複数のLoaderノードで読みこんで、一つのImportSettingsノードに流し込んで、全部一発で設定したり、</p>
+<p class="p9"><span class="Apple-tab-span">	</span>このフォルダ以下の画像で名前にUI_って含んである画像は～ みたいな分岐も作り出せる。(Filterノードを使う</p>
+<p class="p10"><span class="Apple-tab-span">	</span></p>
+<p class="p10"><br></p>
+<p class="p9"><span class="Apple-tab-span">	</span>また、ImportSettingsノードは、画像だけでなくAudio、Modelに対しても対応しているので、それらにも同じようなことが実現できる。</p>
+<p class="p9"><span class="Apple-tab-span">	</span>それ以外のAssetでは、Modifierノードを使うといい感じに編集できそう。</p>
+<p class="p10"><br></p>
+<p class="p10"><br></p>
+<p class="p11"><a href="https://github.com/sassembla/Advent2016_AssetBundleGraph/tree/#%E8%A4%87%E6%95%B0%E3%81%AE%E7%B4%A0%E6%9D%90%E3%81%8B%E3%82%89%E3%83%97%E3%83%AC%E3%83%95%E3%82%A1%E3%83%96%E3%82%92%E4%BD%9C%E3%82%8B">複数の素材からプレファブを作る</a></p>
+<p class="p11"><span class="Apple-tab-span">	</span>Prefab(プレファブ)を作成する、というのが、これが数がかさんでくると重労働だ。</p>
+<p class="p11"><span class="Apple-tab-span">	</span>たとえばPrefabの構成に変更があった時とか、手でやってると正直しんどい。ミスも出る。</p>
+<p class="p11"><span class="Apple-tab-span">	</span>じゃあスクリプトを書いて自動化する？　その自動化するコード毎回全部書くの？</p>
 <p class="p12"><br></p>
+<p class="p11"><span class="Apple-tab-span">	</span>という煽りに対して、AssetBundleGraphはわりといい感じの答えを用意してくれている。</p>
+<p class="p11"><span class="Apple-tab-span">	</span>PrefabBuilderノードを使うのだ。</p>
+<p class="p12"><br></p>
+<p class="p11"><span class="Apple-tab-span">	</span>まず、ユニティちゃんsの画像が入ったフォルダを、下記のように「キャラごとに」用意する。</p>
+<p class="p13"><span class="s2"><span class="Apple-tab-span">	</span></span><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202016-12-22%202.11.30.png" alt="スクリーンショット 2016-12-22 2.11.30.png"></p>
+<p class="p14"><span class="Apple-tab-span">	</span></p>
+<p class="p11"><span class="s1"><span class="Apple-tab-span">	</span></span>各フォルダの中には、各キャラの立ち絵が6枚ずつ入っている。</p>
+<p class="p11"><span class="Apple-tab-span">	</span>今回はこの各キャラ6枚の絵を、アニメーションとしてTexture2Dの配列に格納したPrefabを、各キャラごとに一つ作る、というのをやってみる。</p>
+<p class="p12"><span class="Apple-tab-span">	</span></p>
+<p class="p11"><span class="Apple-tab-span">	</span>prefabの要件はこんな感じ。</p>
+<p class="p11"><span class="Apple-tab-span">	</span>・prefabを3キャラ分、各キャラ一個作る</p>
+<p class="p11"><span class="Apple-tab-span">	</span>・prefabの内容は、GameObjectに特定のScriptがセットされている &amp; ScriptのTexture2D[] texturesには各キャラのTextureが6枚ずつセットされている。</p>
+<p class="p12"><span class="Apple-tab-span">	</span></p>
+<p class="p11"><span class="Apple-tab-span">	</span>さて、やっていこう。</p>
+<p class="p11"><span class="Apple-tab-span">	</span>とりあえず素材を用意した段階で、フォルダ名に注目してほしい。</p>
+<p class="p13"><span class="Apple-tab-span">	</span><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202016-12-22%202.11.30.png" alt="スクリーンショット 2016-12-22 2.11.30.png"></p>
+<p class="p11"><span class="s1"><span class="Apple-tab-span">	</span></span>フォルダ名は、<span class="s1">chara_</span>キャラ名<span class="s1"> </span>という感じで、ルールをもたせてある。</p>
+<p class="p11"><span class="s1"><span class="Apple-tab-span">	</span></span>このルールを利用して、prefabづくりを簡単にすることができる。</p>
+<p class="p12"><br></p>
+<p class="p11"><span class="Apple-tab-span">	</span>そしてprefabになるGameObjectにセットするScriptだが、これは自分で用意する。</p>
+<p class="p11"><span class="Apple-tab-span">	</span>サンプルでは Assets/MyCubeScript.cs というScriptを用意した。</p>
+<p class="p12"><br></p>
+<p class="p11"><b><span class="Apple-tab-span">	</span>MyCubeScript.cs</b></p>
+<p class="p11"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/Advent2016_AssetBundleGraph/blob/#%E8%A4%87%E6%95%B0%E3%81%AE%E7%B4%A0%E6%9D%90%E3%81%8B%E3%82%89%E3%83%97%E3%83%AC%E3%83%95%E3%82%A1%E3%83%96%E3%82%92%E4%BD%9C%E3%82%8B/Assets/MyCubeScript.cs">https://github.com/sassembla/Advent2016_AssetBundleGraph/blob/%23複数の素材からプレファブを作る/Assets/MyCubeScript.cs</a></p>
+<p class="p14"><span class="Apple-tab-span">	</span></p>
+<p class="p11"><span class="Apple-tab-span">	</span>内容は至って簡単、Texture2D[] textures というパラメータを、lengthが６だと指定して初期化してあるだけ。</p>
 <p class="p12"><span class="Apple-tab-span">	</span></p>
 <p class="p12"><br></p>
+<p class="p11"><span class="Apple-tab-span">	</span>では、これらを使ってprefabを作る工程に入ろう。</p>
 <p class="p12"><br></p>
-<p class="p11"><a href="https://github.com/sassembla/Advent2016_AssetBundleGraph/tree/#%E8%A4%87%E6%95%B0%E3%81%AE%E7%B4%A0%E6%9D%90%E3%81%8B%E3%82%89%E3%83%97%E3%83%AC%E3%83%95%E3%82%A1%E3%83%96%E3%82%92%E4%BD%9C%E3%82%8B">複数の素材からプレファブを作る</a></p>
+<p class="p11"><span class="Apple-tab-span">	</span>まずはLoaderノードを置き、ロードする素材のパスをセットする。</p>
+<p class="p13"><span class="s2"><span class="Apple-tab-span">	</span></span><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202016-12-22%202.11.36.png" alt="スクリーンショット 2016-12-22 2.11.36.png"></p>
+<p class="p11"><span class="s1"><span class="Apple-tab-span">	</span>Assets/Game/Images </span>フォルダ以下に上記の<span class="s1">3</span>キャラのフォルダが入っているので、指定。</p>
+<p class="p13"><span class="Apple-tab-span">	</span><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202016-12-22%202.11.42.png" alt="スクリーンショット 2016-12-22 2.11.42.png"></p>
+<p class="p12"><span class="Apple-tab-span">	</span></p>
+<p class="p11"><span class="Apple-tab-span">	</span>次に、Groupingノードを作成する。Loaderと適当につなごう。</p>
+<p class="p11"><span class="Apple-tab-span">	</span><span class="s1"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202016-12-22%202.12.04.png" alt="スクリーンショット 2016-12-22 2.12.04.png"></span></p>
+<p class="p11"><span class="Apple-tab-span">	</span>そしてGroupingノードを選択して、InspectorからGrouping Keywordを編集する。</p>
+<p class="p13"><span class="Apple-tab-span">	</span><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202016-12-22%202.19.59.png" alt="スクリーンショット 2016-12-22 2.19.59.png"></p>
+<p class="p11"><span class="s1"><span class="Apple-tab-span">	</span></span>ここでは、&lt;<span class="s1">chara_*/&gt; </span>という文字列を入れている。<span class="s1"><span class="Apple-tab-span">	</span></span></p>
+<p class="p14"><br></p>
+<p class="p11"><span class="s1"><span class="Apple-tab-span">	</span></span>こう書くと、「chara_なにか/」というパターンで、</p>
+<p class="p11"><span class="Apple-tab-span">	</span>Loaderから流れてきているAssetのパスをもとに、</p>
+<p class="p11"><span class="Apple-tab-span">	</span>素材を複数のグループに分割することができる。<span class="Apple-tab-span">	</span></p>
+<p class="p12"><span class="Apple-tab-span">	</span></p>
+<p class="p11"><span class="Apple-tab-span">	</span>ちょっと何いってるかわからないので、仮にBundleConfigノードを作って置いてつないでみよう。</p>
+<p class="p13"><span class="Apple-tab-span">	</span><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202016-12-22%202.20.09.png" alt="スクリーンショット 2016-12-22 2.20.09.png"></p>
+<p class="p14"><br></p>
+<p class="p11"><span class="s1"><span class="Apple-tab-span">	</span>18:3 </span>みたいな表記が、接続線の上に表示されたと思う。このボタンを押すと、接続線を流れるAssetsの内容が、<span class="s1">Inspector</span>に表示される。</p>
+<p class="p11"><span class="Apple-tab-span">	</span>お判りだろうか。18個のAssetsが、3つのグループに分割されているのが。</p>
+<p class="p13"><span class="Apple-tab-span">	</span><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202016-12-22%202.20.10.png" alt="スクリーンショット 2016-12-22 2.20.10.png"></p>
+<p class="p14"><br></p>
+<p class="p11"><span class="s1"><span class="Apple-tab-span">	</span></span>お判りだろうか。Group Key: のところに、kohaku, misaki, yuko とかキャラ名が入っているのが。</p>
+<p class="p11"><span class="Apple-tab-span">	</span>Groupingノードでは、あらかじめフォルダ名にルールをつけておくことで、それらをグループ名にしてAssetsをグループ化することができるのだ。</p>
+<p class="p14"><br></p>
+<p class="p11"><span class="s1"><span class="Apple-tab-span">	</span></span>いや～これ思いついた時は俺すげーって思ったよ。</p>
+<p class="p14"><br></p>
+<p class="p11"><span class="s1"><span class="Apple-tab-span">	</span></span>で、</p>
+<p class="p14"><br></p>
+<p class="p11"><span class="s1"><span class="Apple-tab-span">	</span></span>やりたいことは「これらのグループ化されたAssetsからprefabを作る」ということなので、</p>
+<p class="p11"><span class="Apple-tab-span">	</span>BundleConfigノードは一回消そう。</p>
 <p class="p12"><br></p>
+<p class="p11"><span class="Apple-tab-span">	</span>PrefabBuilderノードを作成する。と、エラーが出る。</p>
+<p class="p13"><span class="Apple-tab-span">	</span><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202016-12-22%202.20.54.png" alt="スクリーンショット 2016-12-22 2.20.54.png"></p>
+<p class="p14"><br></p>
+<p class="p11"><span class="s1"><span class="Apple-tab-span">	</span></span>なになに？<span class="s1"> </span>って選択してInspectorを見に行くと、</p>
+<p class="p11"><span class="Apple-tab-span">	</span>「PrefabBuilderにはPrefabBuilder scriptが必要だよ」と出る。</p>
+<p class="p13"><span class="Apple-tab-span">	</span><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202016-12-22%202.21.39.png" alt="スクリーンショット 2016-12-22 2.21.39.png"></p>
+<p class="p14"><br></p>
+<p class="p11"><span class="s1"><span class="Apple-tab-span">	</span></span>すいませんそうなんです。<span class="s1">script</span>要るんです。</p>
+<p class="p11"><span class="s1"><span class="Apple-tab-span">	</span></span>でもこれも作成できるんだよこのツール。</p>
+<p class="p14"><span class="Apple-tab-span">	</span></p>
+<p class="p13"><span class="Apple-tab-span">	</span><span class="s2">ツールバー</span> &gt; Window &gt;AssetBundleGraph &gt; Create Node Script &gt; PrefabBuilder Script <span class="s2">を選択。</span></p>
+<p class="p13"><span class="Apple-tab-span">	</span><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202016-12-22%202.22.21.png" alt="スクリーンショット 2016-12-22 2.22.21.png"></p>
+<p class="p14"><span class="Apple-tab-span">	</span></p>
+<p class="p11"><span class="s1"><span class="Apple-tab-span">	</span></span>選択すると、scriptが作成されて、コンパイルが走る。</p>
+<p class="p11"><span class="Apple-tab-span">	</span>で、コンパイルが終わったら、PrefabBuilderを選択して、</p>
+<p class="p11"><span class="Apple-tab-span">	</span>PrefabBuilderというパラメータのドロップダウンをクリックし、MyBuilderを選ぼう。</p>
+<p class="p13"><span class="Apple-tab-span">	</span><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202016-12-23%203.54.49.png" alt="スクリーンショット 2016-12-23 3.54.49.png"></p>
+<p class="p14"><br></p>
+<p class="p11"><span class="s1"><span class="Apple-tab-span">	</span></span>すると、PrefabBuilderノードにMyBuilderというコードがセットされ、</p>
+<p class="p11"><span class="Apple-tab-span">	</span>エラーが消える。</p>
 <p class="p12"><br></p>
+<p class="p11"><span class="Apple-tab-span">	</span>以降、PrefabBuilderノードが実行されると、MyBuilderというコードが自動的に実行されるようになる。</p>
+<p class="p13"><span class="Apple-tab-span">	</span><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202016-12-22%202.22.22.png" alt="スクリーンショット 2016-12-22 2.22.22.png"></p>
+<p class="p14"><br></p>
+<p class="p11"><span class="s1"><span class="Apple-tab-span">	</span>MyBuilder</span>のコードは、作成直後は雛形のような感じになっている。</p>
+<p class="p11"><span class="Apple-tab-span">	</span>コードは次のパスにある。</p>
+<p class="p11"><span class="Apple-tab-span">	</span>Assets/AssetBundlerGraph/Generated/Editor/MyPrefabBuilder.cs</p>
+<p class="p14"><br></p>
+<p class="p11"><span class="s1"><span class="Apple-tab-span">	</span></span>内容はこんな感じ。解説は日本語でお送りします</p>
+<p class="p11"><span class="Apple-tab-span">	</span>MyPrefabBuilder.cs</p>
+<p class="p13"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/Advent2016_AssetBundleGraph/blob/#%E8%A4%87%E6%95%B0%E3%81%AE%E7%B4%A0%E6%9D%90%E3%81%8B%E3%82%89%E3%83%97%E3%83%AC%E3%83%95%E3%82%A1%E3%83%96%E3%82%92%E4%BD%9C%E3%82%8B/Assets/AssetBundleGraph/Generated/Editor/MyPrefabBuilder.cs">https://github.com/sassembla/Advent2016_AssetBundleGraph/blob/%23<span class="s2">複数の素材からプレファブを作る</span>/Assets/AssetBundleGraph/Generated/Editor/MyPrefabBuilder.cs</a></p>
+<p class="p14"><br></p>
+<p class="p11"><span class="s1"><span class="Apple-tab-span">	</span></span>やっていることは、</p>
+<p class="p11"><span class="Apple-tab-span">	</span>・CanCreatePrefab関数で、ABG実行前のRefresh時に実行される関数の結果として、入力されてくるデータのチェックや、チェックがOKだったらprefab名を返す処理を書く。このprefab名はABG実行時に使用される(その名前のprefabがダイレクトに作られる)。</p>
+<p class="p11"><span class="Apple-tab-span">	</span>・CreatePrefab関数で、ABG実行時に実行されてほしい処理を書く。</p>
+<p class="p14"><br></p>
+<p class="p11"><span class="s1"><span class="Apple-tab-span">	</span></span>まずはCanCreatePrefab関数の内容を見る。</p>
+<p class="p17"><span class="s3"><span class="Apple-tab-span">	</span>/**</span></p>
+<p class="p17"><span class="s3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span> * Test if prefab can be created with incoming assets.</span></p>
+<p class="p17"><span class="s3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span> * @result Name of prefab file if prefab can be created. null if not.</span></p>
+<p class="p17"><span class="s3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span> */</span></p>
+<p class="p17"><span class="s3"><span class="Apple-tab-span">	</span>public string CanCreatePrefab (string groupKey, List&lt;UnityEngine.Object&gt; objects) {</span></p>
+<p class="p18"><span class="s3"></span><br></p>
+<p class="p17"><span class="s3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>/*</span></p>
+<p class="p19"><span class="s4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span><span class="s3">この関数では、セッティングの途中で「どんなオブジェクトが</span><span class="s4">AssetBundleGraph</span><span class="s3">から流れてくるか」というのをチェックしたりすることができる。</span></p>
+<p class="p19"><span class="s4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span><span class="s3">ここでは各グループで</span><span class="s4">6</span><span class="s3">つずつの</span><span class="s4">Texture</span><span class="s3">が来るはずなので、</span></p>
+<p class="p18"><span class="s3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span></p>
+<p class="p19"><span class="s4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>6</span><span class="s3">枚テクスチャがあったら</span><span class="s4">Prefab</span><span class="s3">ができる</span><span class="s4"> </span><span class="s3">という予定で値を返してみる。</span></p>
+<p class="p17"><span class="s3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>*/</span></p>
+<p class="p17"><span class="s3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>if (objects.Count != 6) {</span></p>
+<p class="p17"><span class="s3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>// </span><span class="s5">足りない！</span></p>
+<p class="p17"><span class="s3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Debug.LogError("texture shortage. groupKey:" + groupKey);</span></p>
+<p class="p17"><span class="s3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>return null;</span></p>
+<p class="p17"><span class="s3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}</span></p>
+<p class="p18"><span class="s3"></span><br></p>
+<p class="p17"><span class="s3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>foreach (var obj in objects) {</span></p>
+<p class="p17"><span class="s3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>if (obj.GetType() != typeof(Texture2D)) {</span></p>
+<p class="p19"><span class="s4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>// </span><span class="s3">テクスチャ</span><span class="s4">2D</span><span class="s3">じゃない！！</span></p>
+<p class="p17"><span class="s3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Debug.LogError("obj is not Texture2D. obj:" + obj + " in groupKey:" + groupKey);</span></p>
+<p class="p17"><span class="s3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>return null;</span></p>
+<p class="p17"><span class="s3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}</span></p>
+<p class="p17"><span class="s3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}</span></p>
+<p class="p18"><span class="s3"></span><br></p>
+<p class="p19"><span class="s4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>// </span><span class="s3">入力されてるアセット的に</span><span class="s4">OK</span><span class="s3">だったら、最終的に作るつもりの</span><span class="s4">Prefab</span><span class="s3">の名前を返す。</span></p>
+<p class="p19"><span class="s4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>// </span><span class="s3">ここでは、</span><span class="s4">prefab_kohaku </span><span class="s3">とかそういうのを想定している。</span></p>
+<p class="p17"><span class="s3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>return "prefab_" + groupKey;</span></p>
+<p class="p17"><span class="s3"><span class="Apple-tab-span">	</span>}</span></p>
+<p class="p14"><br></p>
+<p class="p11"><span class="Apple-tab-span">	</span>この関数はちょっと難解で、ABGが自動的に作ったテンプレっぽい内容を書き換えて、次のようなことをしている。</p>
+<p class="p11"><span class="Apple-tab-span">	</span>・objectsがテクスチャ6枚のセットであること</p>
+<p class="p11"><span class="Apple-tab-span">	</span>・もしそうだったら、”prefab_” + groupKey という文字列を返すこと</p>
+<p class="p12"><span class="Apple-tab-span">	</span></p>
+<p class="p11"><span class="s1"><span class="Apple-tab-span">	</span></span>最後に返しているstringは、「無事にprefabが生成されたらこの名前にする」というパラメータになっている。</p>
+<p class="p11"><span class="Apple-tab-span">	</span>で、groupKeyという引数には、今回の構成の場合、さきほどGroupingで分けた、「kohaku」「misaki」「yuko」という文字列が入ってくる。</p>
+<p class="p12"><span class="Apple-tab-span">	</span></p>
+<p class="p11"><span class="Apple-tab-span">	</span>Groupingした素材のグループ観で切り分けられたリソースに対して、対応するようにこの関数が呼ばれるのだ。</p>
+<p class="p11"><span class="Apple-tab-span">	</span>これによって、</p>
+<p class="p11"><span class="Apple-tab-span">	</span>1.グループを作る</p>
+<p class="p11"><span class="Apple-tab-span">	</span>2.グループに対して処理をする(特にこの場合prefabを作る)</p>
+<p class="p12"><br></p>
+<p class="p11"><span class="Apple-tab-span">	</span>ということが大変やりやすくなっている。</p>
+<p class="p14"><br></p>
+<p class="p14"><br></p>
+<p class="p11"><span class="s1"><span class="Apple-tab-span">	</span></span>で、次にCreatePrefab関数の中身を見よう。</p>
+<p class="p12"><span class="Apple-tab-span">	</span></p>
+<p class="p17"><span class="s3"><span class="Apple-tab-span">	</span>/**</span></p>
+<p class="p17"><span class="s3"><span class="Apple-tab-span">	</span> * Create Prefab.</span></p>
+<p class="p17"><span class="s3"><span class="Apple-tab-span">	</span> */<span class="Apple-converted-space"> </span></span></p>
+<p class="p17"><span class="s3"><span class="Apple-tab-span">	</span>public UnityEngine.GameObject CreatePrefab (string groupKey, List&lt;UnityEngine.Object&gt; objects) {</span></p>
+<p class="p18"><span class="s3"></span><br></p>
+<p class="p17"><span class="s3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>// objects</span><span class="s5">の中身は</span><span class="s3">Texture2D</span><span class="s5">なので、</span><span class="s3">UnityEngine.Object</span><span class="s5">から</span><span class="s3">Texture2D</span><span class="s5">に変換する。</span></p>
+<p class="p17"><span class="s3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>var textures = new Texture2D[6];</span></p>
+<p class="p17"><span class="s3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>for (var i = 0; i &lt; objects.Count; i++) {</span></p>
+<p class="p17"><span class="s3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>var obj = objects[i];</span></p>
+<p class="p17"><span class="s3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>textures[i] = obj as Texture2D;</span></p>
+<p class="p17"><span class="s3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}</span></p>
+<p class="p18"><span class="s3"></span><br></p>
+<p class="p17"><span class="s3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>// GameObject</span><span class="s5">を作成する。ここでは</span><span class="s3">Cube</span><span class="s5">が好きなので</span><span class="s3">Cube</span><span class="s5">を作る。</span></p>
+<p class="p17"><span class="s3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>GameObject go = GameObject.CreatePrimitive(PrimitiveType.Cube);</span></p>
+<p class="p18"><span class="s3"></span><br></p>
+<p class="p19"><span class="s4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>// </span><span class="s3">今回</span><span class="s4">Texture2D</span><span class="s3">を６枚セットする対象のスクリプトを、</span><span class="s4">go</span><span class="s3">にくっつける。</span></p>
+<p class="p17"><span class="s3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>MyCubeScript myCubeScr = go.AddComponent&lt;MyCubeScript&gt;();</span></p>
+<p class="p18"><span class="s3"></span><br></p>
+<p class="p17"><span class="s3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>// myCubeScr</span><span class="s5">の</span><span class="s3">textures(Texture2D</span><span class="s5">の</span><span class="s3">Array)</span><span class="s5">に、ダイレクトにセット。</span></p>
+<p class="p17"><span class="s3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>myCubeScr.textures = textures;</span></p>
+<p class="p18"><span class="s3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span></p>
+<p class="p17"><span class="s3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>/*</span></p>
+<p class="p17"><span class="s3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span><span class="s5">最終的に</span><span class="s3">GameObject</span><span class="s5">を返すと、その</span><span class="s3">GameObject</span><span class="s5">が自動的に</span><span class="s3">Prefab</span><span class="s5">になる！</span><span class="s3"><span class="Apple-converted-space"> </span></span></p>
+<p class="p19"><span class="s4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span><span class="s3">わあ</span><span class="s4">Prefab</span><span class="s3">できちゃったよ。</span></p>
+<p class="p17"><span class="s3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span><span class="s5">名前は</span><span class="s3">CanCreatePrefab</span><span class="s5">関数で返したものが使われる。</span></p>
+<p class="p17"><span class="s3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>*/</span></p>
+<p class="p17"><span class="s3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>return go;</span></p>
+<p class="p18"><span class="s3"></span><br></p>
+<p class="p19"><span class="s4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>// </span><span class="s3">そしてなんと、この</span><span class="s4">GameObject</span><span class="s3">はこのあと自動的に消去される。</span></p>
+<p class="p17"><span class="s3"><span class="Apple-tab-span">	</span>}</span></p>
+<p class="p12"><br></p>
+<p class="p11"><span class="s1"><span class="Apple-tab-span">	</span></span>やっていることは、ものすごくダイレクトな感じ。</p>
+<p class="p11"><span class="s1"><span class="Apple-tab-span">	</span></span>・ローカル変数 Texture2D[] texturesを作り、CreatePrefab関数の引数 objects として流れてくるAssets(全部Texture2Dのインスタンス)をセットする</p>
+<p class="p11"><span class="s1"><span class="Apple-tab-span">	</span></span>・GameObjectを作ってMyCubeScriptをAddして、</p>
+<p class="p11"><span class="s1"><span class="Apple-tab-span">	</span></span>・myCubeScrのtexturesというインスタンスに、冒頭で作ったtexturesをセット。</p>
+<p class="p12"><br></p>
+<p class="p11"><span class="Apple-tab-span">	</span>これで、あとはGameObject goを、この関数の返り値としてreturnするだけ。</p>
+<p class="p11"><span class="Apple-tab-span">	</span>するだけで、GameObject goは勝手に、<b>キャラのテクスチャ6枚を含んだtextures配列 を持ったMyCubeScript がセットされた prefab</b>になる。</p>
+<p class="p14"><br></p>
+<p class="p11"><span class="s1"><span class="Apple-tab-span">	</span></span>この<span class="s1">prefab</span>、特に<span class="s1">Export</span>する先を<span class="s1">Exporter</span>ノードなどで指定しなければ、<span class="s1">ABG</span>のキャッシュ内に出力される。</p>
+<p class="p11"><span class="s1"><span class="Apple-tab-span">	</span></span>具体的にいうと次の図のようなところに吐かれる。</p>
+<p class="p13"><span class="Apple-tab-span">	</span><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202016-12-22%203.04.03.png" alt="スクリーンショット 2016-12-22 3.04.03.png"></p>
+<p class="p14"><span class="Apple-tab-span">	</span></p>
+<p class="p11"><span class="s1"><span class="Apple-tab-span">	</span></span>で、内容を確認してみると、、</p>
+<p class="p13"><span class="Apple-tab-span">	</span><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202016-12-22%203.04.12.png" alt="スクリーンショット 2016-12-22 3.04.12.png"></p>
+<p class="p11"><span class="s1"><span class="Apple-tab-span">	</span></span>ちゃんとテクスチャ全部セットされてる。やったぜ！</p>
+<p class="p14"><br></p>
+<p class="p11"><span class="s1"><span class="Apple-tab-span">	</span></span>どうだろうか。</p>
+<p class="p11"><span class="s1"><span class="Apple-tab-span">	</span></span>いままで手で書いてたコード、毎回構築していたルール、みたいなのと比べて、楽じゃねーかな？</p>
+<p class="p12"><span class="Apple-tab-span">	</span></p>
+<p class="p11"><span class="Apple-tab-span">	</span>複数のPrefabを作るにはどうすればいいのか？とかは、多分複数のPrefabBuilderを用意すればいいんじゃないかな～と思う。</p>
+<p class="p14"><br></p>
+<p class="p14"><br></p>
 <p class="p11">プラットフォーム指定してコマンドラインから起動</p>
 <p class="p12"><br></p>
 <p class="p12"><br></p>
