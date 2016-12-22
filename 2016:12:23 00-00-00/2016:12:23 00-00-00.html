@@ -7,131 +7,175 @@
   <meta name="Generator" content="Cocoa HTML Writer">
   <meta name="CocoaVersion" content="1504.6">
   <style type="text/css">
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px Helvetica}
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Sans'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; min-height: 18.0px}
     p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'}
-    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; min-height: 18.0px}
-    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
-    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 17.0px 'Hiragino Sans'}
-    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 17.0px 'Hiragino Sans'; min-height: 26.0px}
-    p.p8 {margin: 0.0px 0.0px 0.0px 0.0px; font: 21.0px 'Hiragino Sans'}
-    span.s1 {font: 22.0px 'Hiragino Sans'}
-    span.s2 {font: 12.0px Helvetica}
-    span.s3 {font: 12.0px 'Hiragino Sans'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 17.0px 'Hiragino Sans'}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 17.0px 'Hiragino Sans'; min-height: 26.0px}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 21.0px 'Hiragino Sans'}
+    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; background-color: #ebebeb}
+    p.p8 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; background-color: #ebebeb; min-height: 18.0px}
+    p.p9 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; background-color: #ffffff}
+    p.p10 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; background-color: #ffffff; min-height: 18.0px}
+    p.p11 {margin: 0.0px 0.0px 0.0px 0.0px; line-height: 15.0px; font: 12.0px 'Hiragino Sans'; background-color: #ffffff}
+    p.p12 {margin: 0.0px 0.0px 0.0px 0.0px; line-height: 15.0px; font: 12.0px 'Hiragino Sans'; background-color: #ffffff; min-height: 18.0px}
     span.Apple-tab-span {white-space:pre}
   </style>
 </head>
 <body>
-<p class="p1"><b>AssetBundleGraph</b><span class="s1"><b>作ってみた(準備中)</b></span></p>
+<p class="p1"><b>AssetBundleGraph作ってみた(準備中)</b></p>
 <p class="p2"><br></p>
 <p class="p3"><b>概要</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>本稿はUnity アドベントカレンダー (2) 12/23日の記事になる。</p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://qiita.com/advent-calendar/2016/unity2">http://qiita.com/advent-calendar/2016/unity2</a></p>
-<p class="p4"><br></p>
+<p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>昨日は(この項目はまだ確定されていない)</p>
 <p class="p3"><span class="Apple-tab-span">	</span>明日は(この項目はまだ確定されていない)</p>
-<p class="p4"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>AssetBundleとかUnityのAssetの設定とかをとにかく力強く楽に扱えるツール「AssetBundleGraph」の話をする。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>あと実は、このページはUnibook 総集編からも参照されている。</p>
+<p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>今回のお題目</b></p>
-<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span>AssetBundleGraph</span>の使用例などを公開できればとおもう。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>AssetBundleGraphの使用例などを公開できればとおもう。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
-<p class="p5"><b>AssetBundleGraph</b></p>
-<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>いろいろあって、UnityのAssetBundle(ほか)をフロー形式で作り出すツール制作のお手伝いをしていた。</p>
-<p class="p4"><br></p>
+<p class="p3"><b>AssetBundleGraph</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>いろいろあって、UnityのAssetBundle(ほか)をフロー形式で作り出すツール制作のお手伝いをしていた。</p>
+<p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>これ。</p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><b>新しいアセットバンドルツールのプロトタイプ</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://blogs.unity3d.com/jp/2016/10/25/new-assetbundle-graph-tool-prototype/">https://blogs.unity3d.com/jp/2016/10/25/new-assetbundle-graph-tool-prototype/</a></p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
-<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>で、かかわった動機とか経緯とかは過去の記事にあるので興味のある人はどうぞ的な感じ。うかつに人にいちゃもんをつけに行くと色々なことが起こるのがよくわかった。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、かかわった動機とか経緯とかは過去の記事にあるので興味のある人はどうぞ。うかつに人にいちゃもんをつけに行くと色々なことが起こるのがよくわかった。</p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://sassembla.github.io/Public/2015:04:13%2019-06-37/2015:04:13%2019-06-37.html">http://sassembla.github.io/Public/2015:04:13%2019-06-37/2015:04:13%2019-06-37.html</a></p>
-<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>-&gt; 自作のAssetStoreにあるやつをプレゼンする -&gt; じゃあお前やれよ(丸みを帯びた表現) -&gt; こうなった</p>
-<p class="p4"><br></p>
-<p class="p4"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>自分が怠惰なせいでいろいろサンプル構成とかをでっち上げるのに時間がかかってしまって、まあ、はい。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>それをやるのが今だ！！！　と思ったので書かせて。</p>
-<p class="p4"><br></p>
-<p class="p4"><br></p>
-<p class="p6"><b>！！注意！！</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>-&gt; 自作のAssetStoreにあるやつをプレゼンする -&gt; じゃあお前やれよ(丸みを帯びた表現) -&gt; ニュースリリースと。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>すでに自分の手は離れており、BitBucket上でゴリゴリと開発/改良/改善が進められている。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、今回はそんなAssetBundleGraphのサンプルを何パターンか作ってみよう、みたいな話。<span class="Apple-tab-span">	</span>だいじょうぶ、ファミ通でもなんでもない攻略本だよ。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p4"><b>！！注意！！</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>大事なことを言い忘れてた。</p>
-<p class="p7"><br></p>
-<p class="p6"><span class="Apple-tab-span">	</span>AssetBundleGraphは</p>
-<p class="p6"><span class="Apple-tab-span">	</span>AssetBundleを作るためだけに使えるツールでは</p>
-<p class="p8"><b><span class="Apple-tab-span">	</span>ない！！！</b></p>
-<p class="p4"><br></p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>AssetBundleGraphは</p>
+<p class="p4"><span class="Apple-tab-span">	</span>AssetBundleを作るためだけに使えるツールでは</p>
+<p class="p6"><b><span class="Apple-tab-span">	</span>ない！！！</b></p>
+<p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>このツールは、いままで手でやっていたUnityのAsset一個ずつに対しての操作を、ルールベースでとにかく大雑把かつ人間より正確にサクッと実行する、というツールなのだ。</p>
-<p class="p4"><br></p>
+<p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>iOS用に全ての画像の設定を変えたりとか、英語版だからこのグラフィック使おうねとか、これらのモデルの設定を全部ああしますとかそういうのを</p>
-<p class="p6"><span class="Apple-tab-span">	</span>自動化できる</p>
+<p class="p4"><span class="Apple-tab-span">	</span>適当にまとめて実行できる</p>
 <p class="p3"><span class="Apple-tab-span">	</span>のだ。</p>
-<p class="p4"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>複数のAssetからプレファブ作ったりするのも</p>
-<p class="p6"><span class="Apple-tab-span">	</span>自動化できる<span class="s3"><span class="Apple-tab-span">	</span></span></p>
-<p class="p3"><span class="Apple-tab-span">	</span>のだ。</p>
-<p class="p4"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>複数のAssetから複雑なプレファブ作ったりするのも</p>
+<p class="p4"><span class="Apple-tab-span">	</span>適当にまとめて実行できる</p>
+<p class="p3"><span class="Apple-tab-span">	</span>のだ。プレファブまわりはさすがにちょっとコード要るんだけど。</p>
+<p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>たまたまその動作の一つとして</p>
 <p class="p3"><span class="Apple-tab-span">	</span>AssetBundleを作れる</p>
 <p class="p3"><span class="Apple-tab-span">	</span>というのがあるだけなのだ。</p>
-<p class="p4"><br></p>
-<p class="p4"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>では例の紹介に行ってみよう。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
 <p class="p3"><b>AssetBundleGraph使用例6本ノック</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>取り上げさせてもらったネタはこちらのシートにあるやつの 0 ~ 5。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>取り上げさせてもらったネタはこちらのシートにあるやつのいくつか。</p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://docs.google.com/spreadsheets/d/1jHv8mFy2HhnnXCRr0tXHRLzt0ve4xGJebas8Q9R31Mo/edit?usp=sharing">https://docs.google.com/spreadsheets/d/1jHv8mFy2HhnnXCRr0tXHRLzt0ve4xGJebas8Q9R31Mo/edit?usp=sharing</a></p>
-<p class="p4"><br></p>
-<p class="p4"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>リポジトリはこちら。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>サンプルモリモリのリポジトリはこちら。</p>
 <p class="p3"><span class="Apple-tab-span">	</span><b>Advent2016_AssetBundleGraph</b></p>
 <p class="p3"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></b><a href="https://github.com/sassembla/Advent2016_AssetBundleGraph">https://github.com/sassembla/Advent2016_AssetBundleGraph</a></p>
-<p class="p4"><b></b><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>各内容は下の方に書いて行く。長い。</p>
-<p class="p4"><b></b><br></p>
-<p class="p4"><b></b><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>サンプルはそれぞれブランチに分かれている。</b></p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>各内容の解説は下の方に書いて行く。長い。</p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><b></b><br></p>
 <p class="p3"><b>リポジトリにあるようなAsset生成が捗る環境を、手元に用意するには</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>readmeにも書くつもりだけれど、短いのでこちらにも書いておく</p>
-<p class="p4"><br></p>
+<p class="p2"><br></p>
 <p class="p3"><b><span class="Apple-tab-span">	</span>1.適当なリソースの入ったプロジェクトを用意する</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>もちろん、「あっAssetBundleGraph使ってAssetをゴインゴインしよう」っていう対象のAssetがいっぱいあるリポジトリとかでいいと思う。</p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>もしくは、適当に空のプロジェクトを作って、適当に画像とかモデルとかをAssetsフォルダ以下に入れたものを用意するのでもいい。</p>
-<p class="p4"><br></p>
+<p class="p2"><br></p>
 <p class="p3"><b><span class="Apple-tab-span">	</span>2.bitbucketのライブラリからAssetBundleGraphをDLする</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://bitbucket.org/Unity-Technologies/assetbundlegraphtool/downloads">https://bitbucket.org/Unity-Technologies/assetbundlegraphtool/downloads</a></p>
-<p class="p4"><b></b><br></p>
+<p class="p2"><b></b><br></p>
 <p class="p3"><b><span class="Apple-tab-span">	</span>3.ダウンロードしてきたAssets/AssetBundleGraph フォルダを、1で用意したプロジェクトのAssetsフォルダに放り込む</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>準備は以上！</p>
-<p class="p4"><br></p>
+<p class="p2"><br></p>
 <p class="p3"><b><span class="Apple-tab-span">	</span>4.使う</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>メニュー &gt; Window &gt; AssetBundleGraph &gt; Open Graph Editor で、グラフのウィンドウが表示されるので、右クリックでノードを作ったりいろいろする。</p>
-<p class="p4"><br></p>
-<p class="p4"><br></p>
-<p class="p3"><b>やりたいこと募集中</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>なにぶんグラフィカルになんとかするのに特化してるツールなんで、とっつきやすいが深堀りするとなるとまあ、</p>
-<p class="p3"><span class="Apple-tab-span">	</span>本家のAssetBundle作りにならう感じで、まあ、例がない。</p>
-<p class="p4"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span><b>みなさんがやりたいことはたくさんあると思うんだけど、そのための例がない</b>、という状況はめっちゃ肌感的に共感できるつもり(傲慢</p>
-<p class="p4"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>というか最新版に対して自分が「わからねえぞ、、なんだこれはどうやればいいんだ、、」って思ったことがあるので、手伝いたい。</p>
-<p class="p4"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>なので、</p>
-<p class="p4"><br></p>
-<p class="p3"><b><span class="Apple-tab-span">	</span>「こんなリソースをAssetbundleGraphで作るにはどうすればいいのか？」 </b>みたいなリクエストを募ろうと思う。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>まあ、気長に。</p>
-<p class="p4"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>宛先はこちら。</p>
-<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><b>AssetBundle(ほか)制作やっていき隊</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://docs.google.com/spreadsheets/d/1jHv8mFy2HhnnXCRr0tXHRLzt0ve4xGJebas8Q9R31Mo/edit?usp=sharing">https://docs.google.com/spreadsheets/d/1jHv8mFy2HhnnXCRr0tXHRLzt0ve4xGJebas8Q9R31Mo/edit?usp=sharing</a></p>
-<p class="p4"><br></p>
-<p class="p4"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>ちなみに、</p>
-<p class="p3"><span class="Apple-tab-span">	</span><b>ラジオのお葉書</b>みたいな感じで、稀に読み上げて参考にすることはあっても、絶対に応答があるわけではない。ごめん。</p>
-<p class="p4"><br></p>
-<p class="p4"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>べつにAssetBundleGraphを使って解決しないかもしれないけど、別の手段はありそうな感じで。</p>
-<p class="p4"><br></p>
-<p class="p4"><br></p>
-<p class="p3">ここから日本語でどうぞみたいなのが広がる。</p>
-<p class="p4"><br></p>
-<p class="p4"><br></p>
-<p class="p4"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>やりたいこと募集中(だった。)</b></p>
+<p class="p7"><span class="Apple-tab-span">	</span>なにぶんグラフィカルになんとかするのに特化してるツールなんで、とっつきやすいが深堀りするとなるとまあ、</p>
+<p class="p7"><span class="Apple-tab-span">	</span>本家のAssetBundle作りにならう感じで、まあ、例がない。</p>
+<p class="p8"><br></p>
+<p class="p7"><span class="Apple-tab-span">	</span><b>みなさんがやりたいことはたくさんあると思うんだけど、そのための例がない</b>、という状況はめっちゃ肌感的に共感できるつもり(傲慢</p>
+<p class="p8"><br></p>
+<p class="p7"><span class="Apple-tab-span">	</span>というか自分が「わからねえぞ、、なんだこれはどうやればいいんだ、、」って思ったことがあるのもあって、少しでも人の理解を手伝いたい。</p>
+<p class="p7"><span class="Apple-tab-span">	</span>今回は最新版を使うのだけれど、自分が関わっていた時(だいたい今年の5月とか6月)より遥かにパワーアップしていた。恐ろしいツール。</p>
+<p class="p8"><br></p>
+<p class="p7"><span class="Apple-tab-span">	</span>なので、こう、</p>
+<p class="p8"><br></p>
+<p class="p7"><b><span class="Apple-tab-span">	</span>「こんなリソースをAssetbundleGraphで作るにはどうすればいいのか？」 </b>みたいなリクエストを募ろうと思う。</p>
+<p class="p7"><span class="Apple-tab-span">	</span>まあ、気長に。</p>
+<p class="p8"><br></p>
+<p class="p7"><span class="Apple-tab-span">	</span>宛先はこちら。</p>
+<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><b>AssetBundle(ほか)制作やっていき隊</b></p>
+<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://docs.google.com/spreadsheets/d/1jHv8mFy2HhnnXCRr0tXHRLzt0ve4xGJebas8Q9R31Mo/edit?usp=sharing">https://docs.google.com/spreadsheets/d/1jHv8mFy2HhnnXCRr0tXHRLzt0ve4xGJebas8Q9R31Mo/edit?usp=sharing</a></p>
+<p class="p8"><br></p>
+<p class="p8"><br></p>
+<p class="p7"><span class="Apple-tab-span">	</span>ちなみに、</p>
+<p class="p7"><span class="Apple-tab-span">	</span><b>ラジオのお葉書</b>みたいな感じで、稀に読み上げて参考にすることはあっても、絶対に応答があるわけではない。ごめん。</p>
+<p class="p8"><br></p>
+<p class="p8"><br></p>
+<p class="p7"><span class="Apple-tab-span">	</span>べつにAssetBundleGraphを使って解決しないかもしれないけど、別の手段はありそうな感じで。</p>
+<p class="p9"><span class="Apple-tab-span">	</span>みたいなことが書いてあったんですよ。アドベントカレンダー当日までは。</p>
+<p class="p10"><br></p>
+<p class="p9"><span class="Apple-tab-span">	</span>さてやっとここから、<b>公募で適当に集まった例を実際にAssetBundleGraphでなんとかしてみたもの</b>の説明になる。</p>
+<p class="p9"><span class="Apple-tab-span">	</span>各お題は、同名のブランチがリポジトリ(<a href="https://github.com/sassembla/Advent2016_AssetBundleGraph">https://github.com/sassembla/Advent2016_AssetBundleGraph</a>)にあるので、それをDLしながら眺めてもらえるとわかりやすいと思う。</p>
+<p class="p10"><br></p>
+<p class="p10"><br></p>
+<p class="p11"><a href="https://github.com/sassembla/Advent2016_AssetBundleGraph/tree/#%E8%A4%87%E6%95%B0%E3%81%AE%E7%B4%A0%E6%9D%90%E3%81%AE%E3%82%BB%E3%83%83%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0%E3%82%92%E4%B8%80%E6%8B%AC%E5%A4%89%E6%9B%B4%E3%81%99%E3%82%8B"><b>複数の素材のセッティングを一括変更する</b></a></p>
+<p class="p11"><span class="Apple-tab-span">	</span>「この種類の画像はGUIに使うので、まるっと全部UI用の設定がしたい」、とかの要望があると思う。</p>
+<p class="p11"><span class="Apple-tab-span">	</span>あるいはもっと複雑な、「TextureのタイプをAdvancedにして、wrapモードをこれに変えて、そんでループを、、」とかをいちいち全部手でやると発狂しかけると思う。</p>
+<p class="p11"><span class="Apple-tab-span">	</span>そしてさらに、素材が入っているフォルダを分けたりするのが人情。一括での設定変換をこれでもかといわんばかりに難しくしてくれる。</p>
+<p class="p12"><br></p>
+<p class="p11"><span class="Apple-tab-span">	</span>そんな時、いちいちGUIから設定を変えることなく、一括で大量のファイルの設定を変更できる機能のデモが、このブランチ。</p>
+<p class="p12"><br></p>
+<p class="p11"><span class="Apple-tab-span">	</span>まず、グラフを右クリックして、Loaderノードを置く。</p>
+<p class="p11"><span class="Apple-tab-span">	</span><img src="0.png" alt="0.png"></p>
+<p class="p12"><span class="Apple-tab-span">	</span></p>
+<p class="p11"><span class="Apple-tab-span">	</span>クリックすると、Inspector</p>
+<p class="p11"><span class="Apple-tab-span">	</span><img src="1.png" alt="1.png"></p>
+<p class="p12"><br></p>
+<p class="p12"><br></p>
+<p class="p12"><span class="Apple-tab-span">	</span></p>
+<p class="p12"><br></p>
+<p class="p12"><br></p>
+<p class="p11"><a href="https://github.com/sassembla/Advent2016_AssetBundleGraph/tree/#%E8%A4%87%E6%95%B0%E3%81%AE%E7%B4%A0%E6%9D%90%E3%81%8B%E3%82%89%E3%83%97%E3%83%AC%E3%83%95%E3%82%A1%E3%83%96%E3%82%92%E4%BD%9C%E3%82%8B">複数の素材からプレファブを作る</a></p>
+<p class="p12"><br></p>
+<p class="p12"><br></p>
+<p class="p11">プラットフォーム指定してコマンドラインから起動</p>
+<p class="p12"><br></p>
+<p class="p12"><br></p>
+<p class="p11">完了後に独自の処理を行う</p>
+<p class="p12"><br></p>
+<p class="p12"><br></p>
+<p class="p11">variantsでABの中身を指定する</p>
+<p class="p12"><br></p>
+<p class="p12"><br></p>
+<p class="p11">プラットフォームごとに異なる素材、異なるimportSettingsを指定する</p>
+<p class="p10"><br></p>
+<p class="p10"><br></p>
 </body>
 </html>
