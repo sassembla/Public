@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1504.76">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #ebebeb}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>よく見たらUnityのIAPにMiniJsonが入ってた話</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>コード見たらこんな感じだった。</p>
+<p class="p2"><br></p>
+<p class="p4">namespace UnityEngine.Purchasing</p>
+<p class="p4">{</p>
+<p class="p4"><span class="Apple-converted-space">    </span>public static class MiniJsonExtensions</p>
+<p class="p4"><span class="Apple-converted-space">    </span>{</p>
+<p class="p4"><span class="Apple-converted-space">        </span>public static List&lt;object&gt; ArrayListFromJson(this string json);</p>
+<p class="p4"><span class="Apple-converted-space">        </span>public static T Get&lt;T&gt;(this Dictionary&lt;string, object&gt; dic, string key);</p>
+<p class="p4"><span class="Apple-converted-space">        </span>public static bool GetBool(this Dictionary&lt;string, object&gt; dic, string key);</p>
+<p class="p4"><span class="Apple-converted-space">        </span>public static T GetEnum&lt;T&gt;(this Dictionary&lt;string, object&gt; dic, string key);</p>
+<p class="p4"><span class="Apple-converted-space">        </span>public static Dictionary&lt;string, object&gt; GetHash(this Dictionary&lt;string, object&gt; dic, string key);</p>
+<p class="p4"><span class="Apple-converted-space">        </span>public static long GetLong(this Dictionary&lt;string, object&gt; dic, string key);</p>
+<p class="p4"><span class="Apple-converted-space">        </span>public static string GetString(this Dictionary&lt;string, object&gt; dic, string key, string defaultValue = "");</p>
+<p class="p4"><span class="Apple-converted-space">        </span>public static List&lt;string&gt; GetStringList(this Dictionary&lt;string, object&gt; dic, string key);</p>
+<p class="p4"><span class="Apple-converted-space">        </span>public static Dictionary&lt;string, object&gt; HashtableFromJson(this string json);</p>
+<p class="p4"><span class="Apple-converted-space">        </span>public static string toJson(this Dictionary&lt;string, string&gt; obj);</p>
+<p class="p4"><span class="Apple-converted-space">        </span>public static string toJson(this string[] array);</p>
+<p class="p4"><span class="Apple-converted-space">        </span>public static string toJson(this Dictionary&lt;string, object&gt; obj);</p>
+<p class="p4"><span class="Apple-converted-space">    </span>}</p>
+<p class="p4">}</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>UnityEngine.Purchasing には、MiniJsonExtensionsっていう名前で、いろんなものをJsonに変えるメソッドがついてる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>というわけでMiniJsonを自前で使うのはもう考えなくていいんじゃないだろうか。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>2017年もよろしくお願いします。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+</body>
+</html>
