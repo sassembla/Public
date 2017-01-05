@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1504.76">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Sans'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; background-color: #ebebeb}
+    span.s1 {font: 22.0px Helvetica}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><span class="s1"><b>Unity IAP</b></span><b> サーバ側で検証～みたいなのを実装してた</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>簡単だった。いや～～楽になったなあ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>もうSoomlaもPrime31も要らないと思う。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>困るのは使い方を知るための情報が足りなかったりとかそのへんだ。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>一番悩んだのが、payloadっていう引数があったんだけど、これがどう扱われるのかまったくドキュメントがないところ。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Mac/iOSのreceiptにはそんなの入る枠ないし、となるとAndroidでのpurchase receiptにのみ関連するんだろうか、、？</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>入っているのか入っていないのか、というめんどくさいけど確認しないとわからなかったのでそのまとめ。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>Unity IAP API</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>なんかこう書くとややこしいんだけど、十分実用に耐える感じ。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・ストアの初期化</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・Purchaseの発行</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・ユーザーアクションのハンドリング</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・Purchase完了時の同期的完了処理</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・Purchase完了後の非同期的完了処理</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・その他 プラットフォーム独自の要素の設定とかいろいろ</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>といった物事が綺麗にハンドリングできる。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>サンプルを作るにあたって苦労したこと</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>今作っているAutoya フレームワークにエッセンシャル的な実装をぶち込んだ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>payloadの次に悩んだのが、Purchase完了後の非同期的完了処理。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>いやドキュメントが足りなくて。具体的には次のことをするための情報がなかった。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・非同期に処理するには、まずPendingする必要がある</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・サーバの応答を待って、対象のProductをcontroller.ConfirmPendingPurchase(e.purchasedProduct)する必要がある</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・今PurchaseしたProductと、過去PurchaseしていてStore処理が未完だから流れてきたProductを<b>綺麗に見分ける</b>必要がある</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・payloadがどんなデータになるのかよくわからん</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>綺麗に見分けるという動作のニーズ</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>UnityのIAP APIでは、購入が完了していないProductはOS(iOS, Android)が適当なタイミングでその情報を流してくるのをラップしているので、</p>
+<p class="p4">PurchaseProcessingResult ProcessPurchase (PurchaseEventArgs e){}<span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>がいつでも呼ばれる可能性がある。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これは、たった今購入したProductに対しても呼ばれるし、先ほど行ってまだ完了していないProductに関しても呼ばれたり、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>あまつさえ別端末で同じIDでログインしてたりすると、そちらで完了していなければ別端末で受ける、みたいなのもある。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>つまり「アカウントに紐づいて、今買ったProductも、こないだ買った未完了のProductも、このメソッドを呼び出す」のだ。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これがめんどうくさい。綺麗に見分けないといけない。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>「Productは購入されてるんだけど、今買ったの？ それともこないだ買ったの？」というのを判断しないといけない。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b>綺麗に見分けるという動作の実装</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、ProductにはtransactionIdというパラメータがあるんだけど、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>このパラメータは「購入処理が開始されてからセットされる」。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>つまり事前に設定できるパラメータではない。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・購入用のIdを適当に用意する</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・そのIdをProductとまとめてStoreに流して、Product情報から取り出す</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ということができれば、他のProductと明確に区別できるんだけど、まあ、クライアント側でそれらを処理間で共有するようなキーはAPIに存在しなかった。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>唯一、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>controller.InitiatePurchase(product, <b>payload</b>);</p>
+<p class="p3"><span class="Apple-tab-span">	</span>のpayloadがなんかそれっぽかったんだけど、このパラメータはまあ、御察しの通り、Androidのreceiptの内部に入れられるパラメータだった。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>んでこのpayload、具体的なreceiptに入るよ～～とか説明一切ないの。なんかpayloadだよってだけで。困る。</p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>最終的にどうやったかというと、Productのインスタンスを自分で保持する、ということにした。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>購入前</p>
+<p class="p3"><span class="Apple-tab-span">	</span>-&gt; ProductIdでProduct召喚</p>
+<p class="p3"><span class="Apple-tab-span">	</span>-&gt; オンメモリでProductを保持(グローバルなパラメータとして保持)</p>
+<p class="p3"><span class="Apple-tab-span">	</span>-&gt; 購入処理</p>
+<p class="p3"><span class="Apple-tab-span">	</span>-&gt; 購入成功でProcessPurchaseが呼ばれる</p>
+<p class="p3"><span class="Apple-tab-span">	</span>-&gt; オンメモリに保持していたProductのインスタンスのtransactionIdが<b>処理を経て変わっている</b>ので、そのtransactionIdと、ProcessPurchaseで渡ってきたProduct(オンメモリのものと同一)のtransactionIdを内容比較</p>
+<p class="p3"><span class="Apple-tab-span">	</span>-&gt; 一致すればたった今購入したProduct、一致しなければ今買ったのではないけれどまだ未処理のProduct という区別ができる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>はーー。これだけのことをするために「どうすればいいんだろ。。？」ってなってた。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ちなみに public void OnPurchaseFailed (Product i, PurchaseFailureReason failReason) メソッドも似たような呼ばれ方するので、やはり判別する必要がある。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>おねがいドキュメント。オンメモリで購入中のProductのインスタンスを保持すればいいですよ、ってどっか書いといて。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>パラメータの内容が動的に変わるからそれ使ってトレースできるよ、っていうのはちょっと、、、ノールックはちょっと、、、、まあ、、、はい、、、</p>
+</body>
+</html>
