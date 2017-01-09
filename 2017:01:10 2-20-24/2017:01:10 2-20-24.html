@@ -7,19 +7,20 @@
   <meta name="Generator" content="Cocoa HTML Writer">
   <meta name="CocoaVersion" content="1504.76">
   <style type="text/css">
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px Helvetica}
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Sans'}
     p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
     p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'}
     p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; min-height: 18.0px}
     p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; background-color: #ebebeb}
     p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; background-color: #ebebeb; min-height: 18.0px}
-    span.s1 {font: 22.0px 'Hiragino Sans'}
+    span.s1 {font: 22.0px Helvetica}
     span.s2 {font: 12.0px Helvetica}
+    span.s3 {font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #000000; background-color: #ffffff}
     span.Apple-tab-span {white-space:pre}
   </style>
 </head>
 <body>
-<p class="p1"><b>Miyamasu</b><span class="s1"><b>アプデしてた</b></span></p>
+<p class="p1"><span class="s1"><b>Miyamasu</b></span><b>アプデしてた ～GUIなしPlayerモードで非同期テスト最高～</b></p>
 <p class="p2"><br></p>
 <p class="p3"><b>概要</b></p>
 <p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>そのうち「2017 Unity 春の自作テストツール祭り」みたいなのをやるので、それに出品(?)する。</p>
@@ -65,8 +66,9 @@
 <p class="p3"><span class="Apple-tab-span">	</span>バッチ実行で、ヘッドレスのPlayerが起動するようにした。</p>
 <p class="p3"><span class="Apple-tab-span">	</span>ようはUnity Editor上でのPlayer状態でのTest実行を、batchから起動することが可能になった。</p>
 <p class="p4"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>sh test.sh とかやると、CI上とかでPlayerモードでのテストが走る。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>これは結構面白かった。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>例えばAutoyaのリポジトリでこれを使ってて、<span class="s3">sh run_miyamasu_tests.sh </span>とかやると、UnityがUIなしで起動した状態で、Playerモードになった上でテストが走る。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>課金とかAssetBundleとかの「非同期を含んでで、MainThreadでしか動かせない」系のテストも無事突破した。これってすごくない？</p>
+<p class="p3"><span class="Apple-tab-span">	</span>結構面白かった。</p>
 <p class="p4"><br></p>
 <p class="p4"><br></p>
 <p class="p3"><b>CloudBuild実行(新規、頓挫中)</b></p>
