@@ -1,0 +1,154 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1504.76">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; min-height: 18.0px}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; background-color: #ebebeb}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; background-color: #ebebeb; min-height: 18.0px}
+    span.s1 {font: 22.0px 'Hiragino Sans'}
+    span.s2 {font: 12.0px Helvetica}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>Miyamasu</b><span class="s1"><b>アプデしてた</b></span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>そのうち「2017 Unity 春の自作テストツール祭り」みたいなのをやるので、それに出品(?)する。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>非同期テストも書けるリモートテストランナー兼、なにかになった。 ver 1.3.0。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>そんな <b>Miyamasu</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/Miyamasu">https://github.com/sassembla/Miyamasu</a></p>
+<p class="p4"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b>アプデ内容</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>非同期テストが書けるUnity用のテストツール、みたいなの、みなさん自作してると思うんだ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Miyamasuもそんな中の一つなんだけど、今回はいろんな実行モードを追加していた。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・Editor実行(既存)</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・Player on Editor実行(改良)</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・Player実行(新規、調整中)</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・Batch Player実行(新規)</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・CloudBuild実行(新規、頓挫中)</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>このうち、CloudBuild実行は、Miyamasu のユニットテストを搭載したプロジェクトをUnity CloudBuildにアップした際、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>その上でテストが走る、みたいなモードなんだけど、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>とにかくNUnitの使い方が残念なのと、Unityが非同期テストを軽んじてて辛いのでまだ実現できていない。</p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p3"><b>Editor実行(既存)</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>コンパイルが走るたびに自動的に実行できる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ただし、PurchaseとAssetBundle周りの非同期コードが一部Playerでしか進捗しないため、それらのテストだけはできない。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>人間が任意でtestをSkipするみたいな機構を入れることで回避した。</p>
+<p class="p4"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b>Player on Editor実行(改良)</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これはそのまま、Play時にMiyamasuのテストケースが実行されるようになった。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>いろいろ手が込んだことをした結果、通常のアプリケーションを走らせたままテストが可能になったと思う。</p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p3"><b>Player on Editor実行(新規、調整中)</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>書かれたテストを適当に実機とかでも実行できる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>もうちょい調整する。リモート実行、リモートレポートとかをガッツリ入れてて、面白いことになってる。</p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p3"><b>Batch Player実行(新規)</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>バッチ実行で、ヘッドレスのPlayerが起動するようにした。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ようはUnity Editor上でのPlayer状態でのTest実行を、batchから起動することが可能になった。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>sh test.sh とかやると、CI上とかでPlayerモードでのテストが走る。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>これは結構面白かった。</p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p3"><b>CloudBuild実行(新規、頓挫中)</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>具体的に言うと、NUnitのユニットテストでは、main threadを自由に回しつつ、main threadで他の処理を走らせつつ、非同期処理を待つ、ということができない。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これは、たとえUnityにasync/await とかが来ても、使い物にならないということを言おうとしてる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>代替策としてMiyamasu作ったんだけど、思ったよりも事態は辛い感じだった。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Unityの構造が～とか、NUnitが～～とかそういうのではなく、NUnitの使い方がダメ、みたいな話。</p>
+<p class="p4"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>NUnitのユニットテストを起動すると、次のような特徴のある動きをする。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・テストはMainThreadで起動(PlayerモードでもEditorモードでもない、そのほかのモード</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・テスト中、Instantiateとかをやっても問題ないので、PlayerのMainThreadか、EditorApplication.updateの属するスレッド(EditorMainThread)に近い特性を持つ。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・なおかつユニットテスト中、EditorApplication.updateは完全停止している(これはほんとに困った)</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・例えば別スレッドで行われる非同期な処理など、特定の処理の終了を待つ方法がない(MainThreadなので、これをロックすると全てが停止する)</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・じゃあ起動だけでもできればいいか、、と思って新規にスレッドを立ち上げると、そのスレッドからMainThreadに対してActionとかを放り込むことができないため、MainThread系のメソッドのテストができない</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>この文章読んだだけだとしっくりこないかもしれないが、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>「非同期テストをするためには、非同期処理の完了を待たなければいけない」という常識的な操作に対して、NUnitの起動スレッドが、停止を許されないMainThreadであることが、致命的になっている。<span class="Apple-tab-span">	</span>たとえばawaitとかで「ほかのthreadが終わるのを待つ」という処理を書くと、もれなく<b>UnityEditor全体が停止する。</b>これだとTestが進まない。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>なおかつ、UnityにはMainThreadでしかできない処理があるので、<b>その処理を放り込む先 = MainThreadが停止してる</b> ということがあるせいで、ろくなテストが書けない。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>理想形はどんななんだろう、って考えると、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・擬似メインスレッドで起動しつつ、実際のPlayerスレッドとは違って「メインスレッドをロックせずに特定の処理が終わるのをメインスレッドで待つ」という処理ができないといけない。</p>
+<p class="p4"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>いっそ特殊なPlay状態にでもしちゃって、特定処理が帰って来たら処理復帰する、それまでは空回りする、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>みたいなIEnumerator返す関数みたいな処理がテストユニットとして動作できるといいのになあと思う。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ようは、NUnitを使うにしても、<b>IEnumeratorを返すようなテストユニットに改変</b>しちゃって、MainThreadからユニットテスト自体をMoveNextさせられればいいんじゃないか。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>まあMiyamasuがそれなんだけど。公式でもっとしっかりしたのがあると嬉しい。</p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>適当なコードにするとしたらこんな感じ。</p>
+<p class="p4"><br></p>
+<p class="p5">public class CloudBuildTestEntryPoint {</p>
+<p class="p5"><span class="Apple-tab-span">	</span>[Test] public static <b>IEnumerator</b> RunFromNUnit () {// IEnumeratorを返す、ユニットテスト単位の擬似MainThreadで実行されるNUnitのテスト処理</p>
+<p class="p6"><br></p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>// 完了待ちをするbool</p>
+<p class="p5"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>var done = false;</b></p>
+<p class="p6"><br></p>
+<p class="p6"><br></p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>// 適当なGameObjectを作成</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>var go = new GameObject("test");</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>var mb = go.AddComponent&lt;MainThreadRunner&gt;();</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>// 別スレッドでテストを実行する処理(IEnumeratorを返してくる)。</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>// mbを取り込んで、MainThreadでやってほしい処理を実行させる。</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>// ここの書き方はどうでもいい。</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>RunOnAnotherThread(</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>() =&gt; {</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>var path = “test:”;</p>
+<p class="p6"><br></p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>// mbに対してMainThreadで実行して欲しいiEnumeratorを送って、mbのUpdateで実行する = MainThreadに処理を放り込む。</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>mb.Commit(</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>() =&gt; {</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>path = path + Application.dataPath;// このメソッドはMainThreadでしか呼べない</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>);</p>
+<p class="p6"><br></p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>// なんか非同期処理</p>
+<p class="p6"><br></p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>done = true;</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>);</p>
+<p class="p6"><span class="Apple-tab-span">	</span></p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>// 上の処理が終わるまでここで空回りさせる</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>while (!<b>done</b>) {</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>yield return null;</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>// なんかAssertとかの処理</p>
+<p class="p5"><span class="Apple-tab-span">	</span>}</p>
+<p class="p5">}</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>公式でないと作れないのが、「PlayモードでなくてもPlayモードと同じように動く、ユニットテスト単位で後片付けとか上手な機構」という感じで、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>こういうのがうまく書けるようになるといいな～～と思う。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>何度も言うけどMiyamasuはそれができてるんで、まあ、公式でないのが欠点。</p>
+<p class="p4"><span class="Apple-tab-span">	</span></p>
+<p class="p4"><br></p>
+</body>
+</html>
