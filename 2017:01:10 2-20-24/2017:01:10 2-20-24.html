@@ -92,8 +92,13 @@
 <p class="p4"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>この文章読んだだけだとしっくりこないかもしれないが、</p>
 <p class="p3"><span class="Apple-tab-span">	</span>「非同期テストをするためには、非同期処理の完了を待たなければいけない」という常識的な操作に対して、NUnitの起動スレッドが、停止を許されないMainThreadであることが、致命的になっている。<span class="Apple-tab-span">	</span>たとえばawaitとかで「ほかのthreadが終わるのを待つ」という処理を書くと、もれなく<b>UnityEditor全体が停止する。</b>これだとTestが進まない。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ちなみにNUnitのテストでの SynchronizationContext.Current はnullなので、何もできない気がする。Playingの時かつMainThreadでのみ値が入って動くみたいだ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://stackoverflow.com/questions/9377290/synchronizationcontext-current-is-null-on-resolving-with-unity-in-wpf">http://stackoverflow.com/questions/9377290/synchronizationcontext-current-is-null-on-resolving-with-unity-in-wpf</a></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
 <p class="p3"><span class="Apple-tab-span">	</span>なおかつ、UnityにはMainThreadでしかできない処理があるので、<b>その処理を放り込む先 = MainThreadが停止してる</b> ということがあるせいで、ろくなテストが書けない。</p>
-<p class="p4"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span></p>
+<p class="p4"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b>理想形を考える</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>理想形はどんななんだろう、って考えると、</p>
 <p class="p3"><span class="Apple-tab-span">	</span>・擬似メインスレッドで起動しつつ、実際のPlayerスレッドとは違って「メインスレッドをロックせずに特定の処理が終わるのをメインスレッドで待つ」という処理ができないといけない。</p>
 <p class="p4"><span class="Apple-tab-span">	</span></p>
