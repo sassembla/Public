@@ -10,8 +10,10 @@
     p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Sans'}
     p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; min-height: 18.0px}
     p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'}
-    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; background-color: #ebebeb}
-    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; background-color: #ebebeb; min-height: 18.0px}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; background-color: #ebebeb}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; background-color: #ebebeb; min-height: 18.0px}
     span.Apple-tab-span {white-space:pre}
   </style>
 </head>
@@ -42,7 +44,7 @@
 <p class="p3"><span class="Apple-tab-span">	</span>Backyardフォルダにある機能がAutoyaとしての処理を行うコードがある場所になっており、</p>
 <p class="p3"><span class="Apple-tab-span">	</span>Backyard以外のフォルダの機能はそれぞれ単体で使用することができる。</p>
 <p class="p2"><br></p>
-<p class="p3"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202017-01-27%205.23.45.png" alt="スクリーンショット 2017-01-27 5.23.45.png"></p>
+<p class="p4"><span class="Apple-tab-span">	</span><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202017-01-27%205.23.45.png" alt="スクリーンショット 2017-01-27 5.23.45.png"></p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>例えば、「認証処理なしで、適当な外部サービスと通信をしたい」という場合には、Connections/HTTPをAutoya経由でなく勝手にnewして使えばいいし、</p>
 <p class="p3"><span class="Apple-tab-span">	</span>課金処理だけを使いたい、という場合はPurchase/PurchaseRouterだけを持ち出せばいい、という感じに使える。</p>
@@ -50,13 +52,14 @@
 <p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p3"><b>便利なアクセッサとしてのAutoya</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>AutoyaのBackyardが提供する機能は、すべて</p>
-<p class="p4">Autoya.(ドット)</p>
+<p class="p5">Autoya.(ドット)</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>と書き始めることで、ゲーム中のどのような場所からでも使用できるようになっている。</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>こんな感じに補完候補が出る。</p>
-<p class="p2"><span class="Apple-tab-span">	</span></p>
-<p class="p3"><span class="Apple-tab-span">	</span><img src="scr.png" alt="scr.png"></p>
+<p class="p6"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span><img src="scr.png" alt="scr.png"></p>
+<p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>ここで使用できる機能は、通信系であればもれなく認証がついた状態で行われる。</p>
 <p class="p3"><span class="Apple-tab-span">	</span>課金処理なども同様に、通信に関しては全て認証がついたりする。</p>
@@ -70,66 +73,66 @@
 <p class="p3"><span class="Apple-tab-span">	</span>抜粋するとこんな感じ。</p>
 <p class="p2"><br></p>
 <p class="p3"><b>OverridePoints.cs</b></p>
-<p class="p4">/**</p>
-<p class="p4"><span class="Apple-converted-space">    </span>modify this class for your app's authentication, purchase dataflow.</p>
-<p class="p4">*/</p>
-<p class="p4">namespace AutoyaFramework {</p>
-<p class="p5"><br></p>
-<p class="p4"><span class="Apple-converted-space">    </span>public partial class Autoya {</p>
-<p class="p4"><span class="Apple-converted-space">        </span>/**</p>
-<p class="p4"><span class="Apple-converted-space">            </span>return if server is under maintenance or not.</p>
-<p class="p4"><span class="Apple-converted-space">        </span>*/</p>
-<p class="p4"><span class="Apple-converted-space">        </span>private bool IsUnderMaintenance (int httpCode, Dictionary&lt;string, string&gt; responseHeader) {</p>
-<p class="p4"><span class="Apple-converted-space">            </span>return httpCode == BackyardSettings.MAINTENANCE_CODE; <b>// どんなhttp response code / response header が来たらメンテナンス画面を出すか</b></p>
-<p class="p4"><span class="Apple-converted-space">        </span>}</p>
-<p class="p5"><br></p>
-<p class="p4"><span class="Apple-converted-space">        </span>/**</p>
-<p class="p4"><span class="Apple-converted-space">            </span>return true if already authenticated, return false if not.</p>
-<p class="p4"><span class="Apple-converted-space">            </span>you can load your authenticated data (kind of Token) here.</p>
-<p class="p4"><span class="Apple-converted-space">        </span>*/</p>
-<p class="p4"><span class="Apple-converted-space">        </span>private bool IsFirstBoot () {<b>// どんな条件だったら、初回起動と見なすか</b></p>
-<p class="p4"><span class="Apple-converted-space">            </span>var tokenCandidatePaths = _autoyaFilePersistence.FileNamesInDomain(AuthSettings.AUTH_STORED_FRAMEWORK_DOMAIN);</p>
-<p class="p4"><span class="Apple-converted-space">            </span>var isFirstBoot = tokenCandidatePaths.Length == 0;</p>
-<p class="p4"><span class="Apple-converted-space">            </span>if (!isFirstBoot) {</p>
-<p class="p4"><span class="Apple-converted-space">                </span>// load saved data and hold it for after use.</p>
-<p class="p4"><span class="Apple-converted-space">                </span>return false;</p>
-<p class="p4"><span class="Apple-converted-space">            </span>}</p>
-<p class="p4"><span class="Apple-converted-space">            </span>return true;</p>
-<p class="p4"><span class="Apple-converted-space">        </span>}</p>
-<p class="p5"><br></p>
-<p class="p4"><span class="Apple-converted-space">        </span>/**</p>
-<p class="p4"><span class="Apple-converted-space">            </span>send authentication data to server at first boot.</p>
-<p class="p4"><span class="Apple-converted-space">        </span>*/</p>
-<p class="p4"><span class="Apple-converted-space">        </span>private IEnumerator OnBootAuthRequest (Action&lt;Dictionary&lt;string, string&gt;, string&gt; setHeaderAndDataToRequest) {<b>// 初回起動リクエスト時、サーバに何をどんな風に送るか</b></p>
-<p class="p4"><span class="Apple-converted-space">            </span>// set boot body data for Http.Post to server.(if empty, this framework use Http.Get for sending data to server.)</p>
-<p class="p4"><span class="Apple-converted-space">            </span>var data = "some boot data";</p>
-<p class="p5"><br></p>
-<p class="p4"><span class="Apple-converted-space">            </span>// set boot authentication header.</p>
-<p class="p4"><span class="Apple-converted-space">            </span>var bootKey = AuthSettings.AUTH_BOOT;</p>
-<p class="p4"><span class="Apple-converted-space">            </span>var base64Str = Base64.FromBytes(bootKey);</p>
-<p class="p5"><br></p>
-<p class="p4"><span class="Apple-converted-space">            </span>var bootRequestHeader = new Dictionary&lt;string, string&gt; {</p>
-<p class="p4"><span class="Apple-converted-space">                </span>{"Authorization", base64Str}</p>
-<p class="p4"><span class="Apple-converted-space">            </span>};</p>
-<p class="p5"><br></p>
-<p class="p4"><span class="Apple-converted-space">            </span>setHeaderAndDataToRequest(bootRequestHeader, data);</p>
-<p class="p4"><span class="Apple-converted-space">            </span>yield break;</p>
-<p class="p4"><span class="Apple-converted-space">        </span>}</p>
-<p class="p5"><br></p>
-<p class="p4"><span class="Apple-converted-space">        </span>/**</p>
-<p class="p4"><span class="Apple-converted-space">            </span>received first boot authentication result.</p>
-<p class="p4"><span class="Apple-converted-space">            </span>if failed to validate response, call bootAuthFailed(int errorCode, string reason).</p>
-<p class="p4"><span class="Apple-converted-space">                </span>this bootAuthFailed method raises the notification against Autoya.Auth_SetOnBootAuthFailed() handler.</p>
-<p class="p4"><span class="Apple-converted-space">        </span>*/</p>
-<p class="p4"><span class="Apple-converted-space">        </span>private IEnumerator OnBootAuthResponse (Dictionary&lt;string, string&gt; responseHeader, string data, Action&lt;int, string&gt; bootAuthFailed) {</p>
-<p class="p4"><span class="Apple-converted-space">            </span>var isValidResponse = true;<b>// 初回起動レスポンスを受け取った時、どんなチェックをおこなって正しかったらどうするか(ファイルを保存する、どこかに通信する、 etc、、</b></p>
-<p class="p4"><span class="Apple-converted-space">            </span>if (isValidResponse) {</p>
-<p class="p4"><span class="Apple-converted-space">                </span>Autoya.Persist_Update(AuthSettings.AUTH_STORED_FRAMEWORK_DOMAIN, AuthSettings.AUTH_STORED_TOKEN_FILENAME, data);</p>
-<p class="p4"><span class="Apple-converted-space">            </span>} else {</p>
-<p class="p4"><span class="Apple-converted-space">                </span>bootAuthFailed(-1, "failed to boot validation.");</p>
-<p class="p4"><span class="Apple-converted-space">            </span>}</p>
-<p class="p4"><span class="Apple-converted-space">            </span>yield break;</p>
-<p class="p4"><span class="Apple-converted-space">        </span>}</p>
+<p class="p5">/**</p>
+<p class="p5"><span class="Apple-converted-space">    </span>modify this class for your app's authentication, purchase dataflow.</p>
+<p class="p5">*/</p>
+<p class="p5">namespace AutoyaFramework {</p>
+<p class="p7"><br></p>
+<p class="p5"><span class="Apple-converted-space">    </span>public partial class Autoya {</p>
+<p class="p5"><span class="Apple-converted-space">        </span>/**</p>
+<p class="p5"><span class="Apple-converted-space">            </span>return if server is under maintenance or not.</p>
+<p class="p5"><span class="Apple-converted-space">        </span>*/</p>
+<p class="p5"><span class="Apple-converted-space">        </span>private bool IsUnderMaintenance (int httpCode, Dictionary&lt;string, string&gt; responseHeader) {</p>
+<p class="p5"><span class="Apple-converted-space">            </span>return httpCode == BackyardSettings.MAINTENANCE_CODE; <b>// どんなhttp response code / response header が来たらメンテナンス画面を出すか</b></p>
+<p class="p5"><span class="Apple-converted-space">        </span>}</p>
+<p class="p7"><br></p>
+<p class="p5"><span class="Apple-converted-space">        </span>/**</p>
+<p class="p5"><span class="Apple-converted-space">            </span>return true if already authenticated, return false if not.</p>
+<p class="p5"><span class="Apple-converted-space">            </span>you can load your authenticated data (kind of Token) here.</p>
+<p class="p5"><span class="Apple-converted-space">        </span>*/</p>
+<p class="p5"><span class="Apple-converted-space">        </span>private bool IsFirstBoot () {<b>// どんな条件だったら、初回起動と見なすか</b></p>
+<p class="p5"><span class="Apple-converted-space">            </span>var tokenCandidatePaths = _autoyaFilePersistence.FileNamesInDomain(AuthSettings.AUTH_STORED_FRAMEWORK_DOMAIN);</p>
+<p class="p5"><span class="Apple-converted-space">            </span>var isFirstBoot = tokenCandidatePaths.Length == 0;</p>
+<p class="p5"><span class="Apple-converted-space">            </span>if (!isFirstBoot) {</p>
+<p class="p5"><span class="Apple-converted-space">                </span>// load saved data and hold it for after use.</p>
+<p class="p5"><span class="Apple-converted-space">                </span>return false;</p>
+<p class="p5"><span class="Apple-converted-space">            </span>}</p>
+<p class="p5"><span class="Apple-converted-space">            </span>return true;</p>
+<p class="p5"><span class="Apple-converted-space">        </span>}</p>
+<p class="p7"><br></p>
+<p class="p5"><span class="Apple-converted-space">        </span>/**</p>
+<p class="p5"><span class="Apple-converted-space">            </span>send authentication data to server at first boot.</p>
+<p class="p5"><span class="Apple-converted-space">        </span>*/</p>
+<p class="p5"><span class="Apple-converted-space">        </span>private IEnumerator OnBootAuthRequest (Action&lt;Dictionary&lt;string, string&gt;, string&gt; setHeaderAndDataToRequest) {<b>// 初回起動リクエスト時、サーバに何をどんな風に送るか</b></p>
+<p class="p5"><span class="Apple-converted-space">            </span>// set boot body data for Http.Post to server.(if empty, this framework use Http.Get for sending data to server.)</p>
+<p class="p5"><span class="Apple-converted-space">            </span>var data = "some boot data";</p>
+<p class="p7"><br></p>
+<p class="p5"><span class="Apple-converted-space">            </span>// set boot authentication header.</p>
+<p class="p5"><span class="Apple-converted-space">            </span>var bootKey = AuthSettings.AUTH_BOOT;</p>
+<p class="p5"><span class="Apple-converted-space">            </span>var base64Str = Base64.FromBytes(bootKey);</p>
+<p class="p7"><br></p>
+<p class="p5"><span class="Apple-converted-space">            </span>var bootRequestHeader = new Dictionary&lt;string, string&gt; {</p>
+<p class="p5"><span class="Apple-converted-space">                </span>{"Authorization", base64Str}</p>
+<p class="p5"><span class="Apple-converted-space">            </span>};</p>
+<p class="p7"><br></p>
+<p class="p5"><span class="Apple-converted-space">            </span>setHeaderAndDataToRequest(bootRequestHeader, data);</p>
+<p class="p5"><span class="Apple-converted-space">            </span>yield break;</p>
+<p class="p5"><span class="Apple-converted-space">        </span>}</p>
+<p class="p7"><br></p>
+<p class="p5"><span class="Apple-converted-space">        </span>/**</p>
+<p class="p5"><span class="Apple-converted-space">            </span>received first boot authentication result.</p>
+<p class="p5"><span class="Apple-converted-space">            </span>if failed to validate response, call bootAuthFailed(int errorCode, string reason).</p>
+<p class="p5"><span class="Apple-converted-space">                </span>this bootAuthFailed method raises the notification against Autoya.Auth_SetOnBootAuthFailed() handler.</p>
+<p class="p5"><span class="Apple-converted-space">        </span>*/</p>
+<p class="p5"><span class="Apple-converted-space">        </span>private IEnumerator OnBootAuthResponse (Dictionary&lt;string, string&gt; responseHeader, string data, Action&lt;int, string&gt; bootAuthFailed) {</p>
+<p class="p5"><span class="Apple-converted-space">            </span>var isValidResponse = true;<b>// 初回起動レスポンスを受け取った時、どんなチェックをおこなって正しかったらどうするか(ファイルを保存する、どこかに通信する、 etc、、</b></p>
+<p class="p5"><span class="Apple-converted-space">            </span>if (isValidResponse) {</p>
+<p class="p5"><span class="Apple-converted-space">                </span>Autoya.Persist_Update(AuthSettings.AUTH_STORED_FRAMEWORK_DOMAIN, AuthSettings.AUTH_STORED_TOKEN_FILENAME, data);</p>
+<p class="p5"><span class="Apple-converted-space">            </span>} else {</p>
+<p class="p5"><span class="Apple-converted-space">                </span>bootAuthFailed(-1, "failed to boot validation.");</p>
+<p class="p5"><span class="Apple-converted-space">            </span>}</p>
+<p class="p5"><span class="Apple-converted-space">            </span>yield break;</p>
+<p class="p5"><span class="Apple-converted-space">        </span>}</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>全体はこんな感じ。</p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/Autoya/blob/master/Assets/Autoya/Backyard/OverridePoints.cs">https://github.com/sassembla/Autoya/blob/master/Assets/Autoya/Backyard/OverridePoints.cs</a></p>
