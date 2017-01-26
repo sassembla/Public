@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1504.76">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Sans'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+    span.s1 {font: 12.0px 'Hiragino Sans'}
+    span.s2 {font: 12.0px Helvetica}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>スマフォでの課金機構のレシート検証について</b></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>まとめる。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>追記</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Unity 5.5でのIAP の話を追加</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>語彙</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>ticketIdについて:</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>購入に際して対応するIdをサーバ側で先行して配布する、そのId。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>連番などでないユーザーIdに紐づいた推測されにくい値が推奨。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>購入手順は、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>・プレイヤーが購入するアイテムを選ぶ</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>・サーバに問い合わせてサーバでticketIdを生成</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>・購入処理開始(プレイヤーに購入しますかY/Nをプラットフォーム機構で表示)</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>・キャンセルだったら無視(できればticketIdが終わったことをサーバに通知)</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>・購入成功であれば、プラットフォームのtransactionIdを未完了にしたまま、サーバへとreceipt + ticketIdを送付</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>・サーバ側でレシート検証</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>・レシートそのほかの検証がOKであれば、クライアントに結果を送付</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>・クライアント側でプラットフォームのtransactionIdを完了にしてDone</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>iOSの検証について</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・ticketId &amp; ユーザー情報で、実際に購買が行われていたかどうかチェック</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・receiptをAppleに問い合わせる。0以外のstatusがある場合はダメ</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・帰って来たレスポンスのtransactionIdで、過去履歴をチェック</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>(チーターは他のアプリのticketを送ってきたりするので、すでに処理済みのtransactionだったら蹴る、とか。)</p>
+<p class="p3"><span class="Apple-tab-span">	</span>-&gt; OK</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>Androidの検証について</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・ticketId &amp; ユーザー情報で、実際に購買が行われていたかどうかチェック</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・receiptを復号</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Base64Decode -&gt; 公開鍵暗号</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・内部に含まれているDeveloperPayloadに、ticketIdが含まれているかどうかチェック(もしかしたら入ってないかもしれない？)</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>(チーターは他のアプリのticketを送ってきたりするので。)</p>
+<p class="p3"><span class="Apple-tab-span">	</span>-&gt; OK</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>参考</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>「iOS/Androidアプリ内課金の不正なレシートによる有料会員登録を防ぐ」</p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://inside.pixiv.net/entry/2014/12/09/111310"><span class="s2">http://inside.pixiv.net/entry/2014/12/09/111310</span></a></span></p>
+<p class="p5"><span class="Apple-tab-span">	</span></p>
+<p class="p4"><b><span class="Apple-tab-span">	</span>Unity5.5</b><span class="s1"><b>以降の</b></span><b>IAP</b><span class="s1"><b>について</b></span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>「Unity IAP サーバ側で検証～みたいなのを実装してた」</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://sassembla.github.io/Public/2017:01:05%2017-46-38/2017:01:05%2017-46-38.html">http://sassembla.github.io/Public/2017:01:05%2017-46-38/2017:01:05%2017-46-38.html</a></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p4"><span class="s1"><b>補：</b></span><b>InitiatePurchase</b><span class="s1"><b>での</b></span><b>payload</b><span class="s1"><b>について</b></span></p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>全然情報がない。</p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>http://qiita.com/kivatek/items/e93e9cf11eba3fba176c</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>データ形式見せてくれてるけどドキュメントと整合性取らねば。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Unity社の実装</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>https://bitbucket.org/Unity-Technologies/unity-iap-samples.git</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>使ってない。役立たずーーー！！！　これじゃ実際に試すしかないじゃん。もーーー。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>payloadはAndroidでのみ効果があるのかな？</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>試すしかなさそう。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>-&gt; Productのインスタンス保持してたらちゃんとtransactionIdが生えたりしたので、無事比較することができた。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>これで同一性に関しては保持できた。よかった、、、、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>で、payloadは、これたぶんAndroid側はデータに入るんだと思う。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>で、check時に内部を見れば良さげ。</p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+</body>
+</html>

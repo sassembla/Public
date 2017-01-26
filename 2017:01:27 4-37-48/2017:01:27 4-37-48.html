@@ -1,0 +1,185 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1504.76">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Sans'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; background-color: #ebebeb; min-height: 18.0px}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; background-color: #ebebeb}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; background-color: #c0c0c0}
+    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; background-color: #d6d6d6}
+    span.s1 {background-color: #ebebeb}
+    span.s2 {background-color: #d6d6d6}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>Autoyaのドキュメント</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>書く。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><b>Autoya</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/Autoya">https://github.com/sassembla/Autoya</a></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>何</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Unityを使って5秒で認証付きゲームを作り始められるようにするためのフレームワーク。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>いろんな機能が入ってるが、それらを使うための準備にかかる時間が限りなく短い、というのを目指している。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ぶっちゃけ何の設定変更もせずに、プレイヤーのidentityを持たせた状態でゲーム開始ができる。</p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>基礎的な構造</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Autoyaという名前のstatic instanceをインターフェースとした、いろいろな便利機能の集合体になっている。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>コアとなるのはAuthentication(認証)処理で、ゲーム起動時に勝手に認証処理をバックグラウンドで開始、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>認証完了したら、その認証情報を入れた通信などが可能になる。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>依存の図</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Backyardフォルダにある機能がAutoyaとしての処理を行うコードがある場所になっており、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Backyard以外のフォルダの機能はそれぞれ単体で使用することができる。</p>
+<p class="p2"><br></p>
+<p class="p4"><br></p>
+<p class="p5"><span class="Apple-tab-span">	</span>Autoya/</p>
+<p class="p4"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span></p>
+<p class="p6"><span class="s1"><span class="Apple-tab-span">	</span></span><span class="s2"><span class="Apple-tab-span">	</span></span>Backyard/</p>
+<p class="p6"><span class="s1"><span class="Apple-tab-span">	</span></span><span class="s2"><span class="Apple-tab-span">	</span></span><span class="Apple-tab-span">	</span>Authentication <b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>&lt;- 他の機能の組み合わせで実装されている、Autoyaのコア部分</b></p>
+<p class="p6"><span class="s1"><span class="Apple-tab-span">	</span></span><span class="s2"><span class="Apple-tab-span">	</span></span><span class="Apple-tab-span">	</span>other..</p>
+<p class="p4"><span class="Apple-tab-span">	</span></p>
+<p class="p7"><span class="s1"><span class="Apple-tab-span">	</span></span><span class="Apple-tab-span">	</span>AssetBundles/</p>
+<p class="p7"><span class="s1"><span class="Apple-tab-span">	</span></span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ListDownloader<span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><b>&lt;- Autoyaに依存しない、各機能の実装</b></p>
+<p class="p7"><span class="s1"><span class="Apple-tab-span">	</span></span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Preloader<span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p7"><span class="s1"><span class="Apple-tab-span">	</span></span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Loader</p>
+<p class="p4"><span class="Apple-tab-span">	</span></p>
+<p class="p7"><span class="s1"><span class="Apple-tab-span">	</span></span><span class="Apple-tab-span">	</span>Connections/</p>
+<p class="p7"><span class="s1"><span class="Apple-tab-span">	</span></span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>HTTP</p>
+<p class="p4"><span class="Apple-tab-span">	</span></p>
+<p class="p7"><span class="s1"><span class="Apple-tab-span">	</span></span><span class="Apple-tab-span">	</span>Purchase/</p>
+<p class="p7"><span class="s1"><span class="Apple-tab-span">	</span></span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>PurchaseRouter</p>
+<p class="p4"><span class="Apple-tab-span">	</span></p>
+<p class="p7"><span class="s1"><span class="Apple-tab-span">	</span></span><span class="Apple-tab-span">	</span>other..</p>
+<p class="p4"><span class="Apple-tab-span">	</span></p>
+<p class="p4"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>例えば、「認証処理なしで、適当な外部サービスと通信をしたい」という場合には、Connections/HTTPをAutoya経由でなく勝手にnewして使えばいいし、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>課金処理だけを使いたい、という場合はPurchase/PurchaseRouterだけを持ち出せばいい、という感じに使える。</p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b>便利なアクセッサとしてのAutoya</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>AutoyaのBackyardが提供する機能は、すべて</p>
+<p class="p5">Autoya.(ドット)</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>と書き始めることで、ゲーム中のどのような場所からでも使用できるようになっている。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>こんな感じに補完候補が出る。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><img src="scr.png" alt="scr.png"></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ここで使用できる機能は、通信系であればもれなく認証がついた状態で行われる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>課金処理なども同様に、通信に関しては全て認証がついたりする。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>カスタマイザブル</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>認証処理やメンテナンスの検知など、Backyardが提供する機能は、Autoya/Backyard/OverridePoint.cs というファイルを更新することで挙動の内容を変更することができる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>特定のタイミングで着火されるハンドラを提供していて、認証フローの要所要所での保存内容やバリデーションや暗号化、サーバがメンテになってる時はこんなコードを返す、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>というようなカスタマイズができるようになっている。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>抜粋するとこんな感じ。</p>
+<p class="p2"><br></p>
+<p class="p3"><b>OverridePoints.cs</b></p>
+<p class="p5">/**</p>
+<p class="p5"><span class="Apple-converted-space">    </span>modify this class for your app's authentication, purchase dataflow.</p>
+<p class="p5">*/</p>
+<p class="p5">namespace AutoyaFramework {</p>
+<p class="p4"><br></p>
+<p class="p5"><span class="Apple-converted-space">    </span>public partial class Autoya {</p>
+<p class="p5"><span class="Apple-converted-space">        </span>/**</p>
+<p class="p5"><span class="Apple-converted-space">            </span>return if server is under maintenance or not.</p>
+<p class="p5"><span class="Apple-converted-space">        </span>*/</p>
+<p class="p5"><span class="Apple-converted-space">        </span>private bool IsUnderMaintenance (int httpCode, Dictionary&lt;string, string&gt; responseHeader) {</p>
+<p class="p5"><span class="Apple-converted-space">            </span>return httpCode == BackyardSettings.MAINTENANCE_CODE; <b>// どんなhttp response code / response header が来たらメンテナンス画面を出すか</b></p>
+<p class="p5"><span class="Apple-converted-space">        </span>}</p>
+<p class="p4"><br></p>
+<p class="p5"><span class="Apple-converted-space">        </span>/**</p>
+<p class="p5"><span class="Apple-converted-space">            </span>return true if already authenticated, return false if not.</p>
+<p class="p5"><span class="Apple-converted-space">            </span>you can load your authenticated data (kind of Token) here.</p>
+<p class="p5"><span class="Apple-converted-space">        </span>*/</p>
+<p class="p5"><span class="Apple-converted-space">        </span>private bool IsFirstBoot () {<b>// どんな条件だったら、初回起動と見なすか</b></p>
+<p class="p5"><span class="Apple-converted-space">            </span>var tokenCandidatePaths = _autoyaFilePersistence.FileNamesInDomain(AuthSettings.AUTH_STORED_FRAMEWORK_DOMAIN);</p>
+<p class="p5"><span class="Apple-converted-space">            </span>var isFirstBoot = tokenCandidatePaths.Length == 0;</p>
+<p class="p5"><span class="Apple-converted-space">            </span>if (!isFirstBoot) {</p>
+<p class="p5"><span class="Apple-converted-space">                </span>// load saved data and hold it for after use.</p>
+<p class="p5"><span class="Apple-converted-space">                </span>return false;</p>
+<p class="p5"><span class="Apple-converted-space">            </span>}</p>
+<p class="p5"><span class="Apple-converted-space">            </span>return true;</p>
+<p class="p5"><span class="Apple-converted-space">        </span>}</p>
+<p class="p4"><br></p>
+<p class="p5"><span class="Apple-converted-space">        </span>/**</p>
+<p class="p5"><span class="Apple-converted-space">            </span>send authentication data to server at first boot.</p>
+<p class="p5"><span class="Apple-converted-space">        </span>*/</p>
+<p class="p5"><span class="Apple-converted-space">        </span>private IEnumerator OnBootAuthRequest (Action&lt;Dictionary&lt;string, string&gt;, string&gt; setHeaderAndDataToRequest) {<b>// 初回起動リクエスト時、サーバに何をどんな風に送るか</b></p>
+<p class="p5"><span class="Apple-converted-space">            </span>// set boot body data for Http.Post to server.(if empty, this framework use Http.Get for sending data to server.)</p>
+<p class="p5"><span class="Apple-converted-space">            </span>var data = "some boot data";</p>
+<p class="p4"><br></p>
+<p class="p5"><span class="Apple-converted-space">            </span>// set boot authentication header.</p>
+<p class="p5"><span class="Apple-converted-space">            </span>var bootKey = AuthSettings.AUTH_BOOT;</p>
+<p class="p5"><span class="Apple-converted-space">            </span>var base64Str = Base64.FromBytes(bootKey);</p>
+<p class="p4"><br></p>
+<p class="p5"><span class="Apple-converted-space">            </span>var bootRequestHeader = new Dictionary&lt;string, string&gt; {</p>
+<p class="p5"><span class="Apple-converted-space">                </span>{"Authorization", base64Str}</p>
+<p class="p5"><span class="Apple-converted-space">            </span>};</p>
+<p class="p4"><br></p>
+<p class="p5"><span class="Apple-converted-space">            </span>setHeaderAndDataToRequest(bootRequestHeader, data);</p>
+<p class="p5"><span class="Apple-converted-space">            </span>yield break;</p>
+<p class="p5"><span class="Apple-converted-space">        </span>}</p>
+<p class="p4"><br></p>
+<p class="p5"><span class="Apple-converted-space">        </span>/**</p>
+<p class="p5"><span class="Apple-converted-space">            </span>received first boot authentication result.</p>
+<p class="p5"><span class="Apple-converted-space">            </span>if failed to validate response, call bootAuthFailed(int errorCode, string reason).</p>
+<p class="p5"><span class="Apple-converted-space">                </span>this bootAuthFailed method raises the notification against Autoya.Auth_SetOnBootAuthFailed() handler.</p>
+<p class="p5"><span class="Apple-converted-space">        </span>*/</p>
+<p class="p5"><span class="Apple-converted-space">        </span>private IEnumerator OnBootAuthResponse (Dictionary&lt;string, string&gt; responseHeader, string data, Action&lt;int, string&gt; bootAuthFailed) {</p>
+<p class="p5"><span class="Apple-converted-space">            </span>var isValidResponse = true;<b>// 初回起動レスポンスを受け取った時、どんなチェックをおこなって正しかったらどうするか(ファイルを保存する、どこかに通信する、 etc、、</b></p>
+<p class="p5"><span class="Apple-converted-space">            </span>if (isValidResponse) {</p>
+<p class="p5"><span class="Apple-converted-space">                </span>Autoya.Persist_Update(AuthSettings.AUTH_STORED_FRAMEWORK_DOMAIN, AuthSettings.AUTH_STORED_TOKEN_FILENAME, data);</p>
+<p class="p5"><span class="Apple-converted-space">            </span>} else {</p>
+<p class="p5"><span class="Apple-converted-space">                </span>bootAuthFailed(-1, "failed to boot validation.");</p>
+<p class="p5"><span class="Apple-converted-space">            </span>}</p>
+<p class="p5"><span class="Apple-converted-space">            </span>yield break;</p>
+<p class="p5"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>全体はこんな感じ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/Autoya/blob/master/Assets/Autoya/Backyard/OverridePoints.cs">https://github.com/sassembla/Autoya/blob/master/Assets/Autoya/Backyard/OverridePoints.cs</a></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>大まかな認証フローやそれに関連するハンドラは全てこのファイルに定義されていて、それらにどんなパラメータをどう暗号化して入れるか、などを自在にできるようにしてみた。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>設定</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>const的な設定ファイルは、すべてAutoya/Settings フォルダ以下にある。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/Autoya/tree/master/Assets/Autoya/Settings">https://github.com/sassembla/Autoya/tree/master/Assets/Autoya/Settings</a></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>認証フロー</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>初回起動時のサーバへの通信と、それ以降のtokenを使った通信をサポートしている。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>JWTなんかも入っているので、暗号化したりシグニチャ作ってサーバで検証したり、とかも楽に導入できる(楽にセキュアにうまくいくかどうかは知らない。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>OverridePointsが対応するフロー図を書く。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+</body>
+</html>
