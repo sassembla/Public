@@ -151,13 +151,77 @@
 <p class="p3"><span class="Apple-tab-span">	</span>JWTなんかも入っているので、暗号化したりシグニチャ作ってサーバで検証したり、とかも楽に導入できる(楽にセキュアにうまくいくかどうかは知らない。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>OverridePointsが対応するフロー図を書く。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>そのうち、全OverridePointsが対応するフロー図を書く。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
+<p class="p3"><b>URLs</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Autoyaは、デフォルトのフローでは次のURLを要求する。</p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>認証系</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>1.初回起動認証URL</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>2.TokenRefreshURL</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>課金系</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>1.アイテム一覧取得URL</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>2.購入事前処理URL</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>3.購入事後処理URL</p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>AssetBundle系</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>1.AssetBundlesList取得URL</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>2.PreloadList取得URL</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>3.Asset取得URL</p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>メンテナンス系</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>1.メンテ情報取得URL</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>基本的に、この9つのURLがあれば、Autoyaの要件にそったアプリケーションの運営ができる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>それぞれのURLについて明記しておく。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
+<p class="p3"><b>認証系</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>1.初回起動認証URL</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>初回起動時にAutoyaからゲームサーバへと送付される通信のURL。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Get or Postで、暗号化された情報をゲームサーバに送り、ゲームサーバ側でユーザー情報やシークレットなどを作成し、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>クライアント側で保存すべきデータ(token、ほか)をレスポンスで送り返してくるのを想定している。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>2.TokenRefreshURL</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ゲームサーバは、クライアントが送付してきたtokenが失効していた場合、401などのレスポンスコードでクライアントに失効を伝えることができる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>この際、クライアントはTokenRefreshURLへとGet or Postでのtoken再発行処理の通信を行う。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ゲームサーバ側でtoken再発行処理がうまくいった場合、クライアント側で保存すべきデータ(token、ほか)をレスポンスでクライアントへと返すことを想定している。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
+<p class="p3"><b>課金系</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>1.アイテム一覧取得URL</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>アプリケーション起動時に、クライアントがこのURLにGetで通信する。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>クライアントがこのURLに通信して来た際、ゲームサーバはこのプレイヤーが購入可能なProductIdの一覧を返すことを想定している。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>2.購入事前処理URL</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>プレイヤーがストア画面などでプロダクトを選択、購入しようとした際、クライアントがこのURLにPostで通信する。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ゲームサーバはこのプレイヤーが特定のプロダクトの購入を試そうとした旨を記録し、実際に購入終了/キャンセル時の処理に際して付き合わせができるように</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>購買情報を記録することができる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>特にTicketId(購買に関して、開始時に付与されるId)をレスポンスで返すことを想定している。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>3.購入事後処理URL</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>プレイヤーがストア画面などでプロダクトを選択、購入完了か、キャンセルした際、クライアントがこのURLに通信する。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>クライアントは事前に発行されていたTicketIdと購買/キャンセルされたプロダクトの情報をゲームサーバにPostで送付する。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ゲームサーバ側は、送付されて来たTicketほかを比較し、課金完了のための処理を行うことができる。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>AssetBundle系</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>1.AssetBundlesList取得URL</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>AssetBundle機能を初期化した際に、クライアントがこのURLへとGetで通信する。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>現在のバージョンのアプリケーションで使用されるAssetBundleの一覧情報のリストを返す。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>2.PreloadList取得URL</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>中略</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>3.Asset取得URL</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>中略 だいたいCDN</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>メンテナンス系</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>1.メンテ情報取得URL</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>中略</p>
 <p class="p2"><br></p>
 </body>
 </html>
