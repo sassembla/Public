@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1504.76">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'}
+    span.s1 {font: 12.0px Helvetica}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>SuekkoっていうC#スクリプト -&gt; Unity GUI Windowなツール作った</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>いちいちUnity specificなコード書くのめんどいので、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>単に型を指定すると、そのパラメータをGUIにしたり、インスタンスのメソッドを実行できる、というやつを作った。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><b>Suekko</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/Suekko">https://github.com/sassembla/Suekko</a></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>内容</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>こんな感じのコードが、</p>
+<p class="p4"><span class="Apple-tab-span">	</span><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202017-02-12%2023.53.26.png" alt="スクリーンショット 2017-02-12 23.53.26.png"></p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p6"><span class="s1"><span class="Apple-tab-span">	</span>Suekko</span>クラスに上記の型を1つ書くだけで、自動的にこんな感じの<span class="s1">GUI</span>になる。</p>
+<p class="p6"><span class="Apple-tab-span">	</span>メソッドも抽出されてて、GUIから実行できる。</p>
+<p class="p4"><span class="Apple-tab-span">	</span><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202017-02-12%2023.53.06.png" alt="スクリーンショット 2017-02-12 23.53.06.png"></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>まだこのウィンドウを作り出すコード自体への型の指定部分が納得いってない。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>現在プロトタイプという感じなので、できればコンソール(そのクラス内でなんか実行した時に出たログをウィンドウ上に出す)みたいなのをやりたい。</p>
+</body>
+</html>
