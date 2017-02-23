@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1504.81">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Sans'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    span.s1 {font: 22.0px Helvetica}
+    span.s2 {font: 12.0px Helvetica}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><span class="s1"><b>Unity 5.5.1</b></span><b>で面白いくらいUnityEditorがCPUを食う問題について</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>やあ、全国のUnity5.5.1のCPU使用率が100%を超えるみんな。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>問題とその解決策を見つけたのでちょっと書いた。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>Unity 5.5.0 -&gt; 5.5.1へと移行したら、CPU使用率がウケル感じになる</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="s2"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202017-02-22%2020.06.51.png" alt="スクリーンショット 2017-02-22 20.06.51.png"></span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>こんな感じに。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>症状としては、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・IAPの利用コードがあるプロジェクトをPlayをすると、UnityのCPU使用率がすっげーアガる</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・Playを停めても上がったまま</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・Unity再起動すると治るが、Playを押すとまた発生する</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>というもの。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>と言っても問題なのはプロジェクトではなく、プロジェクトに含まれている</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Unity IAPのライブラリのバージョン だった。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>古いバージョンのUnity IAPライブラリが含まれているプロジェクトを新しいUnity EditorでPlayするとCPUが青天井になる</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ということがわかった。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>解消方法としては簡単で、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・Unity IAPのライブラリを更新する</p>
+<p class="p3"><span class="Apple-tab-span">	</span>という感じ。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>具体的にいうと、</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p4"><span class="Apple-tab-span">	</span><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202017-02-22%2016.39.53.png" alt="スクリーンショット 2017-02-22 16.39.53.png"></p>
+<p class="p4"><span class="Apple-tab-span">	</span>Unity IAP is up to date<span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>って出るまで<span class="s2">Reimport</span>ボタンを押せばいいと思う。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>実際にCPU持って行く箇所はどこなのか</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>実際にCPUを持っていくのは、UnityEditor上でPlayを押した際、StoreのアイテムIdとかを設定する処理を行う部分。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>UnityPurchasing.Initialize</b> 関数の中。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>一度Playすると、たとえ停止をしてもそのCPUのアガりっぷりは衰えない。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>なにこれこわい。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>該当の <b>UnityPurchasing.Initialize</b> 関数自体を実行しなくなると、CPUが跳ね上がる問題は消える。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>まあ課金処理ができなくなるんですけど。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Unity IAP、自分自身ではバージョンが古いからアップデートしてね！みたいなこと一切言わないのだけれど、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>もしかしてな～～って思ってServicesのIN-APP-PURCHASING の項を見に行ったら、更新できるよっていう感じだったので</p>
+<p class="p3"><span class="Apple-tab-span">	</span>二度ほど押せて、二度コンパイルが走ったあとで治った。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>今後の対処方</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>こういうのなんか、、難しいね、、、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>実行コード上からは、IAPライブラリのバージョンを気にするようなことはないので、エラーの原因に気づけない。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>UnityのServicesのUIを見に行ってやっと気づく。というかそこを見ても原因かどうかは気づけない。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>試して「あっ治った」っていう状態があるのが、まあ、今の俺、という程度。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>UnityEditorのバージョンと、配布されてたIAPのライブラリの食い合わせ問題みたいなのがあるんだろうか。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>このエディタだったらこのバージョン以上のIAPライブラリ使ってなかったらWarning みたいなのは作れるかもしれないな。</b></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>UnityのIAPのライブラリ、痒いところに手が届く素晴らしいバランス(運用スタイルによるがAndroidとかの堅牢性を信じてない人であれば全く問題ない設計)なので</p>
+<p class="p3"><span class="Apple-tab-span">	</span>極力使用したい。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+</body>
+</html>
