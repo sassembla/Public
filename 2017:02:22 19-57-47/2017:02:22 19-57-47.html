@@ -53,6 +53,18 @@
 <p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>って出るまで<span class="s2">Reimport</span>ボタンを押せばいいと思う。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
+<p class="p3"><b>問題点の切り分け</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>まず、あるコードを実行すると、CPUが跳ね上がっているという情報をもらった。環境はUnity5.5.1p4とのこと。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>自分の方では手元に5.5.1p3があったので、まずp3で同じ事象が起こるかどうか試してみた。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・5.5.1p3であるプロジェクトをPlay、確かにCPU使用率がいい感じに跳ね上がるのを確認した。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・同じプロジェクトを5.5.0p4でチェックすると、CPU使用率は跳ね上がらなかった。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・そのプロジェクトは5.5.0p4での生成時に取得していたIAPのdllを含んでいた。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・5.5.1p3で動作時、どの処理があったらCPUが跳ね上がるのか確認していくと、IAPの関数を実行した時点からCPUが上がって行くのが確認できた。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>という感じ。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
 <p class="p3"><b>実際にCPU持って行く箇所はどこなのか</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>実際にCPUを持っていくのは、UnityEditor上でPlayを押した際、StoreのアイテムIdとかを設定する処理を行う部分。</p>
 <p class="p3"><span class="Apple-tab-span">	</span><b>UnityPurchasing.Initialize</b> 関数の中。</p>
