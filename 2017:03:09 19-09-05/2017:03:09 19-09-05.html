@@ -1,0 +1,120 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1504.81">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Sans'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; min-height: 18.0px}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; background-color: #ebebeb}
+    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; background-color: #ebebeb; min-height: 18.0px}
+    span.s1 {font: 22.0px Helvetica}
+    span.s2 {font: 12.0px Helvetica}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><span class="s1"><b>Unity5.6</b></span><b>で非同期テストするときの基本的人権が保護されそう</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>今はまだβなんだけど、Unity5.6には複数の機能が追加されそう。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・テストをPlay時に実行することができる</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・IEnumeratorを返り値とする非同期なテストができる</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>という感じでいろいろ革新がある感じ。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これをディズニーランドの城ジェクションマッピング待ってる間に書いてる現在のverはβ11。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://unity3d.com/jp/unity/beta">https://unity3d.com/jp/unity/beta</a></p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p3"><b>TestRunnerがPlayModeに対応</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>今までのモードはEditModeとしてそのままに、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>PlayMode という「実行するとPlay開始し、完了するとPlay終了する」というテストモードが増えた。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p5"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202017-03-09%2018.55.43.png" alt="スクリーンショット 2017-03-09 18.55.43.png"></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span>Enable playmode tests</span>ボタンを押すと、「エディタ再起動してね！」って言われるのがすごくbeta感ある。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>再起動するとボタンは「テストを作成する」ボタンに変わるので、押すと雛形として「NewPlayModeTest.cs」がAssets/フォルダに直に吐かれる。</p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p3"><b>コード</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>こんな感じのコード。</p>
+<p class="p4"><br></p>
+<p class="p6">using UnityEngine;</p>
+<p class="p6">using UnityEngine.TestTools;</p>
+<p class="p6">using NUnit.Framework;</p>
+<p class="p6">using System.Collections;</p>
+<p class="p7"><br></p>
+<p class="p6">public class NewPlayModeTest {</p>
+<p class="p7"><br></p>
+<p class="p6"><span class="Apple-tab-span">	</span>[Test]</p>
+<p class="p6"><span class="Apple-tab-span">	</span>public void NewPlayModeTestSimplePasses() {</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>// Use the Assert class to test conditions.</p>
+<p class="p6"><span class="Apple-tab-span">	</span>}</p>
+<p class="p7"><br></p>
+<p class="p6"><span class="Apple-tab-span">	</span>// A UnityTest behaves like a coroutine in PlayMode</p>
+<p class="p6"><span class="Apple-tab-span">	</span>// and allows you to yield null to skip a frame in EditMode</p>
+<p class="p6"><span class="Apple-tab-span">	</span>[UnityTest]</p>
+<p class="p6"><span class="Apple-tab-span">	</span>public IEnumerator NewPlayModeTestWithEnumeratorPasses() {</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>// Use the Assert class to test conditions.</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>// yield to skip a frame</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>yield return null;</p>
+<p class="p6"><span class="Apple-tab-span">	</span>}</p>
+<p class="p6">}</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Test attributeのほうはまあいつも通りのなんの面白みもないテストなんだけど、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>UnityTest attributeの方が素晴らしくて。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・IEnumeratorを返すユニットテスト</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・yieldを使ってテストの終了を遅延させることができる</p>
+<p class="p3"><span class="Apple-tab-span">	</span>= 非同期テストができる</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>という素晴らしい特性を獲得している。これが欲しかったのでMiyamasuとか作ってたんだけど。</p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p3"><b>例えば1000frame待つという簡単なテスト</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>こんな感じになる。</p>
+<p class="p6">using UnityEngine;</p>
+<p class="p6">using UnityEngine.TestTools;</p>
+<p class="p6">using System.Collections;</p>
+<p class="p7"><br></p>
+<p class="p6">public class NewPlayModeTest {</p>
+<p class="p7"><br></p>
+<p class="p6">    int frame = 0;</p>
+<p class="p7"><br></p>
+<p class="p6">    [UnityTest] public IEnumerator NewPlayModeTestWithEnumeratorPasses () {</p>
+<p class="p6">        while (true) {</p>
+<p class="p6">            if (frame == 1000) {</p>
+<p class="p6">                Debug.Log("1000 frame passed.");</p>
+<p class="p6">                break;</p>
+<p class="p6">            }</p>
+<p class="p6">            yield return null;</p>
+<p class="p6">            frame++;</p>
+<p class="p6">        }</p>
+<p class="p6">    }</p>
+<p class="p6">}</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>うーーーん簡単。ちゃんとPlayモードで動作する。</p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p3"><b>テスト完了時にチラッと見える「N件成功！」的なビューがあるんだけど</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>なんかじっくり見るにはどうすればいいんだろう。もうちょい調べる。</p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p3"><b>残る課題というかやりたいこと</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>実機で動かしたいので、なんらかランタイムのコードからこれらを着火する方法を見つけたい。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>あと、実機でのテストの結果とかを集計したいねっていうのがこないだの<b>春の自作Unityテストツール祭り</b>で話題に出てたので、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>そのへんも叶えたい。</p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+</body>
+</html>
