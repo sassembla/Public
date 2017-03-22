@@ -1,0 +1,149 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1504.81">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Sans'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; background-color: #ebebeb}
+    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; background-color: #ebebeb; min-height: 18.0px}
+    span.s1 {font: 12.0px Helvetica}
+    span.s2 {font: 12.0px 'Hiragino Sans'}
+    span.s3 {background-color: #ebebeb}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>タップしたらイベントを下位に伝搬しつつ消えるボタンの作り方</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>簡単にやる方法があったので書く。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>リポジトリはこちら。</p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>Raycaster</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/Raycaster">https://github.com/sassembla/Raycaster</a></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>需要とか説明とか</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>なんでもいいからどこか押したら消えるウィンドウ</p>
+<p class="p3"><span class="Apple-tab-span">	</span>(しかも押した時の動作は打ち消さないでほしいみたいな狂ったニーズがあるとき)</p>
+<p class="p3"><span class="Apple-tab-span">	</span>に使える。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>こんなGUIがあったとして、</p>
+<p class="p4"><span class="Apple-tab-span">	</span><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202017-03-22%2022.41.16.png" alt="スクリーンショット 2017-03-22 22.41.16.png"></p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>一番手前のが今回の話の対象で、これもボタンになっていて、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・押す(touchEndとかUp)と消える</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・もしも押した位置が下のボタンにも入っていれば、ボタンを押したことにする</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>というキツいニーズを持っているとしよう。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>そんなんねーだろって思うんだけど、ある。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>こういうGUIを作りたいケース。</p>
+<p class="p4"><span class="Apple-tab-span">	</span><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202017-03-22%2022.49.39.png" alt="スクリーンショット 2017-03-22 22.49.39.png"></p>
+<p class="p5"><br></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span></span>まあ、さっきまで控えめだった半透明ボタンが画面に覆いかぶさってる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>これは、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・手前の白いボタンをタップしたらボタンについてるイベントが着火</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・それ以外のところ(半透明)をクリックしたら、消えつつ下のイベントが着火</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>みたいな感じで、ようは</p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>「白いボタンを押してイベントを発生させる or それ以外の範囲を押すと半透明や白いボタンが消えつつ下のボタンを押したことにする」</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>というような、排他的な領域のタッチ取得 + イベント発生に使える。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>半透明のやつが全透明だったらもっとわかりやすいかも。</p>
+<p class="p4"><span class="Apple-tab-span">	</span><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202017-03-22%2022.51.34.png" alt="スクリーンショット 2017-03-22 22.51.34.png"></p>
+<p class="p3"><span class="Apple-tab-span">	</span>この、青い丸で四角く括られてる部位を触ると、白いボタンが消えてこの領域も消えて、下のボタンを押したことになる、みたいなのが理想ですと。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>理想のイベント発生順</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・半透明のところをクリックすると、半透明と白いボタンが消える</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・もし消すときにタップした位置にボタンがあったら、それを発動させる</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>実装の情報</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>UnityでのuGUIは便利なもんで、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>EventSystemを使っていてくれる場合は非常に簡単にタッチイベントを遮ったり偽造したりすることができる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>具体的には以下の方法を使う。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>1.でかいボタンを作る(半透明のやつ)</p>
+<p class="p3"><span class="Apple-tab-span">	</span>2.ボタンに次のようなコードを貼る</p>
+<p class="p6">using System.Collections.Generic;</p>
+<p class="p6">using UnityEngine;</p>
+<p class="p6">using UnityEngine.EventSystems;</p>
+<p class="p7"><br></p>
+<p class="p6">public class RaycastPreventor : MonoBehaviour {</p>
+<p class="p7"><br></p>
+<p class="p6">    public void CatchTap () {</p>
+<p class="p6">        // ここで、発生したイベントはなんなんだろう。というのを型で判断できそう。今後見てみる。</p>
+<p class="p7"><br></p>
+<p class="p6">        this.gameObject.SetActive(false);</p>
+<p class="p7"><br></p>
+<p class="p6">        var tapPos = new Vector3();</p>
+<p class="p6">        if (0 &lt; Input.touchCount) {</p>
+<p class="p6">            tapPos = Input.touches[0].position;</p>
+<p class="p6">        } else {</p>
+<p class="p6">            tapPos = Input.mousePosition;</p>
+<p class="p6">        }</p>
+<p class="p6">        </p>
+<p class="p6">        // 新規のpointerイベントを生成する</p>
+<p class="p6">        var newPointerEvent = new PointerEventData(EventSystem.current);</p>
+<p class="p6">        </p>
+<p class="p6">        // ここでの位置のセットが必須。</p>
+<p class="p6">        newPointerEvent.position = tapPos;</p>
+<p class="p6">        </p>
+<p class="p6">        var objectsHit = new List&lt;RaycastResult&gt;();</p>
+<p class="p6">        EventSystem.current.RaycastAll(newPointerEvent, objectsHit);</p>
+<p class="p7"><br></p>
+<p class="p6">        foreach (var objectHit in objectsHit) {</p>
+<p class="p6">            // 同種のイベントを受けられるやつだけを通す。</p>
+<p class="p6">            if (!ExecuteEvents.CanHandleEvent&lt;IPointerClickHandler&gt;(objectHit.gameObject)) {</p>
+<p class="p6">                continue;</p>
+<p class="p6">            }</p>
+<p class="p7"><br></p>
+<p class="p6">            // 最初の一つにだけ、イベントを送り込む。</p>
+<p class="p6">            ExecuteEvents.Execute&lt;IPointerClickHandler&gt;(objectHit.gameObject, cursor, (handler, eventData) =&gt; handler.OnPointerClick((PointerEventData)eventData));</p>
+<p class="p7"><br></p>
+<p class="p6">            //一件通ったらもう着火する必要がないので、逃げる。</p>
+<p class="p6">            break;</p>
+<p class="p6">        }</p>
+<p class="p6">    }</p>
+<p class="p6">}</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>3.ボタンのOnClickイベントのとこに、CatchTapメソッドを貼る。</p>
+<p class="p4"><span class="s2"><span class="Apple-tab-span">	</span></span><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202017-03-22%2022.54.44.png" alt="スクリーンショット 2017-03-22 22.54.44.png"></p>
+<p class="p5"><br></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span></span>これで、実装自体は終わり。やってることの紹介は以下。</p>
+<p class="p5"><br></p>
+<p class="p5"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b>実装内容紹介</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>次のような動作になってる。</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>1.CatchTap<span class="s2">着火</span></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>2.</span><span class="s3">this.gameObject.SetActive(false);</span><span class="s1"> </span>でこのオブジェクト自体を無効化 -&gt;</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="s1">3.</span><span class="s3">tapPos</span>を取得して、pointerEventを新規作成したものの位置に適応し、同じ位置でのイベントを作成 -&gt;</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="s1">4.</span><span class="s3">EventSystem.current.RaycastAll(newPointerEvent, objectsHit);</span> で、このイベントにヒットするオブジェクト一覧を取得 -&gt;</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="s1">5.</span>取得したオブジェクトに対して、該当するイベントを受けられるかどうかチェック -&gt;</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="s1">6.</span>イベントを受けられる物体を見つけたら、最初の一つだけにイベントを着火して完</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>調べるのに苦労したんだけどうーーーむ、APIドキュメントにサンプルコードが少ないのがキツいのかなあ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>継承関係とかはそりゃまあAPIドキュメント見ればわかるんだけど、利用例が一切ないコードを型情報からつなぎ合わせたり</p>
+<p class="p3"><span class="Apple-tab-span">	</span>欲しい動きをしそうなメソッドを探すのが大変だった。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>GraphicRaycasterを使って云々したりもできるので便利。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+</body>
+</html>
