@@ -16,7 +16,6 @@
     p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; background-color: #ebebeb; min-height: 18.0px}
     span.s1 {font: 12.0px Helvetica}
     span.s2 {font: 12.0px 'Hiragino Sans'}
-    span.s3 {background-color: #ebebeb}
     span.Apple-tab-span {white-space:pre}
   </style>
 </head>
@@ -111,7 +110,7 @@
 <p class="p6">            }</p>
 <p class="p7"><br></p>
 <p class="p6">            // 最初の一つにだけ、イベントを送り込む。</p>
-<p class="p6">            ExecuteEvents.Execute&lt;IPointerClickHandler&gt;(objectHit.gameObject, cursor, (handler, eventData) =&gt; handler.OnPointerClick((PointerEventData)eventData));</p>
+<p class="p6">            ExecuteEvents.Execute&lt;IPointerClickHandler&gt;(objectHit.gameObject, newPointerEvent, (handler, eventData) =&gt; handler.OnPointerClick((PointerEventData)eventData));</p>
 <p class="p7"><br></p>
 <p class="p6">            //一件通ったらもう着火する必要がないので、逃げる。</p>
 <p class="p6">            break;</p>
@@ -129,10 +128,10 @@
 <p class="p3"><span class="Apple-tab-span">	</span>次のような動作になってる。</p>
 <p class="p5"><br></p>
 <p class="p4"><span class="Apple-tab-span">	</span>1.CatchTap<span class="s2">着火</span></p>
-<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>2.</span><span class="s3">this.gameObject.SetActive(false);</span><span class="s1"> </span>でこのオブジェクト自体を無効化 -&gt;</p>
-<p class="p3"><span class="Apple-tab-span">	</span><span class="s1">3.</span><span class="s3">tapPos</span>を取得して、pointerEventを新規作成したものの位置に適応し、同じ位置でのイベントを作成 -&gt;</p>
-<p class="p3"><span class="Apple-tab-span">	</span><span class="s1">4.</span><span class="s3">EventSystem.current.RaycastAll(newPointerEvent, objectsHit);</span> で、このイベントにヒットするオブジェクト一覧を取得 -&gt;</p>
-<p class="p3"><span class="Apple-tab-span">	</span><span class="s1">5.</span>取得したオブジェクトに対して、該当するイベントを受けられるかどうかチェック -&gt;</p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>2.</span>this.gameObject.SetActive(false);<span class="s1"> </span>でこのオブジェクト自体を無効化</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="s1">3.</span>tapPosを取得して、pointerEventを新規作成したものの位置に適応し、同じ位置でのイベントを作成</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="s1">4.</span>EventSystem.current.RaycastAll(newPointerEvent, objectsHit); で、このイベントにヒットするオブジェクト一覧を取得</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="s1">5.</span>取得したオブジェクトに対して、該当するイベントを受けられるかどうかチェック</p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="s1">6.</span>イベントを受けられる物体を見つけたら、最初の一つだけにイベントを着火して完</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>調べるのに苦労したんだけどうーーーむ、APIドキュメントにサンプルコードが少ないのがキツいのかなあ。</p>
