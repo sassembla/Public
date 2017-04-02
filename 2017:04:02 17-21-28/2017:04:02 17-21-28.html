@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1504.82">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic Pro'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic Pro'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic Pro'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic Pro'; background-color: #ebebeb}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px 'Hiragino Kaku Gothic Pro'; color: #000000; background-color: #ffffff; min-height: 17.0px}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px 'Hiragino Kaku Gothic Pro'; color: #000000; background-color: #ffffff}
+    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px 'Hiragino Kaku Gothic Pro'; color: #000000; background-color: #ebebeb}
+    p.p8 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px 'Hiragino Kaku Gothic Pro'; color: #000000}
+    span.s1 {font-variant-ligatures: no-common-ligatures}
+    span.s2 {font-variant-ligatures: no-common-ligatures; background-color: #ffffff}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>EventSystemのExecutionOrderに勝つ</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ほら、ScriptのExecutionOrderってあるじゃない。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、EventSystemのExecutionOrderは公開されてないので、調べてみた。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>前提知識</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>UnityのEventSystemは、ざっくり書くと次のような構造でイベントを処理している。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>1.EventSystemのUpdateで毎フレーム処理を開始</p>
+<p class="p3"><span class="Apple-tab-span">	</span>2.InputModule系でInput系の入力(Input.GetMouseButtonUpとか)を解析</p>
+<p class="p3"><span class="Apple-tab-span">	</span>3.奥深くにあるExecuteEvents系を着火</p>
+<p class="p3"><span class="Apple-tab-span">	</span>4.処理をUnityEventの系統に変換し、対象となるオブジェクトのメソッドを実行</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、このEventSystemのUpdateが発生する順番が、暗黙でべらぼうに高速なのがわかったっていう話。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>調べ方</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>EventSystemの中で、次のような、StandaloneInputModuleを拡張したクラスを作って、その実行順を上回れないかどうか試す。</p>
+<p class="p2"><br></p>
+<p class="p4">public class MyInputModule : StandaloneInputModule {</p>
+<p class="p4"><span class="Apple-converted-space">        </span>public override void Process () {</p>
+<p class="p4"><span class="Apple-converted-space">            </span>Debug.Log("processing. count:" + Time.frameCount + " button:" + Input.GetMouseButtonUp(0));</p>
+<p class="p4"><span class="Apple-converted-space">            </span>base.Process();</p>
+<p class="p4"><span class="Apple-converted-space">        </span>}</p>
+<p class="p4"><span class="Apple-converted-space"> </span>}</p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p6"><span class="s1"><span class="Apple-tab-span">	</span>で、実際に上回るには、いろいろな方法で実行順をセットできるんだけど、</span></p>
+<p class="p6"><span class="s1"><span class="Apple-tab-span">	</span>参考：</span></p>
+<p class="p6"><span class="s1"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>【Unity】コンポーネントのイベント実行順についてのTips</b></span></p>
+<p class="p6"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://tsubakit1.hateblo.jp/entry/2017/02/05/003714">http://tsubakit1.hateblo.jp/entry/2017/02/05/003714</a></span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p6"><span class="s1"><span class="Apple-tab-span">	</span>個人的な事情により、metadataを書き換える方法で臨んでみる。</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p6"><span class="s1"><span class="Apple-tab-span">	</span>まあこんなmetadataを持つようなMonoBehaviourを継承したインスタンスがあったとして、</span></p>
+<p class="p7"><span class="s1">fileFormatVersion: 2</span></p>
+<p class="p7"><span class="s1">guid: d539e8a5875684b56879dabc6b0f9847</span></p>
+<p class="p7"><span class="s1">timeCreated: 1491113951</span></p>
+<p class="p7"><span class="s1">licenseType: Pro</span></p>
+<p class="p7"><span class="s1">MonoImporter:</span></p>
+<p class="p7"><span class="s1"><span class="Apple-converted-space">  </span>serializedVersion: 2</span></p>
+<p class="p7"><span class="s1"><span class="Apple-converted-space">  </span>defaultReferences: []</span></p>
+<p class="p7"><span class="s1"><span class="Apple-converted-space">  </span>executionOrder: 0</span></p>
+<p class="p7"><span class="s1"><span class="Apple-converted-space">  </span>icon: {instanceID: 0}</span></p>
+<p class="p7"><span class="s1"><span class="Apple-converted-space">  </span>userData:<span class="Apple-converted-space"> </span></span></p>
+<p class="p7"><span class="s1"><span class="Apple-converted-space">  </span>assetBundleName:<span class="Apple-converted-space"> </span></span></p>
+<p class="p7"><span class="s1"><span class="Apple-converted-space">  </span>assetBundleVariant:<span class="Apple-converted-space"> </span></span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p6"><span class="s1"><span class="Apple-tab-span">	</span>このexecutionOrderのところをいじればいいわけで。簡単。</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p6"><span class="s1"><b>いじってみた</b></span></p>
+<p class="p6"><span class="s1"><span class="Apple-tab-span">	</span>-10 x</span></p>
+<p class="p6"><span class="s1"><span class="Apple-tab-span">	</span>-100 x</span></p>
+<p class="p6"><span class="s1"><span class="Apple-tab-span">	</span>-999 x</span></p>
+<p class="p8"><span class="s2"><span class="Apple-tab-span">	</span>-1000 o</span></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>-1000になったところで、EventSystemと同列の時間軸に並ぶ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、あとはGameObjectの生成順の話になるので、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>EventSystemより高速にGameObjectを生成できれば勝てる。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+</body>
+</html>
