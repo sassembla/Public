@@ -1,0 +1,176 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1504.82">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Sans'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; min-height: 18.0px}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; background-color: #ebebeb}
+    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; background-color: #ebebeb; min-height: 18.0px}
+    p.p8 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; background-color: #ebebeb}
+    span.s1 {font: 22.0px Helvetica}
+    span.s2 {font: 12.0px Helvetica}
+    span.s3 {font: 12.0px 'Hiragino Sans'}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>オレオレ言語の字句解析</b><span class="s1"><b> for </b></span><b>いろんなプラットフォームについて</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span>Scala</span>でパーサコンビネータ作った以外で、ちゃんと言語の字句解析を行なったことがないのでやってみている。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>参考</p>
+<p class="p4"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>bison/flex(yacc/lex)</b><span class="s3"><b>について</b></span></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://hp.vector.co.jp/authors/VA022047/linux/bison.html">http://hp.vector.co.jp/authors/VA022047/linux/bison.html</a></p>
+<p class="p2"><br></p>
+<p class="p4"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>flex man</b></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://dinosaur.compilertools.net/flex/manpage.html">http://dinosaur.compilertools.net/flex/manpage.html</a></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>道具と使用場所に関する分析</b></p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>やるべきことは</p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span>1.</span>字句解析機を出力する</p>
+<p class="p4"><span class="Apple-tab-span">	</span>2.<span class="s3">使う</span></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>なのだけれど、実際に使われる環境はどんななんだろうか。字句解析が行われるのが確定している環境は、</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="s3">・</span>Unity</p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>・ブラウザ</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>という感じで、ようはライブラリにできると良さそう。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>適当に<span class="s2">Docker</span>上の<span class="s2">Linux</span>から吐く。最終的にブラウザで使うなら<span class="s2">wasm</span>にすればよかろう。<span class="s2">c to wasm</span>はどっかあった気がする。</p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>そうでなくても<span class="s2">LLVM</span>関連で出力できそう。</p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span>Unity</span>向けであれば<span class="s2">C#</span>の<span class="s2">IL</span>か、やはりライブラリを出力したいところ。これにはどういう手段があるだろうか。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>パースするべきものの設定と</b><span class="s2"><b>flex</b></span><b>の実行</b></p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>こんな感じの.lファイルをつくる。内容はmanに書いてあったやつ。</p>
+<p class="p5"><br></p>
+<p class="p6">%option noyywrap</p>
+<p class="p6">/* scanner for a toy Pascal-like language */</p>
+<p class="p7"><br></p>
+<p class="p6">%{</p>
+<p class="p6">/* need this for the call to atof() below */</p>
+<p class="p6">#include &lt;math.h&gt;</p>
+<p class="p6">%}</p>
+<p class="p7"><br></p>
+<p class="p6">digit <span class="Apple-converted-space">            </span>[0-9]</p>
+<p class="p6">alpha <span class="Apple-converted-space">            </span>[A-Za-z_]*</p>
+<p class="p6">alpha_num <span class="Apple-converted-space">        </span>({alpha}|{digit})</p>
+<p class="p6">/*</p>
+<p class="p6"><span class="Apple-tab-span">	</span>こういうコメントは存在できるのか。</p>
+<p class="p6">*/</p>
+<p class="p6">%%</p>
+<p class="p7"><br></p>
+<p class="p6">{digit}+ {</p>
+<p class="p6"><span class="Apple-tab-span">	</span>printf( "An integer: %s (%d)\n", yytext, atoi( yytext ) );</p>
+<p class="p6">}</p>
+<p class="p7"><br></p>
+<p class="p6">{digit}+"."{digit}*<span class="Apple-tab-span">	</span>{</p>
+<p class="p6"><span class="Apple-tab-span">	</span>printf( "A float: %s (%g)\n", yytext, atof( yytext ) );</p>
+<p class="p6">}</p>
+<p class="p7"><br></p>
+<p class="p6">if|then|begin|end|procedure|function {</p>
+<p class="p6"><span class="Apple-tab-span">	</span>printf( "A keyword: %s\n", yytext );</p>
+<p class="p6">}</p>
+<p class="p7"><br></p>
+<p class="p6">{alpha} printf( "An identifier: %s\n", yytext );</p>
+<p class="p7"><br></p>
+<p class="p6">"+"|"-"|"*"|"/" printf( "An operator: %s\n", yytext );</p>
+<p class="p7"><br></p>
+<p class="p6">"{"[^}\n]*"}" /* eat up one-line comments */</p>
+<p class="p7"><br></p>
+<p class="p6">[ \t\n]+ /* eat up whitespace */</p>
+<p class="p7"><br></p>
+<p class="p6">. printf( "Unrecognized character: %s\n", yytext );</p>
+<p class="p7"><br></p>
+<p class="p6">%%</p>
+<p class="p7"><br></p>
+<p class="p6">main( argc, argv )</p>
+<p class="p6">int argc;</p>
+<p class="p6">char **argv;</p>
+<p class="p6">{</p>
+<p class="p6"><span class="Apple-tab-span">	</span>++argv, --argc;<span class="Apple-tab-span">	</span>/* skip over program name */</p>
+<p class="p6"><span class="Apple-tab-span">	</span>if ( argc &gt; 0 ) {</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>yyin = fopen( argv[0], "r" );</p>
+<p class="p6"><span class="Apple-tab-span">	</span>} else {</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>yyin = stdin;</p>
+<p class="p6"><span class="Apple-tab-span">	</span>}</p>
+<p class="p7"><br></p>
+<p class="p6"><span class="Apple-tab-span">	</span>yylex();</p>
+<p class="p6">}</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>うん、まだ全然わかんないや。とりあえずmanのいうとおりに進める。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p8">flex parsel.l</p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>で、<span class="s2">lex.yy.c</span>というcコードが出力される。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p8">gcc lex.yy.c</p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>それをgccとかでコンパイル。Macで実行するとclangが使われる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>特に名前を指定してないので、コンパイル結果としてa.outファイルが出力される。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>ここでまあ、%option noyywrap とかを.lファイルの行頭に書いておくと、flexさんがyywrap(n)というdefineを追加してくれる。</p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>今はまず字句解析の結果だけが欲しいので、これで動かす。</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p3"><b>どんなものがパースされてどうなるんだろう</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、manに書いてあったサンプルがpascal-likeとのことだったので、雑にhello world + アルファを食わせてみる。</p>
+<p class="p5"><br></p>
+<p class="p3">hello.pas</p>
+<p class="p6">program Hello;</p>
+<p class="p7"><br></p>
+<p class="p6">begin</p>
+<p class="p6"><span class="Apple-converted-space">  </span>writeln('Hello, world.');</p>
+<p class="p6"><span class="Apple-converted-space">  </span>Sentinel =0.0;</p>
+<p class="p6">end.</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>で、</p>
+<p class="p8">./a.out hello.pas</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>とか動かすと、</p>
+<p class="p6">An identifier: program</p>
+<p class="p6">An identifier: Hello</p>
+<p class="p6">Unrecognized character: ;</p>
+<p class="p6">A keyword: begin</p>
+<p class="p6">An identifier: writeln</p>
+<p class="p6">Unrecognized character: (</p>
+<p class="p6">Unrecognized character: '</p>
+<p class="p6">An identifier: Hello</p>
+<p class="p6">Unrecognized character: ,</p>
+<p class="p6">An identifier: world</p>
+<p class="p6">Unrecognized character: .</p>
+<p class="p6">Unrecognized character: '</p>
+<p class="p6">Unrecognized character: )</p>
+<p class="p6">Unrecognized character: ;</p>
+<p class="p6">An identifier: Sentinel</p>
+<p class="p6">Unrecognized character: =</p>
+<p class="p6">A float: 0.0 (0)</p>
+<p class="p6">Unrecognized character: ;</p>
+<p class="p6">A keyword: end</p>
+<p class="p6">Unrecognized character: .</p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>、、、うん、まあ、なんていうか、うん。なるほど。</p>
+<p class="p4"><span class="Apple-tab-span">	</span>pascal like<span class="s3">だからな。</span></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>ちょっと改良して構文と内容の関連性がわかった。</p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>で、やりたいことを実装に移す。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span>Emit2501</span>形式では、時間経過的な駆動のために必要なパラメータと、実際にメソッドを着火するための機構が連結してある。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>実行系もサクッと作ってしまったので、まあ、なんというか汚い。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>これを綺麗にしていく第一歩として、パーサを実装していろんな環境で使えるようにしてみよう、という感じ。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>とりあえずだいたいの部分は<span class="s2">lex</span>で字句解析できるようになった。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>やったぜ！</p>
+</body>
+</html>
