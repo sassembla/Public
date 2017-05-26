@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1504.83">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Sans'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+    span.s1 {font: 22.0px Helvetica}
+    span.s2 {font: 12.0px Helvetica}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><span class="s1"><b>Oculus Medium</b></span><b>で、レイヤーの回転をデフォルト状態に合わせて、左右反転がズレなくする</b></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ちょっと悩んでたMediumのレイヤー移動問題に解を見つけた。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>簡潔にいうと、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・Flipで左右反転してるはずなんだけど意図しないところに反転するのを解消する</p>
+<p class="p3"><span class="Apple-tab-span">	</span>という感じ</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>編集中にレイヤーに回転を加えた状態でFlipを行うと、意図しないところに出る</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これがまあわかりにくい事象で、</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>1.まあ適当に指を作る。</p>
+<p class="p4"><img src="2.png" alt="2.png"></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>2.並べて適当にリサイズ</p>
+<p class="p4"><img src="3.png" alt="3.png"></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>3.手のひらを作る</p>
+<p class="p4"><img src="sassembla_2017-05-26_08-49-46.png" alt="sassembla_2017-05-26_08-49-46.png"></p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>とかやったあとに胴体+肩を作って、さっき作った手を持ってきて、、</p>
+<p class="p4"><img src="sassembla_2017-05-26_09-00-53.png" alt="sassembla_2017-05-26_09-00-53.png"></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>手の位置を合わせてくっつけて、さて</p>
+<p class="p4"><img src="sassembla_2017-05-26_09-02-42.png" alt="sassembla_2017-05-26_09-02-42.png"></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>handのレイヤーを選択、DuplicateしてFlip! 右手の位置に手が、、とおもいきや、そうはいかず。</p>
+<p class="p4"><img src="sassembla_2017-05-26_09-03-15.png" alt="sassembla_2017-05-26_09-03-15.png"></p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>これ、<span class="s2">hand</span>のレイヤーを回転させているから発生する現象で、</p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>「<span class="s2">hand</span>のレイヤー内ではX軸を中心にFlipがちゃんと発生している。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>handのレイヤーは回転が加わっているため、点線の位置あたりにFlipの軸が存在するのだ。</p>
+<p class="p4"><img src="sassembla_2017-05-26_09-03-152.png" alt="sassembla_2017-05-26_09-03-152.png"></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、このままだと左右対称の位置、右手の位置にhandを左右対称コピーして出すことができない。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>自由な移動でなんとかすることも可能だけど、まあズレる。手でやったらズレるよなあまあ。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>というわけで、handのレイヤーの回転をデフォルトの軸で上書きして、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>duplicate -&gt; Flipで右手が出るようにする。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>まずは新規レイヤーを作成(Layer 54がhandのレイヤー)</p>
+<p class="p4"><img src="sassembla_2017-05-26_09-22-21.png" alt="sassembla_2017-05-26_09-22-21.png"></p>
+<p class="p5"><br></p>
+<p class="p5"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>次にhandのレイヤーをduplicateし(Layer55)、54-55をMergeする。</p>
+<p class="p4"><img src="sassembla_2017-05-26_09-22-44.png" alt="sassembla_2017-05-26_09-22-44.png"></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>この状態でFlipをかけると、新規レイヤー = デフォルトの無回転の状態でFlipが発生するため、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>めっちゃいい感じに右手が完成する。</p>
+<p class="p4"><img src="sassembla_2017-05-26_09-22-54.png" alt="sassembla_2017-05-26_09-22-54.png"></p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>もっとなんか変わった事象が起こる時があって、そのへんは追い中。</p>
+</body>
+</html>
