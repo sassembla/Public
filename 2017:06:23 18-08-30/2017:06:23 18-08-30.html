@@ -30,6 +30,13 @@
 <p class="p3"><span class="Apple-tab-span">	</span>適当にこうしとけば逃げ場が作れるな～みたいな感じの情報をまとめておく。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
+<p class="p3"><b>サンプルはこちら</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>DoTweenTest</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/DoTweenTest">https://github.com/sassembla/DoTweenTest</a></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>DOTweenはもちろん入ってないので自分で入れて。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
 <p class="p3"><b>Sequence使お</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>基本的な指針として。</p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://stackoverflow.com/questions/37214649/how-to-kill-current-running-dotween-sequence-in-unity3d">https://stackoverflow.com/questions/37214649/how-to-kill-current-running-dotween-sequence-in-unity3d</a></p>
@@ -47,10 +54,28 @@
 <p class="p3"><span class="Apple-tab-span">	</span>というかこれ以外の方法だとグローバル空間のDoTweenを使ってしまうような感じで、</p>
 <p class="p3"><span class="Apple-tab-span">	</span>他所のアニメーションの影響を受けて止まるとかがあるって聞いたんだけどマジ？</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>ちなみにKillするなら同時に「こうなっててほしい位置」とかを手でセットしよう。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>KillとかCompleteではセットしてくれない。</p>
+<p class="p2"><br></p>
+<p class="p3"><b>KillとCompleteの差<span class="Apple-tab-span">	</span></b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>sequenceを使うことで、KillしたりCompleteしたことにしたりできる。いいね。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、これらには差がある。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>Killで終了させた場合、開始時に指定した完了時パラメータが調整されない。</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>Completeでは、開始時に指定した完了時地点をセットしてくれる。</b></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>サンプル作っといた。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>KillDoesntFixPosition</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/DoTweenTest/blob/master/Assets/TestCase/KillDoesntFixPosition.cs">https://github.com/sassembla/DoTweenTest/blob/master/Assets/TestCase/KillDoesntFixPosition.cs</a></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>CompleteDoesFixPosition</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/DoTweenTest/blob/master/Assets/TestCase/CompleteDoesFixPosition.cs">https://github.com/sassembla/DoTweenTest/blob/master/Assets/TestCase/CompleteDoesFixPosition.cs</a><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
+<p class="p3"><b>最大でもN個まではエフェクト出すんだけどそれ以降出たら消す</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>というまあよくあるやつはこんな感じに書くと楽かもしれない。</p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>CascadingEffectSample.cs</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/DoTweenTest/blob/master/Assets/TestCase/CascadingEffectSample.cs">https://github.com/sassembla/DoTweenTest/blob/master/Assets/TestCase/CascadingEffectSample.cs</a></p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 </body>
