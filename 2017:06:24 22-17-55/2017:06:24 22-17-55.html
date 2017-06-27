@@ -12,9 +12,12 @@
     p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'}
     p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; min-height: 18.0px}
     p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px Menlo; color: #000000; background-color: #ebebeb}
+    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px Menlo; color: #000000; background-color: #ebebeb; min-height: 13.0px}
     span.s1 {font: 22.0px 'Hiragino Sans'}
     span.s2 {font: 12.0px Helvetica}
     span.s3 {font: 12.0px 'Hiragino Sans'}
+    span.s4 {font-variant-ligatures: no-common-ligatures}
     span.Apple-tab-span {white-space:pre}
   </style>
 </head>
@@ -46,5 +49,28 @@
 <p class="p4"><br></p>
 <p class="p4"><br></p>
 <p class="p3">わりかしスッキリした。式年遷宮感ある。</p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p3"><b>備考</b></p>
+<p class="p6"><span class="s4">cat &lt;&lt; EOF &gt; nginx.conf</span></p>
+<p class="p7"><span class="s4"></span><br></p>
+<p class="p6"><span class="s4">server {</span></p>
+<p class="p7"><span class="s4"></span><br></p>
+<p class="p6"><span class="s4"><span class="Apple-converted-space">       </span>listen 80;</span></p>
+<p class="p7"><span class="s4"></span><br></p>
+<p class="p6"><span class="s4"><span class="Apple-converted-space">       </span>location / {</span></p>
+<p class="p7"><span class="s4"></span><br></p>
+<p class="p6"><span class="s4"><span class="Apple-converted-space">               </span>try_files $uri $uri/ =404;</span></p>
+<p class="p7"><span class="s4"></span><br></p>
+<p class="p6"><span class="s4"><span class="Apple-converted-space">       </span>}</span></p>
+<p class="p7"><span class="s4"></span><br></p>
+<p class="p6"><span class="s4">}</span></p>
+<p class="p7"><span class="s4"></span><br></p>
+<p class="p6"><span class="s4">EOF</span></p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>みたいな書き方楽でいいな。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>そのうち更新しよう。</p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
 </body>
 </html>
