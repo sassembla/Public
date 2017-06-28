@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1504.83">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'}
+    span.s1 {font: 22.0px 'Hiragino Sans'}
+    span.s2 {color: #e32400}
+    span.s3 {color: #9a244f}
+    span.s4 {color: #9929bd}
+    span.s5 {color: #5e30eb}
+    span.s6 {font: 15.0px 'Hiragino Sans'; color: #5e30eb}
+    span.s7 {font: 20.0px 'Hiragino Sans'; color: #5e30eb}
+    span.s8 {font: 25.0px 'Hiragino Sans'; color: #5e30eb}
+    span.s9 {font: 30.0px 'Hiragino Sans'; color: #5e30eb}
+    span.s10 {color: #3a88fe}
+    span.s11 {color: #00c7fc}
+    span.s12 {color: #77bb41}
+    span.s13 {text-decoration: underline ; color: #ff2600}
+    span.s14 {color: #c3d117}
+    span.s15 {color: #d29d00}
+    span.s16 {color: #ff6a00}
+    span.s17 {color: #d58400}
+    span.s18 {color: #000000}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>publi.sh</b><span class="s1"><b>の代替を作る</b></span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>publi.shとは、今このブログっぽいものをrtf -&gt; htmlへと変換してるツール。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>まんまshell。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、さすがに拡張が無理なのと、なんらか見やすいようにしたいね～という思いがあり、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>式年遷宮を考え中。</p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>現状のpubli.sh(というかhtmlnize.shとindexize.sh)</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/Public/blob/gh-pages/publi.sh">https://github.com/sassembla/Public/blob/gh-pages/publi.sh</a><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/Public/blob/gh-pages/htmlnize.sh">https://github.com/sassembla/Public/blob/gh-pages/htmlnize.sh</a></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/Public/blob/gh-pages/indexize.sh">https://github.com/sassembla/Public/blob/gh-pages/indexize.sh</a></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>既存仕様のいろいろ</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>rtfベース</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>記述はrtf or rtfdで行なっている。というかMacのTextEditっていうアプリが高性能で、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>画像だろうがレイアウトだろうがなんだろうが自由にサクッとなんとかしてくれるんで、そのへんに依存している。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>絶対にhtmlを書きたくない。<span class="s2">文</span><span class="s3">字</span><span class="s4">の</span><span class="s5">色</span><span class="s6">や</span><span class="s7">サ</span><span class="s8">イ</span><span class="s9">ズ</span><span class="s10">、<b>強調ぐあい</b>な</span><span class="s11">ん</span><span class="s12">て</span><span class="s13"><b>GUIから</b></span><span class="s14">自</span><span class="s15">由</span><span class="s16">に</span><span class="s17">変</span><span class="s18">えられてなんぼだ。</span></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>html変換</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>htmlnize.shってのでやってる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/Public/blob/gh-pages/htmlnize.sh">https://github.com/sassembla/Public/blob/gh-pages/htmlnize.sh</a></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>TextEditで出力したrtfをhtmlに変換するところはshellで行なっている。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>特定のフォルダにrtfを入れた状態で変換shellを走らせると、rtf/rtfd2htmlが走る。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>画像が一切含まれないrtfはそのままhtmlへと変換される。</p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>画像が含まれるrtf = rtfdはこれもともとフォルダ的な扱いでデータを保持するので、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>html化した際はフォルダが露出し、使用している画像などが画像として出てくる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>で、rtfd-&gt;html化された場合、html内のパスが自動的にフォルダ内の画像パスを指すようになっている。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>これによって、アップロードされたあとの画像パスがいい感じになる。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>自動インデックス作成</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>indexize.shってのでやってる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/Public/blob/gh-pages/indexize.sh">https://github.com/sassembla/Public/blob/gh-pages/indexize.sh</a></p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>html化された記事からタイトルを取り出して、その日付とかを元にリンクというか記事一覧インデックスを作成する。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>無理やりやってる。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>バージョン管理</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>publi.shの対象パスをgithubで管理してるので、まあ、楽。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>競合というか制作動機</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>octpressとかまあほんとにそのへんいろいろあるんだけど、ブログである必要はないという異様な需要に基づくいらない機能がいっぱいあるんで、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>それらをカスタマイズするのが辛いので作った。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3">つづく。</p>
+<p class="p2"><br></p>
+</body>
+</html>
