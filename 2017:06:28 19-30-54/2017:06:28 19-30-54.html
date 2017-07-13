@@ -1,0 +1,186 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1504.83">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; min-height: 18.0px}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    span.s1 {font: 22.0px 'Hiragino Sans'}
+    span.s2 {font: 12.0px Helvetica}
+    span.s3 {font: 12.0px 'Hiragino Sans'}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>Autoya Information</b><span class="s1"><b>を仕上げる</b></span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>なかなか大変なので記事にすることでモチベを上げる。という不思議な試み。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span>Autoya</span>っていうフレームワークがあるんだけど、まあ、そこで、<span class="s2"><b>WebView</b></span><b>を使いたくないんだよ。</b></p>
+<p class="p4"><br></p>
+<p class="p5"><b><span class="Apple-tab-span">	</span>Autoya</b></p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/Autoya">https://github.com/sassembla/Autoya</a></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="s3">で、この</span>Information<span class="s3">という機能で、</span></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>WebViewなしでhtml/markdownをuGUIパーツを使って描画する</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>みたいなことをやっていて。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>その中でそろそろリファクタリングしようなみたいな感じになってきたので、そのまとめとしてこの記事があるっていうね。</p>
+<p class="p4"><br></p>
+<p class="p4"><b></b><br></p>
+<p class="p3"><b>心意気</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>WebViewを使わずにそれっぽいビューを表示したい。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>markdownとかhtmlの描画ができると嬉しい。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>その際にjsは完全に無視、cssは別の方法で実装、レイアウトにはUnityのuGUIから独自タグを作り出してそれを使う、という感じに殴りつけている。</p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p3"><b>なぜWebViewを避けるのか</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・イベントフックが毎回面倒い</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・遅い</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・たかだかお知らせとかを出すためには機能過多</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・遅い</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・イベント入力位置とかビューの位置情報とかをUnity側と同期するのがしんどい</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・遅い</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・プラットフォームを跨いだ実装が存在しない</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・遅い</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・各種exploitの源になることができる</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・遅い</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・機能の初期化や更新などがいい感じに重い</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・あと遅い</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>などの理由があり、あと根本的に<b>遅い</b>ため、WebViewへの依存を殺傷することを真面目に考えるに至った。</p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p3"><b>既存構造</b></p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>・<span class="s2">md/html</span>を<span class="s2">parse</span>して<b>Layout</b>(レイアウト計算)する</p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>・Layout済みのビューを<b>Materialize</b>(実体化 = uGUI化)する</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>という感じで、まずLayout -&gt; Materializeという順番で動かすことだけを考えて実装していた。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>まあこれがうまくいかないケースが出てきた。</p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p3"><b>Problem1:Layoutにロード後の素材の情報が必須</b></p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>画面幅だけを与えた画像<span class="s2">(width=100%</span>、height指定なし)とかに対して、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="s2">width</span>を画面幅で出すことは容易なのだけれど、画像の高さが未指定なので、高さを自動的に算出することができない。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>仕様的には、画像のwidthが100%であれば、heightは画像のアスペクト比に応じて決定される。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>このため、画像のアスペクト比が必要になる。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、Layout機構ではまだ画像をDLしてないので、困った、っていう。</p>
+<p class="p4"><span class="Apple-tab-span">	</span></p>
+<p class="p4"><br></p>
+<p class="p3"><b>P1解決策</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Layoutを遅延させて画像高さを得るか。まあそれで損することは特にないような気がする。</p>
+<p class="p4"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・Layoutにローディング要素のローディングを盛り込む</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・Materializeの代わりにFocusみたいな概念を持ち込んで、指定のポイントから画面高さ分を実体化する</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>というような感じでいける気がする。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>座標系の変更点がLayoutだけに場が閉じていれば、再度Layoutが発生したコンポーネントから先だけを再Layoutする、っていうのも容易なのでは。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ローディングがかかるチャンスは一度のほうがいい(分割ローディングする価値は無い)、という感じなんで、まあいいか。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・Layoutが完了したらハンドラが着火される</p>
+<p class="p3"><span class="Apple-tab-span">	</span>みたいな感じになる。</p>
+<p class="p4"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b>Problem2:いろんなハンドラについて解決する</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>このへんの細かいパラメータの決定条件を書かんとな。すっげー多いんだよなこの辺。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>まず列挙するか。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・イベント</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>画像、リンク、タッチなどが仕込める。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>仕込めるが、外部からどのように触れるようにするか、っていうのはまだ考えきれていない。</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ビューに対してイベントを仕込んでおく、みたいなのとは別に、このビューに対してこのイベントが起こったらこうする、というのを渡せればいいと思っている。</p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・階層間距離処理</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>要素の階層構造に対応して隙間を適当にセットできる。<span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>で、まあ、ようは、css。</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p4"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・使用リソース指定</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>特定のAssetのセットを対応させることができる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>画面ごとに、「このUIの時に表示させる画面はコレ」みたいなのがセットできる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>階層間距離処理とかもAssetにしてしまうと良さそうな気がするな～。<span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>よくまあ作ったもんなんだけど、これだけ広範囲に機能が存在するとほんとに使えるのか疑問符がいっぱい出てくる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>すべてハンドラのていを保っているんで、まあ内部的な拡張は容易。外部公開も容易。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>でも外部公開はあんまりしないだろうな～～カスタマイズ性をAPIで表現しすぎると設定項目多くて使いづらい。</p>
+<p class="p4"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b>P2解決策</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>イベントに対して</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>・画像、リンクのどちらにしても、urlを受ける。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>-&gt; 発行されるメソッドの型 = ButtonとかLinkとか をenumで持つようにして、実行されるメソッド種を一個で済むようにすんべ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>-&gt; uGUIのイベントにしちゃうのがいいかな。インスタンスどう渡すかな～。呼び出し元が限定できればいいだけだったらuGUIのイベントの必要ないんだよな～。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>複数のビューを同時に出す、とかも視野に入れときたいので、それを考えると、ビューのインスタンスを取り出す時にハンドラをセットしたり、ハンドラを後からセットしたりできるといいのか。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>まあやっぱAction&lt;EventSourceType, string&gt;一発で済むな、イベントにする必要ないや。</p>
+<p class="p4"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>使用リソース指定</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>・階層構造に対してAssetを割り当てられるといいのかなあ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Prefabに階層構造値を指定できる、とか？</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>なんらかの形でAssetが出力できればいいのか。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>-&gt; html -&gt; view -&gt; htmlへと再分解できるコースが存在することに気がついた。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>具体的には、uGUIでビューを作る -&gt; そこからPrefab要素を作ると、その要素をhtmlで記述して生成、レイアウトできるようになる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>本機能は、ぶっちゃけ、HTMLでUnity GUIを表示するブラウザ機構みたいな感じになる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>これがCSSの代わりだな～～。</p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>・uGUIでGUIを作る -&gt; HTMLでそのGUIを配置したりパラメータ出したりできる</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Prefab雛形をキャンバスに並べる -&gt; パラメータ設定</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>-&gt; ビュー名をつけて保存、ってやると、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>-&gt; 階層を見て階層情報をPrefab化</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>-&gt; 要素それ自体を別Prefabとして分解保存</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>-&gt; リソース名フォルダがどこかに爆誕するので、それをAssetBundleにしたりすることができる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>-&gt; リソース名 = ビュー名なので、Load時に名前を指定することで、DLしたりResourcesフォルダから探したりできる。</p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p3"><b>Problem3:Container Prefabがウザい</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>現状は特に意味がなく、無くせる気がする。うん。設定しないでも行けるように変更するか。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ContainerPrefabはなくても動かせる</p>
+<p class="p4"><span class="Apple-tab-span">	</span></p>
+<p class="p4"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b>P3解決策</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Container Prefabを読み込む実装を消す。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>-&gt;できた。</p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p3"><b>リファクタリングが終わっていい感じ</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Layout, Materializeが綺麗に分割された。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>depthを簡単に得るために、Tagに関しては、Layout開始時にすでに値になってしまっていてもいいのかもしれない。まあ後回しで良さそう。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>それか単純にstaticなdepthを得る関数を用意すれば良さそう。</p>
+<p class="p4"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b>今後</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>AssetBundleの群が複数必要。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・viewNameに対応するAssetBundle群</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・html内で使用される画像とかを格納したAssetBundle群</p>
+<p class="p4"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>後者はInformationの枠組みを超えるAssetBundleなので、どうしようかな、頑張ってくれ的な。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>前者はサポートをしたい。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>具体的には、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・AssetBundle化の機構を持たせる</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>・DefaultとspecificをそれぞれAssetBundleにすることができる</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>・それらが読み込まれる(リストみたいなものを渡しとく必要はある？</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>できればAssetBundles機構への依存を少なくしておきたいんで、Informationから直で使うのは避けたい。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>、、、</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>まあ悩もう。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p4"><br></p>
+</body>
+</html>
