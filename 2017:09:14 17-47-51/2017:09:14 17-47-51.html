@@ -1,0 +1,126 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1504.83">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #ebebeb}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>UUebView ドキュメント(途中)</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Standalone WebView for Unity なこれのドキュメントを書かねば。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>UUebView</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/UUebView-freeversion">https://github.com/sassembla/UUebView-freeversion</a></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>このページを草稿とする。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>使用できるWebコンテンツについて</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>HTML一択。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>実際にデモで使っているhtmlのサンプルはこんな感じ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/UUebView-freeversion/blob/master/Assets/Sample/Resources/items.html">https://github.com/sassembla/UUebView-freeversion/blob/master/Assets/Sample/Resources/items.html</a></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>CSS、JSは一切効かないどころかパースできない気がする。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>そのうち無視するようにするかな。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>UUebViewの制約として、Unityの持っているAnimationやらイベント、uGUIレイアウトの機構でだいたいのことはできるので</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Unityゲーム内でWebView代替としてAppアプデ無しに動かすに足ると判断したため、JS、CSSはサポートされない。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>HTMLのルール</b><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・HTMLタグはここにあるタグのぶんは適当に使える。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/UUebView-freeversion/tree/master/Assets/InformationResources/Resources/Views/Default">https://github.com/sassembla/UUebView-freeversion/tree/master/Assets/InformationResources/Resources/Views/Default</a></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・DOCTYPE以外のタグはすべて小文字で書く。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>なんかhtml5wayらしいんでそれで。パースも楽になるんでそれで。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://www.xml.vc/HTML5/kiso/rule.html">http://www.xml.vc/HTML5/kiso/rule.html</a></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>これの、HTML構文例に出てくるようなのをサポートしている。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・DOCTYPEはなくても良い</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・DOCTYPEでサポートされているのは、独自に作った <b>uuebview</b>　タイプのみ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>hrefをつけて独自定義タグの設定ファイルをwebかresourcesかAssetBundleから読み出すことができる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>サンプル <a href="https://github.com/sassembla/UUebView-freeversion/blob/master/Assets/Sample/Resources/items.html">items.html</a> ではresourcesから読みだしている。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・title, headは完全に無視される</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・bodyはあってもなくてもいい</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・使えるAttributeは以下</p>
+<p class="p3"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>id</b>(string)</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>要素にidを振ることができる。</p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>src</b>(string)</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>要素が画像系であれば、画像を展開する</p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>href</b>(string)</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>要素をボタン化した場合、イベントのパラメータとして使われる。</p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>align</b>(left, center, right)</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>要素の整列を行う。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>また、UUebView独自で以下のAttributeを使ってイベントを制御することができる。</p>
+<p class="p3"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>button</b>(true, false)</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>要素をボタンとして扱い、クリック時にイベントが着火するようになる。idがあればイベント着火時にパラメータとして渡ってくる。</p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>listen</b>(string[, params string])</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>パラメータに他のタグのidを記述できる。そのidが振られた要素がイベントを発効した場合にhiddenを切り替える。id要素は,で箇条書きできる(ようにしたい)</p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>hidden</b>(true, false)</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>要素の表示/非表示を扱う。falseを指定すると初レンダリング時は非表示となる。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>Viewの取得</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span> UUebViewComponent.Getなんちゃら<b>(ドキュメント書き途中)</b></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>ハンドラ</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>複数のイベントハンドラがIUUebViewEventHandler型で定義してある。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>OnLoadedとか。<b>(ドキュメント書き途中)</b></p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b>イベントの発効</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>画像、リンクはUnityのGUIとしてのクリック機能を持たせることができる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>タグにbutton=‘true‘ とか書けばいい。</p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>Viewへの要素の追加、削除</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>でっち上げのTreeQueryLanguageを使って要素を編集することができる。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>構文</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><b>タグ/子タグ:インデックス数値/目標タグ</b></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>e,g,</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><b>body/child:0/img</b></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>などのように書くと、</p>
+<p class="p4">&lt;body&gt;</p>
+<p class="p4"><span class="Apple-tab-span">	</span>&lt;child&gt;</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>something</p>
+<p class="p4"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>&lt;img src=“”/&gt;</b></p>
+<p class="p4"><span class="Apple-tab-span">	</span>&lt;/child&gt;</p>
+<p class="p4"><span class="Apple-tab-span">	</span>&lt;child&gt;</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>&lt;img src=“”/&gt;</p>
+<p class="p4"><span class="Apple-tab-span">	</span>&lt;/child&gt;</p>
+<p class="p4">&lt;/body&gt;</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>太字の要素にヒットする。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>これqueryなの？っていうと疑問が出てくるんだけどまあほら、暫定だから。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>末尾に追加するなら<b>(ドキュメント書き途中)</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>特定のタグの要素の末尾に追加するなら<b>(ドキュメント書き途中)</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>削除する場合<b>(ドキュメント書き途中)</b></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+</body>
+</html>
