@@ -1,0 +1,120 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1504.83">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Sans'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; background-color: #ebebeb}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; background-color: #ebebeb; min-height: 18.0px}
+    span.s1 {font: 12.0px 'Hiragino Sans'}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>Miyamasuメンテした</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Miyamasu Test Runnerをアップデートして、Unity5.6以降のテストを実機でも動かせる + 実行結果取得できるようにした。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>サンプルシーン起動するといきなりこんな感じになる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><img src="DJxYJzuUEAA1jBa.jpg" alt="DJxYJzuUEAA1jBa.jpg"></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>画像はiPhone実機上でのテスト実行と結果みたいなやつ。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>エディタ上からは、Unity自体のTestRunnerを使って実行できるようになっている。</p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span></span><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202017-09-15%2023.33.48.png" alt="スクリーンショット 2017-09-15 23.33.48.png"></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>Miyamasu</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/Miyamasu">https://github.com/sassembla/Miyamasu</a></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>リリース。UnityPackageもあるよ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/Miyamasu/releases/tag/0.6.0">https://github.com/sassembla/Miyamasu/releases/tag/0.6.0</a></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>動機</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>5.6から、まともな非同期テストが書けるようになった(二千何年の話をしてるんだ)</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>Unity5.6で非同期テストするときの基本的人権が保護されそう</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://sassembla.github.io/Public/2017:03:09%2019-09-05/2017:03:09%2019-09-05.html">http://sassembla.github.io/Public/2017:03:09%2019-09-05/2017:03:09%2019-09-05.html</a></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、これはUnityTestっていうAttributeをつけることで実現できてたんだけど、なんと実機上でテストを実行するパスが無かった。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Editorにつないで実機に送り込んで実行、ってやってると、なんだ、その、ダサい。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>というわけで、EditorでもRuntimeでも実行できるようにした。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>また、実機実行に際して、GUIを作るのがダルかったのでUUebViewっていうHTML書いたらGUIが出るやつを使っている。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>動的にHTMLコンテンツを足していってオートリロードで動かす、みたいなのができた。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>テスト結果を表示するところに使われている。具体的にはこんなコード。</p>
+<p class="p2"><br></p>
+<p class="p3"><a href="https://github.com/sassembla/Miyamasu/blob/master/Assets/MiyamasuTestRunner/Runtime/MainThreadRunner.cs#L117">https://github.com/sassembla/Miyamasu/blob/master/Assets/MiyamasuTestRunner/Runtime/MainThreadRunner.cs#L117</a></p>
+<p class="p5">public void AddLog (string[] message, Recorder.ReportType type, Exception e) {</p>
+<p class="p5">    var icon = "pass";</p>
+<p class="p6"><br></p>
+<p class="p5"><span class="Apple-tab-span">	</span>(中略)</p>
+<p class="p6"><br></p>
+<p class="p5">    var error = string.Empty;</p>
+<p class="p5">    if (e != null) {</p>
+<p class="p5">        var id = Guid.NewGuid().ToString();</p>
+<p class="p5">        error =<span class="Apple-converted-space">  </span>@" button='true' src='" + Base64Encode(e.ToString()) + @"' id='" + id + @"'";</p>
+<p class="p5">    }</p>
+<p class="p5">    </p>
+<p class="p5"><b>    logList.Add(@"</b></p>
+<p class="p5"><b>        &lt;bg" + error + @"&gt;</b></p>
+<p class="p5"><b>            &lt;textbg&gt;</b></p>
+<p class="p5"><b>                &lt;contenttext&gt;" + messageBlock + @"&lt;/contenttext&gt;</b></p>
+<p class="p5"><b>            &lt;/textbg&gt;</b></p>
+<p class="p5"><b>            &lt;iconbg&gt;&lt;" + icon + @"/&gt;&lt;/iconbg&gt;</b></p>
+<p class="p5"><b>        &lt;/bg&gt;&lt;br&gt;");</b></p>
+<p class="p6"><br></p>
+<p class="p5">}</p>
+<p class="p3"><span class="Apple-tab-span">	</span>HTMLを追加するだけで画面にこんな感じにコンテンツが出るようになる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202017-09-15%2023.29.07.png" alt="スクリーンショット 2017-09-15 23.29.07.png"></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>失敗したテストのとこに赤いの出るようにしたら便利だった。</p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b>テストコード</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>UnityTestがIEnumeratorを扱うようになった都合上、次のような形で非同期テストが書けるようになった。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>一定時間のあいだ、条件が満たされるのを待つ。時間内に満たされればOK、ダメだったらTimeoutExceptionが出る。</p>
+<p class="p2"><br></p>
+<p class="p3"><a href="https://github.com/sassembla/Miyamasu/blob/master/Assets/SampleTests/SampleTest.cs">https://github.com/sassembla/Miyamasu/blob/master/Assets/SampleTests/SampleTest.cs</a></p>
+<p class="p5">[MTest] public <b>IEnumerator</b> Timeout () {</p>
+<p class="p5">    var obj = new GameObject("runner");</p>
+<p class="p5">    IsNotNull(obj);</p>
+<p class="p6"><br></p>
+<p class="p5">    var runner = obj.AddComponent&lt;Runner&gt;();</p>
+<p class="p6"><br></p>
+<p class="p5">    yield return <b>WaitUntil</b>(</p>
+<p class="p5">        () =&gt; runner.n == 100,// too much.</p>
+<p class="p5">        () =&gt; {throw new TimeoutException("not yet. runner.n:" + runner.n);},</p>
+<p class="p5">        1//sec</p>
+<p class="p5">    );</p>
+<p class="p5">}</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>yield return WaitUntil() で非同期待ち出来るのいい。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Assert系はUnityに組み込まれているNUnitをロガーでラップしたものを用意した。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>といっても全部ラップするの面倒臭かったので、まだログが出ない関数がある。(定義ジャンプすればわかる</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>そのうち全部ラップする。あと半分くらい。一括置換サイコー！</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>今後</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>AutoyaのテストもMiyamasuで書いてあるので、更新して動かせるようにする。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>体感で1.5倍くらい高速になった。あとGUIがついたので色々楽に。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>GUIからのテスト単体の再実行、Slackと連携してテストログの送付(誰かに送りつけたい)、Slackからのテスト送り込み、などをやっていきたい。</p>
+<p class="p2"><br></p>
+</body>
+</html>
