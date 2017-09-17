@@ -1,0 +1,109 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1504.83">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Sans'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 18.0px 'Hiragino Sans'}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    span.s1 {font: 12.0px Helvetica}
+    span.s2 {font: 12.0px 'Hiragino Sans'}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>iOSDC2017行ってきた</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これ</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://iosdc.jp/2017/">https://iosdc.jp/2017/</a></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>自分が参加したのは16, 17の二日間。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>全部書いてると死にそうになるので印象に残ったところとか素晴らしいと思ったところをダイジェスト。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p4"><b>16日</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>モバイルアプリで困らないエラーハンドリングとロギングのベストプラクティス</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>guard 節で書いてあるコードに対して、Analyticsのfatalな感じのログを入れておく、という部分が素晴らしかった。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・複数人開発をしていると、「これは絶対起こらんやろww」みたいなことが起こる。呼ばれるはずがない条件で関数が呼ばれたりとか。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・その異常を、エラーを生み出すよりも先に異変として察知するために、Analyticsを使う</p>
+<p class="p3"><span class="Apple-tab-span">	</span>というのの具体例で、他に類をみないアイデアで素晴らしいと思った。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>応用が利きそう。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>Implementing Music Playback on watchOS</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>いろいろなAPIやそれらのサウンド面での動作の話が面白かった。特にアプリケーションのforeground -&gt; bgでの寿命まわりで、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>サウンドをストップしても死なないで欲しいんだけどそのうち死んで欲しいみたいなニーズがAppleWatch app にもあるんだなあというのが参考になった。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>その実装方法も含めて。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>Xcode Source Editor Extensionの世界</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>この日一番輝いてた(独断)</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>「愚痴るだけなら誰でもできる</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>高い壁があったら登るのが我々エンジニア」</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>なんかどっか自分ちの壁に貼っとこうかなと思った。人に言わされると嫌な言葉だとは思うんだけど、自分で言う宣言としては最上。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Xcodeのプラグインを作るときに調べようと思っていたことがすべて網羅されている。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>資料のアプデ報告TweetをXcodeプラグインから行うという離れ業すごかった。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://speakerdeck.com/takasek/20170916-number-iosdc">https://speakerdeck.com/takasek/20170916-number-iosdc</a><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>あとこの日この公演のあとにルームCにトートバッグを忘れたのは俺でした。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>運営の人ご迷惑おかけしました。無事回収させてもらいました。助かり～</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p4"><b>17日</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>アイコンや画像の配置をCIで自動化する</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Sketch.appのコマンドラインツールを使ってデザイナー -&gt; CI -&gt; 実装(エンジニア) までをシームレスにつなげていて素晴らしかった。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>各所での処理も最小限っぽい。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、これらの先駆者のおかげでUnity用にもプラグインを作ることができた。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><b>Sketchで作った全画像をUnityに取り込む</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://sassembla.github.io/Public/2017:09:17%2015-07-34/2017:09:17%2015-07-34.html">http://sassembla.github.io/Public/2017:09:17%2015-07-34/2017:09:17%2015-07-34.html</a></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>興味深かったのが、全体のフローが仕上がった後に問題として残っている部分の紹介で、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>名前付けやそれらの前提ルールの整理について、という感じで、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>治安が良くなると次は文化的な問題の解決に向かっていく、というのが素晴らしいなあと思った。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>CoreMLでアイドル顔識別アプリを作ろう</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>MLがらみのファイル生成に関するいろいろな関連性がわかって凄く助かった。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>15分でわかるバックグラウンドアップロード</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="s1">BackgroundTransferService</span>について言及してくれていて、自分たちでデータアップローダみたいなものを作るときに大いに参考にさせてもらおうと思う。</p>
+<p class="p5"><span class="Apple-tab-span">	</span>timeoutIntervalForResource<span class="s2">のデフォが</span>1W<span class="s2">だった話面白かった。</span></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>サポート効率を上げるログ収集環境の構築</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>独自enumを作れ！　という感じで面白かった</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>iOSDC Japan 2016 の賞金を放置しておくと１年でどうなったか？！</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>完全にビットコインの話題だった。最高。たかりたい。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>会場インフラLT</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>業者さんがらみの壮絶なスケジュールを踏破して会場ネットワークなんとかしていたのものすごい。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>お陰さまで快適なネットワーク環境で真剣に話を聞いたりビールを飲んだりすることができた。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>終わりに</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>最高だった。来年もまた行きたい。</p>
+</body>
+</html>
