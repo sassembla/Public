@@ -18,7 +18,7 @@
 <p class="p1"><span class="s1"><b>Sketch</b></span><b>で作った全画像をUnityに取り込む</b></p>
 <p class="p2"><br></p>
 <p class="p3"><b>概要</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>iOSDC2017でSketch.appに含まれるsketchtoolっていうコマンドラインからファイルをexportするっていうのが紹介されてて、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>iOSDC2017でsvgファイルから画像群をexportするsketchtoolというコマンドラインツールが紹介されてて、</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p3"><span class="Apple-tab-span">	</span><b>アイコンや画像の配置をCIで自動化する</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://iosdc.jp/2017/node/1442">https://iosdc.jp/2017/node/1442</a></p>
@@ -32,7 +32,10 @@
 <p class="p3"><b><span class="Apple-tab-span">	</span>Sketchこれ</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://www.sketchapp.com">https://www.sketchapp.com</a></p>
 <p class="p2"><br></p>
-<p class="p3"><b><span class="Apple-tab-span">	</span>sketchtoolというコマンドラインが含まれている。</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、sketchtoolはこの.appの中に含まれている。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Sketchで作成したデータから、好きな単位で画像を取り出すことができる。素晴らし。</p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>sketchtoolの紹介</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://www.sketchapp.com/tool/">https://www.sketchapp.com/tool/</a></p>
 <p class="p2"><br></p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
@@ -41,8 +44,8 @@
 <p class="p3"><span class="Apple-tab-span">	</span>2.Sketchファイルが更新されたら、再度インポータが起動してexport処理を実行して画像を吐き出す</p>
 <p class="p3"><span class="Apple-tab-span">	</span>3.すでに存在する画像を上書きする場合はそのimport設定を模倣する(これはUnityがやってくれるんで自動的にできそう)</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
-<p class="p3"><span class="Apple-tab-span">	</span>これらができると、Sketchで画面単位だったりパーツ単位でsvgで素材を作成し、そのsliceで解像度を指定し、そのファイルを</p>
-<p class="p3"><span class="Apple-tab-span">	</span>Unity側で使用、更新追随できるようになる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>これらができると、Sketchで画面単位だったりパーツ単位でsvgで素材を作成し、そのsliceで解像度を指定し、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>そのファイルをUnity側で使用、<b>Sketchファイルに更新があれば自動的に変更に追随</b>できるようになる。</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>ファッキン便利。</p>
 <p class="p2"><br></p>
