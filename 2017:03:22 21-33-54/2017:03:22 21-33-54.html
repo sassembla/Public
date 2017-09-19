@@ -1,0 +1,465 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1504.83">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic Pro'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic Pro'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic Pro'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px 'Hiragino Kaku Gothic Pro'; color: #000000; background-color: #ffffff}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px 'Hiragino Kaku Gothic Pro'; color: #000000; background-color: #ffffff; min-height: 17.0px}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 16.0px 'Hiragino Kaku Gothic Pro'; color: #000000; background-color: #ffffff}
+    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Menlo; color: #9cdcfe}
+    span.s1 {font-variant-ligatures: no-common-ligatures}
+    span.s2 {font: 11.0px 'Hiragino Kaku Gothic Pro'; font-variant-ligatures: no-common-ligatures; color: #000000; background-color: #ffffff}
+    span.s3 {font-kerning: none; background-color: #1e1e1e}
+    span.s4 {font-kerning: none; color: #d4d4d4; background-color: #1e1e1e}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>イベントシステムをどっかからすげ替える話</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>完全に私的な実験のメモなので後から読んでも誰にも何もわからんと思う。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>現在のタッチと同じRaycasterでどんなターゲットが存在するかを検知する</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>BaseEventData Constructor</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>public BaseEventData(EventSystems.EventSystem eventSystem);</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Description</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Construct a BaseEventData tied to the passed EventSystem.</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>っつーことなので、これでBaseEventDataが生成できるのでは？</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・イベントを生成する</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・RaycastAllする</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>という流れで、位置によってはいけそうな気が。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>-&gt;　いけた。同じ位置でイベントを発行できる。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、どんな種類のイベントが発生したかを取得できるだろうか。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>GraphicRaycasterを使う手</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>http://gamedev.stackexchange.com/questions/93592/graphics-raycaster-of-unity-how-does-it-work</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>よくわかってないが、これがやりたいことは特殊そう。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>イベントトリガの話</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><a href="https://docs.unity3d.com/ScriptReference/EventSystems.EventTrigger.html">https://docs.unity3d.com/ScriptReference/EventSystems.EventTrigger.html</a></p>
+<p class="p3"><span class="Apple-tab-span">	</span>EventTriggerを拡張したクラスを作ると、いろんなイベントを傍受することができる？</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ぽい？</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>やってみよう。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>uGUIのインスタンスを上から叩く的な。</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>http://qiita.com/tadokoro/items/e72d6eff5998cb00ab02</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>やっていることは、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・current.currentSelectedGameObject がヒットするタイミングで、どのgameObjectがどんなポイントでタップされたか、をみる</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・そいつと同じクリックを発生させて、可能性を見る</p>
+<p class="p3"><span class="Apple-tab-span">	</span>というやつ。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>なるほどな～という感じなんだけど、こいつはオブジェクトを見ているあたりに可能性がありそう。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>2501の対stateMachineまわりで困っていたのが、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・特定のインスタンスについてるStateMachineが叩けない</p>
+<p class="p3"><span class="Apple-tab-span">	</span>というやつで、これをなんとかする必要がある。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>具体的には、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・特定のインスタンスを収集する(事前辞書の作成、GOについてるスクリプトのインスタンスの自動収集</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・再現系のイベントがインスタンスに対して実行された際、そのインスタンスに対してメソッド実行を送り込む</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・するとstateMachineから再現できる</p>
+<p class="p3"><span class="Apple-tab-span">	</span>的な。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>実行記録からインスタンス割り出しをして実行できるなら、そいつはめっちゃ効率がいい。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>メソッド実行のさらに上が必要な場合、それらを取得することも可能だと、可能性が広がる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>という感じ。</p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b>uGUI以前のCubeとかに対しての対策</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>PhysicsRaycasterとかが使えそうな気がする。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>-&gt; カメラに対してつけると、cubeとかも全て EventSystem.current.IsPointerOverGameObject() に反応するようになる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、イベント獲得 -&gt; currentがnullなら、それは3Dオブジェクト向けのイベントなので、physicsRaycasterでオブジェクト判定して、その</p>
+<p class="p3"><span class="Apple-tab-span">	</span>いちばん上を見つける、ということが可能になった。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>スゲー野蛮。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これで、記録レイヤーでいうと、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・どの3DオブジェクトがXXXされたか、gameObject単位で取得できるようになった</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>という感じ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>XXXには、いろんなイベントが入る。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、記録に関しては光明が見えてきた。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>再現</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>どのイベントが出たかがわかったので、今度は再現時にそれをGOに対してぶつける必要が出てくる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>そういうことができるようなEmit2501形式を実現できればよさげ。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・同じフレームで実行されたコマンドは、なんか把握できるはず。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・(伝搬元のオブジェクトに対してイベントを発行する、とかができるとスゲーー面白い。)</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>、、、あーーーそういえば実行できましたね、、、うん、、、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ゲームオブジェクト + コンポーネントなので、 stateMachineが付いている場合、そのインスタンスがゲームオブジェクト + コンポーネント名で</p>
+<p class="p3"><span class="Apple-tab-span">	</span>保持できていれば、単純にインスタンス名 + OnClickで、発動時にOnClickが起こったことにできるのでは？</p>
+<p class="p3"><span class="Apple-tab-span">	</span>-&gt; 理屈上はできる。すげーな。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>ラスト、再現用のオブジェクトリストの取得</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>最後の前提、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ゲーム中に存在しているGUI対象のオブジェクトのリストを取得する。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・GameObjectでMonoBehaviourを持ってるもの</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・</p>
+<p class="p3"><span class="Apple-tab-span">	</span>条件を集めて、全体から検索できるようにしよう。クッソ重くてもできる自信はある。根拠は忘れた。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>PlayMakerが対応してるイベント一覧</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>https://hutonggames.fogbugz.com/?W128</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><a href="https://docs.unity3d.com/jp/540/ScriptReference/EventSystems.BaseEventData.html">https://docs.unity3d.com/jp/540/ScriptReference/EventSystems.BaseEventData.html</a></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ふむ、usedがある。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>取得できた！！<span class="Apple-tab-span">	</span></b></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>&lt;b&gt;<b>eligibleForClick</b>&lt;/b&gt;: False クリック時 ~ 放すまでの間にtrueになる。mouseDown, mouseUpの瞬間</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1">階層構造的には、</span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>PointerInputModule -&gt; StandaloneInputModule という順に継承していて、</span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>PointerInputModuleにはm_pointerDataが入っている。</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>で、</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>この辞書へは、Process関数でデータが詰められるようになってる。</span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>同じ処理を走らせられれば、どんなイベントが発生するかを追うことは可能。</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>で、とりあえず今調べたいのは、最速でこのデータを調べた場合、PointerEventDataのbefore-Process-afterの両方を手に入れることで、</span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>どんなイベントが発生したのかを追えるのではないか、という感じ。</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>そのためには、Processの存在位置が問題になる。</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>BaseInputModuleでのProcessは、EventSystemから呼ばれてる。</span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>で、そのタイミングは、</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>Updateだ。よし、設定順が高速なら勝てる。</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>選択肢が２つ、先回りと後追い + 次フレームの調達というのができそうなんだけど、うーん、、</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>1.先回り + 現地調達</span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>が確実か。</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p5"><span class="s1"><span class="Apple-tab-span">	</span></span></p>
+<p class="p4"><span class="s1">素早くインスタンスを作る</span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>・Updateで挟む、ということをする。</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1">テスト</span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>・起動時初期化でインスタンスを作る</span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>・シーン起動時に作る</span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>とかで、まずはやって見るか。</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p5"><span class="s1"><span class="Apple-tab-span">	</span></span></p>
+<p class="p4"><span class="s1">どのイベントが発生したかを知る</span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>-&gt; ぶっちゃけ手段がない。</span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>過去直近で発生したイベントを全て経由するポイントとかがあれば、それを見るのがいいんだけど。</span></p>
+<p class="p5"><span class="s1"><span class="Apple-tab-span">	</span></span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>-&gt; もっと簡単に、endOfFrame使えば挟めるな。</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>-&gt; できた。</span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>EndOfFrameと挟み込むことで、イベントの着火を検知できるようになった。</span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>・オブジェクトの検知は1f遅れる(というかendより後、Updateより前で着火してる) -&gt; なので、実際のイベントが発生したのは-1frameになる。</span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>・</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1">スキャン</span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>対象のオブジェクトが見つかるまで、Rayを打つ、ということができる。</span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>GUIの対象物だけは事前に？</span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>というか</span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>Findすればいいんだよな？ということに気づいた。</span></p>
+<p class="p5"><span class="s1"><span class="Apple-tab-span">	</span></span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>名前がわかっていればFindできる。</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>同じオブジェクトがいっぱいある場合はどうなんだろう。名前で判別がつかないのか。</span></p>
+<p class="p5"><span class="s1"><span class="Apple-tab-span">	</span></span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>なにか絶対的なもの = idなんだけど、位置とかもあるはず。</span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>ヒエラルキー位置みたいなのとか。</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p5"><span class="s1"><span class="Apple-tab-span">	</span></span></p>
+<p class="p4"><span class="s1">BaseInputModuleがrequire EventSystemを持ってしまっているので、二重化問題が発生する。</span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>ので、やはりBaseInputModuleから先を模倣しないといけない。EventSystemの模倣になる。</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1"><b><span class="Apple-tab-span">	</span>あとは、発生して欲しいイベントがなぜ発生しないのかを追えればいい感じ。</b></span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>functorか～～なんか違った気がするんだけどな、これらしい。</span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Enterとかの経路を見てみよう。</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p6"><span class="s1"><b>対uGUI</b></span></p>
+<p class="p4"><span class="s1"><b>click</b></span></p>
+<p class="p4"><span class="s1">functor:UnityEngine2.EventSystems.ExecuteEvents+EventFunction`1[UnityEngine.EventSystems.IPointerClickHandler]</span></p>
+<p class="p4"><span class="s1">UnityEngine.Debug:LogError(Object)</span></p>
+<p class="p4"><span class="s1">UnityEngine2.EventSystems.ExecuteEvents:Execute(GameObject, BaseEventData, EventFunction`1) (at Assets/UnityEngine.EventSystems/ExecuteEvents.cs:367)</span></p>
+<p class="p4"><span class="s1">UnityEngine2.EventSystems.StandaloneInputModule2:ProcessMousePress(MouseButtonEventData) (at Assets/UnityEngine.EventSystems/StandaloneInputModule.cs:547)</span></p>
+<p class="p4"><span class="s1">UnityEngine2.EventSystems.StandaloneInputModule2:ProcessMouseEvent(Int32) (at Assets/UnityEngine.EventSystems/StandaloneInputModule.cs:466)</span></p>
+<p class="p4"><span class="s1">UnityEngine2.EventSystems.StandaloneInputModule2:ProcessMouseEvent() (at Assets/UnityEngine.EventSystems/StandaloneInputModule.cs:450)</span></p>
+<p class="p4"><span class="s1">UnityEngine2.EventSystems.StandaloneInputModule2:Process() (at Assets/UnityEngine.EventSystems/StandaloneInputModule.cs:233)</span></p>
+<p class="p4"><span class="s1">UnityEngine.EventSystems.EventSystem:Update()</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1"><b>このあと対象のメソッドが呼ばれてる</b></span></p>
+<p class="p4"><span class="s1">IPointerClickHandler</span></p>
+<p class="p4"><span class="s1">UnityEngine.Debug:LogError(Object)</span></p>
+<p class="p4"><span class="s1">UnityEngine2.EventSystems.ExecuteEvents:Execute(IPointerClickHandler, BaseEventData) (at Assets/UnityEngine.EventSystems/ExecuteEvents.cs:275)</span></p>
+<p class="p4"><span class="s1">UnityEngine2.EventSystems.ExecuteEvents:Execute(GameObject, BaseEventData, EventFunction`1) (at Assets/UnityEngine.EventSystems/ExecuteEvents.cs:392)</span></p>
+<p class="p4"><span class="s1">UnityEngine2.EventSystems.StandaloneInputModule2:ProcessMousePress(MouseButtonEventData) (at Assets/UnityEngine.EventSystems/StandaloneInputModule.cs:547)</span></p>
+<p class="p4"><span class="s1">UnityEngine2.EventSystems.StandaloneInputModule2:ProcessMouseEvent(Int32) (at Assets/UnityEngine.EventSystems/StandaloneInputModule.cs:466)</span></p>
+<p class="p4"><span class="s1">UnityEngine2.EventSystems.StandaloneInputModule2:ProcessMouseEvent() (at Assets/UnityEngine.EventSystems/StandaloneInputModule.cs:450)</span></p>
+<p class="p4"><span class="s1">UnityEngine2.EventSystems.StandaloneInputModule2:Process() (at Assets/UnityEngine.EventSystems/StandaloneInputModule.cs:233)</span></p>
+<p class="p4"><span class="s1">UnityEngine.EventSystems.EventSystem:Update()</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1"><b>exit</b></span></p>
+<p class="p4"><span class="s1">functor:UnityEngine2.EventSystems.ExecuteEvents+EventFunction`1[UnityEngine.EventSystems.IPointerExitHandler]</span></p>
+<p class="p4"><span class="s1">UnityEngine.Debug:LogError(Object)</span></p>
+<p class="p4"><span class="s1">UnityEngine2.EventSystems.ExecuteEvents:Execute(GameObject, BaseEventData, EventFunction`1) (at Assets/UnityEngine.EventSystems/ExecuteEvents.cs:367)</span></p>
+<p class="p4"><span class="s1">UnityEngine2.EventSystems.BaseInputModule:HandlePointerExitAndEnter(PointerEventData, GameObject) (at Assets/UnityEngine.EventSystems/BaseInputModule.cs:190)</span></p>
+<p class="p4"><span class="s1">UnityEngine2.EventSystems.PointerInputModule:ProcessMove(PointerEventData) (at Assets/UnityEngine.EventSystems/PointerInputModule.cs:284)</span></p>
+<p class="p4"><span class="s1">UnityEngine2.EventSystems.StandaloneInputModule2:ProcessMouseEvent(Int32) (at Assets/UnityEngine.EventSystems/StandaloneInputModule.cs:467)</span></p>
+<p class="p4"><span class="s1">UnityEngine2.EventSystems.StandaloneInputModule2:ProcessMouseEvent() (at Assets/UnityEngine.EventSystems/StandaloneInputModule.cs:450)</span></p>
+<p class="p4"><span class="s1">UnityEngine2.EventSystems.StandaloneInputModule2:Process() (at Assets/UnityEngine.EventSystems/StandaloneInputModule.cs:233)</span></p>
+<p class="p4"><span class="s1">UnityEngine.EventSystems.EventSystem:Update()</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1"><b>このあと対象のメソッドが呼ばれてる</b></span></p>
+<p class="p4"><span class="s1">IPointerExitHandler</span></p>
+<p class="p4"><span class="s1">UnityEngine.Debug:LogError(Object)</span></p>
+<p class="p4"><span class="s1">UnityEngine2.EventSystems.ExecuteEvents:Execute(IPointerExitHandler, BaseEventData) (at Assets/UnityEngine.EventSystems/ExecuteEvents.cs:257)</span></p>
+<p class="p4"><span class="s1">UnityEngine2.EventSystems.ExecuteEvents:Execute(GameObject, BaseEventData, EventFunction`1) (at Assets/UnityEngine.EventSystems/ExecuteEvents.cs:392)</span></p>
+<p class="p4"><span class="s1">UnityEngine2.EventSystems.BaseInputModule:HandlePointerExitAndEnter(PointerEventData, GameObject) (at Assets/UnityEngine.EventSystems/BaseInputModule.cs:190)</span></p>
+<p class="p4"><span class="s1">UnityEngine2.EventSystems.PointerInputModule:<b>ProcessMove</b>(PointerEventData) (at Assets/UnityEngine.EventSystems/PointerInputModule.cs:284)</span></p>
+<p class="p4"><span class="s1">UnityEngine2.EventSystems.StandaloneInputModule2:<b>ProcessMouseEvent</b>(Int32) (at Assets/UnityEngine.EventSystems/StandaloneInputModule.cs:467)</span></p>
+<p class="p4"><span class="s1">UnityEngine2.EventSystems.StandaloneInputModule2:ProcessMouseEvent() (at Assets/UnityEngine.EventSystems/StandaloneInputModule.cs:450)</span></p>
+<p class="p4"><span class="s1">UnityEngine2.EventSystems.StandaloneInputModule2:Process() (at Assets/UnityEngine.EventSystems/StandaloneInputModule.cs:233)</span></p>
+<p class="p4"><span class="s1">UnityEngine.EventSystems.EventSystem:Update()</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p6"><span class="s1"><b>対オブジェクト</b></span></p>
+<p class="p4"><span class="s1"><b>enter</b></span></p>
+<p class="p4"><span class="s1">functor:UnityEngine2.EventSystems.ExecuteEvents+EventFunction`1[UnityEngine.EventSystems.IPointerEnterHandler]</span></p>
+<p class="p4"><span class="s1">UnityEngine.Debug:LogError(Object)</span></p>
+<p class="p4"><span class="s1">UnityEngine2.EventSystems.ExecuteEvents:Execute(GameObject, BaseEventData, EventFunction`1) (at Assets/UnityEngine.EventSystems/ExecuteEvents.cs:367)</span></p>
+<p class="p4"><span class="s1">UnityEngine2.EventSystems.BaseInputModule:HandlePointerExitAndEnter(PointerEventData, GameObject) (at Assets/UnityEngine.EventSystems/BaseInputModule.cs:222)</span></p>
+<p class="p4"><span class="s1">UnityEngine2.EventSystems.PointerInputModule:ProcessMove(PointerEventData) (at Assets/UnityEngine.EventSystems/PointerInputModule.cs:284)</span></p>
+<p class="p4"><span class="s1">UnityEngine2.EventSystems.StandaloneInputModule2:ProcessMouseEvent(Int32) (at Assets/UnityEngine.EventSystems/StandaloneInputModule.cs:467)</span></p>
+<p class="p4"><span class="s1">UnityEngine2.EventSystems.StandaloneInputModule2:ProcessMouseEvent() (at Assets/UnityEngine.EventSystems/StandaloneInputModule.cs:450)</span></p>
+<p class="p4"><span class="s1">UnityEngine2.EventSystems.StandaloneInputModule2:Process() (at Assets/UnityEngine.EventSystems/StandaloneInputModule.cs:233)</span></p>
+<p class="p4"><span class="s1">UnityEngine.EventSystems.EventSystem:Update()</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1"><b>exit</b></span></p>
+<p class="p4"><span class="s1">functor:UnityEngine2.EventSystems.ExecuteEvents+EventFunction`1[UnityEngine.EventSystems.IPointerExitHandler]</span></p>
+<p class="p4"><span class="s1">UnityEngine.Debug:LogError(Object)</span></p>
+<p class="p4"><span class="s1">UnityEngine2.EventSystems.ExecuteEvents:Execute(GameObject, BaseEventData, EventFunction`1) (at Assets/UnityEngine.EventSystems/ExecuteEvents.cs:367)</span></p>
+<p class="p4"><span class="s1">UnityEngine2.EventSystems.BaseInputModule:HandlePointerExitAndEnter(PointerEventData, GameObject) (at Assets/UnityEngine.EventSystems/BaseInputModule.cs:190)</span></p>
+<p class="p4"><span class="s1">UnityEngine2.EventSystems.PointerInputModule:ProcessMove(PointerEventData) (at Assets/UnityEngine.EventSystems/PointerInputModule.cs:284)</span></p>
+<p class="p4"><span class="s1">UnityEngine2.EventSystems.StandaloneInputModule2:ProcessMouseEvent(Int32) (at Assets/UnityEngine.EventSystems/StandaloneInputModule.cs:467)</span></p>
+<p class="p4"><span class="s1">UnityEngine2.EventSystems.StandaloneInputModule2:ProcessMouseEvent() (at Assets/UnityEngine.EventSystems/StandaloneInputModule.cs:450)</span></p>
+<p class="p4"><span class="s1">UnityEngine2.EventSystems.StandaloneInputModule2:Process() (at Assets/UnityEngine.EventSystems/StandaloneInputModule.cs:233)</span></p>
+<p class="p4"><span class="s1">UnityEngine.EventSystems.EventSystem:Update()</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1">ProcessMove経由で、HandlePointerExitAndEnterが呼ばれている気がする。</span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>その場所でnullになったり、GOになったりしてる？</span></p>
+<p class="p7"><span class="s2"><span class="Apple-tab-span">	</span></span><span class="s3">pointerEvent</span><span class="s4">.</span><span class="s3">pointerCurrentRaycast</span><span class="s4">.</span><span class="s3">gameObject</span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>にnullが入ってる。</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>なるほど。</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1">PointerEventDataをoverrideしてると、pointerCurrentRaycast にraycastのsetが行われない、みたいだ。どこで実行されてるか調べたいんだけどな～～。参照を追うしかないか。</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1"><b><span class="Apple-tab-span">	</span>ただしいfrom-toは、</b></span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1">みほん CopyFromTo to.pointerCurrentRaycast:Name: Button (UnityEngine.GameObject)</span></p>
+<p class="p4"><span class="s1">module: Name: Canvas (UnityEngine.GameObject)</span></p>
+<p class="p4"><span class="s1">eventCamera:<span class="Apple-converted-space"> </span></span></p>
+<p class="p4"><span class="s1">sortOrderPriority: 0</span></p>
+<p class="p4"><span class="s1">renderOrderPriority: 0</span></p>
+<p class="p4"><span class="s1">distance: 0</span></p>
+<p class="p4"><span class="s1">index: 0</span></p>
+<p class="p4"><span class="s1">depth: 0</span></p>
+<p class="p4"><span class="s1">worldNormal: (0.0, 0.0, 0.0)</span></p>
+<p class="p4"><span class="s1">worldPosition: (0.0, 0.0, 0.0)</span></p>
+<p class="p4"><span class="s1">screenPosition: (321.9, 129.3)</span></p>
+<p class="p4"><span class="s1">module.sortOrderPriority: 0</span></p>
+<p class="p4"><span class="s1">module.renderOrderPriority: 0</span></p>
+<p class="p4"><span class="s1">sortingLayer: 0</span></p>
+<p class="p4"><span class="s1">sortingOrder: 0</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space"> </span>vs from.pointerCurrentRaycast:Name: Button (UnityEngine.GameObject)</span></p>
+<p class="p4"><span class="s1">module: Name: Canvas (UnityEngine.GameObject)</span></p>
+<p class="p4"><span class="s1">eventCamera:<span class="Apple-converted-space"> </span></span></p>
+<p class="p4"><span class="s1">sortOrderPriority: 0</span></p>
+<p class="p4"><span class="s1">renderOrderPriority: 0</span></p>
+<p class="p4"><span class="s1">distance: 0</span></p>
+<p class="p4"><span class="s1">index: 0</span></p>
+<p class="p4"><span class="s1">depth: 0</span></p>
+<p class="p4"><span class="s1">worldNormal: (0.0, 0.0, 0.0)</span></p>
+<p class="p4"><span class="s1">worldPosition: (0.0, 0.0, 0.0)</span></p>
+<p class="p4"><span class="s1">screenPosition: (321.9, 129.3)</span></p>
+<p class="p4"><span class="s1">module.sortOrderPriority: 0</span></p>
+<p class="p4"><span class="s1">module.renderOrderPriority: 0</span></p>
+<p class="p4"><span class="s1">sortingLayer: 0</span></p>
+<p class="p4"><span class="s1">sortingOrder: 0</span></p>
+<p class="p4"><span class="s1">UnityEngine.Debug:LogError(Object)</span></p>
+<p class="p4"><span class="s1">UnityEngine2.EventSystems.PointerInputModule:CopyFromTo(PointerEventData, PointerEventData) (at Assets/UnityEngine.EventSystems/PointerInputModule.cs:207)</span></p>
+<p class="p4"><span class="s1">UnityEngine2.EventSystems.PointerInputModule:GetMousePointerEventData(Int32) (at Assets/UnityEngine.EventSystems/PointerInputModule.cs:268)</span></p>
+<p class="p4"><span class="s1">UnityEngine2.EventSystems.StandaloneInputModule2:ProcessMouseEvent(Int32) (at Assets/UnityEngine.EventSystems/StandaloneInputModule.cs:460)</span></p>
+<p class="p4"><span class="s1">UnityEngine2.EventSystems.StandaloneInputModule2:ProcessMouseEvent() (at Assets/UnityEngine.EventSystems/StandaloneInputModule.cs:450)</span></p>
+<p class="p4"><span class="s1">UnityEngine2.EventSystems.StandaloneInputModule2:Process() (at Assets/UnityEngine.EventSystems/StandaloneInputModule.cs:233)</span></p>
+<p class="p4"><span class="s1">UnityEngine.EventSystems.EventSystem:Update()</span></p>
+<p class="p5"><span class="s1"><span class="Apple-tab-span">	</span></span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>これに対して、現在は</span></p>
+<p class="p4"><span class="s1">CopyFromTo to.pointerCurrentRaycast: vs from.pointerCurrentRaycast:</span></p>
+<p class="p4"><span class="s1">UnityEngine.Debug:LogError(Object)</span></p>
+<p class="p4"><span class="s1">UnityEngine2.EventSystems.PointerInputModule:CopyFromTo(PointerEventData, PointerEventData) (at Assets/UnityEngine.EventSystems/PointerInputModule.cs:209)</span></p>
+<p class="p4"><span class="s1">UnityEngine2.EventSystems.PointerInputModule:GetMousePointerEventData(Int32) (at Assets/UnityEngine.EventSystems/PointerInputModule.cs:271)</span></p>
+<p class="p4"><span class="s1">UnityEngine2.EventSystems.StandaloneInputModule2:ProcessMouseEvent(Int32) (at Assets/UnityEngine.EventSystems/StandaloneInputModule.cs:466)</span></p>
+<p class="p4"><span class="s1">UnityEngine2.EventSystems.StandaloneInputModule2:ProcessMouseEvent() (at Assets/UnityEngine.EventSystems/StandaloneInputModule.cs:455)</span></p>
+<p class="p4"><span class="s1">UnityEngine2.EventSystems.StandaloneInputModule2:Process() (at Assets/UnityEngine.EventSystems/StandaloneInputModule.cs:234)</span></p>
+<p class="p4"><span class="s1">UnityEngine2.EventSystems.EventSystem:Update() (at Assets/UnityEngine.EventSystems/EventSystem.cs:351)</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>両方ともnull。ふーむ。</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>-&gt; 自分で作った方は該当するRayCasterがなかった。ので、作ればいけそう。</span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>BaseRaycaster -&gt; GraphinsRaycasterと、PhysicsRaycasterの2つ、、</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>選択肢は2つあって、</span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>1.Raycasterを自作して追加する</span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>2.RaycastManagerをハックしてリストを取得する</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>たぶん1のほうがいい。</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>uGUIに関してはできた。</span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>で、あとは</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>・GameObjectへのタッチがまだ取れてない -&gt; できた</span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>・uGUIへのイベントの深度がちょっと違う</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1">IPointerEnterHandler</span></p>
+<p class="p4"><span class="s1">UnityEngine.Debug:LogError(Object)</span></p>
+<p class="p4"><span class="s1">UnityEngine2.EventSystems.ExecuteEvents:Execute(IPointerEnterHandler, BaseEventData) (at Assets/UnityEngine.EventSystems/ExecuteEvents.cs:251)</span></p>
+<p class="p4"><span class="s1">UnityEngine2.EventSystems.ExecuteEvents:Execute(GameObject, BaseEventData, EventFunction`1) (at Assets/UnityEngine.EventSystems/ExecuteEvents.cs:392)</span></p>
+<p class="p4"><span class="s1">UnityEngine2.EventSystems.BaseInputModule:HandlePointerExitAndEnter(PointerEventData, GameObject) (at Assets/UnityEngine.EventSystems/BaseInputModule.cs:231)</span></p>
+<p class="p4"><span class="s1">UnityEngine2.EventSystems.PointerInputModule:ProcessMove(PointerEventData) (at Assets/UnityEngine.EventSystems/PointerInputModule.cs:301)</span></p>
+<p class="p4"><span class="s1">UnityEngine2.EventSystems.StandaloneInputModule2:ProcessMouseEvent(Int32) (at Assets/UnityEngine.EventSystems/StandaloneInputModule.cs:468)</span></p>
+<p class="p4"><span class="s1">UnityEngine2.EventSystems.StandaloneInputModule2:ProcessMouseEvent() (at Assets/UnityEngine.EventSystems/StandaloneInputModule.cs:450)</span></p>
+<p class="p4"><span class="s1">UnityEngine2.EventSystems.StandaloneInputModule2:Process() (at Assets/UnityEngine.EventSystems/StandaloneInputModule.cs:233)</span></p>
+<p class="p4"><span class="s1">UnityEngine.EventSystems.EventSystem:Update()</span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>ここまで来る必要がある。</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>できた～～～</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1">で、Dragとかも補足はできたので、あとはClickのイベント発生の中身を追うとかすると良さげ。</span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>-&gt; 特に同じオブジェクト判定とかしてないっぽいな、、なんか制約があると思ったんだけど。</span></p>
+<p class="p5"><span class="s1"><span class="Apple-tab-span">	</span></span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1">uGUIの検知が1f遅れる？</span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>なんか初期化順の問題なのかな</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>my processのほうが実行が早いのに、判定は遅れる。</span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>これはバグっぽい。よくない。</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1">IPointerClickHandler:88</span></p>
+<p class="p4"><span class="s1">UnityEngine.Debug:LogWarning(Object)</span></p>
+<p class="p4"><span class="s1">UnityEngine2.EventSystems.ExecuteEvents:Execute(IPointerClickHandler, BaseEventData) (at Assets/UnityEngine.EventSystems/ExecuteEvents.cs:276)</span></p>
+<p class="p4"><span class="s1">UnityEngine2.EventSystems.ExecuteEvents:Execute(GameObject, BaseEventData, EventFunction`1) (at Assets/UnityEngine.EventSystems/ExecuteEvents.cs:401)</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1">UnityEngine2.EventSystems.StandaloneInputModule2:ProcessMousePress(MouseButtonEventData) (at Assets/UnityEngine.EventSystems/StandaloneInputModule.cs:556)</span></p>
+<p class="p4"><span class="s1">UnityEngine2.EventSystems.StandaloneInputModule2:ProcessMouseEvent(Int32) (at Assets/UnityEngine.EventSystems/StandaloneInputModule.cs:475)</span></p>
+<p class="p4"><span class="s1">UnityEngine2.EventSystems.StandaloneInputModule2:ProcessMouseEvent() (at Assets/UnityEngine.EventSystems/StandaloneInputModule.cs:456)</span></p>
+<p class="p4"><span class="s1">UnityEngine2.EventSystems.StandaloneInputModule2:Process() (at Assets/UnityEngine.EventSystems/StandaloneInputModule.cs:235)</span></p>
+<p class="p4"><span class="s1">UnityEngine2.EventSystems.EventSystem:Update() (at Assets/UnityEngine.EventSystems/EventSystem.cs:350)</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>この判定がもう一歩高速でないとおかしい。Updateか。</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1">Processで、<b>ProcessMousePress</b>まではきてる。</span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>で、ここからの挙動に差がある。</span></p>
+<p class="p5"><span class="s1"><span class="Apple-tab-span">	</span></span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>ReleasedThisFrame</span></p>
+<p class="p5"><span class="s1"><span class="Apple-tab-span">	</span></span></p>
+<p class="p4"><span class="s1">なるほど、Update時にはtrueになってないんだ。ということは、</span></p>
+<p class="p4"><span class="s1">・Update</span></p>
+<p class="p4"><span class="s1">・何か</span></p>
+<p class="p4"><span class="s1">・EventSystemが処理する</span></p>
+<p class="p4"><span class="s1">という順で動いている？それも妙な話だな。</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1">processing. count:1208 button:True</span></p>
+<p class="p4"><span class="s1">UnityEngine.Debug:LogError(Object)</span></p>
+<p class="p4"><span class="s1">MyInputModule:Process() (at Assets/MyInputModule.cs:14)</span></p>
+<p class="p4"><span class="s1">UnityEngine.EventSystems.EventSystem:Update()</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>この中に、Input.GetMouseButtonUpをtrueにしている要素があるはず。</span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>ってなるとInputなんだけどねえ。</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1"><b>思い違いをしていた。</b></span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>eventSystemは、endOfFrameよりあと、次のUpdateより前で動いている。</span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>つまりeventSystemの使っているUpdateがすごく特殊。</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>-&gt; 組み込みのExecutionOrderがあるみたい。なので、次の結論が得られた。</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>・EventSystemが既に存在する場合のみ、順に配慮した動きが必要になる</span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>・5.5以上でないと多分追い抜けない(それでも追い抜けないかもしれない</span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>-&gt; tapでインスタンスがnullにされたりすると、事後でしか追いつけないので、記録が同じにならない可能性がある</span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>-&gt; 直前のフレームに処理を差し込むにはEventSystemに乗っかるか、先に実行するしかない。乗っかる方は辛いのでやりたくない。</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>・eventSystemが存在しなければ特に問題なさげ？</span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>-&gt; 腕力でexecutionOrderいじりたい</span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>-&gt; metadata編集で勝てた。-1000つよい。</span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>-10 x</span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>-100 x</span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>-999 x</span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>-1000 o</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>イェーイ。</span></p>
+<p class="p5"><span class="s1"><span class="Apple-tab-span">	</span></span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>ということで、運用するなら、metadataを開けてなんとかする機構が必要になる。</span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>そしてこの機構のために、この部分だけをコードで用意する必要がある。</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>なるほど。</span></p>
+<p class="p5"><span class="s1"><span class="Apple-tab-span">	</span></span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p5"><span class="s1"></span><br></p>
+</body>
+</html>
