@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1504.83">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>Shader関連で人間が欲しい知識とはどんなのか</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>壁打ちのためにまとめる。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>ShaderKitchenを作る時のモチベーション</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・Unityにおけるシェーダの構造を解説すること</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・シェーダの知識を得て、それをユーザーが再構成可能になること</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・シェーダの知識をgithub上へと投稿でき、その解説を外部の人間が行うことができること</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>という3点に分解できる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>最終的には自分の手を離れて、github上で適当に成長していってほしい。ステークホルダーは自分なんだけど自分は学べればそれでいい的なポジ。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>今のところ考えている知識の階段</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>1.Unity上でのシェーダのフォーマットを知る</p>
+<p class="p3"><span class="Apple-tab-span">	</span>2.今まで存在したシェーダ(PBR以前)について、その式の意味を、用語と一緒に解説する</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>このパーツはあのシェーダのあの部分、とかの、実質の機能的な意味での先祖と子孫みたいな関係を露わにしたい。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>またそれを遡って参照可能にしたい。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>3.同様のフォーマットでUnityのstandardShaderの解説や、ユニティちゃんトゥーンシェーダの解説を行う</p>
+<p class="p3"><span class="Apple-tab-span">	</span>4.適当な知識人に自慢のシェーダを披露してもらい、その解説を書く</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>というような感じでコンテンツを揃えていって俺はいろいろわかってラッキーみたいなことを考えていたんだけど、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ShaderForgeとかAmplifierあたりのせいで懸念がある。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>しかるに困っていること</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ShaderForgeとかとシェーダのプログラム学習の相性が最悪に悪い気がしている。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>こう、ShaderKitchenは、<b>シェーダを直書きすることそれ自体</b>は目的ではないんだけど、それでもコードを元に解説をしようとしている。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、ShaderForgeとかで書かれたシェーダコードから意図を推察するのが、これがものすごくしんどい。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>あのへんのツールは</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・1~2までを様々な経験で理解した人が</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・それをコードなしに表現すること</p>
+<p class="p3"><span class="Apple-tab-span">	</span>を達成するために存在している感じがある。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>なので、あれらの生成されたコードを見てもさっぱり勉強にならん。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>-&gt; どちらかというとShaderForgeとかで吐いたコードを綺麗にガッチャンコして数字シェーダ名を解明して云々みたいな</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>逆アセンブルが必須になる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>というのがあって、うーーーーん、、</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・コードを元にシェーダを解説しようという試みを続けていいのか</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>-&gt; 絶対に必要だという直感があるのでYes</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・んでShaderForgeとかとどう付き合えばいいんだろう</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>-&gt; なやみどころ</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>という感じ。</p>
+<p class="p2"><br></p>
+</body>
+</html>
