@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Style-Type" content="text/css">
   <title></title>
   <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="1504.76">
+  <meta name="CocoaVersion" content="1504.83">
   <style type="text/css">
     p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Sans'}
     p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; min-height: 18.0px}
@@ -46,8 +46,10 @@
 <p class="p3"><b>iOSの検証について</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>・ticketId &amp; ユーザー情報で、実際に購買が行われていたかどうかチェック</p>
 <p class="p3"><span class="Apple-tab-span">	</span>・receiptをAppleに問い合わせる。0以外のstatusがある場合はダメ</p>
-<p class="p3"><span class="Apple-tab-span">	</span>・帰って来たレスポンスのtransactionIdで、過去履歴をチェック</p>
-<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>(チーターは他のアプリのticketを送ってきたりするので、すでに処理済みのtransactionだったら蹴る、とか。)</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・bundle_idがこのAppのCFBundleIdentifierか</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・product_idがticketのものと一致するか</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・帰って来たレスポンスのtransactionIdで、<b>過去このアプリで使われた全てのtransactionId</b>との重複をチェック</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>(チーターは他のアプリのticketを送ってきたりするので、すでに誰かが処理済みのtransactionだったら蹴る、とか。)</p>
 <p class="p3"><span class="Apple-tab-span">	</span>-&gt; OK</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
