@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1504.83">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Sans'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    span.s1 {font: 22.0px Helvetica}
+    span.s2 {font: 12.0px 'Hiragino Sans'}
+    span.s3 {font: 12.0px Helvetica}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><span class="s1"><b>Gitpitch</b></span><b>が便利だったのでプレビュー用の機構作った</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これ</p>
+<p class="p3"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>GITPITCH</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/gitpitch/gitpitch">https://github.com/gitpitch/gitpitch</a></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・Github上のPITCME.mdという名前のmdファイルをスライドに変換して見せてくれるサービス</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・文字フォーマットとかのデフォルトが見やすめ</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・画像とかも置ける</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>欠点がないわけではなくて、特に簡単にプレビューできないというのが自分の場合特に辛かったんで、こう、解決しようかなと。</p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b>プレビューしたい、、プレビューしたくない？</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ユーザーのブラウザ -&gt; gitpitch -&gt; github/repository/branch/PITCHME.md というルートでスライドの元となるmdを取得する感じになってるんで、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ようはgithubにpushしないとスライドが見れないっていうのがあって。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>branch切ってそっちにアップして完成したらmasterに合流~みたいなの書いてあるっぽいんだけどそうじゃねーんだよ、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>根本的にcommit pushせんでもプレビューしたいんだよ。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>issue closed</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>preview関連のissue見てたら解決したようなそぶりになってるんだけど実質面倒臭くて解決してねーじゃねーか、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>みたいなのを見つけたので、解決策として一個なんか作った。</p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b>offlineモードの延長線上でプレビューと言い張る</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これが一番現実解な気がする。楽だし。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>現状PITCHMEにはオフラインモードがある。</p>
+<p class="p4"><span class="s2"><span class="Apple-tab-span">	</span></span><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202017-10-03%2016.01.18.png" alt="スクリーンショット 2017-10-03 16.01.18.png"></p>
+<p class="p3"><span class="s3"><span class="Apple-tab-span">	</span></span>このオレンジに光ってるやつを押すと、プレゼンアセット全体がDLできる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>DLできて、index.htmlも入ってて、</p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ああーこれひらけばいいんじゃねってなるんだけど、そのままローカルで開くとhttpサーバでないと解決できないCORS関連の動作があるらしく、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ロードに失敗する。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>この動作は意図してないものなんじゃねーかな～と思いつつ、じゃあhttpサーバに乗っけたら動くのかよ、っていうと問題なく動いた。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、このDLできたアセット全体は、こんな感じのフォルダになってて、PITCHME.mdも入ってる。<span class="s3"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202017-10-03%2016.04.44.png" alt="スクリーンショット 2017-10-03 16.04.44.png"></span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>なんだ入ってるんじゃん、という感じで、この.mdを編集するとちゃんとコンテンツも変化する。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>やったねプレビューできるよ。HTTPサーバに置けばね。</b></p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>で、どうやるのが一番楽か</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>いろいろ考えたんだけどなんかもうDockerでnginx立ててそっから見れる場所にgitpitchのファイルを置けばいいと思うんだよね。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>というわけでこれ。</p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>GitpitchPreview</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/gitpitchpreview">https://github.com/sassembla/gitpitchpreview</a></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>使い方はREADMEを見てもらうとして。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これでローカルで編集して気が済んだらcommit pushで運用できるぞ＝～～</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+</body>
+</html>
