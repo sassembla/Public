@@ -18,7 +18,7 @@
   </style>
 </head>
 <body>
-<p class="p1"><span class="s1"><b>Gitpitch</b></span><b>が便利だったのでプレビュー用の機構作った</b></p>
+<p class="p1"><span class="s1"><b>Gitpitch</b></span><b>が便利だったのでプレビュー用の機構作った(追記あり)</b></p>
 <p class="p2"><br></p>
 <p class="p3"><b>概要</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>これ</p>
@@ -75,7 +75,50 @@
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>これでローカルで編集して気が済んだらcommit pushで運用できるぞ＝～～</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3">以下追記</p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>今後の課題</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・nginxのキャッシュ設定いじってないので、mdやassets/以下の画像を弄っても変わらない時がある。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/gitpitchpreview/issues/2">https://github.com/sassembla/gitpitchpreview/issues/2</a></p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・offline出力をする際にmdの中の画像が強制的にassets/以下にまとめられる。このほかにもオリジナルのmdとは変更点が多い。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>1.画像がassets/以下にまとめられる</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>2.md内の画像リンクもassets/以下を指すようになる</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>3.@[1] とかの記法は&lt;span class="code-presenting-annotation fragment current-only" ,, みたいなタグに展開された状態で来る</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>という感じで、offlineで持ってきたmdをそのまま使うのは厳しい。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>が、試しにオリジナルのmd(@[1]とかの記法を使ってるやつ)を置いてみたところ、変換されない状態で表示されてさらに厳しいことになったので、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>うーーーんんん、、、、</p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>Offlineから取得したmdをいじる場合、しんどい部分がある</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>という感じに着地してしまった。うーん、、、</p>
+<p class="p2"><br></p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b>余談、どうできると綺麗か</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>結局gitpitchは、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ブラウザからgitpitchサーバを介してgithub/user/repoにアクセスする際、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>1.pitchme.mdを変換したものを、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>2.jsとかで動作可能にしたものとして、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>3.ブラウザに表示する、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>という経路を経ている。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>offline出力で取得できるものはこのフローの2から先を渡してくれるだけなので、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>1を2に変換する工程はgitpitchのサーバに含まれてしまっていて、まあ再現できなそう(さらに不可逆なのがキツい)。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>うーーーん。かなしみだ。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>というわけで、<b>「文言の変更に関しては」プレビューが完璧にできる。</b>という程度なことがわかってしまった。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>だれか改善して。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 </body>
