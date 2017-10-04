@@ -1,0 +1,118 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1504.83">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px 'Hiragino Kaku Gothic ProN'; color: #000000; background-color: #ebebeb}
+    span.s1 {font-variant-ligatures: no-common-ligatures}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>deploy to Heroku面白かった</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Crowiをなるべく怠惰にクローズドで使いたかったのでdeploy to herokuボタンをポチッと押した。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>便利だった。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、まあ、その後、設定を変えないといけないのでちょっと触ってるみたいな話。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>設定を変えたいんだ</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>具体的には.envファイルを足したり編集したりして云々がしたい。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>herokuはgithubからのデプロイ以外にもheroku CLIからのpushもできて素敵、みたいな感じなんだけど、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>deploy to herokuボタン一発でアップされたアプリケーションは、なんというか特殊っぽくて、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>デプロイ元のgitリポジトリを持たないみたいだ。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>heroku gitで取得しても空のフォルダが出来上がる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、herokuからソースコードを取得して設定ファイルを追加、その上で再度アップして云々ってのをやる必要がある。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>バックアップ</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>既存のコードを取得するための処理が行えた。slug。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://kb.heroku.com/how-can-i-download-my-code-from-heroku">https://kb.heroku.com/how-can-i-download-my-code-from-heroku</a></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>slugプラグイン入れてheroku slugs:download -a APP_NAME でOK。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>実行するとアプリケーションのファイルがまるっと手に入る。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>（もしかしたらここが不十分とかそういうのかな、、あとで問題が出る。）</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>このときの現状</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・手元にはherokuにアップされていたファイルがすべて?ある</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・これらをherokuへとアップし直すことで、デプロイとか更新ができる。はず。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202017-10-04%2014.43.52.png" alt="スクリーンショット 2017-10-04 14.43.52.png"></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>node_modulesはまあ現地で展開してくれそうなのでgitには含まないようにして、herokuへとpush。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>で、herokuへとpushしたあたりで問題が</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>deploy時のpostinstall処理でこんな感じのエラーが出る。</p>
+<p class="p2"><br></p>
+<p class="p4"><span class="s1">remote:<span class="Apple-converted-space">        </span>&gt; crowi@1.6.2 postinstall /tmp/build_d989cb6fdb4acc6a79775c1d6949d915</span></p>
+<p class="p4"><span class="s1">remote:<span class="Apple-converted-space">        </span>&gt; gulp</span></p>
+<p class="p4"><span class="s1">remote: <span class="Apple-converted-space">       </span></span></p>
+<p class="p4"><span class="s1">remote:<span class="Apple-converted-space">        </span>[05:14:06] Using gulpfile /tmp/build_d989cb6fdb4acc6a79775c1d6949d915/gulpfile.js</span></p>
+<p class="p4"><span class="s1">remote:<span class="Apple-converted-space">        </span>[05:14:06] Starting 'css:sass'...</span></p>
+<p class="p4"><span class="s1">remote:<span class="Apple-converted-space">        </span>[05:14:06] Starting 'js:del'...</span></p>
+<p class="p4"><span class="s1">remote:<span class="Apple-converted-space">        </span>[05:14:06] Finished 'js:del' after 25 ms</span></p>
+<p class="p4"><span class="s1">remote:<span class="Apple-converted-space">        </span>[05:14:06] Starting 'js:concat'...</span></p>
+<p class="p4"><span class="s1">remote:<span class="Apple-converted-space">        </span>[05:14:06] Finished 'js:concat' after 45 ms</span></p>
+<p class="p4"><span class="s1">remote:<span class="Apple-converted-space">        </span>[05:14:06] Starting 'webpack'...</span></p>
+<p class="p4"><span class="s1">remote:<span class="Apple-converted-space">        </span>[05:14:08] Finished 'css:sass' after 1.82 s</span></p>
+<p class="p4"><span class="s1">remote:<span class="Apple-converted-space">        </span>[05:14:08] Starting 'css:concat'...</span></p>
+<p class="p4"><span class="s1">remote:<span class="Apple-converted-space">        </span>[05:14:09] Finished 'css:concat' after 1.33 s</span></p>
+<p class="p4"><span class="s1">remote:<span class="Apple-converted-space">        </span>[05:14:09] Starting 'css:min'...</span></p>
+<p class="p4"><span class="s1">remote:<span class="Apple-converted-space">        </span>[05:14:10] Finished 'css:min' after 982 ms</span></p>
+<p class="p4"><span class="s1">remote: <span class="Apple-converted-space">       </span></span></p>
+<p class="p4"><span class="s1">remote:<span class="Apple-converted-space">        </span>internal/streams/legacy.js:59</span></p>
+<p class="p4"><span class="s1">remote:<span class="Apple-converted-space">        </span>throw er; // Unhandled stream error in pipe.</span></p>
+<p class="p4"><span class="s1">remote:<span class="Apple-converted-space">        </span>^</span></p>
+<p class="p4"><span class="s1">remote:<span class="Apple-converted-space">        </span>Error: ./resource/js/app.js</span></p>
+<p class="p4"><span class="s1">remote:<span class="Apple-converted-space">        </span>Module build failed: SyntaxError: Unexpected token (45:17)</span></p>
+<p class="p4"><span class="s1">remote: <span class="Apple-converted-space">       </span></span></p>
+<p class="p4"><span class="s1">remote:<span class="Apple-converted-space">        </span>43 | const componentMappings = {</span></p>
+<p class="p4"><span class="s1">remote:<span class="Apple-converted-space">        </span>44 | <span class="Apple-converted-space">  </span>// 'search-top': &lt;HeaderSearchBox crowi={crowi} /&gt;,</span></p>
+<p class="p4"><span class="s1">remote:<span class="Apple-converted-space">        </span>&gt; 45 | <span class="Apple-converted-space">  </span>'search-page': &lt;SearchPage crowi={crowi} /&gt;,</span></p>
+<p class="p4"><span class="s1">remote:<span class="Apple-converted-space">        </span>|<span class="Apple-converted-space">                  </span>^</span></p>
+<p class="p4"><span class="s1">remote:<span class="Apple-converted-space">        </span>46 | <span class="Apple-converted-space">  </span>'page-list-search': &lt;PageListSearch crowi={crowi} /&gt;,</span></p>
+<p class="p4"><span class="s1">remote:<span class="Apple-converted-space">        </span>47 | <span class="Apple-converted-space">  </span>'page-attachment': &lt;PageAttachment pageId={pageId} pageContent={pageContent} crowi={crowi} /&gt;,</span></p>
+<p class="p4"><span class="s1">remote:<span class="Apple-converted-space">        </span>48 |</span></p>
+<p class="p4"><span class="s1">remote: <span class="Apple-converted-space">       </span></span></p>
+<p class="p4"><span class="s1">remote:<span class="Apple-converted-space">        </span>BabelLoaderError: SyntaxError: Unexpected token (45:17)</span></p>
+<p class="p4"><span class="s1">remote: <span class="Apple-converted-space">       </span></span></p>
+<p class="p4"><span class="s1">remote:<span class="Apple-converted-space">        </span>43 | const componentMappings = {</span></p>
+<p class="p4"><span class="s1">remote:<span class="Apple-converted-space">        </span>44 | <span class="Apple-converted-space">  </span>// 'search-top': &lt;HeaderSearchBox crowi={crowi} /&gt;,</span></p>
+<p class="p4"><span class="s1">remote:<span class="Apple-converted-space">        </span>&gt; 45 | <span class="Apple-converted-space">  </span>'search-page': &lt;SearchPage crowi={crowi} /&gt;,</span></p>
+<p class="p4"><span class="s1">remote:<span class="Apple-converted-space">        </span>|<span class="Apple-converted-space">                  </span>^</span></p>
+<p class="p4"><span class="s1">remote:<span class="Apple-converted-space">        </span>46 | <span class="Apple-converted-space">  </span>'page-list-search': &lt;PageListSearch crowi={crowi} /&gt;,</span></p>
+<p class="p4"><span class="s1">remote:<span class="Apple-converted-space">        </span>47 | <span class="Apple-converted-space">  </span>'page-attachment': &lt;PageAttachment pageId={pageId} pageContent={pageContent} crowi={crowi} /&gt;,</span></p>
+<p class="p4"><span class="s1">remote:<span class="Apple-converted-space">        </span>48 |</span></p>
+<p class="p4"><span class="s1">remote: <span class="Apple-converted-space">       </span></span></p>
+<p class="p4"><span class="s1">remote:<span class="Apple-converted-space">        </span>at transpile (/tmp/build_d989cb6fdb4acc6a79775c1d6949d915/node_modules/babel-loader/lib/index.js:63:13)</span></p>
+<p class="p4"><span class="s1">remote:<span class="Apple-converted-space">        </span>at Object.module.exports (/tmp/build_d989cb6fdb4acc6a79775c1d6949d915/node_modules/babel-loader/lib/index.js:163:20)form.b39996c7cb4897273bcf.js from UglifyJs</span></p>
+<p class="p4"><span class="s1">remote:<span class="Apple-converted-space">        </span>Unexpected character '`' [form.b39996c7cb4897273bcf.js:525,32]</span></p>
+<p class="p4"><span class="s1">remote:<span class="Apple-converted-space">        </span>npm ERR! code ELIFECYCLE</span></p>
+<p class="p4"><span class="s1">remote:<span class="Apple-converted-space">        </span>npm ERR! errno 1</span></p>
+<p class="p4"><span class="s1">remote:<span class="Apple-converted-space">        </span>npm ERR! crowi@1.6.2 postinstall: `gulp`</span></p>
+<p class="p4"><span class="s1">remote:<span class="Apple-converted-space">        </span>npm ERR! Exit status 1</span></p>
+<p class="p4"><span class="s1">remote:<span class="Apple-converted-space">        </span>npm ERR!</span></p>
+<p class="p4"><span class="s1">remote:<span class="Apple-converted-space">        </span>npm ERR! Failed at the crowi@1.6.2 postinstall script.</span></p>
+<p class="p4"><span class="s1">remote:<span class="Apple-converted-space">        </span>npm ERR! This is probably not a problem with npm. There is likely additional logging output above.</span></p>
+<p class="p4"><span class="s1">remote: <span class="Apple-converted-space">       </span></span></p>
+<p class="p4"><span class="s1">remote:<span class="Apple-converted-space">        </span>npm ERR! A complete log of this run can be found in:</span></p>
+<p class="p4"><span class="s1">remote:<span class="Apple-converted-space">        </span>npm ERR! <span class="Apple-converted-space">    </span>/app/.npm/_logs/2017-10-04T05_14_16_105Z-debug.log</span></p>
+<p class="p4"><span class="s1">remote:<span class="Apple-converted-space"> </span></span></p>
+<p class="p4"><span class="s1">remote: -----&gt; Build failed</span></p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+</body>
+</html>
