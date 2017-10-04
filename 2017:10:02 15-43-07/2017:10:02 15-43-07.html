@@ -16,7 +16,7 @@
   </style>
 </head>
 <body>
-<p class="p1"><b>Crowiをdeploy to Herokuでデプロイしてるんだけどビルドエラー</b></p>
+<p class="p1"><b>Crowiをdeploy to Herokuでデプロイして画像OKにする</b></p>
 <p class="p2"><br></p>
 <p class="p3"><b>概要</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>Crowiをなるべく怠惰にクローズドで使いたかったのでdeploy to herokuボタンをポチッと押した。</p>
@@ -24,9 +24,20 @@
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>で、その後、設定を変えないといけないのでちょっと触ってるみたいな話。</p>
 <p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>少量だけど画像もアップしたりしたい、、というやつ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>でハマった。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>デフォルト</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>デフォルトではAWSのS3とかに画像をアップできるように設定されている。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>AWS側のパラメータセットがなければ何も起きない(画像をアップできないようになっている)</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、これは.envファイルをアップしたりすれば解決できるんだな～という判断をして、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>herokuに上がっているものを編集する旅に出ることになった。</p>
+<p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>設定を変えたいんだ</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>具体的には.envファイルを足したり編集したりして云々がしたい。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>具体的にはheroku上に.envファイルを足したり編集したりして云々がしたい。</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>herokuはgithubからのデプロイ以外にもheroku CLIからのpushもできて素敵、みたいな感じなんだけど、</p>
 <p class="p3"><span class="Apple-tab-span">	</span>deploy to herokuボタン一発でアップされたアプリケーションは、なんというか特殊っぽくて、</p>
@@ -114,5 +125,16 @@
 <p class="p4"><span class="s1">remote: -----&gt; Build failed</span></p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>1.6.2が上がっているのだと思うのだけれど、herokuのことをわかってないから起こるような問題に当たってしまったのかしら。</p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b>で</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>どうすんべと思ってCrowiのgitter見に行って過去ログ漁っていたら、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>“起動するときの env に関しては heroku 管理画面の configuration vars から見れると思います” という書き込みがあったので、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>えーーーーーーーーーーーーっっと、、、</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>問題がherokuからの既存Appの取得にあるのかherokuへのupの仕方にあるのか内容にあるのかが全然わかってないので、うん、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>heroku &gt; configuration vars に FILE_UPLOAD local みたいなのをつけたら無事動いたよ、よかったね、という話。</p>
 </body>
 </html>
