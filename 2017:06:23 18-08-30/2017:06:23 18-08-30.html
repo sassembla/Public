@@ -12,6 +12,7 @@
     p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'}
     p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; background-color: #ebebeb}
     p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; background-color: #ebebeb; min-height: 18.0px}
+    span.s1 {text-decoration: line-through}
     span.Apple-tab-span {white-space:pre}
   </style>
 </head>
@@ -37,22 +38,26 @@
 <p class="p3"><span class="Apple-tab-span">	</span>DOTweenはもちろん入ってないので自分で入れて。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
-<p class="p3"><b>Sequence使お</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>基本的な指針として。</p>
-<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://stackoverflow.com/questions/37214649/how-to-kill-current-running-dotween-sequence-in-unity3d">https://stackoverflow.com/questions/37214649/how-to-kill-current-running-dotween-sequence-in-unity3d</a></p>
-<p class="p2"><br></p>
-<p class="p2"><br></p>
-<p class="p4"><span class="Apple-tab-span">	</span>// Grab a free Sequence to use</p>
-<p class="p4"><span class="Apple-tab-span">	</span>Sequence mySequence = DOTween.Sequence();</p>
-<p class="p5"><br></p>
-<p class="p4"><span class="Apple-tab-span">	</span>// Add a movement tween at the beginning</p>
-<p class="p4"><span class="Apple-tab-span">	</span>mySequence.Append(transform.DOMoveX(45, 1));</p>
-<p class="p5"><br></p>
-<p class="p4"><span class="Apple-tab-span">	</span>mySequence.Kill(); //Kill the sequence.</p>
-<p class="p2"><br></p>
-<p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>というかこれ以外の方法だとグローバル空間のDoTweenを使ってしまうような感じで、</p>
-<p class="p3"><span class="Apple-tab-span">	</span>他所のアニメーションの影響を受けて止まるとかがあるって聞いたんだけどマジ？</p>
+<p class="p3"><span class="s1"><b>Sequence使お</b></span></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>基本的な指針として。</span></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://stackoverflow.com/questions/37214649/how-to-kill-current-running-dotween-sequence-in-unity3d">https://stackoverflow.com/questions/37214649/how-to-kill-current-running-dotween-sequence-in-unity3d</a></span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>// Grab a free Sequence to use</span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>Sequence mySequence = DOTween.Sequence();</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>// Add a movement tween at the beginning</span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>mySequence.Append(transform.DOMoveX(45, 1));</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>mySequence.Kill(); //Kill the sequence.</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>というかこれ以外の方法だとグローバル空間のDoTweenを使ってしまうような感じで、</span></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>他所のアニメーションの影響を受けて止まるとかがあるって聞いたんだけどマジ？</span></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ここの記述は間違っていた。それぞれ独立したDOTweenを作る方法が別にある。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>そのうち書き足す。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>KillとCompleteの差<span class="Apple-tab-span">	</span></b></p>
