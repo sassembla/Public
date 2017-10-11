@@ -1,0 +1,132 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1504.83">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Sans'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'}
+    span.s1 {font: 12.0px 'Hiragino Kaku Gothic ProN'; font-kerning: none}
+    span.s2 {font: 12.0px Helvetica}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>AppManifestモジュールについて</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>アプリケーションの設定ファイルを読み書きする機構。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Autoyaのモジュールの一つ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/Autoya/tree/master/Assets/Autoya/Manifest">https://github.com/sassembla/Autoya/tree/master/Assets/Autoya/Manifest</a></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>重要な制約として、string以外の型を保持できないようにしてある。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>用途</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>アプリケーションの運用に際して、事前に定義したパラメータを管理するのに特化している。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>アプリケーションの運用以外に関するパラメータを管理するために使うのは得策では無い。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>アプリケーションで保持、管理したいパラメータ</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>1.ビルド時に決定されるreadonlyなパラメータ</p>
+<p class="p3"><span class="Apple-tab-span">	</span>2.ビルド時に初期値が決定され、更新されるパラメータ</p>
+<p class="p3"><span class="Apple-tab-span">	</span>3.動作時に新規に追加、上書きされていくパラメータ</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>だいたいこの三つがあると思う。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>AppManifest機構では、1と2を扱う。3はInAppDBなどで扱う。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>1.ビルド時に決定されるreadonlyなパラメータ</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>アプリケーションのバージョン、ビルド時の情報など、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>外部から参照して使うのみのパラメータ。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>よくタイトル画面に表示したりする。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>パラメータ名から値までが完全に決定された状態。</p>
+<p class="p2"><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>2.ビルド時に初期値として決定され、それ以降更新されるパラメータ</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>事前にキーが決まっているパラメータ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>外部から参照して使うほか、更新が発生したりする。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>事前にキーが決まっており、深度も決定されているが、変更が発生することがあるのが1との違い。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>予期されている範囲での変動を保持する。</p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>3.動作時に新規に追加、上書きされていくパラメータ</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>1,2以外のクライアント側でのpersistantな要素。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>要はDB。</p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>キーが増えたり、深度が変わったりする。初期値もあったりなかったり。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>真面目な運用を考えるとまあ可変キー、可変深度になると思う。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>型も多岐にわたる。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>AppManifest</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>次のような階層構造になっている</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>AppManifestStore</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="s1">┣</span><span class="Apple-tab-span">	</span>BuildManifest</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ビルド時に決定されるパラメータ集</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="s1">┗<span class="Apple-tab-span">	</span></span>RuntimeManifest</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ビルド時に初期値として決定され、それ以降更新されるパラメータ集</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>取り出しはAppManifestStore経由で、辞書形式で取得できるようになっている。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>RuntimeManifestパラメータに関しては、取り出し -&gt; 変更 -&gt; 上書き、ができる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>read/writeに関する機構は外部から渡すことができる(暗号化/復号化フック書ける)</p>
+<p class="p3"><span class="Apple-tab-span">	</span>BuildManifest、RuntimeManifestに使用するデータ型は外部から渡す。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>それぞれの保存形式</b></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>BuildManifest</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>実行時書き換え機構を持たないため、まんまResourcesフォルダ以下にjson形式で保存されている。</p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>RuntimeManifest</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>実行時書き換え機構を持つため、アプリケーションの実行環境に保存される。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>保存メソッドは外部から与えることができる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>両方とも、生成元となる型を与えて生成するデータの形状を規定する。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>生成元の型情報に初期値をセットすることができる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>重要な制約として、string以外の型を保持できない。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>Autoyaでの使用例</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="s2">Autoya</span>では、2つのバージョン値を使ってユーザーの手元のゲームを管理できるようになっている。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>appVersion</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>アプリケーションのバージョン</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>resVersion</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>リソースのバージョン</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>appVersion</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>appVersionはアプリケーションの実行バイナリの更新でのみ変動するため、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>BuildManifestのパタメータとして保持している。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>認証がある通信に際して、サーバ側にクライアントアプリのバージョンを通知するために使っている。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>サーバはこの通知をもとに、「君のアプリは古い。こっちを使いなさい」とか返答を寄越してくる。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>resVersion</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>resVersionはアプリケーションが現在保持しているDL可能リソース全体のバージョンを表象している。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>これはアプリの運用中に変化していく(だいたいincrementされる)ため、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>RuntimeManifestのパラメータとして保持している。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>認証がある通信に際して、サーバ側にクライアントのDL済みのリソースバージョンを通知するために使っている。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>サーバはこの通知をもとに、「君のアプリのリソース情報は古い。こっちを使いなさい」とか返答を寄越してくる。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+</body>
+</html>
