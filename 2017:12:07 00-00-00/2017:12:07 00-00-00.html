@@ -1,0 +1,212 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1504.83">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'; color: #000000}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; color: #000000; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; color: #000000}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; line-height: 18.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; color: #4ec9b0; -webkit-text-stroke: #4ec9b0; background-color: #000000}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; line-height: 18.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; color: #d4d4d4; -webkit-text-stroke: #d4d4d4; background-color: #000000; min-height: 18.0px}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; line-height: 18.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; color: #d4d4d4; -webkit-text-stroke: #d4d4d4; background-color: #000000}
+    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; line-height: 18.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; color: #9cdcfe; -webkit-text-stroke: #9cdcfe; background-color: #000000}
+    p.p8 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; color: #000000; -webkit-text-stroke: #d4d4d4; min-height: 18.0px}
+    p.p9 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; color: #000000; -webkit-text-stroke: #d4d4d4}
+    p.p10 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; -webkit-text-stroke: #d4d4d4}
+    span.s1 {font-kerning: none}
+    span.s2 {font: 12.0px 'Hiragino Kaku Gothic ProN'; font-kerning: none}
+    span.s3 {font-kerning: none; color: #569cd6; -webkit-text-stroke: 0px #569cd6}
+    span.s4 {font-kerning: none; color: #d4d4d4; -webkit-text-stroke: 0px #d4d4d4}
+    span.s5 {font-kerning: none; color: #dcdcaa; -webkit-text-stroke: 0px #dcdcaa}
+    span.s6 {font-kerning: none; color: #9cdcfe; -webkit-text-stroke: 0px #9cdcfe}
+    span.s7 {font-kerning: none; color: #ce9178; -webkit-text-stroke: 0px #ce9178}
+    span.s8 {font-kerning: none; color: #c586c0; -webkit-text-stroke: 0px #c586c0}
+    span.s9 {font-kerning: none; color: #4ec9b0; -webkit-text-stroke: 0px #4ec9b0}
+    span.s10 {color: #000000}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><span class="s1"><b>実機上でテスト実行/結果収集するツールの紹介</b></span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p3"><span class="s1"><b>概要</b></span></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>この記事はUnity Advent Calendar 2017の7日目のやつ。</span></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span><a href="https://qiita.com/advent-calendar/2017/unity"><span class="s2">https://qiita.com/advent-calendar/2017/unity</span></a></span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>Miymamasuというテストツール作って使っているんだけどそれの紹介をする。</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>これ。</span></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span><b>Miyamasu</b></span></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/Miyamasu"><span class="s2">https://github.com/sassembla/Miyamasu</span></a></span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p3"><b>実機でしか動作しないものを自動で手軽に適当に動かして、本当に動作するのか試したい、、試したくない、、？</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>課金機能、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>E2E的な処理、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>処理速度、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>あの画面が表示されるまでにどんな絵がでるの？ みたいな。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>そんなあれこれを、実機上で動かして収集する話。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>Miyamasuでできること一覧</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>テスト書く<span class="Apple-tab-span">	</span>-&gt; Editorで実行 -&gt; レポートをSlackに送信</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>-&gt; Playerで実行(Editor上) -&gt; レポートをSlackに送信</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>-&gt; Playerで実行(実機) -&gt; レポートをSlackに送信</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>このオール ハイル テスト感。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>サンプルシナリオ</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>あるシーンをAdditiveで開いて、その上で適当な関数を実行するテストを用意してみようかと。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>1.BaseSceneでアプリを起動、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>2.TestTargetSceneをロードしてロード後のスクリプトにアクセスし、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>3.プロパティが正しいパラメータを返すかをチェックする。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>4.その時のスクショを撮る</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>0.インストール</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Miyamasuのunitypackageをここからダウンロードしてunitypackageを実行、とりあえず全部入れる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Unity -&gt; Window -&gt; Test Runner を押して、テストウィンドウを開く。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>初回だけEditorの再起動が必要になる。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>1.まずテストを書く</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>testのコードを、適当にAssetsフォルダ以下に書く。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>こんな感じ。</p>
+<p class="p2"><br></p>
+<p class="p4"><span class="s3">using</span><span class="s4"> </span><span class="s1">System</span><span class="s4">.</span><span class="s1">Collections</span><span class="s4">;</span></p>
+<p class="p4"><span class="s3">using</span><span class="s4"> </span><span class="s1">System</span><span class="s4">.</span><span class="s1">Collections</span><span class="s4">.</span><span class="s1">Generic</span><span class="s4">;</span></p>
+<p class="p4"><span class="s3">using</span><span class="s4"> </span><span class="s1">Miyamasu</span><span class="s4">;</span></p>
+<p class="p4"><span class="s3">using</span><span class="s4"> </span><span class="s1">UnityEngine</span><span class="s4">;</span></p>
+<p class="p4"><span class="s3">using</span><span class="s4"> </span><span class="s1">UnityEngine</span><span class="s4">.</span><span class="s1">SceneManagement</span><span class="s4">;</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s3">public</span><span class="s4"> </span><span class="s3">class</span><span class="s4"> </span><span class="s1">Tests</span><span class="s4"> : </span><span class="s1">MiyamasuTestRunner</span><span class="s4"> {</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s4">    [</span><span class="s1">MSetup</span><span class="s4">] </span><span class="s3">public</span><span class="s4"> </span><span class="s1">IEnumerator</span><span class="s4"> </span><span class="s5">Setup</span><span class="s4"> () {</span></p>
+<p class="p6"><span class="s1">        </span><span class="s3">var</span><span class="s1"> loadAdditionalScene = </span><span class="s6">SceneManager</span><span class="s1">.</span><span class="s5">LoadSceneAsync</span><span class="s1">(</span><span class="s7">"TestTargetScene"</span><span class="s1">, </span><span class="s6">LoadSceneMode</span><span class="s1">.</span><span class="s6">Additive</span><span class="s1">);</span></p>
+<p class="p7"><span class="s4">        </span><span class="s8">while</span><span class="s4"> (!</span><span class="s1">loadAdditionalScene</span><span class="s4">.</span><span class="s1">isDone</span><span class="s4">) {</span></p>
+<p class="p6"><span class="s1">            </span><span class="s8">yield</span><span class="s1"> </span><span class="s8">return</span><span class="s1"> </span><span class="s3">null</span><span class="s1">;</span></p>
+<p class="p6"><span class="s1">        }</span></p>
+<p class="p6"><span class="s1">    }</span></p>
+<p class="p4"><span class="s4">    [</span><span class="s1">MTeardown</span><span class="s4">] </span><span class="s3">public</span><span class="s4"> </span><span class="s1">IEnumerator</span><span class="s4"> </span><span class="s5">Teardown</span><span class="s4"> () {</span></p>
+<p class="p6"><span class="s1">        </span><span class="s3">var</span><span class="s1"> unloadAdditionalScene = </span><span class="s6">SceneManager</span><span class="s1">.</span><span class="s5">UnloadSceneAsync</span><span class="s1">(</span><span class="s7">"TestTargetScene"</span><span class="s1">);</span></p>
+<p class="p7"><span class="s4">        </span><span class="s8">while</span><span class="s4"> (!</span><span class="s1">unloadAdditionalScene</span><span class="s4">.</span><span class="s1">isDone</span><span class="s4">) {</span></p>
+<p class="p6"><span class="s1">            </span><span class="s8">yield</span><span class="s1"> </span><span class="s8">return</span><span class="s1"> </span><span class="s3">null</span><span class="s1">;</span></p>
+<p class="p6"><span class="s1">        }</span></p>
+<p class="p6"><span class="s1">    }</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s4">    [</span><span class="s1">MTest</span><span class="s4">] </span><span class="s3">public</span><span class="s4"> </span><span class="s1">IEnumerator</span><span class="s4"> </span><span class="s5">CheckRunning</span><span class="s4"> () {</span></p>
+<p class="p6"><span class="s1">        </span><span class="s3">var</span><span class="s1"> instance = </span><span class="s6">GameObject</span><span class="s1">.</span><span class="s5">FindObjectOfType</span><span class="s1">&lt;</span><span class="s9">TestTargetScript</span><span class="s1">&gt;();</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p6"><span class="s1">        </span><span class="s5">NotNull</span><span class="s1">(</span><span class="s6">instance</span><span class="s1">);</span></p>
+<p class="p7"><span class="s4">        </span><span class="s5">IsTrue</span><span class="s4">(</span><span class="s1">instance</span><span class="s4">.</span><span class="s1">Running</span><span class="s4">);</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p6"><span class="s1">        </span><span class="s8">yield</span><span class="s1"> </span><span class="s8">break</span><span class="s1">;</span></p>
+<p class="p6"><span class="s1">    }</span></p>
+<p class="p6"><span class="s1">}</span></p>
+<p class="p8"><br></p>
+<p class="p9"><span class="Apple-tab-span">	</span><b>MSetup</b>アトリビュートが付いているメソッドはテスト前に、<b>MTeardown</b>アトリビュートが付いているメソッドはテスト後に実行される。</p>
+<p class="p9"><span class="Apple-tab-span">	</span>それぞれTestTargetSceneをロードしたりアンロードしたりしてる。</p>
+<p class="p8"><br></p>
+<p class="p9"><span class="Apple-tab-span">	</span><b>MTest</b>アトリビュートがついてるメソッドは、Setup、Teardownの間に実行される、テストのメイン部分。</p>
+<p class="p9"><span class="Apple-tab-span">	</span>この関数名がそのままテストケースの名前になる。</p>
+<p class="p8"><br></p>
+<p class="p9"><span class="Apple-tab-span">	</span>ここでは、TestTargetScriptのインスタンスを探し、nullでないこと、instane.Runningがtrueを返すことを期待している。</p>
+<p class="p8"><span class="Apple-tab-span">	</span></p>
+<p class="p9"><span class="Apple-tab-span">	</span>IEnumeratorを返す関数しかテストケースにできないのだけど、今回のテストでは非同期さをテストの対象にしてないので、</p>
+<p class="p9"><span class="Apple-tab-span">	</span>yield breakして終わり。</p>
+<p class="p8"><br></p>
+<p class="p8"><br></p>
+<p class="p9"><b>2.Editorでコンパイルが走ると、書いたテストの名称が実行可能なテスト一覧に出る</b></p>
+<p class="p9"><span class="Apple-tab-span">	</span>こんな感じ。</p>
+<p class="p10"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202017-12-06%2018.10.38.png" alt="スクリーンショット 2017-12-06 18.10.38.png"></p>
+<p class="p8"><span class="Apple-tab-span">	</span></p>
+<p class="p9"><span class="Apple-tab-span">	</span>で、CheckRunningをダブルクリックで実行！ なんかゴウンゴウン動いて、、</p>
+<p class="p9"><span class="Apple-tab-span">	</span>無事Passした？</p>
+<p class="p8"><br></p>
+<p class="p10"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202017-12-06%2018.11.21.png" alt="スクリーンショット 2017-12-06 18.11.21.png"></p>
+<p class="p9"><span class="Apple-tab-span">	</span>やったぜ。</p>
+<p class="p8"><br></p>
+<p class="p9"><b>3.Playerでもテストを実行してみる</b></p>
+<p class="p9"><span class="Apple-tab-span">	</span>ここで、思いついたようにPlayを押してみると、先ほどと同じテストがPlayerでも実行される。</p>
+<p class="p8"><br></p>
+<p class="p10"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202017-12-06%2018.11.42.png" alt="スクリーンショット 2017-12-06 18.11.42.png"></p>
+<p class="p8"><br></p>
+<p class="p9"><span class="Apple-tab-span">	</span>Playerで実行した場合、GUIがなんか出る。まだ適当なのであまりいいUIではない。</p>
+<p class="p8"><br></p>
+<p class="p9"><span class="Apple-tab-span">	</span>ちなみに全件自動的に実行される。</p>
+<p class="p8"><br></p>
+<p class="p9"><span class="Apple-tab-span">	</span>この状態で実機ビルドを行うと?<span class="Apple-converted-space"> </span></p>
+<p class="p9"><span class="Apple-tab-span">	</span>そう、<b>実機でも同じテストが自動的に実行される。結果もGUIから観れる。</b></p>
+<p class="p8"><b><span class="Apple-tab-span">	</span></b></p>
+<p class="p9"><span class="Apple-tab-span">	</span>今回は割愛するけど、Failした場合はエラーログも出て、端末へとコピーしたりできる。</p>
+<p class="p8"><span class="Apple-tab-span">	</span></p>
+<p class="p8"><br></p>
+<p class="p9"><b>4.ログ</b></p>
+<p class="p9"><span class="Apple-tab-span">	</span>Editor上で実行した場合は、ログがプロジェクトのフォルダの miyamasu.log ってファイルに吐かれるので、</p>
+<p class="p9"><span class="Apple-tab-span">	</span>まだJenkinsとか使ってる人とかはこの辺を使うといいと思う。</p>
+<p class="p8"><br></p>
+<p class="p9"><span class="Apple-tab-span">	</span>あとローカルでtail -f したりすると観やすい。内容はこんな感じ。</p>
+<p class="p10"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202017-12-06%2018.12.47.png" alt="スクリーンショット 2017-12-06 18.12.47.png"></p>
+<p class="p8"><br></p>
+<p class="p9"><span class="Apple-tab-span">	</span>当然実機上ではこのログは吐かれない。CloudBuildでもログを得るのは面倒臭い。</p>
+<p class="p8"><br></p>
+<p class="p9"><span class="Apple-tab-span">	</span>ではどうする?<span class="Apple-converted-space"> </span></p>
+<p class="p9"><span class="Apple-tab-span">	</span>よろしい、Slack連携だ。 (Slack!! Slack!!</p>
+<p class="p8"><br></p>
+<p class="p8"><br></p>
+<p class="p9"><b>5.Slackの設定をしよう</b></p>
+<p class="p9"><span class="Apple-tab-span">	</span>この段階では、Slackへとテストレポートを送る機構が働いていない。</p>
+<p class="p8"><br></p>
+<p class="p9"><span class="Apple-tab-span">	</span>設定は、Unity -&gt; Window -&gt; Miyamasu Test Runner -&gt; Open Settings からできる。</p>
+<p class="p10"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202017-12-06%2017.36.27.png" alt="スクリーンショット 2017-12-06 17.36.27.png"></p>
+<p class="p8"><br></p>
+<p class="p9"><span class="Apple-tab-span">	</span><b>slackToken</b>、<b>slackChannelName</b> をセットすると、テストの成否に関わるログが自動的にSlackのそのチャンネルへと転送されるようになる。</p>
+<p class="p9"><span class="Apple-tab-span">	</span>これは当然実機で実行した場合もそんな感じなので、こう、なんだ、楽。</p>
+<p class="p8"><span class="Apple-tab-span">	</span></p>
+<p class="p9"><span class="Apple-tab-span">	</span>slack上ではこんな感じに表示される。</p>
+<p class="p10"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202017-12-06%2018.55.29.png" alt="スクリーンショット 2017-12-06 18.55.29.png"></p>
+<p class="p8"><br></p>
+<p class="p9"><span class="Apple-tab-span">	</span>デバイス名は自動的に取得される。やったぜ。</p>
+<p class="p8"><br></p>
+<p class="p8"><br></p>
+<p class="p9"><b>5.動作時のスクリーンショットを撮ってSlackに送る</b></p>
+<p class="p9"><span class="Apple-tab-span">	</span>testの途中で、今どんな状況なの？ってのをスクショしたい時あると思うんだけど、</p>
+<p class="p9"><span class="Apple-tab-span">	</span>そのへんはコードを足すとできる。</p>
+<p class="p8"><br></p>
+<p class="p4"><span class="s4">    [</span><span class="s1">MTest</span><span class="s4">] </span><span class="s3">public</span><span class="s4"> </span><span class="s1">IEnumerator</span><span class="s4"> </span><span class="s5">CheckRunning</span><span class="s4"> () {</span></p>
+<p class="p6"><span class="s1">        </span><span class="s3">var</span><span class="s1"> instance = </span><span class="s6">GameObject</span><span class="s1">.</span><span class="s5">FindObjectOfType</span><span class="s1">&lt;</span><span class="s9">TestTargetScript</span><span class="s1">&gt;();</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p6"><span class="s1">        </span><span class="s5">NotNull</span><span class="s1">(</span><span class="s6">instance</span><span class="s1">);</span></p>
+<p class="p7"><span class="s4">        </span><span class="s5">IsTrue</span><span class="s4">(</span><span class="s1">instance</span><span class="s4">.</span><span class="s1">Running</span><span class="s4">);</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p6"><span class="s1">        </span><span class="s8">yield</span><span class="s1"> </span><span class="s8">return</span><span class="s1"> </span><span class="s5">SendScreenshotToSlack</span><span class="s1">(</span><span class="s7">"TestTatgetScene”</span><span class="s1">);// これで、この瞬間の画面のスクショを送り出せる。</span></p>
+<p class="p6"><span class="s1">    }</span></p>
+<p class="p8"><br></p>
+<p class="p8"><br></p>
+<p class="p10"><span class="s10"><span class="Apple-tab-span">	</span></span>Slack上にこんな感じでスクショが出る。もちろんMiyamasuのインターフェースは映らない。</p>
+<p class="p10"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202017-12-06%2020.10.06.png" alt="スクリーンショット 2017-12-06 20.10.06.png"></p>
+<p class="p8"><br></p>
+<p class="p8"><br></p>
+<p class="p9"><b>Sampleリポジトリ</b></p>
+<p class="p9"><span class="Apple-tab-span">	</span>このサンプルシナリオを実装したリポジトリを用意した。</p>
+<p class="p8"><br></p>
+<p class="p9"><span class="Apple-tab-span">	</span><b>Miyamasu2Slack</b></p>
+<p class="p9"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/Miyamasu2Slack">https://github.com/sassembla/Miyamasu2Slack</a></p>
+<p class="p8"><br></p>
+<p class="p8"><br></p>
+<p class="p9"><span class="Apple-tab-span">	</span>このプロジェクトでは、特定のシーンを読みだしてその時のスクショがどう、みたいなのを実機上でも実行できる。</p>
+<p class="p9"><span class="Apple-tab-span">	</span>当然ながらslackTokenとかは入ってないのでこう、なんだ、あれだ、頑張って。</p>
+<p class="p8"><br></p>
+<p class="p9"><b><span class="Apple-tab-span">	</span>参考 slack設定あれこれ</b></p>
+<p class="p9"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://sassembla.github.io/Public/2017:12:06%2013-21-52/2017:12:06%2013-21-52.html">http://sassembla.github.io/Public/2017:12:06%2013-21-52/2017:12:06%2013-21-52.html</a></p>
+<p class="p8"><br></p>
+</body>
+</html>
