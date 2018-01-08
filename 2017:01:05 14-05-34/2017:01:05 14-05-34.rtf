@@ -1,0 +1,353 @@
+{\rtf1\ansi\ansicpg932\cocoartf1504\cocoasubrtf830
+{\fonttbl\f0\fnil\fcharset128 HiraKakuPro-W3;}
+{\colortbl;\red255\green255\blue255;\red202\green202\blue202;\red26\green26\blue26;\red212\green214\blue154;
+\red140\green211\blue254;\red79\green123\blue61;\red194\green126\blue101;\red167\green197\blue152;\red183\green111\blue179;
+\red70\green137\blue204;\red0\green0\blue0;\red6\green33\blue79;\red0\green0\blue0;\red255\green255\blue255;
+\red38\green38\blue38;\red254\green254\blue254;}
+{\*\expandedcolortbl;;\cssrgb\c83137\c83137\c83137;\csgray\c13536;\cssrgb\c86275\c86275\c66667;
+\cssrgb\c61176\c86275\c99608;\cssrgb\c37647\c54510\c30588;\cssrgb\c80784\c56863\c47059;\cssrgb\c70980\c80784\c65882;\cssrgb\c77255\c52549\c75294;
+\cssrgb\c33725\c61176\c83922;\csgenericrgb\c0\c0\c0;\cssrgb\c1176\c18431\c38431;\csgray\c0;\csgray\c100000;
+\cssrgb\c20000\c20000\c20000;\cssrgb\c99608\c99608\c99608;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww22800\viewh8400\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\b\fs44 \cf0 qdanshita\'82\'cc\'83\'60\'83\'85\'81\'5b\'83\'6a\'83\'93\'83\'4f\'8f\'d0\'89\'ee
+\b0\fs24 \
+\
+
+\b \'8a\'54\'97\'76
+\b0 \
+	nginx-luajit-websocket-udp\'81\'41\'97\'aa\'82\'b5\'82\'c4qdanshita\'82\'c9\'82\'c8\'82\'c1\'82\'bd\'81\'42\
+	\'8a\'65\'8b\'40\'8d\'5c\'82\'cc\'90\'dd\'92\'e8\'82\'cc\'8a\'d6\'98\'41\'90\'ab\'82\'e2\'81\'41\'83\'8d\'83\'4f\'81\'41\'83\'60\'83\'85\'81\'5b\'83\'6a\'83\'93\'83\'4f\'82\'c9\'82\'c2\'82\'a2\'82\'c4\'8f\'91\'82\'ad\'81\'42\
+\
+	\'83\'8a\'83\'7c\'83\'57\'83\'67\'83\'8a\'82\'cd\'82\'b1\'82\'b1\'81\'42\
+		{\field{\*\fldinst{HYPERLINK "https://github.com/sassembla/nginx-luajit-ws/tree/benchmark-with-netcore"}}{\fldrslt https://github.com/sassembla/nginx-luajit-ws/tree/benchmark-with-netcore}}\
+	\
+\
+
+\b \'8b\'40\'8d\'5c\'8d\'5c\'90\'ac
+\b0 \
+	nginx + lua(micro websocket server per connection)\'81\'41\
+	nginx stream + go-udp-server(udp receiver/sender)\
+	disque(upstream/downstream message queue) \'82\'f0\'91\'67\'82\'dd\'8d\'87\'82\'ed\'82\'b9\'82\'bd\'8b\'40\'8d\'5c\'81\'42\
+\
+\
+
+\b \'93\'c1\'90\'ab
+\b0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 	\'81\'451\'83\'86\'81\'5b\'83\'55\'81\'5b\'82\'c9\'82\'c2\'82\'ab\'81\'41\'8f\'c1\'94\'ef\'82\'b7\'82\'e9\'83\'7c\'81\'5b\'83\'67\'82\'cd\'83\'86\'81\'5b\'83\'55\'90\'da\'91\'b1tcp1\'82\'c2 + disque-nginx up/down tcp2 \'82\'cc3\'82\'c2\'81\'42\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 	\'81\'45queue\'82\'f0\'8b\'b2\'82\'de\'82\'bd\'82\'df\'81\'41\'95\'89\'89\'d7\'82\'c9\'8b\'ad\'82\'a2\'81\'42\
+	\'81\'45upstream(\'8f\'e3\'97\'ac\'83\'54\'81\'5b\'83\'6f)\'82\'f0\'8a\'ae\'91\'53\'94\'f1\'93\'af\'8a\'fa\'82\'c9\'8e\'c0\'91\'95\'82\'c5\'82\'ab\'82\'e9\'81\'42\'82\'b1\'82\'cc\'8e\'64\'91\'67\'82\'dd\'82\'cd\'81\'41\'83\'51\'81\'5b\'83\'80\'83\'8d\'83\'57\'83\'62\'83\'4e\'82\'f0backpressure\'82\'cc\'95\'89\'89\'d7\'82\'f0\'8d\'6c\'82\'a6\'82\'b8\'82\'c9\'8e\'c0\'8d\'73\'82\'b7\'82\'e9\'82\'cc\'82\'c9\'96\'f0\'97\'a7\'82\'c2\'81\'42\
+\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\b \cf0 \'90\'da\'91\'b1\'82\'c6\'83\'66\'81\'5b\'83\'5e\'83\'74\'83\'8d\'81\'5b
+\b0 \
+	0.\'83\'7d\'83\'62\'83\'60\'83\'93\'83\'4f\'81\'41\'90\'da\'91\'b1\'82\'c9\'95\'4b\'97\'76\'82\'c8\'83\'70\'83\'89\'83\'81\'81\'5b\'83\'5e\'82\'f0\'8e\'e6\'93\'be\
+	1.\'83\'4e\'83\'89\'83\'43\'83\'41\'83\'93\'83\'67\'82\'c6\'82\'cc\'8a\'d4\'82\'c9udp\'82\'c5\'82\'cc\'83\'66\'81\'5b\'83\'5e\'91\'97\'95\'74\'8c\'6f\'98\'48\'82\'f0\'8a\'6d\'97\'a7\
+	2. 0,1\'82\'c5\'8e\'e6\'93\'be\'82\'b5\'82\'bd\'83\'70\'83\'89\'83\'81\'81\'5b\'83\'5e\'82\'f0\'8e\'67\'82\'c1\'82\'c4\'81\'41websocket\'82\'c5\'82\'cc\'90\'da\'91\'b1\'82\'f0\'8d\'73\'82\'a4\'81\'42\
+\
+	udp\'90\'da\'91\'b1\'82\'cc\'8e\'e8\'8f\'87\'82\'cd\'83\'58\'83\'4c\'83\'62\'83\'76\'82\'b7\'82\'e9\'82\'b1\'82\'c6\'82\'aa\'82\'c5\'82\'ab\'81\'41\'82\'bb\'82\'cc\'8f\'ea\'8d\'87downstream\'82\'c5\'82\'ccudp\'91\'97\'95\'74\'82\'cd\'94\'ad\'90\'b6\'82\'b5\'82\'c8\'82\'ad\'82\'c8\'82\'e9\'81\'42(\'97\'76lua\'83\'4a\'83\'58\'83\'5e\'83\'7d\'83\'43\'83\'59)\
+\
+	\'90\'da\'91\'b1\'8c\'e3\'81\'41udp\'81\'41ws\'82\'f0\'89\'ee\'82\'b5\'82\'c4downstream\'82\'cc\'83\'66\'81\'5b\'83\'5e\'82\'aa\'83\'54\'81\'5b\'83\'6f\'82\'a9\'82\'e7\'83\'4e\'83\'89\'83\'43\'83\'41\'83\'93\'83\'67\'82\'d6\'82\'c6\'91\'97\'95\'74\'82\'b3\'82\'ea\'82\'e9\'81\'42\
+\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\b\fs34 \cf0 nginx.conf\'81\'41lua\'81\'41go-udp-server\'81\'41disque\'82\'cc\'83\'5a\'83\'62\'83\'65\'83\'42\'83\'93\'83\'4f
+\b0\fs24 \
+	\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\b \cf0 nginx.conf\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\b0 \cf0 	nginx.conf({\field{\*\fldinst{HYPERLINK "https://github.com/sassembla/nginx-luajit-ws/blob/benchmark-with-netcore/DockerResources/nginx.conf"}}{\fldrslt https://github.com/sassembla/nginx-luajit-ws/blob/benchmark-with-netcore/DockerResources/nginx.conf}})\
+	worker\'82\'b2\'82\'c6\'82\'cc\'90\'da\'91\'b1\'90\'94\'82\'c8\'82\'c7\'82\'f0\'90\'dd\'92\'e8\'82\'b7\'82\'e9\'81\'42\
+\
+	nginx stream\'82\'c58080\'83\'7c\'81\'5b\'83\'67\'82\'c5\'8e\'f3\'82\'af\'8e\'7e\'82\'df\'82\'bdudp\'82\'f08081\'83\'7c\'81\'5b\'83\'67\'82\'c5\'91\'d2\'82\'c2go-udp-server\'82\'d6\'82\'c6proxy\'82\'b5\'82\'c4\'82\'a2\'82\'e9\'81\'42
+\b \
+\
+
+\b0 	url\'82\'c9\'91\'ce\'82\'b5\'82\'c4lua\'83\'74\'83\'40\'83\'43\'83\'8b\'82\'cc\'83\'70\'83\'58\'82\'f0\'8e\'77\'92\'e8\'81\'41\'83\'8b\'81\'5b\'83\'65\'83\'42\'83\'93\'83\'4f\'82\'f0\'8d\'73\'82\'a4\'81\'42\
+	\'83\'54\'83\'93\'83\'76\'83\'8b\'82\'c5\'82\'cd\'81\'41\'8e\'9f\'82\'cc\'82\'e6\'82\'a4\'82\'c8\'8b\'4c\'8f\'71\'82\'c5\'81\'41http://SOMEWHERE/sample_disque_client \'82\'d6\'82\'c6\'93\'9e\'92\'42\'82\'b5\'82\'bd\'83\'8a\'83\'4e\'83\'47\'83\'58\'83\'67\'82\'f0\'81\'41sample_disque_client.lua\'83\'58\'83\'4e\'83\'8a\'83\'76\'83\'67\'82\'d6\'82\'c6\'93\'5d\'91\'97\'82\'b7\'82\'e9\'81\'42\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf2 \cb3 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 # sample disque client route.\
+location /\cf4 \strokec4 sample_disque_client\cf2 \strokec2  \{\
+    content_by_lua_file lua/sample_disque_client.\cf5 \strokec5 lua\cf2 \strokec2 ;\
+\}\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \cb1 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\b \cf0 \
+\
+lua
+\b0 \
+	/lua\'83\'74\'83\'48\'83\'8b\'83\'5f\'88\'c8\'89\'ba\'82\'c9\'93\'fc\'82\'c1\'82\'c4\'82\'a2\'82\'e9\'81\'42\
+	nginx.conf\'82\'cc\'83\'8b\'81\'5b\'83\'65\'83\'42\'83\'93\'83\'4f\'82\'a9\'82\'e7\'8c\'c4\'82\'ce\'82\'ea\'81\'41\'83\'8a\'83\'4e\'83\'47\'83\'58\'83\'67\'8e\'9e\'82\'c9\'8e\'c0\'8d\'73\'82\'b3\'82\'ea\'82\'e9\'81\'42\
+		\
+	\'83\'5a\'83\'62\'83\'65\'83\'42\'83\'93\'83\'4f\'81\'41\'83\'8a\'83\'4e\'83\'47\'83\'58\'83\'67\'83\'77\'83\'62\'83\'5f\'92\'6c\'82\'cc\'93\'c7\'82\'dd\'8f\'6f\'82\'b5/\'95\'aa\'8a\'f2\'81\'41\'82\'bb\'82\'cc\'83\'70\'83\'89\'83\'81\'81\'5b\'83\'5e\'82\'f0\'8e\'67\'82\'c1\'82\'bd\'94\'46\'8f\'d8\'8b\'40\'8d\'5c\'82\'f0\'93\'fc\'82\'ea\'82\'e9\'89\'d3\'8f\'8a\'82\'aa\'82\'a0\'82\'e9\'81\'42\
+	\'82\'dc\'82\'bd\'81\'41upstream\'82\'aa 
+\b \'83\'8a\'83\'4e\'83\'47\'83\'58\'83\'67url\'96\'96\'94\'f6path + _context
+\b0  \'82\'c6\'82\'a2\'82\'a4queue\'96\'bc\'82\'c5disque\'82\'a9\'82\'e7\'83\'66\'81\'5b\'83\'5e\'82\'f0\'88\'f8\'82\'ab\'8f\'6f\'82\'b9\'82\'e9\'82\'e6\'82\'a4\'82\'c9\'82\'c8\'82\'c1\'82\'c4\'82\'a2\'82\'e9\'81\'42\
+\
+
+\b 	
+\b0 sample_disque_client.lua({\field{\*\fldinst{HYPERLINK "https://github.com/sassembla/nginx-luajit-ws/blob/benchmark-with-netcore/DockerResources/lua/sample_disque_client.lua"}}{\fldrslt https://github.com/sassembla/nginx-luajit-ws/blob/benchmark-with-netcore/DockerResources/lua/sample_disque_client.lua}})\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf6 \cb3 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec6 -- get identity of game from url. e.g. http://somewhere/game_key -> game_key_context.\cf2 \strokec2 \
+UPSTREAM_IDENTIFIER = \cf4 \strokec4 string.gsub\cf2 \strokec2 (ngx.\cf5 \strokec5 var\cf2 \strokec2 .\cf5 \strokec5 uri\cf2 \strokec2 , \cf7 \strokec7 "/"\cf2 \strokec2 , \cf7 \strokec7 ""\cf2 \strokec2 ) .. \cf7 \strokec7 "_context"\cf2 \strokec2 \
+\
+\cf6 \strokec6 -- message type definitions.\cf2 \strokec2 \
+STATE_CONNECT           = \cf8 \strokec8 1\cf2 \strokec2 \
+STATE_STRING_MESSAGE    = \cf8 \strokec8 2\cf2 \strokec2 \
+STATE_BINARY_MESSAGE    = \cf8 \strokec8 3\cf2 \strokec2 \
+STATE_DISCONNECT_INTENT = \cf8 \strokec8 4\cf2 \strokec2 \
+STATE_DISCONNECT_ACCIDT = \cf8 \strokec8 5\cf2 \strokec2 \
+STATE_DISCONNECT_DISQUE_ACKFAILED = \cf8 \strokec8 6\cf2 \strokec2 \
+STATE_DISCONNECT_DISQUE_ACCIDT_SENDFAILED = \cf8 \strokec8 7\cf2 \strokec2 \
+\
+\
+\cf6 \strokec6 ---- SETTINGS ----\cf2 \strokec2 \
+\
+\cf6 \strokec6 -- upstream/downstream queue.\cf2 \strokec2 \
+DISQUE_IP = \cf7 \strokec7 "127.0.0.1"\cf2 \strokec2 \
+DISQUE_PORT = \cf8 \strokec8 7711\cf2 \strokec2 \
+\
+\cf6 \strokec6 -- CONNECTION_ID is nginx's request id. that len is 32. guidv4 length is 36, add four "0". \cf2 \strokec2 \
+\cf6 \strokec6 -- overwritten by token.\cf2 \strokec2 \
+CONNECTION_ID = ngx.\cf5 \strokec5 var\cf2 \strokec2 .\cf5 \strokec5 request_id\cf2 \strokec2  .. \cf7 \strokec7 "0000"\cf2 \strokec2 \
+\
+\cf6 \strokec6 -- go unix domain socket path.\cf2 \strokec2 \
+UNIX_DOMAIN_SOCKET_PATH = \cf7 \strokec7 "unix:/tmp/go-udp-server"\cf2 \strokec2 \
+\
+\cf6 \strokec6 -- max size of downstream message.\cf2 \strokec2 \
+DOWNSTREAM_MAX_PAYLOAD_LEN = \cf8 \strokec8 1024\cf2 \strokec2 \
+\
+\
+\cf6 \strokec6 ---- REQUEST HEADER PARAMS ----\cf2 \strokec2 \
+\
+\
+\cf9 \strokec9 local\cf2 \strokec2  token = ngx.\cf5 \strokec5 req\cf2 \strokec2 .\cf4 \strokec4 get_headers\cf2 \strokec2 ()[\cf7 \strokec7 "token"\cf2 \strokec2 ]\
+\cf9 \strokec9 if\cf2 \strokec2  not token \cf9 \strokec9 then\cf2 \strokec2 \
+\uc0\u160 \u160 \u160 \u160 ngx.\cf4 \strokec4 log\cf2 \strokec2 (ngx.\cf5 \strokec5 ERR\cf2 \strokec2 , \cf7 \strokec7 "no token."\cf2 \strokec2 )\
+\uc0\u160 \u160 \u160 \u160 \cf9 \strokec9 return\cf2 \strokec2 \
+\cf9 \strokec9 end\cf2 \strokec2 \
+\
+\
+\cf9 \strokec9 local\cf2 \strokec2  udp_port = ngx.\cf5 \strokec5 req\cf2 \strokec2 .\cf4 \strokec4 get_headers\cf2 \strokec2 ()[\cf7 \strokec7 "param"\cf2 \strokec2 ]\
+\cf9 \strokec9 if\cf2 \strokec2  not udp_port \cf9 \strokec9 then\cf2 \strokec2 \
+\uc0\u160 \u160 \u160 \u160 ngx.\cf4 \strokec4 log\cf2 \strokec2 (ngx.\cf5 \strokec5 ERR\cf2 \strokec2 , \cf7 \strokec7 "no param."\cf2 \strokec2 )\
+\uc0\u160 \u160 \u160 \u160 \cf9 \strokec9 return\cf2 \strokec2 \
+\cf9 \strokec9 end\cf2 \strokec2 \
+\
+\cf6 \strokec6 ---- POINT BEFORE CONNECT ----\cf2 \strokec2 \
+\
+\cf6 \strokec6 -- redis example.\cf2 \strokec2 \
+\cf6 \strokec6 -- \'82\'b1\'82\'cc\'82\'dc\'82\'dc\'82\'be\'82\'c6\'92\'ca\'90\'4d\'92\'50\'88\'ca\'82\'c5redis\'83\'41\'83\'4e\'83\'5a\'83\'58\'82\'aa\'94\'ad\'90\'b6\'82\'b5\'82\'bf\'82\'e1\'82\'a4\'82\'cc\'82\'c5\'81\'41\'82\'b1\'82\'cc\'83\'75\'83\'8d\'83\'62\'83\'4e\'93\'e0\'82\'c5\'81\'41\'82\'c8\'82\'f1\'82\'e7\'82\'a9\'82\'cctoken\'83\'60\'83\'46\'83\'62\'83\'4e\'82\'f0\'82\'e2\'82\'e9\'82\'c6\'82\'a9\'82\'b7\'82\'e9\'82\'c6\'82\'c8\'82\'a8\'97\'c7\'82\'a2\'81\'42\'82\'b1\'82\'cc\'83\'54\'81\'5b\'83\'6f\'82\'c9\'82\'ad\'82\'e9\'82\'cd\'82\'b8\'82\'c8\'82\'e7\'81\'60\'82\'c6\'82\'a9\'82\'bb\'82\'a4\'82\'a2\'82\'a4\'97\'76\'91\'66\'82\'c5\'81\'42\cf2 \strokec2 \
+\cf9 \strokec9 if\cf2 \strokec2  \cf10 \strokec10 false\cf2 \strokec2  \cf9 \strokec9 then\cf2 \strokec2 \
+\uc0\u160 \u160 \u160 \u160 \cf9 \strokec9 local\cf2 \strokec2  redis = \cf4 \strokec4 require\cf2 \strokec2  \cf7 \strokec7 "redis.redis"\cf2 \strokec2 \
+\uc0\u160 \u160 \u160 \u160 \cf9 \strokec9 local\cf2 \strokec2  redisConn = redis:\cf4 \strokec4 new\cf2 \strokec2 ()\
+\uc0\u160 \u160 \u160 \u160 \cf9 \strokec9 local\cf2 \strokec2  ok, err = redisConn:\cf4 \strokec4 connect\cf2 \strokec2 (\cf7 \strokec7 "127.0.0.1"\cf2 \strokec2 , \cf8 \strokec8 6379\cf2 \strokec2 )\
+\
+\uc0\u160 \u160 \u160 \u160 \cf9 \strokec9 if\cf2 \strokec2  not ok \cf9 \strokec9 then\cf2 \strokec2 \
+\uc0\u160 \u160 \u160 \u160 \u160 \u160 \u160 \u160 ngx.\cf4 \strokec4 log\cf2 \strokec2 (ngx.\cf5 \strokec5 ERR\cf2 \strokec2 , \cf7 \strokec7 "connection:"\cf2 \strokec2 , CONNECTION_ID, \cf7 \strokec7 " failed to generate redis client. err:"\cf2 \strokec2 , err)\
+\uc0\u160 \u160 \u160 \u160 \u160 \u160 \u160 \u160 \cf9 \strokec9 return\cf2 \strokec2 \
+\uc0\u160 \u160 \u160 \u160 \cf9 \strokec9 end\cf2 \strokec2 \
+\
+\uc0\u160 \u160 \u160 \u160 \cf6 \strokec6 -- \'83\'67\'81\'5b\'83\'4e\'83\'93\'82\'f0\'83\'4c\'81\'5b\'82\'c9\'82\'b5\'82\'c4\'8e\'e6\'93\'be\cf2 \strokec2 \
+\uc0\u160 \u160 \u160 \u160 \cf9 \strokec9 local\cf2 \strokec2  res, err = redisConn:\cf4 \strokec4 get\cf2 \strokec2 (token)\
+\uc0\u160 \u160 \u160 \u160 \
+\uc0\u160 \u160 \u160 \u160 \cf6 \strokec6 -- \'83\'4c\'81\'5b\'82\'aakvs\'82\'c9\'82\'c8\'82\'a9\'82\'c1\'82\'bd\'82\'e7\'94\'46\'8f\'d8\'8e\'b8\'94\'73\'82\'c6\'82\'b5\'82\'c4\'8f\'49\'97\'b9\cf2 \strokec2 \
+\uc0\u160 \u160 \u160 \u160 \cf9 \strokec9 if\cf2 \strokec2  not res \cf9 \strokec9 then\cf2 \strokec2 \
+\uc0\u160 \u160 \u160 \u160 \u160 \u160 \u160 \u160 \cf6 \strokec6 -- no key found.\cf2 \strokec2 \
+\uc0\u160 \u160 \u160 \u160 \u160 \u160 \u160 \u160 ngx.\cf4 \strokec4 log\cf2 \strokec2 (ngx.\cf5 \strokec5 ERR\cf2 \strokec2 , \cf7 \strokec7 "connection:"\cf2 \strokec2 , CONNECTION_ID, \cf7 \strokec7 " failed to authenticate. no token found in kvs."\cf2 \strokec2 )\
+\
+\uc0\u160 \u160 \u160 \u160 \u160 \u160 \u160 \u160 \cf6 \strokec6 -- \'90\'d8\'92\'66\cf2 \strokec2 \
+\uc0\u160 \u160 \u160 \u160 \u160 \u160 \u160 \u160 redisConn:\cf4 \strokec4 close\cf2 \strokec2 ()\
+\uc0\u160 \u160 \u160 \u160 \u160 \u160 \u160 \u160 ngx.\cf4 \strokec4 exit\cf2 \strokec2 (\cf8 \strokec8 200\cf2 \strokec2 )\
+\uc0\u160 \u160 \u160 \u160 \u160 \u160 \u160 \u160 \cf9 \strokec9 return\cf2 \strokec2 \
+\uc0\u160 \u160 \u160 \u160 \cf9 \strokec9 elseif\cf2 \strokec2  res == ngx.\cf5 \strokec5 null\cf2 \strokec2  \cf9 \strokec9 then\cf2 \strokec2 \
+\uc0\u160 \u160 \u160 \u160 \u160 \u160 \u160 \u160 \cf6 \strokec6 -- no value found.\cf2 \strokec2 \
+\uc0\u160 \u160 \u160 \u160 \u160 \u160 \u160 \u160 ngx.\cf4 \strokec4 log\cf2 \strokec2 (ngx.\cf5 \strokec5 ERR\cf2 \strokec2 , \cf7 \strokec7 "connection:"\cf2 \strokec2 , CONNECTION_ID, \cf7 \strokec7 " failed to authenticate. token is nil."\cf2 \strokec2 )\
+\
+\uc0\u160 \u160 \u160 \u160 \u160 \u160 \u160 \u160 \cf6 \strokec6 -- \'90\'d8\'92\'66\cf2 \strokec2 \
+\uc0\u160 \u160 \u160 \u160 \u160 \u160 \u160 \u160 redisConn:\cf4 \strokec4 close\cf2 \strokec2 ()\
+\uc0\u160 \u160 \u160 \u160 \u160 \u160 \u160 \u160 ngx.\cf4 \strokec4 exit\cf2 \strokec2 (\cf8 \strokec8 200\cf2 \strokec2 )\
+\uc0\u160 \u160 \u160 \u160 \u160 \u160 \u160 \u160 \cf9 \strokec9 return\cf2 \strokec2 \
+\uc0\u160 \u160 \u160 \u160 \cf9 \strokec9 end\cf2 \strokec2 \
+\
+\uc0\u160 \u160 \u160 \u160 \cf6 \strokec6 -- delete got key.\cf2 \strokec2 \
+\uc0\u160 \u160 \u160 \u160 \cf9 \strokec9 local\cf2 \strokec2  ok, err = redisConn:\cf4 \strokec4 del\cf2 \strokec2 (token)\
+\
+\uc0\u160 \u160 \u160 \u160 \cf6 \strokec6 -- \'90\'d8\'92\'66\cf2 \strokec2 \
+\uc0\u160 \u160 \u160 \u160 redisConn:\cf4 \strokec4 close\cf2 \strokec2 ()\
+\
+\uc0\u160 \u160 \u160 \u160 \cf6 \strokec6 -- \'95\'cf\'90\'94\'82\'c9\'83\'5a\'83\'62\'83\'67\'81\'41\'83\'70\'83\'89\'83\'81\'81\'5b\'83\'5e\'82\'c6\'82\'b5\'82\'c4\'93\'6e\'82\'b7\'81\'42\cf2 \strokec2 \
+\uc0\u160 \u160 \u160 \u160 user_data = res\
+\cf9 \strokec9 else\cf2 \strokec2 \
+\uc0\u160 \u160 \u160 \u160 user_data = token\
+\uc0\u160 \u160 \u160 \u160 CONNECTION_ID = token\
+\cf9 \strokec9 end\cf2 \strokec2 \
+\
+\cf6 \strokec6 -- ngx.log(ngx.ERR, "connection:", CONNECTION_ID, " user_data:", user_data)\cf2 \strokec2 \
+\
+\
+\
+\cf6 \strokec6 ---- CONNECT ----\cf2 \strokec2 \
+...\cf0 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \cb1 	\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\b \cf0 go-udp-server
+\b0 \
+	/go\'83\'74\'83\'48\'83\'8b\'83\'5f\'88\'c8\'89\'ba\'82\'c9\'93\'fc\'82\'c1\'82\'c4\'82\'a2\'82\'e9\'81\'42\
+\
+	main.go({\field{\*\fldinst{HYPERLINK "https://github.com/sassembla/nginx-luajit-ws/blob/benchmark-with-netcore/DockerResources/go/main.go"}}{\fldrslt https://github.com/sassembla/nginx-luajit-ws/blob/benchmark-with-netcore/DockerResources/go/main.go}})\
+	\'82\'f0\'83\'52\'83\'93\'83\'70\'83\'43\'83\'8b\'82\'b5\'82\'c4\cf11 \'8b\'4e\'93\'ae\'82\'b5\'82\'c4\'82\'a8\'82\'ad\'81\'42\
+	\
+	\'83\'66\'83\'74\'83\'48\'83\'8b\'83\'67\'82\'c5\'82\'cd8081\'83\'7c\'81\'5b\'83\'67\'82\'c5udp\'90\'da\'91\'b1\'82\'f0\'8e\'f3\'82\'af\'95\'74\'82\'af\'81\'41tmp/\expnd0\expndtw0\kerning0
+go-udp-server\'82\'c6\'82\'a2\'82\'a4\'96\'bc\'91\'4f\'82\'ccunix domain socket\'82\'f0\'93\'c7\'82\'dd\'8d\'9e\'82\'de\'81\'42\
+	nginx stream\'8b\'40\'8d\'5c\'82\'cc\'89\'ba\'82\'c5\'93\'ae\'82\'ad\'82\'cc\'82\'f0\'8a\'ee\'91\'62\'82\'c6\'82\'b5\'82\'c4\'82\'a2\'82\'c4\'81\'41nginx\'82\'cd8080/udp\'82\'c5udp\'82\'f0\'8e\'f3\'82\'af\'95\'74\'82\'af\'81\'418081 go-udp-server\'82\'d6\'82\'c6\'83\'66\'81\'5b\'83\'5e\'82\'f0proxy\'82\'b7\'82\'e9\'81\'42\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf11 \kerning1\expnd0\expndtw0 \
+	\'8b\'4e\'93\'ae\'8e\'9e\'82\'c9\'83\'49\'83\'76\'83\'56\'83\'87\'83\'93\'82\'f0\'93\'6e\'82\'b7\'82\'b1\'82\'c6\'82\'c5\'81\'41\'83\'66\'83\'74\'83\'48\'83\'8b\'83\'67\'90\'dd\'92\'e8\'82\'f0\'8f\'e3\'8f\'91\'82\'ab\'82\'b7\'82\'e9\'82\'b1\'82\'c6\'82\'aa\'82\'c5\'82\'ab\'82\'e9\'81\'42centos\'82\'c8\'82\'c7\'82\'f0\'8e\'67\'82\'a4\'8d\'db\'82\'cd\'93\'4b\'93\'96\'82\'c9\'8e\'77\'92\'e8\'82\'b7\'82\'e9\'82\'c6\'82\'a2\'82\'a2\'82\'c6\'8e\'76\'82\'a4\'81\'42\
+\
+	--port\'83\'49\'83\'76\'83\'56\'83\'87\'83\'93\'82\'c5udp\'82\'f0\'91\'d2\'82\'bf\'8e\'f3\'82\'af\'82\'e9\'83\'7c\'81\'5b\'83\'67\'82\'f0\'8e\'77\'92\'e8\'81\'41\
+	--\expnd0\expndtw0\kerning0
+domain\'83\'49\'83\'76\'83\'56\'83\'87\'83\'93\'82\'c5\'81\'41unix domain socket\'82\'cc\'83\'70\'83\'58\'82\'f0\'8e\'77\'92\'e8\'82\'b7\'82\'e9\'81\'42\
+\
+	\'95\'89\'89\'d7\'82\'aa\'8d\'82\'82\'ad\'82\'c8\'82\'e9\'82\'c6lua\'91\'a4\'82\'c5 \cf13 \cb14 \kerning1\expnd0\expndtw0 \CocoaLigature0 shared connection is busy while proxying connection \'83\'8d\'83\'4f\'82\'aa\'8f\'6f\'82\'e9\'81\'42\'82\'bd\'82\'be\'81\'41\'82\'b1\'82\'ea\'82\'aa\'8f\'6f\'82\'e9\'8f\'f3\'91\'d4\'82\'aa\'82\'b7\'82\'c5\'82\'c9\'83\'52\'83\'41\'90\'94\'82\'c9\'91\'ce\'82\'b5\'82\'c4nginx\'82\'ccworker\'82\'aa\'83\'54\'83\'60\'82\'c1\'82\'c4\'82\'a2\'82\'e9\cf11 \cb1 \CocoaLigature1 \
+\
+\
+
+\b disque
+\b0 \
+	disque-server\'82\'f0\'95\'ca\'93\'72\'8b\'4e\'93\'ae\'82\'b5\'82\'c4\'82\'a8\'82\'ad\'81\'42\
+	\'8b\'4e\'93\'ae\'8e\'9e\'82\'c9 \cf15 \cb16 \expnd0\expndtw0\kerning0
+--maxclients 100000 \'82\'c6\'82\'a9\'82\'c2\'82\'af\'82\'c4\'82\'a8\'82\'ad\'82\'c6\'81\'41disque\'82\'cc\'83\'66\'83\'74\'83\'48\'83\'8b\'83\'67\'92\'6c\'82\'cc10000\'88\'c8\'8f\'e3\'82\'cc\'90\'da\'91\'b1\'82\'aa\'89\'c2\'94\'5c\'82\'c9\'82\'c8\'82\'e9\'81\'42\cf11 \cb1 \kerning1\expnd0\expndtw0 \
+\
+	lua\'82\'a9\'82\'e7\'90\'da\'91\'b1 -> disque -> upstream\'82\'d6\'82\'c6\'83\'66\'81\'5b\'83\'5e\'82\'f0\'91\'97\'82\'e8\'81\'41\
+	upstream -> disque -> lua -> \'83\'4e\'83\'89\'83\'43\'83\'41\'83\'93\'83\'67\'82\'d6\'82\'c6\'83\'66\'81\'5b\'83\'5e\'82\'f0\'91\'97\'82\'e9\'92\'86\'8c\'70\'93\'5f\'82\'c9\'8e\'67\'82\'ed\'82\'ea\'82\'e9\'81\'42\
+\
+	\
+
+\b\fs34 Upstream
+\b0\fs24 \
+	\'97\'76\'82\'cdServer\'81\'42\
+\
+	\'83\'54\'83\'93\'83\'76\'83\'8b\'82\'c6\'82\'b5\'82\'c4\'81\'41\'96\'f160fps\'82\'c5\'83\'4e\'83\'89\'83\'43\'83\'41\'83\'93\'83\'67\'82\'d6\'82\'c6echo\'82\'f0\'8d\'73\'82\'a4dotnet core\'82\'cc\'8b\'40\'8d\'5c\'82\'f0\'97\'70\'88\'d3\'82\'b5\'82\'c4\'82\'a0\'82\'e9\'81\'42\
+	{\field{\*\fldinst{HYPERLINK "https://github.com/sassembla/nginx-luajit-ws/tree/benchmark-with-netcore/DockerResources/csharp"}}{\fldrslt https://github.com/sassembla/nginx-luajit-ws/tree/benchmark-with-netcore/DockerResources/csharp}}\
+\
+\
+
+\b \'83\'8d\'83\'4f
+\b0 \
+	\'90\'da\'91\'b1\'81\'41\'90\'d8\'92\'66\'81\'41\'83\'47\'83\'89\'81\'5b\'82\'c8\'82\'c7\'82\'cc\'8a\'ee\'96\'7b\'93\'49\'82\'c8\'8f\'ee\'95\'f1\'82\'cd\'81\'41\'82\'b7\'82\'d7\'82\'c4nginx\'82\'ccerror.log\'82\'c9\'8f\'6f\'82\'e9\'82\'e6\'82\'a4\'82\'c9\'82\'c8\'82\'c1\'82\'c4\'82\'a2\'82\'e9\'81\'42\
+	\'83\'66\'83\'74\'83\'48\'83\'8b\'83\'67\'82\'c5\'82\'cd\'90\'d8\'92\'66\'8e\'9e\'81\'41\'83\'47\'83\'89\'81\'5b\'8e\'9e\'82\'cc\'82\'dd\'83\'8d\'83\'4f\'82\'f0\'8f\'6f\'97\'cd\'82\'b5\'82\'c4\'82\'a2\'82\'e9\'81\'42\
+\
+	\'8f\'6f\'97\'cd\'82\'e0\'82\'c6\'82\'cdlua\'82\'c8\'82\'cc\'82\'c5\'81\'41\'95\'d2\'8f\'57\'82\'b5\'82\'bd\'82\'a2\'8f\'ea\'8d\'87\'82\'cd\'82\'bb\'82\'bf\'82\'e7\'82\'f0\'81\'42
+\b \
+
+\b0 \
+
+\b \
+\'83\'60\'83\'85\'81\'5b\'83\'6a\'83\'93\'83\'4f
+\b0 \
+
+\b 	nginx error log
+\b0 \
+		-> \cf13 \cb14 \CocoaLigature0 max number of clients reached\
+			 -> disque\cf11 \cb1 \CocoaLigature1 \'82\'cc\cf13 \cb14 \CocoaLigature0 max connection\'90\'dd\'92\'e8\'82\'f0\'8f\'e3\'89\'f1\'82\'e9\'90\'da\'91\'b1\'82\'aadisque\'82\'c9\'97\'88\'82\'bd\'81\'42 \'83\'66\'83\'74\'83\'48\'83\'8b\'83\'67\'82\'cd10000\'81\'41disque\'82\'f0\cf15 \cb16 \expnd0\expndtw0\kerning0
+\CocoaLigature1 --maxclients 100000\'82\'c6\'82\'a9\'82\'c2\'82\'af\'82\'c4\'8b\'4e\'93\'ae\'82\'b7\'82\'ea\'82\'ceOK\'81\'42\
+\
+		-> too many \'82\'c8\'82\'f1\'82\'bf\'82\'e1\'82\'e7\'81\'41worker \'82\'c8\'82\'f1\'82\'bf\'82\'e1\'82\'e7\
+			 -> nginx.conf\'82\'c9worker_rlimit_nofile\'82\'e2worker_connections\'82\'cc\'90\'dd\'92\'e8\'82\'aa\'82\'a0\'82\'e9\'82\'cc\'82\'c5\'82\'a2\'82\'b6\'82\'e9\'82\'c6\'97\'c7\'82\'a2\'81\'42\
+				
+\b \cf0 \cb1 \kerning1\expnd0\expndtw0 Nginx\'82\'cc\'83\'70\'83\'74\'83\'48\'81\'5b\'83\'7d\'83\'93\'83\'58\'82\'f0\'8b\'c9\'8c\'c0\'82\'c9\'82\'b7\'82\'e9\'82\'bd\'82\'df\'82\'cc\'8d\'6c\'8e\'40
+\b0 \
+				{\field{\*\fldinst{HYPERLINK "https://qiita.com/iwai/items/1e29adbdd269380167d2"}}{\fldrslt https://qiita.com/iwai/items/1e29adbdd269380167d2}}\cf15 \cb16 \expnd0\expndtw0\kerning0
+\
+\
+		-> \cf13 \cb14 \kerning1\expnd0\expndtw0 \CocoaLigature0 shared connection is busy while proxying connection\
+			 -> lua\'82\'a9\'82\'e7go-udp-server\'82\'d6\'82\'c6udp\'83\'66\'81\'5b\'83\'5e\'82\'f0\'91\'97\'95\'74\'82\'b7\'82\'e9\'8d\'db\'82\'c9\'81\'41nginx lua\'82\'cc\'83\'5c\'83\'50\'83\'62\'83\'67IO\'82\'cc\'8c\'c0\'8a\'45\'82\'f0\'92\'b4\'82\'a6\'82\'c4\'82\'a2\'82\'e9\'82\'c6\'94\'ad\'90\'b6\'82\'b7\'82\'e9\'81\'42\
+\
+\
+
+\b 	\'83\'4e\'83\'89\'83\'43\'83\'41\'83\'93\'83\'67\'91\'a4\'83\'47\'83\'89\'81\'5b
+\b0 \
+		-> connection refused, reset by peer\
+			-> \'83\'54\'81\'5b\'83\'6f\'82\'cctcp/ip\'82\'cc\'83\'5c\'83\'50\'83\'62\'83\'67\'90\'94\'8c\'c0\'8a\'45\'82\'c9\'92\'42\'82\'b5\'82\'c4\'82\'a2\'82\'e9\'89\'c2\'94\'5c\'90\'ab\'82\'aa\'8d\'82\'82\'a2\'81\'42\
+				ubuntu\'82\'be\'82\'c1\'82\'bd\'82\'e7 echo 1024 65535 > /proc/sys/net/ipv4/ip_local_port_range \'82\'c6\'82\'a9\'82\'c5\'83\'70\'83\'89\'83\'81\'81\'5b\'83\'5e\'95\'cf\'82\'a6\'82\'ea\'82\'ce\'82\'a2\'82\'a2\'81\'42\
+\
+
+\b 	\cf0 \cb1 \CocoaLigature1 disquuun\'95\'94\'95\'aa\'82\'cc\'95\'89\'89\'d7\'82\'aa\'8d\'82\'82\'a2
+\b0 \
+		-> disquuun\'82\'cc\'8f\'89\'8a\'fa\'89\'bb\'83\'70\'83\'89\'83\'81\'81\'5b\'83\'5e\'82\'cc\'83\'52\'83\'6c\'83\'4e\'83\'56\'83\'87\'83\'93\'90\'94\'82\'f0\'91\'9d\'82\'e2\'82\'b7\'82\'b1\'82\'c6\'82\'c5\'95\'89\'89\'d7\'82\'aa\'89\'ba\'82\'aa\'82\'e9\'83\'50\'81\'5b\'83\'58\'82\'aa\'82\'a0\'82\'e9\'81\'42\
+			60fps 10msg/sec up/down 5000\'90\'da\'91\'b1\'88\'c8\'8f\'e3\'82\'c5\'93\'ae\'82\'ad\'8f\'ea\'8d\'87\'82\'cd\'81\'4130\'90\'da\'91\'b1\'82\'ad\'82\'e7\'82\'a2\'82\'c5\'82\'a2\'82\'a2\'97\'5c\'8a\'b4\'82\'aa\'82\'b7\'82\'e9\'81\'42\'82\'bb\'82\'ea\'88\'c8\'8f\'e3\'82\'a0\'82\'b0\'82\'c4\'82\'e0\'83\'58\'83\'79\'83\'62\'83\'4e\'82\'aa\'95\'cf\'82\'ed\'82\'e7\'82\'c8\'82\'a2\'81\'42\
+\
+			\'82\'dc\'82\'bd\'81\'41\'8a\'65\'83\'86\'81\'5b\'83\'55\'81\'5b\'8c\'fc\'82\'af\'82\'cc\'83\'66\'81\'5b\'83\'5e\'82\'f0\'91\'97\'95\'74\'8e\'9e\'82\'c9\'8a\'65\'83\'86\'81\'5b\'83\'55\'81\'5b\'92\'50\'88\'ca\'82\'c5\'82\'dc\'82\'c6\'82\'df\'82\'e9\'82\'c6\'95\'89\'89\'d7\'82\'aa\'89\'ba\'82\'aa\'82\'e9\'81\'42\
+			\'97\'9d\'91\'7a\'82\'cd1f\'82\'a0\'82\'bd\'82\'e8\'8a\'65\'83\'86\'81\'5b\'83\'55\'81\'5b\'82\'c9\'91\'ce\'82\'b5\'82\'c41\'92\'ca\'82\'cc\'91\'97\'95\'74\'82\'c9\'82\'c5\'82\'ab\'82\'e9\'82\'c6\'82\'a2\'82\'a2\'81\'42\cf13 \cb14 \CocoaLigature0 \
+		\
+	
+\b \cf0 \cb1 \CocoaLigature1 go-udp-server\'82\'cc\'95\'89\'89\'d7\'82\'aa\'8d\'82\'82\'a2
+\b0 \cf15 \cb16 \expnd0\expndtw0\kerning0
+\
+		-> 20~30%\'82\'ad\'82\'e7\'82\'a2\'82\'cd\'82\'e6\'82\'ad\'82\'a0\'82\'e9\'8a\'b4\'82\'b6\'81\'42\
+			\'83\'81\'83\'62\'83\'5a\'81\'5b\'83\'57\'91\'97\'95\'74\'82\'cc\'90\'94\'82\'c9\'82\'bb\'82\'cc\'82\'dc\'82\'dc\'8a\'d6\'98\'41\'82\'b7\'82\'e9\'82\'cc\'82\'c5\'81\'41downstream\'82\'cc\'83\'81\'83\'62\'83\'5a\'81\'5b\'83\'57\'90\'94\'82\'f0\'8c\'a9\'92\'bc\'82\'b7\'82\'c6\'89\'f0\'8f\'c1\'82\'b5\'82\'e2\'82\'b7\'82\'a2\'81\'42\
+			\
+\
+
+\b \'8a\'65\'83\'70\'81\'5b\'83\'63\'82\'cc\'97\'4c\'96\'b3\'82\'c9\'82\'e6\'82\'e9\'95\'89\'89\'d7\'95\'cf\'93\'ae\'82\'c9\'82\'c2\'82\'a2\'82\'c4
+\b0 \
+	lua <-> disque\'82\'cc\'83\'81\'83\'62\'83\'5a\'81\'5b\'83\'57\'82\'cc\'82\'e2\'82\'e8\'8e\'e6\'82\'e8\'82\'cd\'81\'41nginx\'82\'ccworker\'82\'d6\'82\'cc\'95\'89\'89\'d7\'82\'aa\'82\'ed\'82\'b8\'82\'a9\'82\'c9\'82\'a0\'82\'e9\'81\'42\
+\
+	\'82\'b1\'82\'ea\'82\'cdworker\'90\'94\'82\'aa\'91\'bd\'82\'af\'82\'ea\'82\'ce\'91\'bd\'82\'a2\'82\'d9\'82\'c7\'8a\'65worker\'82\'cc\'95\'89\'89\'d7\'82\'aa\'8c\'b8\'82\'e9\'82\'cc\'82\'c5\'81\'41\'83\'58\'83\'79\'83\'62\'83\'4e\'82\'aa\'90\'4c\'82\'d1\'82\'e9\'81\'42\
+	4\'83\'52\'83\'41\'82\'cc\'83\'7d\'83\'56\'83\'93\'82\'c5 \cf0 \cb1 \kerning1\expnd0\expndtw0 60fps 10msg/sec up/down \'82\'f0\'8e\'c0\'8e\'7b\cf15 \cb16 \expnd0\expndtw0\kerning0
+\'82\'b3\'82\'b9\'82\'bd\'82\'c6\'82\'b1\'82\'eb\'81\'416000\'90\'da\'91\'b1\'82\'f0\'92\'b4\'82\'a6\'82\'bd\'82\'a0\'82\'bd\'82\'e8\'82\'a9\'82\'e7\'83\'4e\'83\'89\'83\'43\'83\'41\'83\'93\'83\'67\'82\'d6\'82\'cc\'83\'66\'81\'5b\'83\'5e\'91\'97\'95\'74\'82\'aa\'82\'ed\'82\'b8\'82\'a9\'82\'c9\'92\'78\'82\'ea\'82\'e9\'83\'50\'81\'5b\'83\'58\'82\'aa\'8e\'55\'8c\'a9\'82\'b3\'82\'ea\'82\'bd\'81\'42\
+\
+\
+
+\b 	nginx worker\'82\'c9\'95\'89\'89\'d7\'82\'aa\'82\'a9\'82\'a9\'82\'e9\'82\'c6\'82\'c7\'82\'a4\'82\'c8\'82\'e9\'82\'a9
+\b0 \
+		\'81\'45\'83\'4e\'83\'89\'83\'43\'83\'41\'83\'93\'83\'67\'82\'d6\'82\'c6\'93\'cd\'82\'af\'82\'e9downstream\'82\'aa\'92\'78\'89\'84\'82\'b7\'82\'e9\'81\'42\'82\'b1\'82\'b1\'82\'aa\'92\'78\'89\'84\'82\'b7\'82\'e9\'82\'cc\'82\'cd\'81\'41\'8a\'65worker\'82\'cc\'95\'89\'89\'d7\'82\'aa40%\'82\'c6\'82\'a9\'82\'f0\'92\'b4\'82\'a6\'82\'c4\'82\'a9\'82\'e7\'81\'42worker\'90\'94\'82\'aa\'91\'bd\'82\'af\'82\'ea\'82\'ce\'94\'f0\'82\'af\'82\'e7\'82\'ea\'82\'e9\'81\'42\
+			worker\'90\'94\'82\'f0\'91\'9d\'82\'e2\'82\'b7\'81\'41downstream\'82\'d6\'82\'cc\'83\'81\'83\'62\'83\'5a\'81\'5b\'83\'57\'82\'f0\'82\'dc\'82\'c6\'82\'df\'82\'e9\'81\'41\'82\'c8\'82\'c7\'82\'c5\'95\'89\'89\'d7\'82\'aa\'8c\'79\'8c\'b8\'82\'c5\'82\'ab\'82\'e9\'81\'42\
+\
+\
+
+\b 	disque\'82\'c9\'95\'89\'89\'d7\'82\'aa\'82\'a9\'82\'a9\'82\'e9\'82\'c6\'82\'c7\'82\'a4\'82\'c8\'82\'e9\'82\'a9
+\b0 \
+		\'81\'45\'82\'a0\'82\'dc\'82\'e8\'96\'e2\'91\'e8\'82\'aa\'8b\'4e\'82\'b1\'82\'e7\'82\'c8\'82\'a2\'81\'42\'83\'81\'83\'62\'83\'5a\'81\'5b\'83\'57\'82\'cc\'93\'9e\'92\'42\'92\'78\'89\'84\'82\'c9\'82\'c2\'82\'c8\'82\'aa\'82\'c1\'82\'bd\'82\'b1\'82\'c6\'82\'cd\'82\'c8\'82\'a2\'82\'c1\'82\'db\'82\'a2\'81\'42\
+			\'82\'e0\'82\'b5\'95\'89\'89\'d7\'82\'aa\'8b\'43\'82\'c9\'82\'c8\'82\'e9\'8f\'ea\'8d\'87\'81\'41lua\'82\'f0\'89\'fc\'95\'cf\'82\'b5\'82\'c4worker\'82\'b2\'82\'c6\'82\'c9\'88\'d9\'82\'c8\'82\'e9disque\'82\'c9\'82\'c2\'82\'c8\'82\'aa\'82\'e9\'82\'e6\'82\'a4\'82\'c9\'82\'b7\'82\'e9\'82\'c6\'82\'a2\'82\'a2\'82\'c6\'8e\'76\'82\'a4\'81\'42\
+\
+\
+
+\b 	upstream\'82\'c9\'95\'89\'89\'d7\'82\'aa\'82\'a9\'82\'a9\'82\'e9\'82\'c6\'82\'c7\'82\'a4\'82\'c8\'82\'e9\'82\'a9
+\b0 \
+		\'81\'45\'91\'53\'91\'cc\'82\'cc\'83\'81\'83\'62\'83\'5a\'81\'5b\'83\'57\'82\'cc\'97\'ac\'82\'ea\'82\'aa\'92\'78\'89\'84\'82\'b7\'82\'e9\'81\'42\
+			upstream\'82\'cc\'83\'81\'83\'62\'83\'5a\'81\'5b\'83\'57\'82\'cc\'8b\'7a\'82\'a2\'8f\'6f\'82\'b5\'82\'aa\'92\'78\'82\'ad\'82\'c8\'82\'e8\'81\'41\
+			downstream\'82\'cc\'83\'81\'83\'62\'83\'5a\'81\'5b\'83\'57\'82\'cc\'91\'97\'95\'74\'82\'aa\'92\'78\'82\'ad\'82\'c8\'82\'e9\'81\'42\
+\
+			\'83\'81\'83\'62\'83\'5a\'81\'5b\'83\'57\'82\'cc\'8f\'c1\'89\'bb\'95\'73\'97\'c7\'82\'aa\'97\'ad\'82\'dc\'82\'c1\'82\'c4\'82\'a2\'82\'ad\'88\'c8\'8a\'4f\'82\'c9\'89\'65\'8b\'bf\'82\'cd\'82\'c5\'82\'c8\'82\'a2\'81\'42\
+		\
+			\'82\'bd\'82\'be\'82\'b5\'81\'41\'83\'81\'83\'62\'83\'5a\'81\'5b\'83\'57\'82\'cc\'8f\'c1\'89\'bb\'95\'73\'97\'c7\'82\'aa\'8b\'4e\'82\'b1\'82\'e9\'82\'c6\'81\'41disque\'82\'aa\'82\'c7\'82\'f1\'82\'c7\'82\'f1\'83\'81\'83\'82\'83\'8a\'82\'f0\'90\'48\'82\'c1\'82\'c4\'82\'a2\'82\'ad\'82\'b1\'82\'c6\'82\'c9\'82\'c8\'82\'e9\'82\'cc\'82\'c5\'81\'41\
+			\'82\'bb\'82\'cc\'95\'d3\'82\'c9\'8a\'d6\'82\'b5\'82\'c4\'92\'8d\'88\'d3\'82\'aa\'95\'4b\'97\'76\'81\'42\'83\'81\'83\'62\'83\'5a\'81\'5b\'83\'57\'83\'54\'83\'43\'83\'59\'82\'aa\'8f\'ac\'82\'b3\'82\'a2 + \'83\'81\'83\'62\'83\'5a\'81\'5b\'83\'57\'82\'f0\'82\'dc\'82\'c6\'82\'df\'82\'c4\'88\'b5\'82\'a4\'82\'e6\'82\'a4\'82\'c8\'8d\'48\'95\'76\'82\'aa\'8c\'f8\'89\'ca\'82\'aa\'8d\'82\'82\'a2\'81\'42\
+\
+\
+
+\b 	go-udp-server\'82\'c9\'95\'89\'89\'d7\'82\'aa\'82\'a9\'82\'a9\'82\'e9\'82\'c6\'82\'c7\'82\'a4\'82\'c8\'82\'e9\'82\'a9
+\b0 \
+		\'81\'45\'82\'a0\'82\'dc\'82\'e8\'96\'e2\'91\'e8\'82\'aa\'8b\'4e\'82\'b1\'82\'e7\'82\'c8\'82\'a2\'81\'42\'83\'81\'83\'62\'83\'5a\'81\'5b\'83\'57\'82\'cc\'93\'9e\'92\'42\'92\'78\'89\'84\'82\'c9\'82\'c2\'82\'c8\'82\'aa\'82\'c1\'82\'bd\'82\'b1\'82\'c6\'82\'cd\'82\'c8\'82\'a2\'82\'c1\'82\'db\'82\'a2\'81\'42\
+			\'95\'89\'89\'d7\'82\'aa\'8b\'43\'82\'c9\'82\'c8\'82\'e9\'8f\'ea\'8d\'87\'81\'41\'90\'56\'8b\'4b\'82\'c9\'83\'7c\'81\'5b\'83\'67\'82\'f0\'8e\'77\'92\'e8\'82\'b5\'82\'c4go-udp-server\'82\'f0\'92\'c7\'89\'c1\'82\'b5\'81\'41nginx.conf\'82\'d6\'82\'c6\'83\'7c\'81\'5b\'83\'67\'8f\'ee\'95\'f1\'82\'f0\'89\'c1\'82\'a6\'82\'e9\'81\'42\
+			\'82\'b7\'82\'e9\'82\'c6\'8e\'a9\'93\'ae\'93\'49\'82\'c9\'95\'a1\'90\'94\'82\'ccgo-udp-server\'82\'d6\'82\'c6\'83\'66\'81\'5b\'83\'5e\'82\'aa\'97\'ac\'82\'ea\'82\'e9\'82\'bd\'82\'df\'81\'41\'95\'89\'89\'d7\'82\'aa\'95\'aa\'8e\'55\'82\'c5\'82\'ab\'82\'e9\'81\'42\
+\
+\
+}
