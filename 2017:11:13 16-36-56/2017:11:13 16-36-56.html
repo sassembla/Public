@@ -1,0 +1,176 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1504.83">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #ffffff; background-color: rgba(255, 255, 255, 0.9); min-height: 18.0px}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; min-height: 18.0px}
+    span.s1 {font-kerning: none; background-color: rgba(255, 255, 255, 0.9)}
+    span.s2 {font-kerning: none}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>NATについて学んでみる + nginx-lua改造で簡単にNAT越えやってみる</b></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>やってみたくなった。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>改造、という言葉がある時点で泥沼になるのは予想できるよね？</p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>NAT</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>いろいろ。ここの解説がわかりやすかった。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://plaza.rakuten.co.jp/hisuirai/diary/201211080000/">https://plaza.rakuten.co.jp/hisuirai/diary/201211080000/</a></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://www.think-like-a-computer.com/2011/09/16/types-of-nat/">http://www.think-like-a-computer.com/2011/09/16/types-of-nat/</a></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>Cone</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・<span class="s1">full cone NAT</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・<span class="s1">address restricted cone NAT</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・<span class="s1">port restricted cone NAT</span></p>
+<p class="p4"><span class="s2"></span><br></p>
+<p class="p3"><span class="s1"><b><span class="Apple-tab-span">	</span>Symmetric</b></span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・<span class="s1">sequential port symmetric NAT</span></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>・random port symmetric NAT</span></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b>要件</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>nginx luaを介して情報交換し、クライアント間でP2Pできるようにする。ようは、nginx luaでシグナリングを行う。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>かなったこと</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>クライアントA,Bに対して、A,Bがサーバに送付したudpパケットを元に、nginx streamを介してシグナリングを行い、A-B間でP2Pができるようにする。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>TURN機構は含まないため、symmetric natは突破というか、解決しない。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>実証実験環境</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>udpを受け付けるサーバを立てて、そこにクライアントからudpを送る -&gt;<span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>サーバ側から状態を観測、変換済み/到達可能なip:portをクライアントに返す -&gt;<span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>クライアントはws接続時にそのパラメータを送ってきて、ws接続寿命の間はudpでのデータ送信ができる、という状態になる<span class="Apple-tab-span">	</span></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b>面白い話：モバイルルータとNAT越え</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><a href="http://custardfilleddonut.blog.fc2.com/blog-entry-19.html">http://custardfilleddonut.blog.fc2.com/blog-entry-19.html</a></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>mobileRouterによっては、公式にSymmetricNATを使っていて、NAT越えしづらいのが把握できる、という感じの話がある。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>プレイヤー間p2pなどで、サーバ以外の2者をつなぐのがしんどい。turn必須になっちゃう。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>現在までの理解：</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・やりたいことは、サーバからudpを使ったpushをクライアントへと送ること。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・クライアント側はNATの向こう側にいることが多いので、NATを越えられる状態が必要になる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・サーバにむけてudpを打てれば、サーバからudpを送り返すことはできるようになる(情報が揃う</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>full corn -&gt; そのまま送り返せばOK(ごく稀に存在。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>address restricted -&gt; 送信先からの返信ならばそのままでOK、そうでない場合、双方向にパケットを打って経路を構築する必要がある。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>port restricted -&gt; 受信側 = サーバでポートを観測できてればOK</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>想定できる安価なケース</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>1.nginxでudp通信を受ける</p>
+<p class="p3"><span class="Apple-tab-span">	</span>2.ip、portをユーザー単位で保存する</p>
+<p class="p3"><span class="Apple-tab-span">	</span>3.なんらかの方法でnginx_luaでのws設立タイミングでその情報に触れる(ユーザー単位での情報のすくい上げを行う</p>
+<p class="p3"><span class="Apple-tab-span">	</span>4.nginx_luaからudpを発信する際にその情報を使う(接続の再セットを行う際は、ws経由でサーバに送って云々になる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>1~3で、同じnginxが使われれば最高という感じ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>udpサーバは、ユーザーid+tokenのような情報を受け取って、ipとportを保存する。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>これだけでOKなはず。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>full: クライアントからのudp送付元がそのままudpを返せるのでOK</p>
+<p class="p3"><span class="Apple-tab-span">	</span>address restricted: クライアントからのudp送付元がそのままudpを返せるのでOK</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="s1">port restricted cone NAT:<span class="Apple-converted-space"> </span></span></p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="s1"><b>もっと</b></span><b>安価なケース</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>nginx stream moduleを使う。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>1.3以降だと入れられそうで、あとはなんというか、Dockerで動かしてlistenができればいいのか。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>-&gt; 対応ポートに/udpつけたらudpに対応した。これで、Dockerでnginx stream udpの受付ができた。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>アプリケーションを動かして、udpを受け取り、そのaddrとportを覚えておく必要がある。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>まずはnginx-luaのstreamモジュールでやってみるか、、あれでudpを受け取って辞書が使えればベスト。うーん、この構造はダメっぽいかな。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・そもそもwsと共存できてる？</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・udpでのデータを受け取って、nginx_luaから触れるようにするにはどうするか：idをパラメータにしてしまうか。それともudpでレスポンスを返すようにするか。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>レスポンスそのまま返せると思うんだよな。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>-&gt; 返せた。で、LAN環境だと返答も受け取ることができた。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>で、あとは、AWSにのっけてテスト。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>-&gt; 今回はstreamを使ってudpのserver/senderを立ち上げておき、そこを経由してデータを流すことで実現した。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p5"><b>特定のポートからudpを射出する装置 みたいなのがあればいいのか</b><span class="Apple-tab-span">	</span>よさそう。それが特定のポートをlistenしてるソケットである必要性がある？</p>
+<p class="p5"><span class="Apple-tab-span">	</span>ありそう。</p>
+<p class="p6"><br></p>
+<p class="p5"><span class="Apple-tab-span">	</span>nginx unit goでそのまま起動できるudp 反射機を用意して、そこにip<span class="Apple-converted-space">  </span>+ ポートで送出させればよさそう。</p>
+<p class="p5"><span class="Apple-tab-span">	</span>その機構とnginx luaとのコミュニケーションはどうやるのがいいんだろう。udp？まあそれでも良さそう。</p>
+<p class="p6"><br></p>
+<p class="p5"><span class="Apple-tab-span">	</span>こうすると、udpポートを１つしか消費せず、データを流せる。</p>
+<p class="p6"><br></p>
+<p class="p5"><span class="Apple-tab-span">	</span>事前にws -&gt; キーを返す -&gt; キーをudpサーバに送る -&gt; udpサーバでip:port:キーを保持、</p>
+<p class="p5"><span class="Apple-tab-span">	</span>nginx luaからudpをキーで送出 -&gt; リフレクタがキーからデータをip:portへと送付</p>
+<p class="p6"><br></p>
+<p class="p5"><span class="Apple-tab-span">	</span>うーーん大変そう。でもudpだから平気かな。どうせ送り出すのは変わらないわけで。udpで送り出せばいいか。</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>この部分を組むか。それでudp沼はおしまい。</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>udp multiplexを勉強してみよう。</p>
+<p class="p6"><br></p>
+<p class="p5"><span class="Apple-tab-span">	</span>-&gt; 結果的に、nginx luaのudp送出でポートを指定できればそれで良さそう。</p>
+<p class="p6"><br></p>
+<p class="p6"><b></b><br></p>
+<p class="p5"><b>nginx luaを改造するためにコードを読む</b></p>
+<p class="p5"><b><span class="Apple-tab-span">	</span>このprでtcp bindが提供されてるんだけど、こんな感じでudpのポートを指定するやつを書ければいいんだと思う。</b></p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/openresty/lua-nginx-module/pull/712/files">https://github.com/openresty/lua-nginx-module/pull/712/files</a></p>
+<p class="p5"><span class="Apple-tab-span">	</span>・定義</p>
+<p class="p5"><span class="Apple-tab-span">	</span>・cの関数を書く</p>
+<p class="p5"><span class="Apple-tab-span">	</span>あたりが必要。</p>
+<p class="p6"><span class="Apple-tab-span">	</span></p>
+<p class="p5"><span class="Apple-tab-span">	</span>nginx luaを書き換えつつコンパイルすればいいのだろうと思って動かしてみる。</p>
+<p class="p6"><br></p>
+<p class="p5"><span class="Apple-tab-span">	</span>nginx luaのcosocketを書き換えてみる。</p>
+<p class="p5"><span class="Apple-tab-span">	</span>-&gt; socketaddrっていうstructがあって、そいつが宛先の情報を持っているんだけど、送信時に送信ポートを指定する手段がなさそう。</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>これは何というか、ipv4とか6とは切り離されたパラメータだからっぽい。</p>
+<p class="p6"><br></p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>luaのudpソケットについて調べる。</p>
+<p class="p6"><br></p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>これsendとreceiveが一致してるような感じなんだよな。というか送り元はポート指定できない的な。</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>送り先のポートは指定できるんだけど、送り元のポート指定ができない。</p>
+<p class="p6"><br></p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>これが指定できれば苦労しないんだよな多分。</p>
+<p class="p6"><br></p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>-&gt; 送り元のポート指定は無理っぽい。sockaddr structになってしまっていて、多分もともとできない。</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>で、残った手としては、通信を受けるのに使っているポートを割り出して、そのパラメータをクライアントへと伝え、クライアントから通信させる。</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>残念な点としては、udpの受け口がとても広範囲に必要なこと。ただしポートを消費しない。経路確立してしまえばそのまま送り出せる。</p>
+<p class="p6"><br></p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>送り元のポートは、connectionそれ自体のポートを使用している。こうすることで、ポート消費を抑えている。</p>
+<p class="p6"><br></p>
+<p class="p6"><br></p>
+<p class="p5"><b>おまけ</b></p>
+<p class="p6"><br></p>
+<p class="p5"><b>ネットワーク帯域を計測する</b></p>
+<p class="p5"><span class="Apple-tab-span">	</span><a href="https://qiita.com/takish/items/3a9ea74cfec4683ddf56">https://qiita.com/takish/items/3a9ea74cfec4683ddf56</a></p>
+<p class="p6"><br></p>
+<p class="p6"><br></p>
+<p class="p5"><b>Lua udp sock</b></p>
+<p class="p5"><span class="Apple-tab-span">	</span><a href="https://github.com/openresty/lua-nginx-module/blob/master/t/087-udp-socket.t">https://github.com/openresty/lua-nginx-module/blob/master/t/087-udp-socket.t</a></p>
+<p class="p6"><br></p>
+<p class="p6"><br></p>
+<p class="p5">クラウドフレアの記事　大量通信を低レイテンシでみたいな話。</p>
+<p class="p5"><span class="Apple-tab-span">	</span><a href="https://blog.cloudflare.com/how-to-achieve-low-latency/">https://blog.cloudflare.com/how-to-achieve-low-latency/</a></p>
+<p class="p6"><br></p>
+<p class="p6"><br></p>
+<p class="p5"><b>ファイルディスクリプタについて</b></p>
+<p class="p5"><span class="Apple-tab-span">	</span>プロセスや実行ファイルにとって外部の資源にアクセスしたりアクセスされたりする際に使用される抽象的なインターフェース</p>
+<p class="p5"><span class="Apple-tab-span">	</span>-&gt; nginxだと、一つのワーカーごとに開けるコネクションの数になっていたはず。workerに対して保持できるfdの数を増やして対応していた。</p>
+<p class="p6"><span class="Apple-tab-span">	</span></p>
+<p class="p6"><br></p>
+<p class="p3"><b>Pacingの話</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><a href="http://www.aist.go.jp/aist_j/press_release/pr2005/pr20050606/pr20050606.html">http://www.aist.go.jp/aist_j/press_release/pr2005/pr20050606/pr20050606.html</a></p>
+<p class="p6"><br></p>
+<p class="p6"><br></p>
+</body>
+</html>
