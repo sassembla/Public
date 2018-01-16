@@ -1,0 +1,445 @@
+{\rtf1\ansi\ansicpg932\cocoartf1504\cocoasubrtf830
+{\fonttbl\f0\fnil\fcharset128 HiraKakuProN-W3;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red213\green213\blue213;\red255\green255\blue255;
+\red192\green192\blue192;\red255\green255\blue255;\red0\green0\blue0;\red44\green238\blue235;\red202\green202\blue202;
+\red23\green23\blue23;\red67\green192\blue160;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;\cssrgb\c86667\c86667\c86667;\cssrgb\c100000\c100000\c100000;
+\cssrgb\c79889\c79890\c79889;\csgray\c100000;\csgray\c0;\cssrgb\c15683\c93976\c93913;\cssrgb\c83137\c83137\c83137;
+\cssrgb\c11765\c11765\c11765;\cssrgb\c30588\c78824\c69020;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww22800\viewh13940\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\b\fs44 \cf0 BenchmarkDotNet\'82\'c5Disquuun\'82\'f0\'83\'60\'83\'85\'81\'5b\'83\'6a\'83\'93\'83\'4f\'82\'b5\'82\'bd\'8e\'9e\'82\'cc\'83\'81\'83\'82
+\b0\fs24 \
+\
+
+\b \'8a\'54\'97\'76
+\b0 \
+	\'82\'c6\'82\'e8\'82\'a0\'82\'a6\'82\'b8\'93\'4b\'93\'96\'82\'c9\'81\'42\
+\
+\'81\'45\'95\'a1\'90\'94\'82\'ccqueue\'82\'c9\'93\'fc\'82\'ea\'82\'e9\'8f\'ea\'8d\'87\'82\'cd\'82\'c7\'82\'a4\'82\'c8\'82\'e9\'81\'48\
+	\'83\'6e\'83\'93\'83\'4f\'82\'b5\'82\'bd\'81\'42\'91\'8a\'90\'ab\'88\'ab\'82\'bb\'82\'a4\'81\'42\
+\
+\pard\pardeftab720\partightenfactor0
+
+\fs26 \cf0 \expnd0\expndtw0\kerning0
+\
+BenchmarkDotNet=v0.10.11, OS=macOS 10.12.6 (16G1114) [Darwin 16.7.0]\
+Processor=Intel Core i7-7Y75 CPU 1.30GHz, ProcessorCount=4\
+.NET Core SDK=2.0.0\
+  [Host]     : .NET Core 2.0.0 (Framework 4.6.00001.0), 64bit RyuJIT\
+  DefaultJob : .NET Core 2.0.0 (Framework 4.6.00001.0), 64bit RyuJIT\
+\
+
+\itap1\trowd \taflags0 \trgaph108\trleft-108 \trbrdrt\brdrnil \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clwWidth2412\clftsWidth3 \clmart10 \clmarl10 \clmarb10 \clmarr10 \clbrdrt\brdrs\brdrw20\brdrcf3 \clbrdrl\brdrs\brdrw20\brdrcf3 \clbrdrb\brdrs\brdrw20\brdrcf3 \clbrdrr\brdrs\brdrw20\brdrcf3 \clpadt120 \clpadl260 \clpadb120 \clpadr260 \gaph\cellx2160
+\clvertalc \clshdrawnil \clwWidth1084\clftsWidth3 \clmart10 \clmarl10 \clmarb10 \clmarr10 \clbrdrt\brdrs\brdrw20\brdrcf3 \clbrdrl\brdrs\brdrw20\brdrcf3 \clbrdrb\brdrs\brdrw20\brdrcf3 \clbrdrr\brdrs\brdrw20\brdrcf3 \clpadt120 \clpadl260 \clpadb120 \clpadr260 \gaph\cellx4320
+\clvertalc \clshdrawnil \clwWidth1084\clftsWidth3 \clmart10 \clmarl10 \clmarb10 \clmarr10 \clbrdrt\brdrs\brdrw20\brdrcf3 \clbrdrl\brdrs\brdrw20\brdrcf3 \clbrdrb\brdrs\brdrw20\brdrcf3 \clbrdrr\brdrs\brdrw20\brdrcf3 \clpadt120 \clpadl260 \clpadb120 \clpadr260 \gaph\cellx6480
+\clvertalc \clshdrawnil \clwWidth1084\clftsWidth3 \clmart10 \clmarl10 \clmarb10 \clmarr10 \clbrdrt\brdrs\brdrw20\brdrcf3 \clbrdrl\brdrs\brdrw20\brdrcf3 \clbrdrb\brdrs\brdrw20\brdrcf3 \clbrdrr\brdrs\brdrw20\brdrcf3 \clpadt120 \clpadl260 \clpadb120 \clpadr260 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\b\fs32 \cf0 Method\cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+\cf0 Mean\cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+\cf0 Error\cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+\cf0 StdDev\cell \row
+
+\itap1\trowd \taflags0 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrt\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clcbpat4 \clwWidth2412\clftsWidth3 \clmart10 \clmarl10 \clmarb10 \clmarr10 \clbrdrt\brdrs\brdrw20\brdrcf3 \clbrdrl\brdrs\brdrw20\brdrcf3 \clbrdrb\brdrs\brdrw20\brdrcf3 \clbrdrr\brdrs\brdrw20\brdrcf3 \clpadt120 \clpadl260 \clpadb120 \clpadr260 \gaph\cellx2160
+\clvertalc \clcbpat4 \clwWidth1084\clftsWidth3 \clmart10 \clmarl10 \clmarb10 \clmarr10 \clbrdrt\brdrs\brdrw20\brdrcf3 \clbrdrl\brdrs\brdrw20\brdrcf3 \clbrdrb\brdrs\brdrw20\brdrcf3 \clbrdrr\brdrs\brdrw20\brdrcf3 \clpadt120 \clpadl260 \clpadb120 \clpadr260 \gaph\cellx4320
+\clvertalc \clcbpat4 \clwWidth1084\clftsWidth3 \clmart10 \clmarl10 \clmarb10 \clmarr10 \clbrdrt\brdrs\brdrw20\brdrcf3 \clbrdrl\brdrs\brdrw20\brdrcf3 \clbrdrb\brdrs\brdrw20\brdrcf3 \clbrdrr\brdrs\brdrw20\brdrcf3 \clpadt120 \clpadl260 \clpadb120 \clpadr260 \gaph\cellx6480
+\clvertalc \clcbpat4 \clwWidth1084\clftsWidth3 \clmart10 \clmarl10 \clmarb10 \clmarr10 \clbrdrt\brdrs\brdrw20\brdrcf3 \clbrdrl\brdrs\brdrw20\brdrcf3 \clbrdrb\brdrs\brdrw20\brdrcf3 \clbrdrr\brdrs\brdrw20\brdrcf3 \clpadt120 \clpadl260 \clpadb120 \clpadr260 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\b0 \cf0 Take10Connection\cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+\cf0 74.96 us\cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+\cf0 1.449 us\cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+\cf0 1.355 us\cell \lastrow\row
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\fs24 \cf0 \kerning1\expnd0\expndtw0 \
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\fs22 \cf5 \cb6 \CocoaLigature0 socket shortage.\cf7 \
+\cf5 System.Reflection.TargetInvocationException: Exception has been thrown by the target of an invocation. ---> System.Exception: deprecated & all sockets are using.\cf7 \
+\cf5    at DisquuunCore.StackSocket.DEPRECATED_Sync(DisqueCommand command, Byte[] data) in /Users/passepied/Desktop/Disquuun/Disquuun/DisquuunSocket.cs:line 710\cf7 \
+\cf5    at DisquuunTest.DisquuunBench.Take_10byte_10sock() in /Users/passepied/Desktop/Disquuun/Program.cs:line 48\cf7 \
+\cf5    at BenchmarkDotNet.Autogenerated.Runnable.MainMultiAction(Int64 invokeCount) in /Users/passepied/Desktop/Disquuun/bin/release/netcoreapp2.0/c5d1091f-1a03-4c1a-ad38-b1cd17081a65/c5d1091f-1a03-4c1a-ad38-b1cd17081a65.notcs:line 562\cf7 \
+\cf5    at BenchmarkDotNet.Engines.Engine.Jitting()\cf7 \
+\cf5    at BenchmarkDotNet.Autogenerated.Runnable.Run(IHost host) in /Users/passepied/Desktop/Disquuun/bin/release/netcoreapp2.0/c5d1091f-1a03-4c1a-ad38-b1cd17081a65/c5d1091f-1a03-4c1a-ad38-b1cd17081a65.notcs:line 124\cf7 \
+\cf5    --- End of inner exception stack trace ---\cf7 \
+\cf5    at System.RuntimeMethodHandle.InvokeMethod(Object target, Object[] arguments, Signature sig, Boolean constructor)\cf7 \
+\cf5    at System.Reflection.RuntimeMethodInfo.UnsafeInvokeInternal(Object obj, Object[] parameters, Object[] arguments)\cf7 \
+\cf5    at BenchmarkDotNet.Autogenerated.Program.AfterAssemblyLoadingAttached(String[] args) in /Users/passepied/Desktop/Disquuun/bin/release/netcoreapp2.0/c5d1091f-1a03-4c1a-ad38-b1cd17081a65/c5d1091f-1a03-4c1a-ad38-b1cd17081a65.notcs:line 56\cf7 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\fs24 \cf0 \cb1 \CocoaLigature1 \
+\'83\'56\'83\'87\'81\'5b\'83\'67\'81\'41\'88\'c0\'92\'e8\'82\'b5\'82\'c8\'82\'a2\'81\'42\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\fs22 \cf8 \cb6 \CocoaLigature0                    Method |     Mean |    Error |   StdDev |\cf7 \cb6 \
+\cf8 \cb6 ------------------------- |---------:|---------:|---------:|\cf7 \cb6 \
+\cf8 \cb6   Take_10byte_2sock_async | 68.04 us | 28.83 us | 1.629 us |\cf7 \cb6 \
+\cf8 \cb6  Take_10byte_10sock_async | 72.87 us | 22.36 us | 1.263 us |\cf7 \cb6 \
+\cf8 \cb6  Take_10byte_30sock_async | 73.63 us | 29.12 us | 1.645 us |
+\fs24 \cf0 \cb1 \CocoaLigature1 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\fs22 \cf8 \cb6 \CocoaLigature0                    Method |     Mean |    Error |    StdDev |\cf7 \cb6 \
+\cf8 \cb6 ------------------------- |---------:|---------:|----------:|\cf7 \cb6 \
+\cf8 \cb6   Take_10byte_2sock_async | 74.89 us | 16.02 us | 0.9051 us |\cf7 \cb6 \
+\cf8 \cb6  Take_10byte_10sock_async | 68.70 us | 36.14 us | 2.0421 us |\cf7 \cb6 \
+\cf8 \cb6  Take_10byte_30sock_async | 70.65 us | 42.91 us | 2.4246 us |\
+\
+2018/01/13 5:32:34\
+\
+\
+
+\fs24 \cf0 \cb1 \CocoaLigature1 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 2018/01/13 5:32:40\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\fs22 \cf8 \cb6 \CocoaLigature0                    Method |     Mean |     Error |    StdDev |\cf7 \cb6 \
+\cf8 \cb6 ------------------------- |---------:|----------:|----------:|\cf7 \cb6 \
+\cf8 \cb6   Take_10byte_2sock_async | 74.17 us | 1.4725 us | 2.1118 us |\cf7 \cb6 \
+\cf8 \cb6  Take_10byte_10sock_async | 74.60 us | 0.9152 us | 0.8113 us |\cf7 \cb6 \
+\cf8 \cb6  Take_10byte_30sock_async | 75.57 us | 0.8857 us | 0.8285 us |
+\fs24 \cf0 \cb1 \CocoaLigature1 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \
+\'83\'74\'83\'8b\'94\'c5\'81\'41\'8e\'e1\'8a\'b1\'8d\'82\'91\'ac\'89\'bb\'82\'c5\'82\'ab\'82\'bd\'8b\'43\'82\'aa\'82\'b7\'82\'e9\'81\'42\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\fs22 \cf8 \cb6 \CocoaLigature0                    Method |     Mean |    Error |    StdDev |\cf7 \cb6 \
+\cf8 \cb6 ------------------------- |---------:|---------:|----------:|\cf7 \cb6 \
+\cf8 \cb6   Take_10byte_2sock_async | 74.52 us | 1.022 us | 0.7979 us |\cf7 \cb6 \
+\cf8 \cb6  Take_10byte_10sock_async | 75.39 us | 1.079 us | 1.0091 us |\cf7 \cb6 \
+\cf8 \cb6  Take_10byte_30sock_async | 78.41 us | 1.518 us | 2.2717 us |\
+
+\fs24 \cf0 \cb1 \CocoaLigature1 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \
+\'8c\'f0\'8c\'dd\'82\'ad\'82\'e7\'82\'a2\'82\'c9shortage\'82\'aa\'82\'c5\'82\'e9\'82\'f1\'82\'c5\'81\'41\'8d\'5c\'91\'a2\'93\'49\'82\'c8\'8c\'87\'8a\'d7\'82\'aa\'82\'a0\'82\'e8\'82\'bb\'82\'a4\'82\'c8\'8b\'43\'82\'aa\'82\'b7\'82\'e9\'81\'42\'82\'bb\'82\'e0\'82\'bb\'82\'e0\'8f\'89\'8a\'fa\'90\'da\'91\'b1\'82\'cc\'8e\'b8\'94\'73\'82\'f0\'82\'bf\'82\'e1\'82\'f1\'82\'c6\'8e\'e6\'93\'be\'82\'b5\'82\'c4\'82\'c8\'82\'a2\'82\'e6\'82\'a4\'82\'c8\'81\'42ubuntu\'97\'a7\'82\'c4\'82\'c4\'82\'bb\'82\'c1\'82\'bf\'82\'c5\'82\'e2\'82\'e9\'82\'a9\'81\'42\
+ubuntu\'82\'c5\'82\'cc2\'83\'52\'83\'41CPU\'82\'c5\'82\'cc\'93\'ae\'8d\'ec\'81\'42\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\fs22 \cf8 \cb6 \CocoaLigature0                    Method |     Mean |    Error |    StdDev |\cf7 \cb6 \
+\cf8 \cb6 ------------------------- |---------:|---------:|----------:|\cf7 \cb6 \
+\cf8 \cb6   Take_10byte_2sock_async | 131.3 us | 3.226 us |  9.461 us |\cf7 \cb6 \
+\cf8 \cb6  Take_10byte_10sock_async | 146.9 us | 6.116 us | 17.744 us |\cf7 \cb6 \
+\cf8 \cb6  Take_10byte_30sock_async | 142.7 us | 4.915 us | 14.336 us |
+\fs24 \cf0 \cb1 \CocoaLigature1 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \
+\'82\'a8\'82\'c1\'82\'bb\'81\'49\'81\'48\
+\
+\'82\'b1\'82\'b1\'82\'a9\'82\'e7\cf9 \cb10 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec9 [\cf11 \strokec11 ShortRunJob\cf9 \strokec9 ]\cb1 \
+\cf0 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \
+
+\fs22 \cf8 \cb6 \CocoaLigature0                       Method |     Mean |    Error |    StdDev |\cf7 \cb6 \
+\cf8 \cb6 ---------------------------- |---------:|---------:|----------:|\cf7 \cb6 \
+\cf8 \cb6      Take_10byte_2sock_async | 141.5 us | 282.3 us | 15.949 us |\cf7 \cb6 \
+\cf8 \cb6     Take_10byte_10sock_async | 143.5 us | 235.4 us | 13.298 us |\cf7 \cb6 \
+\cf8 \cb6     Take_10byte_30sock_async | 167.5 us | 545.8 us | 30.840 us |\cf7 \cb6 \
+\cf8 \cb6   Take_10byte_2sock_pipeline | 138.9 us | 134.2 us |  7.584 us |\cf7 \cb6 \
+\cf8 \cb6  Take_10byte_10sock_pipeline | 140.2 us | 175.1 us |  9.892 us |
+\fs24 \cf0 \cb1 \CocoaLigature1 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \
+ubuntu\'8a\'d6\'8c\'57\'82\'c8\'82\'ad\'93\'ae\'82\'a9\'82\'b5\'82\'c4\'8c\'9f\'8f\'d8\'82\'c5\'82\'ab\'82\'bb\'82\'a4\'81\'42\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \
+
+\fs22 \cf8 \cb6 \CocoaLigature0                   Method |     Mean |     Error |    StdDev |\cf7 \cb6 \
+\cf8 \cb6 ------------------------ |---------:|----------:|----------:|\cf7 \cb6 \
+\cf8 \cb6   Take_10byte_2sock_sync | 52.78 us |  7.275 us | 0.4111 us |
+\fs24 \cf0 \cb1 \CocoaLigature1 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \
+\'8a\'ee\'91\'62\'93\'49\'82\'c8sync\'82\'aa\'82\'b1\'82\'ea\'82\'c5\'81\'41async\'82\'cc\'95\'89\'89\'d7\'82\'f0\'91\'aa\'82\'e9\'82\'c9\'82\'cd\'81\'41\'82\'c6\'82\'a2\'82\'a4\'82\'cc\'82\'aa\'90\'b3\'82\'b5\'82\'ad\'82\'c8\'82\'a2\'81\'42\
+\
+\'93\'e0\'95\'94\'93\'49\'82\'c8\'8b\'40\'8d\'5c\'82\'cc\'91\'ac\'93\'78\'82\'f0\'90\'7d\'82\'e9\'82\'cc\'82\'aa\'83\'41\'83\'8a\'81\'42\
+\
+\
+\'92\'78\'82\'bb\'82\'a4\'82\'c8\'82\'c6\'82\'b1\'82\'eb\'82\'c5\'82\'a2\'82\'a4\'82\'c6\'81\'41\'95\'a1\'90\'94\'82\'cc\'83\'5c\'83\'50\'83\'62\'83\'67\'82\'f0\'90\'d8\'82\'e8\'91\'d6\'82\'a6\'82\'e9\'82\'a0\'82\'bd\'82\'e8\'81\'42\
+lock\'82\'f0\'8a\'4f\'82\'b7\'82\'b1\'82\'c6\'82\'aa\'82\'c5\'82\'ab\'82\'bd\'82\'e7\'8c\'8b\'8d\'5c\'95\'cf\'82\'ed\'82\'e9\'82\'cc\'82\'c5\'82\'cd\'8a\'b4\
+	\'8e\'51\'8d\'6c\
+		http://engineering.grani.jp/entry/2017/07/28/145035\
+\
+\'83\'65\'83\'58\'83\'67\'82\'c5\'93\'ae\'82\'a9\'82\'b7\'82\'c6\'81\'41\'83\'5c\'83\'50\'83\'62\'83\'67\'82\'aa\'90\'73\'82\'ab\'82\'bd\'82\'c6\'82\'b1\'82\'eb\'82\'c5\'92\'e2\'8e\'7e\'82\'b5\'82\'c4\'82\'b5\'82\'dc\'82\'a4\'82\'dd\'82\'bd\'82\'a2\'81\'42\'82\'b1\'82\'ea\'89\'bd\'82\'a9\'82\'cc\'89\'f0\'96\'be\'82\'c9\'8e\'67\'82\'a6\'82\'bb\'82\'a4\'81\'42\
+-> \'90\'da\'91\'b1\'8a\'ae\'97\'b9\'91\'4f\'82\'c9\'83\'56\'83\'58\'83\'65\'83\'80\'82\'aa\'93\'ae\'8d\'ec\'82\'b5\'82\'c4\'82\'e9\'82\'c1\'82\'db\'82\'a2\'81\'42\'82\'d3\'82\'de\'81\'41\'81\'41\'81\'41\'8b\'4e\'93\'ae\'91\'4f\'82\'c9\'83\'66\'81\'5b\'83\'5e\'82\'f0\'95\'fa\'82\'e8\'8d\'9e\'82\'de\'82\'b1\'82\'c6\'82\'aa\'82\'c5\'82\'ab\'82\'c4\'82\'b5\'82\'dc\'82\'c1\'82\'c4\'82\'a2\'82\'e9\'81\'42\
+\
+	-> \'83\'6f\'83\'4f\'82\'be\'82\'c1\'82\'bd\'81\'42\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\fs22 \cf8 \cb6 \CocoaLigature0                       Method |      Mean |     Error |     StdDev |\cf7 \
+\cf8 ---------------------------- |----------:|----------:|-----------:|\cf7 \
+\cf8      Take_10byte_2sock_async |  68.21 us |  10.81 us |  0.6107 us |\cf7 \
+\cf8       Take_10byte_2sock_sync |  64.78 us |  53.97 us |  3.0491 us |\cf7 \
+\cf8     Take_10byte_10sock_async |  94.92 us |  43.23 us |  2.4424 us |\cf7 \
+\cf8     Take_10byte_30sock_async | 109.56 us | 418.98 us | 23.6731 us |\cf7 \
+\cf8   Take_10byte_2sock_pipeline | 102.49 us |  83.99 us |  4.7454 us |\cf7 \
+\cf8  Take_10byte_10sock_pipeline |  76.44 us |  33.99 us |  1.9203 us |\cf7 \
+\cf8  Take_10byte_30sock_pipeline |  77.62 us |  91.14 us |  5.1495 us |\cf7 \
+\
+\'82\'c7\'82\'a4\'82\'e0tcp\'90\'da\'91\'b1\'82\'bb\'82\'ea\'8e\'a9\'91\'cc\'82\'cc\'8e\'9e\'8a\'d4\'82\'e0\'89\'c1\'96\'a1\'82\'b3\'82\'ea\'82\'c4\'82\'e9\'82\'e6\'82\'a4\'82\'c8\'81\'48\'82\'dc\'82\'a0\'82\'c5\'82\'e0pipeline\'82\'aa\'8a\'84\'82\'c6\'8d\'82\'91\'ac\'82\'c8\'8b\'43\'82\'aa\'82\'b7\'82\'e9\'82\'cc\'82\'cd\'82\'a2\'82\'a2\'82\'b1\'82\'c6\'81\'42\
+\
+\'82\'c6\'82\'e8\'82\'a0\'82\'a6\'82\'b8\'82\'a0\'82\'c6\'92\'c7\'89\'c1\'82\'b7\'82\'d7\'82\'ab\'82\'c8\'82\'cc\'82\'cd\'81\'41\
+\'81\'45\'91\'ab\'82\'e8\'82\'c8\'82\'a2\'8f\'ea\'8d\'87\'82\'cc\'83\'5c\'83\'50\'83\'62\'83\'67\'92\'c7\'89\'c1\'83\'41\'83\'89\'81\'5b\'83\'67\
+	stack\'82\'c9\'93\'fc\'82\'c1\'82\'bd\'8e\'9e\'8a\'d4\'82\'c6stack\'82\'b5\'82\'c4\'82\'bd\'82\'e0\'82\'cc\'82\'aa\'8e\'e6\'82\'e8\'8f\'6f\'82\'b3\'82\'ea\'82\'e9\'8e\'9e\'8a\'d4\'82\'c5\'81\'41\'82\'bb\'82\'cc\'8e\'9e\'8a\'d4\'82\'cc\'8d\'c5\'92\'b7\'82\'f0\'8e\'63\'82\'b7\'81\'48 \'8e\'b8\'91\'ac\'82\'b5\'82\'c4\'82\'a2\'82\'bd\'8e\'9e\'8a\'d4\'81\'41\'82\'dd\'82\'bd\'82\'a2\'82\'c8\'81\'42\
+	\'92\'50\'88\'ca\'8e\'9e\'8a\'d4\'82\'a0\'82\'bd\'82\'e8\'82\'cc\'8e\'b8\'91\'ac\'89\'f1\'90\'94\'82\'c6\'82\'a9\'82\'c5\'82\'e0\'82\'a2\'82\'a2\'82\'cc\'82\'a9\'82\'c8\'81\'41\'83\'58\'83\'8c\'83\'62\'83\'68\'8e\'67\'82\'a4\'82\'cc\'8c\'99\'82\'be\'82\'a9\'82\'e7\'81\'41\'94\'ad\'90\'b6\'83\'5e\'83\'43\'83\'7e\'83\'93\'83\'4f\'8a\'d6\'98\'41\'82\'c5\'82\'c8\'82\'f1\'82\'a9\'82\'c5\'82\'ab\'82\'e9\'82\'c6\'82\'a2\'82\'a2\'82\'cc\'82\'be\'82\'aa\
+\
+\cf8                       Method |      Mean |     Error |     StdDev |\cf7 \
+\cf8 ---------------------------- |----------:|----------:|-----------:|\cf7 \
+\cf8      Take_10byte_2sock_async |  69.06 us |  23.87 us |  1.3487 us |\cf7 \
+\cf8       Take_10byte_2sock_sync |  56.41 us |  14.25 us |  0.8050 us |\cf7 \
+\cf8     Take_10byte_10sock_async |  69.36 us |  38.55 us |  2.1779 us |\cf7 \
+\cf8     Take_10byte_30sock_async |  72.14 us |  33.17 us |  1.8742 us |\cf7 \
+\cf8   Take_10byte_2sock_pipeline |  75.60 us |  29.17 us |  1.6484 us |\cf7 \
+\cf8  Take_10byte_10sock_pipeline |  77.12 us |  10.02 us |  0.5662 us |\cf7 \
+\cf8  Take_10byte_30sock_pipeline | 103.12 us | 196.04 us | 11.0764 us |\
+\cf7 \
+\'82\'dc\'82\'be\'83\'89\'83\'93\'83\'5f\'83\'80\'8a\'b4\'82\'a0\'82\'e9\'82\'c8\'81\'60\'81\'60\'82\'e2\'82\'df\'82\'e6\'82\'a4\'81\'42\
+\
+unix domain socket\'82\'f0C#\'82\'c5\'88\'b5\'82\'a4\'82\'b1\'82\'c6\'82\'cd\'82\'c5\'82\'ab\'82\'e9\'82\'f1\'82\'be\'82\'eb\'82\'a4\'82\'a9\'81\'42-> \'82\'c5\'82\'ab\'82\'e9\'81\'41\'83\'5c\'83\'50\'83\'62\'83\'67\'83\'5e\'83\'43\'83\'76\'82\'c5\'91\'49\'82\'d7\'82\'e9\'81\'42\'82\'dc\'82\'a0\'8d\'a1\'89\'f1\'82\'cd\'82\'e2\'82\'e7\'82\'c8\'82\'a2\'82\'a9\'82\'c8\'81\'60disque\'91\'a4\'82\'c9\'82\'c8\'82\'f1\'82\'a9\'82\'a0\'82\'e8\'82\'bb\'82\'a4\'82\'be\'82\'b5\'81\'41\'8d\'aa\'96\'7b\'93\'49\'82\'c9\'8e\'9e\'8a\'d4\'82\'aa\'82\'c8\'82\'a2\'81\'42\
+\
+\
+\'82\'a0\'82\'c6\'82\'cdsocket shortage\'82\'be\'82\'af\'91\'ce\'89\'9e\'82\'b5\'82\'e6\'82\'a4\'81\'42\
+-> available\'82\'cc\'8f\'91\'82\'ab\'95\'fb\'95\'cf\'82\'a6\'82\'e7\'82\'ea\'82\'e9\'82\'a9\'82\'e0\'81\'42\'82\'ed\'82\'b4\'82\'ed\'82\'b4socket\'82\'dc\'82\'c5\'93\'c7\'82\'dd\'82\'c9\'82\'a2\'82\'a9\'82\'c8\'82\'ad\'82\'c4\'82\'e0\'82\'a2\'82\'a2\'93\'49\'82\'c8\'81\'42\
+\'82\'e2\'82\'c1\'82\'c4\'82\'dd\'82\'bd -> \
+\
+\cf8                       Method |     Mean |     Error |    StdDev |\cf7 \
+\cf8 ---------------------------- |---------:|----------:|----------:|\cf7 \
+\cf8      Take_10byte_2sock_async | 81.98 us | 101.04 us |  5.709 us |\cf7 \
+\cf8       Take_10byte_2sock_sync |       NA |        NA |        NA |\cf7 \
+\cf8     Take_10byte_10sock_async | 91.41 us | 157.85 us |  8.919 us |\cf7 \
+\cf8     Take_10byte_30sock_async | 95.51 us |  80.68 us |  4.558 us |\cf7 \
+\cf8   Take_10byte_2sock_pipeline | 99.40 us | 285.53 us | 16.133 us |\cf7 \
+\cf8  Take_10byte_10sock_pipeline | 85.39 us | 145.92 us |  8.245 us |\cf7 \
+\cf8  Take_10byte_30sock_pipeline | 76.18 us |  36.68 us |  2.072 us |\cf7 \
+\
+\'92\'78\'82\'ad\'82\'c8\'82\'c1\'82\'bdw\
+\'82\'e2\'81\'5b\'82\'df\'82\'e6\'81\'42\
+\cf8                       Method |     Mean |     Error |    StdDev |\cf7 \
+\cf8 ---------------------------- |---------:|----------:|----------:|\cf7 \
+\cf8      Take_10byte_2sock_async | 78.41 us |  44.05 us |  2.489 us |\cf7 \
+\cf8       Take_10byte_2sock_sync | 57.63 us |  28.17 us |  1.592 us |\cf7 \
+\cf8     Take_10byte_10sock_async | 76.53 us |  33.12 us |  1.871 us |\cf7 \
+\cf8     Take_10byte_30sock_async | 83.94 us |  28.41 us |  1.605 us |\cf7 \
+\cf8   Take_10byte_2sock_pipeline | 85.94 us |  97.83 us |  5.527 us |\cf7 \
+\cf8  Take_10byte_10sock_pipeline | 84.15 us | 233.62 us | 13.200 us |\cf7 \
+\cf8  Take_10byte_30sock_pipeline | 84.44 us |  18.17 us |  1.027 us |\
+\cf7 \
+\'82\'e2\'82\'cd\'82\'e8\'82\'d9\'82\'da\'8b\'43\'95\'aa\'82\'dd\'82\'bd\'82\'a2\'82\'c8\'83\'70\'83\'89\'83\'81\'81\'5b\'83\'5e\'82\'c9\'82\'c8\'82\'e9\'82\'c8\'81\'42\
+\
+\'83\'70\'83\'43\'83\'76\'83\'89\'83\'43\'83\'93\'8c\'6e\'82\'c910\'94\'7b\'82\'cc\'83\'66\'81\'5b\'83\'5e\'82\'f0\'97\'ac\'82\'b7\'82\'e2\'82\'c2\'81\'42\'82\'e2\'82\'cd\'82\'e8\'83\'66\'81\'5b\'83\'5e\'97\'ca\'82\'c9\'89\'9e\'82\'b6\'82\'c4\'95\'cf\'82\'ed\'82\'e9\'82\'cb\'81\'42\
+\cf8                       Method |      Mean |      Error |     StdDev |\cf7 \
+\cf8 ---------------------------- |----------:|-----------:|-----------:|\cf7 \
+\cf8      Take_10byte_2sock_async |  81.15 us |   9.596 us |  0.5422 us |\cf7 \
+\cf8       Take_10byte_2sock_sync |  59.28 us |   5.387 us |  0.3044 us |\cf7 \
+\cf8     Take_10byte_10sock_async |  99.69 us | 223.154 us | 12.6086 us |\cf7 \
+\cf8     Take_10byte_30sock_async |  78.28 us |  36.978 us |  2.0893 us |\cf7 \
+\cf8   Take_10byte_2sock_pipeline | 152.23 us |  40.314 us |  2.2778 us |\cf7 \
+\cf8  Take_10byte_10sock_pipeline | 156.67 us |  80.243 us |  4.5339 us |\cf7 \
+\cf8  Take_10byte_30sock_pipeline | 184.29 us | 272.888 us | 15.4187 us |\cf7 \
+\
+conoha\'8f\'e3\'82\'ccubuntu 4\'83\'52\'83\'41\'82\'c5\'8e\'c0\'8d\'73\'82\'b5\'82\'bd\'82\'c6\'82\'b1\'82\'eb\'81\'41\'82\'b1\'82\'f1\'82\'c8\'8a\'b4\'82\'b6\'81\'42\
+\cf8                           Method |      Mean |      Error |    StdDev |\cf7 \
+\cf8 -------------------------------- |----------:|-----------:|----------:|\cf7 \
+\cf8          Take_10byte_2sock_async | 111.04 us |   131.1 us |  7.406 us |\cf7 \
+\cf8           Take_10byte_2sock_sync |  80.81 us |   108.5 us |  6.132 us |\cf7 \
+\cf8         Take_10byte_10sock_async | 130.34 us |   304.1 us | 17.181 us |\cf7 \
+\cf8         Take_10byte_30sock_async | 116.58 us |   310.2 us | 17.529 us |\cf7 \
+\cf8    Take_10byte_2sock_sync_10item | 895.81 us | 1,387.7 us | 78.405 us |\cf7 \
+\cf8  Take_10byte_10sock_async_10item | 343.30 us |   582.9 us | 32.935 us |\cf7 \
+\cf8  Take_10byte_30sock_async_10item | 373.80 us |   321.7 us | 18.178 us |\cf7 \
+\cf8       Take_10byte_2sock_pipeline | 131.05 us |   168.6 us |  9.528 us |\cf7 \
+\cf8      Take_10byte_10sock_pipeline | 129.62 us |   244.6 us | 13.823 us |\cf7 \
+\cf8      Take_10byte_30sock_pipeline | 134.58 us |   187.4 us | 10.586 us |\cf7 \
+\cf8    Take_10byte_2sock_pipeline_10 | 299.17 us |   413.9 us | 23.386 us |\cf7 \
+\cf8   Take_10byte_10sock_pipeline_10 | 273.35 us |   382.1 us | 21.588 us |\cf7 \
+\cf8   Take_10byte_30sock_pipeline_10 | 298.77 us |   276.1 us | 15.601 us |\cf7 \
+\
+\'83\'89\'83\'74\'82\'c5\'82\'cd\'82\'a9\'82\'c8\'82\'e8\'82\'a2\'82\'a2\'83\'58\'83\'52\'83\'41\'81\'42\
+\'83\'56\'83\'72\'83\'41\'94\'c5\'82\'c5\'82\'cd\'81\'41\
+\cf8                           Method |      Mean |     Error |    StdDev |\cf7 \
+\cf8 -------------------------------- |----------:|----------:|----------:|\cf7 \
+\cf8          Take_10byte_2sock_async | 123.49 us | 162.89 us |  9.204 us |\cf7 \
+\cf8           Take_10byte_2sock_sync |  89.48 us |  61.36 us |  3.467 us |\cf7 \
+\cf8         Take_10byte_10sock_async | 120.44 us |  56.71 us |  3.204 us |\cf7 \
+\cf8         Take_10byte_30sock_async | 123.53 us | 248.56 us | 14.044 us |\cf7 \
+\cf8    Take_10byte_2sock_sync_10item | 913.86 us | 187.61 us | 10.600 us |\cf7 \
+\cf8  Take_10byte_10sock_async_10item | 344.47 us |  47.89 us |  2.706 us |\cf7 \
+\cf8  Take_10byte_30sock_async_10item | 387.18 us | 727.27 us | 41.092 us |\cf7 \
+\cf8       Take_10byte_2sock_pipeline | 118.08 us |  68.37 us |  3.863 us |\cf7 \
+\cf8      Take_10byte_10sock_pipeline | 120.99 us | 266.48 us | 15.057 us |\cf7 \
+\cf8      Take_10byte_30sock_pipeline | 136.96 us | 239.90 us | 13.555 us |\cf7 \
+\cf8    Take_10byte_2sock_pipeline_10 | 288.80 us | 203.55 us | 11.501 us |\cf7 \
+\cf8   Take_10byte_10sock_pipeline_10 | 231.18 us | 172.80 us |  9.764 us |\cf7 \
+\cf8   Take_10byte_30sock_pipeline_10 | 290.03 us | 205.35 us | 11.603 us |\cf7 \
+\
+\'82\'b1\'82\'f1\'82\'c8\'8a\'b4\'82\'b6\'82\'a9\'81\'42\
+async\'8c\'6e\'82\'cd\'8c\'ac\'95\'c0\'82\'ddWaitHandle\'82\'cc\'83\'79\'83\'69\'83\'8b\'83\'65\'83\'42\'82\'f0\'95\'89\'82\'c1\'82\'c4\'82\'e9\'82\'f1\'82\'c5\'81\'41\'82\'bb\'82\'ea\'82\'c5\'82\'b1\'82\'cc\'83\'58\'83\'52\'83\'41\'82\'c8\'82\'e7\'82\'a2\'82\'a2\'8a\'b4\'82\'b6\'82\'c8\'82\'cc\'82\'c5\'82\'cd\'81\'42\
+\'82\'d9\'82\'da\'89\'bd\'82\'e0\'82\'b5\'82\'c8\'82\'a2\'83\'5c\'83\'50\'83\'62\'83\'67\'82\'f0\'96\'cd\'82\'b5\'82\'bd\'83\'66\'81\'5b\'83\'5e\'82\'be\'82\'c6\'82\'b1\'82\'f1\'82\'c8\'8a\'b4\'82\'b6\'81\'42\
+\
+\cf8                           Method |      Mean |      Error |    StdDev |\cf7 \
+\cf8 -------------------------------- |----------:|-----------:|----------:|\cf7 \
+\cf8          Take_10byte_2sock_async |  4.018 us |  1.2750 us | 0.0720 us |\cf7 \
+\cf8           Take_10byte_2sock_sync |  1.500 us |  0.2568 us | 0.0145 us |\cf7 \
+\cf8         Take_10byte_10sock_async |  4.180 us |  0.6578 us | 0.0372 us |\cf7 \
+\cf8         Take_10byte_30sock_async |  4.136 us |  0.6864 us | 0.0388 us |\cf7 \
+\cf8    Take_10byte_2sock_sync_10item | 14.721 us |  3.6871 us | 0.2083 us |\cf7 \
+\cf8  Take_10byte_10sock_async_10item | 17.819 us |  4.7120 us | 0.2662 us |\cf7 \
+\cf8  Take_10byte_30sock_async_10item | 18.440 us | 12.3032 us | 0.6952 us |\cf7 \
+\
+\
+\'82\'b3\'82\'e7\'82\'c9loop\'82\'c6\'82\'a9\'82\'f0\'89\'c1\'82\'a6\'82\'e7\'82\'ea\'82\'e9\'82\'e6\'82\'a4\'82\'c9\'82\'b5\'82\'bd\'81\'42\
+\
+\'82\'cd\'82\'a2\'81\'41\'82\'c6\'82\'a2\'82\'a4\'82\'b1\'82\'c6\'82\'c5\'81\'41\'92\'ca\'90\'4d\'88\'c8\'8a\'4f\'82\'cc\'95\'94\'95\'aa\'82\'cc\'82\'a0\'82\'e8\'82\'e6\'82\'a4\'82\'cd\'8c\'eb\'8d\'b7\'82\'c5\'81\'42\
+\
+\'82\'a4\'81\'5b\'82\'f1\'83\'78\'81\'5b\'83\'58\'83\'4e\'83\'89\'83\'58\'97\'70\'88\'d3\'82\'b7\'82\'e9\'82\'c6\'83\'78\'83\'93\'83\'60\'82\'aa\'82\'c4\'82\'ab\'82\'df\'82\'f1\'82\'c9\'97\'8e\'82\'bf\'82\'e9\'82\'cc\'82\'c8\'82\'f1\'82\'c5\'81\'42interface\'82\'c9\'82\'b5\'82\'c4\'82\'dd\'82\'e9\'82\'a9\'81\'42\
+\
+\cf8                           Method |      Mean |       Error |     StdDev |\cf7 \
+\cf8 -------------------------------- |----------:|------------:|-----------:|\cf7 \
+\cf8          Take_10byte_2sock_async |  4.263 us |   1.6034 us |  0.0906 us |\cf7 \
+\cf8           Take_10byte_2sock_sync |  1.572 us |   1.3900 us |  0.0785 us |\cf7 \
+\cf8         Take_10byte_10sock_async |  4.242 us |   1.0398 us |  0.0588 us |\cf7 \
+\cf8         Take_10byte_30sock_async |  4.183 us |   0.6072 us |  0.0343 us |\cf7 \
+\cf8    Take_10byte_2sock_sync_10item | 15.413 us |   3.4801 us |  0.1966 us |\cf7 \
+\cf8  Take_10byte_10sock_async_10item | 18.348 us |  11.8447 us |  0.6692 us |\cf7 \
+\cf8  Take_10byte_30sock_async_10item | 18.033 us |   0.7730 us |  0.0437 us |\cf7 \
+\cf8       Take_10byte_2sock_pipeline |  4.753 us |   0.7805 us |  0.0441 us |\cf7 \
+\cf8      Take_10byte_10sock_pipeline |  4.670 us |   0.8726 us |  0.0493 us |\cf7 \
+\cf8      Take_10byte_30sock_pipeline |  4.529 us |   0.5373 us |  0.0304 us |\cf7 \
+\cf8    Take_10byte_2sock_pipeline_10 | 25.391 us |   5.5216 us |  0.3120 us |\cf7 \
+\cf8   Take_10byte_10sock_pipeline_10 | 24.981 us |   5.8046 us |  0.3280 us |\cf7 \
+\cf8   Take_10byte_30sock_pipeline_10 | 23.549 us |   7.6720 us |  0.4335 us |\cf7 \
+\cf8         Take_10byte_2sock_loop_2 | 33.197 us |  11.0151 us |  0.6224 us |\cf7 \
+\cf8        Take_10byte_10sock_loop_2 | 55.504 us | 398.8342 us | 22.5349 us |\cf7 \
+\cf8        Take_10byte_30sock_loop_2 | 43.701 us | 391.8285 us | 22.1390 us |\
+\cf7 \
+\'82\'dc\'82\'a0\'81\'41\'83\'81\'83\'93\'83\'65\'83\'69\'83\'93\'83\'58\'90\'ab\'8d\'6c\'82\'a6\'82\'bd\'82\'e7\'82\'b1\'82\'f1\'82\'c8\'8a\'b4\'82\'b6\'82\'a9\'82\'c8\'81\'60\'82\'c6\'8e\'76\'82\'a2\'82\'c2\'82\'c2\'81\'41\'92\'78\'82\'a2\'81\'42\
+\
+\cf8                           Method |      Mean |     Error |    StdDev |\cf7 \
+\cf8 -------------------------------- |----------:|----------:|----------:|\cf7 \
+\cf8          Take_10byte_2sock_async |  5.246 us |  9.635 us | 0.5444 us |\cf7 \
+\cf8           Take_10byte_2sock_sync |  1.737 us |  1.059 us | 0.0598 us |\cf7 \
+\cf8         Take_10byte_10sock_async |  4.994 us |  5.007 us | 0.2829 us |\cf7 \
+\cf8         Take_10byte_30sock_async |  5.447 us |  6.660 us | 0.3763 us |\cf7 \
+\cf8    Take_10byte_2sock_sync_10item | 16.707 us |  5.224 us | 0.2952 us |\cf7 \
+\cf8  Take_10byte_10sock_async_10item | 18.547 us |  9.683 us | 0.5471 us |\cf7 \
+\cf8  Take_10byte_30sock_async_10item | 18.483 us |  7.964 us | 0.4500 us |\cf7 \
+\cf8       Take_10byte_2sock_pipeline |  5.722 us |  6.309 us | 0.3565 us |\cf7 \
+\cf8      Take_10byte_10sock_pipeline |  4.856 us |  4.104 us | 0.2319 us |\cf7 \
+\cf8      Take_10byte_30sock_pipeline |  5.816 us |  3.047 us | 0.1721 us |\cf7 \
+\cf8    Take_10byte_2sock_pipeline_10 | 29.869 us | 42.256 us | 2.3876 us |\cf7 \
+\cf8   Take_10byte_10sock_pipeline_10 | 25.101 us |  3.782 us | 0.2137 us |\cf7 \
+\cf8   Take_10byte_30sock_pipeline_10 | 24.649 us |  3.549 us | 0.2005 us |\cf7 \
+\
+\'96\'df\'82\'b5\'82\'bd\'81\'42\
+\
+\cf8                           Method |      Mean |      Error |    StdDev |\cf7 \
+\cf8 -------------------------------- |----------:|-----------:|----------:|\cf7 \
+\cf8          Take_10byte_2sock_async |  4.065 us |  1.7354 us | 0.0981 us |\cf7 \
+\cf8           Take_10byte_2sock_sync |  1.537 us |  0.9427 us | 0.0533 us |\cf7 \
+\cf8         Take_10byte_10sock_async |  5.889 us |  8.2307 us | 0.4651 us |\cf7 \
+\cf8         Take_10byte_30sock_async |  5.515 us |  2.4331 us | 0.1375 us |\cf7 \
+\cf8    Take_10byte_2sock_sync_10item | 17.907 us | 28.7123 us | 1.6223 us |\cf7 \
+\cf8  Take_10byte_10sock_async_10item | 22.929 us | 53.0855 us | 2.9994 us |\cf7 \
+\cf8  Take_10byte_30sock_async_10item | 21.841 us |  3.7723 us | 0.2131 us |\cf7 \
+\cf8       Take_10byte_2sock_pipeline |  4.795 us |  0.9523 us | 0.0538 us |\cf7 \
+\cf8      Take_10byte_10sock_pipeline |  4.656 us |  0.5813 us | 0.0328 us |\cf7 \
+\cf8      Take_10byte_30sock_pipeline |  4.735 us |  0.5510 us | 0.0311 us |\cf7 \
+\cf8    Take_10byte_2sock_pipeline_10 | 22.294 us |  6.0993 us | 0.3446 us |\cf7 \
+\cf8   Take_10byte_10sock_pipeline_10 | 23.485 us | 22.0893 us | 1.2481 us |\cf7 \
+\cf8   Take_10byte_30sock_pipeline_10 | 21.890 us |  7.6632 us | 0.4330 us |\cf7 \
+\cf8         Take_10byte_2sock_loop_2 | 29.881 us |  1.8279 us | 0.1033 us |\cf7 \
+\cf8        Take_10byte_10sock_loop_2 | 31.114 us | 15.8645 us | 0.8964 us |\cf7 \
+\cf8        Take_10byte_30sock_loop_2 | 33.355 us | 21.4925 us | 1.2144 us |\cf7 \
+\
+\'82\'b3\'82\'e7\'82\'c9\'83\'56\'83\'72\'83\'41\'82\'c8\'83\'65\'83\'58\'83\'67\'82\'c9\'82\'b5\'82\'c4\'82\'dd\'82\'bd\'82\'a2\'82\'aa\'81\'41\'82\'b1\'82\'cc\'8a\'c2\'8b\'ab\'82\'c5\'82\'cd\'82\'a4\'82\'b2\'82\'a9\'82\'b9\'82\'c8\'82\'a2\'82\'cc\'82\'c5\'8c\'a9\'91\'97\'82\'e9\'81\'42\
+\
+\cf8                           Method |      Mean |      Error |    StdDev |\cf7 \
+\cf8 -------------------------------- |----------:|-----------:|----------:|\cf7 \
+\cf8          Take_10byte_2sock_async |  4.040 us |  0.7995 us | 0.0452 us |\cf7 \
+\cf8           Take_10byte_2sock_sync |  1.549 us |  0.2411 us | 0.0136 us |\cf7 \
+\cf8         Take_10byte_10sock_async |  4.290 us |  0.9721 us | 0.0549 us |\cf7 \
+\cf8         Take_10byte_30sock_async |  4.220 us |  1.3237 us | 0.0748 us |\cf7 \
+\cf8    Take_10byte_2sock_sync_10item | 16.081 us | 16.7491 us | 0.9464 us |\cf7 \
+\cf8  Take_10byte_10sock_async_10item | 20.856 us | 18.8980 us | 1.0678 us |\cf7 \
+\cf8  Take_10byte_30sock_async_10item | 18.623 us |  6.1906 us | 0.3498 us |\cf7 \
+\cf8       Take_10byte_2sock_pipeline |  5.197 us | 11.6224 us | 0.6567 us |\cf7 \
+\cf8      Take_10byte_10sock_pipeline |  5.598 us |  3.1213 us | 0.1764 us |\cf7 \
+\cf8      Take_10byte_30sock_pipeline |  5.065 us |  0.7191 us | 0.0406 us |\cf7 \
+\cf8    Take_10byte_2sock_pipeline_10 | 22.567 us | 12.7912 us | 0.7227 us |\cf7 \
+\cf8   Take_10byte_10sock_pipeline_10 | 25.333 us |  6.0615 us | 0.3425 us |\cf7 \
+\cf8   Take_10byte_30sock_pipeline_10 | 23.269 us | 11.4749 us | 0.6484 us |\cf7 \
+\cf8         Take_10byte_2sock_loop_2 | 32.199 us | 16.3175 us | 0.9220 us |\cf7 \
+\cf8        Take_10byte_10sock_loop_2 | 35.051 us |  4.2557 us | 0.2405 us |\cf7 \
+\cf8        Take_10byte_30sock_loop_2 | 34.979 us |  2.1891 us | 0.1237 us |\cf7 \
+\
+\'8d\'c5\'8f\'49\'81\'41Pressure\'8c\'9f\'92\'6d\'8b\'40\'8d\'5c\'82\'f0\'95\'74\'82\'af\'89\'c1\'82\'a6\'82\'bd\'83\'6f\'81\'5b\'83\'57\'83\'87\'83\'93\'81\'42\
+\
+\'96\'f3\'82\'a0\'82\'c1\'82\'c4core2\'82\'c5\'82\'cd\'82\'c8\'82\'ad3.5\'82\'c5\'83\'52\'83\'93\'83\'70\'83\'43\'83\'8b\'92\'ca\'82\'c1\'82\'c4\'97\'7e\'82\'b5\'82\'a2\'83\'6f\'81\'5b\'83\'57\'83\'87\'83\'93\'82\'c5\'8d\'c4\'93\'78\'83\'8d\'83\'57\'83\'62\'83\'4e\'82\'cc\'82\'dd\'83\'78\'83\'93\'83\'60\'81\'423.5\'83\'75\'83\'89\'83\'93\'83\'60\'82\'c6\'82\'b5\'82\'c4\'93\'66\'82\'ab\'8f\'6f\'82\'bb\'82\'a4\'81\'42\
+\
+\cf8                           Method |      Mean |       Error |     StdDev |\cf7 \
+\cf8 -------------------------------- |----------:|------------:|-----------:|\cf7 \
+\cf8          Take_10byte_2sock_async |  9.446 us |  42.6027 us |  2.4071 us |\cf7 \
+\cf8           Take_10byte_2sock_sync |  1.847 us |   0.3184 us |  0.0180 us |\cf7 \
+\cf8         Take_10byte_10sock_async |  5.389 us |   3.2670 us |  0.1846 us |\cf7 \
+\cf8         Take_10byte_30sock_async |  5.558 us |   1.9537 us |  0.1104 us |\cf7 \
+\cf8    Take_10byte_2sock_sync_10item | 18.929 us |  27.2548 us |  1.5399 us |\cf7 \
+\cf8  Take_10byte_10sock_async_10item | 22.569 us |   5.9343 us |  0.3353 us |\cf7 \
+\cf8  Take_10byte_30sock_async_10item | 19.399 us |   3.3334 us |  0.1883 us |\cf7 \
+\cf8       Take_10byte_2sock_pipeline |  5.485 us |   0.6061 us |  0.0342 us |\cf7 \
+\cf8      Take_10byte_10sock_pipeline |  5.077 us |   1.6905 us |  0.0955 us |\cf7 \
+\cf8      Take_10byte_30sock_pipeline |  6.545 us |   5.5997 us |  0.3164 us |\cf7 \
+\cf8    Take_10byte_2sock_pipeline_10 | 31.838 us |  28.0285 us |  1.5837 us |\cf7 \
+\cf8   Take_10byte_10sock_pipeline_10 | 28.984 us |   7.3191 us |  0.4135 us |\cf7 \
+\cf8   Take_10byte_30sock_pipeline_10 | 26.362 us |   4.1309 us |  0.2334 us |\cf7 \
+\cf8         Take_10byte_2sock_loop_2 | 49.594 us | 440.7760 us | 24.9047 us |\cf7 \
+\cf8        Take_10byte_10sock_loop_2 | 43.963 us |  62.6907 us |  3.5421 us |\cf7 \
+\cf8        Take_10byte_30sock_loop_2 | 66.129 us |  55.2169 us |  3.1199 us |\cf7 \
+\
+\'82\'e2\'82\'cd\'82\'e8\'96\'da\'97\'a7\'82\'c1\'82\'c4\'92\'78\'82\'a2\'81\'42concurrencyQueue\'91\'ac\'82\'a2\'82\'f1\'82\'be\'82\'c8\'82\'a0\'81\'42\
+\
+\cf8                           Method |      Mean |      Error |    StdDev |\cf7 \
+\cf8 -------------------------------- |----------:|-----------:|----------:|\cf7 \
+\cf8          Take_10byte_2sock_async |  4.656 us |  6.2569 us | 0.3535 us |\cf7 \
+\cf8           Take_10byte_2sock_sync |  1.730 us |  0.9745 us | 0.0551 us |\cf7 \
+\cf8         Take_10byte_10sock_async |  4.337 us |  0.4410 us | 0.0249 us |\cf7 \
+\cf8         Take_10byte_30sock_async |  4.262 us |  0.7247 us | 0.0409 us |\cf7 \
+\cf8    Take_10byte_2sock_sync_10item | 17.134 us |  8.7683 us | 0.4954 us |\cf7 \
+\cf8  Take_10byte_10sock_async_10item | 21.383 us | 16.5207 us | 0.9335 us |\cf7 \
+\cf8  Take_10byte_30sock_async_10item | 22.547 us |  3.6320 us | 0.2052 us |\cf7 \
+\cf8       Take_10byte_2sock_pipeline |  6.301 us |  1.8376 us | 0.1038 us |\cf7 \
+\cf8      Take_10byte_10sock_pipeline |  5.949 us |  2.8413 us | 0.1605 us |\cf7 \
+\cf8      Take_10byte_30sock_pipeline |  6.673 us |  4.2911 us | 0.2425 us |\cf7 \
+\cf8    Take_10byte_2sock_pipeline_10 | 29.744 us | 20.4818 us | 1.1573 us |\cf7 \
+\cf8   Take_10byte_10sock_pipeline_10 | 25.569 us | 10.5866 us | 0.5982 us |\cf7 \
+\cf8   Take_10byte_30sock_pipeline_10 | 23.797 us |  3.4032 us | 0.1923 us |\cf7 \
+\cf8         Take_10byte_2sock_loop_2 | 35.643 us | 21.8902 us | 1.2368 us |\cf7 \
+\cf8        Take_10byte_10sock_loop_2 | 35.144 us | 16.8500 us | 0.9521 us |\cf7 \
+\cf8        Take_10byte_30sock_loop_2 | 35.683 us | 12.4644 us | 0.7043 us |\cf7 \
+\
+\'82\'be\'82\'a2\'82\'bd\'82\'a2\'94\'7b\'82\'ad\'82\'e7\'82\'a2\'88\'e1\'82\'a4\'81\'42\
+\
+}
