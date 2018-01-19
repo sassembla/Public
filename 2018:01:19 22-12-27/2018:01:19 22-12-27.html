@@ -63,12 +63,6 @@
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>はい。</p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ちなみにMacroってメニューだとコードにコメントを書くこと自体が不可</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>・変数の寿命が独自</p>
-<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>[VarDef, A, "initial"] みたいな感じで変数を初期化、</p>
-<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>[VarSet, A, "set"] みたいな感じで変数に値を代入できるのだけれど、</p>
-<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>loop関数の中でVarDefを使うと、挙動がおかしくなる。 具体的にはAが定義済みの場合は[VarDef, A....]は定義を上書きしないみたいだ。</p>
-<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>なので、プログラム中で変数として使いたい値がある場合、プログラムの上の方にまとめてVarDefしておく必要がありそう。</p>
-<p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>・エラーにならないケースがある</p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>どうもメッセージングみたいな挙動をしていて、</p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>・メソッドの引数の型が合わない場合はエラー</p>
@@ -156,19 +150,40 @@
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>注意点</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>Zscript &gt; Record は時々嘘をつく。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>たいへんとっつきにくい要素がこれらだった。いまならもう怖くない、、</p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>・Top Levelという概念</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Zscriptに記述できる一番外側のブロックをTop Levelといい、UIに関係するコードや変数定義、関数定義などを記述することができる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>このレベルにダイレクトにLoopとかIfとかの処理を書くことはできない。</p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>処理を書く場合、必ず <b>ボタンを押したら~</b> みたいな関数の中に書く必要がある。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>・Zscript &gt; Record は時々嘘をつく。</b></p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
-<p class="p3"><span class="Apple-tab-span">	</span>例えば Record中に Tool &gt; Geometry &gt; Modify Topology &gt; Delete By Symmetry とかを実行すると</p>
-<p class="p3"><span class="Apple-tab-span">	</span>[IPress,Tool:Geometry:Delete By Symmetry]</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>例えば Record中に Tool &gt; Geometry &gt; Modify Topology &gt; Delete By Symmetry とかを実行すると</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>[IPress,Tool:Geometry:Delete By Symmetry]</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>とか記録されるんだけど、これをそのままコピーしてもDelete By Symmetry は実行されない。 ええ、、、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>とか記録されるんだけど、これをそのままコピーしてもDelete By Symmetry は実行されない。 ええ、、、</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
-<p class="p3"><span class="Apple-tab-span">	</span>そう、記録されたコマンドが間違っている。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>そう、記録されたコマンドが間違っている。</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>正しくは、</p>
-<p class="p3"><span class="Apple-tab-span">	</span>[IPress,Tool:Geometry:<b>Modify Topology</b>:Delete By Symmetry]</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>正しくは、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>[IPress,Tool:Geometry:<b>Modify Topology</b>:Delete By Symmetry]</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>まあ手で実行するときの階層がそうなってるんで、、まあ、、、はい、、、なんで間違うの、、、？ バグ、、、？</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>まあ手で実行するときの階層がそうなってるんで、、まあ、、、はい、、、なんで間違うの、、、？ バグ、、、？</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>・変数の寿命が独自</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>[VarDef, A, "initial"] みたいな感じで変数を初期化、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>[VarSet, A, "set"] みたいな感じで変数に値を代入できるのだけれど、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>VarDefはTopLevel(すべての関数の外側)にしか書けない。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>loop関数の中でVarDefを使うと、挙動がおかしくなる。 具体的にはAが定義済みの場合は[VarDef, A....]は定義を上書きしないみたいだ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>なので、プログラム中で変数として使いたい値がある場合、プログラムの上の方にまとめてVarDefしておく必要がある。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>もしくはダイレクトにVarSetだけ使うとか。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>感想</b></p>
