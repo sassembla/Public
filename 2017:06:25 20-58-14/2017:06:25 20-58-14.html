@@ -1,0 +1,226 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1504.83">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Sans'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; min-height: 18.0px}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Menlo; color: #111111}
+    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px Menlo; color: #000000}
+    p.p8 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Helvetica; color: #111111; background-color: #f3f3f3}
+    p.p9 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Helvetica; color: #111111}
+    p.p10 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px Menlo; color: #000000; background-color: #ffffff}
+    span.s1 {font: 22.0px Helvetica}
+    span.s2 {font: 12.0px Helvetica}
+    span.s3 {font: 12.0px 'Hiragino Sans'}
+    span.s4 {font: 12.0px 'Hiragino Sans'; color: #000000}
+    span.s5 {font-kerning: none; background-color: #eff0f1}
+    span.s6 {font-variant-ligatures: no-common-ligatures; background-color: #ffffff}
+    span.s7 {font-kerning: none}
+    span.s8 {font-kerning: none; background-color: #f3f3f3}
+    span.s9 {font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #000000; background-color: #ffffff}
+    span.s10 {font-variant-ligatures: no-common-ligatures}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><span class="s1"><b>WebuSocket</b></span><b>のテストをポータブルにする + tls1.2</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>わすれてたんだけど、nginx-lua側もtlsやらんとな。</b></p>
+<p class="p4"><span class="Apple-tab-span">	</span>https://github.com/openresty/lua-ssl-nginx-module</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>これもまた式年遷宮。</p>
+<p class="p2"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="s3">・</span>tls<span class="s3">喋れる</span>WebServer<span class="s3">欲しい</span></p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>・ついでに<span class="s2">wss</span>も喋れるWebServer欲しい</p>
+<p class="p3"><span class="Apple-tab-span">	</span>という感じで。</p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Unity2017からは.netCoreのバイナリも入ってるんで、それでフルに書こうかな～～と思ったんだけど、うーんん、まずは動作する別環境を作って、それに追いつかせよう。</p>
+<p class="p5"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>というわけでまずは見本作成、nginxでの手元でtlsなhttp + websocket な話から。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>-&gt; 準備が思ったより大変だったので、うーん、最後のチャレンジとしてルータの整理整頓を行う。悲しい。</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p3"><b>TLS導入の話</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>let’s Encryptな。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://www.nginx.com/blog/lets-encrypt-tls-nginx/">https://www.nginx.com/blog/lets-encrypt-tls-nginx/</a></p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p3"><b>nginxの設定</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>日本語でわかりやすく。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://heartbeats.jp/hbblog/2012/06/nginx06.html">https://heartbeats.jp/hbblog/2012/06/nginx06.html</a></p>
+<p class="p5"><span class="Apple-tab-span">	</span></p>
+<p class="p5"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、それらが整った上で、netCore上でとりあえずhttpとwebsocket返せるやつ書こう。</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p3"><b>そういえば、WebuSocketでのドメインの除外設定について</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>特になんもせずに流してる気がしてきたぞ。ガバガバだぞ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/WebuSocket/blob/master/WebuSocket/WebSocketEncryption.cs#L73">https://github.com/sassembla/WebuSocket/blob/master/WebuSocket/WebSocketEncryption.cs#L73</a></p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>なんとかしよう。</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p3">メモ</p>
+<p class="p3"><span class="Apple-tab-span">	</span>certbotってのを使うといい感じっぽい。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>https://certbot.eff.org</p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>どんなサーバ使ってるんだっけ？ -&gt; ubuntuなんだけどvどれ</p>
+<p class="p6"><span class="s4"><span class="Apple-tab-span">	</span></span><span class="s5">cat /etc/*release</span></p>
+<p class="p5"><br></p>
+<p class="p7"><span class="s4"><span class="Apple-tab-span">	</span>-&gt; </span><span class="s6">16.04.2 LTS</span></p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ふむ。</p>
+<p class="p5"><br></p>
+<p class="p8"><span class="s7">$ sudo apt-get install software-properties-common</span></p>
+<p class="p8"><span class="s7">$ sudo add-apt-repository ppa:certbot/certbot</span></p>
+<p class="p8"><span class="s7">$ sudo apt-get update</span></p>
+<p class="p9"><span class="s8">$ sudo apt-get install python-certbot-nginx<span class="Apple-converted-space"> </span></span></p>
+<p class="p5"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ふーむ、一行目からこける要素がある。<span class="s9">apt-get update</span> したらいけた。これ以降は動作。</p>
+<p class="p5"><br></p>
+<p class="p7"><span class="s4"><span class="Apple-tab-span">	</span></span><span class="s6">Geographic area: 6</span></p>
+<p class="p10"><span class="s10"><span class="Apple-tab-span">	</span>Time zone: 78</span></p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、ここからがcertbotの動作。</p>
+<p class="p9"><span class="s4"><span class="Apple-tab-span">	</span></span><span class="s8">sudo certbot --nginx</span></p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、</p>
+<p class="p7"><span class="s4"><span class="Apple-tab-span">	</span></span><span class="s6">No names were found in your configuration files. Please enter in your domain</span></p>
+<p class="p7"><span class="s6">name(s) (comma and/or space separated)<span class="Apple-converted-space">  </span>(Enter 'c' to cancel):kissaki.tv</span></p>
+<p class="p5"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ふむ。</p>
+<p class="p5"><br></p>
+<p class="p7"><span class="s4"><span class="Apple-tab-span">	</span></span><span class="s6">nginx: [error] invalid PID number "" in "/run/nginx.pid"</span></p>
+<p class="p5"><span class="Apple-tab-span">	</span></p>
+<p class="p7"><span class="s4"><span class="Apple-tab-span">	</span></span><span class="s6">Cannot find a VirtualHost matching domain kissaki.tv.</span></p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>あ、なんか前提おかしいっぽい。nginx動いてるといけなかったかな？</p>
+<p class="p3"><span class="Apple-tab-span">	</span>なんか起動しっぱなしのnginxのpidがおかしいのかな。</p>
+<p class="p5"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>-&gt; nginxの状態がおかしいっぽい。ふむ？</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>-&gt; リンクがおかしかった。デフォルトでnginxっていうリンクが存在してるぽいんだけど、自分の構成したnginxのパスを踏んでない。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>このexeはなんかletsencが作っちゃってるっぽいな。なるほどな？</p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・restartには失敗してるんだけどもうconfは変わってるんだろうか？</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>なんかletsencは別のnginxをいじってるような気がしなくもない。</p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>とりあえず本家で入ってたnginxを停止した状態で試してみよう。</p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>-&gt; エラーは出なくなった。が、</p>
+<p class="p7"><span class="s4"><span class="Apple-tab-span">	</span></span><span class="s6">Cannot find a VirtualHost matching domain kissaki.tv.</span></p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>とか言われる。ふむ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>なんかいろんな前提がありそうなんで、bareなubuntuからやってみよう。</p>
+<p class="p5"><span class="Apple-tab-span">	</span></p>
+<p class="p5"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b>Bareなubuntuでリトライ</b></p>
+<p class="p5"><span class="Apple-tab-span">	</span></p>
+<p class="p9"><span class="s4"><span class="Apple-tab-span">	</span></span><span class="s8">apt-get install python-certbot-nginx</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>のとこで、nginx入れてるんだなあ。これと前提が合わせられればそれでいいか。</p>
+<p class="p5"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、ubuntu + certbotだとバグがあるみたいな？ まじ？</p>
+<p class="p3"><span class="Apple-tab-span">	</span>下記で触れられてるのと同じことが起きてるっぽくて、うーん。最近か。centosでやってみよう。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://totoshko88.wordpress.com/2017/06/11/letsencrypt-certbot-ubuntu-nginx/">https://totoshko88.wordpress.com/2017/06/11/letsencrypt-certbot-ubuntu-nginx/</a></p>
+<p class="p5"><span class="Apple-tab-span">	</span></p>
+<p class="p5"><br></p>
+<p class="p3"><b>Bare centosでリトライ</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>はい。とりあえず動かしたい。</p>
+<p class="p5"><br></p>
+<p class="p10"><span class="s10">yum -y install wget</span></p>
+<p class="p10"><span class="s10">wget https://dl.eff.org/certbot-auto</span></p>
+<p class="p10"><span class="s10">chmod a+x certbot-auto</span></p>
+<p class="p10"><span class="s10">./certbot-auto --nginx</span></p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、依存いろいろ入れて、</p>
+<p class="p5"><span class="Apple-tab-span">	</span></p>
+<p class="p10"><span class="s10">Saving debug log to /var/log/letsencrypt/letsencrypt.log</span></p>
+<p class="p10"><span class="s10">The nginx plugin is not working; there may be problems with your existing configuration.</span></p>
+<p class="p10"><span class="s10">The error was: NoInstallationError()</span></p>
+<p class="p5"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ふむ、、、なんかあやしい。</p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>こっちではnginxが入ってないな～なるほど、動かしとけ的な前提なのかな？</p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>いろいろ読んで試そう。</p>
+<p class="p5"><br></p>
+<p class="p3">https://digitz.org/blog/lets-encrypt-ssl-centos-7-setup/</p>
+<p class="p5"><br></p>
+<p class="p3">https://certbot.eff.org/docs/</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p3"><b>別軸</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>How to setup NGINX with automatic HTTPS in Docker</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://tevinjeffrey.me/how-to-setup-nginx-proxy-and-lets-encrypt-with-docker/">https://tevinjeffrey.me/how-to-setup-nginx-proxy-and-lets-encrypt-with-docker/</a></p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p3"><b>nginx側の記事</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>https://www.nginx.com/blog/lets-encrypt-tls-nginx/</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p3"><b>Certbot</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>main</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>https://certbot.eff.org/#ubuntuxenial-nginx</p>
+<p class="p3"><span class="Apple-tab-span">	</span>doc</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>https://certbot.eff.org/docs/</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p3">おっdockerに対応してる記事あった</p>
+<p class="p3"><span class="Apple-tab-span">	</span>http://qiita.com/setouchi/items/b3a78cb396ae6e58b84b</p>
+<p class="p3"><span class="Apple-tab-span">	</span>wordpressかー</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p3"><b>Running with Docker</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>うーんドキュメントを読もうと言う感じだ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://certbot.eff.org/docs/install.html#running-with-docker">https://certbot.eff.org/docs/install.html#running-with-docker</a></p>
+<p class="p5"><br></p>
+<p class="p5"><b></b><br></p>
+<p class="p3"><b>docker で全自動 Let's encrypt</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ほうほう。</p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>http://qiita.com/kuboon/items/f424b84c718619460c6f</p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>続きやってみよう。</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p3">・対象のドメインへのアクセスができなかったから動いてない説</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・ARecordのセット</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>https://muumuu-domain.com/?mode=conpane&amp;state=custom</p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・ルータの解放</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>https://www.akakagemaru.info/port/wsr-2533dhp-portfw.html</p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>あたりがありそう。なるほどって感じ。で、ルータのパスを失ったので、どうすっかな。再設定か～。</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p3"><b>最終的に欲しいものは</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>nginx + tlsを動かせる場所。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>awsで構築するか。</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>nginx</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>あ、そういえばdocker作ったわ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>dockerでの動作な必要があるのかな？</p>
+<p class="p5"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>aws</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ec2に導入すれば良さそう、これはapacheの例なのでまあ読みかえでいけるかな。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>https://qiita.com/MashMorgan/items/56498f276c54406b1928</p>
+<p class="p5"><br></p>
+<p class="p5"><span class="Apple-tab-span">	</span></p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+</body>
+</html>

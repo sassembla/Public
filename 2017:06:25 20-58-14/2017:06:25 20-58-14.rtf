@@ -1,0 +1,288 @@
+{\rtf1\ansi\ansicpg932\cocoartf1504\cocoasubrtf830
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fnil\fcharset128 HiraginoSans-W4;\f2\fnil\fcharset128 HiraginoSans-W3;
+\f3\fnil\fcharset0 Menlo-Regular;}
+{\colortbl;\red255\green255\blue255;\red14\green14\blue14;\red235\green236\blue237;\red0\green0\blue0;
+\red255\green255\blue255;\red240\green240\blue240;}
+{\*\expandedcolortbl;;\cssrgb\c6667\c6667\c6667;\cssrgb\c93725\c94118\c94510;\csgray\c0;
+\csgray\c100000;\cssrgb\c95294\c95294\c95294;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww19500\viewh14580\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\b\fs44 \cf0 WebuSocket
+\f1 \'82\'cc\'83\'65\'83\'58\'83\'67\'82\'f0\'83\'7c\'81\'5b\'83\'5e\'83\'75\'83\'8b\'82\'c9\'82\'b7\'82\'e9 + tls1.2
+\f0\b0\fs24 \
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f1\b \cf0 \'82\'ed\'82\'b7\'82\'ea\'82\'c4\'82\'bd\'82\'f1\'82\'be\'82\'af\'82\'c7\'81\'41nginx-lua\'91\'a4\'82\'e0tls\'82\'e2\'82\'e7\'82\'f1\'82\'c6\'82\'c8\'81\'42
+\f0\b0 \
+	https://github.com/openresty/lua-ssl-nginx-module\
+\
+\
+
+\f1\b \'8a\'54\'97\'76
+\f0\b0 \
+	
+\f2 \'82\'b1\'82\'ea\'82\'e0\'82\'dc\'82\'bd\'8e\'ae\'94\'4e\'91\'4a\'8b\'7b\'81\'42
+\f0 \
+\
+	
+\f2 \'81\'45
+\f0 tls
+\f2 \'92\'9d\'82\'ea\'82\'e9
+\f0 WebServer
+\f2 \'97\'7e\'82\'b5\'82\'a2
+\f0 \
+	
+\f2 \'81\'45\'82\'c2\'82\'a2\'82\'c5\'82\'c9
+\f0 wss
+\f2 \'82\'e0\'92\'9d\'82\'ea\'82\'e9WebServer\'97\'7e\'82\'b5\'82\'a2\
+	\'82\'c6\'82\'a2\'82\'a4\'8a\'b4\'82\'b6\'82\'c5\'81\'42\
+\
+	Unity2017\'82\'a9\'82\'e7\'82\'cd.netCore\'82\'cc\'83\'6f\'83\'43\'83\'69\'83\'8a\'82\'e0\'93\'fc\'82\'c1\'82\'c4\'82\'e9\'82\'f1\'82\'c5\'81\'41\'82\'bb\'82\'ea\'82\'c5\'83\'74\'83\'8b\'82\'c9\'8f\'91\'82\'b1\'82\'a4\'82\'a9\'82\'c8\'81\'60\'81\'60\'82\'c6\'8e\'76\'82\'c1\'82\'bd\'82\'f1\'82\'be\'82\'af\'82\'c7\'81\'41\'82\'a4\'81\'5b\'82\'f1\'82\'f1\'81\'41\'82\'dc\'82\'b8\'82\'cd\'93\'ae\'8d\'ec\'82\'b7\'82\'e9\'95\'ca\'8a\'c2\'8b\'ab\'82\'f0\'8d\'ec\'82\'c1\'82\'c4\'81\'41\'82\'bb\'82\'ea\'82\'c9\'92\'c7\'82\'a2\'82\'c2\'82\'a9\'82\'b9\'82\'e6\'82\'a4\'81\'42\
+	\
+	\'82\'c6\'82\'a2\'82\'a4\'82\'ed\'82\'af\'82\'c5\'82\'dc\'82\'b8\'82\'cd\'8c\'a9\'96\'7b\'8d\'ec\'90\'ac\'81\'41nginx\'82\'c5\'82\'cc\'8e\'e8\'8c\'b3\'82\'c5tls\'82\'c8http + websocket \'82\'c8\'98\'62\'82\'a9\'82\'e7\'81\'42\
+	-> \'8f\'80\'94\'f5\'82\'aa\'8e\'76\'82\'c1\'82\'bd\'82\'e6\'82\'e8\'91\'e5\'95\'cf\'82\'be\'82\'c1\'82\'bd\'82\'cc\'82\'c5\'81\'41\'82\'a4\'81\'5b\'82\'f1\'81\'41\'8d\'c5\'8c\'e3\'82\'cc\'83\'60\'83\'83\'83\'8c\'83\'93\'83\'57\'82\'c6\'82\'b5\'82\'c4\'83\'8b\'81\'5b\'83\'5e\'82\'cc\'90\'ae\'97\'9d\'90\'ae\'93\'da\'82\'f0\'8d\'73\'82\'a4\'81\'42\'94\'df\'82\'b5\'82\'a2\'81\'42\
+\
+\
+\
+
+\f1\b TLS\'93\'b1\'93\'fc\'82\'cc\'98\'62\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\b0 \cf0 	let\'81\'66s Encrypt\'82\'c8\'81\'42\
+		{\field{\*\fldinst{HYPERLINK "https://www.nginx.com/blog/lets-encrypt-tls-nginx/"}}{\fldrslt https://www.nginx.com/blog/lets-encrypt-tls-nginx/}}\
+\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\b \cf0 nginx\'82\'cc\'90\'dd\'92\'e8
+\f2\b0 \
+	\'93\'fa\'96\'7b\'8c\'ea\'82\'c5\'82\'ed\'82\'a9\'82\'e8\'82\'e2\'82\'b7\'82\'ad\'81\'42\
+		{\field{\*\fldinst{HYPERLINK "https://heartbeats.jp/hbblog/2012/06/nginx06.html"}}{\fldrslt https://heartbeats.jp/hbblog/2012/06/nginx06.html}}\
+	\
+	\
+	\'82\'c5\'81\'41\'82\'bb\'82\'ea\'82\'e7\'82\'aa\'90\'ae\'82\'c1\'82\'bd\'8f\'e3\'82\'c5\'81\'41netCore\'8f\'e3\'82\'c5\'82\'c6\'82\'e8\'82\'a0\'82\'a6\'82\'b8http\'82\'c6websocket\'95\'d4\'82\'b9\'82\'e9\'82\'e2\'82\'c2\'8f\'91\'82\'b1\'82\'a4\'81\'42\
+\
+\
+
+\f1\b \'82\'bb\'82\'a4\'82\'a2\'82\'a6\'82\'ce\'81\'41WebuSocket\'82\'c5\'82\'cc\'83\'68\'83\'81\'83\'43\'83\'93\'82\'cc\'8f\'9c\'8a\'4f\'90\'dd\'92\'e8\'82\'c9\'82\'c2\'82\'a2\'82\'c4
+\f2\b0 \
+	\'93\'c1\'82\'c9\'82\'c8\'82\'f1\'82\'e0\'82\'b9\'82\'b8\'82\'c9\'97\'ac\'82\'b5\'82\'c4\'82\'e9\'8b\'43\'82\'aa\'82\'b5\'82\'c4\'82\'ab\'82\'bd\'82\'bc\'81\'42\'83\'4b\'83\'6f\'83\'4b\'83\'6f\'82\'be\'82\'bc\'81\'42\
+		{\field{\*\fldinst{HYPERLINK "https://github.com/sassembla/WebuSocket/blob/master/WebuSocket/WebSocketEncryption.cs#L73"}}{\fldrslt https://github.com/sassembla/WebuSocket/blob/master/WebuSocket/WebSocketEncryption.cs#L73}}\
+\
+	\'82\'c8\'82\'f1\'82\'c6\'82\'a9\'82\'b5\'82\'e6\'82\'a4\'81\'42\
+\
+\
+\'83\'81\'83\'82\
+	certbot\'82\'c1\'82\'c4\'82\'cc\'82\'f0\'8e\'67\'82\'a4\'82\'c6\'82\'a2\'82\'a2\'8a\'b4\'82\'b6\'82\'c1\'82\'db\'82\'a2\'81\'42\
+		https://certbot.eff.org\
+\
+	\'82\'c7\'82\'f1\'82\'c8\'83\'54\'81\'5b\'83\'6f\'8e\'67\'82\'c1\'82\'c4\'82\'e9\'82\'f1\'82\'be\'82\'c1\'82\'af\'81\'48 -> ubuntu\'82\'c8\'82\'f1\'82\'be\'82\'af\'82\'c7v\'82\'c7\'82\'ea\
+	
+\f3\fs26 \cf2 \cb3 \expnd0\expndtw0\kerning0
+cat /etc/*release
+\f2\fs24 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+\
+	-> 
+\f3\fs22 \cf4 \cb5 \CocoaLigature0 16.04.2 LTS
+\f2\fs24 \cf0 \cb1 \CocoaLigature1 \
+\
+	\'82\'d3\'82\'de\'81\'42\
+\
+\pard\pardeftab720\partightenfactor0
+
+\f0\fs28 \cf2 \cb6 \expnd0\expndtw0\kerning0
+$ sudo apt-get install software-properties-common\
+$ sudo add-apt-repository ppa:certbot/certbot\
+$ sudo apt-get update\
+$ sudo apt-get install python-certbot-nginx 
+\f2\fs24 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 	\
+	\'82\'d3\'81\'5b\'82\'de\'81\'41\'88\'ea\'8d\'73\'96\'da\'82\'a9\'82\'e7\'82\'b1\'82\'af\'82\'e9\'97\'76\'91\'66\'82\'aa\'82\'a0\'82\'e9\'81\'42
+\f3\fs22 \cf4 \cb5 \CocoaLigature0 apt-get update
+\f2\fs24 \cf0 \cb1 \CocoaLigature1  \'82\'b5\'82\'bd\'82\'e7\'82\'a2\'82\'af\'82\'bd\'81\'42\'82\'b1\'82\'ea\'88\'c8\'8d\'7e\'82\'cd\'93\'ae\'8d\'ec\'81\'42\
+\
+	
+\f3\fs22 \cf4 \cb5 \CocoaLigature0 Geographic area: 6\
+	Time zone: 78\
+
+\f2\fs24 \cf0 \cb1 \CocoaLigature1 \
+\
+	\'82\'c5\'81\'41\'82\'b1\'82\'b1\'82\'a9\'82\'e7\'82\'aacertbot\'82\'cc\'93\'ae\'8d\'ec\'81\'42\
+	
+\f0\fs28 \cf2 \cb6 \expnd0\expndtw0\kerning0
+sudo certbot --nginx
+\f2\fs24 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+\
+	\'82\'c5\'81\'41\
+	
+\f3\fs22 \cf4 \cb5 \CocoaLigature0 No names were found in your configuration files. Please enter in your domain\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf4 name(s) (comma and/or space separated)  (Enter 'c' to cancel):kissaki.tv
+\f2\fs24 \cf0 \cb1 \CocoaLigature1 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 	\
+	\'82\'d3\'82\'de\'81\'42\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 	
+\f3\fs22 \cf4 \cb5 \CocoaLigature0 nginx: [error] invalid PID number "" in "/run/nginx.pid"
+\f2\fs24 \cf0 \cb1 \CocoaLigature1 \
+	\
+	
+\f3\fs22 \cf4 \cb5 \CocoaLigature0 Cannot find a VirtualHost matching domain kissaki.tv.\
+
+\f2\fs24 \cf0 \cb1 \CocoaLigature1 \
+	\'82\'a0\'81\'41\'82\'c8\'82\'f1\'82\'a9\'91\'4f\'92\'f1\'82\'a8\'82\'a9\'82\'b5\'82\'a2\'82\'c1\'82\'db\'82\'a2\'81\'42nginx\'93\'ae\'82\'a2\'82\'c4\'82\'e9\'82\'c6\'82\'a2\'82\'af\'82\'c8\'82\'a9\'82\'c1\'82\'bd\'82\'a9\'82\'c8\'81\'48\
+	\'82\'c8\'82\'f1\'82\'a9\'8b\'4e\'93\'ae\'82\'b5\'82\'c1\'82\'cf\'82\'c8\'82\'b5\'82\'ccnginx\'82\'ccpid\'82\'aa\'82\'a8\'82\'a9\'82\'b5\'82\'a2\'82\'cc\'82\'a9\'82\'c8\'81\'42\
+	\
+	-> nginx\'82\'cc\'8f\'f3\'91\'d4\'82\'aa\'82\'a8\'82\'a9\'82\'b5\'82\'a2\'82\'c1\'82\'db\'82\'a2\'81\'42\'82\'d3\'82\'de\'81\'48\
+		-> \'83\'8a\'83\'93\'83\'4e\'82\'aa\'82\'a8\'82\'a9\'82\'b5\'82\'a9\'82\'c1\'82\'bd\'81\'42\'83\'66\'83\'74\'83\'48\'83\'8b\'83\'67\'82\'c5nginx\'82\'c1\'82\'c4\'82\'a2\'82\'a4\'83\'8a\'83\'93\'83\'4e\'82\'aa\'91\'b6\'8d\'dd\'82\'b5\'82\'c4\'82\'e9\'82\'db\'82\'a2\'82\'f1\'82\'be\'82\'af\'82\'c7\'81\'41\'8e\'a9\'95\'aa\'82\'cc\'8d\'5c\'90\'ac\'82\'b5\'82\'bdnginx\'82\'cc\'83\'70\'83\'58\'82\'f0\'93\'a5\'82\'f1\'82\'c5\'82\'c8\'82\'a2\'81\'42\
+		\'82\'b1\'82\'ccexe\'82\'cd\'82\'c8\'82\'f1\'82\'a9letsenc\'82\'aa\'8d\'ec\'82\'c1\'82\'bf\'82\'e1\'82\'c1\'82\'c4\'82\'e9\'82\'c1\'82\'db\'82\'a2\'82\'c8\'81\'42\'82\'c8\'82\'e9\'82\'d9\'82\'c7\'82\'c8\'81\'48\
+\
+	\'81\'45restart\'82\'c9\'82\'cd\'8e\'b8\'94\'73\'82\'b5\'82\'c4\'82\'e9\'82\'f1\'82\'be\'82\'af\'82\'c7\'82\'e0\'82\'a4conf\'82\'cd\'95\'cf\'82\'ed\'82\'c1\'82\'c4\'82\'e9\'82\'f1\'82\'be\'82\'eb\'82\'a4\'82\'a9\'81\'48\
+		\'82\'c8\'82\'f1\'82\'a9letsenc\'82\'cd\'95\'ca\'82\'ccnginx\'82\'f0\'82\'a2\'82\'b6\'82\'c1\'82\'c4\'82\'e9\'82\'e6\'82\'a4\'82\'c8\'8b\'43\'82\'aa\'82\'b5\'82\'c8\'82\'ad\'82\'e0\'82\'c8\'82\'a2\'81\'42\
+\
+	\'82\'c6\'82\'e8\'82\'a0\'82\'a6\'82\'b8\'96\'7b\'89\'c6\'82\'c5\'93\'fc\'82\'c1\'82\'c4\'82\'bdnginx\'82\'f0\'92\'e2\'8e\'7e\'82\'b5\'82\'bd\'8f\'f3\'91\'d4\'82\'c5\'8e\'8e\'82\'b5\'82\'c4\'82\'dd\'82\'e6\'82\'a4\'81\'42\
+\
+	-> \'83\'47\'83\'89\'81\'5b\'82\'cd\'8f\'6f\'82\'c8\'82\'ad\'82\'c8\'82\'c1\'82\'bd\'81\'42\'82\'aa\'81\'41\
+	
+\f3\fs22 \cf4 \cb5 \CocoaLigature0 Cannot find a VirtualHost matching domain kissaki.tv.
+\f2\fs24 \cf0 \cb1 \CocoaLigature1 \
+\
+	\'82\'c6\'82\'a9\'8c\'be\'82\'ed\'82\'ea\'82\'e9\'81\'42\'82\'d3\'82\'de\'81\'42\
+	\'82\'c8\'82\'f1\'82\'a9\'82\'a2\'82\'eb\'82\'f1\'82\'c8\'91\'4f\'92\'f1\'82\'aa\'82\'a0\'82\'e8\'82\'bb\'82\'a4\'82\'c8\'82\'f1\'82\'c5\'81\'41bare\'82\'c8ubuntu\'82\'a9\'82\'e7\'82\'e2\'82\'c1\'82\'c4\'82\'dd\'82\'e6\'82\'a4\'81\'42\
+	\
+	\
+
+\f1\b Bare\'82\'c8ubuntu\'82\'c5\'83\'8a\'83\'67\'83\'89\'83\'43
+\f2\b0 \
+	\
+	
+\f0\fs28 \cf2 \cb6 \expnd0\expndtw0\kerning0
+apt-get install python-certbot-nginx
+\f2\fs24 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+	\'82\'cc\'82\'c6\'82\'b1\'82\'c5\'81\'41nginx\'93\'fc\'82\'ea\'82\'c4\'82\'e9\'82\'f1\'82\'be\'82\'c8\'82\'a0\'81\'42\'82\'b1\'82\'ea\'82\'c6\'91\'4f\'92\'f1\'82\'aa\'8d\'87\'82\'ed\'82\'b9\'82\'e7\'82\'ea\'82\'ea\'82\'ce\'82\'bb\'82\'ea\'82\'c5\'82\'a2\'82\'a2\'82\'a9\'81\'42\
+	\
+	\'82\'c5\'81\'41ubuntu + certbot\'82\'be\'82\'c6\'83\'6f\'83\'4f\'82\'aa\'82\'a0\'82\'e9\'82\'dd\'82\'bd\'82\'a2\'82\'c8\'81\'48 \'82\'dc\'82\'b6\'81\'48\
+	\'89\'ba\'8b\'4c\'82\'c5\'90\'47\'82\'ea\'82\'e7\'82\'ea\'82\'c4\'82\'e9\'82\'cc\'82\'c6\'93\'af\'82\'b6\'82\'b1\'82\'c6\'82\'aa\'8b\'4e\'82\'ab\'82\'c4\'82\'e9\'82\'c1\'82\'db\'82\'ad\'82\'c4\'81\'41\'82\'a4\'81\'5b\'82\'f1\'81\'42\'8d\'c5\'8b\'df\'82\'a9\'81\'42centos\'82\'c5\'82\'e2\'82\'c1\'82\'c4\'82\'dd\'82\'e6\'82\'a4\'81\'42\
+		{\field{\*\fldinst{HYPERLINK "https://totoshko88.wordpress.com/2017/06/11/letsencrypt-certbot-ubuntu-nginx/"}}{\fldrslt https://totoshko88.wordpress.com/2017/06/11/letsencrypt-certbot-ubuntu-nginx/}}\
+	\
+\
+
+\f1\b Bare centos\'82\'c5\'83\'8a\'83\'67\'83\'89\'83\'43
+\f2\b0 \
+	\'82\'cd\'82\'a2\'81\'42\'82\'c6\'82\'e8\'82\'a0\'82\'a6\'82\'b8\'93\'ae\'82\'a9\'82\'b5\'82\'bd\'82\'a2\'81\'42\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f3\fs22 \cf4 \cb5 \CocoaLigature0 yum -y install wget\
+wget https://dl.eff.org/certbot-auto\
+chmod a+x certbot-auto\
+./certbot-auto --nginx\
+
+\f2\fs24 \cf0 \cb1 \CocoaLigature1 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 	\'82\'c5\'81\'41\'88\'cb\'91\'b6\'82\'a2\'82\'eb\'82\'a2\'82\'eb\'93\'fc\'82\'ea\'82\'c4\'81\'41\
+	\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f3\fs22 \cf4 \cb5 \CocoaLigature0 Saving debug log to /var/log/letsencrypt/letsencrypt.log\
+The nginx plugin is not working; there may be problems with your existing configuration.\
+The error was: NoInstallationError()\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f2\fs24 \cf0 \cb1 \CocoaLigature1 	\
+	\'82\'d3\'82\'de\'81\'41\'81\'41\'81\'41\'82\'c8\'82\'f1\'82\'a9\'82\'a0\'82\'e2\'82\'b5\'82\'a2\'81\'42\
+\
+	\'82\'b1\'82\'c1\'82\'bf\'82\'c5\'82\'cdnginx\'82\'aa\'93\'fc\'82\'c1\'82\'c4\'82\'c8\'82\'a2\'82\'c8\'81\'60\'82\'c8\'82\'e9\'82\'d9\'82\'c7\'81\'41\'93\'ae\'82\'a9\'82\'b5\'82\'c6\'82\'af\'93\'49\'82\'c8\'91\'4f\'92\'f1\'82\'c8\'82\'cc\'82\'a9\'82\'c8\'81\'48\
+\
+	\'82\'a2\'82\'eb\'82\'a2\'82\'eb\'93\'c7\'82\'f1\'82\'c5\'8e\'8e\'82\'bb\'82\'a4\'81\'42\
+\
+https://digitz.org/blog/lets-encrypt-ssl-centos-7-setup/\
+\
+https://certbot.eff.org/docs/\
+\
+\
+
+\f1\b \'95\'ca\'8e\'b2
+\f2\b0 \
+	How to setup NGINX with automatic HTTPS in Docker\
+		{\field{\*\fldinst{HYPERLINK "https://tevinjeffrey.me/how-to-setup-nginx-proxy-and-lets-encrypt-with-docker/"}}{\fldrslt https://tevinjeffrey.me/how-to-setup-nginx-proxy-and-lets-encrypt-with-docker/}}\
+\
+\
+\
+
+\f1\b nginx\'91\'a4\'82\'cc\'8b\'4c\'8e\'96
+\f2\b0 \
+	https://www.nginx.com/blog/lets-encrypt-tls-nginx/\
+\
+\
+
+\f1\b Certbot
+\f2\b0 \
+	main\
+		https://certbot.eff.org/#ubuntuxenial-nginx\
+	doc\
+		https://certbot.eff.org/docs/\
+\
+\
+\'82\'a8\'82\'c1docker\'82\'c9\'91\'ce\'89\'9e\'82\'b5\'82\'c4\'82\'e9\'8b\'4c\'8e\'96\'82\'a0\'82\'c1\'82\'bd\
+	http://qiita.com/setouchi/items/b3a78cb396ae6e58b84b\
+	wordpress\'82\'a9\'81\'5b\
+\
+\
+
+\f1\b Running with Docker
+\f2\b0 \
+	\'82\'a4\'81\'5b\'82\'f1\'83\'68\'83\'4c\'83\'85\'83\'81\'83\'93\'83\'67\'82\'f0\'93\'c7\'82\'e0\'82\'a4\'82\'c6\'8c\'be\'82\'a4\'8a\'b4\'82\'b6\'82\'be\'81\'42\
+		{\field{\*\fldinst{HYPERLINK "https://certbot.eff.org/docs/install.html#running-with-docker"}}{\fldrslt https://certbot.eff.org/docs/install.html#running-with-docker}}\
+\
+
+\f1\b \
+docker \'82\'c5\'91\'53\'8e\'a9\'93\'ae Let's encrypt
+\f2\b0 \
+	\'82\'d9\'82\'a4\'82\'d9\'82\'a4\'81\'42\
+\
+	http://qiita.com/kuboon/items/f424b84c718619460c6f\
+\
+	\'91\'b1\'82\'ab\'82\'e2\'82\'c1\'82\'c4\'82\'dd\'82\'e6\'82\'a4\'81\'42\
+\
+\
+\'81\'45\'91\'ce\'8f\'db\'82\'cc\'83\'68\'83\'81\'83\'43\'83\'93\'82\'d6\'82\'cc\'83\'41\'83\'4e\'83\'5a\'83\'58\'82\'aa\'82\'c5\'82\'ab\'82\'c8\'82\'a9\'82\'c1\'82\'bd\'82\'a9\'82\'e7\'93\'ae\'82\'a2\'82\'c4\'82\'c8\'82\'a2\'90\'e0\
+	\'81\'45ARecord\'82\'cc\'83\'5a\'83\'62\'83\'67\
+		https://muumuu-domain.com/?mode=conpane&state=custom\
+\
+	\'81\'45\'83\'8b\'81\'5b\'83\'5e\'82\'cc\'89\'f0\'95\'fa\
+		https://www.akakagemaru.info/port/wsr-2533dhp-portfw.html\
+\
+	\'82\'a0\'82\'bd\'82\'e8\'82\'aa\'82\'a0\'82\'e8\'82\'bb\'82\'a4\'81\'42\'82\'c8\'82\'e9\'82\'d9\'82\'c7\'82\'c1\'82\'c4\'8a\'b4\'82\'b6\'81\'42\'82\'c5\'81\'41\'83\'8b\'81\'5b\'83\'5e\'82\'cc\'83\'70\'83\'58\'82\'f0\'8e\'b8\'82\'c1\'82\'bd\'82\'cc\'82\'c5\'81\'41\'82\'c7\'82\'a4\'82\'b7\'82\'c1\'82\'a9\'82\'c8\'81\'42\'8d\'c4\'90\'dd\'92\'e8\'82\'a9\'81\'60\'81\'42\
+\
+\
+
+\f1\b \'8d\'c5\'8f\'49\'93\'49\'82\'c9\'97\'7e\'82\'b5\'82\'a2\'82\'e0\'82\'cc\'82\'cd
+\f2\b0 \
+	nginx + tls\'82\'f0\'93\'ae\'82\'a9\'82\'b9\'82\'e9\'8f\'ea\'8f\'8a\'81\'42\
+	aws\'82\'c5\'8d\'5c\'92\'7a\'82\'b7\'82\'e9\'82\'a9\'81\'42\
+\
+\
+
+\f1\b 	nginx
+\f2\b0 \
+		\'82\'a0\'81\'41\'82\'bb\'82\'a4\'82\'a2\'82\'a6\'82\'cedocker\'8d\'ec\'82\'c1\'82\'bd\'82\'ed\'81\'42\
+		docker\'82\'c5\'82\'cc\'93\'ae\'8d\'ec\'82\'c8\'95\'4b\'97\'76\'82\'aa\'82\'a0\'82\'e9\'82\'cc\'82\'a9\'82\'c8\'81\'48\
+\
+
+\f1\b 	aws
+\f2\b0 \
+		ec2\'82\'c9\'93\'b1\'93\'fc\'82\'b7\'82\'ea\'82\'ce\'97\'c7\'82\'b3\'82\'bb\'82\'a4\'81\'41\'82\'b1\'82\'ea\'82\'cdapache\'82\'cc\'97\'e1\'82\'c8\'82\'cc\'82\'c5\'82\'dc\'82\'a0\'93\'c7\'82\'dd\'82\'a9\'82\'a6\'82\'c5\'82\'a2\'82\'af\'82\'e9\'82\'a9\'82\'c8\'81\'42\
+		https://qiita.com/MashMorgan/items/56498f276c54406b1928\
+\
+	\
+\
+\
+\
+}

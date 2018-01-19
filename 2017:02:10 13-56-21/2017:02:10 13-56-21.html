@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1504.83">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; background-color: #ebebeb}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>Caching.IsVersionCached(url, hash) ってどういう挙動？</b></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Caching.IsVersionCached(url, hash) の挙動がよくわからない。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ドキュメントにも書いてないし。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://docs.unity3d.com/jp/current/ScriptReference/Caching.IsVersionCached.html">https://docs.unity3d.com/jp/current/ScriptReference/Caching.IsVersionCached.html</a></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>でも実装はされてて、Unity5.5p4とかだと使える。(もっと前から使える。)</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、この関数のどんな挙動が悩ましいのか、書いていく。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>hashを使ったAssetBundleのDLについて</b></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>5.x系だと、こんな感じのメソッドを使ってAssetBundleをDLできるようになってる。</p>
+<p class="p4">public static Networking.UnityWebRequest GetAssetBundle(string uri, <b>Hash128 hash</b>, uint crc);</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ドキュメントはこれ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><a href="https://docs.unity3d.com/ScriptReference/Networking.UnityWebRequest.GetAssetBundle.html">https://docs.unity3d.com/ScriptReference/Networking.UnityWebRequest.GetAssetBundle.html</a></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>とあるurlに紐づいてDLされているAssetBundleについて、このメソッドに渡したhash値がDL時のhash値と一致しなかったら、DLが発生する。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>そうでない場合はAssetBundleがストレージにキャッシュされてるので、そこから取得する、みたいな。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、だ。この関数には良いところがいっぱいあって。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・キャッシュに含まれていたら + hashが合致していたら、AssetBundleが取得できる</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・キャッシュに含まれていなかったらAssetBundleをDL、取得できる</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・キャッシュに含まれていなかったらAssetBundleをDL、キャッシュもする</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・キャッシュに含まれていたら + hash合致しなかったら、やはり取得しに行く</p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>・</b>キャッシュに含まれていたら + <b>hash合致しなかった場合、古いファイルは消える(消えますよね？ 消えますよね？？ 明文化されてない気がするけど！！</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・crcで正しいファイルかチェックできる</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>などなど。hashが本当にいい仕事してる。versionのようなヘタレとは違うのだ。違うのだ。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、次は、<b>「AssetBundleむかしDLした気がするんだけど、このAssetBundleってあるんですか？」</b>って確認したいだけの場合。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>まあ、、、この機会を「実際に使用しないならいいじゃん！実際に使用するときはRequest使えばいいじゃん！」みたいな話で没シュートしたい場合、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>かつ、そのためCaching.IsVersionCached(url, hash)がドキュメントに書いてないという事情な場合、話はシンプルにまとまりそう。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>hashを使ったAssetBundleがキャッシュされているかどうかのチェックについて</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>本題。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ざっくりいうと、hashを使ったIsVersionCheckedは、<b>どんなhashを渡してもtrueが返ってくる</b>ときがあるようだ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>サンプルを用意した。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+</body>
+</html>

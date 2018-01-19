@@ -1,0 +1,162 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1504.83">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Sans'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; color: #000000; background-color: #ebebeb}
+    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; color: #000000; background-color: #ebebeb; min-height: 18.0px}
+    p.p8 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; color: #000000}
+    span.s1 {font: 12.0px Helvetica}
+    span.s2 {color: #000000}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>ZBrushのスクリプト Zscriptを書いて動かす</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>VRでモデリングしてそいつをいい感じにリトポしたりするのにZBrushを使ってるんだけど、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>VR側のモデリングでかなり精度を出せるようになってきたので、ZBrushでやる作業がほぼリトポだけになってきた。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、これをいちいちモデルの全パーツに対してやってるのがしんどくなってきたので、Zscriptを書いてZBrushの動作を自動化しようみたいなはなし。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>Zscriptって何</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>リファレンス</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://docs.pixologic.com/user-guide/customizing-zbrush/zscripting/technical/">http://docs.pixologic.com/user-guide/customizing-zbrush/zscripting/technical/</a></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>なんというかスクリプトで、ZBrushの動作を記述してloopとかifでサブツール(ZBrushのオブジェクト単位)に対して操作を加えることができる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>もっと簡単に言うと、<b>ボタンを増やしてそのボタンを押したらどうなるかを作成できる</b></p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b>動かし方</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>1.ZBrush &gt; Zscriptメニュー &gt; Record &gt; なんか適当に自動化したいことをする &gt; Zscriptメニュー &gt; End Rec で、動作内容をテキストファイルとして出力できる</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>その際、「初期化する？」とか聞くダイアログが出るんだけど、対象モデルを用意した上でYesとか押すと対象モデル搔き消えるんで、断固Noを押すケースの方が多いと思う。</p>
+<p class="p4"><span class="Apple-tab-span">	</span><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202018-01-19%2022.26.19.png" alt="スクリーンショット 2018-01-19 22.26.19.png"></p>
+<p class="p3"><span class="Apple-tab-span">	</span>2. 1で吐き出したtxtとにらめっこしながらスクリプト(txt形式)を書く。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>&lt;このときコツというか言外の仕様がいくつかある。<b>後述</b>&gt;</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>3.書いたスクリプトを、ZBrush &gt; Zscriptメニュー &gt; Load で読み込む。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>このとき、UIがこんな感じになっていることを確認しとく。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="s1"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202018-01-19%2022.24.11.png" alt="スクリーンショット 2018-01-19 22.24.11.png"></span></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>4.なんか実行できないエラーがあったら画面下部のところに赤く表示される。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>これ困ったことにテキストではなく映像としてエラーが表示されるんで、エラー内容ググるのが大変だった。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>5.実行できる場合、ボタンが画面下部のところに表示される。このボタンを押すと、Loadしたスクリプトが実行される。</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202018-01-19%2022.22.19.png" alt="スクリーンショット 2018-01-19 22.22.19.png"></p>
+<p class="p5"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b>言外の仕様</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ドキュメント見ても書いてなかったと思うんだけど次みたいな仕様があった。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・コメントで日本語を書くのはOK、ただし、Noteなどのメッセージを出す画面では英語以外表示されない</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>はい。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ちなみにMacroってメニューだとコードにコメントを書くこと自体が不可</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・変数の寿命が独自</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>[VarDef, A, "initial"] みたいな感じで変数を初期化、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>[VarSet, A, "set"] みたいな感じで変数に値を代入できるのだけれど、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>loop関数の中でVarDefを使うと、挙動がおかしくなる。 具体的にはAが定義済みの場合は[VarDef, A....]は定義を上書きしないみたいだ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>なので、プログラム中で変数として使いたい値がある場合、プログラムの上の方にまとめてVarDefしておく必要がありそう。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>最低限これだけ使えれば試行錯誤できそうなコマンド</b></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>Note</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>[Note, "English!!! only!"]</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>画面上にメッセージを出す。このままだとクリックしないと消えない。今変更を加えようとしているSubToolがどれなのか、とか</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>そういったデバッグのための情報を知るのに重宝する。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>VarDef, VarSet</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>[VarDef, 変数名, 初期値]</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>[VarSet, 変数名, 値]</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>変数定義と定義済み変数への値の上書きを行う。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>値には数字、文字列、リスト(値 or 文字列)がある。</p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>SubToolSelect</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>[SubToolSelect, 数字]</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>特定の番号のSubToolを選択した状態にする。後述のLoopと組み合わせると、全てのSubToolに対して何かする、みたいなのが</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>簡単にできる。</p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>Loop</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>[Loop, 回数, 処理, インデックス変数]</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>回数文だけ処理を実行する。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>インデックス変数は処理の中で使うことができる。例えば次のようなコードの場合、</p>
+<p class="p6">// 場にあるSubToolの数を変数 subToolCount にセット</p>
+<p class="p6">[VarSet, subToolCount, [SubToolGetCount]]</p>
+<p class="p7"><br></p>
+<p class="p6">[Loop, subToolCount,<span class="Apple-converted-space"> </span></p>
+<p class="p6"><span class="Apple-tab-span">	</span>// 上からn番目のツールを選択した状態にする</p>
+<p class="p6"><span class="Apple-tab-span">	</span>[SubToolSelect, [Val, n]]</p>
+<p class="p6"><span class="Apple-tab-span">	</span>,</p>
+<p class="p6"><span class="Apple-tab-span">	</span>n</p>
+<p class="p6">]</p>
+<p class="p8"><span class="s2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>subToolCount<span class="s2">回数ぶん、処理 </span><b>上からn番目のツールを選択した状態にする</b><span class="s2"> を実行する。</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>その際、nには0 ~ (<span class="s2">subToolCount</span> -1)までの数字が入る。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>nを取り出すのに[Val, n] とか書かなきゃいけないのがなんともキツイが、これは有効に動作する。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>これだけで場にあるすべてのSubToolを順に選択することができる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ZBrushでは選択状態のSubToolに対して何か処理を加える、というのが根幹的な動作になっているので、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>選択できさえすればあとは動作をさせればいい感じになる。</p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>IGetTitle</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>[IGetTitle, Tool:Current Tool]</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>現在選択されているSubToolの名称を取得する。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>このメソッド と 文字列を足すメソッドを組み合わせることで、順番以外の方法でSubToolを指定することが可能になる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>具体例は次。</p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>StrMerge<span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>[StrMerge, "Tool:Sub Tool:", #currentSubToolName]</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>こんな感じに書くと、変数 currentSubToolName に入っている文字列と、文字列 Tool:Sub Tool: を連結する。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>例えば currentSubToolName に A とか入ってたら、Tool:Sub Tool:A が出力される。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>VarSetとかと組み合わせて、Tool:Sub Tool:ツール名 みたいな文字列を変数に入れておくことができる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>これがあると、次のような動作が自動化できる。</p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>IModGet, IModSet</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>[IModSet, currentSubToolPath, [IModGet, currentSubToolPath] + 32]// set visible.</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>名前で指定したUIのパラメータを変更する。<span class="Apple-tab-span">	</span>Getで取得、Setでセット。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>例えば上のコードで、currentSubToolPathに書かれているSubToolの表示/非表示を切り替えられる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>このモード値みたいなやつはイマイチよくわかってない。書き方によっては再現性がなかったりする。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>この関数では、特定のSubToolの指定を文字列で行なっているんだけれど、SubToolを文字列から指定する場合、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Tool:Sub Tool:ツール名 みたいな文字列にならないと指定できない。なぜこんな、、まあ、、、はい、、、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>以上のコマンドと、あとはZscript &gt; Record からの動作 -&gt; サンプルコードが出てくるのでそれらを抜粋、、 をいい感じにやると、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>比較的なんでも自動化できる気がする。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>注意点</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Zscript &gt; Record は時々嘘をつく。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>例えば Record中に Tool &gt; Geometry &gt; Modify Topology &gt; Delete By Symmetry とかを実行すると</p>
+<p class="p3"><span class="Apple-tab-span">	</span>[IPress,Tool:Geometry:Delete By Symmetry]</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>とか記録されるんだけど、これをそのままコピーしてもDelete By Symmetry は実行されない。 ええ、、、</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>そう、記録されたコマンドが間違っている。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>正しくは、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>[IPress,Tool:Geometry:<b>Modify Topology</b>:Delete By Symmetry]</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>まあ手で実行するときの階層がそうなってるんで、、まあ、、、はい、、、なんで間違うの、、、？ バグ、、、？</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>感想</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>いままでいろんな言語扱ってきたけど、そのなかでも一番辛かった。でもこれで自動化できる！！ 効率最高になった。</p>
+<p class="p2"><br></p>
+</body>
+</html>

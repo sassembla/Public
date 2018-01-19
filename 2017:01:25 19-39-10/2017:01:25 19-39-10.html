@@ -1,0 +1,103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1504.83">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>Quicの話 ある日のミートアップ</b></p>
+<p class="p2"><br></p>
+<p class="p3">概要</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3">udpが通じない場合はhttp/tcpにフォールバックしてる</p>
+<p class="p2"><br></p>
+<p class="p3">壮大なABテストされてるなあ。</p>
+<p class="p2"><br></p>
+<p class="p3">PCの方がモバイルよりも受けてる恩恵が小さいのはなんでだろう</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・まずこれらを比べることは困難</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・データセンタへの接続とか、IPの変更がエフェクト出してる。改善率が低いのはそのせい？</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3">いろいろ前提がよくわからん図</p>
+<p class="p3"><span class="Apple-tab-span">	</span>でも改善するための指標としてこういう実験が背景にあるのはすごく羨ましい。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>解決すべき問題に対して理解が深められてそう</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3">Rebuffer rateが100%になったケースが93％なるほど</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3">クソ遅い環境(インドとか300msRTT medium)に対して、8%の改善があったみたいな話</p>
+<p class="p3"><span class="Apple-tab-span">	</span>なるほどな～遅い環境ほど改善率がある技術。底上げができる感じ。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>sigcomm QUIC 2017あたりで検索するとデータが引っかかるようになりそう。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>別の話</b></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3">HTTP over QUIC</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3">1本のstreamにはヘッダがカウンターしてる</p>
+<p class="p3"><span class="Apple-tab-span">	</span>- 3,2,1 -&gt;</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>&lt;- 1,2,3 -</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・他のにデータが流れてる<span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3">か、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ヘッダに1本</p>
+<p class="p3"><span class="Apple-tab-span">	</span>データに1本</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>のペア x N になる(予定？)</p>
+<p class="p2"><br></p>
+<p class="p3">フレームタイプの削除</p>
+<p class="p3"><span class="Apple-tab-span">	</span>WINDOW_UPDATE, PING, RST_STREAM, GOAWAY とかはquicが提供する。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3">セッティングの交換</p>
+<p class="p3"><span class="Apple-tab-span">	</span>quicがハンドルするんでいろんな設定が消えるが、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>どうやってそれを周知するか(ack)</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3">セッティングのack</p>
+<p class="p3"><span class="Apple-tab-span">	</span>SETTINGS_ACK<span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>これが送られてくるstreamが最後のstream(それ以下のstreamしか使われない</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>そのへんが使われる。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3">header compression</p>
+<p class="p3"><span class="Apple-tab-span">	</span>udpなんで順番は全くない。で、通し番号を振ると、HoLが発生する。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ので、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>qpackでは別のアプローチを取る。</p>
+<p class="p2"><br></p>
+<p class="p3">qpack(wip</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>insert key=value at INDEX<span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>INDEX 1 0 key value</p>
+<p class="p3"><span class="Apple-tab-span">	</span>reference iINDEX、、、みたいなのを定義してる</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>参照の証みたいなのを送り返してくるのか。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>「QPACK(work in progress)。ダイナミックテーブルのスロット番号を指定してテーブルに追加。パケロスの結果、インデックス参照が先に届いちゃった場合はブロックする 」</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>「テーブルからの削除も明示的に送る。参照がパケロスで遅れる場合があるので、使用回数を削除コマンドに含めておく。送信側で使った回数だけ受信側で使ってなければパケロスあったとわかる」</p>
+<p class="p3"><span class="Apple-tab-span">	</span>図がいっぱいあったので見て理解したい。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3">state machine オブ でかい</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+</body>
+</html>
