@@ -69,6 +69,22 @@
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>loop関数の中でVarDefを使うと、挙動がおかしくなる。 具体的にはAが定義済みの場合は[VarDef, A....]は定義を上書きしないみたいだ。</p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>なので、プログラム中で変数として使いたい値がある場合、プログラムの上の方にまとめてVarDefしておく必要がありそう。</p>
 <p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・エラーにならないケースがある</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>どうもメッセージングみたいな挙動をしていて、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>・メソッドの引数の型が合わない場合はエラー</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>・メソッドの引数の内容が見つからない場合はエラー</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>これらはちゃんとエラーになるんだけど、次のケースはエラーが出ない。</p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>・IPressで存在しないコマンドを実行する</p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>これが結構厄介で、ZBrush自体がRecordで記録するコマンドが間違ってるケースがちょいちょいあるみたいで、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>存在しないコマンドを実行することになってしまい、これがエラーを吐かないので停止せずエライことになる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・continueやskipみたいな概念がない</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Loopっていう他言語でのforみたいなのがあるんだけど、これがifでskipしたりcontinueしたりできない。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>つらい。</p>
+<p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>最低限これだけ使えれば試行錯誤できそうなコマンド</b></p>
 <p class="p2"><b></b><br></p>
