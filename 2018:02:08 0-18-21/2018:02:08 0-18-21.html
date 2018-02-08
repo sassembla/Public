@@ -10,23 +10,26 @@
     p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Sans'}
     p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; min-height: 18.0px}
     p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; background-color: #ebebeb}
     span.Apple-tab-span {white-space:pre}
   </style>
 </head>
 <body>
-<p class="p1"><b>UnityでPlugin機構を持ったAssetを作る</b></p>
+<p class="p1"><b>Unityでプラグイン機構を持ったdllを作る</b></p>
 <p class="p2"><br></p>
 <p class="p3"><b>概要</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>次のような前提の時に使えるテクニック。</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>・dllにして配布するAssetを作る</p>
-<p class="p3"><span class="Apple-tab-span">	</span>・プロジェクト内の他のdllがある場合、それを本Assetから、拡張機能として使う</p>
-<p class="p2"><span class="Apple-tab-span">	</span></p>
-<p class="p3"><span class="Apple-tab-span">	</span>できるだけ頑張りたくないので適当にやったらうまくいった。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・プロジェクト内に特定のdllがある場合、それを本Assetから拡張機能として使う</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>例えば、「もしAっていうライブラリがあったら、それを使った拡張機能を有効にする」みたいなやつ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>これは変則的だけど、「他のライブラリをプラグインのように扱う」ってことになる。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>具体例</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>UUebViewっていうAsset作って使ってるんだけど、デフォルトではuGUIのテキストを使ってUIを生成している。</p>
+<p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>で、まあ、テキストといえばTextMesh Pro(TMPro)で、そっち使った方が綺麗なUIになるんだよね。</p>
 <p class="p3"><span class="Apple-tab-span">	</span>なので、TMProを使った描画機能を提供したい。</p>
 <p class="p2"><br></p>
@@ -48,11 +51,29 @@
 <p class="p3"><span class="Apple-tab-span">	</span>ということでこんな感じにすればできるよ的な。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>・signatureをパクる(そのうち詳細を追記するよ)</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・本体コード -&gt; 依存対象dllへの依存があるコードを書く</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・依存対象dllを一旦削除し、依存対象dllに入っていた部分をダミーコードとして実装する</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・ダミーコードを依存対象と同じsignatureでdllにする(ダミーdllの生成)</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・ダミーdllを参照する形で本体コードをdllへとコンパイル(本体dllの生成)</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これで、ダミーdll = 依存対象dll という関係が成立し、本体dllからは、ダミーdllと依存対象dllの区別はつかず、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>依存対象dllの機能を本体dllから使いたい場合は、<b>ダミーdllを削除 &amp; 依存対象dllをコンパイルに巻き込めばOK</b> という形になる。</p>
 <p class="p2"><br></p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p3"><b>問題点</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>TMProのsignature最悪でversion値が書いてあるんで頭を抱えている。<span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>TMProのdllのsignatureが最悪で、次のような値になっている。</p>
+<p class="p2"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>Assembly <b>TextMeshPro-2017.2-1.0.56-Runtime</b>, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>nameにversion値が書いてあるんで頭を抱えている。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>これ新version出たらdllのsignature変わってしまうので、適合性が消えてしまう。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、これはまあ対処法としては、本体dllに記載されている「こんな名前のdllに依存してます」みたいな情報を書き換えるとできる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>その機能をポータブルに提供できれば、完璧なのだが。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>まだそこまでは踏み込んでいない。</p>
+<p class="p2"><br></p>
+<p class="p3">いろいろ解決できたらさらに図を足す。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 </body>
