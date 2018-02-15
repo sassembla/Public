@@ -1,0 +1,137 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1504.83">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Sans'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 17.0px 'Hiragino Sans'}
+    span.s1 {font: 22.0px Helvetica}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><span class="s1"><b>Autoya</b></span><b>についてのドキュメント更新の前のウォーミングアップ</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Autoyaのドキュメントは2018に入ってから更新が止まっていてやばい。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>最新で異様な機能が入っていたりするのでせめてその部分の更新をしないといけない。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>あとなんかOSSドキュメントについていい感じのツールがあった気がするので漁ってみたい。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>まずはメモを残す。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>AssetBundle、Information、Manifest、OverridePoints</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p4"><b>AssetBundles</b></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b>基本戦略</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Autoyaで実装されているAssetBundleの使用法は、オンデマンドなタイミングでのロード(必要であればABのダウンロードを含む)と、Preloadの2つに分かれる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>依存性解決あり。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Preloadは「使う前にAssetBundleをDLしておく」機能になっていて、PreloadListというjson形式のデータで「このシーンに入ったら最低限DLしておいてほしいABはこれ」とか</p>
+<p class="p3"><span class="Apple-tab-span">	</span>指定してDLさせることができる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ちなみにPreloadListは何個、どんな分割で作ってもいい。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>また、高度な使い方として、PreloadListの代わりに「サーバからPreloadListをダウンロードできるurl」を書くことができ、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ゲーム運営が進んだタイミングでサーバが返すデータを更新することで、「この画面まできたらあるABを全ユーザーが保持している見通しがあるのでダウンロードさせておく」などができる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これによってサーバ側でユーザーが保持しているABのダウンロードタイミングを完全に制御することができる。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>AssetBundleListとAssetGraphとの連携</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>AssetBundleListは、Autoyaで扱うABのリスト。json形式で、サーバから返したり初期バージョンをアプリケーションに入れておいたりできる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ABListは運用に起因するリソース更新に応じて更新される。更新系はAutoyaのネットワークハンドリング起因でイベントとして発生し、かなりかっこいい実装になっている(雑)。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>どこかのバージョンから、AssetGraph v1.3を同梱したUnityPackageを配布するようになった。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>これにより、AssetGraph から AssetBundleList + AssetBundles の生成が可能になっている。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>AssetGraph側のこの辺変えたいな～みたいな要素もちょこちょこあるのでそれはまた別に記載する。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>AssetBundleListのマルチ化</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>要望としてちょいちょい上がっていた、AssetBundleListのマルチ化 = 複数リストでの運用に対応した。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これによって、AssetBundleを複数のリストに分け、管理/更新することが可能になった。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>例えばアドベンチャーパートのABはめっちゃ更新頻度が高いんだけど他は別に、、みたいな時、Adv用のABListとそれ以外用のABListを別に更新したりできる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>トピックとしては簡単なんだけど実用には根本的にいろんな方面の難易度がある。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・使用できるAssetBundleListの情報はRuntimeManifestに記述する必要がある(リストの名前、ver、ダウンロードurlベースパスなど)</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・サーバがクライアントのリソースを更新したくなったら、レスポンスヘッダーに特定の値を入れることでリストの更新を促すことができる。つまるところサーバドリブン。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・CDNにいろんなパスを掘ってAssetBundleを安置しておく必要がある</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>など。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>マルチになったABList自体の作成はAssetGraphに依存していて、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>AssetGraph <b>A</b>を作る -&gt;<span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>AssetGraphのハンドラにAutoya用のスクリプトアタッチする -&gt;<span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ビルド -&gt;<span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><b>A</b>という名前のABList + ABが、プラットフォームやバージョンを加味された状態で生成される<span class="Apple-converted-space"> </span></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>という流れになっている。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>というかこれをAssetGraph使わずに人間が作るのは、APIを叩くだけにしたってほんとうにしんどい。仕様的に一つしか正解APIがないし、そのAPIは本当にメジャーじゃないし。</p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>そのAPIって？</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>これ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://sassembla.github.io/Public/2016:08:22%2015-13-26/2016:08:22%2015-13-26.html">http://sassembla.github.io/Public/2016:08:22%2015-13-26/2016:08:22%2015-13-26.html</a></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>このAPIを人間が手で書いて使うのは無理。AssetGraphはその内部でこれを使っている。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>AssetDatabaseの状況に左右されず、EditorのassetBundleドロップダウンを一切無視した状態で、manifestファイルを無制限に複数生成できる。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p4"><b>Information</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>お知らせ画面</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Autoyaの中の特異点、ヤッチマッタ感の高いフルスクラッチUnityネイティブなWebViewでのお知らせ画面表示機能がある。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>uGUIでHTMLタグを作って、HTMLを書くとそのレイアウトやConstraint、uGUIについてるスクリプトをバッチリ使用できる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>圧倒的にWebViewより高速で、メモリも食わず、コントロール感覚はUnityそのもので、全プラットフォームで動かせる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>HTMLタグ自体も外部からAssetBundleやらで輸入できるため、ぶっちゃけWebComponentsみたいなものをUnity上で実装したという表現があってる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>やりすぎた。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>まだ完全じゃないので、無理して使わないでいいと思う(及び腰)</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>TextMesh Pro対応がもうすぐリリースされるので、そうすると態度でかくなると思う。すごく綺麗かつ高速。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p4"><b>Manifest</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>宣誓書</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Autoyaでは、ビルド時に確定してブレない情報と、実行時に動的に更新されるような情報をManifestという形式で保存している。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>BuildManifestとRuntimeManifestがそれ。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>BuildManifestにはみんな大好きビルド番号や日時、constなデータなどをビルド時に書き込むことができ、これは不変になる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>RuntimeManifestには現在保持しているABListの情報などを入れることができ、永続化対象にもなっている。<span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Autoya.Manifest_なにやらで出てくる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これらManifestのファイル内容は本来開発者が自由に書いていいと思っているんだけれど、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ABListのマルチ化に伴って「これは一体なんなんだ？」的なデフォルト設定がうまれてしまっているのがとてもまずいと思っている。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p4"><b>OverridePoints</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>上書き可能なポイント集</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Autoyaではそのデフォルトの挙動でJWTでの認証や改ざん防止を放り込んであって、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>それらのパラメータや動作はすべてOverridePoints.csというファイルを更新することで変更できる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Frameworkとしての指針は、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>「フローは決まってるんでどんなプロトコル使うかとかどう暗号化してファイル保存しようかは各自頑張って」</p>
+<p class="p3"><span class="Apple-tab-span">	</span>である。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>んでその、OverridePointsがちょっと増減してるはずなので、それを書かねば。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+</body>
+</html>
