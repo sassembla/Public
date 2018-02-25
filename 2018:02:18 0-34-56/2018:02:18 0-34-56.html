@@ -1,0 +1,242 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1504.83">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Sans'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; color: #393939; min-height: 18.0px}
+    p.p6 {margin: 0.0px 0.0px 0.0px 72.0px; text-indent: -72.0px; font: 12.0px 'Hiragino Sans'; color: #393939}
+    p.p7 {margin: 0.0px 0.0px 0.0px 72.0px; text-indent: -72.0px; font: 12.0px 'Hiragino Sans'; color: #393939; min-height: 18.0px}
+    p.p8 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; background-color: #ebebeb}
+    p.p9 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; background-color: #ebebeb; min-height: 18.0px}
+    p.p10 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px 'Hiragino Sans'; color: #000000; background-color: #ebebeb}
+    p.p11 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px 'Hiragino Sans'; color: #000000; background-color: #ffffff}
+    p.p12 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px 'Hiragino Sans'; color: #000000; background-color: #ffffff; min-height: 17.0px}
+    p.p13 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px 'Hiragino Sans'; color: #000000}
+    li.li3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'}
+    li.li4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; color: #393939}
+    span.s1 {font-kerning: none}
+    span.s2 {font: 12.0px 'Lucida Grande'}
+    span.s3 {font-variant-ligatures: no-common-ligatures}
+    span.s4 {font-variant-ligatures: no-common-ligatures; background-color: #ffffff}
+    span.Apple-tab-span {white-space:pre}
+    ul.ul1 {list-style-type: disc}
+    ul.ul2 {list-style-type: hyphen}
+  </style>
+</head>
+<body>
+<p class="p1"><b>docusaurusで遊ぶ</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Autoyaのドキュメントの既存資産部分をプレゼンテーションスタイルからちゃんとしたドキュメントに移動する、というのをずっとやっていた。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>んで目処が立ったんで最新化も行うなど。去年末くらいから開始して結構かかったな、、、</p>
+<p class="p2"><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>使っているもの</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>docusaurus</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://docusaurus.io">https://docusaurus.io</a></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>目次があるドキュメントツールが欲しかったので選んだ。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>インストール</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>いろんなところに書いてあるんではい。公式。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://docusaurus.io/docs/en/installation.html">https://docusaurus.io/docs/en/installation.html</a></p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b>構造的な概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>つぎのようなファイルを基礎に成立している。フォルダ名は鬱陶しいのでverifyを終えた時のものに合わせてある。</p>
+<p class="p2"><br></p>
+<ul class="ul1">
+  <li class="li4"><span class="s1"><b>website/core/Footer.js<span class="Apple-converted-space"> </span></b></span></li>
+  <ul class="ul2">
+    <li class="li4">Footerに使われているReactコンポーネント。カスタマイズしてねって感じ。</li>
+  </ul>
+</ul>
+<p class="p5"><span class="s1"></span><br></p>
+<ul class="ul1">
+  <li class="li4"><span class="s1"><b>website/blog</b></span></li>
+  <ul class="ul2">
+    <li class="li4">markdownで書かれたexampleなblog記事置き場</li>
+  </ul>
+</ul>
+<p class="p5"><br></p>
+<ul class="ul1">
+  <li class="li4"><span class="s1"><b>docs</b></span></li>
+</ul>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="s2"><b>⁃</b></span><span class="Apple-tab-span">	</span>markdownで書かれたexampleなドキュメンテーション記事置き場</p>
+<p class="p7"><span class="s1"></span><br></p>
+<ul class="ul1">
+  <li class="li4"><span class="s1"><b>website/pages<span class="Apple-converted-space"> </span></b></span></li>
+  <ul class="ul2">
+    <li class="li4">トップレベルのページ置き場</li>
+  </ul>
+</ul>
+<p class="p5"><br></p>
+<ul class="ul1">
+  <li class="li4"><span class="s1"><b>website/static</b></span></li>
+  <ul class="ul2">
+    <li class="li4">静的な素材置き場。</li>
+  </ul>
+</ul>
+<p class="p5"><br></p>
+<ul class="ul1">
+  <li class="li4"><span class="s1"><b>website/siteConfig.js<span class="Apple-converted-space"> </span></b></span></li>
+  <ul class="ul2">
+    <li class="li3">コンフィグファイル。</li>
+  </ul>
+</ul>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>サイト構築に際して</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>簡単なページを作ってみる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>条件として、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・ファイル名と内部で記述するidが一致すること</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・必ずヘッダーパラメータを入れること</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>などがある。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ヘッダーパラメータは次のようなもので、</p>
+<p class="p8">---// このへんから</p>
+<p class="p8">id: install0</p>
+<p class="p8">title: Install Autoya to your project</p>
+<p class="p8">sidebar_label: Installation</p>
+<p class="p8">---// このへんまで</p>
+<p class="p9"><br></p>
+<p class="p8">リリースにUnitypackageファイルがあるんで、その辺を選んで使うと楽。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>idはファイル名に一致したもの、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>titleはmdとは無関係に一番上に出る文字列、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>sidebar_labelは、[この名前のsidebarの下にぶら下がる]という宣言になっている。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>sidebar_labelがないと、そのページを表示する際にはサイドバーがないページが出てくる。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>サイドバーをいじる</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>サイドバーはjsonになっている。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>website/sidebars.json をいじることで編集できる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>こんな感じ。</p>
+<p class="p8">{</p>
+<p class="p8"><span class="Apple-converted-space">  </span>"docs": {</p>
+<p class="p8"><span class="Apple-converted-space">  <span class="Apple-tab-span">	</span></span>"Getting started":["install0"],</p>
+<p class="p8"><span class="Apple-tab-span">	</span>"API":["api0"]</p>
+<p class="p8"><span class="Apple-converted-space">  </span>},</p>
+<p class="p8"><span class="Apple-converted-space">  </span>"docs-other": {</p>
+<p class="p8"><span class="Apple-converted-space">    </span>"First Category": ["doc4", "doc5"]</p>
+<p class="p8"><span class="Apple-converted-space">  </span>}</p>
+<p class="p8">}</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>各ページのidを記述することで、簡単に目次が作れて便利。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>docs-otherは表示されないっぽい。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>サイドバーからコンテンツへとジャンプ、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>コンテンツ間はコンテンツ間でリンク、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>コンテンツにsidebarの表記がなければページ上もサイドバーが出ない、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>みたいな挙動になっている。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>サイドバー、概念的には</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・一番大雑把な特性で所属をわける</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Document、API、他、みたいな。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・Docはこのサイドバー、APIはこのサイドバー、みたいな概念ではない</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ないっぽい。複数サイドバーみたいなissueが上がってそうな気はするが。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・サイト内で複数種類のサイドバーをせっていすることが可能。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>こんな感じにした。</p>
+<p class="p2"><br></p>
+<p class="p3"><b>sidebars.json</b></p>
+<p class="p8">{</p>
+<p class="p8"><span class="Apple-converted-space">  </span>"docs": {</p>
+<p class="p8"><span class="Apple-converted-space">  <span class="Apple-tab-span">	</span></span>"Installation": ["install0"],</p>
+<p class="p8"><span class="Apple-converted-space">  <span class="Apple-tab-span">	</span></span>"Overview": ["overview0", "overridepoints0"],</p>
+<p class="p8"><span class="Apple-converted-space">  <span class="Apple-tab-span">	</span></span>"Documents": [</p>
+<p class="p8"><span class="Apple-converted-space">  <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>"auth0",</p>
+<p class="p8"><span class="Apple-converted-space">  <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>"manifest0",</p>
+<p class="p8"><span class="Apple-converted-space">  <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>"persistence0",</p>
+<p class="p8"><span class="Apple-converted-space">  <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>"assetbundle0",</p>
+<p class="p8"><span class="Apple-converted-space">  <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>"connection0",</p>
+<p class="p8"><span class="Apple-converted-space">  <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>"maintenance0",</p>
+<p class="p8"><span class="Apple-converted-space">  <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>"purchase0",</p>
+<p class="p8"><span class="Apple-converted-space">  <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>"notification0",</p>
+<p class="p8"><span class="Apple-converted-space">  <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>"information0",</p>
+<p class="p8"><span class="Apple-converted-space">  <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>"settings0"</p>
+<p class="p8"><span class="Apple-converted-space">  <span class="Apple-tab-span">	</span></span>],</p>
+<p class="p8"><span class="Apple-converted-space">  <span class="Apple-tab-span">	</span></span>"Resource Management":[</p>
+<p class="p8"><span class="Apple-converted-space">  <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>"resource_generate0",</p>
+<p class="p8"><span class="Apple-converted-space">  <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>"resource_deploy0"</p>
+<p class="p8"><span class="Apple-converted-space">  <span class="Apple-tab-span">	</span></span>],</p>
+<p class="p8"><span class="Apple-converted-space">  <span class="Apple-tab-span">	</span></span>"App Management": [</p>
+<p class="p8"><span class="Apple-converted-space">  <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>"update_app_version0",</p>
+<p class="p8"><span class="Apple-converted-space">  <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>"update_resource_version0",</p>
+<p class="p8"><span class="Apple-converted-space">  <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>"turn_on_maintenance0"</p>
+<p class="p8"><span class="Apple-converted-space">  <span class="Apple-tab-span">	</span></span>]</p>
+<p class="p8"><span class="Apple-converted-space">  </span>},</p>
+<p class="p8"><span class="Apple-converted-space">  </span>"api":{</p>
+<p class="p8"><span class="Apple-converted-space">  <span class="Apple-tab-span">	</span></span>"APIs": [</p>
+<p class="p8"><span class="Apple-converted-space">  <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>"api_auth0",</p>
+<p class="p8"><span class="Apple-converted-space">  <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>"api_manifest0",</p>
+<p class="p8"><span class="Apple-converted-space">  <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>"api_persistence0",</p>
+<p class="p8"><span class="Apple-converted-space">  <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>"api_assetbundle0",</p>
+<p class="p8"><span class="Apple-converted-space">  <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>"api_http0", "api_udp0",</p>
+<p class="p8"><span class="Apple-converted-space">  <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>"api_maintenance0",</p>
+<p class="p8"><span class="Apple-converted-space">  <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>"api_purchase0",</p>
+<p class="p8"><span class="Apple-converted-space">  <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>"api_information0"</p>
+<p class="p8"><span class="Apple-converted-space">  <span class="Apple-tab-span">	</span></span>]</p>
+<p class="p8"><span class="Apple-converted-space">  </span>}</p>
+<p class="p8">}</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これで、docsとapiというサイドバーが作れる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>この名称はサイト上には一切現れないため、単に区別のためだけにある感じ。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>ビルド</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>websiteフォルダー下で</p>
+<p class="p10"><span class="s3">yarn run build</span></p>
+<p class="p11"><span class="s3"><span class="Apple-tab-span">	</span>とかやると、ビルドされる。</span></p>
+<p class="p11"><span class="s3"><span class="Apple-tab-span">	</span>website/buildとかフォルダが生成される。</span></p>
+<p class="p12"><span class="s3"><span class="Apple-tab-span">	</span></span></p>
+<p class="p11"><span class="s3"><span class="Apple-tab-span">	</span>github pages向けだと、次のコマンドがあり、</span></p>
+<p class="p10"><span class="s3">yarn docusaurus-publish</span></p>
+<p class="p12"><span class="s3"></span><br></p>
+<p class="p13"><span class="s4"><span class="Apple-tab-span">	</span>できた中身をgithub pagesに関連づければよさげ。</span></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>Tips</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>blogは、yyyy-mm-dd-ファイル名.md でないとダメだとか。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>Question</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>ライブリロードどうなってんの</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/facebook/Docusaurus/issues/234">https://github.com/facebook/Docusaurus/issues/234</a></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>-&gt; 中にexpressが入ってるんで頑張ればできそうなんだけど、今のとこ無理。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>mdで書くドキュメント類は単に更新すればhtmlに変換されて良いのだけれど、sidebarとかfooterの内容はコンパイルが必要なのか更新されない。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>自分はyarn run startをした状態で別ターミナルで yarn run build とかでしのいでいる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>このへんはwatchで自動化すると良さそう。</p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>docsの下にフォルダ掘りたいんだけどできないものか<span class="Apple-tab-span">	</span></b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/facebook/Docusaurus/issues/323">https://github.com/facebook/Docusaurus/issues/323</a></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>-&gt; 書き換えられるけどできない。flattenみたいなのを使う必要がある。</p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>en から他の言語への切り替え</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>デフォルトを日本語で書いている(enなんだけどね)</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://docusaurus.io/docs/en/translation.html">https://docusaurus.io/docs/en/translation.html</a></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>-&gt; まだ見てない。</p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>検索窓</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>なんか有効にできるっぽい。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://docusaurus.io/docs/en/search.html">https://docusaurus.io/docs/en/search.html</a></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>-&gt; まだ見てない。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>やったことあるひといた。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://efcl.info/2017/12/26/docusaurus-almin/">http://efcl.info/2017/12/26/docusaurus-almin/</a></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+</body>
+</html>
