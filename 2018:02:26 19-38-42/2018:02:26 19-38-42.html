@@ -1,0 +1,142 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1504.83">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Sans'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 17.0px 'Hiragino Sans'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>Streaming Conf行ってきた</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>RTMP1.0 by go</b></p>
+<p class="p2"><br></p>
+<p class="p4"><b>RTMP</b></p>
+<p class="p4"><span class="Apple-tab-span">	</span>tcpベース、いろいろ。</p>
+<p class="p4"><span class="Apple-tab-span">	</span>Wowzaサーバに対して現場から生放送したデータをアップ、みたいなところに使っている。</p>
+<p class="p4"><span class="Apple-tab-span">	</span>TCPで好きにぶん投げるのだとまずいので、タイムスタンプをいっぱい入れている。</p>
+<p class="p2"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>ffmpegと通信する？</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ffmpeg大活躍だな。</p>
+<p class="p2"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>チャンクストリーム</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>データはチャンク単位に分割される。</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>-&gt; でかい物を送って詰まるのを防ぐため。</p>
+<p class="p2"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>種類いっぱいある。</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>AMF アクションメッセージフォーマット みたいな圧縮データを送るのもある。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>nginx-rtmp-mod と wowzaの間の会話をみたらこんな感じだった</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>～　みたいなのがgithubにあるそう。みよう。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>Showroomの人の話</b></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p4"><b>ShowroomではCDNを使った配信をしていない。</b></p>
+<p class="p4"><span class="Apple-tab-span">	</span>ほー？</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p4"><b>通知が出るので配信開始時にグッと負荷がかかる</b></p>
+<p class="p4"><span class="Apple-tab-span">	</span>あらかじめ予測してマニュアルでスケールアウトさせておく。<span class="Apple-tab-span">	</span></p>
+<p class="p4"><span class="Apple-tab-span">	</span>誕生日だからくるぞ</p>
+<p class="p4"><span class="Apple-tab-span">	</span>未公開情報の開示だからくるぞ</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>みたいな読みを効かせる</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>結局人力かよみたいな。</p>
+<p class="p2"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>告知SNSでのいいね数とか。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>WebRTCとHLSの話</b></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>HLSの配信を高速化</b></p>
+<p class="p4"><span class="Apple-tab-span">	</span>300msくらいまでいけたらしい。すごいね。</p>
+<p class="p2"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>youtubeはCMAFを使っていて速い(2秒</p>
+<p class="p2"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>提案手法では350ms</p>
+<p class="p2"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>プレイリストをからの状態からアップしちゃって書き込み続ける</p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>HLS処理を改善した件</b></p>
+<p class="p4"><span class="Apple-tab-span">	</span>モイ株式会社、ツイキャスの中の人。</p>
+<p class="p2"><br></p>
+<p class="p4"><b>生放送に特化。Cで全部書く人。</b></p>
+<p class="p4"><span class="Apple-tab-span">	</span>nodeで</p>
+<p class="p4"><span class="Apple-tab-span">	</span>rtmp -&gt; hls</p>
+<p class="p4"><span class="Apple-tab-span">	</span>flv -&gt; h254 mpegtsとかに。<span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p4"><b>調停遅延HLS</b></p>
+<p class="p4"><span class="Apple-tab-span">	</span>みんな作ってるんだなあ。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>同じくツイキャスの中の人</b></p>
+<p class="p4"><span class="Apple-tab-span">	</span>同時1万人 AWS wowzaとかはなし。お金がなくなっちゃう。</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ほーー</p>
+<p class="p2"><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p4"><b>1Mbpsはモバイルにはまだ速い</b></p>
+<p class="p4"><span class="Apple-tab-span">	</span>100kbpsくらいで、、</p>
+<p class="p2"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>softbankの回線だけ特殊なんで、何か用意しないといけない</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>-&gt; もうちょい詳しく聞いてみたかった。</p>
+<p class="p2"><br></p>
+<p class="p4"><b>キーフレームを使いまわしている</b></p>
+<p class="p4"><span class="Apple-tab-span">	</span>ラジオ放送とかで静止画を流す場合はもうエンコーダー止まってる</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>びんづめさん</b></p>
+<p class="p2"><b></b><br></p>
+<p class="p4"><b>配信システムを作ろうとした時の話</b></p>
+<p class="p4"><span class="Apple-tab-span">	</span>コーデック</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>h264とか</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>映像 + 音声</p>
+<p class="p2"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>コンテナ</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>FLV、MPEG tsとか</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p4"><b>コンテナに含まれるのは</b></p>
+<p class="p4"><span class="Apple-tab-span">	</span>コーデック情報</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>パラメータ</p>
+<p class="p2"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>ストリームデータ</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>タイムスタンプ</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>エンコード済みデータ</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>+ アルファ　キーフレームかどうかなど。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p4"><b>PTSとDTS</b></p>
+<p class="p4"><span class="Apple-tab-span">	</span>Presentation ts</p>
+<p class="p4"><span class="Apple-tab-span">	</span>いつ表示されるか</p>
+<p class="p2"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>Decode ts</p>
+<p class="p4"><span class="Apple-tab-span">	</span>データのデコード順に関してフラれた時刻</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>映像のBフレームなど、前後の情報が必要。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>メテオさん</b></p>
+<p class="p4"><span class="Apple-tab-span">	</span>bitrateを改善して配信量を減らした話</p>
+<p class="p2"><br></p>
+<p class="p4"><b>H264 + Opusで配信</b></p>
+<p class="p4"><span class="Apple-tab-span">	</span>6-9秒の遅延</p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p4"><span class="Apple-tab-span">	</span>CBRからVBRに変換。</p>
+<p class="p2"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>FFMpegのh264エンコーディングガイドを熟読しよう</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+</body>
+</html>

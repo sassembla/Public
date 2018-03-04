@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1504.83">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Sans'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px 'Hiragino Sans'; color: #000000; background-color: #ebebeb}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px 'Hiragino Sans'; color: #000000; background-color: #ffffff; min-height: 17.0px}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px 'Hiragino Sans'; color: #000000; background-color: #ffffff}
+    span.s1 {font-variant-ligatures: no-common-ligatures}
+    span.s2 {font-variant-ligatures: no-common-ligatures; background-color: #ffffff}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>Unityでprotobufを使う</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>2018年ともなると選択肢増えていた。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>避けたいこと</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>attrでの生成</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>なぜ変更可能性をわざわざ下げねばならないのか。IDLあるんだからそっちを主にしようよ。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>やりたいこと</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>.proto ファイルからのコード生成</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ドンピシャなのがこれ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/5argon/protobuf-unity">https://github.com/5argon/protobuf-unity</a></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>やらないといけないこと</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>iOS向けに、事前に生成されたcsコードをdllにしておく必要がある。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>protobufのインストール</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>macだとhomebrewが楽。</p>
+<p class="p4"><span class="s1">brew install protobuf</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p6"><span class="s1"><span class="Apple-tab-span">	</span>で、入れ終わったら</span></p>
+<p class="p4"><span class="s1">/usr/local/bin/protoc</span></p>
+<p class="p6"><span class="s1"><span class="Apple-tab-span">	</span>で出て来るパスをUnity &gt; Preferences &gt; Protobuf に指定する。</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p6"><span class="s1"><span class="Apple-tab-span">	</span>この時入っているverは3.5.1。</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p6"><span class="s1"><b>Unity側のprotobuf.dllの更新</b></span></p>
+<p class="p6"><span class="s1"><span class="Apple-tab-span">	</span>含まれているdllが古いため、protobuf本家のリポジトリ <a href="https://github.com/google/protobuf"><span class="s2">https://github.com/google/protobuf</span></a> からcsharp用のdllを生成する。</span></p>
+<p class="p6"><span class="s1"><span class="Apple-tab-span">	</span>protobuf 3.5.1のdotnet fw 4.5あたりでのdllが落ちてると嬉しいんだけど。</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p6"><span class="s1"><span class="Apple-tab-span">	</span>と言うわけでなんとかなるようにしたのがこちらのリポジトリ(fork)</span></p>
+<p class="p6"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/protobuf-unity"><span class="s2">https://github.com/sassembla/protobuf-unity</span></a></span></p>
+<p class="p5"><span class="s1"></span><br></p>
+</body>
+</html>
