@@ -1,0 +1,270 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1504.83">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Sans'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; background-color: #ebebeb}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; color: #000000; background-color: #ebebeb}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; color: #000000; background-color: #ffffff; min-height: 18.0px}
+    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; color: #000000; background-color: #ffffff}
+    p.p8 {margin: 0.0px 0.0px 0.0px 0.0px; font: 17.0px 'Hiragino Sans'; color: #000000; background-color: #ffffff}
+    span.s1 {font-variant-ligatures: no-common-ligatures}
+    span.s2 {font-variant-ligatures: no-common-ligatures; background-color: #ebebeb}
+    span.s3 {font-variant-ligatures: no-common-ligatures; background-color: #ffffff}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>k8sの基本を学ぶ</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>必要が出たので学ぶ。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>MasterとNode</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Masterが総合的なサービスのコントローラ、Nodeがコンテナの実行部分。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>Resource</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>k8sにはいろいろな要素グループがあり、総称はResource</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Resourceという要素の中に、Pod、Node、Masterなどがある。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>全ての要素にlabelをつけることができる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>namespaceという単位で括ることができる。何も指定しない場合default。</p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b>Pod</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>1つ以上のコンテナが入ったResource。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>k8sではこの単位でアプリケーションを運用する。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>この単位でNodeにデプロイされる。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>Service</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Resourceへのインターフェースを提供するResource</p>
+<p class="p3"><span class="Apple-tab-span">	</span>labelでPodを判別し、インターフェースを提供する。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>ReplicaSet</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Podの調整を行う関数みたいなResource。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>labelに則ってPodを検索し、指定した数値と見つかったPodの多寡で調整を行う。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>Deployment</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>アプリケーションのアップデートやロールバックを宣言的に行うためのResource。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3">とりあえず基礎はこんなところか。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>minukubeを使ってうごかしてみる</b></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b>依存</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>mac用だとhyperkitとかに依存してる。で、これはdocker入れたら入ってるっぽいんだよな。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>-&gt; dockerが持ってるHyperkitとの橋渡しのドライバがあるみたいだ。下記で入れる。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p4">curl -LO https://storage.googleapis.com/minikube/releases/latest/docker-machine-driver-hyperkit \</p>
+<p class="p4">&amp;&amp; chmod +x docker-machine-driver-hyperkit \</p>
+<p class="p4">&amp;&amp; sudo mv docker-machine-driver-hyperkit /usr/local/bin/ \</p>
+<p class="p4">&amp;&amp; sudo chown root:wheel /usr/local/bin/docker-machine-driver-hyperkit \</p>
+<p class="p4">&amp;&amp; sudo chmod u+s /usr/local/bin/docker-machine-driver-hyperkit</p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>minikubeのインストール</b></p>
+<p class="p5"><span class="s1">curl -Lo minikube https://storage.googleapis.com/minikube/releases/v0.25.0/minikube-darwin-amd64</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これ以外のバージョンだと動作しなかった。こえーー。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>具体的にいうと、kubectl 1.9.0とminikube 0.25.0の組み合わせ以外で動かなかった。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>起動</b></p>
+<p class="p5"><span class="s1">minikube start --vm-driver=hyperkit</span></p>
+<p class="p6"><span class="s1"></span><br></p>
+<p class="p7"><span class="s1"><span class="Apple-tab-span">	</span>パラメータはconfigでセットしておくことができる。</span></p>
+<p class="p5"><span class="s1">minikube config set vm-driver hyperkit</span></p>
+<p class="p6"><span class="s1"></span><br></p>
+<p class="p6"><span class="s1"></span><br></p>
+<p class="p7"><span class="s1"><b>状態</b></span></p>
+<p class="p5"><span class="s1">minikube status</span></p>
+<p class="p5"><span class="s1">minikube: Running</span></p>
+<p class="p5"><span class="s1">cluster: Running</span></p>
+<p class="p5"><span class="s1">kubectl: Correctly Configured: pointing to minikube-vm at 192.168.64.6</span></p>
+<p class="p6"><span class="s1"></span><br></p>
+<p class="p6"><span class="s1"></span><br></p>
+<p class="p7"><span class="s1"><b>imageのデプロイと実行</b></span></p>
+<p class="p6"><span class="s1"><span class="Apple-tab-span">	</span></span></p>
+<p class="p5"><span class="s1">kubectl run hello-minikube --image=k8s.gcr.io/echoserver:1.4 --port=8080</span></p>
+<p class="p7"><span class="s1"><span class="Apple-tab-span">	</span>imageとportを指定して投入する。</span></p>
+<p class="p7"><span class="s1"><span class="Apple-tab-span">	</span>この時点でport 8080にアクセスしても何も起こらない。</span></p>
+<p class="p6"><span class="s1"></span><br></p>
+<p class="p7"><span class="s1"><span class="Apple-tab-span">	</span>投入されたコンテナはpodに入る = podが生成される。</span></p>
+<p class="p5"><span class="s1">kubectl get pod</span></p>
+<p class="p5"><span class="s1">NAME<span class="Apple-converted-space">                            </span>READY <span class="Apple-converted-space">    </span>STATUS<span class="Apple-converted-space">    </span>RESTARTS <span class="Apple-converted-space">  </span>AGE</span></p>
+<p class="p5"><span class="s1">hello-minikube-c6c6764d-f8nhg <span class="Apple-converted-space">  </span>1/1 <span class="Apple-converted-space">      </span>Running <span class="Apple-converted-space">  </span>0<span class="Apple-converted-space">          </span>5m</span></p>
+<p class="p7"><span class="s1"><span class="Apple-tab-span">	</span>ラベル付きのものを取得したい場合、-l k=v とかやると抽出できる。</span></p>
+<p class="p6"><span class="s1"></span><br></p>
+<p class="p6"><span class="s1"></span><br></p>
+<p class="p7"><span class="s1"><span class="Apple-tab-span">	</span>実行するとdeploymentが生成されているので、検知できるようになる。</span></p>
+<p class="p5"><span class="s1">kubectl get deployment</span></p>
+<p class="p5"><span class="s1">NAME <span class="Apple-converted-space">            </span>DESIRED <span class="Apple-converted-space">  </span>CURRENT <span class="Apple-converted-space">  </span>UP-TO-DATE <span class="Apple-converted-space">  </span>AVAILABLE <span class="Apple-converted-space">  </span>AGE</span></p>
+<p class="p5"><span class="s1">hello-minikube <span class="Apple-converted-space">  </span>1 <span class="Apple-converted-space">        </span>1 <span class="Apple-converted-space">        </span>1<span class="Apple-converted-space">            </span>1 <span class="Apple-converted-space">          </span>9m</span></p>
+<p class="p6"><span class="s1"></span><br></p>
+<p class="p6"><span class="s1"></span><br></p>
+<p class="p7"><span class="s1"><span class="Apple-tab-span">	</span>deploymentについての記述を見てみる。</span></p>
+<p class="p5"><span class="s1">kubectl describe deployment hello-minikube</span></p>
+<p class="p6"><span class="s1"></span><br></p>
+<p class="p7"><span class="s1"><span class="Apple-tab-span">	</span>これで元になっているimageとか空いてるポートとかが確認できる。</span></p>
+<p class="p6"><span class="s1"></span><br></p>
+<p class="p6"><span class="s1"></span><br></p>
+<p class="p7"><span class="s1"><span class="Apple-tab-span">	</span>deploymentへと接続するhello-minikubeというサービスを生成</span></p>
+<p class="p5"><span class="s1">kubectl expose deployment hello-minikube --type=NodePort</span></p>
+<p class="p6"><span class="s1"></span><br></p>
+<p class="p6"><span class="s1"></span><br></p>
+<p class="p7"><span class="s1"><span class="Apple-tab-span">	</span>hello-minikube サービスのurlを取得(urlオプション無しだと自動的にブラウザで開く)</span></p>
+<p class="p5"><span class="s1">minikube service hello-minikube --url</span></p>
+<p class="p6"><span class="s1"></span><br></p>
+<p class="p6"><span class="s1"></span><br></p>
+<p class="p7"><span class="s1"><span class="Apple-tab-span">	</span>削除、deploymentとserviceを消す。</span></p>
+<p class="p5"><span class="s1">kubectl delete deployment hello-minikube</span></p>
+<p class="p5"><span class="s1">kubectl delete service hello-minikube</span></p>
+<p class="p6"><span class="s1"></span><br></p>
+<p class="p7"><span class="s1"><span class="Apple-tab-span">	</span>概念的には、</span></p>
+<p class="p6"><span class="s1"></span><br></p>
+<p class="p7"><span class="s1"><span class="Apple-tab-span">	</span>1.runでpodがデプロイされ、指定した名前のdeploymentリソースが生成される。</span></p>
+<p class="p7"><span class="s1"><span class="Apple-tab-span">	</span>2.生成されたdeploymentに対して、expose 名前指定 + 接続オプションで、外部からアクセス可能なipとポートが生成される。</span></p>
+<p class="p6"><span class="s1"><span class="Apple-tab-span">	</span></span></p>
+<p class="p7"><span class="s1"><span class="Apple-tab-span">	</span>という感じで、デプロイ -&gt; サービス生成 という手順を踏むと公開される。</span></p>
+<p class="p6"><span class="s1"></span><br></p>
+<p class="p7"><span class="s1"><span class="Apple-tab-span">	</span>接続オプションにはNodePortとLoadBalancer、Ingress がある。</span></p>
+<p class="p7"><span class="s1"><span class="Apple-tab-span">	</span>minikubeで使えるのはNodePortのみ。実際にはLBかIngressを使うっぽい。</span></p>
+<p class="p6"><span class="s1"></span><br></p>
+<p class="p6"><span class="s1"></span><br></p>
+<p class="p7"><span class="s1"><b>ファイルをもとにdeployを行う</b></span></p>
+<p class="p7"><span class="s1"><span class="Apple-tab-span">	</span>yamlの視認性はヤバいのでjsonで。</span></p>
+<p class="p6"><span class="s1"></span><br></p>
+<p class="p7"><span class="s1">dep.json</span></p>
+<p class="p5"><span class="s1">{</span></p>
+<p class="p5"><span class="s1"><span class="Apple-converted-space">   </span>"apiVersion": "apps/v1",</span></p>
+<p class="p5"><span class="s1"><span class="Apple-converted-space">   </span>"kind": "Deployment",</span></p>
+<p class="p5"><span class="s1"><span class="Apple-converted-space">   </span>"metadata": {<b>// デプロイ自体の設定</b></span></p>
+<p class="p5"><span class="s1"><span class="Apple-converted-space">      </span>"name": "nginx-hostname-deployment",</span></p>
+<p class="p5"><span class="s1"><span class="Apple-converted-space">      </span>"labels": {</span></p>
+<p class="p5"><span class="s1"><span class="Apple-converted-space">         </span>"app": "nginx-hostname"</span></p>
+<p class="p5"><span class="s1"><span class="Apple-converted-space">      </span>}</span></p>
+<p class="p5"><span class="s1"><span class="Apple-converted-space">   </span>},</span></p>
+<p class="p5"><span class="s1"><span class="Apple-converted-space">   </span>"spec": {<b>// replicaとかtemplate、selectorが所属する属性。</b></span></p>
+<p class="p5"><span class="s1"><span class="Apple-converted-space">      </span>"replicas": 1,</span></p>
+<p class="p5"><span class="s1"><span class="Apple-converted-space">      </span>"selector": {</span></p>
+<p class="p5"><span class="s1"><span class="Apple-converted-space">         </span>"matchLabels": {</span></p>
+<p class="p5"><span class="s1"><span class="Apple-converted-space">            </span>"app": "nginx-hostname"</span></p>
+<p class="p5"><span class="s1"><span class="Apple-converted-space">         </span>}</span></p>
+<p class="p5"><span class="s1"><span class="Apple-converted-space">      </span>},</span></p>
+<p class="p5"><span class="s1"><span class="Apple-converted-space">      </span>"template": {</span></p>
+<p class="p5"><span class="s1"><span class="Apple-converted-space">         </span>"metadata": {</span></p>
+<p class="p5"><span class="s1"><span class="Apple-converted-space">            </span>"labels": {</span></p>
+<p class="p5"><span class="s1"><span class="Apple-converted-space">               </span>"app": "nginx-hostname"</span></p>
+<p class="p5"><span class="s1"><span class="Apple-converted-space">            </span>}</span></p>
+<p class="p5"><span class="s1"><span class="Apple-converted-space">         </span>},</span></p>
+<p class="p5"><span class="s1"><span class="Apple-converted-space">         </span>"spec": {</span></p>
+<p class="p5"><span class="s1"><span class="Apple-converted-space">            </span>"containers": [</span></p>
+<p class="p5"><span class="s1"><span class="Apple-converted-space">               </span>{</span></p>
+<p class="p5"><span class="s1"><span class="Apple-converted-space">                  </span>"name": "nginx-hostname",<b>// 名前</b></span></p>
+<p class="p5"><span class="s1"><span class="Apple-converted-space">                  </span>"image": "stenote/nginx-hostname",<b>// 元にするイメージ</b></span></p>
+<p class="p5"><span class="s1"><span class="Apple-converted-space">                  </span>"ports": [<b>// exposeするポート</b></span></p>
+<p class="p5"><span class="s1"><span class="Apple-converted-space">                     </span>{</span></p>
+<p class="p5"><span class="s1"><span class="Apple-converted-space">                        </span>"containerPort": 80</span></p>
+<p class="p5"><span class="s1"><span class="Apple-converted-space">                     </span>}</span></p>
+<p class="p5"><span class="s1"><span class="Apple-converted-space">                  </span>]</span></p>
+<p class="p5"><span class="s1"><span class="Apple-converted-space">               </span>}</span></p>
+<p class="p5"><span class="s1"><span class="Apple-converted-space">            </span>]</span></p>
+<p class="p5"><span class="s1"><span class="Apple-converted-space">         </span>}</span></p>
+<p class="p5"><span class="s1"><span class="Apple-converted-space">      </span>}</span></p>
+<p class="p5"><span class="s1"><span class="Apple-converted-space">   </span>}</span></p>
+<p class="p5"><span class="s1">}</span></p>
+<p class="p6"><span class="s1"></span><br></p>
+<p class="p7"><span class="s1"><span class="Apple-tab-span">	</span>これを実行する。</span></p>
+<p class="p5"><span class="s1">kubectl apply -f dep.json</span></p>
+<p class="p6"><span class="s1"></span><br></p>
+<p class="p7"><span class="s1"><span class="Apple-tab-span">	</span>すると、</span><span class="s2">nginx-hostname-deployment</span><span class="s1">というdeploymentが作成される。</span></p>
+<p class="p6"><span class="s1"></span><br></p>
+<p class="p7"><span class="s1"><span class="Apple-tab-span">	</span>podとreplicaSetについて指定してあり、それらが生成されている。</span></p>
+<p class="p7"><span class="s1"><span class="Apple-tab-span">	</span>その状態はkubectl get pod -l app=nginx-hostname とかで取得できる。</span></p>
+<p class="p6"><span class="s1"><span class="Apple-tab-span">	</span></span></p>
+<p class="p7"><span class="s1"><span class="Apple-tab-span">	</span>deplpyment name指定でserviceを作成、公開状態にする。</span></p>
+<p class="p5"><span class="s3"><span class="Apple-tab-span">	</span></span><span class="s1">kubectl expose deployment nginx-hostname-deployment ---type=NodePort</span></p>
+<p class="p6"><span class="s1"></span><br></p>
+<p class="p7"><span class="s1"><span class="Apple-tab-span">	</span>で、公開済みのserviceの情報を見るには下記が使える。</span></p>
+<p class="p5"><span class="s3"><span class="Apple-tab-span">	</span></span><span class="s1">kubectl get service nginx-hostname-deployment</span></p>
+<p class="p5"><span class="s3"><span class="Apple-tab-span">	</span></span><span class="s1">kubectl describe service nginx-hostname-deployment</span></p>
+<p class="p6"><span class="s1"></span><br></p>
+<p class="p7"><span class="s1"><span class="Apple-tab-span">	</span>ここから、このセットをスケールアウトさせてみる。</span></p>
+<p class="p6"><span class="s1"><span class="Apple-tab-span">	</span></span></p>
+<p class="p5"><span class="s1">kubectl scale --replicas=5 deployment nginx-hostname-deployment</span></p>
+<p class="p6"><span class="s1"><span class="Apple-tab-span">	</span></span></p>
+<p class="p7"><span class="s1"><span class="Apple-tab-span">	</span>これで5つまでスケールする。(ここではオフラインで実行したんで失敗してる。)</span></p>
+<p class="p5"><span class="s1">kubectl get pod -l app=nginx-hostname</span></p>
+<p class="p5"><span class="s1">NAME<span class="Apple-converted-space">                                        </span>READY <span class="Apple-converted-space">    </span>STATUS <span class="Apple-converted-space">            </span>RESTARTS <span class="Apple-converted-space">  </span>AGE</span></p>
+<p class="p5"><span class="s1">nginx-hostname-deployment-8b65c84d7-6qzjj <span class="Apple-converted-space">  </span>1/1 <span class="Apple-converted-space">      </span>Running<span class="Apple-converted-space">            </span>0<span class="Apple-converted-space">          </span>1h</span></p>
+<p class="p5"><span class="s1">nginx-hostname-deployment-8b65c84d7-77mv7 <span class="Apple-converted-space">  </span>0/1 <span class="Apple-converted-space">      </span>ErrImagePull <span class="Apple-converted-space">      </span>0<span class="Apple-converted-space">          </span>54m</span></p>
+<p class="p5"><span class="s1">nginx-hostname-deployment-8b65c84d7-7996w <span class="Apple-converted-space">  </span>0/1 <span class="Apple-converted-space">      </span>ImagePullBackOff <span class="Apple-converted-space">  </span>0<span class="Apple-converted-space">          </span>54m</span></p>
+<p class="p5"><span class="s1">nginx-hostname-deployment-8b65c84d7-smc4w <span class="Apple-converted-space">  </span>0/1 <span class="Apple-converted-space">      </span>ErrImagePull <span class="Apple-converted-space">      </span>0<span class="Apple-converted-space">          </span>54m</span></p>
+<p class="p5"><span class="s1">nginx-hostname-deployment-8b65c84d7-vlhkb <span class="Apple-converted-space">  </span>0/1 <span class="Apple-converted-space">      </span>ErrImagePull <span class="Apple-converted-space">      </span>0<span class="Apple-converted-space">          </span>54m</span></p>
+<p class="p6"><span class="s1"></span><br></p>
+<p class="p7"><span class="s1"><span class="Apple-tab-span">	</span>scaleやりなおしてもimagePullBackOffから帰って来なかったやつが一機あったのが気になる、、、、</span></p>
+<p class="p6"><span class="s1"></span><br></p>
+<p class="p6"><span class="s1"></span><br></p>
+<p class="p7"><span class="s1"><span class="Apple-tab-span">	</span>ということで、scaleコマンドでスケーリングできる。もちろんこれは減らす方向にも向かえる。</span></p>
+<p class="p6"><span class="s1"></span><br></p>
+<p class="p7"><span class="s1"><span class="Apple-tab-span">	</span>整理すると、</span></p>
+<p class="p7"><span class="s1"><span class="Apple-tab-span">	</span>1.deploymentの設定ファイル書く</span></p>
+<p class="p7"><span class="s1"><span class="Apple-tab-span">	</span>2.実行するとデプロイが行われる。書かれているimageが使われる</span></p>
+<p class="p7"><span class="s1"><span class="Apple-tab-span">	</span>3.sca;eコマンドでdeployment/設定名 でスケーリングできる</span></p>
+<p class="p6"><span class="s1"></span><br></p>
+<p class="p7"><span class="s1"><span class="Apple-tab-span">	</span>となる感じで、これは便利。</span></p>
+<p class="p6"><span class="s1"></span><br></p>
+<p class="p6"><span class="s1"></span><br></p>
+<p class="p8"><span class="s1"><b>APIまとめ</b></span></p>
+<p class="p6"><span class="s1"><span class="Apple-tab-span">	</span></span></p>
+<p class="p7"><span class="s1"><b>デプロイする</b></span></p>
+<p class="p5"><span class="s1">kubectl apply -f dep.json</span></p>
+<p class="p6"><span class="s1"></span><br></p>
+<p class="p6"><span class="s1"></span><br></p>
+<p class="p7"><span class="s1"><b>デプロイ済みのものを公開する</b></span></p>
+<p class="p5"><span class="s1">kubectl expose deployment デプロイ名 ---type=NodePort</span></p>
+<p class="p7"><span class="s1"><span class="Apple-tab-span">	</span>-&gt; 指定したdeploymentに対して<b>同じ名前の</b>serviceが生成される。</span></p>
+<p class="p7"><span class="s1"><span class="Apple-tab-span">	</span>-&gt; typeはいろいろある(minikubeではNodePortしか使えない)</span></p>
+<p class="p6"><span class="s1"></span><br></p>
+<p class="p6"><span class="s1"></span><br></p>
+<p class="p7"><span class="s1"><b>公開したデプロイのurlを得る(ここだけminikube)</b></span></p>
+<p class="p5"><span class="s1">minikube service hello-minikube --url</span></p>
+<p class="p7"><span class="s1"><span class="Apple-tab-span">	</span>serviceとdeploymentは独立しているため、deploymentを消してもserviceは影響を受けない(ルーティング的には影響を受けそうだが)</span></p>
+<p class="p6"><span class="s1"></span><br></p>
+<p class="p6"><span class="s1"></span><br></p>
+<p class="p7"><span class="s1"><b>スケールさせる</b></span></p>
+<p class="p5"><span class="s1">kubectl scale --replicas=5 deployment デプロイ名</span></p>
+<p class="p6"><span class="s1"></span><br></p>
+<p class="p6"><span class="s1"></span><br></p>
+<p class="p7"><span class="s1"><b>非公開にする</b></span></p>
+<p class="p5"><span class="s1">kubectl delete service サービス名</span></p>
+<p class="p6"><span class="s1"></span><br></p>
+<p class="p6"><span class="s1"></span><br></p>
+<p class="p7"><span class="s1"><b>停止させる</b></span></p>
+<p class="p5"><span class="s1">kubectl delete deployment デプロイ名</span></p>
+<p class="p6"><span class="s1"></span><br></p>
+<p class="p6"><span class="s1"></span><br></p>
+<p class="p6"><span class="s1"></span><br></p>
+<p class="p6"><span class="s1"></span><br></p>
+<p class="p7"><span class="s1"><b>今のところの所感</b></span></p>
+<p class="p7"><span class="s1"><span class="Apple-tab-span">	</span>apply、run、scale、delete、get、set、expose、describeとかは動詞的、</span></p>
+<p class="p7"><span class="s1"><span class="Apple-tab-span">	</span>pod、service(svc)、deploymentはリソースの指定のkind扱い、resourceのフィルタに使われている感じ。</span></p>
+<p class="p7"><span class="s1"><span class="Apple-tab-span">	</span>さらに-lオプションでのラベルでのフィルタリングがある。</span></p>
+<p class="p6"><span class="s1"></span><br></p>
+<p class="p6"><span class="s1"></span><br></p>
+</body>
+</html>
