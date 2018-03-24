@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1504.83">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Sans'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.3px Courier; background-color: #ebebeb}
+    span.s1 {font-kerning: none}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>Unity 2017.3以降のUnityWebRequestの話</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>2017.2 ~ 3の間で仕様変更があって、ただそのことについてしっかり書いてるところを見たことがなかったのでまとめる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>AutoyaのテストでHTTP系のやつがあってそれで気づいた。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>発端</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Unity2017.3から、UnityWebRequestがデフォルト設定ではcontent-lengthをつけなくなった。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>これはバグじゃね？って話でissueが上がったりしていた。</p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>WWW REQUEST DOESN'T SEND CONTENT-LENGTH HEADER</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://issuetracker.unity3d.com/issues/www-request-fails-to-get-content-length-header">https://issuetracker.unity3d.com/issues/www-request-fails-to-get-content-length-header</a></p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b>具体例</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>デフォルトのUnityWebRequestのヘッダが以下のように変わる。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>2017.2系まで</b></p>
+<p class="p3"><img src="2.png" alt="2.png"></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>2017.3系以降</b></p>
+<p class="p3"><img src="3.png" alt="3.png"></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>このとき、両versionとも、UnityWebRequestのchunkedTransferは、デフォルトのtrueのまま。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>お分かりいただけただろうか？</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>2017.2系だと、<b>chunkedTransfer = trueなのにTransfer-Encodingが全く入っておらず</b>、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>かつ<b>Content-Lengthが入っている</b>。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>2017.3系だと、<b>chunkedTransfer = trueなのでTransfer-Encoding: chunked が入っていて</b>、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>Content-Lengthが入っていない</b>。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Content-Lengthとchunkedの関係は、RFC2616にいろいろ書いてある。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://tools.ietf.org/html/rfc2616">https://tools.ietf.org/html/rfc2616</a></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>簡単に書くと、2017.2まではchunkedTransfer = trueなのにchunkedになってないリクエストを送っていた。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>chunkedありなしとサーバ側の挙動の関係でいえば、</p>
+<p class="p2"><br></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>Messages MUST NOT include both a Content-Length header field and a</span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">  </span>non-identity transfer-coding. If the message does include a non-</span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">  </span>identity transfer-coding, the Content-Length MUST be ignored.</span></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>みたいな記述があり、両方入っている場合はContent-Lengthが無視される。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ということで、バグっていたのは2017.2までで、Unity側はどっかでこのことに気づいて手を入れ(どこかのパッチリリースだった気がする、忘れた)、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>デフォルトの状態のUnityWebRequestのヘッダパラメータからはContent-Lengthが消えた。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>このため、例えば自分がテストに使っている、<b>httpbin.org</b>(<a href="https://httpbin.org">https://httpbin.org</a>)とかが、chunkedに対応してなくてcontent-lengthないよ～ってエラーを返してきたりしていた。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b>対処</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>えーーっと、2017.3以降は、chunkedを使いたい場合はそのまま、使いたくない場合はchunkedTransfer = falseとする必要がある。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>2017.2以前で、最新のパッチリリースはともかく、chunkedを使いたい場合は、、えーーーーっと、、まあ、、誰か試して。自分はもう2017.3以降に対応することにしたんで、、</p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b>教訓</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>パラメータが一切変わらなくても要素が変わることがあり、それに対してテストで気づけたので、まあ、はい。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>テストは自分を助けてくれる。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+</body>
+</html>
