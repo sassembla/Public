@@ -13,11 +13,9 @@
     p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; color: #000000; background-color: #ebebeb}
     p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; background-color: #ebebeb}
     p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px 'Hiragino Sans'; color: #000000; background-color: #ebebeb}
-    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px 'Hiragino Sans'; color: #000000}
-    p.p8 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px 'Hiragino Sans'; color: #000000; background-color: #ffffff; min-height: 17.0px}
+    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px 'Hiragino Sans'; color: #000000; background-color: #ffffff; min-height: 17.0px}
     span.s1 {font-kerning: none}
     span.s2 {font-variant-ligatures: no-common-ligatures}
-    span.s3 {font-variant-ligatures: no-common-ligatures; background-color: #ffffff}
     span.Apple-tab-span {white-space:pre}
   </style>
 </head>
@@ -116,7 +114,7 @@
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>この時点でGKEのページからデプロイ済みの確認が取れた。ノードの詳細画面の一番下にデプロイされてるのを確認。</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>dep.jsonには次のようなパラメータをセットしてたんだけど、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>role.jsonには次のようなパラメータをセットしてたんだけど、</p>
 <p class="p5">{</p>
 <p class="p5"><span class="Apple-converted-space">   </span>"apiVersion": "extensions/v1beta1",</p>
 <p class="p5"><span class="Apple-converted-space">   </span>"kind": "Deployment",</p>
@@ -144,11 +142,11 @@
 <p class="p6"><span class="s2">o role-deployment <span class="Apple-converted-space">  </span>LoadBalancer <span class="Apple-converted-space">  </span>10.35.250.167 <span class="Apple-converted-space">  </span>35.229.178.174 <span class="Apple-converted-space">  </span>your_port:31518/TCP <span class="Apple-converted-space">  </span>2m</span></p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>なるほど、exposeしてる対象が異なるのか。さらになんか違いそう。</p>
-<p class="p7"><span class="s3">kubectl expose deployment role-deployment --port=your_port,your_port2 --type="LoadBalancer"</span></p>
+<p class="p6"><span class="s2">kubectl expose deployment role-deployment --port=your_port,your_port2 --type="LoadBalancer"</span></p>
 <p class="p3"><span class="Apple-tab-span">	</span>とかだと複数portいけた。やったぜ。で、</p>
 <p class="p3"><span class="Apple-tab-span">	</span>じゃあこれはどんなデータになってるんだろう、、、jsonにできないとつらいぞ、、</p>
 <p class="p3"><span class="Apple-tab-span">	</span>-&gt; get svc 名前 -o yamlで取り出して云々して比較した。jsonでも取り出せる？ -&gt; 出せた。</p>
-<p class="p8"><span class="s2"></span><br></p>
+<p class="p7"><span class="s2"></span><br></p>
 <p class="p6"><span class="s2">kubectl get svc role-deployment -o json</span></p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>

@@ -1,9 +1,9 @@
 {\rtf1\ansi\ansicpg932\cocoartf1504\cocoasubrtf830
 {\fonttbl\f0\fnil\fcharset128 HiraginoSans-W4;\f1\fnil\fcharset128 HiraginoSans-W3;}
-{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red230\green230\blue230;\red25\green25\blue25;
-\red0\green0\blue0;\red255\green255\blue255;}
-{\*\expandedcolortbl;;\csgenericrgb\c0\c0\c0;\csgray\c92143;\cssrgb\c12941\c12941\c12941;
-\csgray\c0;\csgray\c100000;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red230\green230\blue230;\red0\green0\blue0;
+\red230\green230\blue230;\red255\green255\blue255;}
+{\*\expandedcolortbl;;\csgenericrgb\c0\c0\c0;\csgray\c92143;\csgray\c0;
+\csgray\c92143;\csgray\c100000;}
 \paperw11900\paperh16840\margl1440\margr1440\vieww22800\viewh8400\viewkind0
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
 
@@ -55,8 +55,8 @@ docker tag image_name asia.gcr.io/project_name/image_name:tag\
 	\'82\'b3\'82\'ab\'82\'d9\'82\'c7push\'82\'b5\'82\'bd\'82\'e0\'82\'cc\'82\'aagcloud\'82\'a9\'82\'e7\'8c\'9f\'92\'6d\'82\'c5\'82\'ab\'82\'e9\'82\'a9\'83\'60\'83\'46\'83\'62\'83\'4e\
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
 
-\f0 \cf5 \cb3 \CocoaLigature0 gcloud container images list-tags asia.gcr.io/\cf2 \expnd0\expndtw0\kerning0
-\CocoaLigature1 project_name\cf5 \kerning1\expnd0\expndtw0 \CocoaLigature0 /\cf2 \expnd0\expndtw0\kerning0
+\f0 \cf4 \cb3 \CocoaLigature0 gcloud container images list-tags asia.gcr.io/\cf2 \expnd0\expndtw0\kerning0
+\CocoaLigature1 project_name\cf4 \kerning1\expnd0\expndtw0 \CocoaLigature0 /\cf2 \expnd0\expndtw0\kerning0
 \CocoaLigature1 image_name
 \f1 \cf0 \kerning1\expnd0\expndtw0 \
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
@@ -71,14 +71,15 @@ docker tag image_name asia.gcr.io/project_name/image_name:tag\
 	\'82\'dc\'82\'b8\'82\'cdkubectl\'82\'cc\'8c\'bb\'8d\'dd\'82\'cc\'83\'52\'83\'93\'83\'65\'83\'4c\'83\'58\'83\'67(\'90\'da\'91\'b1\'90\'e6)\'82\'f0\'8a\'6d\'94\'46\'81\'42\
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
 
-\f0 \cf5 \cb3 \CocoaLigature0 kubectl config current-context\
+\f0 \cf4 \cb3 \CocoaLigature0 kubectl config current-context\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
 
 \f1 \cf0 \cb1 \CocoaLigature1 \
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
 \cf0 	\'82\'c5\'81\'41\'90\'da\'91\'b1\'90\'e6\'82\'aaGKE\'82\'cc\'88\'d3\'90\'7d\'82\'b5\'82\'bd\'83\'4e\'83\'89\'83\'58\'83\'5e\'82\'c5\'82\'c8\'82\'a2\'8f\'ea\'8d\'87\'81\'41gcloud\'83\'52\'83\'7d\'83\'93\'83\'68\'82\'f0\'8e\'67\'82\'c1\'82\'c4\'82\'bb\'82\'cc\'83\'70\'83\'89\'83\'81\'81\'5b\'83\'5e\'82\'f0\'95\'cf\'8d\'58\'82\'b7\'82\'e9\'81\'42\
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
 
-\f0 \cf5 \cb3 \CocoaLigature0 gcloud container clusters get-credentials your_cluster_name --zone your_zone
+\f0 \cf4 \cb3 \CocoaLigature0 gcloud container clusters get-credentials your_cluster_name --zone your_zone
 \f1 \cf0 \CocoaLigature1 \
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
 \cf0 \cb1 \
@@ -93,7 +94,8 @@ docker tag image_name asia.gcr.io/project_name/image_name:tag\
 
 \f0\b role.json
 \f1\b0 \
-\cb3 \{\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \cb3 \{\
    "apiVersion": "extensions/v1beta1",\
    "kind": "Deployment",\
    "metadata": \{\
@@ -134,7 +136,8 @@ docker tag image_name asia.gcr.io/project_name/image_name:tag\
       \}\
    \}\
 \}\
-\cb1 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \cb1 \
 	\'82\'c5\'81\'41kubectl apply \'83\'52\'83\'7d\'83\'93\'83\'68\'82\'c5\'83\'66\'83\'76\'83\'8d\'83\'43\'82\'c5\'82\'ab\'82\'e9\'81\'42\
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
 \cf0 \cb3 kubectl apply -f role.json\
@@ -142,12 +145,14 @@ docker tag image_name asia.gcr.io/project_name/image_name:tag\
 \cf0 \cb1 \
 	\'82\'b1\'82\'cc\'8e\'9e\'93\'5f\'82\'c5GKE\'82\'cc\'83\'79\'81\'5b\'83\'57\'82\'a9\'82\'e7\'83\'66\'83\'76\'83\'8d\'83\'43\'8d\'cf\'82\'dd\'82\'cc\'8a\'6d\'94\'46\'82\'aa\'8e\'e6\'82\'ea\'82\'bd\'81\'42\'83\'6d\'81\'5b\'83\'68\'82\'cc\'8f\'da\'8d\'d7\'89\'e6\'96\'ca\'82\'cc\'88\'ea\'94\'d4\'89\'ba\'82\'c9\'83\'66\'83\'76\'83\'8d\'83\'43\'82\'b3\'82\'ea\'82\'c4\'82\'e9\'82\'cc\'82\'f0\'8a\'6d\'94\'46\'81\'42\
 \
-	dep.json\'82\'c9\'82\'cd\'8e\'9f\'82\'cc\'82\'e6\'82\'a4\'82\'c8\'83\'70\'83\'89\'83\'81\'81\'5b\'83\'5e\'82\'f0\'83\'5a\'83\'62\'83\'67\'82\'b5\'82\'c4\'82\'bd\'82\'f1\'82\'be\'82\'af\'82\'c7\'81\'41
+	role.json\'82\'c9\'82\'cd\'8e\'9f\'82\'cc\'82\'e6\'82\'a4\'82\'c8\'83\'70\'83\'89\'83\'81\'81\'5b\'83\'5e\'82\'f0\'83\'5a\'83\'62\'83\'67\'82\'b5\'82\'c4\'82\'bd\'82\'f1\'82\'be\'82\'af\'82\'c7\'81\'41
 \f0 \
-\cb3 \{\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \cb3 \{\
    "apiVersion": "extensions/v1beta1",\
    "kind": "Deployment",\
-\cb1 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \cb1 \
 	\'82\'b1\'82\'ea\'81\'41\'82\'c8\'82\'f1\'82\'c5extensions/v1beta1 \'82\'c6\'82\'a9\'82\'c9\'82\'c8\'82\'e9\'82\'f1\'82\'be\'82\'eb\'82\'a4\'81\'42minikube\'82\'c5\'82\'e2\'82\'c1\'82\'c4\'82\'bd\'82\'dd\'82\'bd\'82\'a2\'82\'c9apps/v1\'82\'c5\'82\'cd\'82\'a2\'82\'af\'82\'c8\'82\'a2\'82\'f1\'82\'be\'82\'eb\'82\'a4\'82\'a9\'81\'48\
 	-> \'82\'b1\'82\'b1\'82\'cc\'90\'dd\'92\'e8\'82\'c9\'91\'a5\'82\'c1\'82\'c4\'82\'e9\'82\'c1\'82\'db\'82\'a2\'81\'42 k8s\'8c\'f6\'8e\'ae\'81\'42\
 		{\field{\*\fldinst{HYPERLINK "https://kubernetes.io/docs/reference/generated/federation/extensions/v1beta1/definitions/"}}{\fldrslt https://kubernetes.io/docs/reference/generated/federation/extensions/v1beta1/definitions/}}\
@@ -160,7 +165,7 @@ docker tag image_name asia.gcr.io/project_name/image_name:tag\
 	\
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
 
-\fs22 \cf5 \cb3 \CocoaLigature0 kubectl create -f svc_role.json 
+\fs22 \cf4 \cb3 \CocoaLigature0 kubectl create -f svc_role.json 
 \fs24 \cf0 \CocoaLigature1 \
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
 \cf0 \cb1 \
@@ -168,33 +173,36 @@ docker tag image_name asia.gcr.io/project_name/image_name:tag\
 	https\'88\'c8\'8a\'4f\'82\'c5\'82\'cc\'83\'41\'83\'4e\'83\'5a\'83\'58\'82\'aa\'82\'c5\'82\'ab\'82\'c8\'82\'a2 + \'83\'52\'83\'93\'83\'65\'83\'69\'82\'aa\'82\'bb\'82\'ea\'82\'c9\'91\'ce\'89\'9e\'82\'b5\'82\'c4\'82\'c8\'82\'a2\'93\'49\'82\'c8\'81\'48\
 	-> \'88\'e1\'82\'c1\'82\'bd\'81\'42\
 \
-\cb3 kubectl expose deployment -l app=role -p your_port --type "LoadBalancer"\
-\cb1 	\'82\'c6\'82\'a9\'83\'5f\'83\'43\'83\'8c\'83\'4e\'83\'67\'82\'c9\'82\'e2\'82\'c1\'82\'bd\'82\'e7\'90\'da\'91\'b1\'82\'c5\'82\'ab\'82\'bd\'81\'42\'82\'e2\'82\'c1\'82\'bd\'82\'ba\'81\'49\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \cb3 kubectl expose deployment -l app=role -p your_port --type "LoadBalancer"\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \cb1 	\'82\'c6\'82\'a9\'83\'5f\'83\'43\'83\'8c\'83\'4e\'83\'67\'82\'c9\'82\'e2\'82\'c1\'82\'bd\'82\'e7\'90\'da\'91\'b1\'82\'c5\'82\'ab\'82\'bd\'81\'42\'82\'e2\'82\'c1\'82\'bd\'82\'ba\'81\'49\
 	\'82\'c6\'82\'a2\'82\'a4\'82\'b1\'82\'c6\'82\'cd\'83\'74\'83\'40\'83\'43\'83\'8b\'82\'c5\'8f\'91\'82\'a2\'82\'bdService\'82\'cc\'8b\'4c\'8f\'71\'82\'aa\'82\'dc\'82\'bf\'82\'aa\'82\'c1\'82\'c4\'82\'a2\'82\'e9\'81\'42\
 \
 	\'8d\'b7\
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
 
-\fs22 \cf5 \cb3 \CocoaLigature0 x role    LoadBalancer   10.35.248.38   104.199.151.125   your_port2:30247/TCP,your_port:30368/TCP   12h
+\fs22 \cf4 \cb3 \CocoaLigature0 x role    LoadBalancer   10.35.248.38   104.199.151.125   your_port2:30247/TCP,your_port:30368/TCP   12h
 \fs24 \cf0 \CocoaLigature1 \
 
-\fs22 \cf5 \CocoaLigature0 o role-deployment   LoadBalancer   10.35.250.167   35.229.178.174   your_port:31518/TCP   2m
+\fs22 \cf4 \CocoaLigature0 o role-deployment   LoadBalancer   10.35.250.167   35.229.178.174   your_port:31518/TCP   2m
 \fs24 \cf0 \CocoaLigature1 \
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
 \cf0 \cb1 \
 	\'82\'c8\'82\'e9\'82\'d9\'82\'c7\'81\'41expose\'82\'b5\'82\'c4\'82\'e9\'91\'ce\'8f\'db\'82\'aa\'88\'d9\'82\'c8\'82\'e9\'82\'cc\'82\'a9\'81\'42\'82\'b3\'82\'e7\'82\'c9\'82\'c8\'82\'f1\'82\'a9\'88\'e1\'82\'a2\'82\'bb\'82\'a4\'81\'42\
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
 
-\fs22 \cf5 \cb6 \CocoaLigature0 kubectl expose deployment role-deployment --port=your_port,your_port2 --type="LoadBalancer"
-\fs24 \cf0 \cb1 \CocoaLigature1 \
+\fs22 \cf4 \cb5 \CocoaLigature0 kubectl expose deployment role-deployment --port=your_port,your_port2 --type="LoadBalancer"
+\fs24 \cf0 \CocoaLigature1 \
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
-\cf0 	\'82\'c6\'82\'a9\'82\'be\'82\'c6\'95\'a1\'90\'94port\'82\'a2\'82\'af\'82\'bd\'81\'42\'82\'e2\'82\'c1\'82\'bd\'82\'ba\'81\'42\'82\'c5\'81\'41\
+\cf0 \cb1 	\'82\'c6\'82\'a9\'82\'be\'82\'c6\'95\'a1\'90\'94port\'82\'a2\'82\'af\'82\'bd\'81\'42\'82\'e2\'82\'c1\'82\'bd\'82\'ba\'81\'42\'82\'c5\'81\'41\
 	\'82\'b6\'82\'e1\'82\'a0\'82\'b1\'82\'ea\'82\'cd\'82\'c7\'82\'f1\'82\'c8\'83\'66\'81\'5b\'83\'5e\'82\'c9\'82\'c8\'82\'c1\'82\'c4\'82\'e9\'82\'f1\'82\'be\'82\'eb\'82\'a4\'81\'41\'81\'41\'81\'41json\'82\'c9\'82\'c5\'82\'ab\'82\'c8\'82\'a2\'82\'c6\'82\'c2\'82\'e7\'82\'a2\'82\'bc\'81\'41\'81\'41\
 	-> get svc \'96\'bc\'91\'4f -o yaml\'82\'c5\'8e\'e6\'82\'e8\'8f\'6f\'82\'b5\'82\'c4\'89\'5d\'81\'58\'82\'b5\'82\'c4\'94\'e4\'8a\'72\'82\'b5\'82\'bd\'81\'42json\'82\'c5\'82\'e0\'8e\'e6\'82\'e8\'8f\'6f\'82\'b9\'82\'e9\'81\'48 -> \'8f\'6f\'82\'b9\'82\'bd\'81\'42\
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
 
-\fs22 \cf5 \cb6 \CocoaLigature0 \
-\cb3 kubectl get svc role-deployment -o json
+\fs22 \cf4 \cb6 \CocoaLigature0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf4 \cb3 kubectl get svc role-deployment -o json
 \fs24 \cf0 \CocoaLigature1 \
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
 \cf0 \cb1 \
@@ -206,7 +214,8 @@ docker tag image_name asia.gcr.io/project_name/image_name:tag\
 
 \b svc_role.json
 \b0 \
-\cb3 \{\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \cb3 \{\
     "apiVersion": "v1",\
     "kind": "Service",\
     "metadata": \{\
@@ -232,7 +241,8 @@ docker tag image_name asia.gcr.io/project_name/image_name:tag\
         "type": "LoadBalancer"\
     \}\
 \}\
-\cb1 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \cb1 \
 	\'8b\'b3\'8c\'50:\
 		\'81\'45deployment\'82\'c9\'82\'c2\'82\'af\'82\'e9\'96\'bc\'91\'4f\'82\'c6service\'82\'c9\'82\'c2\'82\'af\'82\'e9\'96\'bc\'91\'4f\'82\'c5\'88\'ea\'92\'76\'82\'b5\'82\'c4\'82\'c8\'82\'a2\'82\'c6\'8d\'73\'82\'af\'82\'c8\'82\'a2\'95\'94\'95\'aa\'82\'aa\'82\'a0\'82\'e9\'81\'42\
 		\'81\'45selector\'82\'c9\'82\'c2\'82\'a2\'82\'c4\'82\'e0\'82\'c1\'82\'c6\'8a\'77\'82\'d4\'95\'4b\'97\'76\'82\'aa\'82\'a0\'82\'e9\'81\'42\'82\'c7\'82\'f1\'82\'c8\'8e\'77\'8c\'fc\'90\'ab\'82\'b5\'82\'c4\'82\'e9\'82\'f1\'82\'be\'82\'a9\'82\'f0\'82\'e0\'82\'c1\'82\'c6\'94\'63\'88\'ac\'82\'b5\'82\'c8\'82\'a2\'82\'c6\'82\'c8\'81\'81\'81\'60\'81\'42\
