@@ -42,7 +42,7 @@
 <p class="p3"><b>作成したimageをContainerRegistryにアップする</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>タグつけてgcloudコマンドでアップ。タグつけるときにtagをつけなければ自動的にlatestがつく。</p>
 <p class="p4"><span class="s1">docker tag image_name asia.gcr.io/project_name/image_name:tag</span></p>
-<p class="p4"><span class="s1">gcloud docker --push asia.gcr.io/project_name/image_name</span></p>
+<p class="p4"><span class="s1">gcloud docker -- push asia.gcr.io/project_name/image_name</span></p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>ContainerRegistryにアップしたコンテナをGKEで使う</b></p>
