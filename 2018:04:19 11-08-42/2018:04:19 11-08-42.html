@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1504.83">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Sans'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>Unity IAPの更新方法</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>こうしないとインポート時に100%Unity Editorが落ちる、という確証が取れたのでまとめる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ちなみにこれを実践しても何度か落ちる可能性がある。IAPのアプデしたいだけなんだが(報告中)</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>1.IAPを使っているコードをコンパイル対象から外す</p>
+<p class="p3"><span class="Apple-tab-span">	</span>2.IAPの入っているPlugins/UnityPurchasing フォルダを消す</p>
+<p class="p3"><span class="Apple-tab-span">	</span>3.一旦Unity終了、プロジェクト直下のLibraryフォルダを消す</p>
+<p class="p3"><span class="Apple-tab-span">	</span>4.Unity起動、ServicesからIAPをImport</p>
+<p class="p3"><span class="Apple-tab-span">	</span>5.ServicesからIAPをReimport</p>
+<p class="p3"><span class="Apple-tab-span">	</span>6.Plugins/UnityPurchasing フォルダ内にunitypackageができるので、それを使う</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>こんだけやるとIAPを最新にできる。なぜだ。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>1.IAPを使っているコードをコンパイル対象から外す</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>なんかコンパイラディレクティブとか使って、特定状況下ではPurchasingとそれに依存するコードを丸ごとコンパイル対象から外す、みたいなことをするといいと思う。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Purchasing系に依存してるコードがある状態でIAP更新すると100%エディタが落ちる。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>2.IAPの入っているPlugins/UnityPurchasing フォルダを消す</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>フォルダを消しても依存がないのでコンパイルエラーが出ないはず。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>3.一旦Unity終了、プロジェクト直下のLibraryフォルダを消す</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Libraryフォルダを消す。これをやらないとやはり落ちる。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>4.Unity起動、ServicesからIAPをImport</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ログイン済み + IAPをEnableにする、という操作が終わっていればImportやReimportボタンが出る。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>押すと、、中確率くらいでUnityEditorが落ちる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>2でフォルダを消しているので、Importになっているはず。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>5.ServicesからIAPをReimport</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Importが終わったら、再度Services &gt; IAP でReimportを押す</p>
+<p class="p3"><span class="Apple-tab-span">	</span>押すと、、中確率くらいでUnityEditorが落ちる。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>6.Plugins/UnityPurchasing フォルダ内にunitypackageができるので、それを使う</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ここまででPlugins/UnityPurchasingフォルダ下にunitypackageが2つできているはずで、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>できていない場合Reimportが足りない。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>何を言っているのかわからねーと思うが本当にそう。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Reimportしまくると出てくる。自分は最大3回くらいReimportした。</p>
+<p class="p2"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202018-04-19%2014.13.23.png" alt="スクリーンショット 2018-04-19 14.13.23.png"></p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>UnityIAP.unitypackage</b> を使うとこで、正しくいろいろ入った状態のIAPが使えるようになる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>最後に1で立てたdefineとかを消して、元来の機構のコンパイルを通して完了となる。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>やらないとどうなるの？</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>using Unity.Purchasing の内容にストア情報が含まれなかったり StandardPurchasingModule.Instance() のコンパイルが通らなかったりする。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>原因は単純で、dllが異なるっぽい。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>unitypackageに含まれてるdllが正しい。それ以外はダメ。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>楽な方法はないの</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>UnityIAPを空のプロジェクトに入れて、そこで出てきたunitypackageを対象のプロジェクトに対して使う。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>なんでやねんという感じがするが、本当にこれ。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>もしかしてAssetStoreの方のやつをそのまま使うと良かったりする？と何回か試したことがあるが、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>うまくいったりいかなかったりで再現性がないんで再現性があるこの手法を紹介する。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+</body>
+</html>
