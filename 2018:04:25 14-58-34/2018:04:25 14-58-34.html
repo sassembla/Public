@@ -25,8 +25,12 @@
 <p class="p3"><span class="Apple-tab-span">	</span>通常のPlayでは発生せず、UnityTestの中でだけ失敗する。安心(？)</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
+<p class="p3"><b>再現リポジトリ</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/TestWithLoadSyncThenUnloadAsync/tree/master">https://github.com/sassembla/TestWithLoadSyncThenUnloadAsync/tree/master</a></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
 <p class="p3"><b>対象</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>Unity2017.3.1p4</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Unity2017.3.1p4、Unity2017.4.0f1</p>
 <p class="p3"><span class="Apple-tab-span">	</span>ほかにもあるかもしれないが検証は各位の宿題とする。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
@@ -64,6 +68,9 @@
 <p class="p4"><span class="Apple-converted-space">        </span>yield return null;</p>
 <p class="p4"><span class="Apple-converted-space">    </span>}</p>
 <p class="p4">}</p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>再現リポジトリのUnityTestを実行すると、Asyncは通過して、Syncは失敗する。</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>こちらからは以上です。レポートしとこ。</p>
 <p class="p2"><br></p>
