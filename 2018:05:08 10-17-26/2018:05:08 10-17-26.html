@@ -48,7 +48,7 @@
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Frustam、平面との距離。</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>距離計算をComputeBufferで扱い、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>位置、距離計算をComputeBufferで扱い、描画する対象を制限する。そのための情報も持つ。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
@@ -79,12 +79,12 @@
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>輪郭のシワとかをリムライトで描くというのにチャレンジしてる。</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>ローポリだとアウトラインそのままで出すとつらい -&gt; OutlineSamplerで特定の頂点だけお線が出る強さを調整することができる。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>頂点カラーを生成 -&gt; テクスチャに焼き出す、とかすると、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>頂点カラーを生成 -&gt; テクスチャに焼き出す、とかすると、楽に調整できるよ。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>あいんつばいさん</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>光らせる話。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>PostProcessingStackのBloomを設定、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>PostProcessingStackのBloomを設定。</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p3"><span class="Apple-tab-span">	</span>RimlightFeather</p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>テクスチャにしっかりした線を描かずに、金属の表現をする。</p>
@@ -244,17 +244,20 @@
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>MemoryProfiler</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>メモリ見るやつ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>いつものメモリ見るやつ。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>MemoryProfilerExtension</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>https://github.com/robertoardila/support-unity-memoryprofiler</p>
+<p class="p3"><span class="Apple-tab-span">	</span><a href="https://github.com/robertoardila/support-unity-memoryprofiler">https://github.com/robertoardila/support-unity-memoryprofiler</a></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>これは知らなかった。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>めっちゃいいのでは！！</p>
+<p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>Instruments VMTracker</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>Appのメモリ消費についての解析ツール。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>WWDCで紹介動画とかがあったらしい。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>WWDCで紹介動画とかがあったらしい。探してみて見るといいよ、使い方わかるから、とのこと。</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>Dirtyサイズがゼロの部分は、Cleanな領域にallocateされたものだと判断できる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Dirtyサイズがゼロの部分は、Cleanな領域にallocateされたものだと判断できる。まあCleanに置かれるのNativePluginとかライブラリとかなのだが。</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p2"><br></p>
 <p class="p3"><b>Instruments Allocation</b></p>
@@ -264,7 +267,7 @@
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>VM TrackerとAllocations合わせて</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>AllocationsのCategoryでVM: Memory 255 とかなってたらUnity。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>AllocationsのCategoryでVM: Memory *** 255 とかなってたらUnity。</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p3">ここまでのツールを組み合わせると、いい感じに答え合わせができそう。</p>
 <p class="p2"><br></p>
@@ -286,7 +289,7 @@
 <p class="p3"><span class="Apple-tab-span">	</span>timelineに複数の視点を置いて、エディタ上で動かすことで他視点をテストしやすくなる。</p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>このTipsクッソ便利だわ、、、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>このTipsクッソ便利だわ、、、それ用のツール作ろうかな。視点一個置くと勝手にTimeline生成してくれるやつ。</p>
 <p class="p2"><br></p>
 </body>
 </html>
