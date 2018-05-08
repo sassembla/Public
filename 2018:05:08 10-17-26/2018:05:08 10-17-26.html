@@ -1,0 +1,292 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1561.4">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Sans'; background-color: #000000; background-color: rgba(0, 0, 0, 0)}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; background-color: #000000; background-color: rgba(0, 0, 0, 0); min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; background-color: #000000; background-color: rgba(0, 0, 0, 0)}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 17.0px 'Hiragino Sans'; background-color: #000000; background-color: rgba(0, 0, 0, 0); min-height: 26.0px}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 17.0px 'Hiragino Sans'; background-color: #000000; background-color: rgba(0, 0, 0, 0)}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 17.0px 'Hiragino Sans'; color: #292b2c; background-color: #000000; background-color: rgba(0, 0, 0, 0)}
+    span.s1 {font-kerning: none}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>Unite2018.day2</b></p>
+<p class="p2"><br></p>
+<p class="p3">おもろかった。参加したやつを順に。</p>
+<p class="p4"><b></b><br></p>
+<p class="p5"><b>誘導ミサイル完全マスター</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>C#でシミュレータを作るといいかも。動いたらComputeShaderに移動していく。</p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・生成時にランダムを入れるようにすると便利</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>並列化された状態でランダムを作ろうとすると大変</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・絶対時刻で管理</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>並列化された状態のアレ。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・爆発距離</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>当たったところからの距離をとって、音を鳴らすのに使ったりする。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ターゲットにミサイルがぶつかった -&gt; ターゲットに命中を通知する</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ComputeBuffer.GetData()でデータをとる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>GPUはそのまま値を返せない。ので、CPUはGPUが値を返すまで停止する。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>AsyncGPUReadback</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>非同期！　ただしWindows限定。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>描画バウンド</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>GPUは速いんだけど、どうせ描画がボトルネックになる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>-&gt; カメラの近くのミサイルを移す、距離をとって近いものをN個まで描画する、とか。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Frustam、平面との距離。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>距離計算をComputeBufferで扱い、</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>メタルバッファ、トリプルなんで三色、これが綺麗に並んでない場合、綺麗に動いてない。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>iPhone6で、ちょうどGetDataのタイミングとして使えるものがあった。安定化はむずかしそう。が、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>2fに一回、2フレーム分を取り出すことで効率化した。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>-&gt; 実際に使ったAPIはLateUpdate。で、毎フレーム実行すると、GetDataが遅かった時のCPUの荒れを次のフレームでもひきずってしまって辛かった。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ので、2fに一回にすることで、GetDataの荒れを解消できた。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ただ公演でもおっしゃっていたが大道芸なので、iOSとかで使いたい場合、素直に2018.2で出るのを待つのがいいのでは、とのこと。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p5"><b>ユニティちゃんシェーダ2</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>カラー設定を直接指定できる</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>-&gt; 好みのカラーを配置できる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>線をくっきり出す、ソーベルカラーフィルタを開発。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>暁さん</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>HighColorMaskを使って、例えば金属だけにSpecularが出るようにしたい。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>-&gt; スペキュラマップを使って、光沢が出て欲しい部分だけに色を使った。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>フォトショでレイヤ作ってやってるよね -&gt; レイヤもう一枚作る、みたいな。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>RimLightMaskについても同様、スカートの中に入らないようにしたり。顔に出ないようにしたり。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>-&gt; 顔は、表情で頂点が移動するので、当たらないようにしている。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>輪郭のシワとかをリムライトで描くというのにチャレンジしてる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ローポリだとアウトラインそのままで出すとつらい -&gt; OutlineSamplerで特定の頂点だけお線が出る強さを調整することができる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>頂点カラーを生成 -&gt; テクスチャに焼き出す、とかすると、</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>あいんつばいさん</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>光らせる話。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>PostProcessingStackのBloomを設定、</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>RimlightFeather</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>テクスチャにしっかりした線を描かずに、金属の表現をする。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ブレードにテクスチャを入れる、カラーマップ上にHDRで加算される。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>京野さん</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>横から見た口をいい感じにマンガチックに出したい</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>サーフェスピアッシングなら、、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>髪の上に眉を描けるなら、口でもできるんじゃない？</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>UTSではステンシル機能として実装している。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>-&gt; できた</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>が、貫通する問題が出たんで、遮蔽シールドを内側に貼ってDone</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>-&gt; 法線をUnity上で編集できるんでいけるのでは</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>アスクザスピーカーで話してみた</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Unity 小林さん。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>その辺の会社のグラフィッカーさんとかがTAになるルートが欲しい、みたいな話をした。</p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ワイ「shader関連の知識は沼、一歩踏み込むと深い。UTSとかで入り口は簡単になったな～と思うんだけど」</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>-&gt; それな</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>-&gt; 今んとこやり遂げてしまうのは、ひたすら「こういう表現がしたい」みたいな執念が強い人。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>-&gt; Unity開発者認定試験でShader関連とかが日本語化されるんで期待してて</p>
+<p class="p3"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Expert Technical Artist:Shading &amp; Effects</b> <a href="https://certification.unity.com/products/expert-technical-artist-shading-effects">https://certification.unity.com/products/expert-technical-artist-shading-effects</a></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>わーい。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>その他だと、「これ以上は今は踏み込まないでいい」みたいなブレーキが欲しい、みたいな話をした。</p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p6"><span class="s1"><b>実践的なパフォーマンス分析と最適化</b></span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>実機でプロファイルしようね、ゲームの全体とか。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>プロファイルツール</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Editorに入ってるやつ。実験的にMonoを使って云々。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>FrameDebugger</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>実機のものも観れるんだが。繋げば。はい。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>MemoryProfiler</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>メモリのあれ。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Platform-specific tools</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Unityに同梱されてる。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>Runtimeメモリがでかすぎる</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>-&gt; AssetAuditor というツールがあるんで、それを使う。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Read/Write enabledつけると2倍食うかんね</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>R/WTexEnabled でapplyを行うと、RAM -&gt; GPUへとアップロードする。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>mipmapがあると質量が33%増える</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>カメラとの距離によってテクスチャを変える場合にのみ意味がある。</p>
+<p class="p2"><br></p>
+<p class="p3"><b>画像</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Crunchcompression ETCが使えるようになっている。が、極端にロードが遅いケースがある？</p>
+<p class="p3"><span class="Apple-tab-span">	</span>調査中とのこと。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>Animation Curve</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Legacyはカーブ数が300よりも小さい場合、有効。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>が、Unity Animation Systemを使った方が効果がでるみたいなケースもありそう。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Humanoidは、retargetting と IKを使っている場合に使う。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>そうでない場合、Genericを使う。</p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b>Animatorコンポーネント</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>CullingMode ってのがあって、選ぶとスクリーン上にないものをアニメーションしなくなる、みたいなモードがある。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>画面に映っていなくても内部的に更新する、みたいなモードもあり。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>GameObjectと関連したAnimator</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>2018から新プロパティができていて、GOが消されても状態を保持できる(GOによらない場所に保持してそう)</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、Animatorの中からGOをKillできるようになる、みたいな。</p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b>リモートプロファイリングしたいんじゃ</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ask the speakerでいろいろ「こういうことやってるんだけど辛いんだが」みたいな話をさせてもらった。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>-&gt; OK、言いたいことはわかった、自分宛にメールしろ</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>-&gt; した。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p6"><span class="s1"><b>パーティクル・マニアクス</b></span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>LoopUntilReplaced 一定値を超えると、超えた分をトランジションありで消す。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Fade Timeをセットできて、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>0 -&gt; 0.7はアルファ、その後の部分はこのシステムでのトランシジョンで使われる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>エフェクトを壁に出すには：</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>レイキャストから座標変換やると楽そう。</p>
+<p class="p2"><br></p>
+<p class="p3"><b>Shape Module</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Edgeモードで、メッシュ頂点を起点としてパーティクルを出すことができる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Ping-pongだと、行ったり来たりする。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>頂点の位置で時間を使うような設定もできるようで、頂点が多い箇所でより滑らかに動く。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>External Forces Mod</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Win限定ぽい？ 2018で入った。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>影響を与えるパーティクルに対して指定したりできる。</p>
+<p class="p2"><br></p>
+<p class="p3"><b>LineRendererEditor</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>2018.2以降</p>
+<p class="p3"><span class="Apple-tab-span">	</span>手で書く -&gt; 頂点減らす、とかができる！</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b>UI Particle</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>SetVerticesDirty()をするといい感じに描画できるぽい、UI空間でのパーティクルのアップデートとか。</p>
+<p class="p2"><br></p>
+<p class="p3"><b>パーティクルのcustimCallingの話</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>見えるパーティクルだけを動かす、みたいな話。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・CullingGroupを作る</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・target.automaticCullingEnabledをチェック</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・パーティクルをグループに入れて、範囲指定をセットしてChangeStateを受け止める</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・ChangeState内でオンオフを行う</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>こんなスクリプト</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>https://gist.github.com/karljj1/aa833be5c2e8a061fb1693ee0d31c915</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>JobSystemとの統合</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>高速になるよ！</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p6"><span class="s1"><b>その最適化、本当に最適ですか！？ ～正しい最適化を行うためのテクニック～</b></span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>iOSでの話</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>VirtualMemoryの話</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>VM -&gt; ページに分割されている</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Physical &gt; Available by App &gt; Appがallocateしたメモリ、他、、 Clean(readOnly)とDirty(自由にできる)</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>iOSはheap size限界を明示していないが、だいたい物理の2倍くらい。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>iOSはvメモリをコンプレスして物理メモリを確保している。</p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b>Unityでの話</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>テクスチャとかのリソースはNativeメモリにガンガン搭載される。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>NativeプラグインはすべてCleanに置かれる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>-&gt; Dirtyメモリを使っているオブジェクトを減らすと良い。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>どうやって計算する？</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>Unity Profiler</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>デバイス上で動かしていると、Used Total とか書いてあるとこ。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>GfxDriverの数値がテクスチャサイズとかの合計(現在描画しているのを除く</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>何がどのくらいのメモリを食っているのがわかる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ProfilerからAssets/とかになんか置かれているのが観れるビューがあるぽい。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>MemoryProfiler</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>メモリ見るやつ。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>MemoryProfilerExtension</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>https://github.com/robertoardila/support-unity-memoryprofiler</p>
+<p class="p2"><br></p>
+<p class="p3"><b>Instruments VMTracker</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Appのメモリ消費についての解析ツール。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>WWDCで紹介動画とかがあったらしい。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Dirtyサイズがゼロの部分は、Cleanな領域にallocateされたものだと判断できる。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>Instruments Allocation</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>スタックトレースが見れるんで、そのへんで。すべてVM。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>SerializedFile: AssetBundle</p>
+<p class="p3"><span class="Apple-tab-span">	</span>il2cpp_codegen_initialize: インスタンスのallocation</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>VM TrackerとAllocations合わせて</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>AllocationsのCategoryでVM: Memory 255 とかなってたらUnity。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3">ここまでのツールを組み合わせると、いい感じに答え合わせができそう。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p6"><span class="s1"><b>アーティストがUnityでサクッといいビジュアルを作るテクニック講座</b></span></p>
+<p class="p2"><br></p>
+<p class="p3">PostProcessingStackv2とかを使うよ。<span class="Apple-tab-span">	</span></p>
+<p class="p3">1.適当にものを置きます</p>
+<p class="p3">2.雨が降ってるんでhazeとかfogとかをセットします</p>
+<p class="p3">3.PostProcessをいじります</p>
+<p class="p2"><br></p>
+<p class="p3">・コントラストが出せるようなシチュエーション</p>
+<p class="p3">・ライティングをリアルにしようと傾ける</p>
+<p class="p3">・空気感を出すためにフォグとか出す</p>
+<p class="p2"><br></p>
+<p class="p3">みたいなことをすると盛り上がる。</p>
+<p class="p2"><br></p>
+<p class="p3"><b>Tips</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>timelineに複数の視点を置いて、エディタ上で動かすことで他視点をテストしやすくなる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>このTipsクッソ便利だわ、、、</p>
+<p class="p2"><br></p>
+</body>
+</html>
