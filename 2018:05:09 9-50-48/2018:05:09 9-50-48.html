@@ -10,10 +10,13 @@
     p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Sans'}
     p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 17.0px 'Hiragino Sans'; min-height: 26.0px}
     p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 17.0px 'Hiragino Sans'; color: #292b2c}
-    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; min-height: 18.0px}
-    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'}
-    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 17.0px 'Hiragino Sans'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; min-height: 18.0px}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
     span.s1 {font-kerning: none}
+    span.s2 {font: 12.0px Helvetica}
+    span.s3 {font: 12.0px 'Hiragino Sans'}
     span.Apple-tab-span {white-space:pre}
   </style>
 </head>
@@ -21,408 +24,447 @@
 <p class="p1"><b>Unite2018.day3</b></p>
 <p class="p2"><b></b><br></p>
 <p class="p3"><span class="s1"><b>新機能Shader Graphを使えばプログラミング無しにシェーダーが作れるようになります！</b></span></p>
-<p class="p4"><br></p>
-<p class="p4"><br></p>
-<p class="p5"><span class="Apple-tab-span">	</span>Create &gt; Shader &gt; ShaderGraph &gt;<span class="Apple-converted-space">  </span>とかでサンプルが出る</p>
-<p class="p4"><br></p>
-<p class="p5"><span class="Apple-tab-span">	</span>右上のプロパティブラックボード、というところでプロパティを足せる。</p>
-<p class="p5"><span class="Apple-tab-span">	</span>-&gt; それをグラフ上にD&amp;Dでノードとして配置できる。パラメータを足せる。</p>
-<p class="p4"><br></p>
-<p class="p5">具体的に作ってみる</p>
-<p class="p4"><span class="Apple-tab-span">	</span></p>
-<p class="p4"><br></p>
-<p class="p5"><b>ディゾルブ</b></p>
-<p class="p5"><span class="Apple-tab-span">	</span>・アルファカットアウトで</p>
-<p class="p5"><span class="Apple-tab-span">	</span>・際が光る</p>
-<p class="p4"><br></p>
-<p class="p5"><span class="Apple-tab-span">	</span>cutoff値よりも小さな部分を透明にする、</p>
-<p class="p5"><span class="Apple-tab-span">	</span>で、濃淡がある画像に対して行ったりすると、その形に抜けていく。</p>
-<p class="p5"><span class="Apple-tab-span">	</span>かつ、際の色を発光にする。</p>
-<p class="p4"><br></p>
-<p class="p5"><span class="Apple-tab-span">	</span>SampleTex2Dを作って、</p>
-<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>石像に使われるノーマルマップをPBR Masterノードにセット</p>
-<p class="p4"><span class="Apple-tab-span">	</span></p>
-<p class="p5"><span class="Apple-tab-span">	</span>モデルは右下のほうでCustomなモデルにセットできる。</p>
-<p class="p4"><br></p>
-<p class="p5"><span class="Apple-tab-span">	</span>SampleNoiseを作って、MasterのAlphaに突っ込む</p>
-<p class="p4"><br></p>
-<p class="p5"><span class="Apple-tab-span">	</span>Vector1パラメータノードを作って、MasterのAlphaClipに突っ込む</p>
-<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>-&gt; この値をいじると、透明度が変わる。</p>
-<p class="p4"><br></p>
-<p class="p5"><span class="Apple-tab-span">	</span>閾値、Threatholdは、Stepノードを使う。</p>
-<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>あるedge値をセットすると、流れ込んでくるものによって0か1を返す。</p>
-<p class="p4"><br></p>
-<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Stepに対してNoiseをインプット値として接続、Vector1ノードをedgeとしてセット</p>
-<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>こうすることで、V1をedgeとしてインプット値を0か1にできる。</p>
-<p class="p4"><br></p>
-<p class="p5"><span class="Apple-tab-span">	</span>Timeノードを使う</p>
-<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ゲーム開始からの秒を返してくる</p>
-<p class="p4"><span class="Apple-tab-span">	</span></p>
-<p class="p5"><span class="Apple-tab-span">	</span>Fractionノードを使う</p>
-<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>小数点以下を抜き出す</p>
-<p class="p4"><br></p>
-<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Time -&gt; Fractionで反復Animationが作れる。</p>
-<p class="p4"><span class="Apple-tab-span">	</span></p>
-<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Fraction -&gt; V1へと接続し、時間で変化する反復要素を組み込む。</p>
-<p class="p4"><br></p>
-<p class="p5"><span class="Apple-tab-span">	</span>プロバティブラックボードにカラーを新規作成し、そこからノードを作成する。</p>
-<p class="p4"><br></p>
-<p class="p5"><span class="Apple-tab-span">	</span>Multiplyノードを足して、カラー -&gt; Mul -&gt; Masterに接続すると、Untiyのプロパティからエッジのカラーをセットすることができる。</p>
-<p class="p4"><br></p>
-<p class="p4"><span class="Apple-tab-span">	</span></p>
-<p class="p5"><b>ゲージ</b></p>
-<p class="p5"><span class="Apple-tab-span">	</span>グラデーション素材とスレッショルドの合成で表現</p>
-<p class="p4"><br></p>
-<p class="p5"><span class="Apple-tab-span">	</span>・グラデーション素材を適当に作る</p>
-<p class="p5"><span class="Apple-tab-span">	</span>・Unlit Graphで作成(ライトの影響受けなくていいので</p>
-<p class="p5"><span class="Apple-tab-span">	</span>・半透明を使うので、Unlit Masterノードの設定を変更、 Opaque -&gt; Transparent</p>
-<p class="p4"><br></p>
-<p class="p5"><span class="Apple-tab-span">	</span>円形ゲージに対して、中心から直線を引いてぐるりとグラデーションを回したようなグラデーションを用意する。</p>
-<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
-<p class="p5"><span class="Apple-tab-span">	</span>Tex2D</p>
-<p class="p5"><span class="Apple-tab-span">	</span>Step</p>
-<p class="p5"><span class="Apple-tab-span">	</span>V1</p>
-<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>を用意、</p>
-<p class="p4"><br></p>
-<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>V1 -&gt; Stepのedge、</p>
-<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Tex2D -&gt; Stepの値</p>
-<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
-<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>とやって、</p>
-<p class="p4"><span class="Apple-tab-span">	</span></p>
-<p class="p5"><span class="Apple-tab-span">	</span>Remap</p>
-<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>in(min ~ max)に入ったものを、out(min ~ max)の範囲で出力さっるよう一時変換するノード。</p>
-<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>0 - 1で入れたものを、1-0にすることで入力を反転する。</p>
-<p class="p4"><br></p>
-<p class="p5"><span class="Apple-tab-span">	</span>Stepだと値がバッチリ切れてしまって、これで値を作るとテクスチャがジャギってしまう。</p>
-<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>-&gt; SmoothStep ノードを使って書き換え！</p>
-<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ゲージのエッジがいい感じに滑らかになった</p>
-<p class="p4"><br></p>
-<p class="p5"><span class="Apple-tab-span">	</span>ゲージの画像をmulノードで追加する。</p>
-<p class="p4"><br></p>
-<p class="p5"><span class="Apple-tab-span">	</span>2つの値を補完したり、アルファブレンディングするのはlerpノードを使うといい感じ。</p>
-<p class="p4"><br></p>
-<p class="p4"><br></p>
-<p class="p5"><b>荒ぶるテレビ</b></p>
-<p class="p5"><span class="Apple-tab-span">	</span>PBRシェーダ、</p>
-<p class="p5"><span class="Apple-tab-span">	</span>SampleTex2Dで対象の画像をインプット</p>
-<p class="p5"><span class="Apple-tab-span">	</span>ライトの色を黒にして無効化</p>
-<p class="p4"><br></p>
-<p class="p5"><span class="Apple-tab-span">	</span>Sinノード</p>
-<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Sin波を使って、横軸に入るしまを作ろう。</p>
-<p class="p4"><br></p>
-<p class="p5"><span class="Apple-tab-span">	</span>Splitノード</p>
-<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ベクトルを成分に分解する</p>
-<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ついとなるCombineノードは、A,R,G,Bなどからベクトルを作り出す。</p>
-<p class="p4"><br></p>
-<p class="p5"><span class="Apple-tab-span">	</span>Sin波をMulで200倍し、</p>
-<p class="p4"><br></p>
-<p class="p5"><span class="Apple-tab-span">	</span>Saturateノードで、-1 ~ 1のSinを、0 ~ 1に変換できる。</p>
-<p class="p4"><br></p>
-<p class="p5"><span class="Apple-tab-span">	</span>UVAnimationさせてみよう。</p>
-<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Time -&gt; Mul -&gt; Addを接続する。</p>
-<p class="p4"><br></p>
-<p class="p4"><br></p>
-<p class="p5"><span class="Apple-tab-span">	</span>Time -&gt; GradientNoise -&gt; 横にぶれるエフェクト、とやって、「ランダムな時間によってぶれる」みたいなのを実現する。</p>
-<p class="p4"><br></p>
-<p class="p4"><br></p>
-<p class="p5"><b>補足情報</b></p>
-<p class="p5"><span class="Apple-tab-span">	</span>今日の例はgithubにあるよ～～</p>
-<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/keijiro/ShaderGraphExamples">https://github.com/keijiro/ShaderGraphExamples</a></p>
-<p class="p4"><br></p>
-<p class="p4"><br></p>
-<p class="p5"><b>CustomNodeの実装</b></p>
-<p class="p5"><span class="Apple-tab-span">	</span>既存のNodeを組み合わせてCustomNodeを作り出せる。なるほど。</p>
-<p class="p4"><br></p>
-<p class="p4"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>Create &gt; Shader &gt; ShaderGraph &gt;<span class="Apple-converted-space">  </span>とかでサンプルが出る</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>右上のプロパティブラックボード、というところでプロパティを足せる。</p>
+<p class="p4"><span class="Apple-tab-span">	</span>-&gt; それをグラフ上にD&amp;Dでノードとして配置できる。パラメータを足せる。</p>
+<p class="p5"><br></p>
+<p class="p4">具体的に作ってみる</p>
+<p class="p5"><span class="Apple-tab-span">	</span></p>
+<p class="p5"><br></p>
+<p class="p4"><b>ディゾルブ</b></p>
+<p class="p4"><span class="Apple-tab-span">	</span>・アルファカットアウトで</p>
+<p class="p4"><span class="Apple-tab-span">	</span>・際が光る</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>cutoff値よりも小さな部分を透明にする、</p>
+<p class="p4"><span class="Apple-tab-span">	</span>で、濃淡がある画像に対して行ったりすると、その形に抜けていく。</p>
+<p class="p4"><span class="Apple-tab-span">	</span>かつ、際の色を発光にする。</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>SampleTex2Dを作って、</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>石像に使われるノーマルマップをPBR Masterノードにセット</p>
+<p class="p5"><span class="Apple-tab-span">	</span></p>
+<p class="p4"><span class="Apple-tab-span">	</span>モデルは右下のほうでCustomなモデルにセットできる。</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>SampleNoiseを作って、MasterのAlphaに突っ込む</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>Vector1パラメータノードを作って、MasterのAlphaClipに突っ込む</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>-&gt; この値をいじると、透明度が変わる。</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>閾値、Threatholdは、Stepノードを使う。</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>あるedge値をセットすると、流れ込んでくるものによって0か1を返す。</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Stepに対してNoiseをインプット値として接続、Vector1ノードをedgeとしてセット</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>こうすることで、V1をedgeとしてインプット値を0か1にできる。</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>Timeノードを使う</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ゲーム開始からの秒を返してくる</p>
+<p class="p5"><span class="Apple-tab-span">	</span></p>
+<p class="p4"><span class="Apple-tab-span">	</span>Fractionノードを使う</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>小数点以下を抜き出す</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Time -&gt; Fractionで反復Animationが作れる。</p>
+<p class="p5"><span class="Apple-tab-span">	</span></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Fraction -&gt; V1へと接続し、時間で変化する反復要素を組み込む。</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>プロバティブラックボードにカラーを新規作成し、そこからノードを作成する。</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>Multiplyノードを足して、カラー -&gt; Mul -&gt; Masterに接続すると、Untiyのプロパティからエッジのカラーをセットすることができる。</p>
+<p class="p5"><br></p>
+<p class="p5"><span class="Apple-tab-span">	</span></p>
+<p class="p4"><b>ゲージ</b></p>
+<p class="p4"><span class="Apple-tab-span">	</span>グラデーション素材とスレッショルドの合成で表現</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>・グラデーション素材を適当に作る</p>
+<p class="p4"><span class="Apple-tab-span">	</span>・Unlit Graphで作成(ライトの影響受けなくていいので</p>
+<p class="p4"><span class="Apple-tab-span">	</span>・半透明を使うので、Unlit Masterノードの設定を変更、 Opaque -&gt; Transparent</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>円形ゲージに対して、中心から直線を引いてぐるりとグラデーションを回したようなグラデーションを用意する。</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p4"><span class="Apple-tab-span">	</span>Tex2D</p>
+<p class="p4"><span class="Apple-tab-span">	</span>Step</p>
+<p class="p4"><span class="Apple-tab-span">	</span>V1</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>を用意、</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>V1 -&gt; Stepのedge、</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Tex2D -&gt; Stepの値</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>とやって、</p>
+<p class="p5"><span class="Apple-tab-span">	</span></p>
+<p class="p4"><span class="Apple-tab-span">	</span>Remap</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>in(min ~ max)に入ったものを、out(min ~ max)の範囲で出力さっるよう一時変換するノード。</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>0 - 1で入れたものを、1-0にすることで入力を反転する。</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>Stepだと値がバッチリ切れてしまって、これで値を作るとテクスチャがジャギってしまう。</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>-&gt; SmoothStep ノードを使って書き換え！</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ゲージのエッジがいい感じに滑らかになった</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>ゲージの画像をmulノードで追加する。</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>2つの値を補完したり、アルファブレンディングするのはlerpノードを使うといい感じ。</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p4"><b>荒ぶるテレビ</b></p>
+<p class="p4"><span class="Apple-tab-span">	</span>PBRシェーダ、</p>
+<p class="p4"><span class="Apple-tab-span">	</span>SampleTex2Dで対象の画像をインプット</p>
+<p class="p4"><span class="Apple-tab-span">	</span>ライトの色を黒にして無効化</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>Sinノード</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Sin波を使って、横軸に入るしまを作ろう。</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>Splitノード</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ベクトルを成分に分解する</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ついとなるCombineノードは、A,R,G,Bなどからベクトルを作り出す。</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>Sin波をMulで200倍し、</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>Saturateノードで、-1 ~ 1のSinを、0 ~ 1に変換できる。</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>UVAnimationさせてみよう。</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Time -&gt; Mul -&gt; Addを接続する。</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>Time -&gt; GradientNoise -&gt; 横にぶれるエフェクト、とやって、「ランダムな時間によってぶれる」みたいなのを実現する。</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p4"><b>補足情報</b></p>
+<p class="p4"><span class="Apple-tab-span">	</span>今日の例はgithubにあるよ～～</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/keijiro/ShaderGraphExamples">https://github.com/keijiro/ShaderGraphExamples</a></p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p4"><b>CustomNodeの実装</b></p>
+<p class="p4"><span class="Apple-tab-span">	</span>既存のNodeを組み合わせてCustomNodeを作り出せる。なるほど。</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
 <p class="p3"><span class="s1"><b>スクリプトによるTimelineがっつり拡張入門</b></span></p>
-<p class="p4"><br></p>
-<p class="p5"><b>おさらい</b></p>
-<p class="p5"><span class="Apple-tab-span">	</span>・いろんなフィールドをコード無しで書き換え可能。</p>
-<p class="p5"><span class="Apple-tab-span">	</span>・パラメータさえMonoBehaviourであれば扱える。</p>
-<p class="p4"><span class="Apple-tab-span">	</span></p>
-<p class="p5"><span class="Apple-tab-span">	</span>Timeline(Playable)</p>
-<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>PlayableDirectorComponent に入っている。</p>
-<p class="p4"><br></p>
-<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Track</p>
-<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Bindingしたものを扱う。</p>
-<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Cllipを含む</p>
-<p class="p5"><span class="Apple-tab-span">	</span>Clip</p>
-<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>時間指定した効果</p>
-<p class="p4"><br></p>
-<p class="p4"><br></p>
-<p class="p5"><span class="Apple-tab-span">	</span>AnimationTrack</p>
-<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>GOのパラメータをコントロールしたい時には使える。</p>
-<p class="p4"><span class="Apple-tab-span">	</span></p>
-<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>例えばPostEffectとか、GOではないものはコントロールできない。スクリプトを書く必要がある。</p>
-<p class="p4"><br></p>
-<p class="p5"><span class="Apple-tab-span">	</span>次のような選択肢がある</p>
-<p class="p5"><span class="Apple-tab-span">	</span>1.AnimationTrack + MonoBehaviour</p>
-<p class="p5"><span class="Apple-tab-span">	</span>2.ControlTrack</p>
-<p class="p5"><span class="Apple-tab-span">	</span>3.CustomPlayable</p>
-<p class="p4"><br></p>
-<p class="p4"><br></p>
-<p class="p5"><b>1.AnimationTrack + MonoBehaviour</b></p>
-<p class="p5"><span class="Apple-tab-span">	</span>一番簡単、MonoBeで扱えばいい。</p>
-<p class="p5"><span class="Apple-tab-span">	</span>Updateとかでいじる。</p>
-<p class="p4"><br></p>
-<p class="p4"><br></p>
-<p class="p5"><b>2.ControlTrack</b></p>
-<p class="p5"><span class="Apple-tab-span">	</span>MonoBehaviour とITimeControl<span class="Apple-tab-span">	</span>を実装する</p>
-<p class="p5"><span class="Apple-tab-span">	</span>Clipの開始、終了、再生中がわかればいい、という場合に有用。</p>
-<p class="p4"><br></p>
-<p class="p5"><span class="Apple-tab-span">	</span>OnControlTimeStart, SetTime(double) とかがある。</p>
-<p class="p5"><span class="Apple-tab-span">	</span>Clipの最大長は取れないので、こう、はい。事前に知っている必要がある。</p>
-<p class="p4"><br></p>
-<p class="p4"><br></p>
-<p class="p5"><b>3.CustomPlayable</b></p>
-<p class="p5"><span class="Apple-tab-span">	</span>専用トラックの定義。</p>
-<p class="p5"><span class="Apple-tab-span">	</span>Behaviour</p>
-<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>クリップごと</p>
-<p class="p4"><br></p>
-<p class="p5"><span class="Apple-tab-span">	</span>Mixer</p>
-<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>トラックごと</p>
-<p class="p4"><br></p>
-<p class="p5"><span class="Apple-tab-span">	</span>Mixerのほうが使いやすい。</p>
-<p class="p5"><span class="Apple-tab-span">	</span>・実時間を扱っているせいで、Behだと処理落ちで終了までのプロセス全てが動くわけではない、という可能性がある</p>
-<p class="p4"><span class="Apple-tab-span">	</span></p>
-<p class="p5"><span class="Apple-tab-span">	</span>Trackの拡張</p>
-<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>BindingType(型)</p>
-<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Trackの色</p>
-<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>TrackClipType(コンテキストメニューに現れるクリップのタイプ、複数貼るのが可能</p>
-<p class="p4"><br></p>
-<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>TrackAssetを拡張、</p>
-<p class="p4"><br></p>
-<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>override Playable CreateTrackMixer</p>
-<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Playable(今回はMixer)を生成する。</p>
-<p class="p4"><br></p>
-<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>var mixer = ~して、</p>
-<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>(この時点でmixerをこのコンテキストで保持しておくと、後からいじれるので良い、らしい。)</p>
-<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>return mixer;</p>
-<p class="p4"><br></p>
-<p class="p4"><span class="Apple-tab-span">	</span></p>
-<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>override void GatherProperties</p>
-<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Clipの(?)終了時にプロパティを戻す。</p>
-<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
-<p class="p4"><br></p>
-<p class="p5"><span class="Apple-tab-span">	</span>Mixer</p>
-<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>トラック全てに対してイベントを発生させる。</p>
-<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>全フレーム、Processメソッドの呼び出しが発生する。</p>
-<p class="p4"><br></p>
-<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Recordしたい、Timeline上でカーブ入れたい、、、</p>
-<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Clip内にBehaviourを持ち、bh内にパラメータを移動する。</p>
-<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Behaviour拡張はかならずSerializableをつける。</p>
-<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>中のパラメータもpublicだったりSerializeFieldで定義する。</p>
-<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>すると、それらは追跡できるようになる。<span class="Apple-tab-span">	</span></p>
-<p class="p4"><br></p>
-<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>これらのClip内の物体は、メソッドを持たせず、全体を見通せるMixer上から編集するスタイルがいいと思う、みたいな。</p>
-<p class="p4"><br></p>
-<p class="p4"><br></p>
-<p class="p5"><b>さらなるスクリプト</b></p>
-<p class="p5"><span class="Apple-tab-span">	</span>AEからコンバートして再生！というのをやってみる。</p>
-<p class="p5"><span class="Apple-tab-span">	</span>MovieProxyPluginを使って、連番アニメーション限定、なるほど！！</p>
-<p class="p4"><br></p>
-<p class="p5"><span class="Apple-tab-span">	</span>あとでデータ見てみよ。</p>
-<p class="p4"><br></p>
-<p class="p4"><br></p>
-<p class="p6"><b>サイゲのあれ</b></p>
-<p class="p5"><span class="Apple-tab-span">	</span>リム、スペキュラ、環境マップは、キャラクターものを作る上で絵がダイレクトに影響を受けやすく、効果が高かった。</p>
-<p class="p5"><span class="Apple-tab-span">	</span>パラメータテクスチャを用意、テクスチャを用意してRGBで強度を調整する、という感じにした。</p>
-<p class="p5"><span class="Apple-tab-span">	</span>Unityの法線は1つしか持てない -&gt; FBXからインポートすることもできない。</p>
-<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>で、FBXを２つ作って、２つの法線をもつ -&gt; 自前インポータを書いて２つの法線を持つデータにする！と。</p>
-<p class="p4"><br></p>
-<p class="p5"><span class="Apple-tab-span">	</span>CGFXをMayaとUnityで共有、すごーい！</p>
-<p class="p4"><br></p>
-<p class="p5"><span class="Apple-tab-span">	</span>Androidでのテクスチャのバンディング対策</p>
-<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ETC2 Normal使うと、0.5秒の圧縮時間と、バンドが出ない映像が得られることがわかった。</p>
-<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ETC2もっと早く使わなかった理由は？</p>
-<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>・判別手段がなかった</p>
-<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>・ないところで使うと６倍のメモリをああああ</p>
-<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>・Unityのバグもあった</p>
-<p class="p4"><br></p>
-<p class="p5"><span class="Apple-tab-span">	</span>並列AssetBundleビルド</p>
-<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>manifestファイルさえあればそのビルドは発生しない(!)という特性を使い、</p>
-<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>特定の単位でビルド対象を切って、manifestを共有していけば、新規や更新があった部分だけが作成される。</p>
-<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
-<p class="p5"><span class="Apple-tab-span">	</span>Unityキャッシュサーバ高速化</p>
-<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>キャッシュのサイズを500GBにして対応、30分 -&gt; 7分 とかになった。</p>
-<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>メモリかな？ MacProを使った。</p>
-<p class="p4"><br></p>
-<p class="p4"><br></p>
-<p class="p6"><b>Aimingさん</b></p>
-<p class="p4"><br></p>
-<p class="p5"><b>正規表現を駆使してResources -&gt; AssetBundle ,,みたいな探索</b></p>
-<p class="p5"><span class="Apple-tab-span">	</span>これって開発中のみ？</p>
-<p class="p5"><span class="Apple-tab-span">	</span>-&gt;常に実用</p>
-<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>すごいパワフルなことをするな、、Resourcesのラッパ作ってそこでだけ行えばいいのでは感があるけど、ものすごい機構。</p>
-<p class="p4"><br></p>
-<p class="p4"><b></b><br></p>
-<p class="p5"><b>Unloadのくだり</b></p>
-<p class="p5"><span class="Apple-tab-span">	</span>2秒で自動unloadしてる</p>
-<p class="p5"><span class="Apple-tab-span">	</span>メモリに保持しておくのが惜しいのか～。なるほど。</p>
-<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>それであれば、辞書を作ってそこにInstantiateしたのを持っておけば、即解放しちゃっていいのでは？</p>
-<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>-&gt; ABManagerがそんな感じの実装を持っているらしい。</p>
-<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ただ、音データとかをコピーなしで鳴らしていると、Unloadしたときに同時に消えちゃうはずで、</p>
-<p class="p4"><br></p>
-<p class="p4"><span class="Apple-tab-span">	</span></p>
-<p class="p5"><b>variantのくだり</b></p>
-<p class="p5"><span class="Apple-tab-span">	</span>使わないほうがいい、Yes。ほんとにそれ。</p>
-<p class="p4"><br></p>
-<p class="p4"><b></b><br></p>
-<p class="p5"><b>AssetBundleNameを使ってる</b></p>
-<p class="p5"><span class="Apple-tab-span">	</span>-&gt; 後続のverでは滅びていた気がする。AssetGraphとかである程度できると思うけれど。</p>
-<p class="p4"><br></p>
-<p class="p4"><br></p>
-<p class="p5"><b>IDCFのCDNだと問題が出る</b></p>
-<p class="p5"><span class="Apple-tab-span">	</span>別にAWSでも発生するんでは、みたいな。クエリつけようねみたいな話だった。</p>
-<p class="p4"><br></p>
-<p class="p4"><br></p>
-<p class="p6"><b>SRP</b></p>
-<p class="p5">いろんなゲームのレベルがあるよね</p>
-<p class="p4"><br></p>
-<p class="p5"><b>Motivation</b></p>
-<p class="p5"><span class="Apple-tab-span">	</span>Unityのレンダリングをblackboxにしたくない、</p>
-<p class="p5"><span class="Apple-tab-span">	</span>カスタマイズの自由を提供したい。</p>
-<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
-<p class="p5"><b>APIs</b></p>
-<p class="p5"><span class="Apple-tab-span">	</span>Built-In Render Pipeline(will be dep)</p>
-<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>既存</p>
-<p class="p4"><br></p>
-<p class="p5"><span class="Apple-tab-span">	</span>Lightweight(beta)</p>
-<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>MobileとXR向け、一つの光源、</p>
-<p class="p4"><br></p>
-<p class="p5"><span class="Apple-tab-span">	</span>HighDefinition(preview)</p>
-<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ハイエンドPC向け</p>
-<p class="p4"><br></p>
-<p class="p5"><span class="Apple-tab-span">	</span>Custom</p>
-<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>カスタム！！</p>
-<p class="p4"><br></p>
-<p class="p4"><br></p>
-<p class="p5"><b>どこから始めようか</b></p>
-<p class="p5"><span class="Apple-tab-span">	</span>Tips:ライトを切るとBatchやTrisがすごく減る</p>
-<p class="p5"><span class="Apple-tab-span">	</span>SRPの使い始め。</p>
-<p class="p4"><br></p>
-<p class="p5"><span class="Apple-tab-span">	</span>新規プロジェクト作成 &gt; 作成ウィンドウでLWRPとかを選択したり、packageManagerから最新版をロードできる。</p>
-<p class="p4"><br></p>
-<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
-<p class="p5"><b>LWRPでのライト</b></p>
-<p class="p5"><span class="Apple-tab-span">	</span>メイン一個のみがサポートされている。</p>
-<p class="p5"><span class="Apple-tab-span">	</span>パフォーマンスよさげ。</p>
-<p class="p4"><br></p>
-<p class="p5"><span class="Apple-tab-span">	</span>Rendering設定 &gt; PixelLight でPixelLightの数を調整できる。</p>
-<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>これらのライトは影を落とさない。ので、描画計算に影響を与えない。</p>
-<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>最大8。</p>
-<p class="p4"><br></p>
-<p class="p5"><b>デカール</b></p>
-<p class="p5"><span class="Apple-tab-span">	</span>はい</p>
-<p class="p4"><br></p>
-<p class="p4"><br></p>
-<p class="p5"><b>DebugWindow</b></p>
-<p class="p5"><span class="Apple-tab-span">	</span>実行時に描画オプションをいじれる、、らしいがよくわからんかった、表示が違う？</p>
-<p class="p4"><br></p>
-<p class="p4"><br></p>
-<p class="p5"><b>CustomRenderPipelineについて</b></p>
-<p class="p5"><span class="Apple-tab-span">	</span>けいじろうさんのRetro3DPipeline</p>
-<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
-<p class="p5"><span class="Apple-tab-span">	</span>あとgithubでScriptabkeRenderPipeline自体が公開されている。</p>
-<p class="p4"><br></p>
-<p class="p4"><br></p>
-<p class="p6"><b>Addressableの話</b></p>
-<p class="p5"><span class="Apple-tab-span">	</span>・ScriptableBuildPipelineで、ビルド時などのサポートができる。すべてC#製。</p>
-<p class="p5"><span class="Apple-tab-span">	</span>・previewがリリースされている。0.0.22-preview</p>
-<p class="p5"><span class="Apple-tab-span">	</span>・エディタでのPlay時にABの更新をやってくれる</p>
-<p class="p4"><span class="Apple-tab-span">	</span></p>
-<p class="p4"><br></p>
-<p class="p5"><b>AssetReference</b></p>
-<p class="p5"><span class="Apple-tab-span">	</span>prefabみたいなもの。参照になるので、打ち間違いとかはない。</p>
-<p class="p4"><br></p>
-<p class="p4"><br></p>
-<p class="p5"><b>読み出し方</b></p>
-<p class="p5"><span class="Apple-tab-span">	</span>・AssetReferenceオブジェクトをインスペクタからセットしたりする。</p>
-<p class="p5"><span class="Apple-tab-span">	</span>・annotationでの型、ラベル(by Addressablesツール)指定で、扱うAssetの指定を行うことが可能。</p>
-<p class="p5"><span class="Apple-tab-span">	</span>・参照カウント方式なんで、消すときはReleaseを行う。</p>
-<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>たぶん無視して種類全消しとかもできるのでは？</p>
-<p class="p4"><br></p>
-<p class="p5"><span class="Apple-tab-span">	</span>・同じロジックのままでDL元を変更できる。</p>
-<p class="p5"><span class="Apple-tab-span">	</span>・どこから取得するか、というのを、グループという単位で指定できる。</p>
-<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>1.Local</p>
-<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>2.Remote</p>
-<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>3.Advanced</p>
-<p class="p4"><br></p>
-<p class="p5"><span class="Apple-tab-span">	</span>・ContentsCatalog、という全てのアドレス、ラベル、グループの情報が入ったファイルを生成する。json。</p>
-<p class="p5"><span class="Apple-tab-span">	</span>・ラベルによる事前ロードを行うことができる。</p>
-<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>AutoyaでいうPreload。これ動的に生成できないかな、、</p>
-<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>特定のラベルがついているAssetをすべて取得することができる。素晴らしい。</p>
-<p class="p4"><br></p>
-<p class="p5"><span class="Apple-tab-span">	</span>・Profile 設定集</p>
-<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Devとか切り替えるよね、ってやつ。素晴らしい。変数の列挙。</p>
-<p class="p4"><br></p>
-<p class="p5"><span class="Apple-tab-span">	</span>・PlayMode 設定</p>
-<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>開発の状況に合わせてデータのロード方法を一括変更するパイプライン処理が選べる。</p>
-<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>1.Fast(デフォルト、AssetDatabaseを見に行く</p>
-<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>2.Virtual(ABに似せたロード経路を使う</p>
-<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>3.Packed(ABを使う</p>
-<p class="p4"><br></p>
-<p class="p5"><span class="Apple-tab-span">	</span>・ResourceManagerProfiler</p>
-<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>現在ロードされているResourceの情報が把握できる。</p>
-<p class="p4"><br></p>
-<p class="p4"><br></p>
-<p class="p5"><b>AddressableAssetsの役割</b></p>
-<p class="p5"><span class="Apple-tab-span">	</span>起動時処理でグループ設定情報をロード、カタログをロードして、というのをコードでやる。</p>
-<p class="p5"><span class="Apple-tab-span">	</span>任意のタイミングでキックできるかな？</p>
-<p class="p4"><br></p>
-<p class="p4"><br></p>
-<p class="p5"><b>ResourceManager</b></p>
-<p class="p5"><span class="Apple-tab-span">	</span>参照関連、寿命の管理を行う。</p>
-<p class="p5"><span class="Apple-tab-span">	</span>AsyncOpを返してくるので、ユーザー側で頑張る。</p>
-<p class="p4"><br></p>
-<p class="p5"><span class="Apple-tab-span">	</span>文字列、AssetReferenceを渡すと云々。</p>
-<p class="p4"><br></p>
-<p class="p4"><span class="Apple-tab-span">	</span></p>
-<p class="p5"><b>カスタマイズ</b></p>
-<p class="p5"><span class="Apple-tab-span">	</span>だいたいすべてのパーツが改造できそう。</p>
-<p class="p4"><br></p>
-<p class="p5"><span class="Apple-tab-span">	</span>たとえばリストであれば、ResLocator、ResProvicerをカスタマイズすればよさげ。</p>
-<p class="p4"><br></p>
-<p class="p5"><span class="Apple-tab-span">	</span>こういったカスタマイズは全て初期化時にセットするんかな。</p>
-<p class="p4"><br></p>
-<p class="p4"><br></p>
-<p class="p5"><b>Q&amp;A</b></p>
-<p class="p5"><span class="Apple-tab-span">	</span>カタログをサーバ側で生json生成してかえしたい(ResLocatorとかをカスタマイズ？</p>
-<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>-&gt; カスタマイズできるよ！</p>
-<p class="p4"><br></p>
-<p class="p5"><span class="Apple-tab-span">	</span>カタログに独自値を加えたい、、！(verとかnameとか</p>
-<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>-&gt; カスタマイズできるよ！</p>
-<p class="p4"><br></p>
-<p class="p5"><span class="Apple-tab-span">	</span>複数のカタログを扱いたい(管理が楽(見た目関連、データ関連とか</p>
-<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>-&gt; appendという形でやるつもりらしい</p>
-<p class="p4"><br></p>
-<p class="p5"><span class="Apple-tab-span">	</span>カタログを更新するタイミングはユーザー定義でいつでもできる？</p>
-<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>-&gt; resLocMapをダイレクトに書き換えることで実現できるが、標準ではない</p>
-<p class="p4"><br></p>
-<p class="p5"><span class="Apple-tab-span">	</span>すでにAB使ってるタイミングでそのABを更新した内容のカタログを獲得したらどうなる？</p>
-<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>-&gt; 自作</p>
-<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
-<p class="p5"><span class="Apple-tab-span">	</span>カスタマイズは全て初期化時にセットする？</p>
-<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>-&gt; それ</p>
-<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
-<p class="p5"><span class="Apple-tab-span">	</span>特定のAssetRefの参照カウントを取得することはできる？</p>
-<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>-&gt; ない</p>
-<p class="p4"><br></p>
-<p class="p5"><span class="Apple-tab-span">	</span>ReleaseByAssetRef、とかで、特定のAssetRefを元にしてるassetsを一掃できる？</p>
-<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>参照カウント管理は自分でやる、が、その機能は面白いんでお話。</p>
-<p class="p4"><br></p>
-<p class="p5"><span class="Apple-tab-span">	</span>RMのエラーハンドリングどうなってる感じ、isErrorみたいなのをやる？</p>
-<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>-&gt; いまのところ自作</p>
-<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
-<p class="p5"><span class="Apple-tab-span">	</span>カタログ更新によって使わなくなったABをどう扱うか</p>
-<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>-&gt; いまのところ自作</p>
-<p class="p4"><br></p>
-<p class="p5"><span class="Apple-tab-span">	</span>Preloadの並列数っていじれます？</p>
-<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>-&gt; 今はない、おもしろいと思うんでお話。</p>
-<p class="p4"><br></p>
-<p class="p5"><span class="Apple-tab-span">	</span>Preloadに使う引数を外部で生成することは受け付けられる？</p>
-<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ラベルは文字列なんでいける！</p>
-<p class="p4"><br></p>
-<p class="p4"><span class="Apple-tab-span">	</span></p>
+<p class="p5"><br></p>
+<p class="p4"><b>おさらい</b></p>
+<p class="p4"><span class="Apple-tab-span">	</span>・いろんなフィールドをコード無しで書き換え可能。</p>
+<p class="p4"><span class="Apple-tab-span">	</span>・パラメータさえMonoBehaviourであれば扱える。</p>
+<p class="p5"><span class="Apple-tab-span">	</span></p>
+<p class="p4"><span class="Apple-tab-span">	</span>Timeline(Playable)</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>PlayableDirectorComponent に入っている。</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Track</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Bindingしたものを扱う。</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Cllipを含む</p>
+<p class="p4"><span class="Apple-tab-span">	</span>Clip</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>時間指定した効果</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>AnimationTrack</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>GOのパラメータをコントロールしたい時には使える。</p>
+<p class="p5"><span class="Apple-tab-span">	</span></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>例えばPostEffectとか、GOではないものはコントロールできない。スクリプトを書く必要がある。</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>次のような選択肢がある</p>
+<p class="p4"><span class="Apple-tab-span">	</span>1.AnimationTrack + MonoBehaviour</p>
+<p class="p4"><span class="Apple-tab-span">	</span>2.ControlTrack</p>
+<p class="p4"><span class="Apple-tab-span">	</span>3.CustomPlayable</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p4"><b>1.AnimationTrack + MonoBehaviour</b></p>
+<p class="p4"><span class="Apple-tab-span">	</span>一番簡単、MonoBeで扱えばいい。</p>
+<p class="p4"><span class="Apple-tab-span">	</span>Updateとかでいじる。</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p4"><b>2.ControlTrack</b></p>
+<p class="p4"><span class="Apple-tab-span">	</span>MonoBehaviour とITimeControl<span class="Apple-tab-span">	</span>を実装する</p>
+<p class="p4"><span class="Apple-tab-span">	</span>Clipの開始、終了、再生中がわかればいい、という場合に有用。</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>OnControlTimeStart, SetTime(double) とかがある。</p>
+<p class="p4"><span class="Apple-tab-span">	</span>Clipの最大長は取れないので、こう、はい。事前に知っている必要がある。</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p4"><b>3.CustomPlayable</b></p>
+<p class="p4"><span class="Apple-tab-span">	</span>専用トラックの定義。</p>
+<p class="p4"><span class="Apple-tab-span">	</span>Behaviour</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>クリップごと</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>Mixer</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>トラックごと</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>Mixerのほうが使いやすい。</p>
+<p class="p4"><span class="Apple-tab-span">	</span>・実時間を扱っているせいで、Behだと処理落ちで終了までのプロセス全てが動くわけではない、という可能性がある</p>
+<p class="p5"><span class="Apple-tab-span">	</span></p>
+<p class="p4"><span class="Apple-tab-span">	</span>Trackの拡張</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>BindingType(型)</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Trackの色</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>TrackClipType(コンテキストメニューに現れるクリップのタイプ、複数貼るのが可能</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>TrackAssetを拡張、</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>override Playable CreateTrackMixer</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Playable(今回はMixer)を生成する。</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>var mixer = ~して、</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>(この時点でmixerをこのコンテキストで保持しておくと、後からいじれるので良い、らしい。)</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>return mixer;</p>
+<p class="p5"><br></p>
+<p class="p5"><span class="Apple-tab-span">	</span></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>override void GatherProperties</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Clipの(?)終了時にプロパティを戻す。</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>Mixer</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>トラック全てに対してイベントを発生させる。</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>全フレーム、Processメソッドの呼び出しが発生する。</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Recordしたい、Timeline上でカーブ入れたい、、、</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Clip内にBehaviourを持ち、bh内にパラメータを移動する。</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Behaviour拡張はかならずSerializableをつける。</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>中のパラメータもpublicだったりSerializeFieldで定義する。</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>すると、それらは追跡できるようになる。<span class="Apple-tab-span">	</span></p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>これらのClip内の物体は、メソッドを持たせず、全体を見通せるMixer上から編集するスタイルがいいと思う、みたいな。</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p4"><b>さらなるスクリプト</b></p>
+<p class="p4"><span class="Apple-tab-span">	</span>AEからコンバートして再生！というのをやってみる。</p>
+<p class="p4"><span class="Apple-tab-span">	</span>MovieProxyPluginを使って、連番アニメーション限定、なるほど！！</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>あとでデータ見てみよ。</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p3"><span class="s1"><b>運営中コンテンツにおける大型アップデート成功のための考え方とUnity最適化手法</b></span></p>
+<p class="p4"><span class="Apple-tab-span">	</span>話題の大半が、ひたすら実践的かつ、「えっそれを決断してやれる組織あるんすか、、マジすか、、」みたいな顔になることが多かった。</p>
+<p class="p5"><span class="Apple-tab-span">	</span></p>
+<p class="p4"><b>シェーダ、グラフィックを大幅更新した話</b></p>
+<p class="p4"><span class="Apple-tab-span">	</span>リム、スペキュラ、環境マップは、キャラクターものを作る上で絵がダイレクトに影響を受けやすく、効果が高かった。</p>
+<p class="p4"><span class="Apple-tab-span">	</span>パラメータテクスチャを用意、テクスチャを用意してRGBで強度を調整する、という感じにした。</p>
+<p class="p4"><span class="Apple-tab-span">	</span>Unityの法線は1つしか持てない -&gt; FBXからインポートすることもできない。</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>で、FBXを２つ作って、２つの法線をもつ -&gt; 自前インポータを書いて２つの法線を持つデータにする！と。</p>
+<p class="p5"><br></p>
+<p class="p4"><b>CGFXをMayaとUnityで共有することで、プレビューを可能にした</b></p>
+<p class="p4"><span class="Apple-tab-span">	</span>すごーい！</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p4"><b>Androidでのテクスチャのバンディング対策</b></p>
+<p class="p4"><span class="Apple-tab-span">	</span>ETC2 Normal使うと、0.5秒の圧縮時間と、バンドが出ない映像が得られることがわかった。</p>
+<p class="p4"><span class="Apple-tab-span">	</span>ETC2もっと早く使わなかった理由は？</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>・騎手が対応しているかどうかの判別手段がなかった</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>・ないところで使うと６倍のメモリをああああ</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>・Unityのバグもあった</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p4"><b>並列AssetBundleビルド</b></p>
+<p class="p4"><span class="Apple-tab-span">	</span>manifestファイルさえあればそのビルドは発生しない(!)という特性を使い、</p>
+<p class="p4"><span class="Apple-tab-span">	</span>特定の単位でビルド対象を切って、manifestを共有していけば、新規や更新があった部分だけが作成される。</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>-&gt; これめっちゃ素敵なのでパクろうと思う。</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p4"><b>Unityキャッシュサーバ高速化</b></p>
+<p class="p4"><span class="Apple-tab-span">	</span>キャッシュのサイズを500GBにして対応、30分 -&gt; 7分 とかになった。MacProを使った。</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p4"><b>まとめの近所</b></p>
+<p class="p4"><span class="Apple-tab-span">	</span>まとめで、「誰が作ったものにもバグはあります、もちろんUnityにも。でもやっていきましょう」みたいな話があって、</p>
+<p class="p4"><span class="Apple-tab-span">	</span>ひたすらうなづいていた。</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p3"><span class="s1"><b>『CARAVAN STORIES』のアセットバンドル事例</b></span></p>
+<p class="p4"><span class="Apple-tab-span">	</span>めちゃくちゃ綺麗な絵の素敵なゲーム。</p>
+<p class="p5"><b></b><br></p>
+<p class="p4"><b>正規表現を駆使してResources -&gt; AssetBundle ,,みたいな探索</b></p>
+<p class="p4"><span class="Apple-tab-span">	</span>これって開発中のみ？</p>
+<p class="p4"><span class="Apple-tab-span">	</span>-&gt;常に実用</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>すごいパワフル、、Resourcesのラッパ作ってそこでだけ行えばいいのでは感があるけど、ものすごい機構。</p>
+<p class="p5"><br></p>
+<p class="p5"><b></b><br></p>
+<p class="p4"><b>Unloadのくだり</b></p>
+<p class="p4"><span class="Apple-tab-span">	</span>2秒で自動unloadしてる</p>
+<p class="p4"><span class="Apple-tab-span">	</span>メモリに保持しておくのが惜しいのか～。なるほど。</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>それであれば、辞書を作ってそこにInstantiateしたのを持っておけば、即解放しちゃっていいのでは？</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>-&gt; ABManagerがそんな感じの実装を持っているらしい。</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ただ、音データとかをコピーなしで鳴らしていると、Unloadしたときに同時に消えちゃうはずで、確かにそんな感じになったというのが発表にあった。</p>
+<p class="p5"><br></p>
+<p class="p5"><span class="Apple-tab-span">	</span></p>
+<p class="p4"><b>variantのくだり</b></p>
+<p class="p4"><span class="Apple-tab-span">	</span>使わないほうがいい、Yes。ほんとにそれ。</p>
+<p class="p5"><br></p>
+<p class="p5"><b></b><br></p>
+<p class="p4"><b>AssetBundleNameを使ってると困るところがある</b></p>
+<p class="p4"><span class="Apple-tab-span">	</span>-&gt; タイミング的に、Unityの負荷が高いところで使うとよく失敗してた気がする。</p>
+<p class="p4"><span class="Apple-tab-span">	</span>-&gt; 後続のverでは滅びていた気がする。AssetGraphとかである程度できると思うけれど。</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p4"><b>IDCFのCDNだと問題が出る</b></p>
+<p class="p4"><span class="Apple-tab-span">	</span>別にAWSでも発生するんでは、みたいな。クエリつけようねみたいな話だった。</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p3"><span class="s1"><b>スクリプタブルレンダーパイプライン入門</b></span></p>
+<p class="p4">いろんなゲームのレベルがあるよね</p>
+<p class="p5"><br></p>
+<p class="p4"><b>Motivation</b></p>
+<p class="p4"><span class="Apple-tab-span">	</span>Unityのレンダリングをblackboxにしたくない、</p>
+<p class="p4"><span class="Apple-tab-span">	</span>カスタマイズの自由を提供したい。</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p4"><b>APIs</b></p>
+<p class="p4"><span class="Apple-tab-span">	</span>Built-In Render Pipeline(will be dep)</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>既存</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>Lightweight(beta)</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>MobileとXR向け、一つの光源、</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>HighDefinition(preview)</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ハイエンドPC向け</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>Custom</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>カスタム！！</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p4"><b>どこから始めようか</b></p>
+<p class="p4"><span class="Apple-tab-span">	</span>Tips:ライトを切るとBatchやTrisがすごく減る</p>
+<p class="p4"><span class="Apple-tab-span">	</span>SRPの使い始め。</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>新規プロジェクト作成 &gt; 作成ウィンドウでLWRPとかを選択したり、packageManagerから最新版をロードできる。</p>
+<p class="p6"><span class="Apple-tab-span">	</span><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202018-05-09%2017.03.12.png" alt="スクリーンショット 2018-05-09 17.03.12.png"></p>
+<p class="p4"><span class="s2"><span class="Apple-tab-span">	</span></span>これらはLWRPのHigh,Middle, Lowとか。あとPostProessingがついてくる。</p>
+<p class="p4"><span class="Apple-tab-span">	</span>LWRPはそれぞれ設定の重量が違う状態のAsset(ScriptableRenderPipelineアセット)</p>
+<p class="p5"><span class="Apple-tab-span">	</span></p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p4"><span class="Apple-tab-span">	</span>このAssetを、</p>
+<p class="p4"><span class="Apple-tab-span">	</span>Project Settings &gt; Graphics &gt;<span class="Apple-converted-space"> </span></p>
+<p class="p6"><span class="s3"><span class="Apple-tab-span">	</span></span><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202018-05-09%2016.51.14.png" alt="スクリーンショット 2018-05-09 16.51.14.png"></p>
+<p class="p7"><br></p>
+<p class="p4"><span class="s2"><span class="Apple-tab-span">	</span>GraphicsSettings</span>のところに適当なLWRPAssetをセットすると、画面に対するパイプラインが変更される。</p>
+<p class="p6"><span class="Apple-tab-span">	</span><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202018-05-09%2016.51.26.png" alt="スクリーンショット 2018-05-09 16.51.26.png"></p>
+<p class="p7"><br></p>
+<p class="p7"><span class="Apple-tab-span">	</span></p>
+<p class="p4"><b>LWRPでのライト</b></p>
+<p class="p4"><span class="Apple-tab-span">	</span>メイン一個のみがサポートされている。</p>
+<p class="p4"><span class="Apple-tab-span">	</span>パフォーマンスよさげ。</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>Rendering設定 &gt; PixelLight でPixelLightの数を調整できる。</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>これらのライトは影を落とさない。ので、描画計算に影響を与えない。</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>最大8。</p>
+<p class="p6"><span class="Apple-tab-span">	</span><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202018-05-09%2017.03.18.png" alt="スクリーンショット 2018-05-09 17.03.18.png"></p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p4"><b>DebugWindow</b></p>
+<p class="p4"><span class="Apple-tab-span">	</span>実行時に描画オプションをいじれる、、らしいがよくわからんかった。今度講演資料みよう。</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p4"><b>CustomRenderPipelineについて</b></p>
+<p class="p4"><span class="Apple-tab-span">	</span>参考になるものといえば！みたいな話題</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>けいじろうさんのRetro3DPipeline</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/keijiro/Retro3DPipeline">https://github.com/keijiro/Retro3DPipeline</a></p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>あとgithubでScriptabkeRenderPipeline自体が公開されている。</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/Unity-Technologies/ScriptableRenderPipeline">https://github.com/Unity-Technologies/ScriptableRenderPipeline</a></p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p3"><span class="s1"><b>そろそろ楽がしたい！新アセットバンドルワークフロー&amp;リソースマネージャー詳細解説</b></span></p>
+<p class="p4"><span class="Apple-tab-span">	</span>・ScriptableBuildPipelineで、ビルド時などのサポートができる。すべてC#製。</p>
+<p class="p4"><span class="Apple-tab-span">	</span>・previewがリリースされている。0.0.22-preview</p>
+<p class="p4"><span class="Apple-tab-span">	</span>・エディタでのPlay時にABの更新をやってくれる</p>
+<p class="p5"><span class="Apple-tab-span">	</span></p>
+<p class="p5"><br></p>
+<p class="p4"><b>AssetReference</b></p>
+<p class="p4"><span class="Apple-tab-span">	</span>prefabみたいなもの。参照になるので、打ち間違いとかはない。</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p4"><b>読み出し方</b></p>
+<p class="p4"><span class="Apple-tab-span">	</span>・AssetReferenceオブジェクトをインスペクタからセットしたりする。</p>
+<p class="p4"><span class="Apple-tab-span">	</span>・annotationでの型、ラベル(by Addressablesツール)指定で、扱うAssetの指定を行うことが可能。</p>
+<p class="p4"><span class="Apple-tab-span">	</span>・参照カウント方式なんで、消すときはReleaseを行う。</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>たぶん無視して種類全消しとかもできるのでは？</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>・同じロジックのままでDL元を変更できる。</p>
+<p class="p4"><span class="Apple-tab-span">	</span>・どこから取得するか、というのを、グループという単位で指定できる。</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>1.Local</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>2.Remote</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>3.Advanced</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>・ContentsCatalog、という全てのアドレス、ラベル、グループの情報が入ったファイルを生成する。json。</p>
+<p class="p4"><span class="Apple-tab-span">	</span>・ラベルによる事前ロードを行うことができる。</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>AutoyaでいうPreload。これ動的に生成できないかな、、</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>特定のラベルがついているAssetをすべて取得することができる。素晴らしい。</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>・Profile 設定集</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Devとか切り替えるよね、ってやつ。素晴らしい。変数の列挙。</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>・PlayMode 設定</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>開発の状況に合わせてデータのロード方法を一括変更するパイプライン処理が選べる。</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>1.Fast(デフォルト、AssetDatabaseを見に行く</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>2.Virtual(ABに似せたロード経路を使う</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>3.Packed(ABを使う</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>・ResourceManagerProfiler</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>現在ロードされているResourceの情報が把握できる。</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p4"><b>AddressableAssetsの役割</b></p>
+<p class="p4"><span class="Apple-tab-span">	</span>起動時処理でグループ設定情報をロード、カタログをロードして、というのをコードでやる。</p>
+<p class="p4"><span class="Apple-tab-span">	</span>任意のタイミングでキックできるかな？</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p4"><b>ResourceManager</b></p>
+<p class="p4"><span class="Apple-tab-span">	</span>参照関連、寿命の管理を行う。</p>
+<p class="p4"><span class="Apple-tab-span">	</span>AsyncOpを返してくるので、ユーザー側で頑張る。</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>文字列、AssetReferenceを渡すと云々。</p>
+<p class="p5"><br></p>
+<p class="p5"><span class="Apple-tab-span">	</span></p>
+<p class="p4"><b>カスタマイズ</b></p>
+<p class="p4"><span class="Apple-tab-span">	</span>だいたいすべてのパーツが改造できそう。</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>たとえばリストであれば、ResLocator、ResProvicerをカスタマイズすればよさげ。</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>こういったカスタマイズは全て初期化時にセットするんかな。</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p4"><b>Q&amp;A</b></p>
+<p class="p4"><span class="Apple-tab-span">	</span>カタログをサーバ側で生json生成してかえしたい(ResLocatorとかをカスタマイズ？</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>-&gt; カスタマイズできるよ！</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>カタログに独自値を加えたい、、！(verとかnameとか</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>-&gt; カスタマイズできるよ！</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>複数のカタログを扱いたい(管理が楽(見た目関連、データ関連とか</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>-&gt; appendという形でやるつもりらしい</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>カタログを更新するタイミングはユーザー定義でいつでもできる？</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>-&gt; resLocMapをダイレクトに書き換えることで実現できるが、標準ではない</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>すでにAB使ってるタイミングでそのABを更新した内容のカタログを獲得したらどうなる？</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>-&gt; 自作</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p4"><span class="Apple-tab-span">	</span>カスタマイズは全て初期化時にセットする？</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>-&gt; それ</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p4"><span class="Apple-tab-span">	</span>特定のAssetRefの参照カウントを取得することはできる？</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>-&gt; ない</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>ReleaseByAssetRef、とかで、特定のAssetRefを元にしてるassetsを一掃できる？</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>参照カウント管理は自分でやる、が、その機能は面白いんでお話。</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>RMのエラーハンドリングどうなってる感じ、isErrorみたいなのをやる？</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>-&gt; いまのところ自作</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p4"><span class="Apple-tab-span">	</span>カタログ更新によって使わなくなったABをどう扱うか</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>-&gt; いまのところ自作</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>Preloadの並列数っていじれます？</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>-&gt; 今はない、おもしろいと思うんでお話。</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>Preloadに使う引数を外部で生成することは受け付けられる？</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ラベルは文字列なんでいける！</p>
+<p class="p5"><br></p>
+<p class="p5"><span class="Apple-tab-span">	</span></p>
+<p class="p4"><b>感想</b></p>
+<p class="p4"><span class="Apple-tab-span">	</span>紹介のされかた的に、「新しいUnityの仕組み」なのかな＝～と思っていたが、実際にはこれはフレームワークなんだな～という理解になった。</p>
+<p class="p4"><span class="Apple-tab-span">	</span>・デフォルトかつ固定のフローが存在する。</p>
+<p class="p4"><span class="Apple-tab-span">	</span>・複数のパーツから構成され、パーツを自作することでフローに乗ったまま動作を変えられる</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>うん、これはフレームワークだ。</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>実際すべてUnity外のC#コードで書かれている、ということで、ほとんどAutoya(自作してるフレームワーク)と同じユースケースを果たせるような予感。</p>
+<p class="p4"><span class="Apple-tab-span">	</span>↑のQ&amp;Aで聞いてた部分で、自分でやる、や、今後つくかも、といった部分に関して、Autoyaには含まれていてAddressableにはまだ、という状況なので、</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>今後めっちゃ使える形になってリリースされるのが待ち遠しい。</p>
+<p class="p5"><span class="Apple-tab-span">	</span></p>
+<p class="p5"><br></p>
 </body>
 </html>
