@@ -47,6 +47,7 @@ function codenize() {
 }
 
 for line in $(< rtfds.log);do
+
 	path=$(echo "$line" | sed -e 's/.rtfd//')
 	path=$(echo "$path" | sed -e 's/.\///')
 	echo path is $path
