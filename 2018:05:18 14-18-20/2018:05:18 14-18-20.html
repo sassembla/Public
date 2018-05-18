@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1561.4">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic ProN'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic ProN'}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>Addressable AssetsとAutoyaの比較</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>材料揃ったんで書く。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>Addressableを生成してAssetに対するアンカーとして使う</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Addressableにしかない。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>AssetBundleをリストとして扱う</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>双方OK</p>
+<p class="p3"><span class="Apple-tab-span">	</span>リストのダウンロード -&gt; 使いたいAssetを含んでいるAssetBundleを見つけてDL、キャッシュして展開、、など。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>複数のAssetBundleをリストとして扱う</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Autoyaでは複数のリストを同時に扱うことができる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>機能リクエストはしておいたので、Addressableでも叶うかも。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>AssetBundleのPreload</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Preloadは、AssetBundleを展開することなく、DLだけを行う処理。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>双方OK</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>Preloadの並列化</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>複数のPreloadを並列に行えるかどうか。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Autoyaでは並列数を指定して実行できる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>機能リクエストはしておいたので、Addressableでも叶うかも。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>バージョンの付与</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Autoyaではリリース済みのAssetBundleに対して、そのリストに特定のバージョン値をセットすることができる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>これで、例えばクライアントが今どんなバージョンのAssetを触っているか、とかが把握できる。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>補足</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Addressable Asset系のすごいところは、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・上記の機能は標準では入ってないけど、リスト作成(Addressableコンパイル) -&gt; リスト取得 -&gt; Assetの指定をAddressable Assetで行うことができる</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・Asset名(往往にしてAssets/ ~ から始まるプロジェクト内パス)をAddressable AssetというAssetで扱うことができる</p>
+<p class="p3"><span class="Apple-tab-span">	</span>というフローが整っているところ。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>特にフローの整理は素晴らしい。いままではフローを作るところから始めていたのが、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>フローのどこに何載せよう、みたいな感じに簡略化できる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>AutoyaのAssetBundleとほとんど同じフローなのも、俺的には良い。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>もしこれが完成したら、自分はAutoya側のAssetBundleの機構をメンテしなくてよくなるのだ！！</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+</body>
+</html>

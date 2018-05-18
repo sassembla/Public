@@ -26,11 +26,14 @@ IFS="
 marker=$(./libraries/JSON.sh < params.json | egrep '\["marker"\]' | cut -d'	' -f2 | sed s/'\"'//g)
 picker=$(./libraries/JSON.sh < params.json | egrep '\["picker"\]' | cut -d'	' -f2 | cut -c2-17)
 
+
 for line in $(< htmlList.log);do
 	#read each file and get first-line as title.
-	if grep "$marker" $line
+	if grep  -q "$marker" $line
 	then
-	#get namePart
+		printf "*"
+
+		#get namePart
 		currentNamePartStr=$(grep "$picker" $line)
 		
 		#create link-tag Head and Tail
@@ -46,6 +49,8 @@ for line in $(< htmlList.log);do
 		echo $aTagHead$currentNamePartStr$aTagTail "wrote "$wroteDate >> index.html
 	fi
 done
+
+printf "\n"
 
 cat ./htmlResource/html_body_tail.html >> index.html
 

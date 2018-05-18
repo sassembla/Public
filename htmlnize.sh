@@ -86,7 +86,7 @@ find . -type f -name \*.rtf -print -maxdepth 1 >> rtfs.log
 for line in $(< rtfs.log);do
 	path=$(echo "$line" | sed -e 's/.rtf//')
 	path=$(echo "$path" | sed -e 's/.\///')
-	echo path is $path
+	# echo path is $path
 	
 	#create directry from target-name(without ".rtf")
 	mkdir "$path"
