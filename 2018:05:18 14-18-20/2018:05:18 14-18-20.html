@@ -14,10 +14,15 @@
   </style>
 </head>
 <body>
-<p class="p1"><b>Addressable AssetとAutoyaの比較</b></p>
+<p class="p1"><b>Addressable AssetとAutoya/AssetBundleモジュールの比較</b></p>
 <p class="p2"><br></p>
 <p class="p3"><b>概要</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>材料揃ったんで書く。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>先に書いておくと、Addressable AssetはC#で書かれたモジュール、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Autiya/AssetBundleモジュールもC#で書かれたものなので、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>どちらもコードをいじることで機能の追加や削除が可能になっている。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ここでは、デフォルトを比較する。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>Addressableを生成してAssetに対するアンカーとして使う</b></p>
@@ -33,6 +38,13 @@
 <p class="p3"><span class="Apple-tab-span">	</span>Autoyaでは複数のリストを同時に扱うことができる。</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>機能リクエストはしておいたので、Addressableでも叶うかも。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>アプリケーション動作中にAssetBundleのリストを更新する</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>AutoyaではAppの動作中に、サーバから新バージョンのAssetBundleリストを取得、更新することができる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>現在使用中のAssetを含んだAssetBundleが更新されたかどうか、などもサーバ主導でハンドリングを行える。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Addressableでは、起動時に一回だけリストを更新することができる。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>AssetBundleのPreload</b></p>
@@ -52,16 +64,20 @@
 <p class="p3"><span class="Apple-tab-span">	</span>これで、例えばクライアントが今どんなバージョンのAssetを触っているか、とかが把握できる。</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p2"><br></p>
+<p class="p3"><b>エラー処理</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Autoyaでは、iOS/Androidなどのモバイルでの通信エラーやら何やらをメチャクチャ丁寧にハンドリングしている。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Addressableはデフォルトではそういうのなさそう(カスタマイズ前提)っぽいので、この辺は頑張って欲しい。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
 <p class="p3"><b>補足</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>Addressable Asset系のすごいところは、</p>
-<p class="p3"><span class="Apple-tab-span">	</span>・上記の機能は標準では入ってないけど、リスト作成(Addressableコンパイル) -&gt; リスト取得 -&gt; Assetの指定をAddressable Assetで行うことができる</p>
-<p class="p3"><span class="Apple-tab-span">	</span>・Asset名(往往にしてAssets/ ~ から始まるプロジェクト内パス)をAddressable AssetというAssetで扱うことができる</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・上記の機能は標準では入ってないけど、リスト作成(Addressableコンパイル) -&gt; 起動時リスト取得 -&gt; Assetの指定をAddressable Assetで行う</p>
 <p class="p3"><span class="Apple-tab-span">	</span>というフローが整っているところ。</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>特にフローの整理は素晴らしい。いままではフローを作るところから始めていたのが、</p>
-<p class="p3"><span class="Apple-tab-span">	</span>フローのどこに何載せよう、みたいな感じに簡略化できる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>特にフローの整理っぷりは素晴らしい。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>いままではフローを実装するところから始めていたのが、このフローのどこに何載せよう、みたいな感じに簡略化できる。</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>AutoyaのAssetBundleとほとんど同じフローなのも、俺的には良い。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Autoya/AssetBundleモジュールとほとんど同じフローなのも、俺的には良い。</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>もしこれが完成したら、自分はAutoya側のAssetBundleの機構をメンテしなくてよくなるのだ！！</p>
 <p class="p2"><br></p>
