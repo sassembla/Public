@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1561.4">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; min-height: 18.0px}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    span.s1 {font: 22.0px 'Hiragino Sans'}
+    span.s2 {font: 12.0px Helvetica}
+    span.s3 {font: 12.0px 'Hiragino Sans'}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>AssetGraph1.3</b><span class="s1"><b>から</b></span><b>1.4</b><span class="s1"><b>へのアップグレード</b></span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>軽い気持ちでアプデしたらassetファイルに互換性がなくて困った。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>こんな時のために1.3にはjson export機構が入っていて、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>じゃあ1.3でexportしたjsonを1.4にインポートすれば、、！</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ってやったらそっちは軽微な罠があったんで回避した。</p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p3"><b>内容</b></p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span>1.3</span>で出力した<span class="s2">json</span>を<span class="s2">1.4</span>に食わせると、インポート直後のグラフが<span class="s2">null</span>を含んでいて吹っ飛ぶ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>これは、json -&gt; グラフオブジェクト への変換部分で、AG1.4では含まれていないクラス情報が存在するため。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>具体的にいうと</p>
+<p class="p4"><span class="Apple-tab-span">	</span></p>
+<p class="p5">UnityEngine.AssetBundles.GraphTool</p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>っていう<span class="s2">namespace</span>が1.3 → 1.4で滅んで、</p>
+<p class="p2"><br></p>
+<p class="p5">UnityEngine.AssetGraph</p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>に変わっているため。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span>AG</span>から<span class="s2">export</span>したファイルに型情報の記載があり、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>その情報をもとにリフレクションでインスタンスを生成するんだけど、その部分のサポートが特にないため、</p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span>1.3</span>で作ったものを<span class="s2">1.4</span>に持って来ると滅ぶ。</p>
+<p class="p2"><br></p>
+<p class="p4"><br></p>
+<p class="p3"><b>今後</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>プルリク出しておいたんでその、はい。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>今すぐなんとかしたい人は、</p>
+<p class="p5"><span class="Apple-tab-span">	</span>1.3<span class="s3">から出力した</span>json<span class="s3">の中で</span><b>UnityEngine.AssetBundles.GraphTool</b><span class="s3">って書いてあるところを</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>全て<span class="s2"><b>UnityEngine.AssetGraph</b></span>に置換してから1.4にimportすると助かる。</p>
+<p class="p4"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+</body>
+</html>
