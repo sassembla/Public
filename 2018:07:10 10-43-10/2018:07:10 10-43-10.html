@@ -90,14 +90,14 @@
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>カタログ取得(自動)(強制)(毎回)に失敗すると死ぬ</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>Packedモード(リソースをWebから取得するモード、多分絶対一番使うやつ)の場合、起動時にカタログをサーバから取得する。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>リソースをWebから取得する設定の場合(というかAASの使用例の99%くらいそうだと思うが)、起動時にカタログをサーバから取得する。</p>
 <p class="p3"><span class="Apple-tab-span">	</span>この際、ひたすら早いタイミングでカタログ取得の通信が走り、その通信に失敗した場合、AASの機構は死ぬ。</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>失敗したらどうなる？ 機構の初期化が途中で終わる。おま、、WIP、、、</p>
 <p class="p2"><br></p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
-<p class="p3"><span class="Apple-tab-span">	</span>このカタログ取得通信を任意のタイミングに変更することができるか？と言われればNoで、これはAASの起動-&gt;通信機構にRuntimeInitializeOnLoadMethodアトリビュートが付いているため。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>通信環境チェックやリトライすらないっぽいのでヤバい。Playerの起動時の不安定さもあいまって、エディタだとだいたい50%くらいの確率で失敗する。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>このカタログ取得通信を任意のタイミングに変更することができるか？と言われればNoで、これはAASの起動 -&gt; 通信機構にRuntimeInitializeOnLoadMethodアトリビュートが付いているため。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>通信環境チェックやリトライすらないっぽいのでヤバい。Playerの起動時の不安定さもあいまって、エディタ + Packedプレイモードだとだいたい50%くらいの確率で失敗する。</p>
 <p class="p2"><br></p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p3"><span class="Apple-tab-span">	</span>また、これは大変ダサいが、エラーになってしまった後で手動でAASを再起動できるかというとNoで、AASのInitializeResourceManagerはprivate staticで定義されている。はい。</p>
@@ -105,6 +105,8 @@
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>おまけで、カタログ取得のベースurlは変更不可能なApplication.dataPath下に置かれるため、ゲームのコンパイル時に完全固定となる。</p>
 <p class="p3"><span class="Apple-tab-span">	</span>これは例えば、ゲームの起動時にユーザーのリージョンを見て、一番近いリージョンのCDNから落とさせるためにurlを変更する、みたいな芸当ができないことを意味する。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>あとリソース取得時に認証を云々も無理。速すぎる。ヒールアンドトゥの兄貴かよ。</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>今後このへんも可換になってほしい、、、</p>
 <p class="p3"><span class="Apple-tab-span">	</span>Unity IAPがかなりまともなハンドリングを提供してくれているので、最終的には期待している(あと大人なのでコントリビュートすればいいと思っている)</p>
