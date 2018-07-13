@@ -1,0 +1,194 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1561.4">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Sans'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 17.0px 'Hiragino Sans'}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>Real World Addressable(WIP)</b></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>AddressablesAssetsSystem(AAS)の機構を使いたいので、まず基本的にどんな使い勝手なのか、また、こんなことがしたい時どこをいじればいいのか、などを書いていく。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>根本的にAAS自体がWIPなのだが、バージョンが変わってもどこを変えてどうすればいいのか、はあんま変わらんと思って書いている。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>version</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ver 0.1.2で書いてる。2018.2にそのまま入れると、AddressablesのGUIを開いたときにGUI生成できないエラーが出る。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、0.0.27でいっぺんaddressableAssetのデータを作成 -&gt; 0.1.2にアップデートすると、問題なく動く。WIP。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>基本的な使い方</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>日本語だとここがわかりやすい</p>
+<p class="p3"><span class="Apple-tab-span">	</span>「Addressable Assets Systemを完全に理解する」</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://qiita.com/k7a/items/b4fd298bcb64dc968ad1">https://qiita.com/k7a/items/b4fd298bcb64dc968ad1</a></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>使用手順を超簡単に書くと、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>1.Unity Editor上でカタログを作成する</p>
+<p class="p3"><span class="Apple-tab-span">	</span>2.ゲーム起動時に自動的にカタログを取得してくるので、ゲーム中でLoadAsset&lt;T&gt;とかやると1で作成したリソースが取得できる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>というような感じになる。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>AASの概念</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>UnityのAssetBundle(AB)は複数のAssetを一個のファイルに固めてダウンロードしやすくしたようなものなのだけれど、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>AddressablesはABのビルド処理やロード処理を行う機構となっている。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ABの操作に関してかなり完璧に隠蔽できているため、ABについての専門的な知識がなくても扱えるようになっている。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>つまり開発者はABについて理解するかわりに、AASについて理解をすれば、AssetBundleでできることを簡単に扱えるようになったと言えるような言えないような。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>まあ理解する対象が変わっただけなんだけど、根底にあるのはABを生成、ロードする機構なので、AASの構造に不都合があったら書き換えていけばいいのだ、とかそんな感じ。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>実装、構成</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>AASは表層にあるAddressablesと、根底にあるResourceManagerの2段構成になっている。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>基本的にはUnityEditor上から、コンパイル時に「どんな外部リソースがあるか」「外部リソースをどんな名前でロード可能にするか」「外部リソースをどんなキーワードでグループ化するか」「その外部リソースをどこからロードするか」などの情報を集めておき、カタログと呼ばれるデータベースを生成する。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>カタログには上記の情報がセットされており、ゲーム起動時にAASが自動的にカタログの取得を行う。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p4"><b>先に書いとく、AASの超WIPなところ</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>多分この項が一番有用な話だと思う。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>カタログ取得(自動)に失敗すると死ぬ</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Packedモード(リソースをWebから取得するモード、多分絶対一番使うやつ)の場合、起動時にカタログをサーバから取得する。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>この際、ひたすら早いタイミングでカタログ取得の通信が走り、その通信に失敗した場合、AASの機構は死ぬ。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>このカタログ取得通信を任意のタイミングに変更することができるか？と言われればNoで、これはAASの起動-&gt;通信機構にRuntimeInitializeOnLoadMethodアトリビュートが付いているため。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>通信環境チェックやリトライすらないっぽいのでヤバい。Playerの起動時の不安定さもあいまって、エディタだとだいたい50%くらいの確率で失敗する。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>また、これは大変ダサいが、エラーになってしまった後で手動でAASを再起動できるかというとNoで、AASのInitializeResourceManagerはprivate staticで定義されている。はい。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>おまけで、カタログ取得のベースurlは変更不可能なApplication.dataPath下に置かれるため、ゲームのコンパイル時に完全固定となる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>これは例えば、ゲームの起動時にユーザーのリージョンを見て、一番近いリージョンのCDNから落とさせるためにurlを変更する、みたいな芸当ができないことを意味する。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>今後このへんも可換になってほしい、、、</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>エラーの原因がわからない</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>WIPなのであれなんだけど、例えばLoadAsset&lt;T&gt; (string assetName) は、UnityではおなじみなasyncOperationを返してくる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>これが、例えばネットワークが死んでて失敗したり、指定したassetNameが違ったりして失敗するんだけど、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>現在の段階では「成功か失敗かはわかる」が、「なんで失敗したのか」がわからない。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ざっくりいうとエラー情報が一切ない。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>LoadAsset系の処理の完了を待つには、Completeイベントが着火するか、asyncOpそれ自体をisDoneになるまで回して、Statusを見ればいい。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Statusは、成功時にはSucceeded、失敗時にはFailedというenumを返して来る。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>IsDoneは、LoadAssetが成功しても失敗してもtrueになる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>OperationExceptionはどんな失敗でもnullのまま。お前何。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>IsValidは、成功しても失敗してもtrueが返ってくる。お前も何。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>他のパラメータは全く当てにならない。WIPなので、今後ちゃんと何か入るかもしれないが、全体のエラーを網羅したenumとかがないと大変な目に合うと思う。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>エラーの内容がわからないので、プレイヤー = ゲームを遊ぶ人に対してどんな情報を与えればいいかがさっぱりわからん。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>というかエラーに対してどんな処理走らせればいいかもわからんのよな。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ありえる厄介なエラーとしては、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・プレイヤーが平和にゲームを遊んでいるタイミングで</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・開発者がCDN上のデータを更新して</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・古いカタログ情報を元にプレイヤーがリソースにアクセスしてきて</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・古いカタログ情報だと最新のリソースが取得できずに死ぬ</p>
+<p class="p3"><span class="Apple-tab-span">	</span>みたいなのとかはよくある話で。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>こういうケースだと、「持っているカタログが古いです。最新のカタログを取得中..」とか表示を出して、プレイヤーを待たせている間にカタログを取得、再度落とし直す、とかをすればいいんだけど、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>そのためには割と精緻なエラー情報が必要で。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>一応確認してみたけど、Addressablesのテストの中だと、StatusではなくResultがnullではなければOK、というような判定をしていた。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>そのうちOperationExceptionがマトモに入るんだと思う。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、まあ、それに沿ったハンドリングをすることになるんだけど。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>WIPのまとめ</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>以上を踏まえ、これ以降の記事は</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・なんかいい感じのタイミングでカタログ取得が済んでいる</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・カタログの内容、Web上に置いてあるリソースについては一点の非もなく、いつでもアクセスできる</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・LoadAsset書く側が、Loadしたいアセットの名前をタイポするなどのミスを100%しない</p>
+<p class="p3"><span class="Apple-tab-span">	</span>という前提に立つものとする。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>現状のAASはかなりセンシティブで、この前提を守らないと動かない。WIPだし。カタログ取得のタイミングやハンドリングも改変可能になってくれるといいのだが。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>まあダメだったらContributeすればいいので！</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p4"><b>どこをどう交換すれば何ができるようになるのか</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>起動タイミングのいろいろがAASの初期化コードにハードコーディングされてることは置いといて、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>次のようなことをしたい場合、どこをどう変えれば(可換なプロバイダを作れば)いいのかをまとめていく。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>(まだひみつ)</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>以下おまけ</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>シーンとかってLoadできるの？</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>できる。モードも指定できる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>☆コード例</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>AssetをダウンロードするURLってどこに入ってんの？</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>PackedモードであればStreamingAssetsにセッティング情報を保持している。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>それ以外のモードであれば、"dataPath/Library/Addressables_settings_" + mode + ".json" にセッティング情報を保持している。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これはカタログのurlも同じで、そちらは "dataPath/Library/Addressables_catalog_" + mode + ".json" に保存されている。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>この部分はreadonlyなんで、アプリケーションを更新しないと更新されなそう。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>データの更新は実機ビルド時、プレイボタンを押した時の２つ。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>動的に書き換える方法はあるんだろうか。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>-&gt; dataPathはreadonlyなんで、リビルド以外なさそう。UnityEditorでAddressable Assetの設定を行う時点で覚悟を決めるか、サーバ側でURLを捻じ曲げるか。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>LoadAssetとかのCompleteが着火するタイミングはLateUpdate</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Completeイベントが着火するのはLateUpdateに固定されている。知らないと地味にハマりそう。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これは、asyncOpをLateUpdateメソッドよりも実行順が前なメソッド内に置いた場合、その発火はCompleteよりも1f遅れる(次のフレームになる)ということを意味している。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>asyncOpを監視するスクリプトのexecution orderを0(デフォルト)にしてLateUpdate関数内でasyncOpを監視すると、Completeの着火よりも速くイベントを認識することは可能。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>LateUpdateで実行すると同じフレームで返ってくるんだろうか？</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>-&gt; 次のフレームのLateUpdateで返ってきた。必ず非同期。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>こんなことしたい、の書き方をテストから探す</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ドキュメント見ても実際こういうのどう書いたらいいんだろう？みたいなのは出てくる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>そういう時はテストを見てみるといいかもしれない。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>UnityのPackagesに入っているものには見た感じすべてテストが含まれており、それらのテストをUnity上で動かすのは割と簡単にできる。</p>
+<p class="p3"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202018-07-13%2014.13.05.png" alt="スクリーンショット 2018-07-13 14.13.05.png"></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>1. UnityのProjectウィンドウ &gt; Packages &gt; テストを走らせたいパッケージを選択 &gt; Reveal in Finder<span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>2. 表示されたフォルダをデスクトップとかにコピー</p>
+<p class="p3"><span class="Apple-tab-span">	</span>3. 新規プロジェクトを作成</p>
+<p class="p3"><span class="Apple-tab-span">	</span>4. 新規プロジェクトのAssetsフォルダに、2でコピーしたフォルダを放り込む</p>
+<p class="p3"><span class="Apple-tab-span">	</span>5. プロジェクトを開くと、テストがあるパッケージであればそのテストが表示される。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>5の時点でコンパイルエラーが出る場合、おそらく持ってきたパッケージ自体が依存している別パッケージがある。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>2で開いたフォルダからなんとなく「これかな？」って持ってくるとうまく行ったりする。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>新規プロジェクトを作るのはオススメ。なぜオススメかというと、へんなファイルがあるところにパッケージを持っていくとものすごいカオスが出来上がってしまうため。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>さて、ここまでしたパッケージのテストが通るのか？というと、前提条件が異なる場合はもちろんエラーが出るので動かないケースも多いが、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>自分が見た範囲だと大体動いている気がする。特にResourceManagerのテストは凄まじい。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>扱う対象のAssetをこの一件のテストのためだけにコード経由でimportし、テストが終わる頃にはUnityのAssetDatabaseから消す、ということをやっている。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ぶっちゃけすごい。こういうテストすごく大事なので参考にしたい。</p>
+<p class="p2"><br></p>
+</body>
+</html>
