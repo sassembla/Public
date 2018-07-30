@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1561.6">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Sans'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>おなかソフトのDon't Destroy On Load #1に行ってきた</b></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>このこれ</p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>Drecom Tech Espresso #6 "おなかソフトのDontDestroyOnLoad"</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://drecom.connpass.com/event/93534/">https://drecom.connpass.com/event/93534/</a></p>
+<p class="p2"><b><span class="Apple-tab-span">	</span></b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>当日の様子はなんか動画として上がるようなので期待して待ってる。</p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p3">あとは全部おまけというかとりあえず事前に考えをまとめておこうと思って書いたアンチョコ(全く見れなかった</p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>ゲームのSingletonどう思う？</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>直感的には、ゲーム要素に関して何か保持しているシングルトンは、8割くらいで負債になる、設計の放棄。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ようは <b>状態を持った グローバル関数 </b>なので、そりゃやばかろうよという感じになると思う。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Sigletonを使うと可換性にものすごい問題を来たす。アクセスが容易すぎるんで、いろんなところから接続できて、その前提を元にコードが書かれる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ここで問題なのは、安易に接続させてしまうことで、接続する側が後世に渡って受ける設計的な影響力が大きすぎること。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>「どうすれば可換な状態を維持できるか」というのに注目すると、ゲーム内Singleton作ってもすぐ捨てないとだめみたいな気分になると思う。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>逆に、目的が「それ」 = どこからでもアクセスできてしかるべきもの、ならば存在してアリだとは思っている。(サウンドマネージャとか認証系とかリソースロード系とか)</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>Unity + ゲーム内Singletonでよくある悪</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>テストの邪魔</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>全てのタイミングを貫通して状態を持ってしまう + 閉鎖的、というのがネック。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>毎回作り直すためにプログラムのコンテキスト自体を作り直すとかの力技が必要</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>欲しいのはSingleton？　それとも一定区間だけアクセス可能なステートマシン？</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>本来あるべきではない公開度合いと、それによる密結合</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>どこからでもアクセスできる、というのがまず設計的な間違いとして露見してくるパターンがほとんどで、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>実際に必要だったのはもっと小さなスコープ、もっと狭いアクセス範囲ということが多い。</p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>だのにグローバルに置いてしまって、「今シングルトンを止めるには、シングルトンに依存している側を大規模に書き直さないといけない」などが発生する。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>つまりシングルトンは「将来のコードの変更可能性を下げる」楔なのだ。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>グローバルではなく、何らかの関係性の何らかのタイミングへの隠蔽、みたいなのが理想で、これは最初からグローバルで作ってしまうと後から直すのが大変。</p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>SingleMonoBe</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>自分は一切お世話になったことがないのでよくわからない。だいたいシーンごとに用意した代替を使ってしまう。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>MonoBeが必要なポイントは後述するが、限られているので、こう、はい。</p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b>おまけ：MonoBehaviourの使い所について考えよう</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・Unityと開発者をつなぐ場所</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・メインスレッドへのエントリーポイント</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>-&gt; つまりメインスレッドでしかできないことをするための場所</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>それだけのためにMBがあればいいのではというね。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>昨今はおもしろコンパイラやおもしろシステムもあることだし、この考え方は変わらないのかなあと思っている。C#で書く場所で頑張らない。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>Unityのメインスレッド制約</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>GUI操作、オーディオ、コンポーネントへの干渉などの起点はすべてこの制約がある。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>この制約のせいで、グローバルからこういう操作呼びたいな～～ってなると、どうしてもMonoBehaviourが必要になる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、これをグローバルに一個だけ置ければいいのでは -&gt; 状態も持たせちゃおう(バカ) -&gt;<span class="Apple-converted-space"> <span class="Apple-tab-span">	</span></span></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Updateとか一個の方が良くない？</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>いい話。でもこれを解決するのはSingletonではなく、現在のゲームのコンテキストに対して一個あるだけのもの、とかで良いはず。</p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>というかMonoBehaviourを拡張するな。あれは</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>それでも避けられない、みんなが欲しい、Unity + Singletonに求められるもの</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>MainThreadDispatcher</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>俺は！！　ここから！！　メインスレッドに！！　何かを投げ込みたい！！！</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>例えばiOSとかだとそういうの簡単にできるんだ。本当にどこからでも簡単に。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>でもUnityにはそういうのないんで。誰かが作って、それをグローバルにおいて、っていうのがよくある。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>UniRxとかな。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>オーディオエンジン</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>オーディオの再生制約にメインスレッド必須があるせいで、どこかのオーディオエンジン使う以外だとシングルトン作って済ませてしまうことが多い。</p>
+<p class="p2"><br></p>
+</body>
+</html>
