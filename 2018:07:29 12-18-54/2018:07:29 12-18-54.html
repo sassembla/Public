@@ -27,7 +27,7 @@
 <p class="p2"><b></b><br></p>
 <p class="p2"><b></b><br></p>
 <p class="p2"><b></b><br></p>
-<p class="p3">あとは全部おまけというかとりあえず事前に考えをまとめておこうと思って書いたアンチョコ(全く見れなかった</p>
+<p class="p3">あとは全部おまけというかとりあえず事前に考えをまとめておこうと思って書いたアンチョコ(アバターのフェイスキャプチャが繊細すぎて本当に目が離せなくて全く見れなかった。(ちょっと文がぶっちぎれ過ぎているので捕捉した。</p>
 <p class="p2"><b></b><br></p>
 <p class="p3"><b>ゲームのSingletonどう思う？</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>直感的には、ゲーム要素に関して何か保持しているシングルトンは、8割くらいで負債になる、設計の放棄。</p>
@@ -39,7 +39,12 @@
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>「どうすれば可換な状態を維持できるか」というのに注目すると、ゲーム内Singleton作ってもすぐ捨てないとだめみたいな気分になると思う。</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>逆に、目的が「それ」 = どこからでもアクセスできてしかるべきもの、ならば存在してアリだとは思っている。(サウンドマネージャとか認証系とかリソースロード系とか)</p>
+<p class="p3"><span class="Apple-tab-span">	</span>逆に、目的が「それ」 = どこからでもアクセスできてしかるべきもの、ならば存在してアリだとは思っている。(サウンドマネージャとか認証系とかリソースロード系とか、ゲームのコア以外の部分のデータの持ち回しとか)</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Autoyaもそんな感じで、あれは認証 + Asset管理 + サーバからのバージョンコントロールを行うための「状態」を保持したシングルトンになっている。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>リセッタとか完備してあったり作り直せるようになってるのでテストできる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>だが、やはり「ゲームの、まさに遊ばせるためのコードの中身」ではない。脇役なのでこの構造を許している。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>Unity + ゲーム内Singletonでよくある悪</b></p>
@@ -78,13 +83,14 @@
 <p class="p3"><span class="Apple-tab-span">	</span>GUI操作、オーディオ、コンポーネントへの干渉などの起点はすべてこの制約がある。</p>
 <p class="p3"><span class="Apple-tab-span">	</span>この制約のせいで、グローバルからこういう操作呼びたいな～～ってなると、どうしてもMonoBehaviourが必要になる。</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>で、これをグローバルに一個だけ置ければいいのでは -&gt; 状態も持たせちゃおう(バカ) -&gt;<span class="Apple-converted-space"> <span class="Apple-tab-span">	</span></span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、これをグローバルに一個だけ置ければいいのでは -&gt; 状態も持たせちゃおう(バカ) -&gt; つらい、、<span class="Apple-tab-span">	</span></p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>Updateとか一個の方が良くない？</p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>いい話。でもこれを解決するのはSingletonではなく、現在のゲームのコンテキストに対して一個あるだけのもの、とかで良いはず。</p>
 <p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>というかMonoBehaviourを拡張するな。あれは</p>
+<p class="p3"><span class="Apple-tab-span">	</span>というかMonoBehaviourを拡張するな。あれはこう、、色々な用途を持つ、UnityとC#コード(というか開発者がやりたいこと全て)をつなぐブリッジ部分だ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>みたいなことを思うことは割とあるけど、まあ人の数だけ正義があるので、正しさ～みたいな話はしない。ほら、人の正義とかどうでもいいじゃないですか。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>それでも避けられない、みんなが欲しい、Unity + Singletonに求められるもの</b></p>
