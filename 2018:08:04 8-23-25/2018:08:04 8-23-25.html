@@ -7,10 +7,11 @@
   <meta name="Generator" content="Cocoa HTML Writer">
   <meta name="CocoaVersion" content="1561.6">
   <style type="text/css">
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'}
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Sans'}
     p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; min-height: 18.0px}
-    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; background-color: #ebebeb}
-    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; background-color: #ebebeb; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; background-color: #ebebeb}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; background-color: #ebebeb; min-height: 18.0px}
     span.s1 {font-kerning: none}
     span.Apple-tab-span {white-space:pre}
   </style>
@@ -18,60 +19,60 @@
 <body>
 <p class="p1"><b>TextMesh ProとuGUIで文字レイアウトを取得する</b></p>
 <p class="p2"><br></p>
-<p class="p1"><b>概要</b></p>
-<p class="p1"><span class="Apple-tab-span">	</span>文字をCanvas上とかに出すじゃない。</p>
-<p class="p1"><span class="Apple-tab-span">	</span>そんなとき、</p>
-<p class="p1"><span class="Apple-tab-span">	</span>「この文字列はこのフィールド上でどんな感じに改行されるの？」</p>
-<p class="p1"><span class="Apple-tab-span">	</span>とかを事前に知りたくなるじゃない。なるよね？</p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>文字をCanvas上とかに出すじゃない。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>そんなとき、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>「この文字列はこのフィールド上でどんな感じに改行されるの？」</p>
+<p class="p3"><span class="Apple-tab-span">	</span>とかを事前に知りたくなるじゃない。なるよね？</p>
 <p class="p2"><br></p>
-<p class="p1"><span class="Apple-tab-span">	</span>それぞれこんな感じで取得できる。</p>
-<p class="p2"><br></p>
-<p class="p2"><br></p>
-<p class="p1"><b>uGUI</b></p>
-<p class="p3"><span class="s1">// Text textComponent みたいなものに対して</span></p>
-<p class="p3"><span class="s1">// TextGenerator generator = new TextGenerator(); みたいなのをグローバルで取得しておいて使い回すことができる</span></p>
-<p class="p4"><span class="s1"></span><br></p>
-<p class="p3"><span class="s1">// invalidate first.</span></p>
-<p class="p3"><span class="s1">generator.Invalidate();</span></p>
-<p class="p4"><span class="s1"></span><br></p>
-<p class="p3"><span class="s1">// set content to prefab.</span></p>
-<p class="p3"><span class="s1">var defaultText = textComponent.text;</span></p>
-<p class="p3"><span class="s1">textComponent.text = text;</span></p>
-<p class="p4"><span class="s1"></span><br></p>
-<p class="p3"><span class="s1"><b>var setting = textComponent.GetGenerationSettings(new Vector2(viewWidth, float.PositiveInfinity));</b></span></p>
-<p class="p3"><span class="s1"><b>generator.Populate(text, setting);</b></span></p>
-<p class="p4"><span class="s1"></span><br></p>
-<p class="p4"><span class="s1"></span><br></p>
-<p class="p3"><span class="s1">var lineCount = generator.lineCount;</span></p>
-<p class="p3"><span class="s1">var lines = generator.lines;// 各行の情報、行の高さとかspacingの高さが取れる</span></p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-tab-span">	</span>太字の行の処理でgeneratorにレイアウト情報が入る。</p>
-<p class="p1"><span class="Apple-tab-span">	</span>レイアウトするサイズ情報をいくらでも好きなように設定、レイアウトを試すことができる。</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-tab-span">	</span>取得できる情報は、全体の行数と各行の情報。大元の文字列のどこからどこまでがこの行、とかのインデックスも入っている。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>それぞれこんな感じで取得できる。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
-<p class="p1"><b>TextMesh Pro</b></p>
-<p class="p3">// TMProのコンポーネント TMPro.TextMeshProUGUI textComponentというのがあったとして</p>
-<p class="p4"><br></p>
-<p class="p3">textComponent.text = text;</p>
-<p class="p4"><br></p>
-<p class="p3">// textComponentに対してwidthをセットする必要がある。高さは無限設定でOK</p>
-<p class="p3"><b>textComponent.rectTransform.sizeDelta = new Vector2(viewWidth, float.PositiveInfinity);</b></p>
-<p class="p4"><br></p>
-<p class="p3">// このメソッドは、コンポーネントがgameobjectにアタッチされて、かつgameobjectがcanvasに乗っている場合のみ動作する。</p>
-<p class="p3"><b>var textInfos = textComponent.GetTextInfo(text);</b></p>
-<p class="p4"><br></p>
-<p class="p3">// 各行の要素とパラメータを取得する。</p>
-<p class="p3">var tmGeneratorLines = textInfos.lineInfo;</p>
-<p class="p3">var lineSpacing = textComponent.lineSpacing;</p>
-<p class="p3">var tmLineCount = textInfos.lineCount;</p>
+<p class="p3"><b>uGUI</b></p>
+<p class="p4"><span class="s1">// Text textComponent みたいなものに対して</span></p>
+<p class="p4"><span class="s1">// TextGenerator generator = new TextGenerator(); みたいなのをグローバルで取得しておいて使い回すことができる</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1">// invalidate first.</span></p>
+<p class="p4"><span class="s1">generator.Invalidate();</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1">// set content to prefab.</span></p>
+<p class="p4"><span class="s1">var defaultText = textComponent.text;</span></p>
+<p class="p4"><span class="s1">textComponent.text = text;</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1"><b>var setting = textComponent.GetGenerationSettings(new Vector2(viewWidth, float.PositiveInfinity));</b></span></p>
+<p class="p4"><span class="s1"><b>generator.Populate(text, setting);</b></span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1">var lineCount = generator.lineCount;</span></p>
+<p class="p4"><span class="s1">var lines = generator.lines;// 各行の情報、行の高さとかspacingの高さが取れる</span></p>
 <p class="p2"><br></p>
-<p class="p1"><span class="Apple-tab-span">	</span>太字の行の処理でgeneratorにレイアウト情報が入る。</p>
-<p class="p1"><span class="Apple-tab-span">	</span>まず TMPro.TextMeshProUGUIコンポーネント のrectTransformを弄る。こうすることで描画されるサイズが変わる。</p>
-<p class="p1"><span class="Apple-tab-span">	</span>uGUIとは異なりcanvas上に配置されたgameobjectにTMPro.TextMeshProUGUIコンポーネントがアタッチされている前提でないと動作しない。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>太字の行の処理でgeneratorにレイアウト情報が入る。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>レイアウトするサイズ情報をいくらでも好きなように設定、レイアウトを試すことができる。</p>
 <p class="p2"><br></p>
-<p class="p1"><span class="Apple-tab-span">	</span>取得できる情報はuGUIと大差ない。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>取得できる情報は、全体の行数と各行の情報。大元の文字列のどこからどこまでがこの行、とかのインデックスも入っている。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>TextMesh Pro</b></p>
+<p class="p4">// TMProのコンポーネント TMPro.TextMeshProUGUI textComponentというのがあったとして</p>
+<p class="p5"><br></p>
+<p class="p4">textComponent.text = text;</p>
+<p class="p5"><br></p>
+<p class="p4">// textComponentに対してwidthをセットする必要がある。高さは無限設定でOK</p>
+<p class="p4"><b>textComponent.rectTransform.sizeDelta = new Vector2(viewWidth, float.PositiveInfinity);</b></p>
+<p class="p5"><br></p>
+<p class="p4">// このメソッドは、コンポーネントがgameobjectにアタッチされて、かつgameobjectがcanvasに乗っている場合のみ動作する。</p>
+<p class="p4"><b>var textInfos = textComponent.GetTextInfo(text);</b></p>
+<p class="p5"><br></p>
+<p class="p4">// 各行の要素とパラメータを取得する。</p>
+<p class="p4">var tmGeneratorLines = textInfos.lineInfo;</p>
+<p class="p4">var lineSpacing = textComponent.lineSpacing;</p>
+<p class="p4">var tmLineCount = textInfos.lineCount;</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>太字の行の処理でgeneratorにレイアウト情報が入る。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>まず TMPro.TextMeshProUGUIコンポーネント のrectTransformを弄る。こうすることで描画されるサイズが変わる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>uGUIとは異なりcanvas上に配置されたgameobjectにTMPro.TextMeshProUGUIコンポーネントがアタッチされている前提でないと動作しない。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>取得できる情報はuGUIと大差ない。</p>
 <p class="p2"><br></p>
 </body>
 </html>
