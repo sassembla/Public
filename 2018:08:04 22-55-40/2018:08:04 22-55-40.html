@@ -1,0 +1,142 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1561.6">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Sans'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; background-color: #ebebeb}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; background-color: #ebebeb; min-height: 18.0px}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>Unity(IL2CPP環境)でのprotobufの使い方</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>今年4月のprotobuf側の改修以降、IL2CPPのAOT対策が組み込まれたため、お世話になることが多いので解説を書く。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>Protobuf is 何</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ProtocolBufferというデータ形式。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>データ -&gt; protobuf形式(byte[]) -&gt; データ というような変形ができる。</p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>公式</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://developers.google.com/protocol-buffers/">https://developers.google.com/protocol-buffers/</a></p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>特徴は、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・どんなデータを扱いたいかを定義した.protoという形式のファイルを書く</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・エディタライブラリが定義ファイルからえいやっといろいろな言語向けのSerialize/Deserialize用コードを生成する(いろんな言語の実装が生成できる</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・開発者は生成されたコードを叩くようなコードを書き、いろんな言語のインスタンス -&gt; protobuf形式のデータ -&gt; インスタンス とかの変形ができるようになる</p>
+<p class="p2"><br></p>
+<p class="p4">syntax = "proto3";</p>
+<p class="p5"><br></p>
+<p class="p4">message SearchRequest {</p>
+<p class="p4"><span class="Apple-tab-span">	</span>string query = 1;</p>
+<p class="p4"><span class="Apple-tab-span">	</span>int32 page_number = 2;</p>
+<p class="p4"><span class="Apple-tab-span">	</span>int32 result_per_page = 3;</p>
+<p class="p4">}</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>protoファイルをサーバとクライアントで共有しとけばあとはなんとかなる的な。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>また、oneofという修飾句があり、複数のクラスを含むような定義をしたあと、その中の「どれか一つだけが実際に入っている」という状態のデータを表現できる。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>oneof accessor</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://developers.google.com/protocol-buffers/docs/proto3#oneof">https://developers.google.com/protocol-buffers/docs/proto3#oneof</a></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これは大変便利で、</p>
+<p class="p2"><br></p>
+<p class="p3">oneofSample.proto</p>
+<p class="p4">message DataA { ... }</p>
+<p class="p4">message DataB { ... }</p>
+<p class="p5"><br></p>
+<p class="p4">message Box {</p>
+<p class="p4"><span class="Apple-tab-span">	</span><b>oneof</b> dataBox {</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>DataA dataA = 1;</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>DataB dataB = 2;</p>
+<p class="p4"><span class="Apple-tab-span">	</span>}</p>
+<p class="p4">}</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>とか作っておくと、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ネットワーク越しにbyte[]を受け取る -&gt; とりあえずadtaBoxでDeserializeする -&gt; dataBoxのタイプを判定、DataAかDataB野どちらかが入っている、というのが、次のようなコードでわかる</p>
+<p class="p3">(C#)<span class="Apple-tab-span">	</span></p>
+<p class="p4">byte[] messageBytes; // ネットワークから受け取ったデータが入ってると思って。</p>
+<p class="p5"><br></p>
+<p class="p4">var box = new Box();</p>
+<p class="p4">ProtocolSerializer.unmarshal(messageBytes, box);</p>
+<p class="p5"><br></p>
+<p class="p4">switch (box.MsgCase)</p>
+<p class="p4">{</p>
+<p class="p4"><span class="Apple-converted-space">    </span>case Box.MsgOneofCase.DataA:</p>
+<p class="p4"><span class="Apple-converted-space">        </span>{</p>
+<p class="p4"><span class="Apple-converted-space">            </span>var dataA = box.dataA;</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>.....</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-converted-space">            </span>break;</p>
+<p class="p4"><span class="Apple-converted-space">        </span>}</p>
+<p class="p4"><span class="Apple-converted-space">    </span>case Box.MsgOneofCase.DataB:</p>
+<p class="p4"><span class="Apple-converted-space">        </span>{</p>
+<p class="p4"><span class="Apple-converted-space">            </span>var dataB = box.dataB;</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>.....</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-converted-space">            </span>break;</p>
+<p class="p4"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>みたいな感じに、switchで中身を把握することができたりする。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>これは一つの経路で複数のデータを扱う時に重宝する。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>送る側は単にboxを作って好きなデータを一種だけ入れればよい。簡単。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>使い方</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>1.protobufのライブラリをマシンにインストールする</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>mac: homebrewが入っていれば、</p>
+<p class="p4">brew install protobuf</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>homebrew 何？ って人は <a href="https://brew.sh">https://brew.sh</a></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Windows: chocolateが入っていれば、</p>
+<p class="p4">choco install protoc</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>chocolate 何？って人は <a href="https://chocolatey.org">https://chocolatey.org</a></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これはコマンドラインツールになっていて、インストール後であればどこからでもprotocコマンドが呼べる、、はず。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>2. .protoファイルからコードを生成する</b></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p4">protoc --csharp_out=. --proto_path=. protocol.proto</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>--csharp_out オプションで、出力する言語をC#にセット、パスを現在のパスに指定、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>--proto_path オプションで、import(他のprotoファイルの参照)を探すパスを現在のパスに指定、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>使用するprotoファイル名を記述、 というような感じ。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これで、protoファイルがあるのと同じパスに指定した言語のコードが生成される。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>ここまでの工程で、C#で使えるSerializer/Deserializerのコードが自分のライブラリで使えるようになる。<span class="Apple-tab-span">	</span>簡単。</b></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>Unityでの一手間</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>IL2CPPの都合として、実行時にReflection.Emitが使えない、というものがある。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、protobufはモロにこれを、byte[]からインスタンスを作る過程で、生成するインスタンスの型情報を取得するために使う。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>2018年4月くらいにprotobufのC#コードに手が入り、使用したいデータ型をあらかじめコードに書くことでReflection.Emitが発生しないようになる、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>= Unity + IL2CPPで使えるようになる、というメソッドが追加された。</p>
+<p class="p2"><br></p>
+<p class="p4">pbr.FileDescriptor.ForceReflectionInitialization&lt;データ型&gt;();</p>
+<p class="p3"><span class="Apple-tab-span">	</span>この1行で、指定したデータ型を、IL2CPP環境で実行しても問題が発生しないようにできる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ちなみにoneofを使っているデータ型を指定するとその内部のデータ型もすべてセーフになる。やったぜ平和。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+</body>
+</html>
