@@ -32,11 +32,12 @@
 <p class="p4"><span class="s1">// Text textComponent みたいなものに対して</span></p>
 <p class="p4"><span class="s1">// TextGenerator generator = new TextGenerator(); みたいなのをグローバルで取得しておいて使い回すことができる</span></p>
 <p class="p5"><span class="s1"></span><br></p>
-<p class="p4"><span class="s1">// invalidate first.</span></p>
+<p class="p4"><span class="s1">var text = "なんか特定の広さの領域に表示してどう改行されるか知りたい文字列";</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1">// 使い回すならinvalidateで過去の情報を消す必要がある</span></p>
 <p class="p4"><span class="s1">generator.Invalidate();</span></p>
 <p class="p5"><span class="s1"></span><br></p>
-<p class="p4"><span class="s1">// set content to prefab.</span></p>
-<p class="p4"><span class="s1">var defaultText = textComponent.text;</span></p>
+<p class="p4"><span class="s1">// コンポーネントにテキストをセットする。</span></p>
 <p class="p4"><span class="s1">textComponent.text = text;</span></p>
 <p class="p5"><span class="s1"></span><br></p>
 <p class="p4"><span class="s1"><b>var setting = textComponent.GetGenerationSettings(new Vector2(viewWidth, float.PositiveInfinity));</b></span></p>
@@ -54,6 +55,8 @@
 <p class="p2"><br></p>
 <p class="p3"><b>TextMesh Pro</b></p>
 <p class="p4">// TMProのコンポーネント TMPro.TextMeshProUGUI textComponentというのがあったとして</p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1">var text = "なんか特定の広さの領域に表示してどう改行されるか知りたい文字列";</span></p>
 <p class="p5"><br></p>
 <p class="p4">textComponent.text = text;</p>
 <p class="p5"><br></p>
