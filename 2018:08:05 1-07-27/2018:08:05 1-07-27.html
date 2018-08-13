@@ -65,12 +65,12 @@
 <p class="p4">}</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>とか作っておくと、</p>
-<p class="p3"><span class="Apple-tab-span">	</span>ネットワーク越しにbyte[]を受け取る -&gt; とりあえずadtaBoxでDeserializeする -&gt; dataBoxのタイプを判定、DataAかDataB野どちらかが入っている、というのが、次のようなコードでわかる</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ネットワーク越しにbyte[]を受け取る -&gt; とりあえずadtaBoxでDeserializeする -&gt; dataBoxのタイプを判定、DataAかDataBのどちらかが入っている、というのが、次のようなコードでわかる</p>
 <p class="p3">(C#)<span class="Apple-tab-span">	</span></p>
 <p class="p4">byte[] messageBytes; // ネットワークから受け取ったデータが入ってると思って。</p>
 <p class="p5"><br></p>
 <p class="p4">var box = new Box();</p>
-<p class="p4">ProtocolSerializer.unmarshal(messageBytes, box);</p>
+<p class="p4">((IMessage)box).MergeFrom(messageBytes);</p>
 <p class="p5"><br></p>
 <p class="p4">switch (box.MsgCase)</p>
 <p class="p4">{</p>
@@ -131,7 +131,9 @@
 <p class="p3"><span class="Apple-tab-span">	</span>2018年4月くらいにprotobufのC#コードに手が入り、使用したいデータ型をあらかじめコードに書くことでReflection.Emitが発生しないようになる、</p>
 <p class="p3"><span class="Apple-tab-span">	</span>= Unity + IL2CPPで使えるようになる、というメソッドが追加された。</p>
 <p class="p2"><br></p>
-<p class="p4">pbr.FileDescriptor.ForceReflectionInitialization&lt;データ型&gt;();</p>
+<p class="p4">using Google.Protobuf.Reflection;</p>
+<p class="p5"><br></p>
+<p class="p4">FileDescriptor.ForceReflectionInitialization&lt;データ型&gt;();</p>
 <p class="p3"><span class="Apple-tab-span">	</span>この1行で、指定したデータ型を、IL2CPP環境で実行しても問題が発生しないようにできる。</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>ちなみにoneofを使っているデータ型を指定するとその内部のデータ型もすべてセーフになる。やったぜ平和。</p>
