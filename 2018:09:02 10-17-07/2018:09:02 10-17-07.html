@@ -1,0 +1,227 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1561.6">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Sans'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; background-color: #ebebeb}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; color: #b51a00; background-color: #ebebeb}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; color: #000000; background-color: #ebebeb}
+    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; color: #ff2600; background-color: #ebebeb}
+    span.s1 {color: #000000}
+    span.s2 {background-color: #ebebeb}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>AssetFileHashが一貫性を失うタイミングについて</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Addressablesがうまいこと完成しても、中で使っているのはAssetBundle。はい。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>AddressablesはABの作成からダウンロード用のリストの生成、それを起動時に取得しての、オンデマンドや範囲による一括取得を可能にしている(動けば)</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ただ、中身はまんまABを使うオープンソースのコントローラ、というかフレームワークで、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>まあ、フレームワークってことはユースケースしっかり判断して使おう・使わないでおこう を決めようなというところ。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>そしてABには、特にABの更新に関わる crc 、hash という2つのパラメータがある。</p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b>crcって何</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>cyclic redundancy check、要するに、データが変更されたかどうかをチェックするための値。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>エラー訂正(データの内容が期待してたんと違う)みたいなのを検知することができる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ABで使われているcrcは、その生成にABの内容、中身のファイルの生成時の時刻などを使用しているらしく、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>中身のAssetが変化するたびに変わる。(そりゃそう)</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>この変化によって、例えば次のようなことをやっている。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>AB1を生成</p>
+<p class="p3"><span class="Apple-tab-span">	</span> -&gt; AB1のcrcはこれ</p>
+<p class="p3"><span class="Apple-tab-span">	</span> -&gt; どっかにメモっておく</p>
+<p class="p3"><span class="Apple-tab-span">	</span> -&gt; クライアントアプリケーション側でメモを取得</p>
+<p class="p3"><span class="Apple-tab-span">	</span> -&gt; AB1をダウンロード</p>
+<p class="p3"><span class="Apple-tab-span">	</span> -&gt; メモのcrcと比較して、欲しかった「作った時のAB1のcrc」と、取得してきたAB1のcrcがマッチするかを見て、ちゃんとダウンロードできたか確認。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>実は、このフローのうち、[AB1をダウンロード]以降は、UnityWebRequestのABダウンロード用の関数の引数がそのままその用途をなしている。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>APIとしてはこのへん。</p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>public static Networking.UnityWebRequest GetAssetBundle(string uri, uint crc);</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://docs.unity3d.com/ScriptReference/Networking.UnityWebRequestAssetBundle.GetAssetBundle.html">https://docs.unity3d.com/ScriptReference/Networking.UnityWebRequestAssetBundle.GetAssetBundle.html</a></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ここのcrcが、まさに「これからダウンロードするABのcrcに対して、マッチするのを期待するcrc」という値になっている。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ちなみにcrc入れて期待したのと違うのが帰ってくると、<b>エラーが出て(表示だけのエラー、キャッチできない、今回落としたABは保存されない)</b>、ダウンロードしたABは<b>null</b>になる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>webからのダウンロードはファイルがぶっ壊れることがままあって、crcによる「落としたファイルが正しいか」みたいな処理は必須になっていると思う。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、このcrcは、AB作成時にmanifestファイルに書いてある。</p>
+<p class="p2"><br></p>
+<p class="p3"><b>nestedprefab.manifest</b></p>
+<p class="p4">ManifestFileVersion: 0</p>
+<p class="p5">CRC: 2200902407</p>
+<p class="p4">Hashes:</p>
+<p class="p4"><span class="Apple-converted-space">  </span>AssetFileHash:</p>
+<p class="p4"><span class="Apple-converted-space">    </span>serializedVersion: 2</p>
+<p class="p4"><span class="Apple-converted-space">    </span>Hash: c088a4b2797e99ed3c95d8ce957816af</p>
+<p class="p4"><span class="Apple-converted-space">  </span>TypeTreeHash:</p>
+<p class="p4"><span class="Apple-converted-space">    </span>serializedVersion: 2</p>
+<p class="p4"><span class="Apple-converted-space">    </span>Hash: 11817dad4d3c8e9c24248d58700284ea</p>
+<p class="p4">HashAppended: 0</p>
+<p class="p4">ClassTypes:</p>
+<p class="p4">- Class: 1</p>
+<p class="p4"><span class="Apple-converted-space">  </span>Script: {instanceID: 0}</p>
+<p class="p4">- Class: 4</p>
+<p class="p4"><span class="Apple-converted-space">  </span>Script: {instanceID: 0}</p>
+<p class="p4">- Class: 23</p>
+<p class="p4"><span class="Apple-converted-space">  </span>Script: {instanceID: 0}</p>
+<p class="p4">- Class: 102</p>
+<p class="p4"><span class="Apple-converted-space">  </span>Script: {instanceID: 0}</p>
+<p class="p4">- Class: 114</p>
+<p class="p4"><span class="Apple-converted-space">  </span>Script: {fileID: 11500000, guid: 7e73406419bf54a50a1b5faf24749c6c, type: 3}</p>
+<p class="p4">- Class: 115</p>
+<p class="p4"><span class="Apple-converted-space">  </span>Script: {instanceID: 0}</p>
+<p class="p4">Assets:</p>
+<p class="p4">- Assets/AutoyaTests/RuntimeData/AssetBundles/MainResources/nestedPrefab.prefab</p>
+<p class="p4">Dependencies:</p>
+<p class="p4">- /Users/passepied/Desktop/autoya/Editor/AssetGraph-1.3-release/UnityEngine.AssetBundleGraph/Cache/AssetBundles/4e024a18-af2d-4f29-9f4b-1212e005d1ea/iOS/texturename1</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>赤字のところがcrc。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>UnityはABを生成するとき、１つのABに対して1つのcrcを計算し、それを記述したmanifestファイルを吐く。</p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で。crcには、Unityのプロジェクトの形態を無茶苦茶にしても一貫した値を出す、という<b>結構強い一貫性</b>がある。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>具体的には、昨今みんながやってるであろう「Libraryフォルダをバージョン管理しない」みたいなことをしても、ちゃんと一貫したcrcを出す。</p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>crcの一貫性とプロジェクト形態の例</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>・これはLibraryフォルダが無い状態からでも同じcrcを出す</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>・たぶんABにする対象のアセットのmetaファイルの値さえしっかりしてればOK</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>・metaファイルすら失うと死(metaが作り直されてABのcrcも当然変わる</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Libraryフォルダをgithubとかに上げないでもいい、みたいなのはみんなやってると思ってる。だから、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Libがなくてもcrcが変わらない、という事態は大変好ましい。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>問題はhashだ。</p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>hashって何</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>hashもUnityのAB取得のAPIに記載がある。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>public static Networking.UnityWebRequest GetAssetBundle(string uri, Hash128 hash, uint crc);</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://docs.unity3d.com/ScriptReference/Networking.UnityWebRequestAssetBundle.GetAssetBundle.html">https://docs.unity3d.com/ScriptReference/Networking.UnityWebRequestAssetBundle.GetAssetBundle.html</a></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>それと、以前書いたhashに関する記事で、hashって何？どう使うの？ってのを紹介している。</p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Caching.IsVersionCached(url, hash) ってどういう挙動？</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://sassembla.github.io/Public/2017:02:10%2013-56-21/2017:02:10%2013-56-21.html">http://sassembla.github.io/Public/2017:02:10%2013-56-21/2017:02:10%2013-56-21.html</a></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>んでこのhash、どうやってつけるのがいいんだろう、って悩むんだけど、なんとABを生成した時に出るmanifestファイルに2種類のhashが書いてある。</p>
+<p class="p4">ManifestFileVersion: 0</p>
+<p class="p6">CRC: 2200902407</p>
+<p class="p4">Hashes:</p>
+<p class="p4"><b><span class="Apple-converted-space">  </span>AssetFileHash:</b></p>
+<p class="p4"><span class="Apple-converted-space">    </span>serializedVersion: 2</p>
+<p class="p7"><span class="s1"><span class="Apple-converted-space">    </span></span>Hash: c088a4b2797e99ed3c95d8ce957816af</p>
+<p class="p4"><b><span class="Apple-converted-space">  </span>TypeTreeHash:</b></p>
+<p class="p4"><span class="Apple-converted-space">    </span>serializedVersion: 2</p>
+<p class="p7"><span class="s1"><span class="Apple-converted-space">    </span></span>Hash: 11817dad4d3c8e9c24248d58700284ea</p>
+<p class="p4">HashAppended: 0</p>
+<p class="p4">ClassTypes:</p>
+<p class="p4">- Class: 1</p>
+<p class="p4"><span class="Apple-converted-space">  </span>Script: {instanceID: 0}</p>
+<p class="p4">- Class: 4</p>
+<p class="p4"><span class="Apple-converted-space">  </span>Script: {instanceID: 0}</p>
+<p class="p4">- Class: 23</p>
+<p class="p4"><span class="Apple-converted-space">  </span>Script: {instanceID: 0}</p>
+<p class="p4">- Class: 102</p>
+<p class="p4"><span class="Apple-converted-space">  </span>Script: {instanceID: 0}</p>
+<p class="p4">- Class: 114</p>
+<p class="p4"><span class="Apple-converted-space">  </span>Script: {fileID: 11500000, guid: 7e73406419bf54a50a1b5faf24749c6c, type: 3}</p>
+<p class="p4">- Class: 115</p>
+<p class="p4"><span class="Apple-converted-space">  </span>Script: {instanceID: 0}</p>
+<p class="p4">Assets:</p>
+<p class="p4">- Assets/AutoyaTests/RuntimeData/AssetBundles/MainResources/nestedPrefab.prefab</p>
+<p class="p4">Dependencies:</p>
+<p class="p3"><span class="s2">- /Users/passepied/Desktop/autoya/Editor/AssetGraph-1.3-release/UnityEngine.AssetBundleGraph/Cache/AssetBundles/4e024a18-af2d-4f29-9f4b-1212e005d1ea/iOS/texturename1</span></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>自分はこのうちで<b>AssetFileHash</b>を使うことが多い。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>まあぶっちゃけ、ここでのhash自体は</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>・ABの要素が変わった時に自動的に変わってくれるとうれしい</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>・ABの要素が変わらないなら変わらないでいてほしい</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>という感じで、この<b>AssetFileHash</b>は「今まで自分が知る限り」その用途を果たしてくれていた。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>が。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>がだ。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>その前提が砕けるタイミングがあった。(本題)</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>AssetFileHashが全くランダムに作られてしまうタイミングがある</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ぶっちゃけて、Libraryフォルダを生成するタイミングで、<b>AssetFileHashの値が無駄に変化する。</b></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>この、<b>Libraryフォルダを作り直すとAssetFileHashの一貫性が破綻する状況</b>は、次のようなシナリオで露見した。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>1.あるプロジェクトでABを生成することになった</p>
+<p class="p3"><span class="Apple-tab-span">	</span>2.まずは<b>PC1</b>で適当にABを生成していた</p>
+<p class="p3"><span class="Apple-tab-span">	</span>3.ABのhashパラメータとしては<b>AssetFileHashを</b>使用していた</p>
+<p class="p3"><span class="Apple-tab-span">	</span>4.hashはAという値を出していた</p>
+<p class="p3"><span class="Apple-tab-span">	</span>5.githubとかでプロジェクトをバージョン管理、<b>Libraryフォルダは含めない(要らないからね！！)</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>6.別のPC、<b>PC2</b>にプロジェクトをpullしてきて展開、このタイミングではLibraryフォルダはない。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>7.Unityを起動すると、Libraryフォルダが生成される。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>8.ここでPC2でABを作成すると、アセットは変化していないのでcrcやサイズなどは一切変化しないが、<b>AssetFileHashは 3. の時とは別の値を生成する。なんでやねん。</b></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>なんとなく嫌な予感がして調べてもらったところ完全に上記の状況がヒットして、ぐえーーってなっていた。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>AssetFileHashはLibraryフォルダが共有されないと一貫性を失ってしまう</b></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>つまり</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・それまで変化がなければ一定の値を保っていた</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・変化があった時「のみ」変わっていた</p>
+<p class="p3"><span class="Apple-tab-span">	</span>という特性だと思っていたのが、Libraryフォルダを生成するようなことがあるとこの一貫性が破綻する。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>一応、Libフォルダが生成されることがトリガーで値が変わる、というのがわかっている状態だが、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>これは例えば、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>「先祖代々ABを作成していたマシンが死んだ」</p>
+<p class="p3"><span class="Apple-tab-span">	</span>「新たにABを生成するマシンにプロジェクトをpullして～」</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>みたいなタイミングで牙を剥く。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>具体的にいうと、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>アプリ側でABDLに際してhashチェックするようなコード書いてると</p>
+<p class="p3"><span class="Apple-tab-span">	</span>すべてのABが更新されたような挙動になってしまう。<b>実際にはなにも変わっていないのに。</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>んんん～～～AssetFileHash<span class="Apple-tab-span">	</span>なんでやねん。</b></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>というわけで、ABのhashには、AssetFileHashとは違った値を使おう。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>オススメは次の特性を満たす値。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・crcのように、ファイルの内容が変わったら10000%変わる値</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・上記以外の要素を一切含まない値</p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>自分はどうするかな～～ ABの名前とcrcからhash作るかな。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>そのうちこの辺に反映される。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/Autoya/blob/master/Assets/Editor/Autoya.AssetGraphIntegration/AutoyaAssetBundleListGenerateProcess.cs#L278">https://github.com/sassembla/Autoya/blob/master/Assets/Editor/Autoya.AssetGraphIntegration/AutoyaAssetBundleListGenerateProcess.cs#L278</a></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Addressablesが将来、このhash要素の概念を守ってくれていると嬉しい。(また最新見てみよう。)</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>あ、バグ、、とかそういう線はあるのかな、、うーん、、、</p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p3">こちらからは以上です。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+</body>
+</html>
