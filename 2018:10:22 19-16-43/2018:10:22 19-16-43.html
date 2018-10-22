@@ -1,0 +1,134 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1561.6">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic Pro'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic Pro'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic Pro'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 17.0px 'Hiragino Kaku Gothic Pro'}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>ECS完全理解</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これ<span class="Apple-converted-space"> </span></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>「Unity ECS完全に理解した」</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://connpass.com/event/101774/">https://connpass.com/event/101774/</a></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>ドカベンさん</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>前提</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Worldインスタンスに対してComponetSystemが1:1対応</p>
+<p class="p3"><span class="Apple-tab-span">	</span>DefaultWorld というのがデフォである。</p>
+<p class="p2"><br></p>
+<p class="p3"><b>動作</b><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Transform、Render、EnemyGenerate、、みたいにSystemを作り、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>それぞれに前提というか適応ルールをセットする。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>e,g, Pos,Rotate,Scaleのどれかがあれば -&gt; PlayerやEnemyのエンティティにヒットする。</p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b>用語の整理</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>ComponentData</b></p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>Entity</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>システムに対するインデックスの定義。</p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>var arch = entityManager.CreateArchetype(条件要素)</p>
+<p class="p3"><span class="Apple-tab-span">	</span>var entity = arch.なにやら</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>ECSの描画について</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>サンプルあり。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>衝突判定</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>そのうち公式実装されるかも。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p4"><b>のたぐす</b></p>
+<p class="p2"><br></p>
+<p class="p3">ECSでパーティクル実装するメソッド</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・GOよりオーバーヘッド低い</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・C#でコントロールできる</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Entityを作る -&gt; それを扱うSystemを作る -&gt; 動かす</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>random.NextFloat3Direction</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>そんなのあるんだww</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>一定時間経過したら削除</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ウッッッ見失った、、、</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>軌跡</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>一定個数の通った位置を保持</p>
+<p class="p3"><span class="Apple-tab-span">	</span>要素をBufferArrayで定義、生成。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>RemoveAt[index]などで削除を行う。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>描画</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Graphics.DrawMesh</p>
+<p class="p3"><span class="Apple-tab-span">	</span>MarkDynamicでちょっと早くなる？</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>高速化</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>GPUへ送る情報を減らすと高速化できそう -&gt; 減らす。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>DrawMeshInstancedIndirect でバッチで渡す。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>頂点数分の長さのパイプ(20パーツ)を作って、Trailにする。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Segment + 要素に分割</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>一旦データをNativeArrayに入れる -&gt; ComputeBufferに入れる流れ。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>NativeArray、Tempで毎回取得するより必要になったタイミングで獲得する流れのほうがよい -&gt; エディタでやるとTempのほうが遅いらしい。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p4"><b>Es</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>Hybrid ECS</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>既存のプロダクトを手っ取り早く良くしたい</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>メインスレッドの占有時間を7 -&gt; 0.4まで減らす話</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Transformを扱う上では結構あり(素敵)</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>1つのGOから1Entityを生成</p>
+<p class="p3"><span class="Apple-tab-span">	</span>従来の開発スタイル + ECS</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>Hybrid特有</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>GOからEntityの値を書き換える、EntityからGOのコンポーネントを書き戻す</p>
+<p class="p3"><span class="Apple-tab-span">	</span>GameObjectEntityを使う。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ComponentDataWrapper を継承することで、GOに貼れる。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>CopyTransformToGOSysytem というSystemが標準で提供されている。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p4"><b>LT</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>NativeSetThreadIndex アトリビュート</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ほーーこんなのが。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+</body>
+</html>
