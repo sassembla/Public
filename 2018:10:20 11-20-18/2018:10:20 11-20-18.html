@@ -1,0 +1,103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1561.6">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 21.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Menlo; color: #6f42c1}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; min-height: 18.0px}
+    span.s1 {font: 21.0px 'Hiragino Sans'}
+    span.s2 {font: 12.0px Helvetica}
+    span.s3 {font: 12.0px Helvetica; color: #000000}
+    span.s4 {font-kerning: none}
+    span.s5 {font: 12.0px 'Hiragino Sans'; color: #000000}
+    span.s6 {font: 12.0px Menlo; font-kerning: none; color: #6f42c1}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>Live2D</b><span class="s1"><b>の除霊記録</b></span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>除霊した。成仏してくれ。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>やばかったところ</b></p>
+<p class="p4"><span class="s3"><span class="Apple-tab-span">	</span></span><span class="s4">OnPostprocessAllAssets </span><span class="s5">ってあるじゃない。</span></p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ドキュメント</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://docs.unity3d.com/ScriptReference/AssetPostprocessor.OnPostprocessAllAssets.html">https://docs.unity3d.com/ScriptReference/AssetPostprocessor.OnPostprocessAllAssets.html</a></p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>大事なこととしては、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>「このAPIは全体で1回だけ走ります」とか</p>
+<p class="p3"><span class="Apple-tab-span">	</span>一切書いてないことで。</p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>つまりこのメソッド、Unityが「あー全部読み込み終わったわ～」ってなったら、いつでも着火する可能性があるんだな。</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、Live2DのPostprocessではこのメソッドにフックする形でResourcesの生成やモデルのインポート時処理をしており、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>これは複数回呼ばれる必要が全くないのに不必要に何回も呼ばれてしまうことがある。</p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>結果的に、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>「開いていたシーンに謎のサンプルキャラクターが発生する」</p>
+<p class="p3"><span class="Apple-tab-span">	</span>「無限にインポートが発生して終わらない」</p>
+<p class="p3"><span class="Apple-tab-span">	</span>などが起こり得る。</p>
+<p class="p5"><br></p>
+<p class="p5"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b>除霊内容</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・Assetがnullな時にAssetDatabaseを使わない(string.Emptyが返ってくる</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・Live2Dがインストールされている箇所の取得を行う</p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>などをやった。</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p3"><b>Assetがnullな時にAssetDatabaseを使わない(string.Emptyが返ってくる</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Live2Dの中で、Resourcesに入っているAssetの読み込み順が不自然だった時に発生する。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="s6">OnPostprocessAllAssets</span> は、そりゃあまあ最後のインポート後に実行される、、はずなんだけど、どこを「最後」とみなすかはUnity次第で。</p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これが、例えば「Live2Dのインポートが終わる前に、別の仕掛けでリソース生成をして、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>そのimportが終わった」みたいな悪魔のようなタイミングで発生するとどうなるか。</p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Live2Dでは、AssetDatabaseに対してimport済みのResourceを突っ込む処理があり、その時、このResourceがnullな可能性がある。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、null を放り込むとどうなるか？</p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>返ってくるのはstring.Emptyなんだこれが。</p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>初めて知ったけどさ。</p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>AssetDatabaseに対して検索目的でAssetを放り込む場合、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・nullチェックして</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・AssetDatabaseに放り込む</p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>とかをやったほうがいい。少なくとも返ってきたものがstring.Emptyじゃないかどうかみたいなチェックはすべきだ。</p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Live2Dのコードはそういうのをやってなかったので、見事にstring.Emptyが入った。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、入った結果どうなるか？</p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ルート/Materials みたいなところにリソースを作ろうとする。当然これはaccess denyされる。</p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>この辺は次のように解決できる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・Assetのリファレンスを使わない(パスベースで解決する。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・ディレクトリはある？ あるなら生成が成功してるはず。</p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>みたいな。 Resource系で、nullになり得るものを信用してはいけない(教訓)。</p>
+<p class="p5"><span class="Apple-tab-span">	</span></p>
+<p class="p5"><br></p>
+<p class="p3"><b>Live2Dがインストールされている箇所の取得を行う</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Live2D、デフォルトパス以外にAssetが移動することが考慮されてない。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Live2D自体のパスの導出に失敗して、前出のインポートエラーが起きたりする。</p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>対策は2つで、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>1.絶対に動かすなよって感じにガチガチに縛る。例えばSDK実行時にAssets直下でなかったらエラー出す。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>2.動かしてもいいように作る</p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>オススメは2。利用しやすいほうが利用される。そして絶対パスは大体変なバグを生む。<span class="Apple-tab-span">	</span></p>
+<p class="p5"><br></p>
+</body>
+</html>
