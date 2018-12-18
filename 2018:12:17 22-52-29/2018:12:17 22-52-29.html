@@ -1,0 +1,118 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1561.6">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Sans'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Courier; background-color: #ebebeb}
+    span.s1 {font-kerning: none}
+    span.s2 {font: 12.0px 'Hiragino Sans'}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>Autoyaのlink.xml Generator作った回</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Autoya 0.9.5のリリースが完了した。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>このリリースでは、わりと「ずっと前から欲しかったんだけど入れられなかった機能」みたいなのを入れた。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・link.xml を生成する機構</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・AssetGraphでAssetBundleをビルドした時についでにlink.xmlを合成出力する機構</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・こまかなバグフィックス</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>などが更新内容。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>このなかで、AssetGraph -&gt; AB作成 -&gt; link.xml生成が熱い。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>AssetBundleとアプリ内含有Assetの関係</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>iOSとかAndroidでのAssetBundleの使用がマストなので、こう、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>「そのABに入ってるAssetはコンパイルに含まれてないのでロードした瞬間、死！！！」</p>
+<p class="p3"><span class="Apple-tab-span">	</span>みたいなのが怖い。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>そこでいろいろな方法があるわけなんだけど、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Autoyaでは、link.xmlを生成することで対処した。</p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b>link.xml Generator</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>AssetのクラスID値(int)を与えるとlink.xmlを吐き出す。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>これ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/Autoya/blob/master/Assets/Editor/Autoya.AssetGraphIntegration/LinkXMLGenerator.cs#L60">https://github.com/sassembla/Autoya/blob/master/Assets/Editor/Autoya.AssetGraphIntegration/LinkXMLGenerator.cs#L60</a></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>単体で抜き出しても使えるので、興味ある人はどうぞ。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、ここで渡すクラスID値とは何か。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>間違ってもここのこれではない</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://docs.unity3d.com/Manual/ClassIDReference.html">https://docs.unity3d.com/Manual/ClassIDReference.html</a></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>この資料ほんんんんんんっっっっっっっっっとーに最悪なことに、<b>間違いまくっている。</b></p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>なので、クラスID値を知りたい人は、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>とりあえずAssetBundleをビルドしてmanifestファイルを見よう。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>こんな感じのやつが出てくる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/Autoya/blob/master/AssetBundles/main_assets/iOS/nestedprefab.manifest#L12">https://github.com/sassembla/Autoya/blob/master/AssetBundles/main_assets/iOS/nestedprefab.manifest#L12</a></p>
+<p class="p2"><br></p>
+<p class="p4"><span class="s1">ManifestFileVersion: 0</span></p>
+<p class="p4"><span class="s1">CRC: 2200902407</span></p>
+<p class="p4"><span class="s1">Hashes:</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">  </span>AssetFileHash:</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">    </span>serializedVersion: 2</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">    </span>Hash: c088a4b2797e99ed3c95d8ce957816af</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">  </span>TypeTreeHash:</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">    </span>serializedVersion: 2</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">    </span>Hash: 11817dad4d3c8e9c24248d58700284ea</span></p>
+<p class="p4"><span class="s1">HashAppended: 0</span></p>
+<p class="p4"><span class="s1">ClassTypes:</span></p>
+<p class="p4"><span class="s1"><b>- Class: 1</b></span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">  </span>Script: {instanceID: 0}</span></p>
+<p class="p4"><span class="s1"><b>- Class: 4</b></span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">  </span>Script: {instanceID: 0}</span></p>
+<p class="p4"><span class="s1"><b>- Class: 23</b></span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">  </span>Script: {instanceID: 0}</span></p>
+<p class="p4"><span class="s1"><b>- Class: 102</b></span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">  </span>Script: {instanceID: 0}</span></p>
+<p class="p4"><span class="s1"><b>- Class: 114</b></span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">  </span>Script: {fileID: 11500000, guid: 7e73406419bf54a50a1b5faf24749c6c, type: 3}</span></p>
+<p class="p4"><span class="s1"><b>- Class: 115</b></span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">  </span>Script: {instanceID: 0}</span></p>
+<p class="p4"><span class="s1">Assets:</span></p>
+<p class="p4"><span class="s1">- Assets/AutoyaTests/RuntimeData/AssetBundles/MainResources/nestedPrefab.prefab</span></p>
+<p class="p4"><span class="s1">Dependencies:</span></p>
+<p class="p4"><span class="s1">- /Users/passepied/Desktop/autoya/Editor/AssetGraph-1.3-release/UnityEngine.AssetBundleGraph/Cache/AssetBundles/4e024a18-af2d-4f29-9f4b-1212e005d1ea/iOS/texturename1</span><span class="s2"><span class="Apple-tab-span">	</span></span></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ここの、Class: 1 とかが、「そのABに含まれているAssetの」「Unity内での」クラスIDの値になっている。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ほらね、簡単でしょう？</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>この数値はmetaファイルとかからは取得できない。できたら別のアプローチとかもあると思うんだけど。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>現状のまとめ</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Autoyaでは、AssetBundleを作成する際にAssetGraphを使っており、AGのビルド時に独自のAssetBundleListを作る機構を提供している。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>List作成のついでに、ビルドしたAssetBundleのmanifestから、ABに含まれる全てのAssetのクラスIDを収集し、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>そのIDをもとにlink.xmlを生成している。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>すでにファイルがある場合は必要な分をマージする。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>これによって、複数のAGのグラフからABをビルドしても一つのlink.xmlがいい感じに太っていくようになる。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+</body>
+</html>
