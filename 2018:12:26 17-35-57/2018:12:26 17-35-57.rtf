@@ -1,0 +1,1185 @@
+{\rtf1\ansi\ansicpg932\cocoartf1561\cocoasubrtf600
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fnil\fcharset128 HiraginoSans-W4;\f2\fnil\fcharset128 HiraginoSans-W3;
+\f3\fnil\fcharset0 Menlo-Regular;}
+{\colortbl;\red255\green255\blue255;\red70\green137\blue204;\red0\green0\blue0;\red202\green202\blue202;
+\red67\green192\blue160;\red140\green211\blue254;\red23\green23\blue23;\red212\green214\blue154;\red167\green197\blue152;
+\red183\green111\blue179;\red89\green138\blue67;\red28\green28\blue29;\red202\green202\blue202;\red70\green137\blue204;
+\red67\green192\blue160;\red212\green214\blue154;\red140\green211\blue254;\red89\green138\blue67;\red167\green197\blue152;
+\red183\green111\blue179;}
+{\*\expandedcolortbl;;\cssrgb\c33725\c61176\c83922;\cssrgb\c0\c0\c0;\cssrgb\c83137\c83137\c83137;
+\cssrgb\c30588\c78824\c69020;\cssrgb\c61176\c86275\c99608;\cssrgb\c11765\c11765\c11765;\cssrgb\c86275\c86275\c66667;\cssrgb\c70980\c80784\c65882;
+\cssrgb\c77255\c52549\c75294;\cssrgb\c41569\c60000\c33333;\cssrgb\c14510\c14510\c14902;\cssrgb\c83137\c83137\c83137;\cssrgb\c33725\c61176\c83922;
+\cssrgb\c30588\c78824\c69020;\cssrgb\c86275\c86275\c66667;\cssrgb\c61176\c86275\c99608;\cssrgb\c41569\c60000\c33333;\cssrgb\c70980\c80784\c65882;
+\cssrgb\c77255\c52549\c75294;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww22800\viewh13720\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\b\fs44 \cf0 ECS
+\f1 \'82\'cc\'82\'dc\'82\'c8\'82\'d1
+\f0\b0\fs24 \
+\
+
+\f1\b \'8a\'54\'97\'76
+\f0\b0 \
+	
+\f2 \'82\'dc\'82\'c8\'82\'d4\'81\'42\'8e\'51\'8d\'6c\'82\'cd\'89\'9a\'82\'dd\'82\'b3\'82\'f1\'82\'cc\'82\'e2\'82\'c2\'81\'42
+\f0 \
+\
+	
+\f2 \'81\'75Unity \'82\'c5 Boids \'83\'56\'83\'7e\'83\'85\'83\'8c\'81\'5b\'83\'56\'83\'87\'83\'93\'82\'f0\'8d\'ec\'90\'ac\'82\'b5\'82\'c4 Entity Component System\'81\'69ECS\'81\'6a\'82\'f0\'8a\'77\'82\'f1\'82\'c5\'82\'dd\'82\'bd\'81\'76
+\f0 \
+		{\field{\*\fldinst{HYPERLINK "http://tips.hecomi.com/entry/2018/12/23/200817"}}{\fldrslt http://tips.hecomi.com/entry/2018/12/23/200817}}\
+\
+\
+
+\b Boid
+\f1 \'81\'41
+\f0 Simulation
+\b0 \
+	
+\f2 \'91\'bc\'82\'cc\'82\'b7\'82\'d7\'82\'c4\'82\'cc
+\f0 Boid
+\f2 \'82\'cc\'88\'ca\'92\'75\'82\'f0\'8c\'a9\'82\'bd\'82\'e8\'82\'b5\'82\'c4\'93\'ae\'82\'ad
+\f0 Boid
+\f2 \'82\'c6\'81\'41
+\f0 \
+	
+\f2 \'82\'bb\'82\'ea\'82\'e7\'82\'f0\'90\'b6\'90\'ac\'82\'b7\'82\'e9
+\f0 Simulation
+\f2 \'82\'c6\'82\'a2\'82\'a4\'91\'67\'82\'dd\'8d\'87\'82\'ed\'82\'b9\'81\'42
+\f0 \
+\
+	
+\f2 \'82\'b1\'82\'b1\'82\'a9\'82\'e7\'81\'41
+\f0 ECS
+\f2 \'82\'c9\'8c\'fc\'82\'af\'82\'c4\'95\'aa\'89\'f0\'82\'b5\'82\'c4\'82\'a2\'82\'ad\'81\'42
+\f0 \
+\
+\
+
+\b entity
+\f1 \'82\'f0\'93\'b1\'93\'fc
+\f0\b0 \
+	
+\f2 \'83\'70\'83\'62\'83\'50\'81\'5b\'83\'57\'83\'7d\'83\'6c\'81\'5b\'83\'57\'83\'83\'81\'5b\'82\'a9\'82\'e7\'93\'b1\'93\'fc\'81\'42
+\f0 \
+\
+\
+
+\b Boid
+\f1 \'82\'cc
+\f0 ECS
+\f1 \'91\'ce\'89\'9e
+\f0\b0 \
+	Boid
+\f2 \'81\'41\'92\'86\'82\'c5\'82\'cd
+\f0 \
+	
+\f2 \'81\'45\'89\'c1\'91\'ac\'93\'78\'81\'41\'88\'ca\'92\'75\'82\'c8\'82\'c7\'82\'cc\'83\'70\'83\'89\'83\'81\'81\'5b\'83\'5e\'82\'aa\'82\'a0\'82\'e9
+\f0 \
+	
+\f2 \'81\'45\'8a\'d6\'90\'94\'82\'c5\'82\'bb\'82\'ea\'82\'e7\'82\'cc\'92\'86\'82\'c9\'92\'6c\'82\'f0\'83\'5a\'83\'62\'83\'67\'82\'b7\'82\'e9
+\f0 \
+	\
+	
+\f2 \'82\'c6\'82\'a2\'82\'a4\'82\'b1\'82\'c6\'82\'f0\'82\'e2\'82\'c1\'82\'c4\'82\'a2\'82\'c4\'81\'41
+\f0 \
+\
+	
+\f2 \'82\'b1\'82\'ea\'82\'f0\'81\'41\
+		\'83\'70\'83\'89\'83\'81\'81\'5b\'83\'5e -> \'83\'47\'83\'93\'83\'65\'83\'42\'83\'65\'83\'42\'89\'bb\
+		\'8a\'d6\'90\'94 -> \'83\'56\'83\'58\'83\'65\'83\'80\'89\'bb\
+\
+	\'82\'c6\'82\'a2\'82\'a4\'82\'b1\'82\'c6\'82\'f0\'82\'e2\'82\'c1\'82\'c4\'82\'a2\'82\'ad\'81\'42\
+\
+	\'93\'ae\'82\'ab\'82\'cc\'83\'6f\'83\'8a\'83\'47\'81\'5b\'83\'56\'83\'87\'83\'93\'82\'c6\'82\'b5\'82\'c4\'82\'cd\'81\'41\
+	\'81\'45\'95\'c7\'82\'c9\'8b\'df\'82\'c3\'82\'a2\'82\'bd\'82\'e7\'89\'5d\'81\'58\
+	\'81\'45\'8c\'fc\'82\'ab\'82\'c6\'82\'a9\'91\'ac\'93\'78\'82\'f0\'89\'5d\'81\'58\
+	\'81\'45\'91\'bc\'82\'cc\'8c\'c2\'91\'cc\'82\'c6\'8b\'df\'82\'c3\'82\'ad\'97\'a3\'82\'ea\'82\'e9\'82\'f0\'89\'5d\'81\'58\
+	\'82\'b7\'82\'e9\'81\'42\
+\
+	\
+	\'83\'70\'83\'89\'83\'81\'81\'5b\'83\'5e\'82\'cc\'95\'aa\'89\'f0\'97\'b1\'93\'78\'82\'c9\'82\'c2\'82\'a2\'82\'c4\'82\'cd\'81\'41\
+	\'81\'45\'8a\'65\'8e\'ed\'83\'56\'83\'58\'83\'65\'83\'80\'82\'aa\'95\'4b\'97\'76\'82\'c8\'8f\'ee\'95\'f1\'82\'f0\'83\'4f\'83\'8b\'81\'5b\'83\'73\'83\'93\'83\'4f\'82\'b5\'82\'c4\'82\'ad\'82\'e9\'82\'c6\'82\'ab\'82\'c9\'96\'7b\'93\'96\'82\'c9\'95\'4b\'97\'76\'82\'c8\'8d\'c5\'8f\'ac\'82\'cc\'97\'b1\'93\'78\'82\'c5\'95\'aa\'89\'f0\'82\'b5\'82\'bd\'95\'fb\'82\'aa\'97\'c7\'82\'a2\
+	\
+	\'82\'c6\'82\'a2\'82\'a4\'82\'b1\'82\'c6\'82\'c8\'82\'cc\'82\'c5\'81\'41\
+\
+	\'82\'dc\'82\'b8\'82\'cd\'8d\'c5\'8f\'ac\'97\'b1\'93\'78\'82\'c5\'83\'47\'83\'93\'83\'65\'83\'42\'83\'65\'83\'42\'89\'bb\'82\'b5\'82\'c4\'82\'dd\'82\'e6\'82\'a4\'81\'42\
+\
+	\
+
+\f1\b \'83\'52\'83\'93\'83\'7c\'81\'5b\'83\'6c\'83\'93\'83\'67\'82\'cc\'8d\'ec\'90\'ac
+\f2\b0 \
+	\'83\'52\'83\'93\'83\'7c\'81\'5b\'83\'6c\'83\'93\'83\'67 = ECS\'82\'c5\'88\'b5\'82\'a4\'8c\'5e\'8f\'ee\'95\'f1\'82\'cc\'92\'e8\'8b\'60\'81\'41\'82\'dd\'82\'bd\'82\'a2\'82\'c8\'88\'f3\'8f\'db\'81\'42\
+	IComponentData\'82\'f0\'8c\'70\'8f\'b3\'82\'b5\'82\'bdstruct\'82\'f0\'92\'e8\'8b\'60\'82\'b5\'81\'41\'93\'e0\'95\'94\'82\'c9Unity.Mathematics \'82\'c9\'92\'e8\'8b\'60\'82\'b3\'82\'ea\'82\'c4\'82\'a2\'82\'e9\'8c\'5e(float3\'82\'c6\'82\'a9)\'82\'f0\'95\'db\'8e\'9d\'82\'b7\'82\'e9\'81\'42\
+	\
+	float3\'82\'cd\'81\'413\'82\'c2\'82\'ccfloat\'82\'aa\'93\'fc\'82\'c1\'82\'c4\'82\'a2\'82\'e9\'8c\'5e\'81\'42\
+\
+	\
+
+\f1\b \'8b\'4e\'93\'ae\'83\'4e\'83\'89\'83\'58\'82\'cc\'8d\'ec\'90\'ac
+\f2\b0 \
+	ECS\'82\'cc\'8a\'d6\'98\'41\'90\'ab\'82\'f0\'8b\'4e\'93\'ae\'82\'b7\'82\'e9()\'82\'e6\'82\'a4\'82\'c8\'8f\'88\'97\'9d\'82\'f0\'8f\'91\'82\'ad\'81\'42\
+	\'81\'45\'83\'52\'83\'93\'83\'7c\'81\'5b\'83\'6c\'83\'93\'83\'67\'82\'cc\'92\'e8\'8b\'60\
+	\'81\'45\'83\'66\'83\'74\'83\'48\'83\'8b\'83\'67\'82\'ccWorld\'82\'a9\'82\'e7EntityManager\'82\'f0\'8e\'e6\'93\'be\
+	\'81\'45\'83\'41\'81\'5b\'83\'4c\'83\'5e\'83\'43\'83\'76\'82\'c6\'8c\'c4\'82\'ce\'82\'ea\'82\'e9\'82\'e0\'82\'cc\'82\'f0manager\'82\'c9\'83\'5a\'83\'62\'83\'67\
+	\'81\'45\'83\'8c\'83\'93\'83\'5f\'83\'89\'82\'cc\'90\'b6\'90\'ac\
+	\'81\'45\'83\'47\'83\'93\'83\'65\'83\'42\'83\'65\'83\'42\'82\'cc\'90\'b6\'90\'ac\'81\'41\'83\'52\'83\'93\'83\'7c\'81\'5b\'83\'6c\'83\'93\'83\'67\'82\'cc\'92\'c7\'89\'c1\
+\
+\
+
+\f1\b \'83\'52\'83\'93\'83\'7c\'81\'5b\'83\'6c\'83\'93\'83\'67\'82\'cc\'92\'e8\'8b\'60
+\f2\b0 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f3 \cf2 \cb3 \expnd0\expndtw0\kerning0
+public\cf4  \cf2 struct\cf4  \cf5 Velocity\cf4  : \cf5 IComponentData\cf4 \
+\{\
+    \cf2 public\cf4  \cf5 float3\cf4  \cf6 Value\cf4 ;\
+\}\
+\
+\cf2 public\cf4  \cf2 struct\cf4  \cf5 Acceleration\cf4  : \cf5 IComponentData\cf4 \
+\{\
+    \cf2 public\cf4  \cf5 float3\cf4  \cf6 Value\cf4 ;\
+\}\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f2 \cf0 \cb1 \kerning1\expnd0\expndtw0 	IComponentData\'82\'f0\'8c\'70\'8f\'b3\'82\'b5\'82\'bd\'8c\'5e\'82\'f0\'90\'b6\'90\'ac\'82\'b5\'82\'c4\'82\'a8\'82\'ad\'81\'42\
+	\'82\'b1\'82\'cc\'8c\'5e\'82\'f0\'83\'47\'83\'93\'83\'65\'83\'42\'83\'65\'83\'42\'82\'c9\'83\'5a\'83\'62\'83\'67\'82\'b7\'82\'e9\'82\'b1\'82\'c6\'82\'c5\'81\'41\'83\'47\'83\'93\'83\'65\'83\'42\'83\'65\'83\'42\'82\'c9\'91\'ce\'82\'b5\'82\'c4\'94\'43\'88\'d3\'82\'cc\'92\'6c\'82\'f0\'8e\'9d\'82\'bd\'82\'b9\'82\'e9\'82\'b1\'82\'c6\'82\'aa\'82\'c5\'82\'ab\'82\'e9\'82\'e6\'82\'a4\'82\'c9\'82\'c8\'82\'e9\'81\'42\
+\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f1\b \cf0 \'83\'66\'83\'74\'83\'48\'83\'8b\'83\'67\'82\'ccWorld\'82\'a9\'82\'e7EntityManager\'82\'f0\'8e\'e6\'93\'be
+\f2\b0 \
+	World\'82\'cd\'8e\'a9\'95\'aa\'82\'c5\'90\'b6\'90\'ac\'82\'b7\'82\'e9\'82\'b1\'82\'c6\'82\'e0\'82\'c5\'82\'ab\'82\'e9\'81\'42\
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f3 \cf2 \cb7 \expnd0\expndtw0\kerning0
+var\cf4  \cf6 manager\cf4  = \cf6 World\cf4 .\cf6 Active\cf4 .\cf8 GetOrCreateManager\cf4 <\cf5 EntityManager\cf4 >();\cb1 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f2 \cf0 \kerning1\expnd0\expndtw0 \
+	\'82\'b1\'82\'ccmanager\'82\'c9\'91\'ce\'82\'b5\'82\'c4\'81\'41\'83\'8c\'83\'93\'83\'5f\'83\'89\'82\'e2\'83\'41\'81\'5b\'83\'4c\'83\'5e\'83\'43\'83\'76\'82\'f0\'83\'5a\'83\'62\'83\'67\'82\'b5\'82\'c4\'82\'a2\'82\'ad\'81\'42\
+\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f1\b \cf0 \'83\'41\'81\'5b\'83\'4c\'83\'5e\'83\'43\'83\'76\'82\'c6\'8c\'c4\'82\'ce\'82\'ea\'82\'e9\'82\'e0\'82\'cc\'82\'f0manager\'82\'c9\'83\'5a\'83\'62\'83\'67
+\f2\b0 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f3 \cf2 \cb3 \expnd0\expndtw0\kerning0
+var\cf4  \cf6 archetype\cf4  = \cf6 manager\cf4 .\cf8 CreateArchetype\cf4 (\
+            \cf2 typeof\cf4 (\cf5 Position\cf4 ),\
+            \cf2 typeof\cf4 (\cf5 Rotation\cf4 ),\
+            \cf2 typeof\cf4 (\cf5 Scale\cf4 ),\
+            \cf2 typeof\cf4 (\cf5 Velocity\cf4 ),\
+            \cf2 typeof\cf4 (\cf5 Acceleration\cf4 ),\
+            \cf2 typeof\cf4 (\cf5 MeshInstanceRenderer\cf4 ));\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf4 \cb1 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f2 \cf0 \kerning1\expnd0\expndtw0 	manager\'82\'c9\'91\'ce\'82\'b5\'82\'c4\'81\'41\'97\'70\'88\'d3\'82\'b5\'82\'bdComponent\'82\'f0\'83\'5a\'83\'62\'83\'67\'82\'b5\'82\'c4\'82\'ad\'81\'42\
+\
+	Position\'81\'41Rotation\'81\'41Scale\'81\'41MeshInstanceRenderer\'82\'cdUnity\'82\'aa\'97\'70\'88\'d3\'82\'b5\'82\'c4\'82\'ad\'82\'ea\'82\'c4\'82\'a2\'82\'e9\'82\'e0\'82\'cc\'82\'f0\'8e\'67\'97\'70\'81\'41\
+	Velocity\'81\'41Acceleration\'82\'cd\'82\'b3\'82\'c1\'82\'ab\'8f\'91\'82\'a2\'82\'bd\'82\'e0\'82\'cc\'82\'f0\'83\'5a\'83\'62\'83\'67\'82\'b7\'82\'e9\'81\'42\
+\
+	\'82\'b1\'82\'a4\'82\'b7\'82\'e9\'82\'b1\'82\'c6\'82\'c5\'81\'41archetype\'82\'f0\'90\'b6\'90\'ac\'82\'c5\'82\'ab\'82\'e9\'81\'42\
+	archetype\'82\'cdComponent\'82\'cc\'8c\'5e\'82\'f0\'97\'f1\'8b\'93\'82\'b5\'82\'bd\'83\'66\'81\'5b\'83\'5e\'82\'f0\'8a\'dc\'82\'f1\'82\'c5\'82\'a2\'82\'e9\'83\'43\'83\'93\'83\'58\'83\'5e\'83\'93\'83\'58\'81\'42\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0 \cf0 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f1\b \cf0 \'83\'8c\'83\'93\'83\'5f\'83\'89\'82\'cc\'90\'b6\'90\'ac
+\f2\b0 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f3 \cf4 \cb3 \expnd0\expndtw0\kerning0
+        \cf2 var\cf4  \cf6 renderer\cf4  = \cf2 new\cf4  \cf5 MeshInstanceRenderer\cf4 \
+        \{\
+            \cf6 castShadows\cf4  = \cf6 ShadowCastingMode\cf4 .\cf6 On\cf4 ,\
+            \cf6 receiveShadows\cf4  = \cf2 true\cf4 ,\
+            \cf6 mesh\cf4  = \cf6 mesh\cf4 ,\
+            \cf6 material\cf4  = \cf6 material\cf4 \
+        \};\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0 \cf0 \cb1 \kerning1\expnd0\expndtw0 	\
+	
+\f2 \'83\'47\'83\'93\'83\'65\'83\'42\'83\'65\'83\'42\'82\'c9\'91\'ce\'82\'b5\'82\'c4\'95\'60\'89\'e6\'8e\'9e\'82\'c9\'8e\'67\'97\'70\'82\'b7\'82\'e9\'8b\'40\'8d\'5c\'82\'f0\'90\'b6\'90\'ac\'82\'b5\'82\'c4\'82\'a8\'82\'ad\'81\'42
+\f0 \
+	
+\f2 \'82\'b1\'82\'cc
+\f0 renderer
+\f2 \'82\'cd\'82\'a0\'82\'c6\'82\'c5\'83\'47\'83\'93\'83\'65\'83\'42\'83\'65\'83\'42\'82\'f0\'90\'b6\'90\'ac\'82\'b7\'82\'e9\'8e\'9e\'82\'c9\'83\'5a\'83\'62\'83\'67\'82\'b7\'82\'e9\'81\'42
+\f0 \
+\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f1\b \cf0 \'83\'47\'83\'93\'83\'65\'83\'42\'83\'65\'83\'42\'82\'cc\'90\'b6\'90\'ac\'81\'41\'83\'52\'83\'93\'83\'7c\'81\'5b\'83\'6c\'83\'93\'83\'67\'82\'cc\'92\'c7\'89\'c1
+\f0\b0 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f3 \cf4 \cb3 \expnd0\expndtw0\kerning0
+            \cf2 var\cf4  \cf6 entity\cf4  = \cf6 manager\cf4 .\cf8 CreateEntity\cf4 (\cf6 archetype\cf4 );\
+            \cf6 manager\cf4 .\cf8 SetComponentData\cf4 (\cf6 entity\cf4 , \cf2 new\cf4  \cf5 Position\cf4  \{ \cf6 Value\cf4  = \cf6 random\cf4 .\cf8 NextFloat3\cf4 (\cf9 1f\cf4 ) \});\
+            \cf6 manager\cf4 .\cf8 SetComponentData\cf4 (\cf6 entity\cf4 , \cf2 new\cf4  \cf5 Rotation\cf4  \{ \cf6 Value\cf4  = \cf6 quaternion\cf4 .\cf6 identity\cf4  \});\
+            \cf6 manager\cf4 .\cf8 SetComponentData\cf4 (\cf6 entity\cf4 , \cf2 new\cf4  \cf5 Scale\cf4  \{ \cf6 Value\cf4  = \cf2 new\cf4  \cf5 float3\cf4 (\cf6 boidScale\cf4 .\cf6 x\cf4 , \cf6 boidScale\cf4 .\cf6 y\cf4 , \cf6 boidScale\cf4 .\cf6 z\cf4 ) \});\
+            \cf6 manager\cf4 .\cf8 SetComponentData\cf4 (\cf6 entity\cf4 , \cf2 new\cf4  \cf5 Velocity\cf4  \{ \cf6 Value\cf4  = \cf6 random\cf4 .\cf8 NextFloat3Direction\cf4 () * \cf6 param\cf4 .\cf6 initSpeed\cf4  \});\
+            \cf6 manager\cf4 .\cf8 SetComponentData\cf4 (\cf6 entity\cf4 , \cf2 new\cf4  \cf5 Acceleration\cf4  \{ \cf6 Value\cf4  = \cf6 float3\cf4 .\cf6 zero\cf4  \});\
+            \cf6 manager\cf4 .\cf8 SetSharedComponentData\cf4 (\cf6 entity\cf4 , \cf6 renderer\cf4 );\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0 \cf0 \cb1 \kerning1\expnd0\expndtw0 	manager
+\f2 \'82\'c9\'91\'ce\'82\'b5\'82\'c4\'81\'41
+\f0 archetype
+\f2 \'82\'f0\'93\'6e\'82\'b7\'82\'b1\'82\'c6\'82\'c5\'83\'47\'83\'93\'83\'65\'83\'42\'83\'65\'83\'42\'82\'f0\'90\'b6\'90\'ac\'82\'b7\'82\'e9\'81\'42
+\f0 \
+\
+	
+\f2 \'82\'b1\'82\'a4\'82\'b7\'82\'e9\'82\'b1\'82\'c6\'82\'c5\'81\'41\'82\'b1\'82\'ea\'82\'e7\'82\'cc\'83\'52\'83\'93\'83\'7c\'81\'5b\'83\'6c\'83\'93\'83\'67\'82\'f0\'8e\'9d\'82\'c1\'82\'bd
+\f0 Entity
+\f2 \'82\'aa\'90\'b6\'90\'ac\'82\'b3\'82\'ea\'82\'e9\'81\'42
+\f0 \
+	
+\f2 \'82\'c5\'81\'41
+\f0 entity
+\f2 \'82\'cc\'82\'bb\'82\'ea\'82\'bc\'82\'ea\'82\'cc\'83\'52\'83\'93\'83\'7c\'81\'5b\'83\'6c\'83\'93\'83\'67\'82\'c9\'91\'ce\'82\'b5\'82\'c4\'83\'66\'81\'5b\'83\'5e\'82\'f0\'83\'5a\'83\'62\'83\'67\'82\'b7\'82\'e9\'82\'b1\'82\'c6\'82\'aa\'82\'c5\'82\'ab\'82\'e9\'81\'42\
+	\'8d\'c5\'8f\'49\'93\'49\'82\'c9entity\'82\'c9\'91\'ce\'82\'b5\'82\'c4renderer\'82\'f0\'83\'5a\'83\'62\'83\'67\'82\'b7\'82\'e9\'82\'c6\'8a\'ae\'97\'b9\'82\'c5\'81\'41\'93\'ae\'82\'ab\'8f\'6f\'82\'b7\'81\'42\
+\
+	\'82\'b1\'82\'b1\'82\'dc\'82\'c5\'82\'c5\'81\'41\'83\'47\'83\'93\'83\'65\'83\'42\'83\'65\'83\'42\'82\'cc\'90\'b6\'90\'ac\'82\'cd\'8a\'ae\'97\'b9\'81\'42\
+	\'8e\'9f\'82\'c9\'81\'41\'82\'b1\'82\'ea\'82\'e7\'82\'cc\'83\'47\'83\'93\'83\'65\'83\'42\'83\'65\'83\'42\'82\'f0\'93\'ae\'82\'a9\'82\'b7\'8e\'64\'8a\'7c\'82\'af(System)\'82\'c9\'82\'c2\'82\'a2\'82\'c4\'8d\'6c\'82\'a6\'82\'e9\'81\'42\
+\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f1\b \cf0 \'83\'47\'83\'93\'83\'65\'83\'42\'83\'65\'83\'42\'82\'f0\'93\'ae\'82\'a9\'82\'b7
+\f2\b0 \
+	ComponentSystem\'82\'f0\'90\'b6\'90\'ac\'82\'b7\'82\'e9\'81\'42\
+	\'81\'45\'83\'66\'81\'5b\'83\'5e\'8c\'5e\'82\'f0\'82\'c7\'82\'b1\'82\'a9\'82\'c9\'92\'e8\'8b\'60(\'8a\'4f\'95\'94\'82\'c5\'82\'e0\'82\'a2\'82\'a2\'82\'cd\'82\'b8)\
+	\'81\'45ComponentSystem\'8c\'5e\'82\'f0\'8c\'70\'8f\'b3\'82\'b5\'82\'bd\'8c\'5e\'82\'f0\'90\'b6\'90\'ac\'81\'41\'83\'66\'81\'5b\'83\'5e\'8c\'5e\'82\'f0\'83\'4e\'83\'89\'83\'58\'93\'e0\'82\'cc\'83\'74\'83\'42\'81\'5b\'83\'8b\'83\'68\'82\'c9\'83\'43\'83\'93\'83\'57\'83\'46\'83\'4e\'83\'67\
+	\'81\'45OnUpdate\'8a\'d6\'90\'94\'82\'f0\'8f\'91\'82\'ad\
+\
+\
+
+\f1\b \'83\'66\'81\'5b\'83\'5e\'8c\'5e\'82\'f0\'82\'c7\'82\'b1\'82\'a9\'82\'c9\'92\'e8\'8b\'60(\'8a\'4f\'95\'94\'82\'c5\'82\'e0\'82\'a2\'82\'a2\'82\'cd\'82\'b8)
+\f2\b0 \
+	\'82\'b1\'82\'f1\'82\'c8\'8a\'b4\'82\'b6\'82\'cc\'8c\'5e\'82\'f0\'8d\'ec\'82\'e9\'81\'42\
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f3 \cf4 \cb3 \expnd0\expndtw0\kerning0
+    \cf2 struct\cf4  \cf5 Data\cf4 \
+    \{\
+        \cf2 public\cf4  \cf2 readonly\cf4  \cf2 int\cf4  \cf6 Length\cf4 ;\
+        \cf2 public\cf4  \cf5 ComponentDataArray\cf4 <\cf5 Position\cf4 > \cf6 positions\cf4 ;\
+        [\cf5 WriteOnly\cf4 ] \cf2 public\cf4  \cf5 ComponentDataArray\cf4 <\cf5 Rotation\cf4 > \cf6 rotations\cf4 ;\
+        \cf2 public\cf4  \cf5 ComponentDataArray\cf4 <\cf5 Velocity\cf4 > \cf6 velocities\cf4 ;\
+        \cf2 public\cf4  \cf5 ComponentDataArray\cf4 <\cf5 Acceleration\cf4 > \cf6 accelerations\cf4 ;\
+    \}\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f2 \cf0 \cb1 \kerning1\expnd0\expndtw0 	\
+	Length\'82\'c9\'82\'cd\'81\'41\'8e\'a9\'93\'ae\'93\'49\'82\'c9\'81\'75\'89\'bd\'8c\'c2\'82\'ccEntity\'82\'aa\'82\'a0\'82\'e9\'82\'a9\'81\'76\'82\'aa\'93\'fc\'82\'e9\'81\'42\'82\'c2\'82\'dc\'82\'e8\'82\'b1\'82\'cc\'90\'94\'95\'aa\'82\'be\'82\'af\'83\'47\'83\'93\'83\'65\'83\'42\'83\'65\'83\'42\'82\'aa\'82\'a0\'82\'e9\'81\'41\'82\'c6\'82\'a2\'82\'a4\'8f\'ee\'95\'f1\'82\'f0\'8e\'e6\'93\'be\'82\'c5\'82\'ab\'82\'e9\'81\'42\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0 \cf0 	position
+\f2 \'82\'c6\'82\'a9\'82\'aaarray\'82\'c9\'82\'c8\'82\'c1\'82\'c4\'82\'a2\'82\'c4\'81\'41\'81\'75\'82\'b7\'82\'d7\'82\'c4\'82\'cc\'83\'47\'83\'93\'83\'65\'83\'42\'83\'65\'83\'42\'82\'ccpositon\'81\'76\'82\'aa\'93\'fc\'82\'c1\'82\'c4\'82\'a2\'82\'e9\'83\'41\'83\'8c\'83\'43\'82\'c9\'82\'c8\'82\'c1\'82\'c4\'82\'a2\'82\'e9\'81\'42\'82\'b7\'82\'b2\'82\'a2\'81\'42\
+\
+
+\f0 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f1\b \cf0 ComponentSystem\'8c\'5e\'82\'f0\'8c\'70\'8f\'b3\'82\'b5\'82\'bd\'8c\'5e\'82\'f0\'90\'b6\'90\'ac\'81\'41\'83\'66\'81\'5b\'83\'5e\'8c\'5e\'82\'f0\'83\'4e\'83\'89\'83\'58\'93\'e0\'82\'cc\'83\'74\'83\'42\'81\'5b\'83\'8b\'83\'68\'82\'c9\'83\'43\'83\'93\'83\'57\'83\'46\'83\'4e\'83\'67\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\b0 \cf0 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f3 \cf2 \cb3 \expnd0\expndtw0\kerning0
+public\cf4  \cf2 class\cf4  \cf5 WallSystem\cf4  : \cf5 ComponentSystem\cf4 \
+\{\
+    \cf2 struct\cf4  \cf5 Data\cf4 \
+    \{\
+        \cf2 public\cf4  \cf2 readonly\cf4  \cf2 int\cf4  \cf6 Length\cf4 ;\
+        [\cf5 ReadOnly\cf4 ] \cf2 public\cf4  \cf5 ComponentDataArray\cf4 <\cf5 Position\cf4 > \cf6 positions\cf4 ;\
+        \cf2 public\cf4  \cf5 ComponentDataArray\cf4 <\cf5 Acceleration\cf4 > \cf6 accelerations\cf4 ;\
+    \}\
+\
+    [\cf5 Inject\cf4 ] \cf5 Data\cf4  \cf6 data\cf4 ;\
+\
+    \cf2 protected\cf4  \cf2 override\cf4  \cf2 void\cf4  \cf8 OnUpdate\cf4 ()\
+    \{\
+		.....\
+\
+        \cf10 for\cf4  (\cf2 int\cf4  \cf6 i\cf4  = \cf9 0\cf4 ; \cf6 i\cf4  < \cf6 data\cf4 .\cf6 Length\cf4 ; ++\cf6 i\cf4 )\
+        \{\
+            \cf6 data\cf4 .\cf6 accelerations\cf4 [\cf6 i\cf4 ] = \cf2 new\cf4  \cf5 Acceleration\cf4  \{ \cf6 Value\cf4  = \cf6 accel\cf4  \};\
+        \}\
+    \}\
+\}\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f1 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+	OnUpdate\'82\'aa\'96\'88\'83\'74\'83\'8c\'81\'5b\'83\'80\'8e\'c0\'8d\'73\'82\'b3\'82\'ea\'82\'e9\'81\'42\
+	Data\'8c\'5e\'82\'f0Inject\'83\'41\'83\'67\'83\'8a\'83\'72\'83\'85\'81\'5b\'83\'67\'82\'f0\'82\'c2\'82\'af\'82\'c4\'92\'e8\'8b\'60\'82\'b5\'82\'c4\'82\'a2\'82\'e9\'82\'aa\'81\'41\'82\'b1\'82\'cc\'83\'43\'83\'93\'83\'58\'83\'5e\'83\'93\'83\'58\'82\'c9\'91\'ce\'82\'b5\'82\'c4\'8e\'a9\'93\'ae\'93\'49\'82\'c9\'83\'47\'83\'93\'83\'65\'83\'42\'83\'65\'83\'42\'82\'aa\'93\'fc\'82\'e9\'81\'42\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0 \cf0 \
+	
+\f2 \'82\'c5\'81\'41Move\'82\'c6Wall\'82\'f0\'83\'5a\'83\'62\'83\'67\'82\'b7\'82\'e9\'82\'b1\'82\'c6\'82\'c5\'81\'41\'88\'da\'93\'ae\'82\'c6\'95\'c7\'90\'da\'8b\'df\'82\'cc\'8f\'88\'97\'9d\'82\'f0\'8e\'c0\'8c\'bb\'82\'c5\'82\'ab\'82\'e9\'81\'42\
+	\'82\'b1\'82\'ea\'82\'e7\'82\'ccComponentSystem\'82\'f0\'8c\'70\'8f\'b3\'82\'b5\'82\'bd\'8c\'5e\'82\'cd\'81\'41\'8e\'a9\'93\'ae\'93\'49\'82\'c9\'83\'66\'83\'74\'83\'48\'83\'8b\'83\'67\'82\'ccWorld\'82\'c9\'91\'67\'82\'dd\'8d\'9e\'82\'dc\'82\'ea\'82\'e9\'81\'42\
+\
+	\'82\'b1\'82\'b1\'82\'dc\'82\'c5\'82\'c5\'95\'c7\'90\'da\'8b\'df\'82\'c6\'88\'da\'93\'ae\'82\'c9\'8a\'d6\'82\'b5\'82\'c4\'82\'cc\'83\'56\'83\'58\'83\'65\'83\'80\'82\'aa\'82\'c5\'82\'ab\'82\'bd\'81\'42\
+\
+	\'82\'c5\'81\'41\'82\'bb\'82\'cc\'8e\'c0\'8d\'73\'8f\'87\'82\'cc\'90\'a7\'8c\'e4\'82\'f0\'82\'a2\'82\'dc\'82\'cc\'82\'c6\'82\'b1\'82\'eb\'82\'cdMoveSystem\'82\'c9attribute\'82\'c5\
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f3 \cf4 \cb7 \expnd0\expndtw0\kerning0
+[\cf5 \cb7 UpdateAfter\cf4 \cb7 (\cf2 \cb7 typeof\cf4 \cb7 (\cf5 \cb7 WallSystem\cf4 \cb7 ))]\cb1 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f2 \cf0 \kerning1\expnd0\expndtw0 	\'82\'c6\'82\'a9\'82\'e2\'82\'c1\'82\'c4\'8d\'73\'82\'a4\'81\'42\
+\
+	\'82\'b1\'82\'b1\'82\'a9\'82\'e7\'82\'cd\'81\'41\'88\'ea\'82\'c2\'82\'cc\'83\'47\'83\'93\'83\'65\'83\'42\'83\'65\'83\'42\'82\'a9\'82\'e7\'95\'ca\'82\'cc\'83\'47\'83\'93\'83\'65\'83\'42\'83\'65\'83\'42\'82\'f0\'8e\'51\'8f\'c6\'82\'b5\'82\'c4\'81\'41\'8c\'51(Boid)\'82\'c1\'82\'db\'82\'a2\'8b\'93\'93\'ae\'82\'f0\'82\'b3\'82\'b9\'82\'e9\'81\'42\
+	\'91\'bc\'82\'cc\'8c\'c2\'91\'cc\'82\'c6\'8b\'df\'82\'c3\'82\'ad\'97\'a3\'82\'ea\'82\'e9\'82\'f0\'89\'5d\'81\'58 \'82\'cc\'95\'94\'95\'aa\'81\'42\
+\
+	\'82\'b1\'82\'cc\'8f\'ea\'8d\'87\'81\'41\'88\'ea\'82\'c2\'82\'cc\'83\'47\'83\'93\'83\'65\'83\'42\'83\'65\'83\'42\'82\'a9\'82\'e7\'81\'41\'82\'d9\'82\'a9\'82\'cc(\'8b\'df\'8f\'8a\'82\'cc)\'83\'47\'83\'93\'83\'65\'83\'42\'83\'65\'83\'42\'82\'f0\'81\'41\'94\'7a\'97\'f1\'82\'c6\'82\'b5\'82\'c4\'88\'b5\'82\'a4\'82\'b1\'82\'c6\'82\'c9\'82\'c8\'82\'e9\'81\'42\
+\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f1\b \cf0 \'94\'7a\'97\'f1\'82\'f0\'83\'47\'83\'93\'83\'65\'83\'42\'83\'65\'83\'42\'93\'e0\'82\'c5\'88\'b5\'82\'a4
+\f2\b0 \
+	\'83\'66\'81\'5b\'83\'5e\'8c\'5e\'82\'f0\'92\'e8\'8b\'60\'82\'b7\'82\'e9\'81\'42\
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f3 \cf4 \cb3 \expnd0\expndtw0\kerning0
+[\cf5 InternalBufferCapacity\cf4 (\cf9 8\cf4 )]\
+\cf2 public\cf4  \cf2 struct\cf4  \cf5 NeighborsEntityBuffer\cf4  : \cf5 IBufferElementData\cf4 \
+\{\
+    \cf2 public\cf4  \cf5 Entity\cf4  \cf6 Value\cf4 ;\
+\}\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f2 \cf0 \cb1 \kerning1\expnd0\expndtw0 	
+\f1 \
+	IBufferElementData\'82\'f0\'8c\'70\'8f\'b3\'82\'b5\'82\'bd\'83\'52\'83\'93\'83\'7c\'81\'5b\'83\'6c\'83\'93\'83\'67\'82\'f0\'97\'70\'88\'d3\'82\'b7\'82\'e9\'81\'42\'82\'b1\'82\'ea\'82\'c5\'94\'7a\'97\'f1\'82\'aa\'88\'b5\'82\'a6\'82\'e9\'81\'42\
+	\'8d\'a1\'82\'dc\'82\'c5\'82\'cdIComponentData\'81\'42\
+\
+	Entity\'82\'f0\'92\'6c\'82\'c6\'82\'b5\'82\'c4\'8e\'9d\'82\'c2\'81\'42(\'94\'7a\'97\'f1\'82\'c6\'82\'b5\'82\'c4\'88\'b5\'82\'ed\'82\'ea\'82\'e9\'81\'42)\
+\
+	\'83\'41\'83\'67\'83\'8a\'83\'72\'83\'85\'81\'5b\'83\'67 
+\b InternalBufferCapacity
+\b0  \'82\'cdIBufferElementData\'82\'c9\'91\'ce\'82\'b5\'82\'c4\'83\'5a\'83\'62\'83\'67\'82\'b7\'82\'e9\'81\'42\
+	\'82\'b1\'82\'cc\'90\'94\'92\'6c\'82\'f0\'92\'b4\'82\'a6\'82\'bd\'8f\'ea\'8d\'87\'82\'cd\'83\'66\'81\'5b\'83\'5e\'82\'aaC#\'82\'cc\'83\'71\'81\'5b\'83\'76\'82\'c9\'82\'a2\'82\'c1\'82\'c4\'82\'b5\'82\'dc\'82\'c1\'82\'c4\'92\'78\'82\'ad\'82\'c8\'82\'e9\'82\'c1\'82\'db\'82\'a2\'81\'42\
+\
+	\'83\'41\'81\'5b\'83\'4c\'83\'5e\'83\'43\'83\'76\'82\'c9
+\b NeighborsEntityBuffer
+\b0 \'8c\'5e\'82\'f0\'91\'ab\'82\'b7\'81\'42\
+\
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f3 \cf4 \cb3 \expnd0\expndtw0\kerning0
+        \cf2 var\cf4  \cf6 archetype\cf4  = \cf6 manager\cf4 .\cf8 CreateArchetype\cf4 (\
+            \cf2 typeof\cf4 (\cf5 Position\cf4 ),\
+            \cf2 typeof\cf4 (\cf5 Rotation\cf4 ),\
+            \cf2 typeof\cf4 (\cf5 Scale\cf4 ),\
+            \cf2 typeof\cf4 (\cf5 Velocity\cf4 ),\
+            \cf2 typeof\cf4 (\cf5 Acceleration\cf4 ),\
+            \cf2 typeof\cf4 (\cf5 MeshInstanceRenderer\cf4 ),\
+            \cf2 typeof\cf4 (\cf5 NeighborsEntityBuffer\cf4 )\
+        );\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f1 \cf0 \cb1 \kerning1\expnd0\expndtw0 	\
+	
+\b NeighborsEntityBuffer
+\b0  \'8c\'5e\'82\'c9\'8a\'d6\'82\'b5\'82\'c4\'82\'cd\'81\'41CreateEntity\'8e\'9e\'82\'c9\'83\'66\'81\'5b\'83\'5e\'82\'f0\'83\'5a\'83\'62\'83\'67\'82\'b7\'82\'e9\'82\'e6\'82\'a4\'82\'c8\'97\'76\'91\'66\'82\'aa\'82\'c8\'82\'a2\'82\'cc\'82\'c5\'82\'b1\'82\'cc\'82\'dc\'82\'dc\'81\'42\
+\
+	IBufferElementData\'82\'f0\'8c\'70\'8f\'b3\'82\'b5\'82\'bd\'8c\'5e\'82\'cc\'92\'86\'90\'67\'82\'cd\'81\'41\'8e\'a9\'93\'ae\'93\'49\'82\'c9\'94\'7a\'97\'f1\'82\'c6\'82\'b5\'82\'c4\'88\'b5\'82\'ed\'82\'ea\'82\'e9\'81\'42\
+	\'82\'b1\'82\'cc\'8f\'ea\'8d\'87\'82\'cd\'81\'41Entity\'8c\'5e\'82\'cc\'83\'41\'83\'8c\'83\'43\'82\'c9\'82\'c8\'82\'e9\'81\'42\
+\
+	Buffer\'82\'a9\'82\'e7\'83\'66\'81\'5b\'83\'5e\'82\'f0\'8e\'e6\'82\'e8\'8f\'6f\'82\'b7\'8f\'ea\'8d\'87\'81\'41Reinterpret<\'83\'6f\'83\'62\'83\'74\'83\'40\'82\'c9\'8a\'dc\'82\'dc\'82\'ea\'82\'c4\'82\'a2\'82\'e9\'8c\'5e> \'82\'c5\'81\'41\'8c\'5e\'82\'cc\'83\'41\'83\'8c\'83\'43\'82\'aa\'8e\'e6\'82\'e8\'8f\'6f\'82\'b9\'82\'e9\'81\'42\
+\
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f3 \cf4 \cb3 \expnd0\expndtw0\kerning0
+            \cf11 /*\cf4 \
+\pard\pardeftab720\sl360\partightenfactor0
+\cf11                 neighbors
+\f2 \'82\'a9\'82\'e7\'88\'ea\'82\'c2\'82\'f0\'8e\'e6\'82\'e8\'8f\'6f\'82\'b7\'81\'42\'82\'b1\'82\'b1\'82\'c5
+\f3 NeighborsEntityBuffer
+\f2 \'82\'cc\'92\'86\'90\'67\'82\'cd
+\f3 Entity
+\f2 \'82\'be\'82\'af\'82\'c8\'82\'cc\'82\'c5\'81\'41
+\f3 \cf4 \
+\cf11                 Reinterpret<
+\f2 \'8c\'5e
+\f3 >
+\f2 \'82\'c5\'8e\'77\'92\'e8\'82\'b7\'82\'e9\'82\'c6
+\f3 Entity
+\f2 \'82\'cc\'83\'41\'83\'8c\'83\'43\'82\'aa\'8e\'e8\'82\'c9\'93\'fc\'82\'e9\'81\'42
+\f3 \cf4 \
+\cf11             */\cf4 \
+            \cf2 var\cf4  \cf6 neighbors\cf4  = \cf6 data\cf4 .\cf6 neighbors\cf4 [\cf6 i\cf4 ].\cf8 Reinterpret\cf4 <\cf5 Entity\cf4 >();\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f1 \cf0 \cb1 \kerning1\expnd0\expndtw0 	\
+	\'82\'b1\'82\'ea\'82\'c5\'81\'41neighbors\'82\'cd 
+\f3 \cf6 \cb12 \expnd0\expndtw0\kerning0
+DynamicBuffer\cf4 <\cf6 Entity\cf4 >
+\f1 \cf0 \cb1 \kerning1\expnd0\expndtw0  \'8c\'5e\'81\'41Entity\'82\'cc\'83\'41\'83\'8c\'83\'43\'82\'c9\'82\'c8\'82\'e9\'81\'42\
+	\'82\'c5\'81\'41\'83\'47\'83\'93\'83\'65\'83\'42\'83\'65\'83\'42\'82\'a9\'82\'e7Position\'82\'c8\'82\'c7\'82\'cc\'88\'ea\'83\'70\'83\'89\'83\'81\'81\'5b\'83\'5e\'82\'f0\'8e\'e6\'93\'be\'82\'b7\'82\'e9\'82\'c9\'82\'cd\'81\'41 
+\f3 \cf6 \cb7 \expnd0\expndtw0\kerning0
+EntityManager\cf4 .\cf8 GetComponentData\cf4 <\cf5 Position\cf4 >(
+\f2 \'91\'ce\'8f\'db\'82\'cc\'83\'47\'83\'93\'83\'65\'83\'42\'83\'65\'83\'42
+\f3 )\cb1  
+\f1 \cf0 \kerning1\expnd0\expndtw0 \'82\'c6\'82\'a9\'82\'e2\'82\'e9\'81\'42
+\f2 \
+\
+	\'82\'b1\'82\'cc\'82\'d9\'82\'a9\'82\'c9Alignment(\'90\'ae\'97\'f1)\'82\'c6Cohesion(\'8c\'8b\'91\'a9)\'82\'ccSystem\'82\'f0\'8d\'ec\'82\'e9\'81\'42\
+\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f1\b \cf0 \'8f\'87\'94\'d4\'95\'74\'82\'af
+\f2\b0 \
+	\'82\'b1\'82\'cc\'8e\'9e\'93\'5f\'82\'c5\'95\'a1\'90\'94\'82\'cc\'83\'56\'83\'58\'83\'65\'83\'80\'82\'aa\'82\'a0\'82\'c1\'82\'c4\'81\'41\'8f\'87\'94\'d4\'96\'e2\'91\'e8\'82\'aa\'8f\'6f\'82\'c4\'82\'ad\'82\'e9\'81\'42\
+	\'95\'ca\'82\'c9\'95\'a1\'90\'94\'82\'cc\'83\'56\'83\'58\'83\'65\'83\'80\'82\'c9\'95\'aa\'82\'af\'82\'c8\'82\'ad\'82\'c4\'82\'e0\'82\'a2\'82\'a2\'82\'cd\'82\'b8\'82\'c8\'82\'f1\'82\'c5\'81\'41\'82\'dc\'82\'c6\'82\'df\'82\'c4\'82\'e0\'82\'a2\'82\'a2\'82\'f1\'82\'be\'82\'af\'82\'c7\'81\'41\'82\'b1\'82\'b1\'82\'c5\'82\'cd\
+	\'81\'45\'93\'c1\'92\'e8\'82\'cc\'82\'dc\'82\'c6\'82\'dc\'82\'e8\
+	\'81\'45\'82\'bb\'82\'cc\'91\'4f\
+	\'81\'45\'82\'bb\'82\'cc\'82\'a0\'82\'c6\
+	\'82\'c6\'82\'a2\'82\'a4\'82\'e6\'82\'a4\'82\'c8\'8b\'e6\'95\'aa\'82\'af\'82\'c5\'8f\'87\'94\'d4\'95\'74\'82\'af\'82\'f0\'8d\'73\'82\'a4\'82\'b1\'82\'c6\'82\'aa\'82\'c5\'82\'ab\'82\'e9\'81\'42\
+\
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f3 \cf4 \cb7 \expnd0\expndtw0\kerning0
+[\cf5 \cb7 UpdateInGroup\cf4 \cb7 (\cf2 \cb7 typeof\cf4 \cb7 (
+\f2 \cf5 \cb7 \'83\'4e\'83\'89\'83\'58
+\f3 \cf4 \cb7 ))]\cb1 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f2 \cf0 \kerning1\expnd0\expndtw0 \
+	\'82\'c6\'82\'a9\'82\'c5\'81\'41\'93\'c1\'92\'e8\'82\'cc\'83\'4e\'83\'89\'83\'58\'92\'e8\'8b\'60\'82\'f0\'8a\'ee\'82\'c9\'82\'b5\'82\'bd\'83\'4f\'83\'8b\'81\'5b\'83\'76\'82\'f0\'90\'b6\'90\'ac\'82\'c5\'82\'ab\'82\'e9\'81\'42\
+	\'82\'b1\'82\'cc\'83\'4f\'83\'8b\'81\'5b\'83\'76\'93\'e0\'82\'be\'82\'c6\'82\'c8\'82\'f1\'82\'a9\'82\'c7\'82\'a4\'82\'a2\'82\'a4\'8f\'87\'94\'d4\'82\'c5\'82\'cc\'8e\'c0\'8d\'73\'82\'c9\'82\'c8\'82\'e9\'82\'a9\'82\'ed\'82\'a9\'82\'e7\'82\'c8\'82\'a2\'82\'aa\'81\'41\
+\
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f3 \cf4 \cb7 \expnd0\expndtw0\kerning0
+[\cf5 \cb7 UpdateAfter\cf4 \cb7 (\cf2 \cb7 typeof\cf4 \cb7 (
+\f2 \cf5 \cb7 \'83\'4e\'83\'89\'83\'58
+\f3 \cf4 \cb7 ))]\cb1 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f2 \cf0 \kerning1\expnd0\expndtw0 	\'82\'c6\'82\'a9\'82\'e2\'82\'e9\'82\'c6\'81\'41\'83\'4f\'83\'8b\'81\'5b\'83\'76\'82\'cc\'8e\'c0\'8d\'73\'8c\'e3\'82\'c9\'8e\'c0\'8d\'73\'81\'41\
+	\
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f3 \cf4 \cb7 \expnd0\expndtw0\kerning0
+[\cf5 \cb7 UpdateBefore\cf4 \cb7 (\cf2 \cb7 typeof\cf4 \cb7 (
+\f2 \cf5 \cb7 \'83\'4e\'83\'89\'83\'58
+\f3 \cf4 \cb7 ))]\cb1 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f2 \cf0 \kerning1\expnd0\expndtw0 	\'82\'c5\'83\'4f\'83\'8b\'81\'5b\'83\'76\'82\'cc\'8e\'c0\'8d\'73\'91\'4f\'82\'c9\'8e\'c0\'8d\'73\'81\'41\'82\'c6\'82\'a9\'82\'aa\'82\'c5\'82\'ab\'82\'e9\'81\'42\
+	\
+	\'83\'4f\'83\'8b\'81\'5b\'83\'76\'82\'aa\'90\'b6\'90\'ac\'82\'c5\'82\'ab\'82\'e9\'82\'cc\'82\'aa\'82\'a2\'82\'a2\'82\'c6\'82\'b1\'82\'eb\'81\'42\
+\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f1\b \cf0 ECS\'82\'c6\'82\'a2\'82\'c1\'82\'c4\'82\'e0\'83\'81\'83\'43\'83\'93\'83\'58\'83\'8c\'83\'62\'83\'68\'82\'c5\'93\'ae\'82\'ad\'82\'cc\'82\'aa\'83\'66\'83\'74\'83\'48\'83\'8b\'83\'67\'82\'c8\'82\'f1\'82\'be\'82\'c8\'81\'60
+\f2\b0 \
+	\'82\'c6\'82\'a2\'82\'a4\'82\'ed\'82\'af\'82\'c5\'81\'41\'82\'b1\'82\'b1\'82\'a9\'82\'e7\'82\'cd\'95\'ca\'83\'58\'83\'8c\'83\'62\'83\'68\'82\'c5\'82\'cc\'8e\'c0\'8d\'73\'82\'c9\'82\'b5\'82\'c4\'82\'a2\'82\'ad\'81\'42\
+	WallSystem\'82\'cc\'83\'78\'81\'5b\'83\'58\'83\'4e\'83\'89\'83\'58\'82\'f0 
+\f3 \cf5 \cb7 \expnd0\expndtw0\kerning0
+ComponentSystem
+\f2 \cf0 \cb1 \kerning1\expnd0\expndtw0  \'82\'a9\'82\'e7 
+\f3 \cf5 \cb7 \expnd0\expndtw0\kerning0
+JobComponentSystem
+\f2 \cf0 \cb1 \kerning1\expnd0\expndtw0  \'82\'c9\'8d\'da\'82\'b9\'91\'d6\'82\'a6\'82\'c4\'81\'41OnUpdate\'82\'aaJobHandle\'82\'f0\'95\'d4\'82\'b7\'82\'e6\'82\'a4\'82\'c9\'83\'5a\'83\'62\'83\'67\'82\'b7\'82\'e9\'81\'42\
+\
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f3 \cf4 \cb3 \expnd0\expndtw0\kerning0
+    \cf2 public\cf4  \cf2 struct\cf4  \cf5 Job\cf4  : \cf5 IJobParallelFor\cf4 \
+    \{\
+        \cf11 // OnUpdate() 
+\f2 \'82\'a9\'82\'e7\'93\'6e\'82\'b5\'82\'c4\'82\'e0\'82\'e7\'82\'a4
+\f3 \cf4 \
+        [\cf5 ReadOnly\cf4 ] \cf2 public\cf4  \cf5 ComponentDataArray\cf4 <\cf5 Position\cf4 > \cf6 positions\cf4 ;\
+\
+        [\cf5 ReadOnly\cf4 ] \cf2 public\cf4  \cf2 float\cf4  \cf6 scale\cf4 ;\
+        [\cf5 ReadOnly\cf4 ] \cf2 public\cf4  \cf2 float\cf4  \cf6 thresh\cf4 ;\
+        [\cf5 ReadOnly\cf4 ] \cf2 public\cf4  \cf2 float\cf4  \cf6 weight\cf4 ;\
+\
+        \cf2 public\cf4  \cf5 ComponentDataArray\cf4 <\cf5 Acceleration\cf4 > \cf6 accelerations\cf4 ;\
+        \cf11 // [ReadOnly] public Param param;\cf4 \
+\
+        \cf11 // OnUpdate() 
+\f2 \'82\'cc\'8f\'88\'97\'9d\'82\'f0\'88\'da\'90\'41
+\f3 \cf4 \
+        \cf2 public\cf4  \cf2 void\cf4  \cf8 Execute\cf4 (\cf2 int\cf4  \cf6 index\cf4 )\
+        \{\
+            \cf5 float3\cf4  \cf6 pos\cf4  = \cf6 positions\cf4 [\cf6 index\cf4 ].\cf6 Value\cf4 ;\
+            \cf5 float3\cf4  \cf6 accel\cf4  = \cf6 accelerations\cf4 [\cf6 index\cf4 ].\cf6 Value\cf4 ;\
+            \cf6 accel\cf4  +=\
+                \cf8 GetAccelAgainstWall\cf4 (-\cf6 scale\cf4  - \cf6 pos\cf4 .\cf6 x\cf4 , \cf2 new\cf4  \cf5 float3\cf4 (+\cf9 1\cf4 , \cf9 0\cf4 , \cf9 0\cf4 ), \cf6 thresh\cf4 , \cf6 weight\cf4 ) +\
+                \cf8 GetAccelAgainstWall\cf4 (-\cf6 scale\cf4  - \cf6 pos\cf4 .\cf6 y\cf4 , \cf2 new\cf4  \cf5 float3\cf4 (\cf9 0\cf4 , +\cf9 1\cf4 , \cf9 0\cf4 ), \cf6 thresh\cf4 , \cf6 weight\cf4 ) +\
+                \cf8 GetAccelAgainstWall\cf4 (-\cf6 scale\cf4  - \cf6 pos\cf4 .\cf6 z\cf4 , \cf2 new\cf4  \cf5 float3\cf4 (\cf9 0\cf4 , \cf9 0\cf4 , +\cf9 1\cf4 ), \cf6 thresh\cf4 , \cf6 weight\cf4 ) +\
+                \cf8 GetAccelAgainstWall\cf4 (+\cf6 scale\cf4  - \cf6 pos\cf4 .\cf6 x\cf4 , \cf2 new\cf4  \cf5 float3\cf4 (-\cf9 1\cf4 , \cf9 0\cf4 , \cf9 0\cf4 ), \cf6 thresh\cf4 , \cf6 weight\cf4 ) +\
+                \cf8 GetAccelAgainstWall\cf4 (+\cf6 scale\cf4  - \cf6 pos\cf4 .\cf6 y\cf4 , \cf2 new\cf4  \cf5 float3\cf4 (\cf9 0\cf4 , -\cf9 1\cf4 , \cf9 0\cf4 ), \cf6 thresh\cf4 , \cf6 weight\cf4 ) +\
+                \cf8 GetAccelAgainstWall\cf4 (+\cf6 scale\cf4  - \cf6 pos\cf4 .\cf6 z\cf4 , \cf2 new\cf4  \cf5 float3\cf4 (\cf9 0\cf4 , \cf9 0\cf4 , -\cf9 1\cf4 ), \cf6 thresh\cf4 , \cf6 weight\cf4 );\
+            \cf6 accelerations\cf4 [\cf6 index\cf4 ] = \cf2 new\cf4  \cf5 Acceleration\cf4  \{ \cf6 Value\cf4  = \cf6 accel\cf4  \};\
+        \}\
+\
+        \cf5 float3\cf4  \cf8 GetAccelAgainstWall\cf4 (\cf2 float\cf4  \cf6 dist\cf4 , \cf5 float3\cf4  \cf6 dir\cf4 , \cf2 float\cf4  \cf6 thresh\cf4 , \cf2 float\cf4  \cf6 weight\cf4 )\
+        \{\
+            \cf10 if\cf4  (\cf6 dist\cf4  < \cf6 thresh\cf4 )\
+            \{\
+                \cf10 return\cf4  \cf6 dir\cf4  * (\cf6 weight\cf4  / \cf6 math\cf4 .\cf8 abs\cf4 (\cf6 dist\cf4  / \cf6 thresh\cf4 ));\
+            \}\
+            \cf10 return\cf4  \cf6 float3\cf4 .\cf6 zero\cf4 ;\
+        \}\
+    \}\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f2 \cf0 \cb1 \kerning1\expnd0\expndtw0 	JobSystem\'82\'f0\'8e\'67\'82\'c1\'82\'c4\'95\'c0\'97\'f1\'89\'bb(\'83\'81\'83\'43\'83\'93\'83\'58\'83\'8c\'83\'62\'83\'68\'88\'c8\'8a\'4f\'82\'c5\'82\'cc\'8e\'c0\'8d\'73)\'82\'b7\'82\'e9\'82\'bd\'82\'df\'82\'c9\'81\'41IJobParallelFor\'8c\'5e\'82\'f0\'8c\'70\'8f\'b3\'82\'b5\'82\'bdstruct\'82\'f0\'97\'70\'88\'d3\'82\'b7\'82\'e9\'81\'42\
+	Execute\'8a\'d6\'90\'94\'82\'cc\'92\'86\'82\'c5\'81\'41Update\'82\'c5\'8e\'c0\'8d\'73\'82\'b5\'82\'c4\'82\'a2\'82\'bd\'97\'76\'91\'66\'82\'f0\'8e\'c0\'8d\'73\'82\'b7\'82\'e9\'81\'42\
+\
+	Execute\'8a\'d6\'90\'94\'82\'cd\'83\'47\'83\'93\'83\'65\'83\'42\'83\'65\'83\'42\'95\'aa\'82\'be\'82\'af\'8e\'c0\'8d\'73\'82\'b3\'82\'ea\'82\'e9\'81\'42\
+\
+\
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f3 \cf4 \cb3 \expnd0\expndtw0\kerning0
+    \cf2 protected\cf4  \cf2 override\cf4  \cf5 JobHandle\cf4  \cf8 OnUpdate\cf4 (\cf5 JobHandle\cf4  \cf6 inputDeps\cf4 )\
+    \{\
+        \cf2 var\cf4  \cf6 job\cf4  = \cf2 new\cf4  \cf5 Job\cf4 \
+        \{\
+            \cf6 positions\cf4  = \cf6 data\cf4 .\cf6 positions\cf4 ,\
+            \cf6 accelerations\cf4  = \cf6 data\cf4 .\cf6 accelerations\cf4 ,\
+\
+            \cf11 // IJobParallelFor
+\f2 \'82\'f0\'8c\'70\'8f\'b3\'82\'b5\'82\'bd
+\f3 struct
+\f2 \'82\'cd\'8e\'51\'8f\'c6\'8c\'5e\'82\'cc\'8e\'51\'8f\'c6\'82\'f0\'8e\'9d\'82\'c4\'82\'c8\'82\'a2\'82\'cc\'82\'c5\'81\'41\'82\'b1\'82\'b1\'82\'c5\'92\'6c\'82\'f0\'93\'6e\'82\'b7\'81\'42
+\f3 \cf4 \
+            \cf6 scale\cf4  = \cf6 Bootstrap\cf4 .\cf6 Param\cf4 .\cf6 wallScale\cf4  * \cf9 0.5f\cf4 ,\
+            \cf6 thresh\cf4  = \cf6 Bootstrap\cf4 .\cf6 Param\cf4 .\cf6 wallDistance\cf4 ,\
+            \cf6 weight\cf4  = \cf6 Bootstrap\cf4 .\cf6 Param\cf4 .\cf6 wallWeight\cf4 \
+        \};\
+        \cf10 return\cf4  \cf6 job\cf4 .\cf8 Schedule\cf4 (\cf6 data\cf4 .\cf6 Length\cf4 , \cf9 32\cf4 , \cf6 inputDeps\cf4 );\
+    \}\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f2 \cf0 \cb1 \kerning1\expnd0\expndtw0 	\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0 \cf0 	
+\f2 \'82\'b1\'82\'ea\'82\'c5\'81\'41
+\f0 WallSystem
+\f2 \'82\'c5\'82\'ccOnUpdate -> Job\'81\'41\'82\'c6\'82\'a2\'82\'a4\'8c\'60\'82\'c5\'83\'66\'81\'5b\'83\'5e\'82\'aa\'95\'ca\'83\'58\'83\'8c\'83\'62\'83\'68\'82\'c5\'8f\'88\'97\'9d\'82\'b3\'82\'ea\'82\'e9\'82\'e6\'82\'a4\'82\'c9\'82\'c8\'82\'e9\'81\'42\
+	\'91\'66\'93\'47\'81\'42\
+\
+	\'82\'e0\'82\'c1\'82\'c6ECS\'82\'c9\'8c\'fc\'82\'a2\'82\'bdJob\'8a\'d6\'98\'41\'82\'cc\'8e\'64\'91\'67\'82\'dd\'82\'aa\'82\'a0\'82\'e9\'82\'cc\'82\'c5\'81\'41\'82\'bb\'82\'bf\'82\'e7\'82\'f0\'8e\'67\'82\'c1\'82\'c4\'91\'53\'91\'cc\'82\'f0\'88\'da\'8d\'73\'82\'b7\'82\'e9\'81\'42\
+\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f1\b \cf0 IJobProcessComponentData\'8c\'5e\'82\'f0\'8e\'67\'82\'c1\'82\'c4\'83\'57\'83\'87\'83\'75\'89\'bb\'82\'f0\'8d\'73\'82\'a4
+\f2\b0 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f3 \cf5 \cb7 \expnd0\expndtw0\kerning0
+IJobProcessComponentData\cf4 \cb1 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0 \cf0 \kerning1\expnd0\expndtw0 	
+\f2 \'8c\'5e\'82\'f0\'8e\'67\'82\'c1\'82\'c4\'83\'57\'83\'87\'83\'75\'82\'cc\'92\'e8\'8b\'60\'82\'f0\'8d\'73\'82\'a4\'82\'c6\'81\'41\'88\'f8\'90\'94\'82\'f0\'8e\'9d\'82\'bd\'82\'b9\'82\'bd\'8f\'e3\'82\'c5Execute\'82\'cc\'92\'e8\'8b\'60\'82\'aa\'82\'c5\'82\'ab\'82\'e9\'81\'42\
+	\
+	\'8e\'9f\'82\'cc\'82\'e6\'82\'a4\'82\'c9\'8c\'5e\'88\'f8\'90\'94\'82\'f0\'83\'5a\'83\'62\'83\'67\'82\'b5\'82\'c4\'92\'e8\'8b\'60\'81\'41\
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f3 \cf4 \cb3 \expnd0\expndtw0\kerning0
+    \cf2 private\cf4  \cf2 struct\cf4  \cf5 Job\cf4  : \cf5 IJobProcessComponentData\cf4 <\cf5 Position\cf4 , \cf5 Rotation\cf4 , \cf5 Velocity\cf4 , \cf5 Acceleration\cf4 >\
+    \{\
+        [\cf5 ReadOnly\cf4 ] \cf2 public\cf4  \cf2 float\cf4  \cf6 dt\cf4 ;\
+        [\cf5 ReadOnly\cf4 ] \cf2 public\cf4  \cf2 float\cf4  \cf6 minSpeed\cf4 ;\
+        [\cf5 ReadOnly\cf4 ] \cf2 public\cf4  \cf2 float\cf4  \cf6 maxSpeed\cf4 ;\
+\
+        \cf2 public\cf4  \cf2 void\cf4  \cf8 Execute\cf4 (\cf2 ref\cf4  \cf5 Position\cf4  \cf6 pos\cf4 , [\cf5 WriteOnly\cf4 ] \cf2 ref\cf4  \cf5 Rotation\cf4  \cf6 rot\cf4 , \cf2 ref\cf4  \cf5 Velocity\cf4  \cf6 vel\cf4 , \cf2 ref\cf4  \cf5 Acceleration\cf4  \cf6 accel\cf4 )\
+        \{\
+            \cf2 var\cf4  \cf6 v\cf4  = \cf6 vel\cf4 .\cf6 Value\cf4 ;\
+            \cf6 v\cf4  += \cf6 accel\cf4 .\cf6 Value\cf4  * \cf6 dt\cf4 ;\
+            \cf2 var\cf4  \cf6 dir\cf4  = \cf6 math\cf4 .\cf8 normalize\cf4 (\cf6 v\cf4 );\
+            \cf2 var\cf4  \cf6 speed\cf4  = \cf6 math\cf4 .\cf8 length\cf4 (\cf6 v\cf4 );\
+            \cf6 v\cf4  = \cf6 math\cf4 .\cf8 clamp\cf4 (\cf6 speed\cf4 , \cf6 minSpeed\cf4 , \cf6 maxSpeed\cf4 ) * \cf6 dir\cf4 ;\
+\
+            \cf6 pos\cf4  = \cf2 new\cf4  \cf5 Position\cf4  \{ \cf6 Value\cf4  = \cf6 pos\cf4 .\cf6 Value\cf4  + \cf6 v\cf4  * \cf6 dt\cf4  \};\
+            \cf6 rot\cf4  = \cf2 new\cf4  \cf5 Rotation\cf4  \{ \cf6 Value\cf4  = \cf6 quaternion\cf4 .\cf8 LookRotationSafe\cf4 (\cf6 dir\cf4 , \cf2 new\cf4  \cf5 float3\cf4 (\cf9 0\cf4 , \cf9 1\cf4 , \cf9 0\cf4 )) \};\
+            \cf6 vel\cf4  = \cf2 new\cf4  \cf5 Velocity\cf4  \{ \cf6 Value\cf4  = \cf6 v\cf4  \};\
+            \cf6 accel\cf4  = \cf2 new\cf4  \cf5 Acceleration\cf4  \{ \cf6 Value\cf4  = \cf6 float3\cf4 .\cf6 zero\cf4  \};\
+        \}\
+    \}\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f2 \cf0 \cb1 \kerning1\expnd0\expndtw0 	Execute\'82\'cd\'82\'e2\'82\'cd\'82\'e8\'83\'47\'83\'93\'83\'65\'83\'42\'83\'65\'83\'42\'90\'94\'95\'aa\'82\'be\'82\'af\'8e\'c0\'8d\'73\'82\'b3\'82\'ea\'82\'e9\'81\'42\
+	\
+	job\'82\'f0\'95\'d4\'82\'b7\'82\'cc\'82\'f0\'97\'76\'8b\'81\'82\'b5\'82\'c4\'82\'a2\'82\'e9 
+\f3 \cf5 \cb7 \expnd0\expndtw0\kerning0
+JobComponentSystem
+\f2 \cf0 \cb1 \kerning1\expnd0\expndtw0  \'82\'ccOnUpdate\'82\'c5\'81\'41\'83\'70\'83\'89\'83\'81\'81\'5b\'83\'5e\'82\'f0\'8a\'dc\'82\'f1\'82\'bejob\'82\'f0\'90\'b6\'90\'ac\'82\'b5\'81\'41Schedule\'82\'f0\'95\'d4\'82\'b7\'81\'42\
+\
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f3 \cf4 \cb3 \expnd0\expndtw0\kerning0
+    \cf2 protected\cf4  \cf2 override\cf4  \cf5 JobHandle\cf4  \cf8 OnUpdate\cf4 (\cf5 JobHandle\cf4  \cf6 inputDeps\cf4 )\
+    \{\
+        \cf2 var\cf4  \cf6 job\cf4  = \cf2 new\cf4  \cf5 Job\cf4 \
+        \{\
+            \cf6 dt\cf4  = \cf6 Time\cf4 .\cf6 deltaTime\cf4 ,\
+            \cf6 minSpeed\cf4  = \cf6 Bootstrap\cf4 .\cf6 Param\cf4 .\cf6 minSpeed\cf4 ,\
+            \cf6 maxSpeed\cf4  = \cf6 Bootstrap\cf4 .\cf6 Param\cf4 .\cf6 maxSpeed\cf4 ,\
+        \};\
+        \cf10 return\cf4  \cf6 job\cf4 .\cf8 Schedule\cf4 (\cf2 this\cf4 , \cf6 inputDeps\cf4 );\
+    \}\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f2 \cf0 \cb1 \kerning1\expnd0\expndtw0 	
+\f0 \
+	Execute
+\f2 \'8a\'d6\'90\'94\'82\'c9\'82\'cd
+\f0 Position
+\f2 \'82\'e2\'82\'e7\'89\'bd\'82\'e2\'82\'e7\'82\'aa\'8c\'5e\'92\'e8\'8b\'60\'8e\'9e\'93\'5f\'82\'cc\'97\'76\'91\'66\'82\'c5\'93\'fc\'82\'c1\'82\'c4\'82\'ad\'82\'e9\'82\'cc\'82\'c5\'81\'41\'83\'70\'83\'89\'83\'81\'81\'5b\'83\'5e\'82\'cc\'93\'c1\'90\'ab\'82\'f0Attribute\'82\'c5\'83\'5a\'83\'62\'83\'67\'82\'b7\'82\'e9\'81\'42\
+	\'82\'b1\'82\'cc\'8f\'ea\'8d\'87\'82\'cdRotation\'82\'aaWrite\'82\'b5\'82\'a9\'82\'b5\'82\'c8\'82\'a2\'82\'cc\'82\'c5\'81\'41WriteOnly\'82\'c9\'82\'b7\'82\'e9\'81\'42\
+\
+	\'82\'b1\'82\'ccExecute\'8a\'d6\'90\'94\'82\'c5\'93\'6e\'82\'c1\'82\'c4\'82\'ad\'82\'e9ref\'82\'cd\'81\'41Inject\'82\'b5\'82\'c4\'82\'a2\'82\'bd\'8e\'9e\'82\'cc\'97\'76\'91\'66\'82\'c6\'93\'af\'82\'b6\'82\'e6\'82\'a4\'82\'c8\'8a\'b4\'82\'b6\'81\'42\
+\
+	OnUpdate\'8a\'d6\'90\'94\'82\'aa\'83\'81\'83\'43\'83\'93\'83\'58\'83\'8c\'83\'62\'83\'68\'82\'c5\'81\'41\'82\'bb\'82\'b1\'82\'a9\'82\'e7JobSystem\'82\'d6\'82\'c6\'83\'57\'83\'87\'83\'75\'82\'f0\'91\'97\'82\'e8\'8f\'6f\'82\'b7\'81\'42\
+	JobSystem\'91\'a4\'82\'c5\'82\'cd\'95\'ca\'83\'58\'83\'8c\'83\'62\'83\'68(WorkerThread)\'8c\'6f\'97\'52\'82\'c5Execute\'82\'aa\'8c\'c4\'82\'ce\'82\'ea\'81\'41\'82\'bb\'82\'b1\'82\'c5\'8f\'88\'97\'9d\'82\'f0\'8d\'73\'82\'a4\'81\'42\
+\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f1\b \cf0 \'94\'7a\'97\'f1\'82\'f0\'88\'b5\'82\'a4(\'93\'c1\'82\'c9Entity\'82\'cc\'94\'7a\'97\'f1)\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\b0 \cf0 	SeparationSysytem\'82\'f0Job\'89\'bb\'82\'b7\'82\'e9\'81\'42\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f2 \cf0 \
+	neighbors\'82\'aaEntity\'82\'cc\'83\'41\'83\'8c\'83\'43\'82\'c8\'82\'cc\'82\'c5\'81\'41\'82\'bb\'82\'cc\'95\'d3\'82\'f0\'88\'b5\'82\'a4\'95\'4b\'97\'76\'82\'aa\'82\'a0\'82\'e9\'81\'42\
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f3 \cf5 \cb7 \expnd0\expndtw0\kerning0
+IJobProcessComponentDataWithEntity\cf4 \cb1 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f2 \cf0 \kerning1\expnd0\expndtw0 	\'8c\'5e\'82\'c5job\'97\'70\'82\'cc\'83\'66\'81\'5b\'83\'5e\'82\'f0\'92\'e8\'8b\'60\'82\'b7\'82\'e9\'82\'c6\'81\'41Execute\'82\'cc\'91\'e6\'88\'ea\'88\'f8\'90\'94\'82\'c9Entity\'8c\'5e\'81\'41\'91\'e6\'93\'f1\'88\'f8\'90\'94\'82\'c9int index\'82\'aa\'82\'c2\'82\'ad\'81\'42\
+	\'82\'bb\'82\'ea\'88\'c8\'8d\'7e\'82\'cc\'88\'f8\'90\'94\'82\'cd\'92\'e8\'8b\'60\'8c\'5e\'82\'c6\'88\'ea\'92\'76\'82\'b7\'82\'e9\'81\'42\
+\
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f3 \cf2 \cb7 \expnd0\expndtw0\kerning0
+public\cf4 \cb7  \cf2 \cb7 void\cf4 \cb7  \cf8 \cb7 Execute\cf4 \cb7 (\cf5 \cb7 Entity\cf4 \cb7  \cf6 \cb7 entity\cf4 \cb7 , \cf2 \cb7 int\cf4 \cb7  \cf6 \cb7 index\cf4 \cb7 , [\cf5 \cb7 ReadOnly\cf4 \cb7 ] \cf2 \cb7 ref\cf4 \cb7  \cf5 \cb7 Position\cf4 \cb7  \cf6 \cb7 pos\cf4 \cb7 , \cf2 \cb7 ref\cf4 \cb7  \cf5 \cb7 Acceleration\cf4 \cb7  \cf6 \cb7 accel\cf4 \cb7 )\{\cb1 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f2 \cf0 \kerning1\expnd0\expndtw0 \
+	\'82\'b1\'82\'f1\'82\'c8\'8a\'b4\'82\'b6\'81\'42\
+\
+	OnUpdate\'82\'c5\'82\'cdjob\'82\'f0\'90\'b6\'90\'ac\'82\'b5\'82\'c4\'83\'58\'83\'50\'83\'57\'83\'85\'81\'5b\'83\'8b\'82\'f0\'95\'d4\'82\'b7\'82\'f1\'82\'be\'82\'aa\'81\'41\
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f3 \cf4 \cb3 \expnd0\expndtw0\kerning0
+    \cf2 protected\cf4  \cf2 override\cf4  \cf5 JobHandle\cf4  \cf8 OnUpdate\cf4 (\cf5 JobHandle\cf4  \cf6 inputDeps\cf4 )\
+    \{\
+        \cf11 // 
+\f2 \'83\'70\'83\'89\'83\'81\'81\'5b\'83\'5e\'82\'f0\'82\'c2\'82\'af\'82\'c4
+\f3 JobSystem
+\f2 \'82\'c9\'95\'fa\'82\'e8\'8d\'9e\'82\'de
+\f3 \cf4 \
+        \cf2 var\cf4  \cf6 job\cf4  = \cf2 new\cf4  \cf5 Job\cf4 \
+        \{\
+            \cf6 separationWeight\cf4  = \cf6 Bootstrap\cf4 .\cf6 Param\cf4 .\cf6 separationWeight\cf4 ,\
+\
+            \cf11 /*\cf4 \
+\pard\pardeftab720\sl360\partightenfactor0
+\cf11                 JobComponentSystem 
+\f2 \'82\'aa
+\f3  GetBufferFromEntity 
+\f2 \'83\'81\'83\'5c\'83\'62\'83\'68\'82\'f0\'8e\'9d\'82\'c1\'82\'c4\'82\'a2\'82\'e9\'82\'cc\'82\'c5\'81\'41
+\f3 \cf4 \
+\cf11                 NeighborsEntityBuffer
+\f2 \'82\'cc\'8c\'5e\'8e\'77\'92\'e8\'82\'c5\'83\'47\'83\'93\'83\'65\'83\'42\'83\'65\'83\'42\'82\'a9\'82\'e7\'83\'6f\'83\'62\'83\'74\'83\'40\'82\'f0\'8e\'e6\'82\'e8\'8f\'6f\'82\'b7\'81\'42
+\f3 \cf4 \
+\cf11                 
+\f2 \'83\'47\'83\'93\'83\'65\'83\'42\'83\'65\'83\'42\'82\'f0\'83\'4c\'81\'5b\'82\'c9\'82\'b5\'82\'bd
+\f3 Neighbors
+\f2 \'82\'cc\'88\'ea\'97\'97\'82\'c6\'82\'a2\'82\'a4\'8c\'60\'82\'c5\'81\'41\'83\'57\'83\'87\'83\'75\'82\'cc\'8e\'c0\'8d\'73\'90\'e6\'82\'c5\'8e\'e6\'82\'e8\'8f\'6f\'82\'b7\'82\'cc\'82\'f0\'97\'5c\'92\'e8\'82\'b7\'82\'e9\'81\'42
+\f3          \cf4 \
+\cf11             */\cf4 \
+            \cf6 neighborsFromEntity\cf4  = \cf8 GetBufferFromEntity\cf4 <\cf5 NeighborsEntityBuffer\cf4 >(\cf2 true\cf4 ),\
+\
+            \cf11 /*\cf4 \
+\cf11                 Position
+\f2 \'8c\'5e\'8e\'77\'92\'e8\'82\'c5\'83\'47\'83\'93\'83\'65\'83\'42\'83\'65\'83\'42\'82\'a9\'82\'e7\'83\'52\'83\'93\'83\'7c\'81\'5b\'83\'6c\'83\'93\'83\'67\'82\'f0\'8e\'e6\'82\'e8\'8f\'6f\'82\'b7\'81\'42
+\f3 \cf4 \
+\cf11                 
+\f2 \'83\'47\'83\'93\'83\'65\'83\'42\'83\'65\'83\'42\'82\'f0\'83\'4c\'81\'5b\'82\'c9\'82\'b5\'82\'bd\'83\'7c\'83\'57\'83\'56\'83\'87\'83\'93\'82\'cc\'88\'ea\'97\'97\'82\'c6\'82\'a2\'82\'a4\'8c\'60\'82\'c5\'81\'41\'83\'57\'83\'87\'83\'75\'82\'cc\'8e\'c0\'8d\'73\'90\'e6\'82\'c5\'8e\'e6\'82\'e8\'8f\'6f\'82\'b7\'82\'cc\'82\'f0\'97\'5c\'92\'e8\'82\'b7\'82\'e9\'81\'42
+\f3 \cf4 \
+\cf11              */\cf4 \
+            \cf6 positionFromEntity\cf4  = \cf8 GetComponentDataFromEntity\cf4 <\cf5 Position\cf4 >(\cf2 true\cf4 ),\
+        \};\
+        \cf10 return\cf4  \cf6 job\cf4 .\cf8 Schedule\cf4 (\cf2 this\cf4 , \cf6 inputDeps\cf4 );\
+    \}\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f2 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+	
+\f3 \cf5 \cb7 \expnd0\expndtw0\kerning0
+IJobProcessComponentDataWithEntity
+\f2 \cf0 \cb1 \kerning1\expnd0\expndtw0  \'82\'f0\'8c\'70\'8f\'b3\'82\'b5\'82\'bdstruct\'91\'a4\'82\'c5\'82\'cd\'81\'41\'82\'bb\'82\'ccExecute\'82\'c5entity\'82\'f0\'8a\'dc\'82\'f1\'82\'be\'8e\'c0\'8d\'73\'83\'75\'83\'8d\'83\'62\'83\'4e\'82\'c9\'82\'c8\'82\'e9\'81\'42\
+\
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f3 \cf4 \cb3 \expnd0\expndtw0\kerning0
+    \cf2 public\cf4  \cf2 struct\cf4  \cf5 Job\cf4  : \cf5 IJobProcessComponentDataWithEntity\cf4 <\cf5 Position\cf4 , \cf5 Acceleration\cf4 >\
+    \{\
+        [\cf5 ReadOnly\cf4 ] \cf2 public\cf4  \cf2 float\cf4  \cf6 separationWeight\cf4 ;\
+        [\cf5 ReadOnly\cf4 ] \cf2 public\cf4  \cf5 BufferFromEntity\cf4 <\cf5 NeighborsEntityBuffer\cf4 > \cf6 neighborsFromEntity\cf4 ;\
+        [\cf5 ReadOnly\cf4 ] \cf2 public\cf4  \cf5 ComponentDataFromEntity\cf4 <\cf5 Position\cf4 > \cf6 positionFromEntity\cf4 ;\
+\
+        \cf2 public\cf4  \cf2 void\cf4  \cf8 Execute\cf4 (\cf5 Entity\cf4  \cf6 entity\cf4 , \cf2 int\cf4  \cf6 index\cf4 , [\cf5 ReadOnly\cf4 ] \cf2 ref\cf4  \cf5 Position\cf4  \cf6 pos\cf4 , \cf2 ref\cf4  \cf5 Acceleration\cf4  \cf6 accel\cf4 )\
+        \{\
+            \cf2 var\cf4  \cf6 neighbors\cf4  = \cf6 neighborsFromEntity\cf4 [\cf6 entity\cf4 ].\cf8 Reinterpret\cf4 <\cf5 Entity\cf4 >();\
+\
+            \cf10 if\cf4  (\cf6 neighbors\cf4 .\cf6 Length\cf4  == \cf9 0\cf4 )\
+            \{\
+                \cf10 return\cf4 ;\
+            \}\
+\
+            \cf2 var\cf4  \cf6 pos0\cf4  = \cf6 pos\cf4 .\cf6 Value\cf4 ;\
+\
+            \cf2 var\cf4  \cf6 force\cf4  = \cf6 float3\cf4 .\cf6 zero\cf4 ;\
+            \cf10 for\cf4  (\cf2 int\cf4  \cf6 i\cf4  = \cf9 0\cf4 ; \cf6 i\cf4  < \cf6 neighbors\cf4 .\cf6 Length\cf4 ; ++\cf6 i\cf4 )\
+            \{\
+                \cf2 var\cf4  \cf6 pos1\cf4  = \cf6 positionFromEntity\cf4 [\cf6 neighbors\cf4 [\cf6 i\cf4 ]].\cf6 Value\cf4 ;\
+                \cf6 force\cf4  += \cf6 math\cf4 .\cf8 normalize\cf4 (\cf6 pos0\cf4  - \cf6 pos1\cf4 );\
+            \}\
+            \cf6 force\cf4  /= \cf6 neighbors\cf4 .\cf6 Length\cf4 ;\
+\
+            \cf2 var\cf4  \cf6 dAccel\cf4  = \cf6 force\cf4  * \cf6 separationWeight\cf4 ;\
+            \cf6 accel\cf4  = \cf2 new\cf4  \cf5 Acceleration\cf4  \{ \cf6 Value\cf4  = \cf6 accel\cf4 .\cf6 Value\cf4  + \cf6 dAccel\cf4  \};\
+        \}\
+    \}\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f2 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+	\'82\'c5\'81\'41neighborsFromEntity \'82\'cd\'8e\'ab\'8f\'91\'82\'dd\'82\'bd\'82\'a2\'82\'c8\'8c\'60\'82\'c9\'82\'c8\'82\'c1\'82\'c4\'82\'a2\'82\'c4\'81\'41\
+	\'83\'47\'83\'93\'83\'65\'83\'42\'83\'65\'83\'42\'95\'aa\'82\'be\'82\'af\'8e\'c0\'8d\'73\'82\'b3\'82\'ea\'82\'e9Execute\'82\'c9\'91\'ce\'82\'b5\'82\'c4\'81\'41entity\'82\'f0\'83\'4c\'81\'5b\'82\'c6\'82\'b5\'82\'c4neighbors\'82\'cc\'83\'6f\'83\'62\'83\'74\'83\'40\'82\'f0\'8e\'e6\'93\'be\'82\'b7\'82\'e9\'82\'b1\'82\'c6\'82\'aa\'82\'c5\'82\'ab\'82\'e9\'81\'42\
+\
+	\'93\'af\'82\'b6\'82\'adposition\'82\'e0\'83\'47\'83\'93\'83\'65\'83\'42\'83\'65\'83\'42\'82\'f0\'83\'4c\'81\'5b\'82\'c6\'82\'b5\'82\'bd\'8e\'ab\'8f\'91\'82\'c9\'82\'b5\'82\'c4\'82\'a0\'82\'c1\'82\'c4\'81\'41\'8e\'e6\'93\'be\'82\'c5\'82\'ab\'82\'e9\'81\'42\
+	\'8d\'c5\'8f\'49\'93\'49\'82\'c9\'81\'41accel\'82\'cc\'92\'6c\'82\'f0\'8d\'58\'90\'56\'82\'b5\'82\'c4\'8f\'49\'97\'b9\'81\'42\
+\
+	\'8d\'c5\'8c\'e3\'82\'c9\'81\'41NeighborDetectionSystem\'82\'f0Job\'89\'bb\'82\'b7\'82\'e9\'81\'42\
+\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f1\b \cf0 NeighborDetectionSystem\'82\'f0Job\'89\'bb\
+	
+\f3\b0 \cf5 \cb7 \expnd0\expndtw0\kerning0
+IJobProcessComponentDataWithEntity
+\f2 \cf0 \cb1 \kerning1\expnd0\expndtw0  \'82\'f0\'8e\'67\'82\'c1\'82\'c4Job\'82\'cc\'92\'e8\'8b\'60\'82\'f0\'8d\'73\'82\'a4\'81\'42\
+\
+	\'82\'c5\'81\'41NeighborDetectionSystem\'82\'c9\'82\'c2\'82\'a2\'82\'c4\'82\'cd\'81\'41\
+	\'81\'45\'83\'47\'83\'93\'83\'65\'83\'42\'83\'65\'83\'42\'82\'cc\'8b\'df\'8f\'8a\'82\'c9\'82\'a0\'82\'e9\'83\'47\'83\'93\'83\'65\'83\'42\'83\'65\'83\'42\'82\'f0\'8f\'57\'82\'df\'82\'e9\
+	\'82\'c6\'82\'a2\'82\'a4\'95\'4b\'97\'76\'90\'ab\'82\'aa\'82\'a0\'82\'e9\'82\'bd\'82\'df\'81\'41\'8e\'fb\'8f\'57\'82\'cc\'82\'bd\'82\'df\'82\'cc\'8b\'40\'8d\'5c\'82\'f0\'8d\'ec\'82\'e9\'95\'4b\'97\'76\'82\'aa\'82\'a0\'82\'e9\'81\'42\
+\
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f3 \cf4 \cb3 \expnd0\expndtw0\kerning0
+    \cf5 ComponentGroup\cf4  \cf6 group\cf4 ;\
+\
+    \cf2 protected\cf4  \cf2 override\cf4  \cf2 void\cf4  \cf8 OnCreateManager\cf4 ()\
+    \{\
+        \cf11 /*\cf4 \
+\pard\pardeftab720\sl360\partightenfactor0
+\cf11             ComponentSystemBase
+\f2 \'82\'c9\'90\'b6\'82\'a6\'82\'c4\'82\'e9\'83\'81\'83\'5c\'83\'62\'83\'68
+\f3  GetComponentGroup 
+\f2 \'82\'c5\'81\'41\'93\'c1\'92\'e8\'82\'cc\'83\'47\'83\'93\'83\'65\'83\'42\'83\'65\'83\'42\'82\'f0\'8f\'57\'82\'df\'82\'e9\'81\'42
+\f3 \cf4 \
+\cf11          */\cf4 \
+        \cf6 group\cf4  = \cf8 GetComponentGroup\cf4 (\
+            \cf2 typeof\cf4 (\cf5 Position\cf4 ),\
+            \cf2 typeof\cf4 (\cf5 Velocity\cf4 ),\
+            \cf2 typeof\cf4 (\cf5 NeighborsEntityBuffer\cf4 ));\
+    \}\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf4 \cb1 \
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f2 \cf0 \kerning1\expnd0\expndtw0 	
+\f3 \cf11 \cb3 \expnd0\expndtw0\kerning0
+ComponentSystemBase\cf4 \cb1  
+\f2 \cf0 \kerning1\expnd0\expndtw0 \'82\'c9\'82\'a0\'82\'e9GetComponentGroup\'83\'81\'83\'5c\'83\'62\'83\'68\'82\'c5\'81\'41\
+	\'83\'4f\'83\'8b\'81\'5b\'83\'76\'82\'c6\'82\'a2\'82\'a4\'92\'50\'88\'ca\'82\'f0\'8d\'ec\'82\'e8 Position\'81\'41Velocity\'81\'41NeighborsEntitiyBuffer \'83\'52\'83\'93\'83\'7c\'81\'5b\'83\'6c\'83\'93\'83\'67\'82\'f0\'82\'ad\'82\'ad\'82\'e8\'8f\'6f\'82\'b9\'82\'e9\'82\'e6\'82\'a4\'82\'c9\'82\'b5\'82\'c4\'82\'a2\'82\'e9\'81\'42\
+\
+	
+\f3 \cf6 \cb7 \expnd0\expndtw0\kerning0
+group\cf4 .\cf8 GetEntityArray\cf4 ()\cb1 \
+
+\f2 \cf0 \kerning1\expnd0\expndtw0 \
+	\'82\'c5\'81\'41Position\'81\'41Velocity\'81\'41NeighborsEntitiyBuffer	\'83\'52\'83\'93\'83\'7c\'81\'5b\'83\'6c\'83\'93\'83\'67\'82\'f0\'8e\'9d\'82\'c1\'82\'bd\'83\'47\'83\'93\'83\'65\'83\'42\'83\'65\'83\'42\'82\'f0\'8e\'fb\'8f\'57\'82\'c5\'82\'ab\'82\'e9\'81\'42\
+\
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f3 \cf4 \cb3 \expnd0\expndtw0\kerning0
+    \cf2 protected\cf4  \cf2 override\cf4  \cf5 JobHandle\cf4  \cf8 OnUpdate\cf4 (\cf5 JobHandle\cf4  \cf6 inputDeps\cf4 )\
+    \{\
+        \cf2 var\cf4  \cf6 job\cf4  = \cf2 new\cf4  \cf5 Job\cf4 \
+        \{\
+            \cf6 prodThresh\cf4  = \cf6 math\cf4 .\cf8 cos\cf4 (\cf6 math\cf4 .\cf8 radians\cf4 (\cf6 Bootstrap\cf4 .\cf6 Param\cf4 .\cf6 neighborFov\cf4 )),\
+            \cf6 distThresh\cf4  = \cf6 Bootstrap\cf4 .\cf6 Param\cf4 .\cf6 neighborDistance\cf4 ,\
+            \cf6 neighborsFromEntity\cf4  = \cf8 GetBufferFromEntity\cf4 <\cf5 NeighborsEntityBuffer\cf4 >(\cf2 false\cf4 ),\
+            \cf6 positionFromEntity\cf4  = \cf8 GetComponentDataFromEntity\cf4 <\cf5 Position\cf4 >(\cf2 true\cf4 ),\
+            \cf6 entities\cf4  = \cf6 group\cf4 .\cf8 GetEntityArray\cf4 (),\
+        \};\
+        \cf10 return\cf4  \cf6 job\cf4 .\cf8 Schedule\cf4 (\cf2 this\cf4 , \cf6 inputDeps\cf4 );\
+    \}\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf4 \cb1 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f2 \cf0 \kerning1\expnd0\expndtw0 	job\'82\'f0\'90\'b6\'90\'ac\'81\'42entities\'83\'70\'83\'89\'83\'81\'81\'5b\'83\'5e\'82\'c9\'8e\'e6\'93\'be\'82\'b5\'82\'bd\'83\'47\'83\'93\'83\'65\'83\'42\'83\'65\'83\'42\'82\'f0\'93\'fc\'82\'ea\'82\'e9\'81\'42\
+	job\'82\'cc\'92\'e8\'8b\'60\'82\'cd\'8e\'9f\'82\'cc\'82\'e6\'82\'a4\'82\'c8\'8a\'b4\'82\'b6\'82\'c5\'81\'41EntityArray entities\'82\'c9group\'82\'a9\'82\'e7\'8e\'e6\'93\'be\'82\'b5\'82\'bd\'83\'47\'83\'93\'83\'65\'83\'42\'83\'65\'83\'42\'82\'aa\'93\'fc\'82\'e9\'81\'42\
+\
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f3 \cf4 \cb3 \expnd0\expndtw0\kerning0
+    \cf2 public\cf4  \cf2 struct\cf4  \cf5 Job\cf4  : \cf5 IJobProcessComponentDataWithEntity\cf4 <\cf5 Position\cf4 , \cf5 Velocity\cf4 >\
+    \{\
+        [\cf5 ReadOnly\cf4 ] \cf2 public\cf4  \cf2 float\cf4  \cf6 prodThresh\cf4 ;\
+        [\cf5 ReadOnly\cf4 ] \cf2 public\cf4  \cf2 float\cf4  \cf6 distThresh\cf4 ;\
+        [\cf5 ReadOnly\cf4 ] \cf2 public\cf4  \cf5 ComponentDataFromEntity\cf4 <\cf5 Position\cf4 > \cf6 positionFromEntity\cf4 ;\
+        [\cf5 ReadOnly\cf4 ] \cf2 public\cf4  \cf5 BufferFromEntity\cf4 <\cf5 NeighborsEntityBuffer\cf4 > \cf6 neighborsFromEntity\cf4 ;\
+        [\cf5 ReadOnly\cf4 ] \cf2 public\cf4  \cf5 EntityArray\cf4  \cf6 entities\cf4 ;\
+\
+        \cf2 public\cf4  \cf2 void\cf4  \cf8 Execute\cf4 (\
+            \cf5 Entity\cf4  \cf6 entity\cf4 ,\
+            \cf2 int\cf4  \cf6 index\cf4 ,\
+            [\cf5 ReadOnly\cf4 ] \cf2 ref\cf4  \cf5 Position\cf4  \cf6 pos\cf4 ,\
+            [\cf5 ReadOnly\cf4 ] \cf2 ref\cf4  \cf5 Velocity\cf4  \cf6 velocity\cf4 )\
+        \{\
+            \cf6 neighborsFromEntity\cf4 [\cf6 entity\cf4 ].\cf8 Clear\cf4 ();\
+\
+            \cf5 float3\cf4  \cf6 pos0\cf4  = \cf6 pos\cf4 .\cf6 Value\cf4 ;\
+            \cf5 float3\cf4  \cf6 fwd0\cf4  = \cf6 math\cf4 .\cf8 normalize\cf4 (\cf6 velocity\cf4 .\cf6 Value\cf4 );\
+\
+            \cf10 for\cf4  (\cf2 int\cf4  \cf6 i\cf4  = \cf9 0\cf4 ; \cf6 i\cf4  < \cf6 entities\cf4 .\cf6 Length\cf4 ; ++\cf6 i\cf4 )\
+            \{\
+                \cf2 var\cf4  \cf6 neighbor\cf4  = \cf6 entities\cf4 [\cf6 i\cf4 ];\
+                \cf10 if\cf4  (\cf6 neighbor\cf4  == \cf6 entity\cf4 ) \cf10 continue\cf4 ;\
+\
+                \cf5 float3\cf4  \cf6 pos1\cf4  = \cf6 positionFromEntity\cf4 [\cf6 neighbor\cf4 ].\cf6 Value\cf4 ;\
+                \cf2 var\cf4  \cf6 to\cf4  = \cf6 pos1\cf4  - \cf6 pos0\cf4 ;\
+                \cf2 var\cf4  \cf6 dist\cf4  = \cf6 math\cf4 .\cf8 length\cf4 (\cf6 to\cf4 );\
+\
+                \cf10 if\cf4  (\cf6 dist\cf4  < \cf6 distThresh\cf4 )\
+                \{\
+                    \cf2 var\cf4  \cf6 dir\cf4  = \cf6 math\cf4 .\cf8 normalize\cf4 (\cf6 to\cf4 );\
+                    \cf2 var\cf4  \cf6 prod\cf4  = \cf6 Vector3\cf4 .\cf8 Dot\cf4 (\cf6 dir\cf4 , \cf6 fwd0\cf4 );\
+                    \cf10 if\cf4  (\cf6 prod\cf4  > \cf6 prodThresh\cf4 )\
+                    \{\
+                        \cf6 neighborsFromEntity\cf4 [\cf6 entity\cf4 ].\cf8 Add\cf4 (\cf2 new\cf4  \cf5 NeighborsEntityBuffer\cf4  \{ \cf6 Value\cf4  = \cf6 neighbor\cf4  \});\
+                    \}\
+                \}\
+            \}\
+        \}\
+    \}\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f2 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+	Execute\'82\'b2\'82\'c6\'82\'c9entities\'82\'cc\'92\'86\'90\'67\'82\'f0\'91\'7b\'8d\'b8\'82\'b5\'82\'c4\'8b\'df\'82\'a2\'83\'47\'83\'93\'83\'65\'83\'42\'83\'65\'83\'42\'82\'f0\'8c\'a9\'82\'c2\'82\'af\'81\'41\
+	\'8e\'a9\'90\'67\'82\'ccneighbors\'82\'c9\'93\'fc\'82\'ea\'82\'e9\'81\'42\
+\
+	\'82\'c6\'82\'a2\'82\'a4\'8a\'b4\'82\'b6\'82\'c5\'81\'41\'8e\'fb\'8f\'57\'82\'aa\'82\'c5\'82\'ab\'82\'e9\'81\'42\
+\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f1\b \cf0 \'82\'b1\'82\'b1\'82\'dc\'82\'c5\'82\'cc\'82\'dc\'82\'c6\'82\'df
+\f2\b0 \
+
+\f1\b 	\'83\'52\'83\'93\'83\'7c\'81\'5b\'83\'6c\'83\'93\'83\'67(ECS\'82\'c5\'88\'b5\'82\'a4\'83\'66\'81\'5b\'83\'5e\'8c\'5e)\'82\'cc\'92\'e8\'8b\'60
+\f2\b0 \
+		IComponentData\'8c\'5e\'82\'f0\'8c\'70\'8f\'b3\'82\'b5\'82\'c4\'81\'41\'8c\'5e\'82\'f0\'92\'e8\'8b\'60\'82\'b7\'82\'e9\'81\'42(Unity\'82\'aa\'92\'e8\'8b\'60\'8d\'cf\'82\'dd\'82\'cc\'8c\'5e\'82\'aa\'82\'a0\'82\'e8\'81\'41\'82\'bb\'82\'ea\'88\'c8\'8a\'4f\'82\'c9\'82\'e0\'92\'e8\'8b\'60\'82\'c5\'82\'ab\'82\'e9)\
+\
+		IBufferElementData\'8c\'5e\'82\'f0\'8c\'70\'8f\'b3\'82\'b5\'82\'c4\'81\'41\'88\'b5\'82\'a4\'94\'7a\'97\'f1\'82\'f0\'92\'e8\'8b\'60\'82\'b7\'82\'e9\'81\'42\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f1 \cf0 			InternalBufferCapacity\'83\'41\'83\'67\'83\'8a\'83\'72\'83\'85\'81\'5b\'83\'67\'82\'c5\'82\'f0\'83\'5a\'83\'62\'83\'67\'82\'b7\'82\'e9\'81\'42\
+\
+			
+\f2 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f1\b \cf0 	\'83\'47\'83\'93\'83\'65\'83\'42\'83\'65\'83\'42\'82\'cc\'90\'b6\'90\'ac
+\f2\b0 \
+		\'83\'8f\'81\'5b\'83\'8b\'83\'68\'81\'41\'83\'47\'83\'93\'83\'65\'83\'42\'83\'65\'83\'42\'83\'7d\'83\'6c\'81\'5b\'83\'57\'83\'83\'81\'5b\'82\'f0\'90\'b6\'90\'ac\
+\
+		\'83\'41\'81\'5b\'83\'4c\'83\'5e\'83\'43\'83\'76(\'83\'47\'83\'93\'83\'65\'83\'42\'83\'65\'83\'42\'82\'c9\'91\'ce\'82\'b5\'82\'c4\'82\'ad\'82\'c1\'82\'c2\'82\'af\'82\'e9\'83\'52\'83\'93\'83\'7c\'81\'5b\'83\'6c\'83\'93\'83\'67\'82\'cc\'8f\'57\'8d\'87)\'82\'f0\'92\'e8\'8b\'60\
+\
+		\'83\'7d\'83\'6c\'81\'5b\'83\'57\'83\'83\'8c\'6f\'97\'52\'82\'c5\'83\'41\'81\'5b\'83\'4c\'83\'5e\'83\'43\'83\'76\'82\'a9\'82\'e7\'83\'47\'83\'93\'83\'65\'83\'42\'83\'65\'83\'42\'90\'b6\'90\'ac\
+\
+\
+
+\f1\b 	ECS\'82\'51\'83\'70\'83\'5e\'81\'5b\'83\'93
+\f2\b0 \
+
+\f1\b \
+		\'83\'70\'83\'5e\'81\'5b\'83\'931\'81\'41ComponentSystem\'8c\'5e\'82\'f0\'8c\'70\'8f\'b3\'82\'b5\'82\'bd\'83\'56\'83\'58\'83\'65\'83\'80\'82\'f0\'92\'e8\'8b\'60\'81\'41Inject\'82\'b5\'82\'bd\'83\'66\'81\'5b\'83\'5e\'82\'f0 void OnUpdate \'82\'c5\'95\'cf\'8c\'60\'82\'b5\'82\'bd\'82\'e8\'82\'b7\'82\'e9(\'83\'81\'83\'43\'83\'93\'83\'58\'83\'8c\'83\'62\'83\'68\'81\'41\'82\'bf\'82\'e5\'82\'c1\'82\'c6\'82\'cd\'8d\'82\'91\'ac)
+\f2\b0 \
+			\'82\'b1\'82\'cc\'8f\'ea\'8d\'87\'81\'41\'92\'e8\'8b\'60\'82\'b5\'82\'bd\'83\'56\'83\'58\'83\'65\'83\'80\'82\'c9\'91\'ce\'82\'b5\'82\'c4\'83\'52\'83\'93\'83\'7c\'81\'5b\'83\'6c\'83\'93\'83\'67\'82\'cc\'92\'e8\'8b\'60\'82\'f0\'95\'ca\'93\'72Inject\'82\'b7\'82\'e9\'82\'c6\'81\'41\'82\'bb\'82\'cc\'83\'74\'83\'42\'81\'5b\'83\'8b\'83\'68\'82\'c9\'91\'ce\'82\'b5\'82\'c4OnUpdate\'82\'cc\'83\'5e\'83\'43\'83\'7e\'83\'93\'83\'4f\'82\'c5\'83\'47\'83\'93\'83\'65\'83\'42\'83\'65\'83\'42\'82\'aa\'93\'fc\'82\'e8\'81\'41\'95\'cf\'8d\'58\'82\'f0\'89\'c1\'82\'a6\'82\'e9\'82\'b1\'82\'c6\'82\'aa\'82\'c5\'82\'ab\'82\'e9\'82\'e6\'82\'a4\'82\'c9\'82\'c8\'82\'e9\'81\'42\
+			\'95\'cf\'8d\'58\'82\'b7\'82\'e9\'82\'c6\'81\'41\'83\'47\'83\'93\'83\'65\'83\'42\'83\'65\'83\'42\'82\'c9\'82\'e0\'92\'6c\'82\'aa\'94\'bd\'89\'66\'82\'b3\'82\'ea\'82\'e9\'81\'42\
+\
+\
+
+\f1\b 		\'83\'70\'83\'5e\'81\'5b\'83\'932\'81\'41JobComponentSystem\'8c\'5e\'82\'f0\'8c\'70\'8f\'b3\'82\'b5\'82\'bd\'83\'56\'83\'58\'83\'65\'83\'80\'82\'f0\'92\'e8\'8b\'60\'81\'41\'8e\'9f\'82\'cc\'82\'c7\'82\'ea\'82\'a9\'82\'cc\'8c\'5e\'82\'cc\'8c\'70\'8f\'b3\'82\'c5Job\'82\'f0\'92\'e8\'8b\'60\'81\'41JobHandle OnUpdate(JobHandle handle)  \'82\'c5Job\'8d\'ec\'90\'ac\
+		 -> \'93\'8a\'93\'fc\'81\'41Job\'91\'a4\'82\'ccExecute\'82\'c5(worker\'83\'58\'83\'8c\'83\'62\'83\'68\'81\'41\'8d\'82\'91\'ac)\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f2\b0 \cf0 \
+				IJobParallelFor					 Execute(int index)\
+				IJobProcessComponentData<T(, ~ T3)	 Execute(ref T t)\
+				IJobProcessComponentDataWithEntity<T(, ~ T3)> Execute(Entity entity, int index, ref T t)\
+\
+\
+			T1~3\'82\'c9\'82\'cdReadOnly\'82\'c8\'82\'c7\'82\'cc\'83\'41\'83\'67\'83\'8a\'83\'72\'83\'85\'81\'5b\'83\'67\'82\'f0\'82\'c2\'82\'af\'82\'e9\'82\'b1\'82\'c6\'82\'c5\'81\'41\'83\'41\'83\'4e\'83\'5a\'83\'58\'82\'cc\'8d\'c5\'93\'4b\'89\'bb\'82\'f0\'8d\'73\'82\'a4\'81\'42\
+\
+			Job\'82\'cdBurstCompiler\'91\'ce\'89\'9e\'82\'c5\'82\'df\'82\'c1\'82\'bf\'82\'e1\'8d\'82\'91\'ac\'89\'bb\'82\'b3\'82\'ea\'82\'e9\'81\'42\
+\
+			\'92\'6c\'82\'c9\'91\'ce\'82\'b5\'82\'c4\'81\'41Job\'93\'e0\'82\'c5\'83\'70\'83\'89\'83\'81\'81\'5b\'83\'5e\'82\'f0\'95\'d2\'8f\'57\'82\'b7\'82\'e9\'82\'c6\'82\'a2\'82\'a4\'8c\'60\'82\'c5\'92\'6c\'82\'cc\'94\'bd\'89\'66\'82\'f0\'8d\'73\'82\'a4\'81\'42\
+\
+		\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f1\b \cf0 		\'91\'6f\'95\'fb\'82\'c6\'82\'e0\'81\'41OnUpdate\'83\'81\'83\'5c\'83\'62\'83\'68\'82\'cd\'83\'81\'83\'43\'83\'93\'83\'58\'83\'8c\'83\'62\'83\'68\'82\'c51\'83\'74\'83\'8c\'81\'5b\'83\'80\'82\'c9\'88\'ea\'89\'f1\'8e\'c0\'8d\'73\'82\'b3\'82\'ea\'82\'e9\'81\'42
+\f2\b0 \
+			Job\'82\'aa\'83\'81\'83\'43\'83\'93\'83\'58\'83\'8c\'83\'62\'83\'68\'82\'a9\'82\'e7\'82\'b5\'82\'a9\'95\'fa\'82\'e8\'8d\'9e\'82\'df\'82\'c8\'82\'a2\'82\'cc\'82\'c9\'8b\'4e\'88\'f6\'82\'b5\'82\'c4\'82\'e9\'81\'42\
+\
+\
+
+\f1\b 		Job\'82\'ccExecute\'82\'cd\'83\'71\'83\'62\'83\'67\'82\'b5\'82\'bd\'83\'47\'83\'93\'83\'65\'83\'42\'83\'65\'83\'42\'82\'cc\'90\'94\'82\'d4\'82\'f1\'8e\'c0\'8d\'73\'82\'b3\'82\'ea\'82\'e9\'81\'42
+\f2\b0 \
+			IJobProcessComponentData<T>\'82\'c8\'82\'c7\'82\'ccT\'82\'c9\'8a\'59\'93\'96\'82\'b7\'82\'e9\'83\'47\'83\'93\'83\'65\'83\'42\'83\'65\'83\'42\'91\'53\'82\'c4\'82\'aa\'91\'ce\'8f\'db\'82\'c9\'82\'c8\'82\'e9\'81\'42\
+			T\'82\'cd\'88\'b5\'82\'a2\'82\'bd\'82\'a2\'83\'66\'81\'5b\'83\'5e\'8e\'a9\'91\'cc\'82\'cc\'91\'49\'8f\'6f\'82\'cc\'82\'d9\'82\'a9\'81\'41\'83\'74\'83\'42\'83\'8b\'83\'5e\'83\'8a\'83\'93\'83\'4f\'82\'c9\'82\'e0\'8e\'67\'82\'c1\'82\'c4\'82\'a2\'82\'e9\'81\'42\
+\
+		\
+
+\f1\b 	\'93\'c1\'8e\'ea\'82\'c8\'8c\'5e\'83\'79\'83\'43\'83\'8d\'81\'5b\'83\'68
+\f2\b0 \
+
+\f1\b \
+		ComponentDataFromEntity<T>
+\f2\b0 \
+			entity\'82\'f0\'83\'4c\'81\'5b\'82\'c9\'81\'41\'92\'6c\'82\'c6\'82\'b5\'82\'c4 T \'82\'f0\'8e\'e6\'82\'e8\'8f\'6f\'82\'b7\'82\'b1\'82\'c6\'82\'aa\'82\'c5\'82\'ab\'82\'e9\'8e\'ab\'8f\'91\'81\'42\
+			ComponentSysytem\'8c\'5e\'82\'aa\'95\'db\'8e\'9d\'82\'b5\'82\'c4\'82\'a2\'82\'e9GetComponentDataFromEntity<T>(bool isReadOnly) \'83\'81\'83\'5c\'83\'62\'83\'68\'82\'c5\'8e\'e6\'93\'be\'82\'c5\'82\'ab\'82\'e9\'81\'42\
+			\'82\'b1\'82\'b1\'82\'c5\'8e\'e6\'93\'be\'82\'c5\'82\'ab\'82\'e9\'82\'cc\'82\'cd\'81\'41\'82\'bb\'82\'cc\'8e\'9e\'82\'ccWorld\'82\'c9\'91\'b6\'8d\'dd\'82\'b7\'82\'e9T\'8c\'5e\'82\'cc\'83\'47\'83\'93\'83\'65\'83\'42\'83\'65\'83\'42\'82\'f0\'8e\'fb\'8f\'57\'82\'b5\'82\'bd\'8e\'ab\'8f\'91\'81\'42\
+\
+\
+
+\f1\b 		BufferFromEntity<T>
+\f2\b0 \
+			entity\'82\'f0\'83\'4c\'81\'5b\'82\'c9\'81\'41\'92\'6c\'82\'c6\'82\'b5\'82\'c4 DynamicBuffer<T> \'82\'f0\'8e\'e6\'82\'e8\'8f\'6f\'82\'b7\'82\'b1\'82\'c6\'82\'aa\'82\'c5\'82\'ab\'82\'e9\'8e\'ab\'8f\'91\'81\'42\
+			JobComponentSystem\'8c\'5e\'82\'aa\'95\'db\'8e\'9d\'82\'b5\'82\'c4\'82\'a2\'82\'e9GetBufferFromEntity<T>(bool isReadOnly) \'83\'81\'83\'5c\'83\'62\'83\'68\'82\'c5\'8e\'e6\'93\'be\'82\'c5\'82\'ab\'82\'e9\'81\'42\
+			\'82\'b1\'82\'b1\'82\'c5\'8e\'e6\'93\'be\'82\'c5\'82\'ab\'82\'e9\'82\'cc\'82\'cd\'81\'41\'82\'bb\'82\'cc\'8e\'9e\'82\'ccWorld\'82\'c9\'91\'b6\'8d\'dd\'82\'b7\'82\'e9T\'8c\'5e\'82\'cc\'83\'47\'83\'93\'83\'65\'83\'42\'83\'65\'83\'42\'82\'f0\'8e\'fb\'8f\'57\'82\'b5\'82\'bd\'8e\'ab\'8f\'91\'81\'42\
+\
+			\
+
+\f1\b 		DynamicBuffer<T>
+\f2\b0 \
+			BufferFromEntity<T>\'8c\'5e\'82\'a9\'82\'e7\'81\'41Reinterpret<S> (S\'82\'cdT\'82\'c9\'8a\'dc\'82\'dc\'82\'ea\'82\'c4\'82\'a2\'82\'e9\'8c\'5e)\'82\'c6\'82\'a9\'82\'c5\'81\'41DynamicBuffer<S> \'82\'f0\'8e\'e6\'82\'e8\'8f\'6f\'82\'b9\'82\'e9\'81\'42\
+\
+\
+
+\f1\b 	Job\'82\'cc\'90\'a7\'96\'f1
+\f2\b0 \
+		Job\'82\'cc\'93\'e0\'95\'94\'82\'c5\'82\'cd\'81\'41\'83\'47\'83\'93\'83\'65\'83\'42\'83\'65\'83\'42\'8e\'fb\'8f\'57\'82\'c8\'82\'c7\'82\'aa\'82\'c5\'82\'ab\'82\'c8\'82\'a2\'81\'42\
+		\'8e\'fb\'8f\'57\'8f\'88\'97\'9d\'82\'c6\'82\'a9\'82\'cd\'83\'81\'83\'43\'83\'93\'83\'58\'83\'8c\'83\'62\'83\'68 = ComponentSystem\'82\'ccOnUpdate\'82\'c6\'82\'a9 \'82\'c5\'8d\'73\'82\'a4\'95\'4b\'97\'76\'82\'aa\'82\'a0\'82\'e9\'81\'42\
+\
+		ComponentSystem/OnUpdate\'82\'cd\'81\'41\'8e\'51\'8f\'c6\'82\'c6\'82\'a9\'82\'f0Job\'82\'c9\'95\'fa\'82\'e8\'8d\'9e\'82\'de\'92\'6e\'93\'5f\'82\'c9\'82\'c8\'82\'e9\'81\'42\
+\
+\
+
+\f1\b \'82\'b4\'82\'c1\'82\'ad\'82\'e8\'8f\'91\'82\'ad\'82\'c6\'82\'c7\'82\'a4\'82\'a2\'82\'a4\'82\'b1\'82\'c6\'82\'f0\'82\'e2\'82\'c1\'82\'c4\'82\'a2\'82\'e9\'82\'a9
+\f3\b0 \cf4 \expnd0\expndtw0\kerning0
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f2 \cf0 \kerning1\expnd0\expndtw0 	\'81\'45\'83\'52\'83\'93\'83\'7c\'81\'5b\'83\'6c\'83\'93\'83\'67\'8c\'5e\'82\'f0\'92\'e8\'8b\'60(\'83\'6f\'83\'62\'83\'74\'83\'40\'82\'c6\'82\'a9\'83\'66\'81\'5b\'83\'5e\'82\'c6\'82\'a9)\
+	\'81\'45\'83\'52\'83\'93\'83\'7c\'81\'5b\'83\'6c\'83\'93\'83\'67\'82\'f0\'95\'db\'8e\'9d\'82\'b5\'82\'bd\'83\'47\'83\'93\'83\'65\'83\'42\'83\'65\'83\'42\'90\'b6\'90\'ac\
+	\'81\'45\'83\'56\'83\'58\'83\'65\'83\'80\'82\'f0\'92\'e8\'8b\'60\'82\'b5\'82\'c4\'81\'41\'93\'c1\'92\'e8\'82\'cc\'83\'52\'83\'93\'83\'7c\'81\'5b\'83\'6c\'83\'93\'83\'67\'82\'f0\'8e\'9d\'82\'c2\'83\'47\'83\'93\'83\'65\'83\'42\'83\'65\'83\'42\'82\'f0\'8e\'fb\'8f\'57\'81\'41OnUpdate\'82\'c5\'83\'66\'81\'5b\'83\'5e\'82\'f0\'82\'a2\'82\'b6\'82\'c1\'82\'bd\'82\'e8\'81\'41\'83\'66\'81\'5b\'83\'5e\'82\'f0\'82\'a2\'82\'b6\'82\'e9Job\'82\'f0\'8d\'ec\'82\'e8\'81\'41JobSystem\'82\'c9\'93\'8a\'93\'fc\'81\'41\'8e\'c0\'8d\'73\
+		\
+	\'82\'b1\'82\'f1\'82\'be\'82\'af\'81\'42\
+	\'83\'52\'83\'93\'83\'7c\'81\'5b\'83\'6c\'83\'93\'83\'67\'82\'cc\'8c\'5e\'82\'f0\'83\'4c\'81\'5b\'82\'c9World\'82\'c9\'8e\'55\'82\'e7\'82\'ce\'82\'c1\'82\'c4\'82\'a2\'82\'e9\'83\'47\'83\'93\'83\'65\'83\'42\'83\'65\'83\'42\'82\'f0\'8e\'fb\'8f\'57\'82\'b5\'82\'c4\'81\'41JobSystem\'8f\'e3\'82\'c5\'92\'6c\'82\'f0\'95\'cf\'82\'a6\'82\'e9\'82\'b1\'82\'c6\'82\'c5\'95\'60\'89\'e6\'82\'c9\'89\'65\'8b\'bf\'82\'f0\'97\'5e\'82\'a6\'82\'e9\'81\'42\
+\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f1\b \cf0 \'95\'ca\'82\'ccSystem\'82\'c9\'82\'ed\'82\'af\'82\'c4\'8f\'91\'82\'a2\'82\'c4\'82\'a0\'82\'e9\'82\'e0\'82\'cc\'82\'f0\'82\'dc\'82\'c6\'82\'df\'82\'e9
+\f2\b0 \
+	\'95\'a1\'90\'94\'82\'ccJob\'82\'f0\'82\'bb\'82\'ea\'82\'bc\'82\'ea1\'82\'c2\'82\'ccSystem\'82\'c9\'95\'ca\'82\'ea\'82\'c4\'92\'e8\'8b\'60\'82\'b5\'82\'c4\'82\'a2\'82\'e9\'82\'aa\'81\'41\'93\'c1\'82\'c9\'82\'ed\'82\'a9\'82\'e8\'82\'e2\'82\'b7\'82\'a2\'88\'c8\'8a\'4f\'82\'cc\'97\'98\'93\'5f\'82\'cd\'82\'c8\'82\'a2\'81\'42\
+	\'82\'c5\'81\'41\'82\'b1\'82\'ea\'82\'e7\'82\'f0\'82\'dc\'82\'c6\'82\'df\'82\'c4\'88\'ea\'82\'c2\'82\'ccSystem\'82\'c9\'92\'e8\'8b\'60\'82\'b7\'82\'e9\'82\'b1\'82\'c6\'82\'aa\'82\'c5\'82\'ab\'82\'e9\'81\'42\
+\
+	\'82\'bb\'82\'a4\'82\'b7\'82\'e9\'82\'b1\'82\'c6\'82\'c5\'81\'41\'83\'56\'83\'58\'83\'65\'83\'80\'8a\'d4\'82\'cc\'91\'d2\'82\'bf\'82\'f0\'8d\'aa\'96\'7b\'93\'49\'82\'c9\'8c\'b8\'82\'e7\'82\'b9\'82\'e9\'81\'42\
+\
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f3 \cf13 \cb3 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec13     \cf14 \strokec14 protected\cf13 \strokec13  \cf14 \strokec14 override\cf13 \strokec13  \cf15 \strokec15 JobHandle\cf13 \strokec13  \cf16 \strokec16 OnUpdate\cf13 \strokec13 (\cf15 \strokec15 JobHandle\cf13 \strokec13  \cf17 \strokec17 inputDeps\cf13 \strokec13 )\
+    \{\
+        \cf18 \strokec18 /*\cf13 \strokec13 \
+\cf18 \strokec18             
+\f2 \'8b\'df\'82\'a2\'83\'47\'83\'93\'83\'65\'83\'42\'83\'65\'83\'42\'82\'cc\'8e\'fb\'8f\'57
+\f3 \cf13 \strokec13 \
+\cf18 \strokec18          */\cf13 \strokec13 \
+        \cf14 \strokec14 var\cf13 \strokec13  \cf17 \strokec17 neighbors\cf13 \strokec13  = \cf14 \strokec14 new\cf13 \strokec13  \cf15 \strokec15 NeighborsDetectionJob\cf13 \strokec13 \
+        \{\
+            \cf17 \strokec17 prodThresh\cf13 \strokec13  = \cf17 \strokec17 math\cf13 \strokec13 .\cf16 \strokec16 cos\cf13 \strokec13 (\cf17 \strokec17 math\cf13 \strokec13 .\cf16 \strokec16 radians\cf13 \strokec13 (\cf17 \strokec17 Bootstrap\cf13 \strokec13 .\cf17 \strokec17 Param\cf13 \strokec13 .\cf17 \strokec17 neighborFov\cf13 \strokec13 )),\
+            \cf17 \strokec17 distThresh\cf13 \strokec13  = \cf17 \strokec17 Bootstrap\cf13 \strokec13 .\cf17 \strokec17 Param\cf13 \strokec13 .\cf17 \strokec17 neighborDistance\cf13 \strokec13 ,\
+            \cf17 \strokec17 neighborsFromEntity\cf13 \strokec13  = \cf16 \strokec16 GetBufferFromEntity\cf13 \strokec13 <\cf15 \strokec15 NeighborsEntityBuffer\cf13 \strokec13 >(\cf14 \strokec14 false\cf13 \strokec13 ),\
+            \cf17 \strokec17 positionFromEntity\cf13 \strokec13  = \cf16 \strokec16 GetComponentDataFromEntity\cf13 \strokec13 <\cf15 \strokec15 Position\cf13 \strokec13 >(\cf14 \strokec14 true\cf13 \strokec13 ),\
+            \cf17 \strokec17 entities\cf13 \strokec13  = \cf17 \strokec17 group\cf13 \strokec13 .\cf16 \strokec16 GetEntityArray\cf13 \strokec13 (),\
+        \};\
+\
+        \cf18 \strokec18 /*\cf13 \strokec13 \
+\cf18 \strokec18             
+\f2 \'95\'c7\'8f\'88\'97\'9d
+\f3 \cf13 \strokec13 \
+\cf18 \strokec18          */\cf13 \strokec13 \
+        \cf14 \strokec14 var\cf13 \strokec13  \cf17 \strokec17 wall\cf13 \strokec13  = \cf14 \strokec14 new\cf13 \strokec13  \cf15 \strokec15 WallJob\cf13 \strokec13 \
+        \{\
+            \cf17 \strokec17 scale\cf13 \strokec13  = \cf17 \strokec17 Bootstrap\cf13 \strokec13 .\cf17 \strokec17 Param\cf13 \strokec13 .\cf17 \strokec17 wallScale\cf13 \strokec13  * \cf19 \strokec19 0.5f\cf13 \strokec13 ,\
+            \cf17 \strokec17 thresh\cf13 \strokec13  = \cf17 \strokec17 Bootstrap\cf13 \strokec13 .\cf17 \strokec17 Param\cf13 \strokec13 .\cf17 \strokec17 wallDistance\cf13 \strokec13 ,\
+            \cf17 \strokec17 weight\cf13 \strokec13  = \cf17 \strokec17 Bootstrap\cf13 \strokec13 .\cf17 \strokec17 Param\cf13 \strokec13 .\cf17 \strokec17 wallWeight\cf13 \strokec13 ,\
+        \};\
+\
+        \cf18 \strokec18 /*\cf13 \strokec13 \
+\cf18 \strokec18             
+\f2 \'8b\'df\'8f\'8a\'82\'cc\'83\'47\'83\'93\'83\'65\'83\'42\'83\'65\'83\'42\'82\'a9\'82\'e7\'97\'a3\'82\'ea\'82\'e9
+\f3 \cf13 \strokec13 \
+\cf18 \strokec18          */\cf13 \strokec13 \
+        \cf14 \strokec14 var\cf13 \strokec13  \cf17 \strokec17 separation\cf13 \strokec13  = \cf14 \strokec14 new\cf13 \strokec13  \cf15 \strokec15 SeparationJob\cf13 \strokec13 \
+        \{\
+            \cf17 \strokec17 separationWeight\cf13 \strokec13  = \cf17 \strokec17 Bootstrap\cf13 \strokec13 .\cf17 \strokec17 Param\cf13 \strokec13 .\cf17 \strokec17 separationWeight\cf13 \strokec13 ,\
+\
+            \cf18 \strokec18 /*\cf13 \strokec13 \
+\cf18 \strokec18                 JobComponentSystem 
+\f2 \'82\'aa
+\f3  GetBufferFromEntity 
+\f2 \'83\'81\'83\'5c\'83\'62\'83\'68\'82\'f0\'8e\'9d\'82\'c1\'82\'c4\'82\'a2\'82\'e9\'82\'cc\'82\'c5\'81\'41
+\f3 \cf13 \strokec13 \
+\cf18 \strokec18                 NeighborsEntityBuffer
+\f2 \'82\'cc\'8c\'5e\'8e\'77\'92\'e8\'82\'c5\'83\'47\'83\'93\'83\'65\'83\'42\'83\'65\'83\'42\'82\'a9\'82\'e7\'83\'6f\'83\'62\'83\'74\'83\'40\'82\'f0\'8e\'e6\'82\'e8\'8f\'6f\'82\'b7\'81\'42
+\f3 \cf13 \strokec13 \
+\cf18 \strokec18                 
+\f2 \'83\'47\'83\'93\'83\'65\'83\'42\'83\'65\'83\'42\'82\'f0\'83\'4c\'81\'5b\'82\'c9\'82\'b5\'82\'bd
+\f3 Neighbors
+\f2 \'82\'cc\'88\'ea\'97\'97\'82\'c6\'82\'a2\'82\'a4\'8c\'60\'82\'c5\'81\'41\'83\'57\'83\'87\'83\'75\'82\'cc\'8e\'c0\'8d\'73\'90\'e6\'82\'c5\'8e\'e6\'82\'e8\'8f\'6f\'82\'b7\'82\'cc\'82\'f0\'97\'5c\'92\'e8\'82\'b7\'82\'e9\'81\'42
+\f3          \cf13 \strokec13 \
+\cf18 \strokec18             */\cf13 \strokec13 \
+            \cf17 \strokec17 neighborsFromEntity\cf13 \strokec13  = \cf16 \strokec16 GetBufferFromEntity\cf13 \strokec13 <\cf15 \strokec15 NeighborsEntityBuffer\cf13 \strokec13 >(\cf14 \strokec14 true\cf13 \strokec13 ),\
+\
+            \cf18 \strokec18 /*\cf13 \strokec13 \
+\cf18 \strokec18                 Position
+\f2 \'8c\'5e\'8e\'77\'92\'e8\'82\'c5\'83\'47\'83\'93\'83\'65\'83\'42\'83\'65\'83\'42\'82\'a9\'82\'e7\'83\'52\'83\'93\'83\'7c\'81\'5b\'83\'6c\'83\'93\'83\'67\'82\'f0\'8e\'e6\'82\'e8\'8f\'6f\'82\'b7\'81\'42
+\f3 \cf13 \strokec13 \
+\cf18 \strokec18                 
+\f2 \'83\'47\'83\'93\'83\'65\'83\'42\'83\'65\'83\'42\'82\'f0\'83\'4c\'81\'5b\'82\'c9\'82\'b5\'82\'bd\'83\'7c\'83\'57\'83\'56\'83\'87\'83\'93\'82\'cc\'88\'ea\'97\'97\'82\'c6\'82\'a2\'82\'a4\'8c\'60\'82\'c5\'81\'41\'83\'57\'83\'87\'83\'75\'82\'cc\'8e\'c0\'8d\'73\'90\'e6\'82\'c5\'8e\'e6\'82\'e8\'8f\'6f\'82\'b7\'82\'cc\'82\'f0\'97\'5c\'92\'e8\'82\'b7\'82\'e9\'81\'42
+\f3 \cf13 \strokec13 \
+\cf18 \strokec18              */\cf13 \strokec13 \
+            \cf17 \strokec17 positionFromEntity\cf13 \strokec13  = \cf16 \strokec16 GetComponentDataFromEntity\cf13 \strokec13 <\cf15 \strokec15 Position\cf13 \strokec13 >(\cf14 \strokec14 true\cf13 \strokec13 ),\
+        \};\
+\
+        \cf18 \strokec18 /*\cf13 \strokec13 \
+\cf18 \strokec18             
+\f2 \'8b\'cf\'90\'ae\'89\'bb
+\f3 \cf13 \strokec13 \
+\cf18 \strokec18          */\cf13 \strokec13 \
+        \cf14 \strokec14 var\cf13 \strokec13  \cf17 \strokec17 alignment\cf13 \strokec13  = \cf14 \strokec14 new\cf13 \strokec13  \cf15 \strokec15 AlignmentJob\cf13 \strokec13 \
+        \{\
+            \cf17 \strokec17 alignmentWeight\cf13 \strokec13  = \cf17 \strokec17 Bootstrap\cf13 \strokec13 .\cf17 \strokec17 Param\cf13 \strokec13 .\cf17 \strokec17 alignmentWeight\cf13 \strokec13 ,\
+            \cf17 \strokec17 neighborsFromEntity\cf13 \strokec13  = \cf16 \strokec16 GetBufferFromEntity\cf13 \strokec13 <\cf15 \strokec15 NeighborsEntityBuffer\cf13 \strokec13 >(\cf14 \strokec14 true\cf13 \strokec13 ),\
+            \cf17 \strokec17 velocityFromEntity\cf13 \strokec13  = \cf16 \strokec16 GetComponentDataFromEntity\cf13 \strokec13 <\cf15 \strokec15 Velocity\cf13 \strokec13 >(\cf14 \strokec14 true\cf13 \strokec13 ),\
+        \};\
+\
+        \cf18 \strokec18 /*\cf13 \strokec13 \
+\cf18 \strokec18             
+\f2 \'8b\'97\'97\'a3\'92\'b2\'90\'ae
+\f3 \cf13 \strokec13 \
+\cf18 \strokec18          */\cf13 \strokec13 \
+        \cf14 \strokec14 var\cf13 \strokec13  \cf17 \strokec17 cohesion\cf13 \strokec13  = \cf14 \strokec14 new\cf13 \strokec13  \cf15 \strokec15 CohesionJob\cf13 \strokec13 \
+        \{\
+            \cf17 \strokec17 cohesionWeight\cf13 \strokec13  = \cf17 \strokec17 Bootstrap\cf13 \strokec13 .\cf17 \strokec17 Param\cf13 \strokec13 .\cf17 \strokec17 cohesionWeight\cf13 \strokec13 ,\
+            \cf17 \strokec17 neighborsFromEntity\cf13 \strokec13  = \cf16 \strokec16 GetBufferFromEntity\cf13 \strokec13 <\cf15 \strokec15 NeighborsEntityBuffer\cf13 \strokec13 >(\cf14 \strokec14 true\cf13 \strokec13 ),\
+            \cf17 \strokec17 positionFromEntity\cf13 \strokec13  = \cf16 \strokec16 GetComponentDataFromEntity\cf13 \strokec13 <\cf15 \strokec15 Position\cf13 \strokec13 >(\cf14 \strokec14 true\cf13 \strokec13 ),\
+        \};\
+\
+        \cf18 \strokec18 /*\cf13 \strokec13 \
+\cf18 \strokec18             
+\f2 \'88\'da\'93\'ae
+\f3 \cf13 \strokec13 \
+\cf18 \strokec18          */\cf13 \strokec13 \
+        \cf14 \strokec14 var\cf13 \strokec13  \cf17 \strokec17 move\cf13 \strokec13  = \cf14 \strokec14 new\cf13 \strokec13  \cf15 \strokec15 MoveJob\cf13 \strokec13 \
+        \{\
+            \cf17 \strokec17 dt\cf13 \strokec13  = \cf17 \strokec17 Time\cf13 \strokec13 .\cf17 \strokec17 deltaTime\cf13 \strokec13 ,\
+            \cf17 \strokec17 minSpeed\cf13 \strokec13  = \cf17 \strokec17 Bootstrap\cf13 \strokec13 .\cf17 \strokec17 Param\cf13 \strokec13 .\cf17 \strokec17 minSpeed\cf13 \strokec13 ,\
+            \cf17 \strokec17 maxSpeed\cf13 \strokec13  = \cf17 \strokec17 Bootstrap\cf13 \strokec13 .\cf17 \strokec17 Param\cf13 \strokec13 .\cf17 \strokec17 maxSpeed\cf13 \strokec13 ,\
+        \};\
+\
+        \cf18 \strokec18 // 
+\f2 \'8f\'87\'94\'d4\'82\'c9\'93\'ae\'8d\'ec\'82\'f0\'8d\'73\'82\'a4\'82\'e6\'82\'a4\'82\'c9\'81\'41\'83\'57\'83\'87\'83\'75\'82\'f0\'98\'41\'8c\'8b\'82\'b5\'82\'c4\'83\'58\'83\'50\'83\'57\'83\'85\'81\'5b\'83\'8a\'83\'93\'83\'4f\'82\'b7\'82\'e9\'81\'42
+\f3 \cf13 \strokec13 \
+        \cf17 \strokec17 inputDeps\cf13 \strokec13  = \cf17 \strokec17 neighbors\cf13 \strokec13 .\cf16 \strokec16 Schedule\cf13 \strokec13 (\cf14 \strokec14 this\cf13 \strokec13 , \cf17 \strokec17 inputDeps\cf13 \strokec13 );\
+        \cf17 \strokec17 inputDeps\cf13 \strokec13  = \cf17 \strokec17 wall\cf13 \strokec13 .\cf16 \strokec16 Schedule\cf13 \strokec13 (\cf14 \strokec14 this\cf13 \strokec13 , \cf17 \strokec17 inputDeps\cf13 \strokec13 );\
+        \cf17 \strokec17 inputDeps\cf13 \strokec13  = \cf17 \strokec17 separation\cf13 \strokec13 .\cf16 \strokec16 Schedule\cf13 \strokec13 (\cf14 \strokec14 this\cf13 \strokec13 , \cf17 \strokec17 inputDeps\cf13 \strokec13 );\
+        \cf17 \strokec17 inputDeps\cf13 \strokec13  = \cf17 \strokec17 alignment\cf13 \strokec13 .\cf16 \strokec16 Schedule\cf13 \strokec13 (\cf14 \strokec14 this\cf13 \strokec13 , \cf17 \strokec17 inputDeps\cf13 \strokec13 );\
+        \cf17 \strokec17 inputDeps\cf13 \strokec13  = \cf17 \strokec17 cohesion\cf13 \strokec13 .\cf16 \strokec16 Schedule\cf13 \strokec13 (\cf14 \strokec14 this\cf13 \strokec13 , \cf17 \strokec17 inputDeps\cf13 \strokec13 );\
+        \cf17 \strokec17 inputDeps\cf13 \strokec13  = \cf17 \strokec17 move\cf13 \strokec13 .\cf16 \strokec16 Schedule\cf13 \strokec13 (\cf14 \strokec14 this\cf13 \strokec13 , \cf17 \strokec17 inputDeps\cf13 \strokec13 );\
+\
+        \cf18 \strokec18 // 
+\f2 \'8d\'c5\'8f\'49\'93\'49\'82\'c8
+\f3 JobHandle
+\f2 \'82\'f0\'95\'d4\'82\'b7\'81\'42
+\f3 \cf13 \strokec13 \
+        \cf20 \strokec20 return\cf13 \strokec13  \cf17 \strokec17 inputDeps\cf13 \strokec13 ;\
+    \}\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f2 \cf0 \cb1 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 \
+	JobComponentSystem\'82\'ccOnUpdate\'8a\'d6\'90\'94\'82\'c5\'82\'bb\'82\'ea\'82\'bc\'82\'ea\'82\'ccJob\'82\'cc\'8f\'89\'8a\'fa\'89\'bb\'82\'f0\'82\'b5\'81\'41Schedule\'83\'81\'83\'5c\'83\'62\'83\'68\'82\'c5\'83\'60\'83\'46\'81\'5b\'83\'93\'82\'b5\'82\'dc\'82\'ad\'82\'e9\'81\'42\
+	\'98\'41\'8c\'8b\'82\'b5\'82\'c4Scheduling\'82\'b7\'82\'e9\'82\'b1\'82\'c6\'82\'aa\'82\'c5\'82\'ab\'82\'e9\'81\'42\
+\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f1\b \cf0 Job\'82\'f0BurstCompile\'82\'c5\'8d\'82\'91\'ac\'89\'bb
+\f2\b0 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0 \cf0 	BurstCompile
+\f2 \'83\'41\'83\'67\'83\'8a\'83\'72\'83\'85\'81\'5b\'83\'67\'82\'f0Job\'92\'e8\'8b\'60\'82\'c9\'82\'c2\'82\'af\'82\'e9\'81\'42\'82\'bb\'82\'f1\'82\'be\'82\'af\'82\'c5\'8d\'82\'91\'ac\'89\'bb\'81\'42
+\f0 \
+\
+\
+\
+}

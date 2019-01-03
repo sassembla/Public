@@ -1,0 +1,815 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1561.6">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Sans'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; min-height: 18.0px}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; line-height: 18.0px; font: 12.0px Menlo; color: #4ec9b0; background-color: #000000}
+    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; line-height: 18.0px; font: 12.0px Menlo; color: #d4d4d4; background-color: #000000}
+    p.p8 {margin: 0.0px 0.0px 0.0px 0.0px; line-height: 18.0px; font: 12.0px Menlo; color: #d4d4d4; background-color: #000000; min-height: 14.0px}
+    p.p9 {margin: 0.0px 0.0px 0.0px 0.0px; line-height: 18.0px; font: 12.0px Menlo; color: #9cdcfe}
+    p.p10 {margin: 0.0px 0.0px 0.0px 0.0px; line-height: 18.0px; font: 12.0px Menlo; color: #9cdcfe; background-color: #000000}
+    p.p11 {margin: 0.0px 0.0px 0.0px 0.0px; line-height: 18.0px; font: 12.0px Menlo; color: #d4d4d4; min-height: 14.0px}
+    p.p12 {margin: 0.0px 0.0px 0.0px 0.0px; line-height: 18.0px; font: 12.0px Menlo; color: #dcdcaa; background-color: #000000}
+    p.p13 {margin: 0.0px 0.0px 0.0px 0.0px; line-height: 18.0px; font: 12.0px Menlo; color: #569cd6; background-color: #000000}
+    p.p14 {margin: 0.0px 0.0px 0.0px 0.0px; line-height: 18.0px; font: 12.0px Menlo; color: #4ec9b0}
+    p.p15 {margin: 0.0px 0.0px 0.0px 0.0px; line-height: 18.0px; font: 12.0px Menlo; color: #6a9955; background-color: #000000}
+    p.p16 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Menlo}
+    p.p17 {margin: 0.0px 0.0px 0.0px 0.0px; line-height: 18.0px; font: 12.0px 'Hiragino Sans'; color: #6a9955; background-color: #000000}
+    p.p18 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Menlo; color: #4ec9b0}
+    p.p19 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Menlo; color: #dcdcaa}
+    p.p20 {margin: 0.0px 0.0px 0.0px 0.0px; line-height: 18.0px; font: 12.0px Menlo; color: #4ec9b0; -webkit-text-stroke: #4ec9b0; background-color: #000000}
+    p.p21 {margin: 0.0px 0.0px 0.0px 0.0px; line-height: 18.0px; font: 12.0px Menlo; color: #d4d4d4; -webkit-text-stroke: #d4d4d4; background-color: #000000}
+    p.p22 {margin: 0.0px 0.0px 0.0px 0.0px; line-height: 18.0px; font: 12.0px Menlo; color: #6a9955; -webkit-text-stroke: #6a9955; background-color: #000000}
+    p.p23 {margin: 0.0px 0.0px 0.0px 0.0px; line-height: 18.0px; font: 12.0px Menlo; color: #9cdcfe; -webkit-text-stroke: #9cdcfe; background-color: #000000}
+    p.p24 {margin: 0.0px 0.0px 0.0px 0.0px; line-height: 18.0px; font: 12.0px Menlo; color: #dcdcaa; -webkit-text-stroke: #dcdcaa; background-color: #000000}
+    p.p25 {margin: 0.0px 0.0px 0.0px 0.0px; line-height: 18.0px; font: 12.0px Menlo; color: #d4d4d4; -webkit-text-stroke: #d4d4d4; background-color: #000000; min-height: 14.0px}
+    p.p26 {margin: 0.0px 0.0px 0.0px 0.0px; line-height: 18.0px; font: 12.0px 'Hiragino Sans'; color: #6a9955; -webkit-text-stroke: #6a9955; background-color: #000000}
+    p.p27 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; -webkit-text-stroke: #d4d4d4; min-height: 18.0px}
+    p.p28 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; -webkit-text-stroke: #d4d4d4}
+    p.p29 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; -webkit-text-stroke: #d4d4d4; min-height: 14.0px}
+    span.s1 {font: 22.0px Helvetica}
+    span.s2 {font: 12.0px Helvetica}
+    span.s3 {font: 12.0px 'Hiragino Sans'}
+    span.s4 {font-kerning: none; color: #569cd6}
+    span.s5 {font-kerning: none; color: #d4d4d4}
+    span.s6 {font-kerning: none}
+    span.s7 {font-kerning: none; color: #4ec9b0}
+    span.s8 {font-kerning: none; color: #9cdcfe}
+    span.s9 {font-kerning: none; color: #569cd6; background-color: #1e1e1e}
+    span.s10 {font-kerning: none; color: #d4d4d4; background-color: #1e1e1e}
+    span.s11 {font-kerning: none; background-color: #1e1e1e}
+    span.s12 {font-kerning: none; color: #dcdcaa; background-color: #1e1e1e}
+    span.s13 {font-kerning: none; color: #4ec9b0; background-color: #1e1e1e}
+    span.s14 {font-kerning: none; color: #dcdcaa}
+    span.s15 {font-kerning: none; color: #b5cea8}
+    span.s16 {font-kerning: none; color: #c586c0}
+    span.s17 {font-kerning: none; color: #6a9955}
+    span.s18 {font: 12.0px 'Hiragino Sans'; font-kerning: none}
+    span.s19 {font: 12.0px Menlo; font-kerning: none; color: #9cdcfe; background-color: #252526}
+    span.s20 {font: 12.0px Menlo; font-kerning: none; color: #d4d4d4; background-color: #252526}
+    span.s21 {font-kerning: none; color: #9cdcfe; background-color: #1e1e1e}
+    span.s22 {font: 12.0px 'Hiragino Sans'; font-kerning: none; color: #d4d4d4; background-color: #1e1e1e}
+    span.s23 {font: 12.0px 'Hiragino Sans'; font-kerning: none; background-color: #1e1e1e}
+    span.s24 {font: 12.0px Menlo; font-kerning: none; color: #4ec9b0; background-color: #1e1e1e}
+    span.s25 {font: 12.0px Menlo; font-kerning: none}
+    span.s26 {font: 12.0px 'Hiragino Sans'; color: #000000}
+    span.s27 {font: 12.0px Menlo; font-kerning: none; color: #6a9955; background-color: #000000}
+    span.s28 {font: 12.0px Menlo; font-kerning: none; color: #d4d4d4}
+    span.s29 {font-kerning: none; color: #d4d4d4; -webkit-text-stroke: 0px #d4d4d4}
+    span.s30 {font-kerning: none; color: #569cd6; -webkit-text-stroke: 0px #569cd6}
+    span.s31 {font-kerning: none; color: #dcdcaa; -webkit-text-stroke: 0px #dcdcaa}
+    span.s32 {font-kerning: none; color: #9cdcfe; -webkit-text-stroke: 0px #9cdcfe}
+    span.s33 {font-kerning: none; color: #6a9955; -webkit-text-stroke: 0px #6a9955}
+    span.s34 {font-kerning: none; color: #4ec9b0; -webkit-text-stroke: 0px #4ec9b0}
+    span.s35 {font-kerning: none; color: #b5cea8; -webkit-text-stroke: 0px #b5cea8}
+    span.s36 {font: 12.0px Menlo; font-kerning: none; color: #d4d4d4; -webkit-text-stroke: 0px #d4d4d4}
+    span.s37 {font-kerning: none; color: #c586c0; -webkit-text-stroke: 0px #c586c0}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><span class="s1"><b>ECS</b></span><b>のまなび</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>まなぶ。参考は凹みさんのやつ。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>「Unity で Boids シミュレーションを作成して Entity Component System（ECS）を学んでみた」</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="http://tips.hecomi.com/entry/2018/12/23/200817">http://tips.hecomi.com/entry/2018/12/23/200817</a></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p4"><b>Boid</b><span class="s3"><b>、</b></span><b>Simulation</b></p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>他のすべての<span class="s2">Boid</span>の位置を見たりして動く<span class="s2">Boid</span>と、</p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>それらを生成する<span class="s2">Simulation</span>という組み合わせ。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>ここから、<span class="s2">ECS</span>に向けて分解していく。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p4"><b>entity</b><span class="s3"><b>を導入</b></span></p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>パッケージマネージャーから導入。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p4"><b>Boid</b><span class="s3"><b>の</b></span><b>ECS</b><span class="s3"><b>対応</b></span></p>
+<p class="p4"><span class="Apple-tab-span">	</span>Boid<span class="s3">、中では</span></p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>・加速度、位置などのパラメータがある</p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>・関数でそれらの中に値をセットする</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>ということをやっていて、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>これを、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>パラメータ -&gt; エンティティ化</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>関数 -&gt; システム化</p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ということをやっていく。</p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>動きのバリエーションとしては、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・壁に近づいたら云々</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・向きとか速度を云々</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・他の個体と近づく離れるを云々</p>
+<p class="p3"><span class="Apple-tab-span">	</span>する。</p>
+<p class="p5"><br></p>
+<p class="p5"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>パラメータの分解粒度については、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・各種システムが必要な情報をグルーピングしてくるときに本当に必要な最小の粒度で分解した方が良い</p>
+<p class="p5"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ということなので、</p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>まずは最小粒度でエンティティ化してみよう。</p>
+<p class="p5"><br></p>
+<p class="p5"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b>コンポーネントの作成</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>コンポーネント = ECSで扱う型情報の定義、みたいな印象。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>IComponentDataを継承したstructを定義し、内部にUnity.Mathematics に定義されている型(float3とか)を保持する。</p>
+<p class="p5"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>float3は、3つのfloatが入っている型。</p>
+<p class="p5"><br></p>
+<p class="p5"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b>起動クラスの作成</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ECSの関連性を起動する()ような処理を書く。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・コンポーネントの定義</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・デフォルトのWorldからEntityManagerを取得</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・アーキタイプと呼ばれるものをmanagerにセット</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・レンダラの生成</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・エンティティの生成、コンポーネントの追加</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p3"><b>コンポーネントの定義</b></p>
+<p class="p6"><span class="s4">public</span><span class="s5"> </span><span class="s4">struct</span><span class="s5"> </span><span class="s6">Velocity</span><span class="s5"> : </span><span class="s6">IComponentData</span></p>
+<p class="p7"><span class="s6">{</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">    </span></span><span class="s4">public</span><span class="s6"> </span><span class="s7">float3</span><span class="s6"> </span><span class="s8">Value</span><span class="s6">;</span></p>
+<p class="p7"><span class="s6">}</span></p>
+<p class="p8"><span class="s6"></span><br></p>
+<p class="p6"><span class="s4">public</span><span class="s5"> </span><span class="s4">struct</span><span class="s5"> </span><span class="s6">Acceleration</span><span class="s5"> : </span><span class="s6">IComponentData</span></p>
+<p class="p7"><span class="s6">{</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">    </span></span><span class="s4">public</span><span class="s6"> </span><span class="s7">float3</span><span class="s6"> </span><span class="s8">Value</span><span class="s6">;</span></p>
+<p class="p7"><span class="s6">}</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>IComponentDataを継承した型を生成しておく。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>この型をエンティティにセットすることで、エンティティに対して任意の値を持たせることができるようになる。</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p3"><b>デフォルトのWorldからEntityManagerを取得</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Worldは自分で生成することもできる。</p>
+<p class="p9"><span class="s9">var</span><span class="s10"> </span><span class="s11">manager</span><span class="s10"> = </span><span class="s11">World</span><span class="s10">.</span><span class="s11">Active</span><span class="s10">.</span><span class="s12">GetOrCreateManager</span><span class="s10">&lt;</span><span class="s13">EntityManager</span><span class="s10">&gt;();</span></p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>このmanagerに対して、レンダラやアーキタイプをセットしていく。</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p3"><b>アーキタイプと呼ばれるものをmanagerにセット</b></p>
+<p class="p10"><span class="s4">var</span><span class="s5"> </span><span class="s6">archetype</span><span class="s5"> = </span><span class="s6">manager</span><span class="s5">.</span><span class="s14">CreateArchetype</span><span class="s5">(</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">            </span></span><span class="s4">typeof</span><span class="s6">(</span><span class="s7">Position</span><span class="s6">),</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">            </span></span><span class="s4">typeof</span><span class="s6">(</span><span class="s7">Rotation</span><span class="s6">),</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">            </span></span><span class="s4">typeof</span><span class="s6">(</span><span class="s7">Scale</span><span class="s6">),</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">            </span></span><span class="s4">typeof</span><span class="s6">(</span><span class="s7">Velocity</span><span class="s6">),</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">            </span></span><span class="s4">typeof</span><span class="s6">(</span><span class="s7">Acceleration</span><span class="s6">),</span></p>
+<p class="p6"><span class="s5"><span class="Apple-converted-space">            </span></span><span class="s4">typeof</span><span class="s5">(</span><span class="s6">MeshInstanceRenderer</span><span class="s5">));</span></p>
+<p class="p11"><span class="s6"></span><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>managerに対して、用意したComponentをセットしてく。</p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Position、Rotation、Scale、MeshInstanceRendererはUnityが用意してくれているものを使用、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Velocity、Accelerationはさっき書いたものをセットする。</p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>こうすることで、archetypeを生成できる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>archetypeはComponentの型を列挙したデータを含んでいるインスタンス。</p>
+<p class="p5"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>レンダラの生成</b></p>
+<p class="p6"><span class="s5"><span class="Apple-converted-space">        </span></span><span class="s4">var</span><span class="s5"> </span><span class="s8">renderer</span><span class="s5"> = </span><span class="s4">new</span><span class="s5"> </span><span class="s6">MeshInstanceRenderer</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">        </span>{</span></p>
+<p class="p10"><span class="s5"><span class="Apple-converted-space">            </span></span><span class="s6">castShadows</span><span class="s5"> = </span><span class="s6">ShadowCastingMode</span><span class="s5">.</span><span class="s6">On</span><span class="s5">,</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">            </span></span><span class="s8">receiveShadows</span><span class="s6"> = </span><span class="s4">true</span><span class="s6">,</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">            </span></span><span class="s8">mesh</span><span class="s6"> = </span><span class="s8">mesh</span><span class="s6">,</span></p>
+<p class="p10"><span class="s5"><span class="Apple-converted-space">            </span></span><span class="s6">material</span><span class="s5"> = </span><span class="s6">material</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">        </span>};</span></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>エンティティに対して描画時に使用する機構を生成しておく。</p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>この<span class="s2">renderer</span>はあとでエンティティを生成する時にセットする。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>エンティティの生成、コンポーネントの追加</b></p>
+<p class="p10"><span class="s5"><span class="Apple-converted-space">            </span></span><span class="s4">var</span><span class="s5"> </span><span class="s6">entity</span><span class="s5"> = </span><span class="s6">manager</span><span class="s5">.</span><span class="s14">CreateEntity</span><span class="s5">(</span><span class="s6">archetype</span><span class="s5">);</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">            </span></span><span class="s8">manager</span><span class="s6">.</span><span class="s14">SetComponentData</span><span class="s6">(</span><span class="s8">entity</span><span class="s6">, </span><span class="s4">new</span><span class="s6"> </span><span class="s7">Position</span><span class="s6"> { </span><span class="s8">Value</span><span class="s6"> = </span><span class="s8">random</span><span class="s6">.</span><span class="s14">NextFloat3</span><span class="s6">(</span><span class="s15">1f</span><span class="s6">) });</span></p>
+<p class="p10"><span class="s5"><span class="Apple-converted-space">            </span></span><span class="s6">manager</span><span class="s5">.</span><span class="s14">SetComponentData</span><span class="s5">(</span><span class="s6">entity</span><span class="s5">, </span><span class="s4">new</span><span class="s5"> </span><span class="s7">Rotation</span><span class="s5"> { </span><span class="s6">Value</span><span class="s5"> = </span><span class="s6">quaternion</span><span class="s5">.</span><span class="s6">identity</span><span class="s5"> });</span></p>
+<p class="p10"><span class="s5"><span class="Apple-converted-space">            </span></span><span class="s6">manager</span><span class="s5">.</span><span class="s14">SetComponentData</span><span class="s5">(</span><span class="s6">entity</span><span class="s5">, </span><span class="s4">new</span><span class="s5"> </span><span class="s7">Scale</span><span class="s5"> { </span><span class="s6">Value</span><span class="s5"> = </span><span class="s4">new</span><span class="s5"> </span><span class="s7">float3</span><span class="s5">(</span><span class="s6">boidScale</span><span class="s5">.</span><span class="s6">x</span><span class="s5">, </span><span class="s6">boidScale</span><span class="s5">.</span><span class="s6">y</span><span class="s5">, </span><span class="s6">boidScale</span><span class="s5">.</span><span class="s6">z</span><span class="s5">) });</span></p>
+<p class="p10"><span class="s5"><span class="Apple-converted-space">            </span></span><span class="s6">manager</span><span class="s5">.</span><span class="s14">SetComponentData</span><span class="s5">(</span><span class="s6">entity</span><span class="s5">, </span><span class="s4">new</span><span class="s5"> </span><span class="s7">Velocity</span><span class="s5"> { </span><span class="s6">Value</span><span class="s5"> = </span><span class="s6">random</span><span class="s5">.</span><span class="s14">NextFloat3Direction</span><span class="s5">() * </span><span class="s6">param</span><span class="s5">.</span><span class="s6">initSpeed</span><span class="s5"> });</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">            </span></span><span class="s8">manager</span><span class="s6">.</span><span class="s14">SetComponentData</span><span class="s6">(</span><span class="s8">entity</span><span class="s6">, </span><span class="s4">new</span><span class="s6"> </span><span class="s7">Acceleration</span><span class="s6"> { </span><span class="s8">Value</span><span class="s6"> = </span><span class="s8">float3</span><span class="s6">.</span><span class="s8">zero</span><span class="s6"> });</span></p>
+<p class="p12"><span class="s5"><span class="Apple-converted-space">            </span></span><span class="s8">manager</span><span class="s5">.</span><span class="s6">SetSharedComponentData</span><span class="s5">(</span><span class="s8">entity</span><span class="s5">, </span><span class="s8">renderer</span><span class="s5">);</span></p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span>manager</span>に対して、<span class="s2">archetype</span>を渡すことでエンティティを生成する。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>こうすることで、これらのコンポーネントを持った<span class="s2">Entity</span>が生成される。</p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>で、<span class="s2">entity</span>のそれぞれのコンポーネントに対してデータをセットすることができる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>最終的にentityに対してrendererをセットすると完了で、動き出す。</p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ここまでで、エンティティの生成は完了。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>次に、これらのエンティティを動かす仕掛け(System)について考える。</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p3"><b>エンティティを動かす</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ComponentSystemを生成する。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・データ型をどこかに定義(外部でもいいはず)</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・ComponentSystem型を継承した型を生成、データ型をクラス内のフィールドにインジェクト</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・OnUpdate関数を書く</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p3"><b>データ型をどこかに定義(外部でもいいはず)</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>こんな感じの型を作る。</p>
+<p class="p13"><span class="s5"><span class="Apple-converted-space">    </span></span><span class="s6">struct</span><span class="s5"> </span><span class="s7">Data</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">    </span>{</span></p>
+<p class="p13"><span class="s5"><span class="Apple-converted-space">        </span></span><span class="s6">public</span><span class="s5"> </span><span class="s6">readonly</span><span class="s5"> </span><span class="s6">int</span><span class="s5"> </span><span class="s8">Length</span><span class="s5">;</span></p>
+<p class="p6"><span class="s5"><span class="Apple-converted-space">        </span></span><span class="s4">public</span><span class="s5"> </span><span class="s6">ComponentDataArray</span><span class="s5">&lt;</span><span class="s6">Position</span><span class="s5">&gt; </span><span class="s8">positions</span><span class="s5">;</span></p>
+<p class="p6"><span class="s5"><span class="Apple-converted-space">        </span>[</span><span class="s6">WriteOnly</span><span class="s5">] </span><span class="s4">public</span><span class="s5"> </span><span class="s6">ComponentDataArray</span><span class="s5">&lt;</span><span class="s6">Rotation</span><span class="s5">&gt; </span><span class="s8">rotations</span><span class="s5">;</span></p>
+<p class="p6"><span class="s5"><span class="Apple-converted-space">        </span></span><span class="s4">public</span><span class="s5"> </span><span class="s6">ComponentDataArray</span><span class="s5">&lt;</span><span class="s6">Velocity</span><span class="s5">&gt; </span><span class="s8">velocities</span><span class="s5">;</span></p>
+<p class="p6"><span class="s5"><span class="Apple-converted-space">        </span></span><span class="s4">public</span><span class="s5"> </span><span class="s6">ComponentDataArray</span><span class="s5">&lt;</span><span class="s6">Acceleration</span><span class="s5">&gt; </span><span class="s8">accelerations</span><span class="s5">;</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p5"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Lengthには、自動的に「何個のEntityがあるか」が入る。つまりこの数分だけエンティティがある、という情報を取得できる。</p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span>position</span>とかがarrayになっていて、「すべてのエンティティのpositon」が入っているアレイになっている。すごい。</p>
+<p class="p5"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>ComponentSystem型を継承した型を生成、データ型をクラス内のフィールドにインジェクト</b></p>
+<p class="p5"><br></p>
+<p class="p6"><span class="s4">public</span><span class="s5"> </span><span class="s4">class</span><span class="s5"> </span><span class="s6">WallSystem</span><span class="s5"> : </span><span class="s6">ComponentSystem</span></p>
+<p class="p7"><span class="s6">{</span></p>
+<p class="p13"><span class="s5"><span class="Apple-converted-space">    </span></span><span class="s6">struct</span><span class="s5"> </span><span class="s7">Data</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">    </span>{</span></p>
+<p class="p13"><span class="s5"><span class="Apple-converted-space">        </span></span><span class="s6">public</span><span class="s5"> </span><span class="s6">readonly</span><span class="s5"> </span><span class="s6">int</span><span class="s5"> </span><span class="s8">Length</span><span class="s5">;</span></p>
+<p class="p6"><span class="s5"><span class="Apple-converted-space">        </span>[</span><span class="s6">ReadOnly</span><span class="s5">] </span><span class="s4">public</span><span class="s5"> </span><span class="s6">ComponentDataArray</span><span class="s5">&lt;</span><span class="s6">Position</span><span class="s5">&gt; </span><span class="s8">positions</span><span class="s5">;</span></p>
+<p class="p6"><span class="s5"><span class="Apple-converted-space">        </span></span><span class="s4">public</span><span class="s5"> </span><span class="s6">ComponentDataArray</span><span class="s5">&lt;</span><span class="s6">Acceleration</span><span class="s5">&gt; </span><span class="s8">accelerations</span><span class="s5">;</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p8"><span class="s6"></span><br></p>
+<p class="p6"><span class="s5"><span class="Apple-converted-space">    </span>[</span><span class="s6">Inject</span><span class="s5">] </span><span class="s6">Data</span><span class="s5"> </span><span class="s8">data</span><span class="s5">;</span></p>
+<p class="p8"><span class="s6"></span><br></p>
+<p class="p13"><span class="s5"><span class="Apple-converted-space">    </span></span><span class="s6">protected</span><span class="s5"> </span><span class="s6">override</span><span class="s5"> </span><span class="s6">void</span><span class="s5"> </span><span class="s14">OnUpdate</span><span class="s5">()</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">    </span>{</span></p>
+<p class="p7"><span class="s6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>.....</span></p>
+<p class="p8"><span class="s6"></span><br></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">        </span></span><span class="s16">for</span><span class="s6"> (</span><span class="s4">int</span><span class="s6"> </span><span class="s8">i</span><span class="s6"> = </span><span class="s15">0</span><span class="s6">; </span><span class="s8">i</span><span class="s6"> &lt; </span><span class="s8">data</span><span class="s6">.</span><span class="s8">Length</span><span class="s6">; ++</span><span class="s8">i</span><span class="s6">)</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">        </span>{</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">            </span></span><span class="s8">data</span><span class="s6">.</span><span class="s8">accelerations</span><span class="s6">[</span><span class="s8">i</span><span class="s6">] = </span><span class="s4">new</span><span class="s6"> </span><span class="s7">Acceleration</span><span class="s6"> { </span><span class="s8">Value</span><span class="s6"> = </span><span class="s8">accel</span><span class="s6"> };</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p7"><span class="s6">}</span></p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>OnUpdateが毎フレーム実行される。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Data型をInjectアトリビュートをつけて定義しているが、このインスタンスに対して自動的にエンティティが入る。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>で、MoveとWallをセットすることで、移動と壁接近の処理を実現できる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>これらのComponentSystemを継承した型は、自動的にデフォルトのWorldに組み込まれる。</p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ここまでで壁接近と移動に関してのシステムができた。</p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、その実行順の制御をいまのところはMoveSystemにattributeで</p>
+<p class="p14"><span class="s10">[</span><span class="s11">UpdateAfter</span><span class="s10">(</span><span class="s9">typeof</span><span class="s10">(</span><span class="s11">WallSystem</span><span class="s10">))]</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>とかやって行う。</p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ここからは、一つのエンティティから別のエンティティを参照して、群(Boid)っぽい挙動をさせる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>他の個体と近づく離れるを云々 の部分。</p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>この場合、一つのエンティティから、ほかの(近所の)エンティティを、配列として扱うことになる。</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p3"><b>配列をエンティティ内で扱う</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>データ型を定義する。</p>
+<p class="p6"><span class="s5">[</span><span class="s6">InternalBufferCapacity</span><span class="s5">(</span><span class="s15">8</span><span class="s5">)]</span></p>
+<p class="p6"><span class="s4">public</span><span class="s5"> </span><span class="s4">struct</span><span class="s5"> </span><span class="s6">NeighborsEntityBuffer</span><span class="s5"> : </span><span class="s6">IBufferElementData</span></p>
+<p class="p7"><span class="s6">{</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">    </span></span><span class="s4">public</span><span class="s6"> </span><span class="s7">Entity</span><span class="s6"> </span><span class="s8">Value</span><span class="s6">;</span></p>
+<p class="p7"><span class="s6">}</span></p>
+<p class="p5"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>IBufferElementDataを継承したコンポーネントを用意する。これで配列が扱える。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>今まではIComponentData。</p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Entityを値として持つ。(配列として扱われる。)</p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>アトリビュート <b>InternalBufferCapacity</b> はIBufferElementDataに対してセットする。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>この数値を超えた場合はデータがC#のヒープにいってしまって遅くなるっぽい。</p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>アーキタイプに<b>NeighborsEntityBuffer</b>型を足す。</p>
+<p class="p5"><br></p>
+<p class="p10"><span class="s5"><span class="Apple-converted-space">        </span></span><span class="s4">var</span><span class="s5"> </span><span class="s6">archetype</span><span class="s5"> = </span><span class="s6">manager</span><span class="s5">.</span><span class="s14">CreateArchetype</span><span class="s5">(</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">            </span></span><span class="s4">typeof</span><span class="s6">(</span><span class="s7">Position</span><span class="s6">),</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">            </span></span><span class="s4">typeof</span><span class="s6">(</span><span class="s7">Rotation</span><span class="s6">),</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">            </span></span><span class="s4">typeof</span><span class="s6">(</span><span class="s7">Scale</span><span class="s6">),</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">            </span></span><span class="s4">typeof</span><span class="s6">(</span><span class="s7">Velocity</span><span class="s6">),</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">            </span></span><span class="s4">typeof</span><span class="s6">(</span><span class="s7">Acceleration</span><span class="s6">),</span></p>
+<p class="p6"><span class="s5"><span class="Apple-converted-space">            </span></span><span class="s4">typeof</span><span class="s5">(</span><span class="s6">MeshInstanceRenderer</span><span class="s5">),</span></p>
+<p class="p6"><span class="s5"><span class="Apple-converted-space">            </span></span><span class="s4">typeof</span><span class="s5">(</span><span class="s6">NeighborsEntityBuffer</span><span class="s5">)</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">        </span>);</span></p>
+<p class="p5"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>NeighborsEntityBuffer</b> 型に関しては、CreateEntity時にデータをセットするような要素がないのでこのまま。</p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>IBufferElementDataを継承した型の中身は、自動的に配列として扱われる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>この場合は、Entity型のアレイになる。</p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Bufferからデータを取り出す場合、Reinterpret&lt;バッファに含まれている型&gt; で、型のアレイが取り出せる。</p>
+<p class="p5"><br></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">            </span></span><span class="s17">/*</span></p>
+<p class="p15"><span class="s6"><span class="Apple-converted-space">                </span>neighbors</span><span class="s18">から一つを取り出す。ここで</span><span class="s6">NeighborsEntityBuffer</span><span class="s18">の中身は</span><span class="s6">Entity</span><span class="s18">だけなので、</span></p>
+<p class="p15"><span class="s6"><span class="Apple-converted-space">                </span>Reinterpret&lt;</span><span class="s18">型</span><span class="s6">&gt;</span><span class="s18">で指定すると</span><span class="s6">Entity</span><span class="s18">のアレイが手に入る。</span></p>
+<p class="p15"><span class="s6"><span class="Apple-converted-space">            </span>*/</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">            </span></span><span class="s4">var</span><span class="s6"> </span><span class="s8">neighbors</span><span class="s6"> = </span><span class="s8">data</span><span class="s6">.</span><span class="s8">neighbors</span><span class="s6">[</span><span class="s8">i</span><span class="s6">].</span><span class="s14">Reinterpret</span><span class="s6">&lt;</span><span class="s7">Entity</span><span class="s6">&gt;();</span></p>
+<p class="p5"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これで、neighborsは <span class="s19">DynamicBuffer</span><span class="s20">&lt;</span><span class="s19">Entity</span><span class="s20">&gt;</span> 型、Entityのアレイになる。</p>
+<p class="p16"><span class="s3"><span class="Apple-tab-span">	</span>で、エンティティからPositionなどの一パラメータを取得するには、 </span><span class="s21">EntityManager</span><span class="s10">.</span><span class="s12">GetComponentData</span><span class="s10">&lt;</span><span class="s13">Position</span><span class="s10">&gt;(</span><span class="s22">対象のエンティティ</span><span class="s10">)</span><span class="s5"> </span><span class="s3">とかやる。</span></p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>このほかにAlignment(整列)とCohesion(結束)のSystemを作る。</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p3"><b>順番付け</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>この時点で複数のシステムがあって、順番問題が出てくる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>別に複数のシステムに分けなくてもいいはずなんで、まとめてもいいんだけど、ここでは</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・特定のまとまり</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・その前</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・そのあと</p>
+<p class="p3"><span class="Apple-tab-span">	</span>というような区分けで順番付けを行うことができる。</p>
+<p class="p5"><br></p>
+<p class="p14"><span class="s10">[</span><span class="s11">UpdateInGroup</span><span class="s10">(</span><span class="s9">typeof</span><span class="s10">(</span><span class="s23">クラス</span><span class="s10">))]</span></p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>とかで、特定のクラス定義を基にしたグループを生成できる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>このグループ内だとなんかどういう順番での実行になるかわからないが、</p>
+<p class="p5"><br></p>
+<p class="p14"><span class="s10">[</span><span class="s11">UpdateAfter</span><span class="s10">(</span><span class="s9">typeof</span><span class="s10">(</span><span class="s23">クラス</span><span class="s10">))]</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>とかやると、グループの実行後に実行、</p>
+<p class="p5"><span class="Apple-tab-span">	</span></p>
+<p class="p14"><span class="s10">[</span><span class="s11">UpdateBefore</span><span class="s10">(</span><span class="s9">typeof</span><span class="s10">(</span><span class="s23">クラス</span><span class="s10">))]</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>でグループの実行前に実行、とかができる。</p>
+<p class="p5"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>グループが生成できるのがいいところ。</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p3"><b>ECSといってもメインスレッドで動くのがデフォルトなんだな～</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>というわけで、ここからは別スレッドでの実行にしていく。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>WallSystemのベースクラスを <span class="s24">ComponentSystem</span> から <span class="s24">JobComponentSystem</span> に載せ替えて、OnUpdateがJobHandleを返すようにセットする。</p>
+<p class="p5"><br></p>
+<p class="p6"><span class="s5"><span class="Apple-converted-space">    </span></span><span class="s4">public</span><span class="s5"> </span><span class="s4">struct</span><span class="s5"> </span><span class="s6">Job</span><span class="s5"> : </span><span class="s6">IJobParallelFor</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">    </span>{</span></p>
+<p class="p15"><span class="s5"><span class="Apple-converted-space">        </span></span><span class="s6">// OnUpdate() </span><span class="s18">から渡してもらう</span></p>
+<p class="p6"><span class="s5"><span class="Apple-converted-space">        </span>[</span><span class="s6">ReadOnly</span><span class="s5">] </span><span class="s4">public</span><span class="s5"> </span><span class="s6">ComponentDataArray</span><span class="s5">&lt;</span><span class="s6">Position</span><span class="s5">&gt; </span><span class="s8">positions</span><span class="s5">;</span></p>
+<p class="p8"><span class="s6"></span><br></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">        </span>[</span><span class="s7">ReadOnly</span><span class="s6">] </span><span class="s4">public</span><span class="s6"> </span><span class="s4">float</span><span class="s6"> </span><span class="s8">scale</span><span class="s6">;</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">        </span>[</span><span class="s7">ReadOnly</span><span class="s6">] </span><span class="s4">public</span><span class="s6"> </span><span class="s4">float</span><span class="s6"> </span><span class="s8">thresh</span><span class="s6">;</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">        </span>[</span><span class="s7">ReadOnly</span><span class="s6">] </span><span class="s4">public</span><span class="s6"> </span><span class="s4">float</span><span class="s6"> </span><span class="s8">weight</span><span class="s6">;</span></p>
+<p class="p8"><span class="s6"></span><br></p>
+<p class="p6"><span class="s5"><span class="Apple-converted-space">        </span></span><span class="s4">public</span><span class="s5"> </span><span class="s6">ComponentDataArray</span><span class="s5">&lt;</span><span class="s6">Acceleration</span><span class="s5">&gt; </span><span class="s8">accelerations</span><span class="s5">;</span></p>
+<p class="p15"><span class="s5"><span class="Apple-converted-space">        </span></span><span class="s6">// [ReadOnly] public Param param;</span></p>
+<p class="p8"><span class="s6"></span><br></p>
+<p class="p15"><span class="s5"><span class="Apple-converted-space">        </span></span><span class="s6">// OnUpdate() </span><span class="s18">の処理を移植</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">        </span></span><span class="s4">public</span><span class="s6"> </span><span class="s4">void</span><span class="s6"> </span><span class="s14">Execute</span><span class="s6">(</span><span class="s4">int</span><span class="s6"> </span><span class="s8">index</span><span class="s6">)</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">        </span>{</span></p>
+<p class="p10"><span class="s5"><span class="Apple-converted-space">            </span></span><span class="s7">float3</span><span class="s5"> </span><span class="s6">pos</span><span class="s5"> = </span><span class="s6">positions</span><span class="s5">[</span><span class="s6">index</span><span class="s5">].</span><span class="s6">Value</span><span class="s5">;</span></p>
+<p class="p10"><span class="s5"><span class="Apple-converted-space">            </span></span><span class="s7">float3</span><span class="s5"> </span><span class="s6">accel</span><span class="s5"> = </span><span class="s6">accelerations</span><span class="s5">[</span><span class="s6">index</span><span class="s5">].</span><span class="s6">Value</span><span class="s5">;</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">            </span></span><span class="s8">accel</span><span class="s6"> +=</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">                </span></span><span class="s14">GetAccelAgainstWall</span><span class="s6">(-</span><span class="s8">scale</span><span class="s6"> - </span><span class="s8">pos</span><span class="s6">.</span><span class="s8">x</span><span class="s6">, </span><span class="s4">new</span><span class="s6"> </span><span class="s7">float3</span><span class="s6">(+</span><span class="s15">1</span><span class="s6">, </span><span class="s15">0</span><span class="s6">, </span><span class="s15">0</span><span class="s6">), </span><span class="s8">thresh</span><span class="s6">, </span><span class="s8">weight</span><span class="s6">) +</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">                </span></span><span class="s14">GetAccelAgainstWall</span><span class="s6">(-</span><span class="s8">scale</span><span class="s6"> - </span><span class="s8">pos</span><span class="s6">.</span><span class="s8">y</span><span class="s6">, </span><span class="s4">new</span><span class="s6"> </span><span class="s7">float3</span><span class="s6">(</span><span class="s15">0</span><span class="s6">, +</span><span class="s15">1</span><span class="s6">, </span><span class="s15">0</span><span class="s6">), </span><span class="s8">thresh</span><span class="s6">, </span><span class="s8">weight</span><span class="s6">) +</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">                </span></span><span class="s14">GetAccelAgainstWall</span><span class="s6">(-</span><span class="s8">scale</span><span class="s6"> - </span><span class="s8">pos</span><span class="s6">.</span><span class="s8">z</span><span class="s6">, </span><span class="s4">new</span><span class="s6"> </span><span class="s7">float3</span><span class="s6">(</span><span class="s15">0</span><span class="s6">, </span><span class="s15">0</span><span class="s6">, +</span><span class="s15">1</span><span class="s6">), </span><span class="s8">thresh</span><span class="s6">, </span><span class="s8">weight</span><span class="s6">) +</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">                </span></span><span class="s14">GetAccelAgainstWall</span><span class="s6">(+</span><span class="s8">scale</span><span class="s6"> - </span><span class="s8">pos</span><span class="s6">.</span><span class="s8">x</span><span class="s6">, </span><span class="s4">new</span><span class="s6"> </span><span class="s7">float3</span><span class="s6">(-</span><span class="s15">1</span><span class="s6">, </span><span class="s15">0</span><span class="s6">, </span><span class="s15">0</span><span class="s6">), </span><span class="s8">thresh</span><span class="s6">, </span><span class="s8">weight</span><span class="s6">) +</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">                </span></span><span class="s14">GetAccelAgainstWall</span><span class="s6">(+</span><span class="s8">scale</span><span class="s6"> - </span><span class="s8">pos</span><span class="s6">.</span><span class="s8">y</span><span class="s6">, </span><span class="s4">new</span><span class="s6"> </span><span class="s7">float3</span><span class="s6">(</span><span class="s15">0</span><span class="s6">, -</span><span class="s15">1</span><span class="s6">, </span><span class="s15">0</span><span class="s6">), </span><span class="s8">thresh</span><span class="s6">, </span><span class="s8">weight</span><span class="s6">) +</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">                </span></span><span class="s14">GetAccelAgainstWall</span><span class="s6">(+</span><span class="s8">scale</span><span class="s6"> - </span><span class="s8">pos</span><span class="s6">.</span><span class="s8">z</span><span class="s6">, </span><span class="s4">new</span><span class="s6"> </span><span class="s7">float3</span><span class="s6">(</span><span class="s15">0</span><span class="s6">, </span><span class="s15">0</span><span class="s6">, -</span><span class="s15">1</span><span class="s6">), </span><span class="s8">thresh</span><span class="s6">, </span><span class="s8">weight</span><span class="s6">);</span></p>
+<p class="p10"><span class="s5"><span class="Apple-converted-space">            </span></span><span class="s6">accelerations</span><span class="s5">[</span><span class="s6">index</span><span class="s5">] = </span><span class="s4">new</span><span class="s5"> </span><span class="s7">Acceleration</span><span class="s5"> { </span><span class="s6">Value</span><span class="s5"> = </span><span class="s6">accel</span><span class="s5"> };</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p8"><span class="s6"></span><br></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">        </span></span><span class="s7">float3</span><span class="s6"> </span><span class="s14">GetAccelAgainstWall</span><span class="s6">(</span><span class="s4">float</span><span class="s6"> </span><span class="s8">dist</span><span class="s6">, </span><span class="s7">float3</span><span class="s6"> </span><span class="s8">dir</span><span class="s6">, </span><span class="s4">float</span><span class="s6"> </span><span class="s8">thresh</span><span class="s6">, </span><span class="s4">float</span><span class="s6"> </span><span class="s8">weight</span><span class="s6">)</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">        </span>{</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">            </span></span><span class="s16">if</span><span class="s6"> (</span><span class="s8">dist</span><span class="s6"> &lt; </span><span class="s8">thresh</span><span class="s6">)</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">            </span>{</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">                </span></span><span class="s16">return</span><span class="s6"> </span><span class="s8">dir</span><span class="s6"> * (</span><span class="s8">weight</span><span class="s6"> / </span><span class="s8">math</span><span class="s6">.</span><span class="s14">abs</span><span class="s6">(</span><span class="s8">dist</span><span class="s6"> / </span><span class="s8">thresh</span><span class="s6">));</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">            </span>}</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">            </span></span><span class="s16">return</span><span class="s6"> </span><span class="s8">float3</span><span class="s6">.</span><span class="s8">zero</span><span class="s6">;</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>JobSystemを使って並列化(メインスレッド以外での実行)するために、IJobParallelFor型を継承したstructを用意する。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Execute関数の中で、Updateで実行していた要素を実行する。</p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Execute関数はエンティティ分だけ実行される。</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p6"><span class="s5"><span class="Apple-converted-space">    </span></span><span class="s4">protected</span><span class="s5"> </span><span class="s4">override</span><span class="s5"> </span><span class="s6">JobHandle</span><span class="s5"> </span><span class="s14">OnUpdate</span><span class="s5">(</span><span class="s6">JobHandle</span><span class="s5"> </span><span class="s8">inputDeps</span><span class="s5">)</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">    </span>{</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">        </span></span><span class="s4">var</span><span class="s6"> </span><span class="s8">job</span><span class="s6"> = </span><span class="s4">new</span><span class="s6"> </span><span class="s7">Job</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">        </span>{</span></p>
+<p class="p10"><span class="s5"><span class="Apple-converted-space">            </span></span><span class="s6">positions</span><span class="s5"> = </span><span class="s6">data</span><span class="s5">.</span><span class="s6">positions</span><span class="s5">,</span></p>
+<p class="p10"><span class="s5"><span class="Apple-converted-space">            </span></span><span class="s6">accelerations</span><span class="s5"> = </span><span class="s6">data</span><span class="s5">.</span><span class="s6">accelerations</span><span class="s5">,</span></p>
+<p class="p8"><span class="s6"></span><br></p>
+<p class="p15"><span class="s5"><span class="Apple-converted-space">            </span></span><span class="s6">// IJobParallelFor</span><span class="s18">を継承した</span><span class="s6">struct</span><span class="s18">は参照型の参照を持てないので、ここで値を渡す。</span></p>
+<p class="p10"><span class="s5"><span class="Apple-converted-space">            </span></span><span class="s6">scale</span><span class="s5"> = </span><span class="s6">Bootstrap</span><span class="s5">.</span><span class="s6">Param</span><span class="s5">.</span><span class="s6">wallScale</span><span class="s5"> * </span><span class="s15">0.5f</span><span class="s5">,</span></p>
+<p class="p10"><span class="s5"><span class="Apple-converted-space">            </span></span><span class="s6">thresh</span><span class="s5"> = </span><span class="s6">Bootstrap</span><span class="s5">.</span><span class="s6">Param</span><span class="s5">.</span><span class="s6">wallDistance</span><span class="s5">,</span></p>
+<p class="p10"><span class="s5"><span class="Apple-converted-space">            </span></span><span class="s6">weight</span><span class="s5"> = </span><span class="s6">Bootstrap</span><span class="s5">.</span><span class="s6">Param</span><span class="s5">.</span><span class="s6">wallWeight</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">        </span>};</span></p>
+<p class="p10"><span class="s5"><span class="Apple-converted-space">        </span></span><span class="s16">return</span><span class="s5"> </span><span class="s6">job</span><span class="s5">.</span><span class="s14">Schedule</span><span class="s5">(</span><span class="s6">data</span><span class="s5">.</span><span class="s6">Length</span><span class="s5">, </span><span class="s15">32</span><span class="s5">, </span><span class="s6">inputDeps</span><span class="s5">);</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p5"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>これで、<span class="s2">WallSystem</span>でのOnUpdate -&gt; Job、という形でデータが別スレッドで処理されるようになる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>素敵。</p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>もっとECSに向いたJob関連の仕組みがあるので、そちらを使って全体を移行する。</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p3"><b>IJobProcessComponentData型を使ってジョブ化を行う</b></p>
+<p class="p14"><span class="s11">IJobProcessComponentData</span></p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>型を使ってジョブの定義を行うと、引数を持たせた上でExecuteの定義ができる。</p>
+<p class="p5"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>次のように型引数をセットして定義、</p>
+<p class="p6"><span class="s5"><span class="Apple-converted-space">    </span></span><span class="s4">private</span><span class="s5"> </span><span class="s4">struct</span><span class="s5"> </span><span class="s6">Job</span><span class="s5"> : </span><span class="s6">IJobProcessComponentData</span><span class="s5">&lt;</span><span class="s6">Position</span><span class="s5">, </span><span class="s6">Rotation</span><span class="s5">, </span><span class="s6">Velocity</span><span class="s5">, </span><span class="s6">Acceleration</span><span class="s5">&gt;</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">    </span>{</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">        </span>[</span><span class="s7">ReadOnly</span><span class="s6">] </span><span class="s4">public</span><span class="s6"> </span><span class="s4">float</span><span class="s6"> </span><span class="s8">dt</span><span class="s6">;</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">        </span>[</span><span class="s7">ReadOnly</span><span class="s6">] </span><span class="s4">public</span><span class="s6"> </span><span class="s4">float</span><span class="s6"> </span><span class="s8">minSpeed</span><span class="s6">;</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">        </span>[</span><span class="s7">ReadOnly</span><span class="s6">] </span><span class="s4">public</span><span class="s6"> </span><span class="s4">float</span><span class="s6"> </span><span class="s8">maxSpeed</span><span class="s6">;</span></p>
+<p class="p8"><span class="s6"></span><br></p>
+<p class="p6"><span class="s5"><span class="Apple-converted-space">        </span></span><span class="s4">public</span><span class="s5"> </span><span class="s4">void</span><span class="s5"> </span><span class="s14">Execute</span><span class="s5">(</span><span class="s4">ref</span><span class="s5"> </span><span class="s6">Position</span><span class="s5"> </span><span class="s8">pos</span><span class="s5">, [</span><span class="s6">WriteOnly</span><span class="s5">] </span><span class="s4">ref</span><span class="s5"> </span><span class="s6">Rotation</span><span class="s5"> </span><span class="s8">rot</span><span class="s5">, </span><span class="s4">ref</span><span class="s5"> </span><span class="s6">Velocity</span><span class="s5"> </span><span class="s8">vel</span><span class="s5">, </span><span class="s4">ref</span><span class="s5"> </span><span class="s6">Acceleration</span><span class="s5"> </span><span class="s8">accel</span><span class="s5">)</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">        </span>{</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">            </span></span><span class="s4">var</span><span class="s6"> </span><span class="s8">v</span><span class="s6"> = </span><span class="s8">vel</span><span class="s6">.</span><span class="s8">Value</span><span class="s6">;</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">            </span></span><span class="s8">v</span><span class="s6"> += </span><span class="s8">accel</span><span class="s6">.</span><span class="s8">Value</span><span class="s6"> * </span><span class="s8">dt</span><span class="s6">;</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">            </span></span><span class="s4">var</span><span class="s6"> </span><span class="s8">dir</span><span class="s6"> = </span><span class="s8">math</span><span class="s6">.</span><span class="s14">normalize</span><span class="s6">(</span><span class="s8">v</span><span class="s6">);</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">            </span></span><span class="s4">var</span><span class="s6"> </span><span class="s8">speed</span><span class="s6"> = </span><span class="s8">math</span><span class="s6">.</span><span class="s14">length</span><span class="s6">(</span><span class="s8">v</span><span class="s6">);</span></p>
+<p class="p10"><span class="s5"><span class="Apple-converted-space">            </span></span><span class="s6">v</span><span class="s5"> = </span><span class="s6">math</span><span class="s5">.</span><span class="s14">clamp</span><span class="s5">(</span><span class="s6">speed</span><span class="s5">, </span><span class="s6">minSpeed</span><span class="s5">, </span><span class="s6">maxSpeed</span><span class="s5">) * </span><span class="s6">dir</span><span class="s5">;</span></p>
+<p class="p8"><span class="s6"></span><br></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">            </span></span><span class="s8">pos</span><span class="s6"> = </span><span class="s4">new</span><span class="s6"> </span><span class="s7">Position</span><span class="s6"> { </span><span class="s8">Value</span><span class="s6"> = </span><span class="s8">pos</span><span class="s6">.</span><span class="s8">Value</span><span class="s6"> + </span><span class="s8">v</span><span class="s6"> * </span><span class="s8">dt</span><span class="s6"> };</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">            </span></span><span class="s8">rot</span><span class="s6"> = </span><span class="s4">new</span><span class="s6"> </span><span class="s7">Rotation</span><span class="s6"> { </span><span class="s8">Value</span><span class="s6"> = </span><span class="s8">quaternion</span><span class="s6">.</span><span class="s14">LookRotationSafe</span><span class="s6">(</span><span class="s8">dir</span><span class="s6">, </span><span class="s4">new</span><span class="s6"> </span><span class="s7">float3</span><span class="s6">(</span><span class="s15">0</span><span class="s6">, </span><span class="s15">1</span><span class="s6">, </span><span class="s15">0</span><span class="s6">)) };</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">            </span></span><span class="s8">vel</span><span class="s6"> = </span><span class="s4">new</span><span class="s6"> </span><span class="s7">Velocity</span><span class="s6"> { </span><span class="s8">Value</span><span class="s6"> = </span><span class="s8">v</span><span class="s6"> };</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">            </span></span><span class="s8">accel</span><span class="s6"> = </span><span class="s4">new</span><span class="s6"> </span><span class="s7">Acceleration</span><span class="s6"> { </span><span class="s8">Value</span><span class="s6"> = </span><span class="s8">float3</span><span class="s6">.</span><span class="s8">zero</span><span class="s6"> };</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Executeはやはりエンティティ数分だけ実行される。</p>
+<p class="p5"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>jobを返すのを要求している <span class="s24">JobComponentSystem</span> のOnUpdateで、パラメータを含んだjobを生成し、Scheduleを返す。</p>
+<p class="p5"><br></p>
+<p class="p6"><span class="s5"><span class="Apple-converted-space">    </span></span><span class="s4">protected</span><span class="s5"> </span><span class="s4">override</span><span class="s5"> </span><span class="s6">JobHandle</span><span class="s5"> </span><span class="s14">OnUpdate</span><span class="s5">(</span><span class="s6">JobHandle</span><span class="s5"> </span><span class="s8">inputDeps</span><span class="s5">)</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">    </span>{</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">        </span></span><span class="s4">var</span><span class="s6"> </span><span class="s8">job</span><span class="s6"> = </span><span class="s4">new</span><span class="s6"> </span><span class="s7">Job</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">        </span>{</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">            </span></span><span class="s8">dt</span><span class="s6"> = </span><span class="s8">Time</span><span class="s6">.</span><span class="s8">deltaTime</span><span class="s6">,</span></p>
+<p class="p10"><span class="s5"><span class="Apple-converted-space">            </span></span><span class="s6">minSpeed</span><span class="s5"> = </span><span class="s6">Bootstrap</span><span class="s5">.</span><span class="s6">Param</span><span class="s5">.</span><span class="s6">minSpeed</span><span class="s5">,</span></p>
+<p class="p10"><span class="s5"><span class="Apple-converted-space">            </span></span><span class="s6">maxSpeed</span><span class="s5"> = </span><span class="s6">Bootstrap</span><span class="s5">.</span><span class="s6">Param</span><span class="s5">.</span><span class="s6">maxSpeed</span><span class="s5">,</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">        </span>};</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">        </span></span><span class="s16">return</span><span class="s6"> </span><span class="s8">job</span><span class="s6">.</span><span class="s14">Schedule</span><span class="s6">(</span><span class="s4">this</span><span class="s6">, </span><span class="s8">inputDeps</span><span class="s6">);</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p5"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span>Execute</span>関数には<span class="s2">Position</span>やら何やらが型定義時点の要素で入ってくるので、パラメータの特性をAttributeでセットする。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>この場合はRotationがWriteしかしないので、WriteOnlyにする。</p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>このExecute関数で渡ってくるrefは、Injectしていた時の要素と同じような感じ。</p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>OnUpdate関数がメインスレッドで、そこからJobSystemへとジョブを送り出す。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>JobSystem側では別スレッド(WorkerThread)経由でExecuteが呼ばれ、そこで処理を行う。</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p3"><b>配列を扱う(特にEntityの配列)</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>SeparationSysytemをJob化する。</p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>neighborsがEntityのアレイなので、その辺を扱う必要がある。</p>
+<p class="p14"><span class="s11">IJobProcessComponentDataWithEntity</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>型でjob用のデータを定義すると、Executeの第一引数にEntity型、第二引数にint indexがつく。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>それ以降の引数は定義型と一致する。</p>
+<p class="p5"><br></p>
+<p class="p14"><span class="s9">public</span><span class="s10"> </span><span class="s9">void</span><span class="s10"> </span><span class="s12">Execute</span><span class="s10">(</span><span class="s11">Entity</span><span class="s10"> </span><span class="s21">entity</span><span class="s10">, </span><span class="s9">int</span><span class="s10"> </span><span class="s21">index</span><span class="s10">, [</span><span class="s11">ReadOnly</span><span class="s10">] </span><span class="s9">ref</span><span class="s10"> </span><span class="s11">Position</span><span class="s10"> </span><span class="s21">pos</span><span class="s10">, </span><span class="s9">ref</span><span class="s10"> </span><span class="s11">Acceleration</span><span class="s10"> </span><span class="s21">accel</span><span class="s10">){</span></p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>こんな感じ。</p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>OnUpdateではjobを生成してスケジュールを返すんだが、</p>
+<p class="p6"><span class="s5"><span class="Apple-converted-space">    </span></span><span class="s4">protected</span><span class="s5"> </span><span class="s4">override</span><span class="s5"> </span><span class="s6">JobHandle</span><span class="s5"> </span><span class="s14">OnUpdate</span><span class="s5">(</span><span class="s6">JobHandle</span><span class="s5"> </span><span class="s8">inputDeps</span><span class="s5">)</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">    </span>{</span></p>
+<p class="p15"><span class="s5"><span class="Apple-converted-space">        </span></span><span class="s6">// </span><span class="s18">パラメータをつけて</span><span class="s6">JobSystem</span><span class="s18">に放り込む</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">        </span></span><span class="s4">var</span><span class="s6"> </span><span class="s8">job</span><span class="s6"> = </span><span class="s4">new</span><span class="s6"> </span><span class="s7">Job</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">        </span>{</span></p>
+<p class="p10"><span class="s5"><span class="Apple-converted-space">            </span></span><span class="s6">separationWeight</span><span class="s5"> = </span><span class="s6">Bootstrap</span><span class="s5">.</span><span class="s6">Param</span><span class="s5">.</span><span class="s6">separationWeight</span><span class="s5">,</span></p>
+<p class="p8"><span class="s6"></span><br></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">            </span></span><span class="s17">/*</span></p>
+<p class="p15"><span class="s6"><span class="Apple-converted-space">                </span>JobComponentSystem </span><span class="s18">が</span><span class="s6"> GetBufferFromEntity </span><span class="s18">メソッドを持っているので、</span></p>
+<p class="p15"><span class="s6"><span class="Apple-converted-space">                </span>NeighborsEntityBuffer</span><span class="s18">の型指定でエンティティからバッファを取り出す。</span></p>
+<p class="p17"><span class="s25"><span class="Apple-converted-space">                </span></span><span class="s6">エンティティをキーにした</span><span class="s25">Neighbors</span><span class="s6">の一覧という形で、ジョブの実行先で取り出すのを予定する。</span><span class="s25"><span class="Apple-converted-space">         </span></span></p>
+<p class="p15"><span class="s6"><span class="Apple-converted-space">            </span>*/</span></p>
+<p class="p6"><span class="s5"><span class="Apple-converted-space">            </span></span><span class="s8">neighborsFromEntity</span><span class="s5"> = </span><span class="s14">GetBufferFromEntity</span><span class="s5">&lt;</span><span class="s6">NeighborsEntityBuffer</span><span class="s5">&gt;(</span><span class="s4">true</span><span class="s5">),</span></p>
+<p class="p8"><span class="s6"></span><br></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">            </span></span><span class="s17">/*</span></p>
+<p class="p17"><span class="s25"><span class="Apple-converted-space">                </span>Position</span><span class="s6">型指定でエンティティからコンポーネントを取り出す。</span></p>
+<p class="p17"><span class="s25"><span class="Apple-converted-space">                </span></span><span class="s6">エンティティをキーにしたポジションの一覧という形で、ジョブの実行先で取り出すのを予定する。</span></p>
+<p class="p15"><span class="s6"><span class="Apple-converted-space">             </span>*/</span></p>
+<p class="p12"><span class="s5"><span class="Apple-converted-space">            </span></span><span class="s8">positionFromEntity</span><span class="s5"> = </span><span class="s6">GetComponentDataFromEntity</span><span class="s5">&lt;</span><span class="s7">Position</span><span class="s5">&gt;(</span><span class="s4">true</span><span class="s5">),</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">        </span>};</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">        </span></span><span class="s16">return</span><span class="s6"> </span><span class="s8">job</span><span class="s6">.</span><span class="s14">Schedule</span><span class="s6">(</span><span class="s4">this</span><span class="s6">, </span><span class="s8">inputDeps</span><span class="s6">);</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="s24">IJobProcessComponentDataWithEntity</span> を継承したstruct側では、そのExecuteでentityを含んだ実行ブロックになる。</p>
+<p class="p5"><br></p>
+<p class="p6"><span class="s5"><span class="Apple-converted-space">    </span></span><span class="s4">public</span><span class="s5"> </span><span class="s4">struct</span><span class="s5"> </span><span class="s6">Job</span><span class="s5"> : </span><span class="s6">IJobProcessComponentDataWithEntity</span><span class="s5">&lt;</span><span class="s6">Position</span><span class="s5">, </span><span class="s6">Acceleration</span><span class="s5">&gt;</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">    </span>{</span></p>
+<p class="p10"><span class="s5"><span class="Apple-converted-space">        </span>[</span><span class="s7">ReadOnly</span><span class="s5">] </span><span class="s4">public</span><span class="s5"> </span><span class="s4">float</span><span class="s5"> </span><span class="s6">separationWeight</span><span class="s5">;</span></p>
+<p class="p6"><span class="s5"><span class="Apple-converted-space">        </span>[</span><span class="s6">ReadOnly</span><span class="s5">] </span><span class="s4">public</span><span class="s5"> </span><span class="s6">BufferFromEntity</span><span class="s5">&lt;</span><span class="s6">NeighborsEntityBuffer</span><span class="s5">&gt; </span><span class="s8">neighborsFromEntity</span><span class="s5">;</span></p>
+<p class="p6"><span class="s5"><span class="Apple-converted-space">        </span>[</span><span class="s6">ReadOnly</span><span class="s5">] </span><span class="s4">public</span><span class="s5"> </span><span class="s6">ComponentDataFromEntity</span><span class="s5">&lt;</span><span class="s6">Position</span><span class="s5">&gt; </span><span class="s8">positionFromEntity</span><span class="s5">;</span></p>
+<p class="p8"><span class="s6"></span><br></p>
+<p class="p6"><span class="s5"><span class="Apple-converted-space">        </span></span><span class="s4">public</span><span class="s5"> </span><span class="s4">void</span><span class="s5"> </span><span class="s14">Execute</span><span class="s5">(</span><span class="s6">Entity</span><span class="s5"> </span><span class="s8">entity</span><span class="s5">, </span><span class="s4">int</span><span class="s5"> </span><span class="s8">index</span><span class="s5">, [</span><span class="s6">ReadOnly</span><span class="s5">] </span><span class="s4">ref</span><span class="s5"> </span><span class="s6">Position</span><span class="s5"> </span><span class="s8">pos</span><span class="s5">, </span><span class="s4">ref</span><span class="s5"> </span><span class="s6">Acceleration</span><span class="s5"> </span><span class="s8">accel</span><span class="s5">)</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">        </span>{</span></p>
+<p class="p10"><span class="s5"><span class="Apple-converted-space">            </span></span><span class="s4">var</span><span class="s5"> </span><span class="s6">neighbors</span><span class="s5"> = </span><span class="s6">neighborsFromEntity</span><span class="s5">[</span><span class="s6">entity</span><span class="s5">].</span><span class="s14">Reinterpret</span><span class="s5">&lt;</span><span class="s7">Entity</span><span class="s5">&gt;();</span></p>
+<p class="p8"><span class="s6"></span><br></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">            </span></span><span class="s16">if</span><span class="s6"> (</span><span class="s8">neighbors</span><span class="s6">.</span><span class="s8">Length</span><span class="s6"> == </span><span class="s15">0</span><span class="s6">)</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">            </span>{</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">                </span></span><span class="s16">return</span><span class="s6">;</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">            </span>}</span></p>
+<p class="p8"><span class="s6"></span><br></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">            </span></span><span class="s4">var</span><span class="s6"> </span><span class="s8">pos0</span><span class="s6"> = </span><span class="s8">pos</span><span class="s6">.</span><span class="s8">Value</span><span class="s6">;</span></p>
+<p class="p8"><span class="s6"></span><br></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">            </span></span><span class="s4">var</span><span class="s6"> </span><span class="s8">force</span><span class="s6"> = </span><span class="s8">float3</span><span class="s6">.</span><span class="s8">zero</span><span class="s6">;</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">            </span></span><span class="s16">for</span><span class="s6"> (</span><span class="s4">int</span><span class="s6"> </span><span class="s8">i</span><span class="s6"> = </span><span class="s15">0</span><span class="s6">; </span><span class="s8">i</span><span class="s6"> &lt; </span><span class="s8">neighbors</span><span class="s6">.</span><span class="s8">Length</span><span class="s6">; ++</span><span class="s8">i</span><span class="s6">)</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">            </span>{</span></p>
+<p class="p10"><span class="s5"><span class="Apple-converted-space">                </span></span><span class="s4">var</span><span class="s5"> </span><span class="s6">pos1</span><span class="s5"> = </span><span class="s6">positionFromEntity</span><span class="s5">[</span><span class="s6">neighbors</span><span class="s5">[</span><span class="s6">i</span><span class="s5">]].</span><span class="s6">Value</span><span class="s5">;</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">                </span></span><span class="s8">force</span><span class="s6"> += </span><span class="s8">math</span><span class="s6">.</span><span class="s14">normalize</span><span class="s6">(</span><span class="s8">pos0</span><span class="s6"> - </span><span class="s8">pos1</span><span class="s6">);</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">            </span>}</span></p>
+<p class="p10"><span class="s5"><span class="Apple-converted-space">            </span></span><span class="s6">force</span><span class="s5"> /= </span><span class="s6">neighbors</span><span class="s5">.</span><span class="s6">Length</span><span class="s5">;</span></p>
+<p class="p8"><span class="s6"></span><br></p>
+<p class="p10"><span class="s5"><span class="Apple-converted-space">            </span></span><span class="s4">var</span><span class="s5"> </span><span class="s6">dAccel</span><span class="s5"> = </span><span class="s6">force</span><span class="s5"> * </span><span class="s6">separationWeight</span><span class="s5">;</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">            </span></span><span class="s8">accel</span><span class="s6"> = </span><span class="s4">new</span><span class="s6"> </span><span class="s7">Acceleration</span><span class="s6"> { </span><span class="s8">Value</span><span class="s6"> = </span><span class="s8">accel</span><span class="s6">.</span><span class="s8">Value</span><span class="s6"> + </span><span class="s8">dAccel</span><span class="s6"> };</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、neighborsFromEntity は辞書みたいな形になっていて、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>エンティティ分だけ実行されるExecuteに対して、entityをキーとしてneighborsのバッファを取得することができる。</p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>同じくpositionもエンティティをキーとした辞書にしてあって、取得できる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>最終的に、accelの値を更新して終了。</p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>最後に、NeighborDetectionSystemをJob化する。</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p3"><b>NeighborDetectionSystemをJob化</b></p>
+<p class="p18"><span class="s26"><b><span class="Apple-tab-span">	</span></b></span><span class="s11">IJobProcessComponentDataWithEntity</span><span class="s26"> を使ってJobの定義を行う。</span></p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、NeighborDetectionSystemについては、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・エンティティの近所にあるエンティティを集める</p>
+<p class="p3"><span class="Apple-tab-span">	</span>という必要性があるため、収集のための機構を作る必要がある。</p>
+<p class="p5"><br></p>
+<p class="p6"><span class="s5"><span class="Apple-converted-space">    </span></span><span class="s6">ComponentGroup</span><span class="s5"> </span><span class="s8">group</span><span class="s5">;</span></p>
+<p class="p8"><span class="s6"></span><br></p>
+<p class="p13"><span class="s5"><span class="Apple-converted-space">    </span></span><span class="s6">protected</span><span class="s5"> </span><span class="s6">override</span><span class="s5"> </span><span class="s6">void</span><span class="s5"> </span><span class="s14">OnCreateManager</span><span class="s5">()</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">    </span>{</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">        </span></span><span class="s17">/*</span></p>
+<p class="p15"><span class="s6"><span class="Apple-converted-space">            </span>ComponentSystemBase</span><span class="s18">に生えてるメソッド</span><span class="s6"> GetComponentGroup </span><span class="s18">で、特定のエンティティを集める。</span></p>
+<p class="p15"><span class="s6"><span class="Apple-converted-space">         </span>*/</span></p>
+<p class="p12"><span class="s5"><span class="Apple-converted-space">        </span></span><span class="s8">group</span><span class="s5"> = </span><span class="s6">GetComponentGroup</span><span class="s5">(</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">            </span></span><span class="s4">typeof</span><span class="s6">(</span><span class="s7">Position</span><span class="s6">),</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">            </span></span><span class="s4">typeof</span><span class="s6">(</span><span class="s7">Velocity</span><span class="s6">),</span></p>
+<p class="p6"><span class="s5"><span class="Apple-converted-space">            </span></span><span class="s4">typeof</span><span class="s5">(</span><span class="s6">NeighborsEntityBuffer</span><span class="s5">));</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p11"><span class="s6"></span><br></p>
+<p class="p11"><span class="s6"></span><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="s27">ComponentSystemBase</span><span class="s28"> </span>にあるGetComponentGroupメソッドで、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>グループという単位を作り Position、Velocity、NeighborsEntitiyBuffer コンポーネントをくくり出せるようにしている。</p>
+<p class="p5"><br></p>
+<p class="p19"><span class="s26"><span class="Apple-tab-span">	</span></span><span class="s21">group</span><span class="s10">.</span><span class="s11">GetEntityArray</span><span class="s10">()</span></p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、Position、Velocity、NeighborsEntitiyBuffer<span class="Apple-tab-span">	</span>コンポーネントを持ったエンティティを収集できる。</p>
+<p class="p5"><br></p>
+<p class="p6"><span class="s5"><span class="Apple-converted-space">    </span></span><span class="s4">protected</span><span class="s5"> </span><span class="s4">override</span><span class="s5"> </span><span class="s6">JobHandle</span><span class="s5"> </span><span class="s14">OnUpdate</span><span class="s5">(</span><span class="s6">JobHandle</span><span class="s5"> </span><span class="s8">inputDeps</span><span class="s5">)</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">    </span>{</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">        </span></span><span class="s4">var</span><span class="s6"> </span><span class="s8">job</span><span class="s6"> = </span><span class="s4">new</span><span class="s6"> </span><span class="s7">Job</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">        </span>{</span></p>
+<p class="p10"><span class="s5"><span class="Apple-converted-space">            </span></span><span class="s6">prodThresh</span><span class="s5"> = </span><span class="s6">math</span><span class="s5">.</span><span class="s14">cos</span><span class="s5">(</span><span class="s6">math</span><span class="s5">.</span><span class="s14">radians</span><span class="s5">(</span><span class="s6">Bootstrap</span><span class="s5">.</span><span class="s6">Param</span><span class="s5">.</span><span class="s6">neighborFov</span><span class="s5">)),</span></p>
+<p class="p10"><span class="s5"><span class="Apple-converted-space">            </span></span><span class="s6">distThresh</span><span class="s5"> = </span><span class="s6">Bootstrap</span><span class="s5">.</span><span class="s6">Param</span><span class="s5">.</span><span class="s6">neighborDistance</span><span class="s5">,</span></p>
+<p class="p6"><span class="s5"><span class="Apple-converted-space">            </span></span><span class="s8">neighborsFromEntity</span><span class="s5"> = </span><span class="s14">GetBufferFromEntity</span><span class="s5">&lt;</span><span class="s6">NeighborsEntityBuffer</span><span class="s5">&gt;(</span><span class="s4">false</span><span class="s5">),</span></p>
+<p class="p12"><span class="s5"><span class="Apple-converted-space">            </span></span><span class="s8">positionFromEntity</span><span class="s5"> = </span><span class="s6">GetComponentDataFromEntity</span><span class="s5">&lt;</span><span class="s7">Position</span><span class="s5">&gt;(</span><span class="s4">true</span><span class="s5">),</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">            </span></span><span class="s8">entities</span><span class="s6"> = </span><span class="s8">group</span><span class="s6">.</span><span class="s14">GetEntityArray</span><span class="s6">(),</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">        </span>};</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">        </span></span><span class="s16">return</span><span class="s6"> </span><span class="s8">job</span><span class="s6">.</span><span class="s14">Schedule</span><span class="s6">(</span><span class="s4">this</span><span class="s6">, </span><span class="s8">inputDeps</span><span class="s6">);</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p11"><span class="s6"></span><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>jobを生成。entitiesパラメータに取得したエンティティを入れる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>jobの定義は次のような感じで、EntityArray entitiesにgroupから取得したエンティティが入る。</p>
+<p class="p5"><br></p>
+<p class="p6"><span class="s5"><span class="Apple-converted-space">    </span></span><span class="s4">public</span><span class="s5"> </span><span class="s4">struct</span><span class="s5"> </span><span class="s6">Job</span><span class="s5"> : </span><span class="s6">IJobProcessComponentDataWithEntity</span><span class="s5">&lt;</span><span class="s6">Position</span><span class="s5">, </span><span class="s6">Velocity</span><span class="s5">&gt;</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">    </span>{</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">        </span>[</span><span class="s7">ReadOnly</span><span class="s6">] </span><span class="s4">public</span><span class="s6"> </span><span class="s4">float</span><span class="s6"> </span><span class="s8">prodThresh</span><span class="s6">;</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">        </span>[</span><span class="s7">ReadOnly</span><span class="s6">] </span><span class="s4">public</span><span class="s6"> </span><span class="s4">float</span><span class="s6"> </span><span class="s8">distThresh</span><span class="s6">;</span></p>
+<p class="p6"><span class="s5"><span class="Apple-converted-space">        </span>[</span><span class="s6">ReadOnly</span><span class="s5">] </span><span class="s4">public</span><span class="s5"> </span><span class="s6">ComponentDataFromEntity</span><span class="s5">&lt;</span><span class="s6">Position</span><span class="s5">&gt; </span><span class="s8">positionFromEntity</span><span class="s5">;</span></p>
+<p class="p6"><span class="s5"><span class="Apple-converted-space">        </span>[</span><span class="s6">ReadOnly</span><span class="s5">] </span><span class="s4">public</span><span class="s5"> </span><span class="s6">BufferFromEntity</span><span class="s5">&lt;</span><span class="s6">NeighborsEntityBuffer</span><span class="s5">&gt; </span><span class="s8">neighborsFromEntity</span><span class="s5">;</span></p>
+<p class="p6"><span class="s5"><span class="Apple-converted-space">        </span>[</span><span class="s6">ReadOnly</span><span class="s5">] </span><span class="s4">public</span><span class="s5"> </span><span class="s6">EntityArray</span><span class="s5"> </span><span class="s8">entities</span><span class="s5">;</span></p>
+<p class="p8"><span class="s6"></span><br></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">        </span></span><span class="s4">public</span><span class="s6"> </span><span class="s4">void</span><span class="s6"> </span><span class="s14">Execute</span><span class="s6">(</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">            </span></span><span class="s7">Entity</span><span class="s6"> </span><span class="s8">entity</span><span class="s6">,</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">            </span></span><span class="s4">int</span><span class="s6"> </span><span class="s8">index</span><span class="s6">,</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">            </span>[</span><span class="s7">ReadOnly</span><span class="s6">] </span><span class="s4">ref</span><span class="s6"> </span><span class="s7">Position</span><span class="s6"> </span><span class="s8">pos</span><span class="s6">,</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">            </span>[</span><span class="s7">ReadOnly</span><span class="s6">] </span><span class="s4">ref</span><span class="s6"> </span><span class="s7">Velocity</span><span class="s6"> </span><span class="s8">velocity</span><span class="s6">)</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">        </span>{</span></p>
+<p class="p10"><span class="s5"><span class="Apple-converted-space">            </span></span><span class="s6">neighborsFromEntity</span><span class="s5">[</span><span class="s6">entity</span><span class="s5">].</span><span class="s14">Clear</span><span class="s5">();</span></p>
+<p class="p8"><span class="s6"></span><br></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">            </span></span><span class="s7">float3</span><span class="s6"> </span><span class="s8">pos0</span><span class="s6"> = </span><span class="s8">pos</span><span class="s6">.</span><span class="s8">Value</span><span class="s6">;</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">            </span></span><span class="s7">float3</span><span class="s6"> </span><span class="s8">fwd0</span><span class="s6"> = </span><span class="s8">math</span><span class="s6">.</span><span class="s14">normalize</span><span class="s6">(</span><span class="s8">velocity</span><span class="s6">.</span><span class="s8">Value</span><span class="s6">);</span></p>
+<p class="p8"><span class="s6"></span><br></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">            </span></span><span class="s16">for</span><span class="s6"> (</span><span class="s4">int</span><span class="s6"> </span><span class="s8">i</span><span class="s6"> = </span><span class="s15">0</span><span class="s6">; </span><span class="s8">i</span><span class="s6"> &lt; </span><span class="s8">entities</span><span class="s6">.</span><span class="s8">Length</span><span class="s6">; ++</span><span class="s8">i</span><span class="s6">)</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">            </span>{</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">                </span></span><span class="s4">var</span><span class="s6"> </span><span class="s8">neighbor</span><span class="s6"> = </span><span class="s8">entities</span><span class="s6">[</span><span class="s8">i</span><span class="s6">];</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">                </span></span><span class="s16">if</span><span class="s6"> (</span><span class="s8">neighbor</span><span class="s6"> == </span><span class="s8">entity</span><span class="s6">) </span><span class="s16">continue</span><span class="s6">;</span></p>
+<p class="p8"><span class="s6"></span><br></p>
+<p class="p10"><span class="s5"><span class="Apple-converted-space">                </span></span><span class="s7">float3</span><span class="s5"> </span><span class="s6">pos1</span><span class="s5"> = </span><span class="s6">positionFromEntity</span><span class="s5">[</span><span class="s6">neighbor</span><span class="s5">].</span><span class="s6">Value</span><span class="s5">;</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">                </span></span><span class="s4">var</span><span class="s6"> </span><span class="s8">to</span><span class="s6"> = </span><span class="s8">pos1</span><span class="s6"> - </span><span class="s8">pos0</span><span class="s6">;</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">                </span></span><span class="s4">var</span><span class="s6"> </span><span class="s8">dist</span><span class="s6"> = </span><span class="s8">math</span><span class="s6">.</span><span class="s14">length</span><span class="s6">(</span><span class="s8">to</span><span class="s6">);</span></p>
+<p class="p8"><span class="s6"></span><br></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">                </span></span><span class="s16">if</span><span class="s6"> (</span><span class="s8">dist</span><span class="s6"> &lt; </span><span class="s8">distThresh</span><span class="s6">)</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">                </span>{</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">                    </span></span><span class="s4">var</span><span class="s6"> </span><span class="s8">dir</span><span class="s6"> = </span><span class="s8">math</span><span class="s6">.</span><span class="s14">normalize</span><span class="s6">(</span><span class="s8">to</span><span class="s6">);</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">                    </span></span><span class="s4">var</span><span class="s6"> </span><span class="s8">prod</span><span class="s6"> = </span><span class="s8">Vector3</span><span class="s6">.</span><span class="s14">Dot</span><span class="s6">(</span><span class="s8">dir</span><span class="s6">, </span><span class="s8">fwd0</span><span class="s6">);</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">                    </span></span><span class="s16">if</span><span class="s6"> (</span><span class="s8">prod</span><span class="s6"> &gt; </span><span class="s8">prodThresh</span><span class="s6">)</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">                    </span>{</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">                        </span></span><span class="s8">neighborsFromEntity</span><span class="s6">[</span><span class="s8">entity</span><span class="s6">].</span><span class="s14">Add</span><span class="s6">(</span><span class="s4">new</span><span class="s6"> </span><span class="s7">NeighborsEntityBuffer</span><span class="s6"> { </span><span class="s8">Value</span><span class="s6"> = </span><span class="s8">neighbor</span><span class="s6"> });</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">                    </span>}</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">                </span>}</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">            </span>}</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Executeごとにentitiesの中身を捜査して近いエンティティを見つけ、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>自身のneighborsに入れる。</p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>という感じで、収集ができる。</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p3"><b>ここまでのまとめ</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>コンポーネント(ECSで扱うデータ型)の定義</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>IComponentData型を継承して、型を定義する。(Unityが定義済みの型があり、それ以外にも定義できる)</p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>IBufferElementData型を継承して、扱う配列を定義する。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>InternalBufferCapacityアトリビュートでをセットする。</p>
+<p class="p5"><br></p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>エンティティの生成</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ワールド、エンティティマネージャーを生成</p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>アーキタイプ(エンティティに対してくっつけるコンポーネントの集合)を定義</p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>マネージャ経由でアーキタイプからエンティティ生成</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>ECS２パターン</b></p>
+<p class="p5"><b></b><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>パターン1、ComponentSystem型を継承したシステムを定義、Injectしたデータを void OnUpdate で変形したりする(メインスレッド、ちょっとは高速)</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>この場合、定義したシステムに対してコンポーネントの定義を別途Injectすると、そのフィールドに対してOnUpdateのタイミングでエンティティが入り、変更を加えることができるようになる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>変更すると、エンティティにも値が反映される。</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>パターン2、JobComponentSystem型を継承したシステムを定義、次のどれかの型の継承でJobを定義、JobHandle OnUpdate(JobHandle handle)<span class="Apple-converted-space">  </span>でJob作成</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span> -&gt; 投入、Job側のExecuteで(workerスレッド、高速)</b></p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>IJobParallelFor<span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span> Execute(int index)</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>IJobProcessComponentData&lt;T(, ~ T3)<span class="Apple-tab-span">	</span> Execute(ref T t)</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>IJobProcessComponentDataWithEntity&lt;T(, ~ T3)&gt; Execute(Entity entity, int index, ref T t)</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>T1~3にはReadOnlyなどのアトリビュートをつけることで、アクセスの最適化を行う。</p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>JobはBurstCompiler対応でめっちゃ高速化される。</p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>値に対して、Job内でパラメータを編集するという形で値の反映を行う。</p>
+<p class="p5"><br></p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>双方とも、OnUpdateメソッドはメインスレッドで1フレームに一回実行される。</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Jobがメインスレッドからしか放り込めないのに起因してる。</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>JobのExecuteはヒットしたエンティティの数ぶん実行される。</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>IJobProcessComponentData&lt;T&gt;などのTに該当するエンティティ全てが対象になる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Tは扱いたいデータ自体の選出のほか、フィルタリングにも使っている。</p>
+<p class="p5"><br></p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>特殊な型ペイロード</b></p>
+<p class="p5"><b></b><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ComponentDataFromEntity&lt;T&gt;</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>entityをキーに、値として T を取り出すことができる辞書。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ComponentSysytem型が保持しているGetComponentDataFromEntity&lt;T&gt;(bool isReadOnly) メソッドで取得できる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ここで取得できるのは、その時のWorldに存在するT型のエンティティを収集した辞書。</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>BufferFromEntity&lt;T&gt;</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>entityをキーに、値として DynamicBuffer&lt;T&gt; を取り出すことができる辞書。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>JobComponentSystem型が保持しているGetBufferFromEntity&lt;T&gt;(bool isReadOnly) メソッドで取得できる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ここで取得できるのは、その時のWorldに存在するT型のエンティティを収集した辞書。</p>
+<p class="p5"><br></p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>DynamicBuffer&lt;T&gt;</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>BufferFromEntity&lt;T&gt;型から、Reinterpret&lt;S&gt; (SはTに含まれている型)とかで、DynamicBuffer&lt;S&gt; を取り出せる。</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>Jobの制約</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Jobの内部では、エンティティ収集などができない。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>収集処理とかはメインスレッド = ComponentSystemのOnUpdateとか で行う必要がある。</p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ComponentSystem/OnUpdateは、参照とかをJobに放り込む地点になる。</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p3"><b>ざっくり書くとどういうことをやっているか</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・コンポーネント型を定義(バッファとかデータとか)</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・コンポーネントを保持したエンティティ生成</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・システムを定義して、特定のコンポーネントを持つエンティティを収集、OnUpdateでデータをいじったり、データをいじるJobを作り、JobSystemに投入、実行</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>こんだけ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>コンポーネントの型をキーにWorldに散らばっているエンティティを収集して、JobSystem上で値を変えることで描画に影響を与える。</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p3"><b>別のSystemにわけて書いてあるものをまとめる</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>複数のJobをそれぞれ1つのSystemに別れて定義しているが、特にわかりやすい以外の利点はない。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、これらをまとめて一つのSystemに定義することができる。</p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>そうすることで、システム間の待ちを根本的に減らせる。</p>
+<p class="p5"><br></p>
+<p class="p20"><span class="s29"><span class="Apple-converted-space">    </span></span><span class="s30">protected</span><span class="s29"> </span><span class="s30">override</span><span class="s29"> </span><span class="s6">JobHandle</span><span class="s29"> </span><span class="s31">OnUpdate</span><span class="s29">(</span><span class="s6">JobHandle</span><span class="s29"> </span><span class="s32">inputDeps</span><span class="s29">)</span></p>
+<p class="p21"><span class="s6"><span class="Apple-converted-space">    </span>{</span></p>
+<p class="p21"><span class="s6"><span class="Apple-converted-space">        </span></span><span class="s33">/*</span></p>
+<p class="p22"><span class="s6"><span class="Apple-converted-space">            </span></span><span class="s18">近いエンティティの収集</span></p>
+<p class="p22"><span class="s6"><span class="Apple-converted-space">         </span>*/</span></p>
+<p class="p20"><span class="s29"><span class="Apple-converted-space">        </span></span><span class="s30">var</span><span class="s29"> </span><span class="s32">neighbors</span><span class="s29"> = </span><span class="s30">new</span><span class="s29"> </span><span class="s6">NeighborsDetectionJob</span></p>
+<p class="p21"><span class="s6"><span class="Apple-converted-space">        </span>{</span></p>
+<p class="p23"><span class="s29"><span class="Apple-converted-space">            </span></span><span class="s6">prodThresh</span><span class="s29"> = </span><span class="s6">math</span><span class="s29">.</span><span class="s31">cos</span><span class="s29">(</span><span class="s6">math</span><span class="s29">.</span><span class="s31">radians</span><span class="s29">(</span><span class="s6">Bootstrap</span><span class="s29">.</span><span class="s6">Param</span><span class="s29">.</span><span class="s6">neighborFov</span><span class="s29">)),</span></p>
+<p class="p23"><span class="s29"><span class="Apple-converted-space">            </span></span><span class="s6">distThresh</span><span class="s29"> = </span><span class="s6">Bootstrap</span><span class="s29">.</span><span class="s6">Param</span><span class="s29">.</span><span class="s6">neighborDistance</span><span class="s29">,</span></p>
+<p class="p20"><span class="s29"><span class="Apple-converted-space">            </span></span><span class="s32">neighborsFromEntity</span><span class="s29"> = </span><span class="s31">GetBufferFromEntity</span><span class="s29">&lt;</span><span class="s6">NeighborsEntityBuffer</span><span class="s29">&gt;(</span><span class="s30">false</span><span class="s29">),</span></p>
+<p class="p24"><span class="s29"><span class="Apple-converted-space">            </span></span><span class="s32">positionFromEntity</span><span class="s29"> = </span><span class="s6">GetComponentDataFromEntity</span><span class="s29">&lt;</span><span class="s34">Position</span><span class="s29">&gt;(</span><span class="s30">true</span><span class="s29">),</span></p>
+<p class="p21"><span class="s6"><span class="Apple-converted-space">            </span></span><span class="s32">entities</span><span class="s6"> = </span><span class="s32">group</span><span class="s6">.</span><span class="s31">GetEntityArray</span><span class="s6">(),</span></p>
+<p class="p21"><span class="s6"><span class="Apple-converted-space">        </span>};</span></p>
+<p class="p25"><span class="s6"></span><br></p>
+<p class="p21"><span class="s6"><span class="Apple-converted-space">        </span></span><span class="s33">/*</span></p>
+<p class="p22"><span class="s6"><span class="Apple-converted-space">            </span></span><span class="s18">壁処理</span></p>
+<p class="p22"><span class="s6"><span class="Apple-converted-space">         </span>*/</span></p>
+<p class="p21"><span class="s6"><span class="Apple-converted-space">        </span></span><span class="s30">var</span><span class="s6"> </span><span class="s32">wall</span><span class="s6"> = </span><span class="s30">new</span><span class="s6"> </span><span class="s34">WallJob</span></p>
+<p class="p21"><span class="s6"><span class="Apple-converted-space">        </span>{</span></p>
+<p class="p23"><span class="s29"><span class="Apple-converted-space">            </span></span><span class="s6">scale</span><span class="s29"> = </span><span class="s6">Bootstrap</span><span class="s29">.</span><span class="s6">Param</span><span class="s29">.</span><span class="s6">wallScale</span><span class="s29"> * </span><span class="s35">0.5f</span><span class="s29">,</span></p>
+<p class="p23"><span class="s29"><span class="Apple-converted-space">            </span></span><span class="s6">thresh</span><span class="s29"> = </span><span class="s6">Bootstrap</span><span class="s29">.</span><span class="s6">Param</span><span class="s29">.</span><span class="s6">wallDistance</span><span class="s29">,</span></p>
+<p class="p23"><span class="s29"><span class="Apple-converted-space">            </span></span><span class="s6">weight</span><span class="s29"> = </span><span class="s6">Bootstrap</span><span class="s29">.</span><span class="s6">Param</span><span class="s29">.</span><span class="s6">wallWeight</span><span class="s29">,</span></p>
+<p class="p21"><span class="s6"><span class="Apple-converted-space">        </span>};</span></p>
+<p class="p25"><span class="s6"></span><br></p>
+<p class="p21"><span class="s6"><span class="Apple-converted-space">        </span></span><span class="s33">/*</span></p>
+<p class="p26"><span class="s25"><span class="Apple-converted-space">            </span></span><span class="s6">近所のエンティティから離れる</span></p>
+<p class="p22"><span class="s6"><span class="Apple-converted-space">         </span>*/</span></p>
+<p class="p21"><span class="s6"><span class="Apple-converted-space">        </span></span><span class="s30">var</span><span class="s6"> </span><span class="s32">separation</span><span class="s6"> = </span><span class="s30">new</span><span class="s6"> </span><span class="s34">SeparationJob</span></p>
+<p class="p21"><span class="s6"><span class="Apple-converted-space">        </span>{</span></p>
+<p class="p23"><span class="s29"><span class="Apple-converted-space">            </span></span><span class="s6">separationWeight</span><span class="s29"> = </span><span class="s6">Bootstrap</span><span class="s29">.</span><span class="s6">Param</span><span class="s29">.</span><span class="s6">separationWeight</span><span class="s29">,</span></p>
+<p class="p25"><span class="s6"></span><br></p>
+<p class="p21"><span class="s6"><span class="Apple-converted-space">            </span></span><span class="s33">/*</span></p>
+<p class="p22"><span class="s6"><span class="Apple-converted-space">                </span>JobComponentSystem </span><span class="s18">が</span><span class="s6"> GetBufferFromEntity </span><span class="s18">メソッドを持っているので、</span></p>
+<p class="p22"><span class="s6"><span class="Apple-converted-space">                </span>NeighborsEntityBuffer</span><span class="s18">の型指定でエンティティからバッファを取り出す。</span></p>
+<p class="p26"><span class="s25"><span class="Apple-converted-space">                </span></span><span class="s6">エンティティをキーにした</span><span class="s25">Neighbors</span><span class="s6">の一覧という形で、ジョブの実行先で取り出すのを予定する。</span><span class="s25"><span class="Apple-converted-space">         </span></span></p>
+<p class="p22"><span class="s6"><span class="Apple-converted-space">            </span>*/</span></p>
+<p class="p20"><span class="s29"><span class="Apple-converted-space">            </span></span><span class="s32">neighborsFromEntity</span><span class="s29"> = </span><span class="s31">GetBufferFromEntity</span><span class="s29">&lt;</span><span class="s6">NeighborsEntityBuffer</span><span class="s29">&gt;(</span><span class="s30">true</span><span class="s29">),</span></p>
+<p class="p25"><span class="s6"></span><br></p>
+<p class="p21"><span class="s6"><span class="Apple-converted-space">            </span></span><span class="s33">/*</span></p>
+<p class="p26"><span class="s25"><span class="Apple-converted-space">                </span>Position</span><span class="s6">型指定でエンティティからコンポーネントを取り出す。</span></p>
+<p class="p26"><span class="s25"><span class="Apple-converted-space">                </span></span><span class="s6">エンティティをキーにしたポジションの一覧という形で、ジョブの実行先で取り出すのを予定する。</span></p>
+<p class="p22"><span class="s6"><span class="Apple-converted-space">             </span>*/</span></p>
+<p class="p24"><span class="s29"><span class="Apple-converted-space">            </span></span><span class="s32">positionFromEntity</span><span class="s29"> = </span><span class="s6">GetComponentDataFromEntity</span><span class="s29">&lt;</span><span class="s34">Position</span><span class="s29">&gt;(</span><span class="s30">true</span><span class="s29">),</span></p>
+<p class="p21"><span class="s6"><span class="Apple-converted-space">        </span>};</span></p>
+<p class="p25"><span class="s6"></span><br></p>
+<p class="p21"><span class="s6"><span class="Apple-converted-space">        </span></span><span class="s33">/*</span></p>
+<p class="p22"><span class="s6"><span class="Apple-converted-space">            </span></span><span class="s18">均整化</span></p>
+<p class="p22"><span class="s6"><span class="Apple-converted-space">         </span>*/</span></p>
+<p class="p21"><span class="s6"><span class="Apple-converted-space">        </span></span><span class="s30">var</span><span class="s6"> </span><span class="s32">alignment</span><span class="s6"> = </span><span class="s30">new</span><span class="s6"> </span><span class="s34">AlignmentJob</span></p>
+<p class="p21"><span class="s6"><span class="Apple-converted-space">        </span>{</span></p>
+<p class="p23"><span class="s29"><span class="Apple-converted-space">            </span></span><span class="s6">alignmentWeight</span><span class="s29"> = </span><span class="s6">Bootstrap</span><span class="s29">.</span><span class="s6">Param</span><span class="s29">.</span><span class="s6">alignmentWeight</span><span class="s29">,</span></p>
+<p class="p20"><span class="s29"><span class="Apple-converted-space">            </span></span><span class="s32">neighborsFromEntity</span><span class="s29"> = </span><span class="s31">GetBufferFromEntity</span><span class="s29">&lt;</span><span class="s6">NeighborsEntityBuffer</span><span class="s29">&gt;(</span><span class="s30">true</span><span class="s29">),</span></p>
+<p class="p24"><span class="s29"><span class="Apple-converted-space">            </span></span><span class="s32">velocityFromEntity</span><span class="s29"> = </span><span class="s6">GetComponentDataFromEntity</span><span class="s29">&lt;</span><span class="s34">Velocity</span><span class="s29">&gt;(</span><span class="s30">true</span><span class="s29">),</span></p>
+<p class="p21"><span class="s6"><span class="Apple-converted-space">        </span>};</span></p>
+<p class="p25"><span class="s6"></span><br></p>
+<p class="p21"><span class="s6"><span class="Apple-converted-space">        </span></span><span class="s33">/*</span></p>
+<p class="p22"><span class="s6"><span class="Apple-converted-space">            </span></span><span class="s18">距離調整</span></p>
+<p class="p22"><span class="s6"><span class="Apple-converted-space">         </span>*/</span></p>
+<p class="p21"><span class="s6"><span class="Apple-converted-space">        </span></span><span class="s30">var</span><span class="s6"> </span><span class="s32">cohesion</span><span class="s6"> = </span><span class="s30">new</span><span class="s6"> </span><span class="s34">CohesionJob</span></p>
+<p class="p21"><span class="s6"><span class="Apple-converted-space">        </span>{</span></p>
+<p class="p23"><span class="s29"><span class="Apple-converted-space">            </span></span><span class="s6">cohesionWeight</span><span class="s29"> = </span><span class="s6">Bootstrap</span><span class="s29">.</span><span class="s6">Param</span><span class="s29">.</span><span class="s6">cohesionWeight</span><span class="s29">,</span></p>
+<p class="p20"><span class="s29"><span class="Apple-converted-space">            </span></span><span class="s32">neighborsFromEntity</span><span class="s29"> = </span><span class="s31">GetBufferFromEntity</span><span class="s29">&lt;</span><span class="s6">NeighborsEntityBuffer</span><span class="s29">&gt;(</span><span class="s30">true</span><span class="s29">),</span></p>
+<p class="p24"><span class="s29"><span class="Apple-converted-space">            </span></span><span class="s32">positionFromEntity</span><span class="s29"> = </span><span class="s6">GetComponentDataFromEntity</span><span class="s29">&lt;</span><span class="s34">Position</span><span class="s29">&gt;(</span><span class="s30">true</span><span class="s29">),</span></p>
+<p class="p21"><span class="s6"><span class="Apple-converted-space">        </span>};</span></p>
+<p class="p25"><span class="s6"></span><br></p>
+<p class="p21"><span class="s6"><span class="Apple-converted-space">        </span></span><span class="s33">/*</span></p>
+<p class="p22"><span class="s6"><span class="Apple-converted-space">            </span></span><span class="s18">移動</span></p>
+<p class="p22"><span class="s6"><span class="Apple-converted-space">         </span>*/</span></p>
+<p class="p21"><span class="s6"><span class="Apple-converted-space">        </span></span><span class="s30">var</span><span class="s6"> </span><span class="s32">move</span><span class="s6"> = </span><span class="s30">new</span><span class="s6"> </span><span class="s34">MoveJob</span></p>
+<p class="p21"><span class="s6"><span class="Apple-converted-space">        </span>{</span></p>
+<p class="p21"><span class="s6"><span class="Apple-converted-space">            </span></span><span class="s32">dt</span><span class="s6"> = </span><span class="s32">Time</span><span class="s6">.</span><span class="s32">deltaTime</span><span class="s6">,</span></p>
+<p class="p23"><span class="s29"><span class="Apple-converted-space">            </span></span><span class="s6">minSpeed</span><span class="s29"> = </span><span class="s6">Bootstrap</span><span class="s29">.</span><span class="s6">Param</span><span class="s29">.</span><span class="s6">minSpeed</span><span class="s29">,</span></p>
+<p class="p23"><span class="s29"><span class="Apple-converted-space">            </span></span><span class="s6">maxSpeed</span><span class="s29"> = </span><span class="s6">Bootstrap</span><span class="s29">.</span><span class="s6">Param</span><span class="s29">.</span><span class="s6">maxSpeed</span><span class="s29">,</span></p>
+<p class="p21"><span class="s6"><span class="Apple-converted-space">        </span>};</span></p>
+<p class="p25"><span class="s6"></span><br></p>
+<p class="p26"><span class="s36"><span class="Apple-converted-space">        </span></span><span class="s25">// </span><span class="s6">順番に動作を行うように、ジョブを連結してスケジューリングする。</span></p>
+<p class="p23"><span class="s29"><span class="Apple-converted-space">        </span></span><span class="s6">inputDeps</span><span class="s29"> = </span><span class="s6">neighbors</span><span class="s29">.</span><span class="s31">Schedule</span><span class="s29">(</span><span class="s30">this</span><span class="s29">, </span><span class="s6">inputDeps</span><span class="s29">);</span></p>
+<p class="p23"><span class="s29"><span class="Apple-converted-space">        </span></span><span class="s6">inputDeps</span><span class="s29"> = </span><span class="s6">wall</span><span class="s29">.</span><span class="s31">Schedule</span><span class="s29">(</span><span class="s30">this</span><span class="s29">, </span><span class="s6">inputDeps</span><span class="s29">);</span></p>
+<p class="p23"><span class="s29"><span class="Apple-converted-space">        </span></span><span class="s6">inputDeps</span><span class="s29"> = </span><span class="s6">separation</span><span class="s29">.</span><span class="s31">Schedule</span><span class="s29">(</span><span class="s30">this</span><span class="s29">, </span><span class="s6">inputDeps</span><span class="s29">);</span></p>
+<p class="p23"><span class="s29"><span class="Apple-converted-space">        </span></span><span class="s6">inputDeps</span><span class="s29"> = </span><span class="s6">alignment</span><span class="s29">.</span><span class="s31">Schedule</span><span class="s29">(</span><span class="s30">this</span><span class="s29">, </span><span class="s6">inputDeps</span><span class="s29">);</span></p>
+<p class="p23"><span class="s29"><span class="Apple-converted-space">        </span></span><span class="s6">inputDeps</span><span class="s29"> = </span><span class="s6">cohesion</span><span class="s29">.</span><span class="s31">Schedule</span><span class="s29">(</span><span class="s30">this</span><span class="s29">, </span><span class="s6">inputDeps</span><span class="s29">);</span></p>
+<p class="p23"><span class="s29"><span class="Apple-converted-space">        </span></span><span class="s6">inputDeps</span><span class="s29"> = </span><span class="s6">move</span><span class="s29">.</span><span class="s31">Schedule</span><span class="s29">(</span><span class="s30">this</span><span class="s29">, </span><span class="s6">inputDeps</span><span class="s29">);</span></p>
+<p class="p25"><span class="s6"></span><br></p>
+<p class="p22"><span class="s29"><span class="Apple-converted-space">        </span></span><span class="s6">// </span><span class="s18">最終的な</span><span class="s6">JobHandle</span><span class="s18">を返す。</span></p>
+<p class="p21"><span class="s6"><span class="Apple-converted-space">        </span></span><span class="s37">return</span><span class="s6"> </span><span class="s32">inputDeps</span><span class="s6">;</span></p>
+<p class="p21"><span class="s6"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p27"><br></p>
+<p class="p28"><span class="Apple-tab-span">	</span>JobComponentSystemのOnUpdate関数でそれぞれのJobの初期化をし、Scheduleメソッドでチェーンしまくる。</p>
+<p class="p28"><span class="Apple-tab-span">	</span>連結してSchedulingすることができる。</p>
+<p class="p27"><br></p>
+<p class="p27"><br></p>
+<p class="p28"><b>JobをBurstCompileで高速化</b></p>
+<p class="p28"><span class="s2"><span class="Apple-tab-span">	</span>BurstCompile</span>アトリビュートをJob定義につける。そんだけで高速化。</p>
+<p class="p29"><br></p>
+<p class="p29"><br></p>
+<p class="p29"><br></p>
+</body>
+</html>
