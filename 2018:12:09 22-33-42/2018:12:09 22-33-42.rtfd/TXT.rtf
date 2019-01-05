@@ -1,0 +1,719 @@
+{\rtf1\ansi\ansicpg932\cocoartf1561\cocoasubrtf600
+{\fonttbl\f0\fnil\fcharset128 HiraginoSans-W4;\f1\fnil\fcharset128 HiraginoSans-W3;\f2\fnil\fcharset0 Menlo-Regular;
+\f3\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;\red202\green202\blue202;\red70\green137\blue204;\red0\green0\blue0;
+\red67\green192\blue160;\red140\green211\blue254;\red89\green138\blue67;\red212\green214\blue154;\red183\green111\blue179;
+\red167\green197\blue152;\red140\green211\blue254;\red194\green126\blue101;}
+{\*\expandedcolortbl;;\cssrgb\c83137\c83137\c83137;\cssrgb\c33725\c61176\c83922;\cssrgb\c0\c0\c0;
+\cssrgb\c30588\c78824\c69020;\cssrgb\c61176\c86275\c99608;\cssrgb\c41569\c60000\c33333;\cssrgb\c86275\c86275\c66667;\cssrgb\c77255\c52549\c75294;
+\cssrgb\c70980\c80784\c65882;\cssrgb\c61176\c86275\c99608;\cssrgb\c80784\c56863\c47059;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww23640\viewh14580\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs44 \cf0 JobSystem
+\f1 \'82\'dc\'82\'c8\'82\'d1
+\f0\fs24 \
+\
+
+\b \'8a\'54\'97\'76
+\b0 \
+	
+\f1 \'8a\'77\'82\'d4\'81\'42\
+\
+\
+
+\f0\b \'93\'72\'92\'86\'8c\'6f\'89\'df
+\f1\b0 \
+	\'82\'b1\'82\'f1\'82\'c8\'8a\'b4\'82\'b6\'82\'cc\'83\'52\'81\'5b\'83\'68\'82\'c9\'82\'b5\'82\'c4\'82\'dd\'82\'e9\
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f2 \cf2 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 \
+\cf3 \cb4 \strokec3 using\cf2 \strokec2  \cf5 \strokec5 System\cf2 \strokec2 ;\
+\cf3 \strokec3 using\cf2 \strokec2  \cf5 \strokec5 System\cf2 \strokec2 .\cf5 \strokec5 Collections\cf2 \strokec2 ;\
+\cf3 \strokec3 using\cf2 \strokec2  \cf5 \strokec5 System\cf2 \strokec2 .\cf5 \strokec5 Collections\cf2 \strokec2 .\cf5 \strokec5 Generic\cf2 \strokec2 ;\
+\cf3 \strokec3 using\cf2 \strokec2  \cf5 \strokec5 Unity\cf2 \strokec2 .\cf5 \strokec5 Collections\cf2 \strokec2 ;\
+\cf3 \strokec3 using\cf2 \strokec2  \cf5 \strokec5 UnityEngine\cf2 \strokec2 ;\
+\
+\cf3 \strokec3 public\cf2 \strokec2  \cf3 \strokec3 class\cf2 \strokec2  \cf5 \strokec5 JS\cf2 \strokec2  : \cf5 \strokec5 MonoBehaviour\cf2 \strokec2 \
+\{\
+    [\cf5 \strokec5 SerializeField\cf2 \strokec2 ] \cf5 \strokec5 Transform\cf2 \strokec2 [] \cf6 \strokec6 targets\cf2 \strokec2 ;\
+    \cf3 \strokec3 float\cf2 \strokec2 [] \cf6 \strokec6 velocity\cf2 \strokec2 ;\
+\
+    \cf7 \strokec7 // Start is called before the first frame update\cf2 \strokec2 \
+    \cf3 \strokec3 void\cf2 \strokec2  \cf8 \strokec8 Start\cf2 \strokec2 ()\
+    \{\
+        \cf6 \strokec6 velocity\cf2 \strokec2  = \cf3 \strokec3 new\cf2 \strokec2  \cf3 \strokec3 float\cf2 \strokec2 [\cf6 \strokec6 targets\cf2 \strokec2 .\cf6 \strokec6 Length\cf2 \strokec2 ];\
+    \}\
+\
+    \cf7 \strokec7 // Update is called once per frame\cf2 \strokec2 \
+    \cf3 \strokec3 void\cf2 \strokec2  \cf8 \strokec8 Update\cf2 \strokec2 ()\
+    \{\
+\
+        \cf3 \strokec3 var\cf2 \strokec2  \cf6 \strokec6 commands\cf2 \strokec2  = \cf3 \strokec3 new\cf2 \strokec2  \cf5 \strokec5 NativeArray\cf2 \strokec2 <\cf5 \strokec5 RaycastCommand\cf2 \strokec2 >(\cf6 \strokec6 targets\cf2 \strokec2 .\cf6 \strokec6 Length\cf2 \strokec2 , \cf6 \strokec6 Allocator\cf2 \strokec2 .\cf6 \strokec6 TempJob\cf2 \strokec2 );\
+        \cf3 \strokec3 var\cf2 \strokec2  \cf6 \strokec6 results\cf2 \strokec2  = \cf3 \strokec3 new\cf2 \strokec2  \cf5 \strokec5 NativeArray\cf2 \strokec2 <\cf5 \strokec5 RaycastHit\cf2 \strokec2 >(\cf6 \strokec6 targets\cf2 \strokec2 .\cf6 \strokec6 Length\cf2 \strokec2 , \cf6 \strokec6 Allocator\cf2 \strokec2 .\cf6 \strokec6 TempJob\cf2 \strokec2 );\
+\
+        \cf9 \strokec9 for\cf2 \strokec2  (\cf3 \strokec3 var\cf2 \strokec2  \cf6 \strokec6 i\cf2 \strokec2  = \cf10 \strokec10 0\cf2 \strokec2 ; \cf6 \strokec6 i\cf2 \strokec2  < \cf6 \strokec6 targets\cf2 \strokec2 .\cf6 \strokec6 Length\cf2 \strokec2 ; \cf6 \strokec6 i\cf2 \strokec2 ++)\
+        \{\
+            \cf3 \strokec3 var\cf2 \strokec2  \cf6 \strokec6 targetPosition\cf2 \strokec2  = \cf6 \strokec6 targets\cf2 \strokec2 [\cf6 \strokec6 i\cf2 \strokec2 ].\cf6 \strokec6 position\cf2 \strokec2 ;\
+            \cf3 \strokec3 var\cf2 \strokec2  \cf6 \strokec6 direction\cf2 \strokec2  = \cf6 \strokec6 Vector3\cf2 \strokec2 .\cf6 \strokec6 down\cf2 \strokec2 ;\
+\
+            \cf7 \strokec7 // 
+\f1 \'8e\'77\'92\'e8\'88\'ca\'92\'75\'82\'a9\'82\'e7\'89\'ba\'95\'fb\'8c\'fc\'82\'c9\'83\'8c\'83\'43\'83\'4c\'83\'83\'83\'58\'83\'67\'82\'f0\'8d\'73\'82\'a4\'83\'52\'83\'7d\'83\'93\'83\'68\'82\'f0\'82\'dc\'82\'c6\'82\'df\'82\'e9
+\f2 \cf2 \strokec2 \
+            \cf7 \strokec7 // RaycastCommand
+\f1 \'8c\'5e\'82\'cd\'81\'41\'8c\'8b\'89\'ca\'82\'c9
+\f2 ReycastHit
+\f1 \'8c\'5e\'82\'f0\'95\'d4\'82\'b5\'82\'c4\'82\'ad\'82\'e9\'81\'42
+\f2 \cf2 \strokec2 \
+            \cf3 \strokec3 var\cf2 \strokec2  \cf6 \strokec6 command\cf2 \strokec2  = \cf3 \strokec3 new\cf2 \strokec2  \cf5 \strokec5 RaycastCommand\cf2 \strokec2 (\cf6 \strokec6 targetPosition\cf2 \strokec2 , \cf6 \strokec6 direction\cf2 \strokec2 );\
+            \cf6 \strokec6 commands\cf2 \strokec2 [\cf6 \strokec6 i\cf2 \strokec2 ] = \cf6 \strokec6 command\cf2 \strokec2 ;\
+        \}\
+\
+        \cf7 \strokec7 /*\cf2 \strokec2 \
+\cf7 \strokec7             
+\f1 \'83\'52\'83\'7d\'83\'93\'83\'68\'82\'f0\'8e\'c0\'8d\'73\'81\'41\'8c\'8b\'89\'ca\'82\'cd
+\f2 results
+\f1 \'82\'c9\'93\'fc\'82\'e9\'81\'42
+\f2 \cf2 \strokec2 \
+\
+\cf7 \strokec7             RaycastCommand
+\f1 \'82\'c5\'93\'fc\'97\'cd\'82\'b5\'82\'bd\'83\'52\'83\'7d\'83\'93\'83\'68\'82\'cd\'81\'41
+\f2 RaycastHit
+\f1 \'82\'f0\'95\'d4\'82\'b5\'82\'c4\'82\'ad\'82\'e9\'81\'42
+\f2 \cf2 \strokec2 \
+\cf7 \strokec7             (
+\f1 \'82\'b1\'82\'ea\'82\'cd
+\f2 raycastCommand
+\f1 \'8c\'5e\'82\'cc
+\f2 ScheduleBatch
+\f1 \'8a\'d6\'90\'94\'82\'aa\'82\'bb\'82\'a4\'82\'a2\'82\'a4\'8e\'c0\'91\'95\'82\'c9\'82\'c8\'82\'c1\'82\'c4\'82\'e9
+\f2 )\cf2 \strokec2 \
+\cf7 \strokec7          */\cf2 \strokec2 \
+        \cf7 \strokec7 // 
+\f1 \'8a\'ae\'97\'b9\'82\'dc\'82\'c5\'91\'d2\'82\'c2
+\f2 (
+\f1 \'82\'b1\'82\'b1\'82\'c5\'83\'66\'83\'62\'83\'68\'83\'8d\'83\'62\'83\'4e\'82\'b5\'82\'c8\'82\'a2\'82\'cc\'82\'cd\'82\'c8\'82\'ba\'82\'c8\'82\'f1\'82\'be\'82\'eb\'82\'a4\'81\'41\'8c\'70\'91\'b1\'82\'c9\'82\'c8\'82\'c1\'82\'c4\'82\'e9\'81\'48
+\f2  
+\f1 \'82\'bb\'82\'ea\'82\'c6\'82\'e0\'82\'bb\'82\'a4\'82\'a2\'82\'a4\'82\'cc\'82\'f0\'89\'c1\'96\'a1\'82\'b5\'82\'c8\'82\'a2\'82\'c5\'82\'a2\'82\'a2\'82\'ad\'82\'e7\'82\'a2\'8d\'82\'91\'ac\'81\'48
+\f2 )\cf2 \strokec2 \
+        \cf7 \strokec7 // -> 
+\f1 \'91\'d2\'82\'c1\'82\'c4\'82\'e9\'81\'42\'8f\'5c\'95\'aa\'82\'c9\'8d\'82\'91\'ac\'82\'c8\'82\'e7\'96\'e2\'91\'e8\'82\'c8\'82\'a2\'82\'c6\'82\'a2\'82\'a4\'83\'8d\'83\'57\'83\'62\'83\'4e\'81\'42
+\f2 \cf2 \strokec2 \
+        \cf7 \strokec7 // 
+\f1 \'8d\'c5\'8c\'e3\'82\'cc\'88\'f8\'90\'94\'82\'cd
+\f2 job
+\f1 \'82\'cc\'8d\'c5\'91\'e5\'95\'aa\'8e\'55\'90\'94\'81\'42
+\f2 \cf2 \strokec2 \
+        \cf3 \strokec3 var\cf2 \strokec2  \cf6 \strokec6 commandJobHandle\cf2 \strokec2  = \cf6 \strokec6 RaycastCommand\cf2 \strokec2 .\cf8 \strokec8 ScheduleBatch\cf2 \strokec2 (\cf6 \strokec6 commands\cf2 \strokec2 , \cf6 \strokec6 results\cf2 \strokec2 , \cf10 \strokec10 10\cf2 \strokec2 );\
+\
+        \cf7 \strokec7 // jobHandle
+\f1 \'82\'cc\'8f\'49\'97\'b9\'82\'f0\'91\'d2\'82\'c2
+\f2 \cf2 \strokec2 \
+        \cf6 \strokec6 commandJobHandle\cf2 \strokec2 .\cf8 \strokec8 Complete\cf2 \strokec2 ();\
+\
+        \cf7 \strokec7 // 
+\f1 \'94\'6a\'8a\'fc
+\f2 \cf2 \strokec2 \
+        \cf6 \strokec6 commands\cf2 \strokec2 .\cf8 \strokec8 Dispose\cf2 \strokec2 ();\
+\
+        \cf7 \strokec7 // 
+\f1 \'89\'c1\'91\'ac\'93\'78\'82\'f0\'83\'5a\'83\'62\'83\'67\'81\'41\'91\'ac\'93\'78\'82\'aa\'83\'7d\'83\'43\'83\'69\'83\'58
+\f2 (
+\f1 \'89\'ba\'82\'c9\'88\'da\'93\'ae
+\f2 )
+\f1 \'81\'41\'82\'a9\'82\'c2\'83\'8c\'83\'43\'83\'4c\'83\'83\'83\'58\'83\'67\'82\'cc\'8b\'97\'97\'a3\'82\'aa\'88\'ea\'92\'e8\'88\'c8\'89\'ba\'82\'be\'82\'c1\'82\'bd\'82\'e7\'82\'d4\'82\'c2\'82\'a9\'82\'c1\'82\'bd\'82\'c6\'82\'dd\'82\'c8\'82\'b7\'81\'42
+\f2 \cf2 \strokec2 \
+        \cf9 \strokec9 for\cf2 \strokec2  (\cf3 \strokec3 var\cf2 \strokec2  \cf6 \strokec6 i\cf2 \strokec2  = \cf10 \strokec10 0\cf2 \strokec2 ; \cf6 \strokec6 i\cf2 \strokec2  < \cf6 \strokec6 targets\cf2 \strokec2 .\cf6 \strokec6 Length\cf2 \strokec2 ; \cf6 \strokec6 i\cf2 \strokec2 ++)\
+        \{\
+            \cf9 \strokec9 if\cf2 \strokec2  (\cf6 \strokec6 velocity\cf2 \strokec2 [\cf6 \strokec6 i\cf2 \strokec2 ] > \cf10 \strokec10 0\cf2 \strokec2  && \cf6 \strokec6 results\cf2 \strokec2 [\cf6 \strokec6 i\cf2 \strokec2 ].\cf6 \strokec6 distance\cf2 \strokec2  < \cf10 \strokec10 0.5f\cf2 \strokec2 )\
+            \{\
+                \cf6 \strokec6 velocity\cf2 \strokec2 [\cf6 \strokec6 i\cf2 \strokec2 ] = -\cf10 \strokec10 2\cf2 \strokec2 ;\
+            \}\
+\
+            \cf6 \strokec6 velocity\cf2 \strokec2 [\cf6 \strokec6 i\cf2 \strokec2 ] += \cf10 \strokec10 0.098f\cf2 \strokec2 ;\
+        \}\
+        \cf6 \strokec6 results\cf2 \strokec2 .\cf8 \strokec8 Dispose\cf2 \strokec2 ();\
+\
+        \cf7 \strokec7 // 
+\f1 \'89\'c1\'91\'ac\'93\'78\'95\'aa\'88\'da\'93\'ae
+\f2 \cf2 \strokec2 \
+        \cf9 \strokec9 for\cf2 \strokec2  (\cf3 \strokec3 var\cf2 \strokec2  \cf6 \strokec6 i\cf2 \strokec2  = \cf10 \strokec10 0\cf2 \strokec2 ; \cf6 \strokec6 i\cf2 \strokec2  < \cf6 \strokec6 targets\cf2 \strokec2 .\cf6 \strokec6 Length\cf2 \strokec2 ; \cf6 \strokec6 i\cf2 \strokec2 ++)\
+        \{\
+            \cf6 \strokec6 targets\cf2 \strokec2 [\cf6 \strokec6 i\cf2 \strokec2 ].\cf6 \strokec6 localPosition\cf2 \strokec2  += \cf6 \strokec6 Vector3\cf2 \strokec2 .\cf6 \strokec6 down\cf2 \strokec2  * \cf6 \strokec6 velocity\cf2 \strokec2 [\cf6 \strokec6 i\cf2 \strokec2 ];\
+        \}\
+    \}\
+\}\
+\cb1 	\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f1 \cf0 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 	\'91\'4f\'92\'f1\'82\'c6\'82\'b5\'82\'c4\'81\'41targets\'94\'7a\'97\'f1\'82\'c9\'82\'cd\'83\'47\'83\'66\'83\'42\'83\'5e\'8f\'e3\'82\'c5cube\'83\'49\'83\'75\'83\'57\'83\'46\'83\'4e\'83\'67\'82\'f0\'83\'5a\'83\'62\'83\'67\'82\'b5\'82\'c4\'82\'a8\'82\'ad\'81\'42\
+	\'82\'a0\'82\'c6\'81\'41\'83\'71\'83\'62\'83\'67\'91\'ce\'8f\'db\'82\'c6\'82\'c8\'82\'e9\'92\'6e\'96\'ca(Terrain\'82\'c6\'82\'a9)\'82\'f0\'97\'70\'88\'d3\'82\'b5\'82\'c6\'82\'ad\'81\'42\
+\
+	\
+
+\f0\b \'8c\'8b\'89\'ca
+\f1\b0 \
+	\'82\'a2\'82\'a2\'8a\'b4\'82\'b6\'82\'c9Main\'82\'c6\'91\'bc3\'83\'58\'83\'8c\'83\'62\'83\'68(\'83\'7d\'83\'56\'83\'93\'82\'aa4\'83\'52\'83\'41\'82\'c8\'82\'cc\'82\'c5\'8d\'87\'8c\'764)\'82\'c5\'95\'aa\'8e\'55\'82\'c5\'82\'ab\'82\'bd\'81\'42\
+	\'82\'b1\'82\'ea\'83\'8f\'81\'5b\'83\'4a\'81\'5b\'90\'94\'82\'cd\'83\'52\'83\'41\'90\'94\'82\'c6\'88\'ea\'92\'76\'82\'b7\'82\'e9\'82\'f1\'82\'be\'82\'eb\'82\'a4\'82\'a9\'81\'41\'81\'41\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f0 \cf0 	{{\NeXTGraphic スクリーンショット 2019-01-05 22.33.15.png \width8340 \height3820 \appleattachmentpadding0 \appleembedtype0 \appleaqc
+}�}\
+\
+	\'83\'41\'83\'62\'83\'76\'82\'c5\'8c\'a9\'82\'e9\'82\'c6\'82\'b1\'82\'f1\'82\'c8\'8a\'b4\'82\'b6\'82\'c5\'81\'41\
+	\'81\'45\'82\'c7\'82\'ea\'82\'a9\'88\'ea\'82\'c2\'82\'cc\'83\'58\'83\'8c\'83\'62\'83\'68\'82\'aaResultJob\'82\'f0\'8e\'c0\'8d\'73\
+	\'81\'45\'83\'81\'83\'43\'83\'93\'83\'58\'83\'8c\'83\'62\'83\'68\'82\'ccWaitForJobGroupID\'82\'aa\'82\'bb\'82\'ea\'82\'f0\'8e\'f3\'82\'af\'82\'e9\
+	\'82\'dd\'82\'bd\'82\'a2\'82\'c8\'8a\'b4\'82\'b6\'82\'c9\'8c\'a9\'82\'a6\'82\'e9\'81\'42\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f3 \cf0 	{{\NeXTGraphic スクリーンショット 2019-01-05 22.40.06.png \width8340 \height4640 \appleattachmentpadding0 \appleembedtype0 \appleaqc
+}�}\
+\
+	
+\f0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 	\
+	\'82\'b1\'82\'b1\'82\'dc\'82\'c5\'82\'c5\'81\'41Raycast\'82\'f0\'91\'c5\'82\'c2\'95\'94\'95\'aa\'82\'cdJob\'89\'bb\'82\'c5\'82\'ab\'82\'c4\'82\'e9\'81\'42\'82\'c5\'81\'41\'8e\'9f\'82\'c9\
+	\'81\'45\'83\'71\'83\'62\'83\'67\'83\'60\'83\'46\'83\'62\'83\'4e\'82\'b5\'82\'c4\'89\'c1\'91\'ac\'93\'78\'82\'f0	\'90\'a7\'8c\'e4\'82\'b7\'82\'e9\'95\'94\'95\'aa\
+	\'81\'45\'88\'da\'93\'ae\'82\'b3\'82\'b9\'82\'e9\'95\'94\'95\'aa\
+	\'82\'f0Job\'89\'bb\'82\'b5\'82\'c4\'82\'dd\'82\'e9\'81\'42\
+\
+	\'82\'b1\'82\'cc\'8e\'9e\'93\'5f\'82\'c5100fps\'91\'4f\'8c\'e3\'81\'42\
+\
+\
+
+\b \'83\'71\'83\'62\'83\'67\'83\'60\'83\'46\'83\'62\'83\'4e\'95\'94\'95\'aa\'82\'ccJob\'89\'bb
+\b0 \
+\
+	\'83\'4f\'83\'8d\'81\'5b\'83\'6f\'83\'8b\'82\'c9\'92\'e8\'8b\'60\'82\'b5\'82\'c4\'82\'a0\'82\'e9velocity\'82\'cdNativeArray<float>\'82\'c9\'82\'b5\'82\'c4\'82\'a8\'82\'ad\'81\'42\
+	\'82\'b1\'82\'cc\'82\'a0\'82\'c6Job\'82\'a9\'82\'e7\'83\'41\'83\'4e\'83\'5a\'83\'58\'82\'b7\'82\'e9\'97\'76\'91\'66\'82\'f0\'90\'b6\'90\'ac\'82\'b7\'82\'e9\'8e\'9e\'82\'c9\'91\'e3\'93\'fc\'82\'b7\'82\'e9\'82\'bd\'82\'df\'81\'42\
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f2 \cf2 \cb4 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2     \cf5 \strokec5 NativeArray\cf2 \strokec2 <\cf3 \strokec3 float\cf2 \strokec2 > \cf6 \strokec6 velocity\cf2 \strokec2 ;\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f0 \cf0 \cb1 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 	\'82\'f1\'82\'c5\'81\'41\'82\'b1\'82\'cc\'83\'43\'83\'93\'83\'58\'83\'5e\'83\'93\'83\'58\'82\'cdOnEnable\'82\'c5\'90\'b6\'90\'ac\'81\'41OnDisable\'82\'c5\'8d\'ed\'8f\'9c\'82\'b7\'82\'e9\'82\'e6\'82\'a4\'82\'c9\'82\'b7\'82\'e9\'81\'42\
+\
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f2 \cf2 \cb4 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2     \cf3 \strokec3 void\cf2 \strokec2  \cf8 \strokec8 OnEnable\cf2 \strokec2 ()\
+    \{\
+        \cf6 \strokec6 velocity\cf2 \strokec2  = \cf3 \strokec3 new\cf2 \strokec2  \cf5 \strokec5 NativeArray\cf2 \strokec2 <\cf3 \strokec3 float\cf2 \strokec2 >(\cf6 \strokec6 targets\cf2 \strokec2 .\cf6 \strokec6 Length\cf2 \strokec2 , \cf6 \strokec6 Allocator\cf2 \strokec2 .\cf6 \strokec6 Persistent\cf2 \strokec2 );\
+        \cf9 \strokec9 for\cf2 \strokec2  (\cf3 \strokec3 int\cf2 \strokec2  \cf6 \strokec6 i\cf2 \strokec2  = \cf10 \strokec10 0\cf2 \strokec2 ; \cf6 \strokec6 i\cf2 \strokec2  < \cf6 \strokec6 targets\cf2 \strokec2 .\cf6 \strokec6 Length\cf2 \strokec2 ; \cf6 \strokec6 i\cf2 \strokec2 ++)\
+        \{\
+            \cf6 \strokec6 velocity\cf2 \strokec2 [\cf6 \strokec6 i\cf2 \strokec2 ] = \cf10 \strokec10 1\cf2 \strokec2 ;\
+        \}\
+    \}\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f0 \cf0 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f2 \cf2 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2     \cf3 \strokec3 void\cf2 \strokec2  \cf8 \strokec8 OnDisable\cf2 \strokec2 ()\
+    \{\
+        \cf6 \strokec6 velocity\cf2 \strokec2 .\cf8 \strokec8 Dispose\cf2 \strokec2 ();\
+    \}\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f0 \cf0 \cb1 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 \
+\
+	\'82\'bb\'82\'f1\'82\'c5\'82\'dc\'82\'b8HitCheckJob\'82\'f0\'81\'41IJobParallelFor struct\'82\'f0\'8a\'67\'92\'a3\'82\'b7\'82\'e9\'8c\'60\'82\'c5\'92\'e8\'8b\'60\'81\'42\
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f2 \cf2 \cb4 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2     \cf3 \strokec3 struct\cf2 \strokec2  \cf5 \strokec5 HitCheckJob\cf2 \strokec2  : \cf5 \strokec5 IJobParallelFor\cf2 \strokec2 \
+    \{\
+        [\cf5 \strokec5 ReadOnly\cf2 \strokec2 ] \cf3 \strokec3 public\cf2 \strokec2  \cf5 \strokec5 NativeArray\cf2 \strokec2 <\cf5 \strokec5 RaycastHit\cf2 \strokec2 > \cf6 \strokec6 hits\cf2 \strokec2 ;\
+        \cf3 \strokec3 public\cf2 \strokec2  \cf5 \strokec5 NativeArray\cf2 \strokec2 <\cf3 \strokec3 float\cf2 \strokec2 > \cf6 \strokec6 velocities\cf2 \strokec2 ;\
+\
+\
+        \cf3 \strokec3 public\cf2 \strokec2  \cf3 \strokec3 void\cf2 \strokec2  \cf8 \strokec8 Execute\cf2 \strokec2 (\cf3 \strokec3 int\cf2 \strokec2  \cf6 \strokec6 i\cf2 \strokec2 )\
+        \{\
+            \cf7 \strokec7 // 
+\f1 \'89\'c1\'91\'ac\'93\'78\'82\'f0\'83\'5a\'83\'62\'83\'67\'81\'41\'91\'ac\'93\'78\'82\'aa\'83\'7d\'83\'43\'83\'69\'83\'58
+\f2 (
+\f1 \'89\'ba\'82\'c9\'88\'da\'93\'ae
+\f2 )
+\f1 \'81\'41\'82\'a9\'82\'c2\'83\'8c\'83\'43\'83\'4c\'83\'83\'83\'58\'83\'67\'82\'cc\'8b\'97\'97\'a3\'82\'aa\'88\'ea\'92\'e8\'88\'c8\'89\'ba\'82\'be\'82\'c1\'82\'bd\'82\'e7\'82\'d4\'82\'c2\'82\'a9\'82\'c1\'82\'bd\'82\'c6\'82\'dd\'82\'c8\'82\'b7\'81\'42
+\f2 \cf2 \strokec2 \
+            \cf9 \strokec9 if\cf2 \strokec2  (\cf6 \strokec6 velocities\cf2 \strokec2 [\cf6 \strokec6 i\cf2 \strokec2 ] > \cf10 \strokec10 0\cf2 \strokec2  && \cf6 \strokec6 hits\cf2 \strokec2 [\cf6 \strokec6 i\cf2 \strokec2 ].\cf6 \strokec6 distance\cf2 \strokec2  < \cf10 \strokec10 0.5f\cf2 \strokec2 )\
+            \{\
+                \cf7 \strokec7 // 
+\f1 \'83\'71\'83\'62\'83\'67\'82\'b5\'82\'bd\'82\'cc\'82\'c5\'89\'c1\'91\'ac\'93\'78\'82\'f0
+\f2 -2
+\f1 \'82\'c9\'83\'5a\'83\'62\'83\'67\'82\'b5\'82\'c4\'95\'82\'82\'a9\'82\'d1\'8f\'e3\'82\'aa\'82\'e7\'82\'b9\'82\'e9\'81\'42
+\f2 \cf2 \strokec2 \
+                \cf6 \strokec6 velocities\cf2 \strokec2 [\cf6 \strokec6 i\cf2 \strokec2 ] = -\cf10 \strokec10 2\cf2 \strokec2 ;\
+            \}\
+\
+            \cf6 \strokec6 velocities\cf2 \strokec2 [\cf6 \strokec6 i\cf2 \strokec2 ] += \cf10 \strokec10 0.098f\cf2 \strokec2 ;\
+        \}\
+    \}\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f0 \cf0 \cb1 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 	Job\'82\'f0\'92\'e8\'8b\'60\'82\'b7\'82\'e9\'8d\'db\'82\'c9\'83\'70\'83\'89\'83\'81\'81\'5b\'83\'5e\'82\'c9\'97\'76\'91\'66\'82\'f0\'83\'5a\'83\'62\'83\'67\'82\'b7\'82\'e9\'82\'b1\'82\'c6\'82\'c5\'81\'41\'8c\'e3\'82\'d9\'82\'c7\'8e\'c0\'8d\'73 = Schedule\'8a\'d6\'90\'94\'82\'f0\'8c\'c4\'82\'d4\'8e\'9e\'82\'c9\'91\'e6\'88\'ea\'88\'f8\'90\'94\'82\'c9\'83\'5a\'83\'62\'83\'67\'82\'b5\'82\'bd\'90\'94\'82\'be\'82\'afExecute\'82\'aa\'89\'f1\'82\'c1\'82\'c4\'82\'ad\'82\'ea\'82\'e9\'81\'42\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \
+	hits\'82\'c8\'82\'c7\'82\'cc\'97\'76\'91\'66\'82\'cc\'83\'5a\'83\'62\'83\'67\'82\'c9\'82\'c2\'82\'a2\'82\'c4\'82\'cd\'81\'41\'82\'b1\'82\'cc\'83\'57\'83\'87\'83\'75\'82\'cc\'83\'43\'83\'93\'83\'58\'83\'5e\'83\'93\'83\'58\'82\'f0\'90\'b6\'90\'ac\'82\'b7\'82\'e9\'8e\'9e\'82\'c9hits = \'82\'dd\'82\'bd\'82\'a2\'82\'c8\'8c\'60\'82\'c9\'82\'b5\'82\'c4\'93\'6e\'82\'b7\'81\'42\
+	hits\'82\'cd\'8e\'51\'8f\'c6\'83\'49\'83\'93\'83\'8a\'81\'5b\'82\'c8\'82\'cc\'82\'c5\'81\'41ReadOnly\'82\'f0\'82\'c2\'82\'af\'82\'e9\'82\'b1\'82\'c6\'82\'aa\'82\'c5\'82\'ab\'82\'e9\'81\'42(velocity\'82\'cdR/W\'97\'bc\'95\'fb\'82\'a0\'82\'e9\'82\'cc\'82\'c5\'82\'c8\'82\'f1\'82\'e0\'82\'c5\'82\'ab\'82\'f1)\
+\
+	\'8e\'9f\'82\'c9\'81\'41\'83\'8c\'83\'43\'83\'4c\'83\'83\'83\'58\'83\'67\'83\'52\'83\'7d\'83\'93\'83\'68\'82\'f0\'8e\'c0\'8d\'73\'82\'b7\'82\'e9\'95\'94\'95\'aa\'82\'cc\'8e\'9f\'82\'c9\'81\'41HitCheckJob\'82\'f0\'90\'b6\'90\'ac\'82\'b7\'82\'e9\'95\'94\'95\'aa\'82\'f0\'92\'c7\'89\'c1\'82\'b7\'82\'e9\'81\'42\
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f2 \cf2 \cb4 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2     \cf3 \strokec3 void\cf2 \strokec2  \cf8 \strokec8 Update\cf2 \strokec2 ()\
+    \{\
+\
+        \cf3 \strokec3 var\cf2 \strokec2  \cf6 \strokec6 commands\cf2 \strokec2  = \cf3 \strokec3 new\cf2 \strokec2  \cf5 \strokec5 NativeArray\cf2 \strokec2 <\cf5 \strokec5 RaycastCommand\cf2 \strokec2 >(\cf6 \strokec6 targets\cf2 \strokec2 .\cf6 \strokec6 Length\cf2 \strokec2 , \cf6 \strokec6 Allocator\cf2 \strokec2 .\cf6 \strokec6 TempJob\cf2 \strokec2 );\
+        \cf3 \strokec3 var\cf2 \strokec2  \cf6 \strokec6 results\cf2 \strokec2  = \cf3 \strokec3 new\cf2 \strokec2  \cf5 \strokec5 NativeArray\cf2 \strokec2 <\cf5 \strokec5 RaycastHit\cf2 \strokec2 >(\cf6 \strokec6 targets\cf2 \strokec2 .\cf6 \strokec6 Length\cf2 \strokec2 , \cf6 \strokec6 Allocator\cf2 \strokec2 .\cf6 \strokec6 TempJob\cf2 \strokec2 );\
+\
+        \cf9 \strokec9 for\cf2 \strokec2  (\cf3 \strokec3 var\cf2 \strokec2  \cf6 \strokec6 i\cf2 \strokec2  = \cf10 \strokec10 0\cf2 \strokec2 ; \cf6 \strokec6 i\cf2 \strokec2  < \cf6 \strokec6 targets\cf2 \strokec2 .\cf6 \strokec6 Length\cf2 \strokec2 ; \cf6 \strokec6 i\cf2 \strokec2 ++)\
+        \{\
+            \cf3 \strokec3 var\cf2 \strokec2  \cf6 \strokec6 targetPosition\cf2 \strokec2  = \cf6 \strokec6 targets\cf2 \strokec2 [\cf6 \strokec6 i\cf2 \strokec2 ].\cf6 \strokec6 position\cf2 \strokec2 ;\
+            \cf3 \strokec3 var\cf2 \strokec2  \cf6 \strokec6 direction\cf2 \strokec2  = \cf6 \strokec6 Vector3\cf2 \strokec2 .\cf6 \strokec6 down\cf2 \strokec2 ;\
+\
+            \cf7 \strokec7 // 
+\f1 \'8e\'77\'92\'e8\'88\'ca\'92\'75\'82\'a9\'82\'e7\'89\'ba\'95\'fb\'8c\'fc\'82\'c9\'83\'8c\'83\'43\'83\'4c\'83\'83\'83\'58\'83\'67\'82\'f0\'8d\'73\'82\'a4\'83\'52\'83\'7d\'83\'93\'83\'68\'82\'f0\'82\'dc\'82\'c6\'82\'df\'82\'e9
+\f2 \cf2 \strokec2 \
+            \cf7 \strokec7 // RaycastCommand
+\f1 \'8c\'5e\'82\'cd\'81\'41\'8c\'8b\'89\'ca\'82\'c9
+\f2 ReycastHit
+\f1 \'8c\'5e\'82\'f0\'95\'d4\'82\'b5\'82\'c4\'82\'ad\'82\'e9\'81\'42
+\f2 \cf2 \strokec2 \
+            \cf3 \strokec3 var\cf2 \strokec2  \cf6 \strokec6 command\cf2 \strokec2  = \cf3 \strokec3 new\cf2 \strokec2  \cf5 \strokec5 RaycastCommand\cf2 \strokec2 (\cf6 \strokec6 targetPosition\cf2 \strokec2 , \cf6 \strokec6 direction\cf2 \strokec2 );\
+            \cf6 \strokec6 commands\cf2 \strokec2 [\cf6 \strokec6 i\cf2 \strokec2 ] = \cf6 \strokec6 command\cf2 \strokec2 ;\
+        \}\
+\
+        \cf7 \strokec7 // 
+\f1 \'83\'57\'83\'87\'83\'75\'82\'cc\'8f\'89\'8a\'fa\'89\'bb\'82\'f0\'82\'b7\'82\'e9
+\f2 \cf2 \strokec2 \
+        \cf3 \strokec3 var\cf2 \strokec2  \cf6 \strokec6 hitCheckJob\cf2 \strokec2  = \cf3 \strokec3 new\cf2 \strokec2  \cf5 \strokec5 HitCheckJob\cf2 \strokec2 ()\
+        \{\
+            \cf6 \strokec6 hits\cf2 \strokec2  = \cf6 \strokec6 results\cf2 \strokec2 ,\
+            \cf6 \strokec6 velocities\cf2 \strokec2  = \cf6 \strokec6 velocity\cf2 \strokec2 \
+        \};\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f0 \cf0 \cb1 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 \
+	\'82\'b1\'82\'b1\'82\'dc\'82\'c5\'82\'c5\'81\'41\'8e\'9f\'82\'cc\'8f\'f3\'91\'d4\'82\'cchitCheckJob\'82\'cc\'83\'43\'83\'93\'83\'58\'83\'5e\'83\'93\'83\'58\'82\'aa\'8e\'e8\'82\'c9\'93\'fc\'82\'e9\'81\'42\
+	\'81\'45\'82\'b1\'82\'cc\'82\'a0\'82\'c6Raycast\'82\'cc\'8c\'8b\'89\'ca = RaycastHit\'82\'ccNativeArray\'82\'f0\'95\'d4\'82\'b5\'82\'c4\'82\'ad\'82\'e9results\'82\'cc\'8e\'51\'8f\'c6\'82\'f0\'81\'41hits\'82\'c9\'91\'e3\'93\'fc\
+	\'81\'45\'91\'ac\'93\'78\'82\'aa\'93\'fc\'82\'e9velocity\'82\'ccNativeArray\'82\'cc\'8e\'51\'8f\'c6\'82\'f0\'81\'41Job\'93\'e0\'95\'94\'82\'c5\'92\'6c\'82\'f0\'93\'fc\'82\'ea\'82\'e9velocities\'82\'c9\'91\'e3\'93\'fc\
+\
+	\'82\'bb\'82\'f1\'82\'c5job\'82\'f0\'8e\'c0\'8d\'73\'81\'42\
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f2 \cf2 \cb4 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2         \cf3 \strokec3 var\cf2 \strokec2  \cf6 \strokec6 commandJobHandle\cf2 \strokec2  = \cf6 \strokec6 RaycastCommand\cf2 \strokec2 .\cf8 \strokec8 ScheduleBatch\cf2 \strokec2 (\cf6 \strokec6 commands\cf2 \strokec2 , \cf6 \strokec6 results\cf2 \strokec2 , \cf10 \strokec10 10\cf2 \strokec2 );\
+        \cf3 \strokec3 var\cf2 \strokec2  \cf6 \strokec6 hitcheckHandle\cf2 \strokec2  = \cf6 \strokec6 hitCheckJob\cf2 \strokec2 .\cf8 \strokec8 Schedule\cf2 \strokec2 (\cf6 \strokec6 targets\cf2 \strokec2 .\cf6 \strokec6 Length\cf2 \strokec2 , \cf10 \strokec10 10\cf2 \strokec2 , \cf6 \strokec6 commandJobHandle\cf2 \strokec2 );\
+        \cf11 \outl0\strokewidth0 hitcheckHandle\cf2 \outl0\strokewidth0 \strokec2 .\cf8 \strokec8 Complete\cf2 \strokec2 ();\
+\cb1 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f0 \cf0 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 	\'90\'e6\'82\'d9\'82\'c7\'82\'dc\'82\'c5RaycastCommand\'82\'cc\'8c\'8b\'89\'ca\'82\'f0\'82\'bb\'82\'cc\'82\'dc\'82\'dcComplete\'82\'b5\'82\'c4\'82\'a2\'82\'bd\'82\'cc\'82\'f0\'81\'41\
+	\'90\'56\'82\'bd\'82\'c9hitcheckHandle\'83\'43\'83\'93\'83\'58\'83\'5e\'83\'93\'83\'58\'82\'f0hitCheckJob.Schedule\'82\'a9\'82\'e7\'90\'b6\'90\'ac\'82\'b5\'81\'41\'82\'bb\'82\'ccjob\'82\'cc\'8a\'ae\'97\'b9\'82\'f0\'91\'d2\'82\'c2\'82\'e6\'82\'a4\'82\'c9\'95\'cf\'8d\'58\'82\'b7\'82\'e9\'81\'42\
+\
+	\'82\'b1\'82\'cc\'8d\'db\'81\'41\'82\'dc\'82\'b8\'83\'8c\'83\'43\'83\'4c\'83\'83\'83\'58\'83\'67\'82\'f0\'91\'c5\'82\'c1\'82\'c4\'82\'a9\'82\'e7\'83\'71\'83\'62\'83\'67\'83\'60\'83\'46\'83\'62\'83\'4e\'82\'aa\'82\'b5\'82\'bd\'82\'a2\'82\'bd\'82\'df\'81\'41hitcheckJob\'82\'ccSchedule\'8a\'d6\'90\'94\'82\'c9commandJobHandle\'82\'cc\'83\'43\'83\'93\'83\'58\'83\'5e\'83\'93\'83\'58\'82\'f0\'83\'5a\'83\'62\'83\'67\'81\'41\
+	\'95\'4b\'82\'b8\
+	\'81\'45
+\f2 \cf11 \cb4 \expnd0\expndtw0\kerning0
+commandJobHandle
+\f0 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+	\'81\'45
+\f2 \cf11 \cb4 \expnd0\expndtw0\kerning0
+hitcheckHandle
+\f0 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+	\
+	\'82\'c6\'82\'a2\'82\'a4\'8f\'87\'94\'d4\'82\'c5\'8f\'88\'97\'9d\'82\'aa\'8e\'c0\'8d\'73\'82\'b3\'82\'ea\'82\'e9\'82\'e6\'82\'a4\'82\'c9\'82\'b7\'82\'e9\'81\'42\
+\
+	\'82\'b1\'82\'b1\'82\'dc\'82\'c5\'82\'c5\'81\'41\'83\'71\'83\'62\'83\'67\'83\'60\'83\'46\'83\'62\'83\'4e\'82\'aajob\'89\'bb\'82\'c5\'82\'ab\'82\'bd\'81\'42\
+\
+\
+
+\b \'88\'da\'93\'ae\'82\'e0Job\'89\'bb\'82\'b7\'82\'e9
+\b0 \
+	\'82\'a0\'82\'c6\'82\'cd\'89\'9e\'97\'70\'82\'c5\'81\'41\
+	\'81\'45\'89\'c1\'91\'ac\'93\'78\'95\'aa\'88\'da\'93\'ae\'82\'b7\'82\'e9\
+	\'82\'c6\'82\'a2\'82\'a4\'8f\'88\'97\'9d\'82\'f0Job\'89\'bb\'82\'b7\'82\'e9\'81\'42\
+\
+	\'82\'dc\'82\'b8\'88\'ca\'92\'75(transform)\'82\'f0\'82\'a2\'82\'b6\'82\'e9\'82\'cc\'82\'c5\'81\'41transform\'82\'c9\'91\'ce\'82\'b5\'82\'c4Job\'93\'e0\'82\'a9\'82\'e7\'8a\'b1\'8f\'c2\'82\'c5\'82\'ab\'82\'e9Job\'82\'f0\'8d\'ec\'90\'ac\'82\'b7\'82\'e9\'81\'42\
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f2 \cf2 \cb4 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2     \cf3 \strokec3 struct\cf2 \strokec2  \cf5 \strokec5 ApplyPositionJob\cf2 \strokec2  : \cf5 \strokec5 IJobParallelForTransform\cf2 \strokec2 \
+    \{\
+        [\cf5 \strokec5 ReadOnly\cf2 \strokec2 ] \cf3 \strokec3 public\cf2 \strokec2  \cf5 \strokec5 NativeArray\cf2 \strokec2 <\cf3 \strokec3 float\cf2 \strokec2 > \cf6 \strokec6 velocities\cf2 \strokec2 ;\
+\
+        \cf3 \strokec3 public\cf2 \strokec2  \cf3 \strokec3 void\cf2 \strokec2  \cf8 \strokec8 Execute\cf2 \strokec2 (\cf3 \strokec3 int\cf2 \strokec2  \cf6 \strokec6 i\cf2 \strokec2 , \cf5 \strokec5 TransformAccess\cf2 \strokec2  \cf6 \strokec6 transform\cf2 \strokec2 )\
+        \{\
+            \cf6 \strokec6 transform\cf2 \strokec2 .\cf6 \strokec6 localPosition\cf2 \strokec2  += \cf6 \strokec6 Vector3\cf2 \strokec2 .\cf6 \strokec6 down\cf2 \strokec2  * \cf6 \strokec6 velocities\cf2 \strokec2 [\cf6 \strokec6 i\cf2 \strokec2 ];\
+        \}\
+    \}\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f0 \cf0 \cb1 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 \
+	\'82\'b1\'82\'f1\'82\'c8\'8a\'b4\'82\'b6\'82\'c5\'81\'41IJobParallelForTransform struct\'82\'f0\'8a\'67\'92\'a3\'82\'b5\'82\'bd\'83\'57\'83\'87\'83\'75\'82\'f0\'92\'e8\'8b\'60\'82\'b7\'82\'e9\'81\'42\
+	Execute\'82\'cc\'93\'e0\'95\'94\'8f\'88\'97\'9d\'82\'c9\'82\'c2\'82\'a2\'82\'c4\'82\'cd\'82\'bf\'82\'e5\'82\'c1\'82\'c6\'93\'c1\'8e\'ea\'82\'c5\'81\'41\
+\
+	\'81\'45IJobOarallelForTransform\'8a\'d6\'90\'94\'82\'ccSchedule\'8a\'d6\'90\'94\'82\'cdTransformAccessArray(Transform[] transforms)\'82\'c6\'82\'a2\'82\'a4\'8c\'5e\'82\'f0\'88\'f8\'90\'94\'82\'c9\'82\'c6\'82\'e8\
+	\'81\'45Execute\'8e\'c0\'8d\'73\'8e\'9e\'82\'c9 transforms \'82\'d6\'82\'cc\'83\'41\'83\'4e\'83\'5a\'83\'58\'82\'aa\'89\'c2\'94\'5c\'82\'c8\'82\'e6\'82\'a4\'82\'c9\'88\'f8\'90\'94\'82\'c9\'93\'fc\'82\'c1\'82\'c4\'82\'a2\'82\'e9\
+	\'82\'c6\'82\'a2\'82\'a4\'8a\'b4\'82\'b6\'81\'42\
+\
+	Transform\'82\'bb\'82\'cc\'82\'dc\'82\'dc\'82\'be\'82\'c6\'8e\'51\'8f\'c6\'8c\'5e\'82\'c9\'82\'c8\'82\'c1\'82\'c4\'82\'b5\'82\'dc\'82\'c1\'82\'c4\'82\'a2\'82\'c4\'92\'6c\'8c\'5e\'82\'c5\'82\'cd\'82\'c8\'82\'a2\'82\'cc\'82\'c5Job\'82\'a9\'82\'e7\'83\'41\'83\'4e\'83\'5a\'83\'58\'82\'c5\'82\'ab\'82\'c8\'82\'a2\'81\'41\'82\'c6\'82\'a2\'82\'a4\'82\'cc\'82\'aa\'82\'a0\'82\'e9\'82\'e7\'82\'b5\'82\'a2\'81\'42\
+	\'82\'c8\'82\'cc\'82\'c5\'81\'41\
+	\
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f2 \cf2 \cb4 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2         \cf3 \strokec3 var\cf2 \strokec2  \cf6 \strokec6 transformAccess\cf2 \strokec2  = \cf3 \strokec3 new\cf2 \strokec2  \cf5 \strokec5 TransformAccessArray\cf2 \strokec2 (\cf6 \strokec6 targets\cf2 \strokec2 );\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f0 \cf0 \cb1 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 \
+	\'82\'c6\'82\'a9\'92\'e8\'8b\'60\'82\'b5\'82\'c4\'81\'41Schedule\'8a\'d6\'90\'94\'82\'c9\'91\'ce\'82\'b5\'82\'c4\'93\'6e\'82\'b7\'81\'42	\
+	\'82\'b3\'82\'e7\'82\'c9Schedule\'82\'cc\'91\'e6\'93\'f1\'88\'f8\'90\'94\'82\'c6\'82\'b5\'82\'c4\'83\'71\'83\'62\'83\'67\'83\'60\'83\'46\'83\'62\'83\'4e\'82\'ccjobHandle\'82\'f0\'93\'6e\'82\'b5\'81\'41\'8f\'87\'94\'d4\'82\'f0\'90\'a7\'8c\'e4\'82\'b7\'82\'e9\'81\'42\
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f2 \cf2 \cb4 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2         \cf3 \strokec3 var\cf2 \strokec2  \cf6 \strokec6 applyPosHandle\cf2 \strokec2  = \cf6 \strokec6 applyPositionJob\cf2 \strokec2 .\cf8 \strokec8 Schedule\cf2 \strokec2 (\cf6 \strokec6 transformAccess\cf2 \strokec2 , \cf6 \strokec6 hitcheckHandle\cf2 \strokec2 );\
+\cb1 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f0 \cf0 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 	\'82\'b1\'82\'ea\'82\'c5\'81\'41\
+	\'81\'45\'83\'8c\'83\'43\'83\'4c\'83\'83\'83\'58\'83\'67\
+	\'81\'45\'83\'71\'83\'62\'83\'67\'83\'60\'83\'46\'83\'62\'83\'4e\
+	\'81\'45\'88\'da\'93\'ae\
+\
+	\'82\'cc\'8f\'87\'94\'d4\'82\'c5\'8f\'88\'97\'9d\'82\'aa\'8d\'73\'82\'ed\'82\'ea\'82\'e9\'82\'e6\'82\'a4\'82\'c9\'82\'c8\'82\'c1\'82\'c4\'82\'a2\'82\'e9\'81\'42\
+	\'8f\'88\'97\'9d\'82\'aa\'8f\'49\'82\'ed\'82\'c1\'82\'bd\'82\'e7\
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f2 \cf2 \cb4 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2         \cf6 \strokec6 transformAccess\cf2 \strokec2 .\cf8 \strokec8 Dispose\cf2 \strokec2 ();\
+\cb1 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f0 \cf0 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 	\'82\'e0\'96\'59\'82\'ea\'82\'c8\'82\'a2\'82\'e6\'82\'a4\'82\'c9\'82\'b7\'82\'e9\'81\'42\'82\'c8\'82\'a2\'8f\'ea\'8d\'87\'83\'47\'83\'89\'81\'5b\'8f\'6f\'82\'b5\'82\'c4\'82\'ad\'82\'ea\'82\'e9\'82\'f1\'82\'c5\'95\'d6\'97\'98\'81\'42\
+\
+	\'82\'b1\'82\'b1\'82\'dc\'82\'c5\'82\'c5\'83\'71\'83\'62\'83\'67\'83\'60\'83\'46\'83\'62\'83\'4e\'82\'c6\'88\'da\'93\'ae\'82\'ccJob\'89\'bb\'82\'aa\'82\'c5\'82\'ab\'82\'bd\'81\'42\'82\'e2\'82\'c1\'82\'bd\'82\'ba\'81\'42\
+	\'82\'b1\'82\'cc\'8e\'9e\'93\'5f\'82\'c5100fps\'91\'4f\'8c\'e3\'81\'42\'82\'dc\'82\'a0\'95\'cf\'82\'ed\'82\'e7\'82\'f1\'81\'42\
+\
+	Raycast\'81\'41Hitcheck\'81\'41ApplyPos\'82\'aaJob\'89\'bb\'82\'c5\'82\'ab\'82\'bd\'90\'7d\'81\'42\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f3 \cf0 {{\NeXTGraphic スクリーンショット 2019-01-06 0.10.59.png \width11940 \height6020 \appleattachmentpadding0 \appleembedtype0 \appleaqc
+}�}\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0 \cf0 \
+\
+	\'82\'b1\'82\'b1\'82\'a9\'82\'e7\'82\'b3\'82\'e7\'82\'c9\'8d\'82\'91\'ac\'89\'bb\'82\'b7\'82\'e9\'82\'c9\'82\'cd\'81\'41\'81\'75Complete\'82\'f0\'82\'e2\'82\'df\'82\'c4\'83\'81\'83\'43\'83\'93\'83\'58\'83\'8c\'83\'62\'83\'68\'82\'cc\'83\'8d\'83\'62\'83\'4e\'82\'f0\'8a\'4f\'82\'b7\'81\'76\'82\'c6\'82\'a2\'82\'a4\'82\'b1\'82\'c6\'82\'f0\'82\'b7\'82\'e9\'8a\'b4\'82\'b6\'82\'c9\'82\'c8\'82\'e9\'81\'42\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \
+
+\b Complete\'82\'f0\'8e\'9f\'82\'cc\'83\'74\'83\'8c\'81\'5b\'83\'80\'82\'c5\'8e\'c0\'8d\'73\'82\'b7\'82\'e9(WaitForJobGroup\'82\'c9\'82\'a9\'82\'a9\'82\'e9\'8e\'9e\'8a\'d4 = \'83\'81\'83\'43\'83\'93\'83\'58\'83\'8c\'83\'62\'83\'68\'82\'c5\'82\'cc\'91\'d2\'82\'bf\'82\'f0\'8c\'b8\'82\'e7\'82\'b7)
+\b0 \
+	Update\'82\'c5\'8d\'73\'82\'a4\'83\'52\'81\'5b\'83\'68\'82\'f0\'8e\'9f\'82\'cc\'82\'e6\'82\'a4\'82\'c8\'8a\'b4\'82\'b6\'82\'c9\'82\'b7\'82\'e9\'81\'42\
+\
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f2 \cf2 \cb4 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2     \cf3 \strokec3 void\cf2 \strokec2  \cf8 \strokec8 Update\cf2 \strokec2 ()\
+    \{\
+\
+        \cf7 \strokec7 // applyPosHandle 
+\f1 \'82\'cc\'8f\'49\'97\'b9\'82\'f0\'91\'d2\'82\'c2
+\f2 \cf2 \strokec2 \
+        \cf6 \strokec6 applyPosHandle\cf2 \strokec2 .\cf8 \strokec8 Complete\cf2 \strokec2 ();\
+\
+        \cf9 \strokec9 for\cf2 \strokec2  (\cf3 \strokec3 var\cf2 \strokec2  \cf6 \strokec6 i\cf2 \strokec2  = \cf10 \strokec10 0\cf2 \strokec2 ; \cf6 \strokec6 i\cf2 \strokec2  < \cf6 \strokec6 targets\cf2 \strokec2 .\cf6 \strokec6 Length\cf2 \strokec2 ; \cf6 \strokec6 i\cf2 \strokec2 ++)\
+        \{\
+            \cf3 \strokec3 var\cf2 \strokec2  \cf6 \strokec6 targetPosition\cf2 \strokec2  = \cf6 \strokec6 targets\cf2 \strokec2 [\cf6 \strokec6 i\cf2 \strokec2 ].\cf6 \strokec6 position\cf2 \strokec2 ;\
+            \cf3 \strokec3 var\cf2 \strokec2  \cf6 \strokec6 direction\cf2 \strokec2  = \cf6 \strokec6 Vector3\cf2 \strokec2 .\cf6 \strokec6 down\cf2 \strokec2 ;\
+\
+            \cf7 \strokec7 // 
+\f1 \'8e\'77\'92\'e8\'88\'ca\'92\'75\'82\'a9\'82\'e7\'89\'ba\'95\'fb\'8c\'fc\'82\'c9\'83\'8c\'83\'43\'83\'4c\'83\'83\'83\'58\'83\'67\'82\'f0\'8d\'73\'82\'a4\'83\'52\'83\'7d\'83\'93\'83\'68\'82\'f0\'82\'dc\'82\'c6\'82\'df\'82\'e9
+\f2 \cf2 \strokec2 \
+            \cf7 \strokec7 // RaycastCommand
+\f1 \'8c\'5e\'82\'cd\'81\'41\'8c\'8b\'89\'ca\'82\'c9
+\f2 ReycastHit
+\f1 \'8c\'5e\'82\'f0\'95\'d4\'82\'b5\'82\'c4\'82\'ad\'82\'e9\'81\'42
+\f2 \cf2 \strokec2 \
+            \cf3 \strokec3 var\cf2 \strokec2  \cf6 \strokec6 command\cf2 \strokec2  = \cf3 \strokec3 new\cf2 \strokec2  \cf5 \strokec5 RaycastCommand\cf2 \strokec2 (\cf6 \strokec6 targetPosition\cf2 \strokec2 , \cf6 \strokec6 direction\cf2 \strokec2 );\
+            \cf6 \strokec6 commands\cf2 \strokec2 [\cf6 \strokec6 i\cf2 \strokec2 ] = \cf6 \strokec6 command\cf2 \strokec2 ;\
+        \}\
+\
+        \cf7 \strokec7 // 
+\f1 \'83\'57\'83\'87\'83\'75\'82\'cc\'8f\'89\'8a\'fa\'89\'bb\'82\'f0\'82\'b7\'82\'e9
+\f2 \cf2 \strokec2 \
+        \cf3 \strokec3 var\cf2 \strokec2  \cf6 \strokec6 hitCheckJob\cf2 \strokec2  = \cf3 \strokec3 new\cf2 \strokec2  \cf5 \strokec5 HitCheckJob\cf2 \strokec2 ()\
+        \{\
+            \cf6 \strokec6 hits\cf2 \strokec2  = \cf6 \strokec6 results\cf2 \strokec2 ,\
+            \cf6 \strokec6 velocities\cf2 \strokec2  = \cf6 \strokec6 velocity\cf2 \strokec2 \
+        \};\
+\
+        \cf3 \strokec3 var\cf2 \strokec2  \cf6 \strokec6 applyPositionJob\cf2 \strokec2  = \cf3 \strokec3 new\cf2 \strokec2  \cf5 \strokec5 ApplyPositionJob\cf2 \strokec2 ()\
+        \{\
+            \cf6 \strokec6 velocities\cf2 \strokec2  = \cf6 \strokec6 velocity\cf2 \strokec2 \
+        \};\
+\
+        \cf7 \strokec7 // 
+\f1 \'83\'8c\'83\'43\'83\'4c\'83\'83\'83\'58\'83\'67\'81\'41\'83\'71\'83\'62\'83\'67\'83\'60\'83\'46\'83\'62\'83\'4e\'82\'dc\'82\'c5\'82\'cd\'95\'cf\'82\'ed\'82\'e7\'82\'b8\'81\'41
+\f2 applyPos
+\f1 \'82\'cc\'83\'6e\'83\'93\'83\'68\'83\'8b\'82\'f0\'83\'4f\'83\'8d\'81\'5b\'83\'6f\'83\'8b\'95\'cf\'90\'94\'82\'c9\'93\'fc\'82\'ea\'82\'e9\'81\'42
+\f2 \cf2 \strokec2 \
+        \cf3 \strokec3 var\cf2 \strokec2  \cf6 \strokec6 commandJobHandle\cf2 \strokec2  = \cf6 \strokec6 RaycastCommand\cf2 \strokec2 .\cf8 \strokec8 ScheduleBatch\cf2 \strokec2 (\cf6 \strokec6 commands\cf2 \strokec2 , \cf6 \strokec6 results\cf2 \strokec2 , \cf10 \strokec10 10\cf2 \strokec2 );\
+        \cf3 \strokec3 var\cf2 \strokec2  \cf6 \strokec6 hitcheckHandle\cf2 \strokec2  = \cf6 \strokec6 hitCheckJob\cf2 \strokec2 .\cf8 \strokec8 Schedule\cf2 \strokec2 (\cf6 \strokec6 targets\cf2 \strokec2 .\cf6 \strokec6 Length\cf2 \strokec2 , \cf10 \strokec10 10\cf2 \strokec2 , \cf6 \strokec6 commandJobHandle\cf2 \strokec2 );\
+        \cf6 \strokec6 applyPosHandle\cf2 \strokec2  = \cf6 \strokec6 applyPositionJob\cf2 \strokec2 .\cf8 \strokec8 Schedule\cf2 \strokec2 (\cf6 \strokec6 transformAccess\cf2 \strokec2 , \cf6 \strokec6 hitcheckHandle\cf2 \strokec2 );\
+    \}\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f0 \cf0 \cb1 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 \
+	applyPosHandle\'82\'f0\'83\'4f\'83\'8d\'81\'5b\'83\'6f\'83\'8b\'82\'c9\'92\'e8\'8b\'60\'82\'b5\'82\'c4\'81\'41\'82\'bb\'82\'cc\'8f\'49\'97\'b9\'91\'d2\'82\'bf=Complete\'82\'f0Update\'82\'cc\'90\'e6\'93\'aa\'82\'c5\'8d\'73\'82\'a4\'81\'42\
+	\'83\'4f\'83\'8d\'81\'5b\'83\'6f\'83\'8b\'89\'bb\'82\'c9\'8d\'d5\'82\'b5\'82\'c4\'81\'41\'82\'a2\'82\'dc\'82\'dc\'82\'c5Update\'82\'cc\'8d\'c5\'8c\'e3\'82\'c5Dispose\'82\'b5\'82\'c4\'82\'a2\'82\'bd\'83\'65\'83\'93\'83\'7c\'83\'89\'83\'8a\'82\'c8NativeArray\'82\'e0\'82\'b7\'82\'d7\'82\'c4\'83\'4f\'83\'8d\'81\'5b\'83\'6f\'83\'8b\'82\'c8\'92\'e8\'8b\'60\'82\'c9\'95\'cf\'82\'ed\'82\'e9\'95\'4b\'97\'76\'82\'aa\'82\'a0\'82\'e9\'81\'42\
+	\
+	Job\'82\'cc\'83\'43\'83\'93\'83\'58\'83\'5e\'83\'93\'83\'58\'90\'b6\'90\'ac(\'8e\'51\'8f\'c6\'93\'6e\'82\'b5)\'82\'c6\'81\'41\'83\'8c\'83\'43\'83\'4c\'83\'83\'83\'58\'83\'67\'83\'52\'83\'7d\'83\'93\'83\'68\'82\'cc\'90\'b6\'90\'ac/\'83\'5a\'83\'62\'83\'67\'82\'cd\'95\'cf\'82\'ed\'82\'e7\'82\'b8\'81\'42\
+\
+	\'82\'b1\'82\'cc\'8e\'9e\'93\'5f\'82\'c5103fps\'82\'ad\'82\'e7\'82\'a2\'82\'c9\'82\'c8\'82\'c1\'82\'bd\'81\'42\'82\'bf\'82\'e5\'82\'c1\'82\'c6\'8d\'82\'91\'ac\'89\'bb\'81\'42\
+	\'83\'76\'83\'8d\'83\'74\'83\'40\'83\'43\'83\'89\'82\'f0\'8c\'a9\'82\'c4\'82\'dd\'82\'e9\'82\'c6\'81\'41Update\'8a\'d6\'90\'94\'82\'aa\'8e\'c0\'8d\'73\'82\'b3\'82\'ea\'82\'c4\'82\'a9\'82\'e7Job\'82\'aa\'8e\'c0\'8d\'73\'82\'b3\'82\'ea\'82\'c4\'82\'a2\'82\'e9\'81\'42\'82\'e2\'82\'c1\'82\'bd\'82\'ba\'81\'42\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f3 \cf0 {{\NeXTGraphic スクリーンショット 2019-01-06 0.35.45.png \width18760 \height5060 \appleattachmentpadding0 \appleembedtype0 \appleaqc
+}�}\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0 \cf0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \
+	\'82\'a0\'82\'c6\'81\'41WaitForJobID\'82\'aa\'8f\'c1\'82\'a6\'82\'bd\'81\'42(\'8f\'e6\'82\'e7\'82\'c8\'82\'a2\'82\'ad\'82\'e7\'82\'a2\'92\'5a\'82\'a2\'82\'a9\'81\'41\'8c\'a9\'97\'8e\'82\'c6\'82\'b5\'82\'c4\'82\'e9\'82\'a9\'81\'42)\
+\
+\
+
+\b \'82\'bf\'82\'e5\'82\'c1\'82\'c6Burst\'89\'bb\'82\'b5\'82\'c4\'82\'dd\'82\'e9
+\b0 \
+	Job\'82\'f0BurstCompiler\'94\'43\'82\'b9\'82\'c9\'82\'b5\'82\'c4\'82\'dd\'82\'e9\'81\'42\
+	Job\'92\'e8\'8b\'60\'82\'ccstruct\'82\'c9 BurstCompile \'82\'cc\'83\'41\'83\'6d\'83\'65\'81\'5b\'83\'56\'83\'87\'83\'93\'82\'f0\'82\'c2\'82\'af\'82\'e9\'82\'be\'82\'af\'81\'42\
+\
+	-> \'94\'9a\'91\'ac\'82\'c9\'82\'c8\'82\'c1\'82\'bd\'81\'42\
+	110fps\'82\'ad\'82\'e7\'82\'a2\'8f\'6f\'82\'c4\'82\'e9\'81\'42\
+\
+\
+
+\b \'92\'6c\'82\'f0\'93\'be\'82\'e7\'82\'ea\'82\'e9\'82\'e6\'82\'a4\'82\'c9\'82\'b7\'82\'e9
+\b0 \
+	IJob\'82\'f0\'8a\'67\'92\'a3\'82\'b5\'82\'bdstruct\'82\'f0\'97\'70\'88\'d3\'82\'b7\'82\'e9\'81\'42\
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f2 \cf2 \cb4 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2     \cf3 \strokec3 struct\cf2 \strokec2  \cf5 \strokec5 IsHit\cf2 \strokec2  : \cf5 \strokec5 IJob\cf2 \strokec2 \
+    \{\
+        [\cf5 \strokec5 ReadOnly\cf2 \strokec2 ] \cf3 \strokec3 public\cf2 \strokec2  \cf5 \strokec5 NativeArray\cf2 \strokec2 <\cf5 \strokec5 RaycastHit\cf2 \strokec2 > \cf6 \strokec6 hits\cf2 \strokec2 ;\
+        [\cf5 \strokec5 WriteOnly\cf2 \strokec2 ] \cf3 \strokec3 public\cf2 \strokec2  \cf5 \strokec5 NativeArray\cf2 \strokec2 <\cf3 \strokec3 int\cf2 \strokec2 > \cf6 \strokec6 isHit\cf2 \strokec2 ;\
+\
+        \cf3 \strokec3 public\cf2 \strokec2  \cf3 \strokec3 void\cf2 \strokec2  \cf8 \strokec8 Execute\cf2 \strokec2 ()\
+        \{\
+            \cf9 \strokec9 for\cf2 \strokec2  (\cf3 \strokec3 var\cf2 \strokec2  \cf6 \strokec6 i\cf2 \strokec2  = \cf10 \strokec10 0\cf2 \strokec2 ; \cf6 \strokec6 i\cf2 \strokec2  < \cf6 \strokec6 hits\cf2 \strokec2 .\cf6 \strokec6 Length\cf2 \strokec2 ; \cf6 \strokec6 i\cf2 \strokec2 ++)\
+            \{\
+                \cf7 \strokec7 // 
+\f1 \'8b\'97\'97\'a3\'82\'aa
+\f2 1f
+\f1 \'82\'e6\'82\'e8\'8f\'ac\'82\'b3\'82\'a9\'82\'c1\'82\'bd\'82\'e7\'81\'41\'83\'71\'83\'62\'83\'67\'82\'b5\'82\'c4\'82\'a2\'82\'e9
+\f2 \cf2 \strokec2 \
+                \cf9 \strokec9 if\cf2 \strokec2  (\cf6 \strokec6 hits\cf2 \strokec2 [\cf6 \strokec6 i\cf2 \strokec2 ].\cf6 \strokec6 distance\cf2 \strokec2  < \cf10 \strokec10 1f\cf2 \strokec2 )\
+                \{\
+                    \cf6 \strokec6 isHit\cf2 \strokec2 [\cf10 \strokec10 0\cf2 \strokec2 ] = \cf10 \strokec10 0\cf2 \strokec2 ;\
+                    \cf9 \strokec9 return\cf2 \strokec2 ;\
+                \}\
+            \}\
+\
+            \cf7 \strokec7 // 
+\f1 \'82\'bb\'82\'ea\'88\'c8\'8a\'4f\'82\'c5\'82\'a0\'82\'ea\'82\'ce\'82\'b7\'82\'d7\'82\'c4\'82\'cc\'83\'43\'83\'93\'83\'58\'83\'5e\'83\'93\'83\'58\'82\'aa\'83\'71\'83\'62\'83\'67\'82\'b5\'82\'c4\'82\'c8\'82\'a2
+\f2 \cf2 \strokec2 \
+            \cf6 \strokec6 isHit\cf2 \strokec2 [\cf10 \strokec10 0\cf2 \strokec2 ] = \cf10 \strokec10 1\cf2 \strokec2 ;\
+        \}\
+    \}\
+\cb1 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f0 \cf0 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 	Update\'93\'e0\'82\'c5\'83\'71\'83\'62\'83\'67\'82\'cc\'83\'6e\'83\'93\'83\'68\'83\'8b\'82\'f0\'90\'b6\'90\'ac\'81\'41\'82\'b1\'82\'b1\'82\'c5\'83\'54\'83\'43\'83\'591\'82\'ccNativeArray<int>\'82\'f0\'93\'fc\'82\'ea\'82\'e9\'81\'42\
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f2 \cf2 \cb4 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2         \cf3 \strokec3 var\cf2 \strokec2  \cf6 \strokec6 hitHandle\cf2 \strokec2  = \cf3 \strokec3 new\cf2 \strokec2  \cf5 \strokec5 IsHit\cf2 \strokec2 ()\
+        \{\
+            \cf6 \strokec6 hits\cf2 \strokec2  = \cf6 \strokec6 results\cf2 \strokec2 ,\
+            \cf6 \strokec6 isHit\cf2 \strokec2  = \cf3 \strokec3 new\cf2 \strokec2  \cf5 \strokec5 NativeArray\cf2 \strokec2 <\cf3 \strokec3 int\cf2 \strokec2 >(\cf10 \strokec10 1\cf2 \strokec2 , \cf6 \strokec6 Allocator\cf2 \strokec2 .\cf6 \strokec6 TempJob\cf2 \strokec2 )\
+        \};\
+\cb1 \
+\cb4         \cf7 \strokec7 // 
+\f1 \'83\'8c\'83\'43\'83\'4c\'83\'83\'83\'58\'83\'67\'81\'41\'83\'71\'83\'62\'83\'67\'83\'60\'83\'46\'83\'62\'83\'4e\'82\'dc\'82\'c5\'82\'cd\'95\'cf\'82\'ed\'82\'e7\'82\'b8\'81\'41
+\f2 applyPos
+\f1 \'82\'cc\'83\'6e\'83\'93\'83\'68\'83\'8b\'82\'f0\'83\'4f\'83\'8d\'81\'5b\'83\'6f\'83\'8b\'95\'cf\'90\'94\'82\'c9\'93\'fc\'82\'ea\'82\'e9\'81\'42
+\f2 \cf2 \strokec2 \
+        \cf3 \strokec3 var\cf2 \strokec2  \cf6 \strokec6 commandJobHandle\cf2 \strokec2  = \cf6 \strokec6 RaycastCommand\cf2 \strokec2 .\cf8 \strokec8 ScheduleBatch\cf2 \strokec2 (\cf6 \strokec6 commands\cf2 \strokec2 , \cf6 \strokec6 results\cf2 \strokec2 , \cf10 \strokec10 10\cf2 \strokec2 );\
+\
+        \cf3 \strokec3 var\cf2 \strokec2  \cf6 \strokec6 isHitHandle\cf2 \strokec2  = \cf6 \strokec6 hitHandle\cf2 \strokec2 .\cf8 \strokec8 Schedule\cf2 \strokec2 (\cf6 \strokec6 commandJobHandle\cf2 \strokec2 );\
+        \cf3 \strokec3 var\cf2 \strokec2  \cf6 \strokec6 hitcheckHandle\cf2 \strokec2  = \cf6 \strokec6 hitCheckJob\cf2 \strokec2 .\cf8 \strokec8 Schedule\cf2 \strokec2 (\cf6 \strokec6 targets\cf2 \strokec2 .\cf6 \strokec6 Length\cf2 \strokec2 , \cf10 \strokec10 10\cf2 \strokec2 , \cf6 \strokec6 commandJobHandle\cf2 \strokec2 );\
+\
+        \cf6 \strokec6 applyPosHandle\cf2 \strokec2  = \cf6 \strokec6 applyPositionJob\cf2 \strokec2 .\cf8 \strokec8 Schedule\cf2 \strokec2 (\cf6 \strokec6 transformAccess\cf2 \strokec2 , \cf6 \strokec6 hitcheckHandle\cf2 \strokec2 );\
+\
+        \cf7 \strokec7 // 
+\f1 \'83\'71\'83\'62\'83\'67\'94\'bb\'92\'e8\'82\'be\'82\'af\'82\'cd\'91\'a6\'8d\'c0\'82\'c9\'8f\'49\'97\'b9\'82\'b3\'82\'b9\'82\'e9
+\f2 \cf2 \strokec2 \
+        \cf6 \strokec6 isHitHandle\cf2 \strokec2 .\cf8 \strokec8 Complete\cf2 \strokec2 ();\
+\
+        \cf3 \strokec3 var\cf2 \strokec2  \cf6 \strokec6 isHit\cf2 \strokec2  = \cf6 \strokec6 hitHandle\cf2 \strokec2 .\cf6 \strokec6 isHit\cf2 \strokec2 [\cf10 \strokec10 0\cf2 \strokec2 ];\
+        \cf9 \strokec9 if\cf2 \strokec2  (\cf6 \strokec6 isHit\cf2 \strokec2  != \cf10 \strokec10 1\cf2 \strokec2 )\
+        \{\
+            \cf6 \strokec6 Debug\cf2 \strokec2 .\cf8 \strokec8 Log\cf2 \strokec2 (\cf12 \strokec12 "
+\f1 \'83\'71\'83\'62\'83\'67\'82\'b5\'82\'bd
+\f2 "\cf2 \strokec2 );\
+        \}\
+\
+        \cf7 \strokec7 // hitHandle
+\f1 \'82\'cc
+\f2 isHit
+\f1 \'82\'cd\'82\'b1\'82\'cc\'83\'75\'83\'8d\'83\'62\'83\'4e\'93\'e0\'82\'c5\'90\'b6\'90\'ac\'82\'b5\'82\'c4\'82\'a2\'82\'e9\'83\'70\'83\'89\'83\'81\'81\'5b\'83\'5e\'82\'c8\'82\'cc\'82\'c5\'81\'41\'82\'b1\'82\'b1\'82\'c5\'8f\'c1\'94\'ef\'82\'b7\'82\'e9\'81\'42
+\f2 \cf2 \strokec2 \
+        \cf6 \strokec6 hitHandle\cf2 \strokec2 .\cf6 \strokec6 isHit\cf2 \strokec2 .\cf8 \strokec8 Dispose\cf2 \strokec2 ();\
+\cb1 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f0 \cf0 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 	\
+	isHitHandle\'82\'f0\'90\'b6\'90\'ac\'81\'41\'83\'8c\'83\'43\'83\'4c\'83\'83\'83\'58\'83\'67\'82\'cc\'82\'a0\'82\'c6\'82\'c9\'8e\'c0\'8d\'73\'82\'b7\'82\'e9\'81\'42\
+	\'82\'c5\'81\'41\'83\'71\'83\'62\'83\'67\'94\'bb\'92\'e8\'82\'be\'82\'af\'82\'f0Complete\'82\'c9\'82\'b5\'82\'c4\'92\'6c\'82\'f0\'8e\'f3\'82\'af\'8e\'e6\'97\'9b\'94\'bb\'92\'66\'82\'c9\'8e\'67\'82\'a4\'81\'42\'95\'d6\'97\'98\'81\'42\
+\
+\
+
+\b \'83\'52\'83\'8b\'81\'5b\'83\'60\'83\'93\'89\'bb\'82\'b7\'82\'e9\
+
+\b0 	\'82\'bf\'82\'e5\'82\'c1\'82\'c6\'82\'cd\'8f\'91\'82\'ab\'82\'e2\'82\'b7\'82\'ad\'82\'c8\'82\'e9\'82\'a9\'81\'48\
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f2 \cf2 \cb4 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2     \cf5 \strokec5 IEnumerator\cf2 \strokec2  \cf8 \strokec8 Start\cf2 \strokec2 ()\
+    \{\
+        \cf3 \strokec3 var\cf2 \strokec2  \cf6 \strokec6 commands\cf2 \strokec2  = \cf3 \strokec3 new\cf2 \strokec2  \cf5 \strokec5 NativeArray\cf2 \strokec2 <\cf5 \strokec5 RaycastCommand\cf2 \strokec2 >(\cf6 \strokec6 targets\cf2 \strokec2 .\cf6 \strokec6 Length\cf2 \strokec2 , \cf6 \strokec6 Allocator\cf2 \strokec2 .\cf6 \strokec6 Persistent\cf2 \strokec2 );\
+        \cf3 \strokec3 var\cf2 \strokec2  \cf6 \strokec6 results\cf2 \strokec2  = \cf3 \strokec3 new\cf2 \strokec2  \cf5 \strokec5 NativeArray\cf2 \strokec2 <\cf5 \strokec5 RaycastHit\cf2 \strokec2 >(\cf6 \strokec6 targets\cf2 \strokec2 .\cf6 \strokec6 Length\cf2 \strokec2 , \cf6 \strokec6 Allocator\cf2 \strokec2 .\cf6 \strokec6 Persistent\cf2 \strokec2 );\
+\
+        \cf3 \strokec3 var\cf2 \strokec2  \cf6 \strokec6 transformAccess\cf2 \strokec2  = \cf3 \strokec3 new\cf2 \strokec2  \cf5 \strokec5 TransformAccessArray\cf2 \strokec2 (\cf6 \strokec6 targets\cf2 \strokec2 );\
+        \cf3 \strokec3 var\cf2 \strokec2  \cf6 \strokec6 velocity\cf2 \strokec2  = \cf3 \strokec3 new\cf2 \strokec2  \cf5 \strokec5 NativeArray\cf2 \strokec2 <\cf3 \strokec3 float\cf2 \strokec2 >(\cf6 \strokec6 targets\cf2 \strokec2 .\cf6 \strokec6 Length\cf2 \strokec2 , \cf6 \strokec6 Allocator\cf2 \strokec2 .\cf6 \strokec6 Persistent\cf2 \strokec2 );\
+\
+        \cf9 \strokec9 for\cf2 \strokec2  (\cf3 \strokec3 int\cf2 \strokec2  \cf6 \strokec6 i\cf2 \strokec2  = \cf10 \strokec10 0\cf2 \strokec2 ; \cf6 \strokec6 i\cf2 \strokec2  < \cf6 \strokec6 targets\cf2 \strokec2 .\cf6 \strokec6 Length\cf2 \strokec2 ; \cf6 \strokec6 i\cf2 \strokec2 ++)\
+        \{\
+            \cf6 \strokec6 velocity\cf2 \strokec2 [\cf6 \strokec6 i\cf2 \strokec2 ] = \cf10 \strokec10 1\cf2 \strokec2 ;\
+        \}\
+\
+        \cf6 \strokec6 disposeAct\cf2 \strokec2  = () =>\
+        \{\
+            \cf9 \strokec9 try\cf2 \strokec2 \
+            \{\
+                \cf6 \strokec6 applyPosHandle\cf2 \strokec2 .\cf8 \strokec8 Complete\cf2 \strokec2 ();\
+\
+                \cf6 \strokec6 velocity\cf2 \strokec2 .\cf8 \strokec8 Dispose\cf2 \strokec2 ();\
+                \cf6 \strokec6 commands\cf2 \strokec2 .\cf8 \strokec8 Dispose\cf2 \strokec2 ();\
+                \cf6 \strokec6 results\cf2 \strokec2 .\cf8 \strokec8 Dispose\cf2 \strokec2 ();\
+                \cf6 \strokec6 transformAccess\cf2 \strokec2 .\cf8 \strokec8 Dispose\cf2 \strokec2 ();\
+            \}\
+            \cf9 \strokec9 catch\cf2 \strokec2  \{ \}\
+        \};\
+\
+        \cf7 \strokec7 // 
+\f1 \'83\'57\'83\'87\'83\'75\'82\'cc\'8f\'89\'8a\'fa\'89\'bb\'82\'f0\'82\'b7\'82\'e9
+\f2 \cf2 \strokec2 \
+        \cf3 \strokec3 var\cf2 \strokec2  \cf6 \strokec6 hitCheckJob\cf2 \strokec2  = \cf3 \strokec3 new\cf2 \strokec2  \cf5 \strokec5 HitCheckJob\cf2 \strokec2 ()\
+        \{\
+            \cf6 \strokec6 hits\cf2 \strokec2  = \cf6 \strokec6 results\cf2 \strokec2 ,\
+            \cf6 \strokec6 velocities\cf2 \strokec2  = \cf6 \strokec6 velocity\cf2 \strokec2 \
+        \};\
+\
+        \cf3 \strokec3 var\cf2 \strokec2  \cf6 \strokec6 applyPositionJob\cf2 \strokec2  = \cf3 \strokec3 new\cf2 \strokec2  \cf5 \strokec5 ApplyPositionJob\cf2 \strokec2 ()\
+        \{\
+            \cf6 \strokec6 velocities\cf2 \strokec2  = \cf6 \strokec6 velocity\cf2 \strokec2 \
+        \};\
+\
+        \cf9 \strokec9 while\cf2 \strokec2  (\cf3 \strokec3 true\cf2 \strokec2 )\
+        \{\
+\
+            \cf9 \strokec9 for\cf2 \strokec2  (\cf3 \strokec3 var\cf2 \strokec2  \cf6 \strokec6 i\cf2 \strokec2  = \cf10 \strokec10 0\cf2 \strokec2 ; \cf6 \strokec6 i\cf2 \strokec2  < \cf6 \strokec6 targets\cf2 \strokec2 .\cf6 \strokec6 Length\cf2 \strokec2 ; \cf6 \strokec6 i\cf2 \strokec2 ++)\
+            \{\
+                \cf3 \strokec3 var\cf2 \strokec2  \cf6 \strokec6 targetPosition\cf2 \strokec2  = \cf6 \strokec6 targets\cf2 \strokec2 [\cf6 \strokec6 i\cf2 \strokec2 ].\cf6 \strokec6 position\cf2 \strokec2 ;\
+                \cf3 \strokec3 var\cf2 \strokec2  \cf6 \strokec6 direction\cf2 \strokec2  = \cf6 \strokec6 Vector3\cf2 \strokec2 .\cf6 \strokec6 down\cf2 \strokec2 ;\
+\
+                \cf7 \strokec7 // 
+\f1 \'8e\'77\'92\'e8\'88\'ca\'92\'75\'82\'a9\'82\'e7\'89\'ba\'95\'fb\'8c\'fc\'82\'c9\'83\'8c\'83\'43\'83\'4c\'83\'83\'83\'58\'83\'67\'82\'f0\'8d\'73\'82\'a4\'83\'52\'83\'7d\'83\'93\'83\'68\'82\'f0\'82\'dc\'82\'c6\'82\'df\'82\'e9
+\f2 \cf2 \strokec2 \
+                \cf7 \strokec7 // RaycastCommand
+\f1 \'8c\'5e\'82\'cd\'81\'41\'8c\'8b\'89\'ca\'82\'c9
+\f2 ReycastHit
+\f1 \'8c\'5e\'82\'f0\'95\'d4\'82\'b5\'82\'c4\'82\'ad\'82\'e9\'81\'42
+\f2 \cf2 \strokec2 \
+                \cf3 \strokec3 var\cf2 \strokec2  \cf6 \strokec6 command\cf2 \strokec2  = \cf3 \strokec3 new\cf2 \strokec2  \cf5 \strokec5 RaycastCommand\cf2 \strokec2 (\cf6 \strokec6 targetPosition\cf2 \strokec2 , \cf6 \strokec6 direction\cf2 \strokec2 );\
+                \cf6 \strokec6 commands\cf2 \strokec2 [\cf6 \strokec6 i\cf2 \strokec2 ] = \cf6 \strokec6 command\cf2 \strokec2 ;\
+            \}\
+\
+            \cf3 \strokec3 var\cf2 \strokec2  \cf6 \strokec6 hitHandle\cf2 \strokec2  = \cf3 \strokec3 new\cf2 \strokec2  \cf5 \strokec5 IsHit\cf2 \strokec2 ()\
+            \{\
+                \cf6 \strokec6 hits\cf2 \strokec2  = \cf6 \strokec6 results\cf2 \strokec2 ,\
+                \cf6 \strokec6 isHit\cf2 \strokec2  = \cf3 \strokec3 new\cf2 \strokec2  \cf5 \strokec5 NativeArray\cf2 \strokec2 <\cf3 \strokec3 int\cf2 \strokec2 >(\cf10 \strokec10 1\cf2 \strokec2 , \cf6 \strokec6 Allocator\cf2 \strokec2 .\cf6 \strokec6 TempJob\cf2 \strokec2 )\
+            \};\
+\
+\
+            \cf7 \strokec7 // 
+\f1 \'83\'8c\'83\'43\'83\'4c\'83\'83\'83\'58\'83\'67\'81\'41\'83\'71\'83\'62\'83\'67\'83\'60\'83\'46\'83\'62\'83\'4e\'82\'dc\'82\'c5\'82\'cd\'95\'cf\'82\'ed\'82\'e7\'82\'b8\'81\'41
+\f2 applyPos
+\f1 \'82\'cc\'83\'6e\'83\'93\'83\'68\'83\'8b\'82\'f0\'83\'4f\'83\'8d\'81\'5b\'83\'6f\'83\'8b\'95\'cf\'90\'94\'82\'c9\'93\'fc\'82\'ea\'82\'e9\'81\'42
+\f2 \cf2 \strokec2 \
+            \cf3 \strokec3 var\cf2 \strokec2  \cf6 \strokec6 commandJobHandle\cf2 \strokec2  = \cf6 \strokec6 RaycastCommand\cf2 \strokec2 .\cf8 \strokec8 ScheduleBatch\cf2 \strokec2 (\cf6 \strokec6 commands\cf2 \strokec2 , \cf6 \strokec6 results\cf2 \strokec2 , \cf10 \strokec10 10\cf2 \strokec2 );\
+\
+            \cf3 \strokec3 var\cf2 \strokec2  \cf6 \strokec6 isHitHandle\cf2 \strokec2  = \cf6 \strokec6 hitHandle\cf2 \strokec2 .\cf8 \strokec8 Schedule\cf2 \strokec2 (\cf6 \strokec6 commandJobHandle\cf2 \strokec2 );\
+            \cf3 \strokec3 var\cf2 \strokec2  \cf6 \strokec6 hitcheckHandle\cf2 \strokec2  = \cf6 \strokec6 hitCheckJob\cf2 \strokec2 .\cf8 \strokec8 Schedule\cf2 \strokec2 (\cf6 \strokec6 targets\cf2 \strokec2 .\cf6 \strokec6 Length\cf2 \strokec2 , \cf10 \strokec10 10\cf2 \strokec2 , \cf6 \strokec6 commandJobHandle\cf2 \strokec2 );\
+\
+            \cf6 \strokec6 applyPosHandle\cf2 \strokec2  = \cf6 \strokec6 applyPositionJob\cf2 \strokec2 .\cf8 \strokec8 Schedule\cf2 \strokec2 (\cf6 \strokec6 transformAccess\cf2 \strokec2 , \cf6 \strokec6 hitcheckHandle\cf2 \strokec2 );\
+\
+            \cf7 \strokec7 // 
+\f1 \'83\'71\'83\'62\'83\'67\'94\'bb\'92\'e8\'82\'be\'82\'af\'82\'cd\'91\'a6\'8d\'c0\'82\'c9\'8f\'49\'97\'b9\'82\'b3\'82\'b9\'82\'e9
+\f2 \cf2 \strokec2 \
+            \cf6 \strokec6 isHitHandle\cf2 \strokec2 .\cf8 \strokec8 Complete\cf2 \strokec2 ();\
+\
+            \cf3 \strokec3 var\cf2 \strokec2  \cf6 \strokec6 isHit\cf2 \strokec2  = \cf6 \strokec6 hitHandle\cf2 \strokec2 .\cf6 \strokec6 isHit\cf2 \strokec2 [\cf10 \strokec10 0\cf2 \strokec2 ];\
+            \cf9 \strokec9 if\cf2 \strokec2  (\cf6 \strokec6 isHit\cf2 \strokec2  != \cf10 \strokec10 1\cf2 \strokec2 )\
+            \{\
+                \cf6 \strokec6 Debug\cf2 \strokec2 .\cf8 \strokec8 Log\cf2 \strokec2 (\cf12 \strokec12 "
+\f1 \'83\'71\'83\'62\'83\'67\'82\'b5\'82\'bd
+\f2 "\cf2 \strokec2 );\
+            \}\
+\
+            \cf7 \strokec7 // hitHandle
+\f1 \'82\'cc
+\f2 isHit
+\f1 \'82\'cd\'82\'b1\'82\'cc\'83\'75\'83\'8d\'83\'62\'83\'4e\'93\'e0\'82\'c5\'90\'b6\'90\'ac\'82\'b5\'82\'c4\'82\'a2\'82\'e9\'83\'70\'83\'89\'83\'81\'81\'5b\'83\'5e\'82\'c8\'82\'cc\'82\'c5\'81\'41\'82\'b1\'82\'b1\'82\'c5\'8f\'c1\'94\'ef\'82\'b7\'82\'e9\'81\'42
+\f2 \cf2 \strokec2 \
+            \cf6 \strokec6 hitHandle\cf2 \strokec2 .\cf6 \strokec6 isHit\cf2 \strokec2 .\cf8 \strokec8 Dispose\cf2 \strokec2 ();\
+\
+            \cf9 \strokec9 yield\cf2 \strokec2  \cf9 \strokec9 return\cf2 \strokec2  \cf3 \strokec3 null\cf2 \strokec2 ;\
+\
+            \cf7 \strokec7 // applyPosHandle 
+\f1 \'82\'cc\'8f\'49\'97\'b9\'82\'f0\'91\'d2\'82\'c2
+\f2 \cf2 \strokec2 \
+            \cf6 \strokec6 applyPosHandle\cf2 \strokec2 .\cf8 \strokec8 Complete\cf2 \strokec2 ();\
+        \}\
+    \}\
+\cb1 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f0 \cf0 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 	NativeArray\'82\'c6\'82\'a9\'81\'41jobHandle\'82\'cc\'90\'b6\'90\'ac\'82\'f0\'88\'ea\'93\'78\'82\'ab\'82\'e8\'82\'c9\'82\'c5\'82\'ab\'82\'bd\'81\'42\
+	\'8e\'51\'8f\'c6\'82\'be\'82\'af\'82\'f0\'82\'c8\'82\'f1\'82\'c6\'82\'a9\'82\'c5\'82\'ab\'82\'e9\'82\'cc\'82\'aa\'97\'c7\'82\'a2\'81\'42\
+\
+	\'8d\'c5\'8c\'e3\'82\'ccjobHandle\'82\'f0IEnum\'82\'cc\'92\'86\'82\'c9\'8e\'64\'95\'91\'82\'a4\'82\'cc\'82\'cd\'81\'41JobHandle\'82\'aanullable\'82\'c5\'82\'c8\'82\'a2\'82\'cc\'82\'c5\'82\'c5\'82\'ab\'82\'c8\'82\'a9\'82\'c1\'82\'bd\'81\'42\
+\
+\
+\
+\
+\
+}
