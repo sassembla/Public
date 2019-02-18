@@ -1,0 +1,153 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1561.6">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; min-height: 18.0px}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 17.0px 'Hiragino Sans'}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; line-height: 18.0px; font: 12.0px Menlo; color: #dcdcaa; -webkit-text-stroke: #dcdcaa; background-color: #000000}
+    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; line-height: 18.0px; font: 12.0px Menlo; color: #d4d4d4; -webkit-text-stroke: #d4d4d4; background-color: #000000}
+    p.p8 {margin: 0.0px 0.0px 0.0px 0.0px; line-height: 18.0px; font: 12.0px Menlo; color: #9cdcfe; -webkit-text-stroke: #9cdcfe; background-color: #000000}
+    p.p9 {margin: 0.0px 0.0px 0.0px 0.0px; line-height: 18.0px; font: 12.0px Menlo; color: #d4d4d4; -webkit-text-stroke: #d4d4d4; min-height: 14.0px}
+    p.p10 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; -webkit-text-stroke: #d4d4d4}
+    p.p11 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; -webkit-text-stroke: #d4d4d4; min-height: 18.0px}
+    p.p12 {margin: 0.0px 0.0px 0.0px 0.0px; line-height: 18.0px; font: 12.0px Menlo; color: #6a9955; -webkit-text-stroke: #6a9955; background-color: #000000}
+    p.p13 {margin: 0.0px 0.0px 0.0px 0.0px; line-height: 18.0px; font: 12.0px Menlo; color: #ce9178; -webkit-text-stroke: #ce9178; background-color: #000000}
+    p.p14 {margin: 0.0px 0.0px 0.0px 0.0px; line-height: 18.0px; font: 12.0px Menlo; color: #d4d4d4; -webkit-text-stroke: #d4d4d4; background-color: #000000; min-height: 14.0px}
+    span.s1 {font: 22.0px 'Hiragino Sans'}
+    span.s2 {font: 12.0px Helvetica}
+    span.s3 {font-kerning: none; color: #d4d4d4; -webkit-text-stroke: 0px #d4d4d4}
+    span.s4 {font-kerning: none; color: #569cd6; -webkit-text-stroke: 0px #569cd6}
+    span.s5 {font-kerning: none}
+    span.s6 {font-kerning: none; color: #9cdcfe; -webkit-text-stroke: 0px #9cdcfe}
+    span.s7 {font-kerning: none; color: #dcdcaa; -webkit-text-stroke: 0px #dcdcaa}
+    span.s8 {font-kerning: none; color: #4ec9b0; -webkit-text-stroke: 0px #4ec9b0}
+    span.s9 {font-kerning: none; color: #ce9178; -webkit-text-stroke: 0px #ce9178}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>toriki</b><span class="s1"><b>日記</b></span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span>Unity</span>で<span class="s2">Twitter</span>使うのだいたい<span class="s2">C#</span>コード<span class="s2">90%</span>でログインとかだけネイティブプラグインみたいなスタイルが固まってきたので、出す。</p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p3"><b>Why not TwitterKit(死んでるじゃん)</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>TwitterKitがDeadしてるのもあるんだけど、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>そもそもTwitterKit iOS/Androidの実装がセッション保持してすごくバギーな挙動になるので、避けたくなった。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>んで持続的にメンテ可能なUnity専用のTwitterログイン + API叩くツールを作るに至った。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これ</p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>toriki</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/toriki">https://github.com/sassembla/toriki</a></p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p3"><b>インストール</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>リリースがあるのでそこからUnityPackageを使ってインストールできる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/toriki/releases/tag/0.9.0">https://github.com/sassembla/toriki/releases/tag/0.9.0</a></p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p5"><b>使い方</b></p>
+<p class="p4"><br></p>
+<p class="p3"><b>1.TwitterSetting.cs にconsumerKeyとかconsumerSecretを書く。</b></p>
+<p class="p4"><br></p>
+<p class="p3"><a href="https://github.com/sassembla/toriki/blob/master/Assets/Toriki/Scripts/TwitterSettings.cs">https://github.com/sassembla/toriki/blob/master/Assets/Toriki/Scripts/TwitterSettings.cs</a></p>
+<p class="p6"><span class="s3"><span class="Apple-converted-space">        </span></span><span class="s4">static</span><span class="s3"> </span><span class="s5">TwitterSettings</span><span class="s3">()</span></p>
+<p class="p7"><span class="s5"><span class="Apple-converted-space">        </span>{</span></p>
+<p class="p8"><span class="s3"><span class="Apple-converted-space">            </span></span><span class="s5">ConsumerKey</span><span class="s3"> = </span><span class="s5">string</span><span class="s3">.</span><span class="s5">Empty</span><span class="s3">;</span></p>
+<p class="p8"><span class="s3"><span class="Apple-converted-space">            </span></span><span class="s5">ConsumerSecret</span><span class="s3"> = </span><span class="s5">string</span><span class="s3">.</span><span class="s5">Empty</span><span class="s3">;</span></p>
+<p class="p9"><span class="s5"><span class="Apple-tab-span">	</span></span></p>
+<p class="p10"><span class="Apple-tab-span">	</span>Runtimeにあるコードで、torikiの初期化を行う際に自動的にロードされる。</p>
+<p class="p10"><span class="Apple-tab-span">	</span>Resourcesとかにキーを暗号化しておいて、ここで復号化すると良い。</p>
+<p class="p11"><br></p>
+<p class="p11"><br></p>
+<p class="p10"><b>2.初期化とAPI</b></p>
+<p class="p11"><br></p>
+<p class="p10"><a href="https://github.com/sassembla/toriki/blob/master/Assets/_Sample/Login/Login.cs">https://github.com/sassembla/toriki/blob/master/Assets/_Sample/Login/Login.cs</a></p>
+<p class="p7"><span class="s5"><span class="Apple-converted-space">        </span></span><span class="s6">TwitterAPI</span><span class="s5">.</span><span class="s7">Init</span><span class="s5">();</span></p>
+<p class="p7"><span class="s5"><span class="Apple-converted-space">        </span></span><span class="s6">TwitterAPI</span><span class="s5">.</span><span class="s7">LogIn</span><span class="s5">(</span></p>
+<p class="p7"><span class="s5"><span class="Apple-converted-space">            </span>(</span><span class="s6">nickname</span><span class="s5">, </span><span class="s6">token</span><span class="s5">, </span><span class="s6">secret</span><span class="s5">) =&gt;</span></p>
+<p class="p7"><span class="s5"><span class="Apple-converted-space">            </span>{</span></p>
+<p class="p12"><span class="s3"><span class="Apple-converted-space">                </span></span><span class="s5">// show user info API example.</span></p>
+<p class="p7"><span class="s5"><span class="Apple-converted-space">                </span></span><span class="s6">TwitterAPI</span><span class="s5">.</span><span class="s7">Get</span><span class="s5">(</span></p>
+<p class="p13"><span class="s3"><span class="Apple-converted-space">                    </span></span><span class="s5">"https://api.twitter.com/1.1/users/show.json"</span><span class="s3">,</span></p>
+<p class="p7"><span class="s5"><span class="Apple-converted-space">                    </span></span><span class="s4">new</span><span class="s5"> </span><span class="s8">SortedDictionary</span><span class="s5">&lt;</span><span class="s4">string</span><span class="s5">, </span><span class="s4">string</span><span class="s5">&gt;</span></p>
+<p class="p7"><span class="s5"><span class="Apple-converted-space">                    </span>{</span></p>
+<p class="p7"><span class="s5"><span class="Apple-converted-space">                        </span>{</span><span class="s9">"screen_name"</span><span class="s5">, </span><span class="s9">"toru_inoue"</span><span class="s5">}</span></p>
+<p class="p7"><span class="s5"><span class="Apple-converted-space">                    </span>},</span></p>
+<p class="p7"><span class="s5"><span class="Apple-converted-space">                    </span></span><span class="s6">result</span><span class="s5"> =&gt;</span></p>
+<p class="p7"><span class="s5"><span class="Apple-converted-space">                    </span>{</span></p>
+<p class="p7"><span class="s5"><span class="Apple-converted-space">                        </span></span><span class="s6">Debug</span><span class="s5">.</span><span class="s7">Log</span><span class="s5">(</span><span class="s9">"show result:"</span><span class="s5"> + </span><span class="s6">result</span><span class="s5">);</span></p>
+<p class="p7"><span class="s5"><span class="Apple-converted-space">                    </span>},</span></p>
+<p class="p7"><span class="s5"><span class="Apple-converted-space">                    </span>(</span><span class="s6">code</span><span class="s5">, </span><span class="s6">errors</span><span class="s5">) =&gt;</span></p>
+<p class="p7"><span class="s5"><span class="Apple-converted-space">                    </span>{</span></p>
+<p class="p7"><span class="s5"><span class="Apple-converted-space">                        </span></span><span class="s6">Debug</span><span class="s5">.</span><span class="s7">Log</span><span class="s5">(</span><span class="s9">"show code:"</span><span class="s5"> + </span><span class="s6">code</span><span class="s5">);</span></p>
+<p class="p7"><span class="s5"><span class="Apple-converted-space">                    </span>}</span></p>
+<p class="p7"><span class="s5"><span class="Apple-converted-space">                </span>);</span></p>
+<p class="p14"><span class="s5"></span><br></p>
+<p class="p12"><span class="s3"><span class="Apple-converted-space">                </span></span><span class="s5">// tweet API example.</span></p>
+<p class="p7"><span class="s5"><span class="Apple-converted-space">                </span></span><span class="s6">TwitterAPI</span><span class="s5">.</span><span class="s7">Post</span><span class="s5">(</span></p>
+<p class="p13"><span class="s3"><span class="Apple-converted-space">                    </span></span><span class="s5">"https://api.twitter.com/1.1/statuses/update.json"</span><span class="s3">,</span></p>
+<p class="p7"><span class="s5"><span class="Apple-converted-space">                    </span></span><span class="s4">new</span><span class="s5"> </span><span class="s8">SortedDictionary</span><span class="s5">&lt;</span><span class="s4">string</span><span class="s5">, </span><span class="s4">string</span><span class="s5">&gt;</span></p>
+<p class="p7"><span class="s5"><span class="Apple-converted-space">                    </span>{</span></p>
+<p class="p7"><span class="s5"><span class="Apple-converted-space">                        </span>{</span><span class="s9">"status"</span><span class="s5">, </span><span class="s9">"Love Toriki. "</span><span class="s5">}</span></p>
+<p class="p7"><span class="s5"><span class="Apple-converted-space">                    </span>},</span></p>
+<p class="p7"><span class="s5"><span class="Apple-converted-space">                    </span></span><span class="s6">result</span><span class="s5"> =&gt;</span></p>
+<p class="p7"><span class="s5"><span class="Apple-converted-space">                    </span>{</span></p>
+<p class="p7"><span class="s5"><span class="Apple-converted-space">                        </span></span><span class="s6">Debug</span><span class="s5">.</span><span class="s7">Log</span><span class="s5">(</span><span class="s9">"update result:"</span><span class="s5"> + </span><span class="s6">result</span><span class="s5">);</span></p>
+<p class="p7"><span class="s5"><span class="Apple-converted-space">                    </span>},</span></p>
+<p class="p7"><span class="s5"><span class="Apple-converted-space">                    </span>(</span><span class="s6">code</span><span class="s5">, </span><span class="s6">errors</span><span class="s5">) =&gt;</span></p>
+<p class="p7"><span class="s5"><span class="Apple-converted-space">                    </span>{</span></p>
+<p class="p7"><span class="s5"><span class="Apple-converted-space">                        </span></span><span class="s6">Debug</span><span class="s5">.</span><span class="s7">Log</span><span class="s5">(</span><span class="s9">"update code:"</span><span class="s5"> + </span><span class="s6">code</span><span class="s5">);</span></p>
+<p class="p7"><span class="s5"><span class="Apple-converted-space">                    </span>}</span></p>
+<p class="p7"><span class="s5"><span class="Apple-converted-space">                </span>);</span></p>
+<p class="p7"><span class="s5"><span class="Apple-converted-space">            </span>},</span></p>
+<p class="p7"><span class="s5"><span class="Apple-converted-space">            </span>(</span><span class="s6">errorCode</span><span class="s5">, </span><span class="s6">message</span><span class="s5">) =&gt;</span></p>
+<p class="p7"><span class="s5"><span class="Apple-converted-space">            </span>{</span></p>
+<p class="p7"><span class="s5"><span class="Apple-converted-space">                </span></span><span class="s6">Debug</span><span class="s5">.</span><span class="s7">Log</span><span class="s5">(</span><span class="s9">"login error:"</span><span class="s5"> + </span><span class="s6">errorCode</span><span class="s5"> + </span><span class="s9">" message:"</span><span class="s5"> + </span><span class="s6">message</span><span class="s5">);</span></p>
+<p class="p7"><span class="s5"><span class="Apple-converted-space">            </span>}</span></p>
+<p class="p7"><span class="s5"><span class="Apple-converted-space">        </span>);</span></p>
+<p class="p11"><br></p>
+<p class="p10"><span class="Apple-tab-span">	</span>Init、 Loginの順に実行する。</p>
+<p class="p11"><br></p>
+<p class="p10"><span class="Apple-tab-span">	</span>ログアウトはない。</p>
+<p class="p10"><span class="Apple-tab-span">	</span>(TwitterKitではアプリ側に通信セッションを保存したりしていたんだけどその辺が多大な問題を起こしていた上に、別にいらないのでいらない。 だから消した。)</p>
+<p class="p11"><br></p>
+<p class="p10"><span class="Apple-tab-span">	</span>APIは、TwitterAPI.Get/Postとか書いて、TwitterのAPI Referenceに書いてあるようなパラメータを入れれば使える。</p>
+<p class="p11"><span class="Apple-tab-span">	</span></p>
+<p class="p11"><b></b><br></p>
+<p class="p10"><b>3.APIだけを使う</b></p>
+<p class="p10"><span class="Apple-tab-span">	</span>Loginで得られるaccessToken、secretがあれば、ログイン処理をいちいち挟まずにAPIを使うことができる。</p>
+<p class="p11"><br></p>
+<p class="p10"><a href="https://github.com/sassembla/toriki/blob/master/Assets/_Sample/APIAccess/APIAccess.cs">https://github.com/sassembla/toriki/blob/master/Assets/_Sample/APIAccess/APIAccess.cs</a></p>
+<p class="p13"><span class="s3"><span class="Apple-converted-space">        </span></span><span class="s6">TwitterAPI</span><span class="s3">.</span><span class="s7">InitWithToken</span><span class="s3">(</span><span class="s5">"ACCESS_TOKEN"</span><span class="s3">, </span><span class="s5">"ACCESS_SECRET"</span><span class="s3">);</span></p>
+<p class="p7"><span class="s5"><span class="Apple-converted-space">        </span></span><span class="s6">TwitterAPI</span><span class="s5">.</span><span class="s7">Get</span><span class="s5">(</span></p>
+<p class="p13"><span class="s3"><span class="Apple-converted-space">            </span></span><span class="s5">"https://api.twitter.com/1.1/users/show.json"</span><span class="s3">,</span></p>
+<p class="p7"><span class="s5"><span class="Apple-converted-space">            </span></span><span class="s4">new</span><span class="s5"> </span><span class="s8">SortedDictionary</span><span class="s5">&lt;</span><span class="s4">string</span><span class="s5">, </span><span class="s4">string</span><span class="s5">&gt;</span></p>
+<p class="p7"><span class="s5"><span class="Apple-converted-space">            </span>{</span></p>
+<p class="p13"><span class="s3"><span class="Apple-converted-space">                </span>{</span><span class="s5">"screen_name"</span><span class="s3">, </span><span class="s5">"toru_inoue"</span><span class="s3">}</span></p>
+<p class="p7"><span class="s5"><span class="Apple-converted-space">            </span>},</span></p>
+<p class="p7"><span class="s5"><span class="Apple-converted-space">            </span></span><span class="s6">result</span><span class="s5"> =&gt;</span></p>
+<p class="p7"><span class="s5"><span class="Apple-converted-space">            </span>{</span></p>
+<p class="p7"><span class="s5"><span class="Apple-converted-space">                </span></span><span class="s6">Debug</span><span class="s5">.</span><span class="s7">Log</span><span class="s5">(</span><span class="s9">"show result:"</span><span class="s5"> + </span><span class="s6">result</span><span class="s5">);</span></p>
+<p class="p7"><span class="s5"><span class="Apple-converted-space">            </span>},</span></p>
+<p class="p7"><span class="s5"><span class="Apple-converted-space">            </span>(</span><span class="s6">code</span><span class="s5">, </span><span class="s6">errors</span><span class="s5">) =&gt;</span></p>
+<p class="p7"><span class="s5"><span class="Apple-converted-space">            </span>{</span></p>
+<p class="p7"><span class="s5"><span class="Apple-converted-space">                </span></span><span class="s6">Debug</span><span class="s5">.</span><span class="s7">Log</span><span class="s5">(</span><span class="s9">"show code:"</span><span class="s5"> + </span><span class="s6">code</span><span class="s5">);</span></p>
+<p class="p7"><span class="s5"><span class="Apple-converted-space">            </span>}</span></p>
+<p class="p7"><span class="s5"><span class="Apple-converted-space">        </span>);</span></p>
+<p class="p11"><br></p>
+<p class="p10"><span class="Apple-tab-span">	</span>InitWithToken とか。以上。</p>
+<p class="p11"><br></p>
+<p class="p11"><br></p>
+</body>
+</html>
