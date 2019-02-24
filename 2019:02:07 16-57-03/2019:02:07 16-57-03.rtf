@@ -50,26 +50,29 @@
 \
 \
 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
 
-\f1\b\fs34 \'8e\'67\'82\'a2\'95\'fb
+\f1\b\fs34 \cf0 \'8e\'67\'82\'a2\'95\'fb
 \b0\fs24 \
 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
 
-\b 1.TwitterSetting.cs \'82\'c9consumerKey\'82\'c6\'82\'a9consumerSecret\'82\'f0\'8f\'91\'82\'ad\'81\'42
+\b \cf0 1.TwitterSetting.cs \'82\'c9consumerKey\'82\'c6\'82\'a9consumerSecret\'82\'f0\'8f\'91\'82\'ad\'81\'42
 \b0 \
 \
-{\field{\*\fldinst{HYPERLINK "https://github.com/sassembla/toriki/blob/master/Assets/Toriki/Scripts/TwitterSettings.cs"}}{\fldrslt https://github.com/sassembla/toriki/blob/master/Assets/Toriki/Scripts/TwitterSettings.cs}}\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+{\field{\*\fldinst{HYPERLINK "https://github.com/sassembla/toriki/blob/master/Assets/Toriki/Scripts/TwitterSettings.cs"}}{\fldrslt \cf0 https://github.com/sassembla/toriki/blob/master/Assets/Toriki/Scripts/TwitterSettings.cs}}\
 \pard\pardeftab720\sl360\partightenfactor0
 
 \f3 \cf2 \cb3 \expnd0\expndtw0\kerning0
-\outl0\strokewidth0 \strokec2         \cf4 \strokec4 static\cf2 \strokec2  \cf5 \strokec5 TwitterSettings\cf2 \strokec2 ()\
+        \cf4 static\cf2  \cf5 TwitterSettings\cf2 ()\
         \{\
-            \cf6 \strokec6 ConsumerKey\cf2 \strokec2  = \cf6 \strokec6 string\cf2 \strokec2 .\cf6 \strokec6 Empty\cf2 \strokec2 ;\
-            \cf6 \strokec6 ConsumerSecret\cf2 \strokec2  = \cf6 \strokec6 string\cf2 \strokec2 .\cf6 \strokec6 Empty\cf2 \strokec2 ;\
+            \cf6 ConsumerKey\cf2  = \cf6 string\cf2 .\cf6 Empty\cf2 ;\
+            \cf6 ConsumerSecret\cf2  = \cf6 string\cf2 .\cf6 Empty\cf2 ;\
 \cb1 	\
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
 
-\f1 \cf0 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 	Runtime\'82\'c9\'82\'a0\'82\'e9\'83\'52\'81\'5b\'83\'68\'82\'c5\'81\'41toriki\'82\'cc\'8f\'89\'8a\'fa\'89\'bb\'82\'f0\'8d\'73\'82\'a4\'8d\'db\'82\'c9\'8e\'a9\'93\'ae\'93\'49\'82\'c9\'83\'8d\'81\'5b\'83\'68\'82\'b3\'82\'ea\'82\'e9\'81\'42\
+\f1 \cf0 \kerning1\expnd0\expndtw0 	Runtime\'82\'c9\'82\'a0\'82\'e9\'83\'52\'81\'5b\'83\'68\'82\'c5\'81\'41toriki\'82\'cc\'8f\'89\'8a\'fa\'89\'bb\'82\'f0\'8d\'73\'82\'a4\'8d\'db\'82\'c9\'8e\'a9\'93\'ae\'93\'49\'82\'c9\'83\'8d\'81\'5b\'83\'68\'82\'b3\'82\'ea\'82\'e9\'81\'42\
 	Resources\'82\'c6\'82\'a9\'82\'c9\'83\'4c\'81\'5b\'82\'f0\'88\'c3\'8d\'86\'89\'bb\'82\'b5\'82\'c4\'82\'a8\'82\'a2\'82\'c4\'81\'41\'82\'b1\'82\'b1\'82\'c5\'95\'9c\'8d\'86\'89\'bb\'82\'b7\'82\'e9\'82\'c6\'97\'c7\'82\'a2\'81\'42\
 \
 \
@@ -81,52 +84,51 @@
 \pard\pardeftab720\sl360\partightenfactor0
 
 \f3 \cf2 \cb3 \expnd0\expndtw0\kerning0
-\outl0\strokewidth0 \strokec2         \cf6 \strokec6 TwitterAPI\cf2 \strokec2 .\cf5 \strokec5 Init\cf2 \strokec2 ();\
-        \cf6 \strokec6 TwitterAPI\cf2 \strokec2 .\cf5 \strokec5 LogIn\cf2 \strokec2 (\
-            (\cf6 \strokec6 nickname\cf2 \strokec2 , \cf6 \strokec6 token\cf2 \strokec2 , \cf6 \strokec6 secret\cf2 \strokec2 ) =>\
+        \cf6 TwitterAPI\cf2 .\cf5 InitWithLogin\cf2 (\
+            (\cf6 nickname\cf2 , \cf6 token\cf2 , \cf6 secret\cf2 ) =>\
             \{\
-                \cf7 \strokec7 // show user info API example.\cf2 \strokec2 \
-                \cf6 \strokec6 TwitterAPI\cf2 \strokec2 .\cf5 \strokec5 Get\cf2 \strokec2 (\
-                    \cf8 \strokec8 "https://api.twitter.com/1.1/users/show.json"\cf2 \strokec2 ,\
-                    \cf4 \strokec4 new\cf2 \strokec2  \cf9 \strokec9 SortedDictionary\cf2 \strokec2 <\cf4 \strokec4 string\cf2 \strokec2 , \cf4 \strokec4 string\cf2 \strokec2 >\
+                \cf7 // show user info API example.\cf2 \
+                \cf6 TwitterAPI\cf2 .\cf5 Get\cf2 (\
+                    \cf8 "https://api.twitter.com/1.1/users/show.json"\cf2 ,\
+                    \cf4 new\cf2  \cf9 SortedDictionary\cf2 <\cf4 string\cf2 , \cf4 string\cf2 >\
                     \{\
-                        \{\cf8 \strokec8 "screen_name"\cf2 \strokec2 , \cf8 \strokec8 "toru_inoue"\cf2 \strokec2 \}\
+                        \{\cf8 "screen_name"\cf2 , \cf8 "toru_inoue"\cf2 \}\
                     \},\
-                    \cf6 \strokec6 result\cf2 \strokec2  =>\
+                    \cf6 result\cf2  =>\
                     \{\
-                        \cf6 \strokec6 Debug\cf2 \strokec2 .\cf5 \strokec5 Log\cf2 \strokec2 (\cf8 \strokec8 "show result:"\cf2 \strokec2  + \cf6 \strokec6 result\cf2 \strokec2 );\
+                        \cf6 Debug\cf2 .\cf5 Log\cf2 (\cf8 "show result:"\cf2  + \cf6 result\cf2 );\
                     \},\
-                    (\cf6 \strokec6 code\cf2 \strokec2 , \cf6 \strokec6 errors\cf2 \strokec2 ) =>\
+                    (\cf6 code\cf2 , \cf6 errors\cf2 ) =>\
                     \{\
-                        \cf6 \strokec6 Debug\cf2 \strokec2 .\cf5 \strokec5 Log\cf2 \strokec2 (\cf8 \strokec8 "show code:"\cf2 \strokec2  + \cf6 \strokec6 code\cf2 \strokec2 );\
+                        \cf6 Debug\cf2 .\cf5 Log\cf2 (\cf8 "show code:"\cf2  + \cf6 code\cf2 );\
                     \}\
                 );\
 \
-                \cf7 \strokec7 // tweet API example.\cf2 \strokec2 \
-                \cf6 \strokec6 TwitterAPI\cf2 \strokec2 .\cf5 \strokec5 Post\cf2 \strokec2 (\
-                    \cf8 \strokec8 "https://api.twitter.com/1.1/statuses/update.json"\cf2 \strokec2 ,\
-                    \cf4 \strokec4 new\cf2 \strokec2  \cf9 \strokec9 SortedDictionary\cf2 \strokec2 <\cf4 \strokec4 string\cf2 \strokec2 , \cf4 \strokec4 string\cf2 \strokec2 >\
+                \cf7 // tweet API example.\cf2 \
+                \cf6 TwitterAPI\cf2 .\cf5 Post\cf2 (\
+                    \cf8 "https://api.twitter.com/1.1/statuses/update.json"\cf2 ,\
+                    \cf4 new\cf2  \cf9 SortedDictionary\cf2 <\cf4 string\cf2 , \cf4 string\cf2 >\
                     \{\
-                        \{\cf8 \strokec8 "status"\cf2 \strokec2 , \cf8 \strokec8 "Love Toriki. "\cf2 \strokec2 \}\
+                        \{\cf8 "status"\cf2 , \cf8 "Love Toriki. "\cf2 \}\
                     \},\
-                    \cf6 \strokec6 result\cf2 \strokec2  =>\
+                    \cf6 result\cf2  =>\
                     \{\
-                        \cf6 \strokec6 Debug\cf2 \strokec2 .\cf5 \strokec5 Log\cf2 \strokec2 (\cf8 \strokec8 "update result:"\cf2 \strokec2  + \cf6 \strokec6 result\cf2 \strokec2 );\
+                        \cf6 Debug\cf2 .\cf5 Log\cf2 (\cf8 "update result:"\cf2  + \cf6 result\cf2 );\
                     \},\
-                    (\cf6 \strokec6 code\cf2 \strokec2 , \cf6 \strokec6 errors\cf2 \strokec2 ) =>\
+                    (\cf6 code\cf2 , \cf6 errors\cf2 ) =>\
                     \{\
-                        \cf6 \strokec6 Debug\cf2 \strokec2 .\cf5 \strokec5 Log\cf2 \strokec2 (\cf8 \strokec8 "update code:"\cf2 \strokec2  + \cf6 \strokec6 code\cf2 \strokec2 );\
+                        \cf6 Debug\cf2 .\cf5 Log\cf2 (\cf8 "update code:"\cf2  + \cf6 code\cf2 );\
                     \}\
                 );\
             \},\
-            (\cf6 \strokec6 errorCode\cf2 \strokec2 , \cf6 \strokec6 message\cf2 \strokec2 ) =>\
+            (\cf6 errorCode\cf2 , \cf6 message\cf2 ) =>\
             \{\
-                \cf6 \strokec6 Debug\cf2 \strokec2 .\cf5 \strokec5 Log\cf2 \strokec2 (\cf8 \strokec8 "login error:"\cf2 \strokec2  + \cf6 \strokec6 errorCode\cf2 \strokec2  + \cf8 \strokec8 " message:"\cf2 \strokec2  + \cf6 \strokec6 message\cf2 \strokec2 );\
+                \cf6 Debug\cf2 .\cf5 Log\cf2 (\cf8 "login error:"\cf2  + \cf6 errorCode\cf2  + \cf8 " message:"\cf2  + \cf6 message\cf2 );\
             \}\
         );\
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
 
-\f1 \cf0 \cb1 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 \
+\f1 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
 	Init\'81\'41 Login\'82\'cc\'8f\'87\'82\'c9\'8e\'c0\'8d\'73\'82\'b7\'82\'e9\'81\'42\
 \
 	\'83\'8d\'83\'4f\'83\'41\'83\'45\'83\'67\'82\'cd\'82\'c8\'82\'a2\'81\'42\
@@ -140,29 +142,30 @@
 \b0 \
 	Login\'82\'c5\'93\'be\'82\'e7\'82\'ea\'82\'e9accessToken\'81\'41secret\'82\'aa\'82\'a0\'82\'ea\'82\'ce\'81\'41\'83\'8d\'83\'4f\'83\'43\'83\'93\'8f\'88\'97\'9d\'82\'f0\'82\'a2\'82\'bf\'82\'a2\'82\'bf\'8b\'b2\'82\'dc\'82\'b8\'82\'c9API\'82\'f0\'8e\'67\'82\'a4\'82\'b1\'82\'c6\'82\'aa\'82\'c5\'82\'ab\'82\'e9\'81\'42\
 \
-{\field{\*\fldinst{HYPERLINK "https://github.com/sassembla/toriki/blob/master/Assets/_Sample/APIAccess/APIAccess.cs"}}{\fldrslt https://github.com/sassembla/toriki/blob/master/Assets/_Sample/APIAccess/APIAccess.cs}}\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+{\field{\*\fldinst{HYPERLINK "https://github.com/sassembla/toriki/blob/master/Assets/_Sample/APIAccess/APIAccess.cs"}}{\fldrslt \cf0 https://github.com/sassembla/toriki/blob/master/Assets/_Sample/APIAccess/APIAccess.cs}}\
 \pard\pardeftab720\sl360\partightenfactor0
 
 \f3 \cf2 \cb3 \expnd0\expndtw0\kerning0
-\outl0\strokewidth0 \strokec2         \cf6 \strokec6 TwitterAPI\cf2 \strokec2 .\cf5 \strokec5 InitWithToken\cf2 \strokec2 (\cf8 \strokec8 "ACCESS_TOKEN"\cf2 \strokec2 , \cf8 \strokec8 "ACCESS_SECRET"\cf2 \strokec2 );\
-        \cf6 \strokec6 TwitterAPI\cf2 \strokec2 .\cf5 \strokec5 Get\cf2 \strokec2 (\
-            \cf8 \strokec8 "https://api.twitter.com/1.1/users/show.json"\cf2 \strokec2 ,\
-            \cf4 \strokec4 new\cf2 \strokec2  \cf9 \strokec9 SortedDictionary\cf2 \strokec2 <\cf4 \strokec4 string\cf2 \strokec2 , \cf4 \strokec4 string\cf2 \strokec2 >\
+        \cf6 TwitterAPI\cf2 .\cf5 InitWithToken\cf2 (\cf8 "ACCESS_TOKEN"\cf2 , \cf8 "ACCESS_SECRET"\cf2 );\
+        \cf6 TwitterAPI\cf2 .\cf5 Get\cf2 (\
+            \cf8 "https://api.twitter.com/1.1/users/show.json"\cf2 ,\
+            \cf4 new\cf2  \cf9 SortedDictionary\cf2 <\cf4 string\cf2 , \cf4 string\cf2 >\
             \{\
-                \{\cf8 \strokec8 "screen_name"\cf2 \strokec2 , \cf8 \strokec8 "toru_inoue"\cf2 \strokec2 \}\
+                \{\cf8 "screen_name"\cf2 , \cf8 "toru_inoue"\cf2 \}\
             \},\
-            \cf6 \strokec6 result\cf2 \strokec2  =>\
+            \cf6 result\cf2  =>\
             \{\
-                \cf6 \strokec6 Debug\cf2 \strokec2 .\cf5 \strokec5 Log\cf2 \strokec2 (\cf8 \strokec8 "show result:"\cf2 \strokec2  + \cf6 \strokec6 result\cf2 \strokec2 );\
+                \cf6 Debug\cf2 .\cf5 Log\cf2 (\cf8 "show result:"\cf2  + \cf6 result\cf2 );\
             \},\
-            (\cf6 \strokec6 code\cf2 \strokec2 , \cf6 \strokec6 errors\cf2 \strokec2 ) =>\
+            (\cf6 code\cf2 , \cf6 errors\cf2 ) =>\
             \{\
-                \cf6 \strokec6 Debug\cf2 \strokec2 .\cf5 \strokec5 Log\cf2 \strokec2 (\cf8 \strokec8 "show code:"\cf2 \strokec2  + \cf6 \strokec6 code\cf2 \strokec2 );\
+                \cf6 Debug\cf2 .\cf5 Log\cf2 (\cf8 "show code:"\cf2  + \cf6 code\cf2 );\
             \}\
         );\
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
 
-\f1 \cf0 \cb1 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 \
+\f1 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
 	InitWithToken \'82\'c6\'82\'a9\'81\'42\'88\'c8\'8f\'e3\'81\'42\
 \
 \
