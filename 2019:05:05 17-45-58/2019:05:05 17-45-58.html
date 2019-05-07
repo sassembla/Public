@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1671.4">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Kaku Gothic Pro'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic Pro'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic Pro'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; min-height: 18.0px}
+    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'}
+    p.p8 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px 'Hiragino Kaku Gothic Pro'; color: #000000; min-height: 17.0px}
+    p.p9 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px 'Hiragino Kaku Gothic Pro'; color: #000000}
+    p.p10 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Kaku Gothic Pro'; background-color: #e6e6e6}
+    p.p11 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px 'Hiragino Kaku Gothic Pro'; color: #000000; background-color: #e6e6e6}
+    span.s1 {font: 12.0px 'Hiragino Sans'}
+    span.s2 {font: 11.0px 'Hiragino Kaku Gothic Pro'; font-variant-ligatures: no-common-ligatures; color: #000000}
+    span.s3 {font-variant-ligatures: no-common-ligatures}
+    span.s4 {font: 12.0px 'Hiragino Kaku Gothic Pro'; font-kerning: none}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>Unity2018系以降でAndroidのビルドのための環境を整える</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Javaに関してかなり頑張りたく無いが、OpenJDKはUnityに含まれるようになっている。これはすごい進歩。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>が、IL2CPPを使うにはNDKが、そしてそもそも実機インストールするにはAndroidSDKのインストールが必要。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>sdkインストール</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>sdkのインストール自体は、ここからDLできるコマンドラインツールで事足りる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://developer.android.com/studio#downloads">https://developer.android.com/studio#downloads</a></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p4"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202019-05-05%2021.53.48.png" alt="スクリーンショット 2019-05-05 21.53.48.png"></p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="s1">間違っても</span>Android Studio<span class="s1">とか要らない。</span></p>
+<p class="p6"><br></p>
+<p class="p7"><span class="Apple-tab-span">	</span>DLしたsdkは、zipファイル名をフォルダ名にして、Applicationsフォルダ以下においとく。この場合は、<span class="s2">sdk-tools-darwin-4333796。</span></p>
+<p class="p8"><span class="s3"></span><br></p>
+<p class="p9"><span class="s3"><span class="Apple-tab-span">	</span>で、設置が終わったら、Unity &gt; Preferences &gt; External Tools でsdk -&gt; browse とやって、toolsフォルダを指すと設定が完了する。</span></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>SDK周りの設定</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>えーっと、AndroidのSDKは、インストールしただけだと何も入っていない状態なので、特定のバージョンのsdkをインストールする。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>sdkmanagerをコマンドラインで動かせば終わりなんだけど、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>サクッと動かすためにはJAVA_HOMEの環境変数設定が必須。いやなんか回避できるんだろうけど、今時そういうのダサい、、、はい。</p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Unityに含まれるjdkのパスを指定する</p>
+<p class="p10">export JAVA_HOME=/Applications/Unity2018.3.11f1/PlaybackEngines/AndroidPlayer/Tools/OpenJDK/MacOS/</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>sdkmanagerを起動、欲しいバージョンのsdkをインストールする。</p>
+<p class="p11"><span class="s3">/Applications/sdk-tools-darwin-4333796/tools/bin/sdkmanager --update</span></p>
+<p class="p11"><span class="s3">/Applications/sdk-tools-darwin-4333796/tools/bin/sdkmanager </span><span class="s4">"platform-tools"</span><span class="s3"> </span><span class="s4">build-tools;28.0.2</span></p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b>ndkインストール</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Unity AndroidでIL2CPPを使ったアプリを作るには、ndkが必要。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Unity &gt; Preferences &gt; External Tools のとこのndkのDownloadボタンがあるので、dlしたらApplications直下に置く。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>設置し終わったら、Unity &gt; Preferences &gt; External Tools の ndk -&gt; browse で、設置したフォルダを指すとOK。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>最終的にはこんな感じになればいい。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p4"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202019-05-05%2022.01.00.png" alt="スクリーンショット 2019-05-05 22.01.00.png"></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3">以上。忘れたいので書く。</p>
+</body>
+</html>
