@@ -36,8 +36,33 @@
 <p class="p3"><span class="Apple-tab-span">	</span>・エディタ上でARKitを使うコードを書いたら自動的にARKitサーバが立ち上がるようにする</p>
 <p class="p3"><span class="Apple-tab-span">	</span>・ARKitを動かすiOSアプリ側からいつでも、何回でも接続、再接続できる</p>
 <p class="p3"><span class="Apple-tab-span">	</span>・無線で接続できる。</p>
-<p class="p2"><br></p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>構造</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>まず、iOS ARKit実行機からはUnity Editorに接続することにした。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>これはまあ、エディタで動いてる時しか使わんでしょみたいな感じ。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>接続にはWebSocketを使う。そのため、iOS側にはWSクライアント、エディタにはWSサーバが立つ。</p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>概念的に書くとこんな感じ</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>iOS ARkit -ws-&gt; Unity Editor</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>WSサーバは結構軽量なんで、ユーザーがエディタのPlayを押したら起動、Stopを押したら落とす、みたいな感じにした。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>次にPlay中にARKitを使うところまできたら &amp;&amp;<span class="Apple-converted-space">  </span>iOS ARKitからのインプットが来ていたら、自動的にiOS ARKitのインプットをPlay中のアプリに流し込みたかった。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、エディタとPlay中のアプリの接続には、やっぱりWebSocketを使った。</p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>概念的に書くとこんな感じ2</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>iOS ARkit -ws-&gt; Unity Editor &lt;-ws- Player</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>面白くなってきやがったぜ。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>最終的なデータフローとしては、上記を実装した上で、iOS -&gt; Editorで中継してPlayerに流し込む という単純なものになっている。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>この構造ならiOS側が切断しようがPlayer側が切断しようが、どちらかが復帰したタイミングでデータを流せる。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
 <p class="p3"><b>展望</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>現状はただARKitについて動くだけなんで、今後はOculus Questの視界とかコントローラとかをUnity Editorにほうり込めるようにする。</p>
 <p class="p3"><span class="Apple-tab-span">	</span>WebSocketサーバで自前のやつがあったんだけど権利の関係でちょっと改修が必要で、現在はFleckというMITライセンスのライブラリに依存している。</p>
