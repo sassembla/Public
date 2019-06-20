@@ -34,24 +34,24 @@
 <p class="p4"><br></p>
 <p class="p3"><b>発端</b></p>
 <p class="p5"><span class="Apple-tab-span">	</span>UnityEngine.Debug.unityLogger.logEnabled = false; <span class="s3">を使っても、</span>Debug.Log<span class="s3">の中の実装が変わるだけで、</span></p>
-<p class="p3"><span class="Apple-tab-span">	</span>Debug.Log(1000)<span class="s2">;</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Debug.Log(“a:” + 1000)<span class="s2">;</span></p>
 <p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>とかの中身が変わってログは出なくなるが、</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span>1000 </span>の部分は、1000.ToString() みたいな処理が走る。</p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>“a:” + <span class="s2">1000 </span>の部分は、“a:” + 1000.ToString() みたいな処理が走る。</p>
 <p class="p4"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>処理が走るやんけ、というところで、ToStringは new string ~ みたいなのがその結果として発生するので、</p>
 <p class="p3"><span class="Apple-tab-span">	</span>結果としてログ関数の中身を無効化しても、無駄なnew発生してるやんけという話。</p>
 <p class="p4"><br></p>
 <p class="p4"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>before</p>
-<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Debug.Log(1000);</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Debug.Log(“a:” + 1000);</p>
 <p class="p4"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>after</p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>UnityEngine.Debug.unityLogger.logEnabled = false;</p>
-<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Debug.Log(1000);// 関数の中身がすげ変わってログは出なくなってるが、1000をstringに変える、という処理は残っている。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Debug.Log(“a:” + 1000);// 関数の中身がすげ変わってログは出なくなってるが、1000をstringに変える、という処理は残っている。</p>
 <p class="p4"><br></p>
 <p class="p4"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>これはまあ、1000の部分で発生したToString()の成果が、GCの対象となる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>これはまあ、“a:” + 1000の部分で発生したToString()の成果が、GCの対象となる。</p>
 <p class="p4"><br></p>
 <p class="p4"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>で、まあ、つまり、</p>
