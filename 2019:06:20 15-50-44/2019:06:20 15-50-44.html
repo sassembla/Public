@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1671.4">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; min-height: 18.0px}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    span.s1 {font: 22.0px 'Hiragino Sans'}
+    span.s2 {font: 12.0px Helvetica}
+    span.s3 {font: 12.0px 'Hiragino Sans'}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>Unity</b><span class="s1"><b>の</b></span><b>Debug.Log</b><span class="s1"><b>の話</b></span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>個人的にUnityでのLogがどうなるか、という動作を追い切ったことがないんで、追った話。</p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p3"><b>前提</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・UnityEditorのLogging設定では、ログは出る。stacktraceが止むだけ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・UnityEngine.Debug.unityLogger.logEnabled = false; では、実行時にこのコードを実行後、ログは出なくなる。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ここまででいうと、後者、 UnityEngine.Debug.unityLogger.logEnabled = false; いいじゃんってなると思うんだけど、まだ気になるポイントがあった。</p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p3"><b>発端</b></p>
+<p class="p5"><span class="Apple-tab-span">	</span>UnityEngine.Debug.unityLogger.logEnabled = false; <span class="s3">を使っても、</span>Debug.Log<span class="s3">の中の実装が変わるだけで、</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Debug.Log(1000)<span class="s2">;</span></p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>とかの中身が変わってログは出なくなるが、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span>1000 </span>の部分は、1000.ToString() みたいな処理が走る。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>処理が走るやんけ、というところで、ToStringは new string ~ みたいなのがその結果として発生するので、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>結果としてログ関数の中身を無効化しても、無駄なnew発生してるやんけという話。</p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>before</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Debug.Log(1000);</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>after</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>UnityEngine.Debug.unityLogger.logEnabled = false;</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Debug.Log(1000);// 関数の中身がすげ変わってログは出なくなってるが、1000をstringに変える、という処理は残っている。</p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これはまあ、1000の部分で発生したToString()の成果が、GCの対象となる。</p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、まあ、つまり、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・UnityEngine.Debug.unityLogger.logEnabled = false; をやっても、結局ログコード自体が残っていると無駄なnewが走る</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>というわけだ。俺はこの時点で結構絶望した。</p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>なんでかというと、UnityEngine.Debug.Log類をglobalで上書きする、という、ヒューマンパワーを食ううえに不完全な方法しか解決策がないから。</p>
+<p class="p4"><span class="Apple-tab-span">	</span></p>
+<p class="p4"><br></p>
+<p class="p3"><b>こうであってほしい</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・コンパイル時にUnityEngine.Debug.LogをConditionalで制御できるようにしてほしい</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・そしたらコンパイル時にUnityEngine.Debug.Logを呼んでる箇所は、たとえdllの中でも消えてくれると思うし、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・例えばログのためのローカル変数とかもunused扱いになってコンパイルで消せると思うので</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>みたいな感じ。<span class="s2">C#</span>レイヤーでこういう問題に挑ませるの悪手だと思う。</p>
+<p class="p4"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+</body>
+</html>
