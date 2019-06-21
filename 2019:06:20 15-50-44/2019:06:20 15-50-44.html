@@ -96,8 +96,16 @@
 <p class="p3"><span class="Apple-tab-span">	</span>・Conditional属性をつけることで、根こそぎ無効にできる</p>
 <p class="p3"><span class="Apple-tab-span">	</span>という手法と、その手法がなお及ばない部分がある、と言うことを示してくれている。</p>
 <p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・using A=B とかやられてるやつは対処できない(ライブラリとかにめっちゃある)</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ということがそれ。コードならいいけど、dllなら？ 詰むが？</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>そしてそれとは別に、まあ、自分はこっちの方が気になるんだけど、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・毎回誰かが同じ、Debug.Log*系のコードを書かないといけない</p>
+<p class="p3"><span class="Apple-tab-span">	</span>これなんの罰ゲームだよ。被ったりするしみんなが同じことを毎回やる必要ないでしょ。</p>
+<p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>そう、つまり不完全なのだよ。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>元栓が欲しいんだ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>完全な、デザインされた元栓が欲しいんだ。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>こうであってほしい</b></p>
@@ -160,7 +168,7 @@
 <p class="p3"><span class="Apple-tab-span">	</span>mなんちゃらの数値は、Unityのバージョンに関連なく固定っぽい。特にビルド対象によって変動はしなかった。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>そしてこのコードをIL2CPP化されたコードの上で使われてるはずなので、使用箇所を探してみる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>そしてこの関数はIL2CPP化されたコードの上で使われてるはずなので、使用箇所を探してみる。</p>
 <p class="p2"><br></p>
 <p class="p10"><span class="s10">Debug_Log_m4051431634</span><span class="s11">(</span><span class="s12"><b>NULL</b></span><span class="s11"> </span><i>/*static, unused*/</i><span class="s11">, </span><span class="s13">_stringLiteral223888751</span><span class="s11">, </span><i>/*hidden argument*/</i><span class="s12"><b>NULL</b></span><span class="s11">);</span><span class="s14"><span class="Apple-tab-span">	</span></span></p>
 <p class="p2"><br></p>
