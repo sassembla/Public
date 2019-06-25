@@ -1,12 +1,12 @@
 {\rtf1\ansi\ansicpg932\cocoartf1671\cocoasubrtf400
 {\fonttbl\f0\fnil\fcharset128 HiraginoSans-W7;\f1\fnil\fcharset128 HiraginoSans-W4;\f2\fnil\fcharset128 HiraginoSans-W3;
-}
-{\colortbl;\red255\green255\blue255;}
-{\*\expandedcolortbl;;}
-\paperw11900\paperh16840\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\f3\fswiss\fcharset0 Helvetica;\f4\fswiss\fcharset0 Helvetica-Bold;}
+{\colortbl;\red255\green255\blue255;\red230\green230\blue230;\red9\green79\blue209;}
+{\*\expandedcolortbl;;\csgray\c92143;\cssrgb\c0\c40784\c85490;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww19700\viewh11480\viewkind0
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
 
-\f0\b\fs44 \cf0 2018.3\'88\'c8\'8d\'7e\'82\'c5WebCamTexture\'82\'aa\'83\'8a\'83\'4e\'83\'47\'83\'58\'83\'67\'83\'54\'83\'43\'83\'59\'82\'f0\'96\'b3\'8e\'8b\'82\'b5\'82\'bd\'83\'66\'81\'5b\'83\'5e\'82\'f0\'93\'8a\'82\'b0\'82\'c4\'82\'ad\'82\'e9\'8c\'8f
+\f0\b\fs44 \cf0 2018.3\'88\'c8\'8d\'7e\'82\'c5WebCamTexture\'82\'aa\'83\'8a\'83\'4e\'83\'47\'83\'58\'83\'67\'83\'54\'83\'43\'83\'59\'82\'f0\'96\'b3\'8e\'8b\'82\'b5\'82\'bd\'83\'66\'81\'5b\'83\'5e\'82\'f0\'93\'8a\'82\'b0\'82\'c4\'82\'ad\'82\'e9\'8c\'8f(\'8c\'dd\'8a\'b7\'90\'ab\'94\'6a\'89\'f3\'82\'be\'82\'c1\'82\'bd)
 \f1\b0\fs24 \
 \
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
@@ -48,4 +48,53 @@
 
 \f0\b \'83\'8c\'83\'7c\'81\'5b\'83\'67
 \f1\b0 \
-	\'8d\'a1\'8d\'ec\'82\'c1\'82\'bd\'81\'42}
+	\'8d\'a1\'8d\'ec\'82\'c1\'82\'bd\'81\'42\
+\
+\
+
+\f0\b \'8c\'8b\'89\'ca
+\f1\b0 \
+	\'83\'8c\'83\'7c\'81\'5b\'83\'67\'82\'c9\'91\'ce\'82\'b5\'82\'c4\
+\pard\pardeftab720\partightenfactor0
+
+\f3 \cf0 \cb2 \expnd0\expndtw0\kerning0
+Hello,\
+\
+Unity added support for iPhone/iPad Depth Camera, please take a look:\
+\pard\pardeftab720\partightenfactor0
+{\field{\*\fldinst{HYPERLINK "https://docs.unity3d.com/ScriptReference/WebCamTexture-ctor.html"}}{\fldrslt \cf3 \ul \ulc3 https://docs.unity3d.com/ScriptReference/WebCamTexture-ctor.html}}\
+\pard\pardeftab720\partightenfactor0
+{\field{\*\fldinst{HYPERLINK "https://docs.unity3d.com/ScriptReference/WebCamDevice.htmlnew"}}{\fldrslt \cf3 \ul \ulc3 https://docs.unity3d.com/ScriptReference/WebCamDevice.htmlnew}}\'a0\
+In your Repro project you selecting 
+\f4\b last 
+\f3\b0 front facing device from a WebCamTexture.devices with an\'a0assumption that it will be correct one, but it is\'a0not valid with new Camera kind introduced.
+\f1 \kerning1\expnd0\expndtw0 \
+\pard\pardeftab720\partightenfactor0
+\cf0 \cb1 \
+	\'81\'45Unity\'82\'cc\'82\'a0\'82\'e9\'83\'6f\'81\'5b\'83\'57\'83\'87\'83\'93\'82\'a9\'82\'e7iPhone/iPad\'82\'cc\'83\'66\'83\'76\'83\'58\'83\'4a\'83\'81\'83\'89\'82\'c9\'91\'ce\'89\'9e\'82\'b5\'82\'bd\'82\'f1\'82\'be\'82\'e6\
+	\'81\'45\'82\'bb\'82\'f1\'82\'c5\'82\'bb\'82\'cc\'82\'d4\'82\'f1\'82\'cc\'83\'4a\'83\'81\'83\'89\'82\'aa\'91\'9d\'82\'a6\'82\'c4\'82\'e9\
+	\'81\'45\'8c\'bb\'8f\'f3\'82\'cc\'82\'a8\'91\'4f\'82\'cc\'83\'41\'83\'76\'83\'8a\'82\'cdfrontFacing \'82\'a9\'82\'c2 last\'82\'c5\'91\'49\'82\'f1\'82\'c5\'82\'e9\'82\'a9\'82\'e7\'81\'41Depth\'83\'4a\'83\'81\'83\'89\'82\'f0\'88\'f8\'82\'a2\'82\'bd\'82\'f1\'82\'be\'82\'e6\
+\
+	\'82\'c6\'82\'a2\'82\'a4\'89\'f1\'93\'9a\'82\'be\'82\'c1\'82\'bd\'81\'42\
+	\
+\
+	\'82\'a2\'82\'e2\'81\'41\'82\'a8\'91\'4f\'81\'41\'82\'bb\'82\'ea\'81\'41\'8d\'a1\'82\'dc\'82\'c5\'88\'ea\'8c\'c2\'82\'b5\'82\'a9\'82\'c8\'82\'a9\'82\'c1\'82\'bdfront facing camera\'82\'f0\'81\'41isFrontFacing\'82\'c5\'8c\'9f\'8d\'f5\'82\'b5\'82\'c4\'82\'e9\'8d\'a1\'82\'dc\'82\'c5\'82\'cc\'83\'41\'83\'76\'83\'8a\'91\'53\'96\'c5\'82\'b7\'82\'e9\'82\'bc\'81\'41\'8c\'e3\'95\'fb\'8c\'dd\'8a\'b7\'90\'ab\'94\'6a\'89\'f3\'82\'b5\'82\'c4\'82\'e9\'82\'e2\'82\'f1\'82\'af\
+\
+	\'82\'c6\'8e\'76\'82\'c1\'82\'bd\'82\'aa\'81\'41\'82\'d3\'81\'5b\'81\'5b\'81\'5b\'82\'f1\'82\'c8\'82\'e9\'82\'d9\'82\'c7\'81\'5b\'81\'81\'81\'81\'81\'81\'81\'60\'81\'60\'81\'60\'82\'c6\'82\'a2\'82\'a4\'8a\'b4\'82\'b6\'82\'c5\'94\'5b\'93\'be\'82\'b5\'82\'bd\'81\'42\
+	\'94\'5b\'93\'be\'82\'a2\'82\'a9\'82\'c8\'82\'a2\'82\'af\'82\'c7\'81\'41\'8b\'8c\'97\'88\'82\'cc\'83\'41\'83\'76\'83\'8a\'82\'cd\'91\'e5\'91\'cc\'8e\'80\'82\'ca\'82\'aa\'81\'41\'94\'6a\'89\'f3\'93\'49\'95\'cf\'8d\'58\'82\'c5\'82\'cd\'82\'a0\'82\'e9\'82\'aa\'81\'41\
+\
+	\'81\'45front facing\
+	\'81\'45kind \
+	\'82\'b1\'82\'cc2\'82\'c2\'82\'f0\'91\'67\'82\'dd\'8d\'87\'82\'ed\'82\'b9\'82\'c4\'83\'60\'83\'46\'83\'62\'83\'4e\'82\'b7\'82\'e9\'95\'4b\'97\'76\'82\'aa\'82\'a0\'82\'e9\'81\'42\
+\
+	kind\'8d\'ec\'82\'e9\'82\'c8\'82\'e7\'83\'4a\'83\'81\'83\'89\'88\'ea\'97\'97\'8e\'e6\'93\'be\'82\'b7\'82\'e9\'82\'c6\'82\'ab\'82\'c9GetDepthCamera\'82\'c6\'82\'a9\'8d\'ec\'82\'e8\'82\'c8\'82\'b3\'82\'a2\'82\'e6\'82\'c6\'82\'a2\'82\'a4\'8b\'43\'8e\'9d\'82\'bf\'82\'aaMax\'82\'c9\'82\'c8\'82\'e8\'82\'bb\'82\'a4\'82\'c9\'82\'c8\'82\'e9\'82\'f1\'82\'be\'82\'af\'82\'c7\'81\'41\
+	\'82\'dc\'81\'5b\'81\'5b\'81\'5b\'81\'5b\'81\'5b\'82\'a4\'81\'5b\'81\'5b\'81\'5b\'81\'5b\'81\'5b\'81\'5b\'81\'5b\'81\'5b\'81\'5b\'82\'f1\'81\'41\'81\'41\'81\'41\'81\'41\'83\'4d\'83\'8a\'83\'4d\'83\'8a\'82\'cc\'83\'4d\'83\'8a\'83\'4d\'83\'8a\'82\'c5\'8b\'96\'82\'b7\'81\'42\
+\
+	\
+
+\f0\b \'91\'8d\'95\'5d
+\f1\b0 \
+	\'8c\'dd\'8a\'b7\'90\'ab\'82\'cd\'94\'6a\'89\'f3\'82\'b3\'82\'ea\'82\'c4\'82\'a2\'82\'e9\'81\'42\'89\'b4\'82\'cd\'8b\'96\'82\'b7\'82\'aa\'89\'b4\'82\'cc\'8d\'b0\'82\'aa\'8e\'cd\'82\'b7\'82\'a9\'82\'c8\'81\'48\'81\'49\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \
+}

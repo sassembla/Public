@@ -10,11 +10,17 @@
     p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Sans'}
     p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; min-height: 18.0px}
     p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; background-color: #e6e6e6}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; background-color: #e6e6e6; min-height: 14.0px}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; color: #094fd1; background-color: #e6e6e6}
+    span.s1 {font-kerning: none}
+    span.s2 {text-decoration: underline ; font-kerning: none}
+    span.s3 {font-kerning: none; color: #000000}
     span.Apple-tab-span {white-space:pre}
   </style>
 </head>
 <body>
-<p class="p1"><b>2018.3以降でWebCamTextureがリクエストサイズを無視したデータを投げてくる件</b></p>
+<p class="p1"><b>2018.3以降でWebCamTextureがリクエストサイズを無視したデータを投げてくる件(互換性破壊だった)</b></p>
 <p class="p2"><br></p>
 <p class="p3"><b>概要</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>タイトルの通り。</p>
@@ -34,6 +40,40 @@
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>レポート</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>今作ってる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>今作った。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>結果</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>レポートに対して</p>
+<p class="p4"><span class="s1">Hello,</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1">Unity added support for iPhone/iPad Depth Camera, please take a look:</span></p>
+<p class="p6"><span class="s2"><a href="https://docs.unity3d.com/ScriptReference/WebCamTexture-ctor.html">https://docs.unity3d.com/ScriptReference/WebCamTexture-ctor.html</a></span></p>
+<p class="p6"><span class="s2"><a href="https://docs.unity3d.com/ScriptReference/WebCamDevice.htmlnew">https://docs.unity3d.com/ScriptReference/WebCamDevice.htmlnew</a></span><span class="s3"> </span></p>
+<p class="p4"><span class="s1">In your Repro project you selecting <b>last </b>front facing device from a WebCamTexture.devices with an assumption that it will be correct one, but it is not valid with new Camera kind introduced.</span></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・UnityのあるバージョンからiPhone/iPadのデプスカメラに対応したんだよ</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・そんでそのぶんのカメラが増えてる</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・現状のお前のアプリはfrontFacing かつ lastで選んでるから、Depthカメラを引いたんだよ</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>という回答だった。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>いや、お前、それ、今まで一個しかなかったfront facing cameraを、isFrontFacingで検索してる今までのアプリ全滅するぞ、後方互換性破壊してるやんけ</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>と思ったが、ふーーーんなるほどー＝＝＝～～～という感じで納得した。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>納得いかないけど、旧来のアプリは大体死ぬが、破壊的変更ではあるが、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・front facing</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・kind<span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>この2つを組み合わせてチェックする必要がある。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>kind作るならカメラ一覧取得するときにGetDepthCameraとか作りなさいよという気持ちがMaxになりそうになるんだけど、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>まーーーーーうーーーーーーーーーん、、、、ギリギリのギリギリで許す。</p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b>総評</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>互換性は破壊されている。俺は許すが俺の魂が赦すかな？！</p>
+<p class="p2"><br></p>
 </body>
 </html>
