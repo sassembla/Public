@@ -1,0 +1,188 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1671.5">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Sans'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 20.0px 'Hiragino Sans'}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 19.0px 'Hiragino Sans'}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; line-height: 16.0px; font: 12.0px 'Hiragino Sans'; min-height: 18.0px}
+    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; line-height: 16.0px; font: 12.0px 'Hiragino Sans'}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>Unite2019Tokyoログ</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>かなり満足感のある公演がいっぱい聞けた。が、めちゃくちゃ抜粋だけ。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p4"><b>The Heretic</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>VFXGraphで、キャラクターの周りに球体の判定を作り、その判定に対してホコリが避けるようなのを作る</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>すごいな、こんなことまでできるんだ。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>符号付きディスタンスフィルタ(SignedDistanceFilter)</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>エッジに近づくほど黒くなる的なマスクに使っていた。TextMeshProでおなじみ。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ワープ<span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>異常な量のスライダーがあって面白かった。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>基本的な考え方としては、なんらかの単位で映像をスライス、ずらしたり歪めたりしていた。</p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p4"><b>たのしいDOTS</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>いますぐはじめなくてもいい DOTS。プレビュー版。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>メモリ -&gt; 土地、面積。出来るだけ効率よく使いたい。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>中央管理者の関与なしに場所から別の場所(=アドレス)を指せるので、コントロールが厳しくなる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>みたいな歴史があって～。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>そこで、NativeContainerという概念を使って、unmanagedな領域で頑張る。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>C#の仕様上で、structはmanaged領域に入らないのを利用した構成。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>チャンクの話</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>chunk = GameObject、というか「インスタンス」。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>昨今の端末はメモリ的に富豪なので、managedな領域で頑張らなくても、unmanagedな領域で富豪的にやってみてもいいのでは？</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ということで、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>チャンクは16KB単位。これは固定で、「この単位で管理する」というだけの決まり。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>一つ要素を消すには、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>・穴を開ける</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>・穴に対していままで他のところにあったデータをコピーする</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>(このとき管理系も書き換える)</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>とかで、たったの2ステップで完了する。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>UnityPhysicsの話</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>決定性がある(マルチスレッドでなおかつ状態を持たないのでマジで単なる式として動く)</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>シミュレーションループ独立</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>予測系が実装できる(ゴルフの玉がどう飛ぶかとか)</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・ABとかはどうなるの？</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>-&gt; ECSへとダイレクトロードできるようになるはず(システムの組み合わせとかは前提になる)</p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b>Rig Constraints</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・packageに上がってる(preview)</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・実行時にいろいろできそうなやつ。サンプルが入ってるので触ってみよう。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>モーションなどのブレンドができる。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>感想</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>1日目は基調講演とかみれた感じ。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>感想というか気になった点は、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・ECSはまだこれからもっと書きやすくなる by 安原さん</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>という感じで、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>エンティティとかシステムを使ってまるーーっと書き方が変わるところとどう使い方が変わるか、待とうね！！！　というのが総論。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3">Day2<span class="Apple-converted-space"> </span></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p4"><b>SRPの話</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>SRPってなーに？ Unityの描画フローについて自作できる機構。</p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b>投影テクスチャシャドウが使いたい！</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Unityのシャドウマップは必ずデプスバッファになる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>-&gt; デプスバッファを使わずにR8程度でシャドウマップを持ちたいが、変更はできない。カメラとかで描画を自作して自分で、、、しんどい。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>-&gt; なので、SRPで、、、</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>RenderTextureとカメラ管理</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>prefabをつくってー、RenderTexture関連のスクリプトを置いてー、、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>-&gt; Playしないと絵が出ない、各要素にスクリプトが必要、生成順の問題が、、、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>-&gt; なので、SRPで、、(これはまあ意図が影響してるが</p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b>作り方</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Protected override void Render(…)みたいな関数を書くと上書きされる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>サンプルは近日公開。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>書き方: LWRPを参考にしよう！ 中身を見る以外に特に例はないぞ。マジか。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>これスペックどうなるんだろう、まー変わんないのか。</p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b>いいところ</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・単一のカメラで縮小したRenderTextureをdepthありで生成したり、それらの描画をマージしたりができる</p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b>Unityの描画機能をimportするには？</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>reflection probeを実現するための関数があった。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>PostProcessingStackを使いたい -&gt; PostProcessingRenderContextというのがコードから利用できたので、それでコンテキストを作成して、、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>UnityのデフォルトUIはそのまま描画したい -&gt; UIにはライトがない。DefaultUnlitというのを設定するとできた。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>-&gt; 困ったらすべてLWRPの該当の箇所を見てる。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>結論</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>パイプライン外部でカメラ + RenderTexture自作ではなくカメラ一発で済むの最高！</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p4"><b>セガのHTTP/2の話</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>HTTP/2ライブラリの実装について</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・C/C++は避けたい、、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・HTTP/2のC#実装を探した</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・monoとか色々あるけど結局C#で複数をサポートしているのがなかった</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・C#を断念</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・もうC/C++しか、、</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>などの感じで、最終的にlibcurlをラップして使う形になっていると。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>これはWindowsエディタで動作するいい感じのライブラリがなかったため。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Windowsエディタが要らない + iOS/Androidならそれぞれのネイティブがいいのでは？ということを言っていた。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>HTTP/2あるあるなんだけど、切断検知やタイムアウトについて、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・libcurlのコネクションそのものに対するタイムアウト+R/Wに関するタイムアウト</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・これだけだと足りなくて結局C#側でもタイムアウト検知してる</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>などがあるとのこと。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p4"><b>禍つヴァールハイト</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>次のようなリソース管理を行っているぽい。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・ABをビルド</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・すべてのABをtarファイルで連結、どの部分にどのABが入っているかなどのリストを作成(tarのインデックス集)</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・tarとリストをCDNに置く</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・クライアントはリストを取得、クライアント内のキャッシュと比較して、ABが必要になったらCDNから取得する</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・CDNへのリクエストとしてrange指定を行い、tarファイルから特定の範囲を取得する</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>(複数のABの取得が1リクエストでできるというおもしろ効果がここで発生する</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・クライアントはレスポンスを事前に取得していたリスト情報をもとにN個のABに分割、ローカルフォルダに保存</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>という感じで、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>なるべく少ないリクエストで複数のデータを取得する、というのを実現している。すごい。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p5"><b>Untiy ロードマップ</b></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b>LiveLink</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ビルド済みアプリに対してエディタからデータを送り込む、今後はコードも(ホットリロードかな！？？！</p>
+<p class="p3"><span class="Apple-tab-span">	</span>開発中だけでもiOSで使えると嬉しいな。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>テクスチャストリーミング</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>テクスチャを非同期でロードする技術。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>特にVRとかで、至近距離なら高精細なテクスチャ、遠くなら荒いやつ~とかで大活躍しそう。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>今後が楽しみ。</p>
+<p class="p6"><b></b><br></p>
+<p class="p7"><b>Cloud Content Delivery</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Unityが手配してくれるCDN的なもの。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>まだいろいろ未定とのことなんで、Akamaiさんとかと組んでくれると嬉しいなあ。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+</body>
+</html>
