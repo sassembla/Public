@@ -11,9 +11,15 @@
     p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; min-height: 18.0px}
     p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'}
     p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 20.0px 'Hiragino Sans'}
-    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 19.0px 'Hiragino Sans'}
-    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; line-height: 16.0px; font: 12.0px 'Hiragino Sans'; min-height: 18.0px}
-    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; line-height: 16.0px; font: 12.0px 'Hiragino Sans'}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 21.0px 'Hiragino Sans'; color: #101214; -webkit-text-stroke: #101214}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; -webkit-text-stroke: #101214}
+    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; -webkit-text-stroke: #101214; min-height: 18.0px}
+    p.p8 {margin: 0.0px 0.0px 0.0px 0.0px; font: 19.0px 'Hiragino Sans'; -webkit-text-stroke: #101214}
+    p.p9 {margin: 0.0px 0.0px 0.0px 0.0px; line-height: 16.0px; font: 12.0px 'Hiragino Sans'; -webkit-text-stroke: #101214; min-height: 18.0px}
+    p.p10 {margin: 0.0px 0.0px 0.0px 0.0px; line-height: 16.0px; font: 12.0px 'Hiragino Sans'; -webkit-text-stroke: #101214}
+    span.s1 {font: 20.0px 'Hiragino Sans'; color: #000000; -webkit-text-stroke: 0px #000000}
+    span.s2 {font-kerning: none; background-color: #ffffff}
+    span.s3 {font: 21.0px Arial; font-kerning: none; background-color: #ffffff}
     span.Apple-tab-span {white-space:pre}
   </style>
 </head>
@@ -152,37 +158,37 @@
 <p class="p3"><span class="Apple-tab-span">	</span>などがあるとのこと。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
-<p class="p4"><b>禍つヴァールハイト</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>次のようなリソース管理を行っているぽい。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>・ABをビルド</p>
-<p class="p3"><span class="Apple-tab-span">	</span>・すべてのABをtarファイルで連結、どの部分にどのABが入っているかなどのリストを作成(tarのインデックス集)</p>
-<p class="p3"><span class="Apple-tab-span">	</span>・tarとリストをCDNに置く</p>
-<p class="p3"><span class="Apple-tab-span">	</span>・クライアントはリストを取得、クライアント内のキャッシュと比較して、ABが必要になったらCDNから取得する</p>
-<p class="p3"><span class="Apple-tab-span">	</span>・CDNへのリクエストとしてrange指定を行い、tarファイルから特定の範囲を取得する</p>
-<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>(複数のABの取得が1リクエストでできるというおもしろ効果がここで発生する</p>
-<p class="p3"><span class="Apple-tab-span">	</span>・クライアントはレスポンスを事前に取得していたリスト情報をもとにN個のABに分割、ローカルフォルダに保存</p>
-<p class="p2"><span class="Apple-tab-span">	</span></p>
-<p class="p3"><span class="Apple-tab-span">	</span>という感じで、</p>
-<p class="p3"><span class="Apple-tab-span">	</span>なるべく少ないリクエストで複数のデータを取得する、というのを実現している。すごい。</p>
-<p class="p2"><br></p>
-<p class="p2"><br></p>
-<p class="p5"><b>Untiy ロードマップ</b></p>
-<p class="p2"><span class="Apple-tab-span">	</span></p>
-<p class="p3"><b>LiveLink</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>ビルド済みアプリに対してエディタからデータを送り込む、今後はコードも(ホットリロードかな！？？！</p>
-<p class="p3"><span class="Apple-tab-span">	</span>開発中だけでもiOSで使えると嬉しいな。</p>
-<p class="p2"><br></p>
-<p class="p2"><br></p>
-<p class="p3"><b>テクスチャストリーミング</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>テクスチャを非同期でロードする技術。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>特にVRとかで、至近距離なら高精細なテクスチャ、遠くなら荒いやつ~とかで大活躍しそう。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>今後が楽しみ。</p>
-<p class="p6"><b></b><br></p>
-<p class="p7"><b>Cloud Content Delivery</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>Unityが手配してくれるCDN的なもの。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>まだいろいろ未定とのことなんで、Akamaiさんとかと組んでくれると嬉しいなあ。</p>
-<p class="p2"><br></p>
-<p class="p2"><br></p>
-<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p5"><span class="s1"><b>「</b></span><span class="s2"><b>禍つヴァールハイト」最大</b></span><span class="s3"><b>100</b></span><span class="s2"><b>人同時プレイ！モバイルオンラインゲームの実装テクニック</b></span></p>
+<p class="p6"><span class="Apple-tab-span">	</span>次のようなリソース管理を行っているぽい。</p>
+<p class="p6"><span class="Apple-tab-span">	</span>・ABをビルド</p>
+<p class="p6"><span class="Apple-tab-span">	</span>・すべてのABをtarファイルで連結、どの部分にどのABが入っているかなどのリストを作成(tarのインデックス集)</p>
+<p class="p6"><span class="Apple-tab-span">	</span>・tarとリストをCDNに置く</p>
+<p class="p6"><span class="Apple-tab-span">	</span>・クライアントはリストを取得、クライアント内のキャッシュと比較して、ABが必要になったらCDNから取得する</p>
+<p class="p6"><span class="Apple-tab-span">	</span>・CDNへのリクエストとしてrange指定を行い、tarファイルから特定の範囲を取得する</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>(複数のABの取得が1リクエストでできるというおもしろ効果がここで発生する</p>
+<p class="p6"><span class="Apple-tab-span">	</span>・クライアントはレスポンスを事前に取得していたリスト情報をもとにN個のABに分割、ローカルフォルダに保存</p>
+<p class="p7"><span class="Apple-tab-span">	</span></p>
+<p class="p6"><span class="Apple-tab-span">	</span>という感じで、</p>
+<p class="p6"><span class="Apple-tab-span">	</span>なるべく少ないリクエストで複数のデータを取得する、というのを実現している。すごい。</p>
+<p class="p7"><br></p>
+<p class="p7"><br></p>
+<p class="p8"><b>Untiy ロードマップ</b></p>
+<p class="p7"><span class="Apple-tab-span">	</span></p>
+<p class="p6"><b>LiveLink</b></p>
+<p class="p6"><span class="Apple-tab-span">	</span>ビルド済みアプリに対してエディタからデータを送り込む、今後はコードも(ホットリロードかな！？？！</p>
+<p class="p6"><span class="Apple-tab-span">	</span>開発中だけでもiOSで使えると嬉しいな。</p>
+<p class="p7"><br></p>
+<p class="p7"><br></p>
+<p class="p6"><b>テクスチャストリーミング</b></p>
+<p class="p6"><span class="Apple-tab-span">	</span>テクスチャを非同期でロードする技術。</p>
+<p class="p6"><span class="Apple-tab-span">	</span>特にVRとかで、至近距離なら高精細なテクスチャ、遠くなら荒いやつ~とかで大活躍しそう。</p>
+<p class="p6"><span class="Apple-tab-span">	</span>今後が楽しみ。</p>
+<p class="p9"><b></b><br></p>
+<p class="p10"><b>Cloud Content Delivery</b></p>
+<p class="p6"><span class="Apple-tab-span">	</span>Unityが手配してくれるCDN的なもの。</p>
+<p class="p6"><span class="Apple-tab-span">	</span>まだいろいろ未定とのことなんで、Akamaiさんとかと組んでくれると嬉しいなあ。</p>
+<p class="p7"><br></p>
+<p class="p7"><br></p>
+<p class="p7"><span class="Apple-tab-span">	</span></p>
 </body>
 </html>
