@@ -1,0 +1,172 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1894.3">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Sans'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; background-color: #e6e6e6}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; background-color: #e6e6e6; min-height: 18.0px}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; line-height: 14.0px; font: 11.0px Menlo; color: #000000; background-color: #e6e6e6}
+    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px 'Hiragino Sans'; color: #000000}
+    p.p8 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px Menlo; color: #000000; background-color: #e6e6e6}
+    p.p9 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px Menlo; color: #000000; background-color: #e6e6e6; min-height: 13.0px}
+    span.s1 {font: 12.0px Menlo; color: #3900a0; background-color: #ffffff}
+    span.s2 {font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #000000; background-color: #ffffff}
+    span.s3 {background-color: #ffffff}
+    span.s4 {font-variant-ligatures: no-common-ligatures}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1">Unityが提供しているSign in with Apple(SIWA)のコードを調整してまともにする</p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>まずい。Unityが提供しているSIWAのコードをそのまま使うと、脆弱性があるんで殴られまくり、最悪やらかしアドベントカレンダーにInすることになる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>問題があるUnity製のSIWAライブラリはこれですね</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>記事</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://blogs.unity3d.com/jp/2019/09/19/support-for-apple-sign-in/">https://blogs.unity3d.com/jp/2019/09/19/support-for-apple-sign-in/</a></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>記事で紹介されてるパッケージのURLはこれ</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://assetstore.unity.com/packages/tools/sign-in-with-apple-154202?_ga=2.99623134.1148277808.1584082182-434679709.1581905190">https://assetstore.unity.com/packages/tools/sign-in-with-apple-154202?_ga=2.99623134.1148277808.1584082182-434679709.1581905190</a></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>最終更新が2/14とかなんだけど、修正されてない。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ここで紹介する問題はすべてUnityが用意しているUnityクライアントSIWA用のObj-Cコードに由来する。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>問題点は以下</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・nonceを扱っていないのでリプレイアタックされ放題になる</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・nonceを扱っていないので出元の確認ができない</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・AuthorizationCodeを扱っていないので検証がしょぼい気がする(検証中)</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>nonceを扱ってないのの何が問題か</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・おんなじデータをexprが切れる前に投げ放題</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・サーバ側がJWTを検証する材料が不足する</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ひとえに、せっかくSIWA自体の機構がnonceを使うことを推奨しているのに、それを使わないので脆弱になっている。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>SIWAのnonce</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>iOS13以降に入っている<span class="s1">ASAuthorizationAppleIDProvider</span>では、リクエストの生成時にnonceパラメータをセットすることができる。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これは、任意の値をnonceパラメータにセットし、そのパラメータがリクエストの成果物に含まれることを意味する。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>例えばサーバでnonce1を生成、クライアントがそれを受け取りnonce1をnonceパラメータにセットすると、Appleから返送されてくるデータにnonce=nonce1が入る。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これによって、クライアントがサーバへと認証データを送った際、サーバ側はnonceに何が含まれているかという情報で検証することが可能になる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>まーーーこれがないと、サーバ側は「jwtのフォーマット的には正しいが、それ以外に検証要素がない」という状態に陥る。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>nonceの追加</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、Unityが提供しているSIWAライブラリにはnonceをセットする部分がゴッソリ抜け落ちているんで、足したものがこちら。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>Autoya Thirdpary Authentication</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/Autoya/blob/feature/signinwithapple/Assets/Autoya/ThirdPartyAuthentication/SignInWithApple/Plugins/iOS/SignInWithApple.m#L57">https://github.com/sassembla/Autoya/blob/feature/signinwithapple/Assets/Autoya/ThirdPartyAuthentication/SignInWithApple/Plugins/iOS/SignInWithApple.m#L57</a></p>
+<p class="p2"><br></p>
+<p class="p4"><span class="Apple-converted-space">        </span>request = [provider createRequest];</p>
+<p class="p4"><span class="Apple-converted-space">        </span>[request setRequestedScopes: @[ASAuthorizationScopeEmail, ASAuthorizationScopeFullName]];</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-converted-space">        </span>// set nonce for verification.</p>
+<p class="p4"><span class="Apple-converted-space">        </span>[request setNonce:nonce];</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これでnonceがセットできる。C#側のコードからのセットまで当然可能になってる。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、これでsignup/signin時にnonceをセットすると、Appleが返してくるidToken(JWT)のpayloadにnonceが入るようになる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>例えば <span class="s2"><b>db862182-d25b-44f7-ae26-8c11437c1d80</b></span><span class="s3"> </span><span class="Apple-tab-span">	</span>という値をnonceに入れてsignup/signinを行うと、次のようなJWT payloadが帰ってくる。太字のところがnonce。</p>
+<p class="p6"><span class="s4">{</span></p>
+<p class="p6"><span class="s4"><span class="Apple-converted-space">  </span>"iss": "https://appleid.apple.com",</span></p>
+<p class="p6"><span class="s4"><span class="Apple-converted-space">  </span>"aud": "com.kissaki.app”,</span></p>
+<p class="p6"><span class="s4"><span class="Apple-converted-space">  </span>"exp": 1584132002,</span></p>
+<p class="p6"><span class="s4"><span class="Apple-converted-space">  </span>"iat": 1584131402,</span></p>
+<p class="p6"><span class="s4"><span class="Apple-converted-space">  </span>"sub": “xxxxx.xxxxx”,</span></p>
+<p class="p6"><span class="s4"><b><span class="Apple-converted-space">  </span>"nonce": "db862182-d25b-44f7-ae26-8c11437c1d80",</b></span></p>
+<p class="p6"><span class="s4"><span class="Apple-converted-space">  </span>"c_hash": "VUbmqVL9jkYt5VpBCtWkhQ",</span></p>
+<p class="p6"><span class="s4"><span class="Apple-converted-space">  </span>"email": “xxxxx@x.x”,</span></p>
+<p class="p6"><span class="s4"><span class="Apple-converted-space">  </span>"email_verified": "true",</span></p>
+<p class="p6"><span class="s4"><span class="Apple-converted-space">  </span>"auth_time": 1584131402,</span></p>
+<p class="p6"><span class="s4"><span class="Apple-converted-space">  </span>"nonce_supported": true</span></p>
+<p class="p6"><span class="s4">}</span></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>んでーー、これを検証するnode.jsのコードはこんな感じになる。太文字のところがnonce関連。</p>
+<p class="p2"><br></p>
+<p class="p7"><span class="s4">verify.js</span></p>
+<p class="p8"><span class="s4">const AUDIENCE_CLAIM = "com.kissaki.app”;</span></p>
+<p class="p8"><span class="s4">const ID_TOKEN = “xxxxx.xxxxx.xxxxx”;</span></p>
+<p class="p8"><span class="s4"><b>const NONCE = “xxxxx”;// nonce should be issed and recoded by the app-server and the client app should use it for SIWA signup/signin.</b></span></p>
+<p class="p9"><span class="s4"></span><br></p>
+<p class="p9"><span class="s4"></span><br></p>
+<p class="p9"><span class="s4"></span><br></p>
+<p class="p8"><span class="s4">const jwt = require('jsonwebtoken')</span></p>
+<p class="p8"><span class="s4">const jwksClient = require('jwks-rsa');</span></p>
+<p class="p9"><span class="s4"></span><br></p>
+<p class="p8"><span class="s4">var client = jwksClient({</span></p>
+<p class="p8"><span class="s4"><span class="Apple-converted-space">  </span>jwksUri: 'https://appleid.apple.com/auth/keys'</span></p>
+<p class="p8"><span class="s4">});</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space"> </span></span></p>
+<p class="p8"><span class="s4">function getApplePublicKey(header, callback) {</span></p>
+<p class="p8"><span class="s4"><span class="Apple-converted-space">  </span>client.getSigningKey(header.kid, function (err, key) {</span></p>
+<p class="p8"><span class="s4"><span class="Apple-converted-space">    </span>var signingKey = key.publicKey || key.rsaPublicKey;</span></p>
+<p class="p8"><span class="s4"><span class="Apple-converted-space">    </span>callback(null, signingKey);</span></p>
+<p class="p8"><span class="s4"><span class="Apple-converted-space">  </span>});</span></p>
+<p class="p8"><span class="s4">}</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space"> </span></span></p>
+<p class="p8"><span class="s4">jwt.verify(ID_TOKEN, getApplePublicKey, null, function (err, decoded) {</span></p>
+<p class="p8"><span class="s4"><span class="Apple-converted-space">  </span>if (err) {</span></p>
+<p class="p8"><span class="s4"><span class="Apple-converted-space">    </span>console.error("validation err:" + err);</span></p>
+<p class="p8"><span class="s4"><span class="Apple-converted-space">    </span>process.exit(1);</span></p>
+<p class="p8"><span class="s4"><span class="Apple-converted-space">  </span>}</span></p>
+<p class="p8"><span class="s4"><b><span class="Apple-converted-space">  </span>if (decoded.nonce !== NONCE) {</b></span></p>
+<p class="p8"><span class="s4"><b><span class="Apple-converted-space">    </span>console.error("unexpected nonce (nonce claim): ", decoded.nonce);</b></span></p>
+<p class="p8"><span class="s4"><b><span class="Apple-converted-space">    </span>process.exit(1);</b></span></p>
+<p class="p8"><span class="s4"><b><span class="Apple-converted-space">  </span>}</b></span></p>
+<p class="p8"><span class="s4"><span class="Apple-converted-space">  </span>if (decoded.iss !== "https://appleid.apple.com") {</span></p>
+<p class="p8"><span class="s4"><span class="Apple-converted-space">    </span>console.error("unexpected issuer (iss claim): ", decoded.iss);</span></p>
+<p class="p8"><span class="s4"><span class="Apple-converted-space">    </span>process.exit(1);</span></p>
+<p class="p8"><span class="s4"><span class="Apple-converted-space">  </span>}</span></p>
+<p class="p8"><span class="s4"><span class="Apple-converted-space">  </span>if (decoded.aud !== AUDIENCE_CLAIM) {</span></p>
+<p class="p8"><span class="s4"><span class="Apple-converted-space">    </span>console.error("unexpected audience (aud claim): ", decoded.aud);</span></p>
+<p class="p8"><span class="s4"><span class="Apple-converted-space">    </span>process.exit(1);</span></p>
+<p class="p8"><span class="s4"><span class="Apple-converted-space">  </span>}</span></p>
+<p class="p9"><span class="s4"></span><br></p>
+<p class="p8"><span class="s4"><span class="Apple-converted-space">  </span>console.log("succeeded to validate Apple token: ", decoded);</span></p>
+<p class="p8"><span class="s4">});</span></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>nonceパラメータを発行ごとに変化させれば、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・既に使われたnonceが来たら殴れる</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・検証の材料にできる</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>という、まあ、はい。普通ですね。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これでやっと、Androidの課金検証と同レベルの検証ができるようになった、、はず。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>nonceには何を入れても(なんか長さ制限とかはRFCとかにあると思うが)いいはずなんで、リプレイアタックの防止と、JWT検証の助けにしようね～。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>AuthorizationCode関連</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Unityが配布しているSIWAのコードに入ってなかったのは、nonceだけではなく。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>AuthorizationCode と呼ばれるパラメータもObj-C側のコードで無視されていた。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>んでーーこれーー、なんかrefresh tokenとかが取得できると思ってるんだけど、設定が膨大なんでまだ確認できてない。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>AppleのサーバにAuthorizationCodeを使って問い合わせて、200が帰ってくればOK～という認識なんだけど、途中。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>危機感が出てきたら続きを書く。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>昨今のAndroidの課金周りとかが壊滅的な改竄を受けてる(ので、なんかチート防止ツールの価値がより強固になってる)のがかなり残念という認識を持ってるんで、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>や～～っぱ通信しましょうよー～～みたいなことを言い出す気がする。自分は。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+</body>
+</html>
