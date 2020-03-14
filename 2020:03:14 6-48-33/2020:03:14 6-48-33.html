@@ -16,15 +16,18 @@
     p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px 'Hiragino Sans'; color: #000000}
     p.p8 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px Menlo; color: #000000; background-color: #e6e6e6}
     p.p9 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px Menlo; color: #000000; background-color: #e6e6e6; min-height: 13.0px}
+    p.p10 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; color: #0000e9; -webkit-text-stroke: #0000e9}
     span.s1 {font: 12.0px Menlo; color: #3900a0; background-color: #ffffff}
     span.s2 {font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #000000; background-color: #ffffff}
     span.s3 {background-color: #ffffff}
     span.s4 {font-variant-ligatures: no-common-ligatures}
+    span.s5 {color: #000000; -webkit-text-stroke: 0px #000000}
+    span.s6 {text-decoration: underline ; font-kerning: none}
     span.Apple-tab-span {white-space:pre}
   </style>
 </head>
 <body>
-<p class="p1">Unityが提供しているSign in with Apple(SIWA)のコードを調整してまともにする</p>
+<p class="p1"><b>Unityが提供しているSign in with Apple(SIWA)のコードを調整してまともにする</b></p>
 <p class="p2"><br></p>
 <p class="p3"><b>概要</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>まずい。Unityが提供しているSIWAのコードをそのまま使うと、脆弱性があるんで殴られまくり、最悪やらかしアドベントカレンダーにInすることになる。</p>
@@ -68,7 +71,7 @@
 <p class="p3"><span class="Apple-tab-span">	</span>で、Unityが提供しているSIWAライブラリにはnonceをセットする部分がゴッソリ抜け落ちているんで、足したものがこちら。</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p3"><b><span class="Apple-tab-span">	</span>Autoya Thirdpary Authentication</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/Autoya/blob/feature/signinwithapple/Assets/Autoya/ThirdPartyAuthentication/SignInWithApple/Plugins/iOS/SignInWithApple.m#L57">https://github.com/sassembla/Autoya/blob/feature/signinwithapple/Assets/Autoya/ThirdPartyAuthentication/SignInWithApple/Plugins/iOS/SignInWithApple.m#L57</a></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/Autoya/blob/feature/signinwithapple/Assets/Autoya/ThirdPartyAuthentication/SignInWithApple/Plugins/iOS/SignInWithApple.m#L57">https://github.com/sassembla/Autoya/blob/feature/signinwithapple/Assets/Autoya/ThirdPartyAuthentication/SignInWithApple/Plugins/iOS/SignInWithApple.m#L59</a></p>
 <p class="p2"><br></p>
 <p class="p4"><span class="Apple-converted-space">        </span>request = [provider createRequest];</p>
 <p class="p4"><span class="Apple-converted-space">        </span>[request setRequestedScopes: @[ASAuthorizationScopeEmail, ASAuthorizationScopeFullName]];</p>
@@ -141,7 +144,12 @@
 <p class="p8"><span class="s4"><span class="Apple-converted-space">  </span>console.log("succeeded to validate Apple token: ", decoded);</span></p>
 <p class="p8"><span class="s4">});</span></p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>nonceパラメータを発行ごとに変化させれば、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>注意して欲しいのは、上のコードはあくまで手元のnode.jsを使って検証してみよう的なホビーコードだってこと。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>実際にはJWTに含まれているnonceについて、サーバ側でそのnonce値が正しいものか、すでに1度使われたものではないか、というのを確認する必要がある。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>なので～上のコードとはかなり違ってくる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、nonceパラメータをサーバサイドが発行するごとにユニークに変化 + 記録すれば、</p>
 <p class="p3"><span class="Apple-tab-span">	</span>・既に使われたnonceが来たら殴れる</p>
 <p class="p3"><span class="Apple-tab-span">	</span>・検証の材料にできる</p>
 <p class="p2"><br></p>
@@ -164,6 +172,24 @@
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>昨今のAndroidの課金周りとかが壊滅的な改竄を受けてる(ので、なんかチート防止ツールの価値がより強固になってる)のがかなり残念という認識を持ってるんで、</p>
 <p class="p3"><span class="Apple-tab-span">	</span>や～～っぱ通信しましょうよー～～みたいなことを言い出す気がする。自分は。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>参考</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>調べるにあたって、このへんを参考にした。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>Apple</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>JWTのverifyの話 nonceはここでも紹介されてる。</p>
+<p class="p10"><span class="s5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://developer.apple.com/documentation/signinwithapplerestapi/verifying_a_user"><span class="s6">https://developer.apple.com/documentation/signinwithapplerestapi/verifying_a_user</span></a></span></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>Sign in with Apple を本番でやらかしをしないために考えてみた</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>最も参考にした記事。もっと読み込まないといけない。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://nerocrux.hatenablog.com/entry/2019/12/11/163231">https://nerocrux.hatenablog.com/entry/2019/12/11/163231</a></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>What the Heck is Sign In with Apple?</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>AuthorizationCodeをverifyするための設定の話を書いてくれてる。読んでる。</p>
+<p class="p10"><span class="s5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://developer.okta.com/blog/2019/06/04/what-the-heck-is-sign-in-with-apple"><span class="s6">https://developer.okta.com/blog/2019/06/04/what-the-heck-is-sign-in-with-apple</span></a></span></p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
