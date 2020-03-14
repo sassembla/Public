@@ -16,13 +16,18 @@
     p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px 'Hiragino Sans'; color: #000000}
     p.p8 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px Menlo; color: #000000; background-color: #e6e6e6}
     p.p9 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px Menlo; color: #000000; background-color: #e6e6e6; min-height: 13.0px}
-    p.p10 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; color: #0000e9; -webkit-text-stroke: #0000e9}
+    p.p10 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px Menlo; color: #2fb41d; background-color: #e6e6e6}
+    p.p11 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px Menlo; color: #9fa01c; background-color: #e6e6e6}
+    p.p12 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; color: #0000e9; -webkit-text-stroke: #0000e9}
     span.s1 {font: 12.0px Menlo; color: #3900a0; background-color: #ffffff}
     span.s2 {font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #000000; background-color: #ffffff}
     span.s3 {background-color: #ffffff}
     span.s4 {font-variant-ligatures: no-common-ligatures}
-    span.s5 {color: #000000; -webkit-text-stroke: 0px #000000}
-    span.s6 {text-decoration: underline ; font-kerning: none}
+    span.s5 {font-variant-ligatures: no-common-ligatures; color: #000000}
+    span.s6 {font-variant-ligatures: no-common-ligatures; color: #2fb41d}
+    span.s7 {font-variant-ligatures: no-common-ligatures; color: #9fa01c}
+    span.s8 {color: #000000; -webkit-text-stroke: 0px #000000}
+    span.s9 {text-decoration: underline ; font-kerning: none}
     span.Apple-tab-span {white-space:pre}
   </style>
 </head>
@@ -101,6 +106,9 @@
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>んでーー、これを検証するnode.jsのコードはこんな感じになる。太文字のところがnonce関連。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>事前にAUDIENCE_CLAIM(Appのidentifier)、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ID_TOKEN(検証したいidToken、クライアントでSIWAが成立したら出てくるやつ)、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>NONCE(クライアントでSIWAのSignup/Signinをする際に入力したやつ) を入れておく。</p>
 <p class="p2"><br></p>
 <p class="p7"><span class="s4">verify.js</span></p>
 <p class="p8"><span class="s4">const AUDIENCE_CLAIM = "com.kissaki.app”;</span></p>
@@ -144,6 +152,23 @@
 <p class="p8"><span class="s4"><span class="Apple-converted-space">  </span>console.log("succeeded to validate Apple token: ", decoded);</span></p>
 <p class="p8"><span class="s4">});</span></p>
 <p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>検証に成功すると次のようなログが出る。</p>
+<p class="p8"><span class="s4">Validated Apple token:<span class="Apple-converted-space">  </span>{</span></p>
+<p class="p10"><span class="s5"><span class="Apple-converted-space">  </span>iss: </span><span class="s4">'https://appleid.apple.com'</span><span class="s5">,</span></p>
+<p class="p10"><span class="s5"><span class="Apple-converted-space">  </span>aud: </span><span class="s4">'com.kissaki.test'</span><span class="s5">,</span></p>
+<p class="p11"><span class="s5"><span class="Apple-converted-space">  </span>exp: </span><span class="s4">1584139641</span><span class="s5">,</span></p>
+<p class="p11"><span class="s5"><span class="Apple-converted-space">  </span>iat: </span><span class="s4">1584139041</span><span class="s5">,</span></p>
+<p class="p8"><span class="s4"><span class="Apple-converted-space">  </span>sub: </span><span class="s6">'xxxxx'</span><span class="s4">,</span></p>
+<p class="p10"><span class="s5"><span class="Apple-converted-space">  </span>nonce: </span><span class="s4">'8a12db08-1e5f-4bbf-83be-4220abb3c55d'</span><span class="s5">,</span></p>
+<p class="p8"><span class="s4"><span class="Apple-converted-space">  </span>c_hash: </span><span class="s6">‘xxxxx’</span><span class="s4">,</span></p>
+<p class="p8"><span class="s4"><span class="Apple-converted-space">  </span>email: </span><span class="s6">‘x@x.x’</span><span class="s4">,</span></p>
+<p class="p8"><span class="s4"><span class="Apple-converted-space">  </span>email_verified: </span><span class="s6">'true'</span><span class="s4">,</span></p>
+<p class="p8"><span class="s4"><span class="Apple-converted-space">  </span>auth_time: </span><span class="s7">1584139041</span><span class="s4">,</span></p>
+<p class="p8"><span class="s4"><span class="Apple-converted-space">  </span>nonce_supported: </span><span class="s7">true</span></p>
+<p class="p8"><span class="s4">}</span></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>検証に失敗する場合はその理由が出る。</p>
+<p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>注意して欲しいのは、上のコードはあくまで手元のnode.jsを使って検証してみよう的なホビーコードだってこと。</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p3"><span class="Apple-tab-span">	</span>実際にはJWTに含まれているnonceについて、サーバ側でそのnonce値が正しいものか、すでに1度使われたものではないか、というのを確認する必要がある。</p>
@@ -179,7 +204,7 @@
 <p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p3"><b><span class="Apple-tab-span">	</span>Apple</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>JWTのverifyの話 nonceはここでも紹介されてる。</p>
-<p class="p10"><span class="s5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://developer.apple.com/documentation/signinwithapplerestapi/verifying_a_user"><span class="s6">https://developer.apple.com/documentation/signinwithapplerestapi/verifying_a_user</span></a></span></p>
+<p class="p12"><span class="s8"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://developer.apple.com/documentation/signinwithapplerestapi/verifying_a_user"><span class="s9">https://developer.apple.com/documentation/signinwithapplerestapi/verifying_a_user</span></a></span></p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b><span class="Apple-tab-span">	</span>Sign in with Apple を本番でやらかしをしないために考えてみた</b></p>
@@ -189,7 +214,7 @@
 <p class="p2"><br></p>
 <p class="p3"><b><span class="Apple-tab-span">	</span>What the Heck is Sign In with Apple?</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>AuthorizationCodeをverifyするための設定の話を書いてくれてる。読んでる。</p>
-<p class="p10"><span class="s5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://developer.okta.com/blog/2019/06/04/what-the-heck-is-sign-in-with-apple"><span class="s6">https://developer.okta.com/blog/2019/06/04/what-the-heck-is-sign-in-with-apple</span></a></span></p>
+<p class="p12"><span class="s8"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://developer.okta.com/blog/2019/06/04/what-the-heck-is-sign-in-with-apple"><span class="s9">https://developer.okta.com/blog/2019/06/04/what-the-heck-is-sign-in-with-apple</span></a></span></p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>

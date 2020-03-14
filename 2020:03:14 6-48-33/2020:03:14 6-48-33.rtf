@@ -2,9 +2,11 @@
 \cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fnil\fcharset128 HiraginoSans-W7;\f1\fnil\fcharset128 HiraginoSans-W4;\f2\fnil\fcharset0 Menlo-Regular;
 \f3\fnil\fcharset0 Menlo-Bold;\f4\fnil\fcharset128 HiraginoSans-W3;}
 {\colortbl;\red255\green255\blue255;\red57\green0\blue160;\red255\green255\blue255;\red230\green230\blue230;
-\red0\green0\blue0;\red255\green255\blue255;\red0\green0\blue233;}
+\red0\green0\blue0;\red255\green255\blue255;\red230\green230\blue230;\red47\green180\blue29;\red159\green160\blue28;
+\red0\green0\blue233;}
 {\*\expandedcolortbl;;\csgenericrgb\c22454\c0\c62803;\csgenericrgb\c100000\c100000\c100000;\csgray\c92143;
-\csgray\c0;\csgray\c100000;\cssrgb\c0\c0\c93333;}
+\csgray\c0;\csgray\c100000;\csgray\c92143;\cssrgb\c20238\c73898\c14947;\cssrgb\c68468\c68012\c14208;
+\cssrgb\c0\c0\c93333;}
 \paperw11900\paperh16840\margl1440\margr1440\vieww22620\viewh11760\viewkind0
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
 
@@ -103,6 +105,9 @@
 \f1\fs24 \cf0 \cb1 \CocoaLigature1 \
 \
 	\'82\'f1\'82\'c5\'81\'5b\'81\'5b\'81\'41\'82\'b1\'82\'ea\'82\'f0\'8c\'9f\'8f\'d8\'82\'b7\'82\'e9node.js\'82\'cc\'83\'52\'81\'5b\'83\'68\'82\'cd\'82\'b1\'82\'f1\'82\'c8\'8a\'b4\'82\'b6\'82\'c9\'82\'c8\'82\'e9\'81\'42\'91\'be\'95\'b6\'8e\'9a\'82\'cc\'82\'c6\'82\'b1\'82\'eb\'82\'aanonce\'8a\'d6\'98\'41\'81\'42\
+	\'8e\'96\'91\'4f\'82\'c9AUDIENCE_CLAIM(App\'82\'ccidentifier)\'81\'41\
+	ID_TOKEN(\'8c\'9f\'8f\'d8\'82\'b5\'82\'bd\'82\'a2idToken\'81\'41\'83\'4e\'83\'89\'83\'43\'83\'41\'83\'93\'83\'67\'82\'c5SIWA\'82\'aa\'90\'ac\'97\'a7\'82\'b5\'82\'bd\'82\'e7\'8f\'6f\'82\'c4\'82\'ad\'82\'e9\'82\'e2\'82\'c2)\'81\'41\
+	NONCE(\'83\'4e\'83\'89\'83\'43\'83\'41\'83\'93\'83\'67\'82\'c5SIWA\'82\'ccSignup/Signin\'82\'f0\'82\'b7\'82\'e9\'8d\'db\'82\'c9\'93\'fc\'97\'cd\'82\'b5\'82\'bd\'82\'e2\'82\'c2) \'82\'f0\'93\'fc\'82\'ea\'82\'c4\'82\'a8\'82\'ad\'81\'42\
 \
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
 
@@ -156,6 +161,27 @@ jwt.verify(ID_TOKEN, getApplePublicKey, null, function (err, decoded) \{\
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
 
 \f1\fs24 \cf0 \cb1 \CocoaLigature1 \
+	\'8c\'9f\'8f\'d8\'82\'c9\'90\'ac\'8c\'f7\'82\'b7\'82\'e9\'82\'c6\'8e\'9f\'82\'cc\'82\'e6\'82\'a4\'82\'c8\'83\'8d\'83\'4f\'82\'aa\'8f\'6f\'82\'e9\'81\'42\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f2\fs22 \cf5 \cb7 \CocoaLigature0 Validated Apple token:  \{\
+  iss: \cf8 'https://appleid.apple.com'\cf5 ,\
+  aud: \cf8 'com.kissaki.test'\cf5 ,\
+  exp: \cf9 1584139641\cf5 ,\
+  iat: \cf9 1584139041\cf5 ,\
+  sub: \cf8 'xxxxx'\cf5 ,\
+  nonce: \cf8 '8a12db08-1e5f-4bbf-83be-4220abb3c55d'\cf5 ,\
+  c_hash: \cf8 \'91xxxxx\'92\cf5 ,\
+  email: \cf8 \'91x@x.x\'92\cf5 ,\
+  email_verified: \cf8 'true'\cf5 ,\
+  auth_time: \cf9 1584139041\cf5 ,\
+  nonce_supported: \cf9 true\cf5 \
+\}\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f1\fs24 \cf0 \cb1 \CocoaLigature1 \
+	\'8c\'9f\'8f\'d8\'82\'c9\'8e\'b8\'94\'73\'82\'b7\'82\'e9\'8f\'ea\'8d\'87\'82\'cd\'82\'bb\'82\'cc\'97\'9d\'97\'52\'82\'aa\'8f\'6f\'82\'e9\'81\'42\
+\
 	\'92\'8d\'88\'d3\'82\'b5\'82\'c4\'97\'7e\'82\'b5\'82\'a2\'82\'cc\'82\'cd\'81\'41\'8f\'e3\'82\'cc\'83\'52\'81\'5b\'83\'68\'82\'cd\'82\'a0\'82\'ad\'82\'dc\'82\'c5\'8e\'e8\'8c\'b3\'82\'ccnode.js\'82\'f0\'8e\'67\'82\'c1\'82\'c4\'8c\'9f\'8f\'d8\'82\'b5\'82\'c4\'82\'dd\'82\'e6\'82\'a4\'93\'49\'82\'c8\'83\'7a\'83\'72\'81\'5b\'83\'52\'81\'5b\'83\'68\'82\'be\'82\'c1\'82\'c4\'82\'b1\'82\'c6\'81\'42\
 	\
 	\'8e\'c0\'8d\'db\'82\'c9\'82\'cdJWT\'82\'c9\'8a\'dc\'82\'dc\'82\'ea\'82\'c4\'82\'a2\'82\'e9nonce\'82\'c9\'82\'c2\'82\'a2\'82\'c4\'81\'41\'83\'54\'81\'5b\'83\'6f\'91\'a4\'82\'c5\'82\'bb\'82\'ccnonce\'92\'6c\'82\'aa\'90\'b3\'82\'b5\'82\'a2\'82\'e0\'82\'cc\'82\'a9\'81\'41\'82\'b7\'82\'c5\'82\'c91\'93\'78\'8e\'67\'82\'ed\'82\'ea\'82\'bd\'82\'e0\'82\'cc\'82\'c5\'82\'cd\'82\'c8\'82\'a2\'82\'a9\'81\'41\'82\'c6\'82\'a2\'82\'a4\'82\'cc\'82\'f0\'8a\'6d\'94\'46\'82\'b7\'82\'e9\'95\'4b\'97\'76\'82\'aa\'82\'a0\'82\'e9\'81\'42\
@@ -197,8 +223,8 @@ jwt.verify(ID_TOKEN, getApplePublicKey, null, function (err, decoded) \{\
 \f0\b 	Apple
 \f1\b0 \
 		JWT\'82\'ccverify\'82\'cc\'98\'62 nonce\'82\'cd\'82\'b1\'82\'b1\'82\'c5\'82\'e0\'8f\'d0\'89\'ee\'82\'b3\'82\'ea\'82\'c4\'82\'e9\'81\'42\
-		{\field{\*\fldinst{HYPERLINK "https://developer.apple.com/documentation/signinwithapplerestapi/verifying_a_user"}}{\fldrslt \cf7 \expnd0\expndtw0\kerning0
-\ul \ulc7 \outl0\strokewidth0 \strokec7 https://developer.apple.com/documentation/signinwithapplerestapi/verifying_a_user}}\
+		{\field{\*\fldinst{HYPERLINK "https://developer.apple.com/documentation/signinwithapplerestapi/verifying_a_user"}}{\fldrslt \cf10 \expnd0\expndtw0\kerning0
+\ul \ulc10 \outl0\strokewidth0 \strokec10 https://developer.apple.com/documentation/signinwithapplerestapi/verifying_a_user}}\
 \
 \
 
@@ -212,8 +238,8 @@ jwt.verify(ID_TOKEN, getApplePublicKey, null, function (err, decoded) \{\
 \f0\b 	What the Heck is Sign In with Apple?
 \f1\b0 \
 		AuthorizationCode\'82\'f0verify\'82\'b7\'82\'e9\'82\'bd\'82\'df\'82\'cc\'90\'dd\'92\'e8\'82\'cc\'98\'62\'82\'f0\'8f\'91\'82\'a2\'82\'c4\'82\'ad\'82\'ea\'82\'c4\'82\'e9\'81\'42\'93\'c7\'82\'f1\'82\'c5\'82\'e9\'81\'42\
-		{\field{\*\fldinst{HYPERLINK "https://developer.okta.com/blog/2019/06/04/what-the-heck-is-sign-in-with-apple"}}{\fldrslt \cf7 \expnd0\expndtw0\kerning0
-\ul \ulc7 \outl0\strokewidth0 \strokec7 https://developer.okta.com/blog/2019/06/04/what-the-heck-is-sign-in-with-apple}}\
+		{\field{\*\fldinst{HYPERLINK "https://developer.okta.com/blog/2019/06/04/what-the-heck-is-sign-in-with-apple"}}{\fldrslt \cf10 \expnd0\expndtw0\kerning0
+\ul \ulc10 \outl0\strokewidth0 \strokec10 https://developer.okta.com/blog/2019/06/04/what-the-heck-is-sign-in-with-apple}}\
 \
 \
 \
