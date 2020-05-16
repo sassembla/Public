@@ -14,7 +14,6 @@
     p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; color: #7f7f7f; background-color: #e6e6e6}
     p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 26.0px 'Hiragino Sans'; color: #808080; background-color: #e6e6e6}
     p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 26.0px 'Hiragino Sans'; background-color: #e6e6e6}
-    p.p8 {margin: 0.0px 0.0px 0.0px 0.0px; font: 26.0px 'Hiragino Sans'; color: #4d4d4d; background-color: #e6e6e6}
     span.s1 {color: #000000}
     span.Apple-tab-span {white-space:pre}
   </style>
@@ -37,10 +36,10 @@
 <p class="p4">あ　　　　　い</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>これを、例えば [あ] と [い] の間で改行が入るような幅に表示しようとするとしよう。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>[あ]の後ろ、２つめのスペースを詰めたところでちょうど改行が起きるような幅を想定する。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>[あ]の後ろ、3つめのスペースを詰めたところでちょうど改行が起きるような幅を想定する。</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
-<p class="p5"><span class="s1">あ　　</span>// 2つめのスペースで改行が発生するような幅</p>
-<p class="p5"><span class="s1">　　　い</span>// 3つのスペースのあとに[い]が来る</p>
+<p class="p5"><span class="s1">あ　　　</span>// 3つめのスペースで改行が発生するような幅</p>
+<p class="p5"><span class="s1">　　い</span>// 2つのスペースのあとに[い]が来る</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p3"><span class="Apple-tab-span">	</span>こうなってくれるのがまあ、予想としては正しいと思うんだよね。</p>
 <p class="p2"><br></p>
@@ -48,30 +47,30 @@
 <p class="p3"><span class="Apple-tab-span">	</span>そしてここでもう一つ、理想としては、レイアウトする枠に対して、レイアウトされる文字は枠幅よりイコールかちょっと少ない位置で折り返しが発生する。</p>
 <p class="p3"><span class="Apple-tab-span">	</span>具体的には、1行目のコンテンツの返す幅は、</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-converted-space">       </span>↓ この位置を表す幅 = あ + スペース + スペース の幅を合計した値で、これは枠幅より小さいはずだよな。</p>
-<p class="p5"><span class="s1">あ　　</span>// 2つめのスペースで改行が発生するような幅</p>
-<p class="p5"><span class="s1">　　　い</span>// 3つのスペースのあとに[い]が来る</p>
+<p class="p3"><span class="Apple-converted-space">       </span>　↓ この位置を表す幅 = あ + スペース + スペース + スペース の幅を合計した値で、これは枠幅より小さいはずだよな。</p>
+<p class="p5"><span class="s1">あ　　　</span>// 3つめのスペースで改行が発生するような幅</p>
+<p class="p5"><span class="s1">　　い</span>// 2つのスペースのあとに[い]が来る</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
-<p class="p3"><span class="Apple-tab-span">	</span>[あ]と[スペース]の幅をそれぞれ100pxだと仮定しよう。つまり1行目の幅は<b>300</b>あるはずなんだ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>[あ]と[スペース]の幅をそれぞれ100pxだと仮定しよう。つまり1行目の幅は<b>400</b>あるはずなんだ。</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>でも違うんだ。実際はこうなるんだ。</p>
 <p class="p2"><br></p>
-<p class="p5"><span class="s1">あ　　</span>// 2つめのスペースで改行が発生するような幅</p>
-<p class="p5"><span class="s1">い</span>// 3つのスペースが消える</p>
+<p class="p5"><span class="s1">あ　　　</span>// 3つめのスペースで改行が発生するような幅</p>
+<p class="p5"><span class="s1">い</span>// 前の2つのスペースが消える</p>
 <p class="p3"><span class="Apple-tab-span">	</span>!?</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
-<p class="p3"><span class="Apple-tab-span">	</span>やったぜ！！、<b>[い]の前の3つのスペースが消えたね！</b>　なんで？</p>
+<p class="p3"><span class="Apple-tab-span">	</span>やったぜ！！、<b>[い]の前の2つのスペースが消えたね！</b>　なんで？</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>そして1行目の幅は？　幅はどうなんだ、教えてくれセフィロス。</p>
 <p class="p2"><br></p>
 <p class="p3">↓ この位置を表す幅 = [あ] 単独の幅、、</p>
-<p class="p5"><span class="s1">あ　　</span>// 2つめのスペースで改行が発生するような幅</p>
-<p class="p5"><span class="s1">い</span>// 3つのスペースが消える</p>
+<p class="p5"><span class="s1">あ　　　</span>// 3つめのスペースで改行が発生するような幅</p>
+<p class="p5"><span class="s1">い</span>// 前の2つのスペースが消える</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span><b>100を返してくる。</b> ふーん、 <b>300じゃないんだ、、</b>なんで、、？</p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>100を返してくる。</b> ふーん、 <b>400じゃないんだ、、</b>なんで、、？</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>カラクリはこうだ。</p>
@@ -79,8 +78,8 @@
 <p class="p3"><span class="Apple-tab-span">	</span>2. TMProは文章の末尾に来るスペースを消すので、行に入るテキストの幅は、「スタート」から「最後に現れるスペース以外の文字」の幅になる</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>1によって、2行目に来るはずの３つのスペースが消され、それでも改行だけはできて、</p>
-<p class="p3"><span class="Apple-tab-span">	</span>2によって誤った幅情報が得られる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>1.によって、2行目に来るはずの2つのスペースが消され、それでも改行だけはできて、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>2.によって誤った幅情報が得られる。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>これらを回避すると、スペースがロストインスペースしないで済み、正確な幅情報が得られる。</p>
@@ -102,11 +101,11 @@
 <p class="p4">い</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>こうなると思うんだよね。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>だがここで、[あ]が、もし、100.1pxの幅を持つとしたら？</p>
+<p class="p3"><span class="Apple-tab-span">	</span>だがここで、[あ]が、もし、101pxの幅を持つとしたら？</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>誇張してちょっと大きなフォントでやったとしよう。同じフォントでも幅は変わる。</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>10個並べたら1001pxになるから、10個めの[あ]は２行目に行くはずだよね。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>10個並べたら1010pxになるから、10個めの[あ]は２行目に行くはずだよね。</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-converted-space">                                                           </span>↓枠幅がここ。 9個目の[あ]と枠幅の隙間に最後の[あ]は入らないよなあ。</p>
 <p class="p6"><span class="s1">あああああああああ</span>あ//x 明確に入らないよね。</p>
@@ -118,7 +117,7 @@
 <p class="p3"><span class="Apple-tab-span">	</span>具体的にいうと、文字が枠を超える形でレイアウトされる。</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-converted-space">                                                           </span>↓枠幅がここ。<span class="Apple-converted-space"> </span></p>
-<p class="p8"><span class="s1">ああああああああああ</span>// 枠を大幅に超えているんだが？</p>
+<p class="p6"><span class="s1">ああああああああああ</span>//枠幅をワイルドに超えてくるんだが？</p>
 <p class="p7">い</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>枠のサイズを与えてさーレイアウトをお願いしてるのにさー、枠のサイズを超えてレイアウトされるんだよ。怖い。</p>
@@ -132,7 +131,7 @@
 <p class="p3"><span class="Apple-tab-span">	</span>なので、レイアウト後に恐る恐る計測して、枠を超えていたら、なんとかしよう。</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p2"><br></p>
-<p class="p3">よいTMPro生活を！ いいライブラリなんだけどなあ。</p>
+<p class="p3">よいTMPro生活を！ いいライブラリなので。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
