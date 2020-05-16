@@ -1,0 +1,141 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1894.4">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Sans'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; background-color: #e6e6e6}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; color: #7f7f7f; background-color: #e6e6e6}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 26.0px 'Hiragino Sans'; color: #808080; background-color: #e6e6e6}
+    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 26.0px 'Hiragino Sans'; background-color: #e6e6e6}
+    p.p8 {margin: 0.0px 0.0px 0.0px 0.0px; font: 26.0px 'Hiragino Sans'; color: #4d4d4d; background-color: #e6e6e6}
+    span.s1 {color: #000000}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>TextMesh Proのエッジケース現象まとめ</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>さわれば触るほど楽しいケースが出てくる。UUebViewでもしこたま遭遇していたが、LayouTaroを作っているとさらに出会う。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>次のようなファンキーを発見した。多分以前のメモとかには出てこない。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・TMProはwhitespaceが特定の位置に来るとファンキーなことをする</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・TMProが改行する位置をミスる</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>TMProはwhitespaceが特定の位置に来るとファンキーなことをする</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>whitespace、つまりスペースを含んだテキストとかを食わせると、まあ、表示幅とテキストの長さによっては、スペースが行の末尾に来ることがあるだろう。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>例えば次のようなテキストがあるとする。[あ]、[い] の間には5つのスペースが入っている。</p>
+<p class="p4">あ　　　　　い</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これを、例えば [あ] と [い] の間で改行が入るような幅に表示しようとするとしよう。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>[あ]の後ろ、２つめのスペースを詰めたところでちょうど改行が起きるような幅を想定する。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p5"><span class="s1">あ　　</span>// 2つめのスペースで改行が発生するような幅</p>
+<p class="p5"><span class="s1">　　　い</span>// 3つのスペースのあとに[い]が来る</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>こうなってくれるのがまあ、予想としては正しいと思うんだよね。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>そしてここでもう一つ、理想としては、レイアウトする枠に対して、レイアウトされる文字は枠幅よりイコールかちょっと少ない位置で折り返しが発生する。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>具体的には、1行目のコンテンツの返す幅は、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-converted-space">       </span>↓ この位置を表す幅 = あ + スペース + スペース の幅を合計した値で、これは枠幅より小さいはずだよな。</p>
+<p class="p5"><span class="s1">あ　　</span>// 2つめのスペースで改行が発生するような幅</p>
+<p class="p5"><span class="s1">　　　い</span>// 3つのスペースのあとに[い]が来る</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>[あ]と[スペース]の幅をそれぞれ100pxだと仮定しよう。つまり1行目の幅は<b>300</b>あるはずなんだ。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>でも違うんだ。実際はこうなるんだ。</p>
+<p class="p2"><br></p>
+<p class="p5"><span class="s1">あ　　</span>// 2つめのスペースで改行が発生するような幅</p>
+<p class="p5"><span class="s1">い</span>// 3つのスペースが消える</p>
+<p class="p3"><span class="Apple-tab-span">	</span>!?</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>やったぜ！！、<b>[い]の前の3つのスペースが消えたね！</b>　なんで？</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>そして1行目の幅は？　幅はどうなんだ、教えてくれセフィロス。</p>
+<p class="p2"><br></p>
+<p class="p3">↓ この位置を表す幅 = [あ] 単独の幅、、</p>
+<p class="p5"><span class="s1">あ　　</span>// 2つめのスペースで改行が発生するような幅</p>
+<p class="p5"><span class="s1">い</span>// 3つのスペースが消える</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>100を返してくる。</b> ふーん、 <b>300じゃないんだ、、</b>なんで、、？</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>カラクリはこうだ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>1. TMProは文章の末尾に来るスペースの存在自体をなかったことにするが、消す前にきちんと幅を測って改行だけはさせてくれる</p>
+<p class="p3"><span class="Apple-tab-span">	</span>2. TMProは文章の末尾に来るスペースを消すので、行に入るテキストの幅は、「スタート」から「最後に現れるスペース以外の文字」の幅になる</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>1によって、2行目に来るはずの３つのスペースが消され、それでも改行だけはできて、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>2によって誤った幅情報が得られる。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これらを回避すると、スペースがロストインスペースしないで済み、正確な幅情報が得られる。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>TMProが改行する位置をミスる</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これには本当に参った。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>レイアウトする枠の長さを1000pxとしよう。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>カーニングの組み合わせ込みで幅100pxの文字なら、10個置くとちょうど枠を満たす。</p>
+<p class="p2"><br></p>
+<p class="p3">　　　　　　　　　↓ここがちょうど、枠のサイズと重なる</p>
+<p class="p4">ああああああああああ</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>このパターンだと、例えば11文字目に何か文字がくれば、その文字は改行された先に送り出される。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>11文字目に[い]が来るとしたら、</p>
+<p class="p2"><br></p>
+<p class="p4">ああああああああああ</p>
+<p class="p4">い</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>こうなると思うんだよね。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>だがここで、[あ]が、もし、100.1pxの幅を持つとしたら？</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>誇張してちょっと大きなフォントでやったとしよう。同じフォントでも幅は変わる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>10個並べたら1001pxになるから、10個めの[あ]は２行目に行くはずだよね。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-converted-space">                                                           </span>↓枠幅がここ。 9個目の[あ]と枠幅の隙間に最後の[あ]は入らないよなあ。</p>
+<p class="p6"><span class="s1">あああああああああ</span>あ//x 明確に入らないよね。</p>
+<p class="p7">あい</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ところが。こうならない組み合わせがある。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>レイアウトした文字が枠のサイズを超えるんだ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>具体的にいうと、文字が枠を超える形でレイアウトされる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-converted-space">                                                           </span>↓枠幅がここ。<span class="Apple-converted-space"> </span></p>
+<p class="p8"><span class="s1">ああああああああああ</span>// 枠を大幅に超えているんだが？</p>
+<p class="p7">い</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>枠のサイズを与えてさーレイアウトをお願いしてるのにさー、枠のサイズを超えてレイアウトされるんだよ。怖い。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これはTMPro内での計算が1pxくらいの誤差を含むから起きる現象で、事前の回避策はない。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ふとレイアウトしてみて、レイアウト結果が枠の幅を超えていることがあって、それで発覚した。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ひどい時は大変ブレイブな感じで枠外にレイアウトが飛び出す。1文字だけだけどさー、与えた枠は守って欲しいんだよなー。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ほとんど全てのケースで枠内に収まるが、TMPro内の計算結果というブラックボックス性のせいで、レイアウトするまで観測できない。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>なので、レイアウト後に恐る恐る計測して、枠を超えていたら、なんとかしよう。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3">よいTMPro生活を！ いいライブラリなんだけどなあ。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+</body>
+</html>
