@@ -1,0 +1,116 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1894.4">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Sans'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; background-color: #e6e6e6}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>firebaseてめえ</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>iOSアプリをAppTransferすると、firebase cloud messagingの通知が最低10日の間不完全な状態になる。有り体に言うと死ぬ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>これは開発者側からは何もできることはない。10日間絶え間なく12の型を繋げていれば(サポートとやり取りしていれば)いつの間にか解決する。おクソでございますわね。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>Transferすると何が起きるのか</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>fcmに登録する要素として、APNs関連のAuthorization KeyとTeamIDの2つがあり、これらがTransfer前とTransfer後で当然変わる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>そしてTransferに際して、これらのfcmのパラメータを変更したが最後、いや変更するしかないんだが、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・旧来のTeamIDのユーザーへの通知が全て死ぬ</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・新規のTeamIDのユーザーへの通知がだんだんと有効になる</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ということが起きる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>具体例としては、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Aさん、Bさんという2名のiOSAppユーザーがいた時、AppTransferの瞬間からAさん、Bさんへのpushは404エラーを返すようになり、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Aさんは2日後にはpushが届くようになり、Bさんはなんと10日後にpushが届くようになる。</p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b>何故こうなるのか</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>一部、Firebaseの内部IDに対してのみ俺の憶測が入る。他は観測した。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>firebase cloud messagingのiOS関連のアカウントは、2020/07現在、次のような形式でAPNsとの連携を実装している。</p>
+<p class="p2"><br></p>
+<p class="p4">FirebasePushUserID(仮) - firebase push token</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>\_ APNs token</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>FirebasePushUserID(FPUID) は適当に外部から想像する代物なんだけど、pushに関して、firebaseが管理するこのようなデータ構造がユーザー単位で存在すると思いねえ。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>firebase push tokenは7dayくらいの寿命を持ち、例えばUnity firebase cloud messaging SDKは、1W(7day)に一度、firebaseから新しいfirebase push token(FPToken)を受け取る。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>これにより、FPUIDに紐づくFPTokenが更新される。端末とかは変わってないので、APNs tokenは変わらない、みたいな状態が起きる。</p>
+<p class="p2"><br></p>
+<p class="p4">FirebasePushUserID(仮) - firebase push token<b> &lt;- こいつが更新される</b></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>\_ APNs token<b> &lt;- このへんは変わらない</b></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>App側はそのFPTokenを自社のWebサーバとかに送付して、以降push通知を流したいタイミングで、次のような通信を行う。</p>
+<p class="p2"><br></p>
+<p class="p4">Webサーバ(FPToken使用) -&gt; fcm(紐づくAPNs使用) -&gt; ユーザーデバイスに通知が届く</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これが正常系。まあそれはいい。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>でねーこれねー、Transferがあったタイミング以降で、<b>FPTokenが更新されても、一定期間、Webサーバ-fcm間で404エラーが出る</b>んだよね。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>いやFPTokenの寿命が1Wって言ってるから、そりゃ更新されるタイミングはTransferから最大1Wなのでは？って思うじゃん？ 違うんだよ。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>fcmは、Transfer以後にたまたま寿命を迎えたFPTokenが更新されても、FPTokenを強制的に更新しても、10日間くらいの間は、404エラーになるようなFPTokenを返してくるんだよね。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>は？っていうね。 更新したのに404なのかよ。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>次のようなパターンがあるのを確認している。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>case 1. Transfer以降で、App起動時に1Wに一度、fcmから新しいFPTokenを取得できるが、そのFPTokenは404エラーになる</p>
+<p class="p3"><span class="Apple-tab-span">	</span>case 2. Transfer以降で、Appのpush通知設定を変更することでfcmから新しいFPTokenを取得できるが、そのFPTokenは404エラーになる</p>
+<p class="p3"><span class="Apple-tab-span">	</span>case 3. Transfer以降で、Appを新規インストール/再インストール(削除してから再インストール！)した場合、それ以降に取得できるFPTokenは正常な動作をする(が、どうやって促すんだよ、push届かねえんだっつうの)</p>
+<p class="p3"><span class="Apple-tab-span">	</span>case 4. Transfer以降で、Appを更新した場合、それ以降に取得できるFPTokenは正常な動作をする(らしい、未確認、いやでもお前どうやって促すんだよ、push届かねえんだっつうの)</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>というような感じになっている。case 1, 2, 3, 4全部に問題がある。なんだこれ地獄かね。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Transferから10日間が過ぎたあたりで、FPTokenが更新された以降で404が出なくなる。404が出ない状態のFPTokenが配布され始めるんだ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>だんだんとpush失敗のログから404が減っていき、ついにはTransfer前と同等に戻る。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これは繰り返しになるが、FPTokenの更新頻度は関係ない。真っ当な、404エラーにならないFPTokenがfirebaseから確実に取得できるのが、Transferから10日以降なのだ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>もちろんばらつきはある。このばらつきによって、Transferから1度目のFPToken更新で404にならないFPTokenを引けるユーザもいれば、そうではなくハズレFPTokenを得るユーザーもいる。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>firebase側もこの状態になったときに何かできるかというと何もできない。開発者も何もできないしfirebase側も何もできない。最悪の体験だった。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>firebaseよ、こうなるのを知っとけ。ドキュメントに書いとけ。OK? みたいな。ふふ。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>エラーが最悪</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>このcase 1,2で発生する404エラーは、通常のfcmが返してくる「お前が指定した端末はそんざいしないゾ☆」エラーと見分けがつかない。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>突然404エラーが増えて見えるわけで、は？ ってなるが、まあ、何もできない。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>どう回避すればいいのか</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Transfer時にfcmを使わない。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>自前でAPNs tokenを保持しておき、Transferから10dayか2W(14day)経過するまでは、自前でAPNs tokenを使ってpushする。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>もしこうなったときに、やった方がいいこと</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Transfer後、即iOSアプリの審査を登録しても2-3日、それが全ユーザーに知れ渡るまでに4-5日、その間は無防備睡眠状態で殴られ続ける。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>pushは届かない。お知らせもユーザーがアプリを起動するまで無意味。唯一アプリ入れ直しだけが意味を成すが、いや、ユーザーにそれをさせちゃダメでしょ。正気を疑う。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>こうなってしまった場合にできることはない。何をしても無駄。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b>こうなる前に、やった方がいいこと</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Firebase Cloud MessagingのUnity SDKは、まあiOS SDKもだが、APNsを取得するルートをmethod swizzlingによってAppから奪うことで動作している。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>これさーマジでさー、この構造やめてくんねーかなー、せめて一瞬でいいからUnityとかiOSにも取得チャンスくれや、改造すんぞ。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ということで改造しましょう。APNsを取り戻しつつfcmにもFPTokenを作ってもらう。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+</body>
+</html>

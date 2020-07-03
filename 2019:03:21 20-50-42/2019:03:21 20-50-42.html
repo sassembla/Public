@@ -1,0 +1,102 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1894.4">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Sans'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; background-color: #e6e6e6}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; background-color: #e6e6e6; min-height: 18.0px}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>簡単に理解するPushNotification on Unity iOS</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>iOS Push通知受け取り RTAする。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>手順</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Pusher.app を使ってローカル環境からAPNs(Apple Push Notification service)をぶっ叩いてpushを出す。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>まず開発者ページからSSLのcertをつくるよ</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://developer.apple.com/account/resources/certificates/add">https://developer.apple.com/account/resources/certificates/add</a></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Apple Push Notification service SSL (Sandbox &amp; Production)作成</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ここを見ながら <a href="https://help.apple.com/developer-account/#/devbfa00fef7">https://help.apple.com/developer-account/#/devbfa00fef7</a> request用のcsrを作成</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>生成したSSL証明書をDLしてkeychainに追加、対象の証明書を右クリック &gt; ~を書き出す を選択。 これで、p12で署名した状態の証明書が作れる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>キーチェーンで作成したp12をPusher.appにセットすると、パスワード聞かれるので返答。無事に設定が完了すると、次のようなログが出る。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>さて、これでpushの準備はできたので、push対象のtokenを取得する。実機に対してコードを追加しよう。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>iOS用のUnityアプリをビルドし、Xcode上で無理やりUNUserNotificationCenter関連のコードを入れていく。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これから、push通知をAPNsに送り出す際にどの端末に送り出すかを決定する要素 = deviceTokenをiOS実機から取得する。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>didRegisterForRemoteNotificationsWithDeviceToken メソッドはすでにUnityが書いてるので、そこにトークンを文字列表示するコードを書き足す。</p>
+<p class="p4">- (void)application:(UIApplication*)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData*)deviceToken</p>
+<p class="p4">{</p>
+<p class="p4"><span class="Apple-converted-space">    </span>NSUInteger length = deviceToken.length;</p>
+<p class="p4"><span class="Apple-converted-space">    </span>const unsigned char *buffer = (unsigned char*)deviceToken.bytes;</p>
+<p class="p4"><span class="Apple-converted-space">    </span>NSMutableString *hexString<span class="Apple-converted-space">  </span>= [NSMutableString stringWithCapacity:(length * 2)];</p>
+<p class="p4"><span class="Apple-converted-space">    </span>for (int i = 0; i &lt; length; ++i) {</p>
+<p class="p4"><span class="Apple-converted-space">        </span>[hexString appendFormat:@"%02x", buffer[i]];</p>
+<p class="p4"><span class="Apple-converted-space">    </span>}</p>
+<p class="p4"><span class="Apple-converted-space">    </span>NSString *deviceTokenSt = [hexString copy];</p>
+<p class="p5"><span class="Apple-converted-space">    </span></p>
+<p class="p4"><span class="Apple-converted-space">    </span>NSLog(@"deviceToken:%@", deviceTokenSt);</p>
+<p class="p4"><span class="Apple-converted-space">    </span>....</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>おまえにpush通知送ろうとおもうんだけどそういうのやっていい？っていうリクエストをユーザーに出すコードを何処かに書く。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>自分は面倒くさかったのでdidFinishLaunchの末尾あたりに書いた。</p>
+<p class="p4"><span class="Apple-converted-space">    </span>....</p>
+<p class="p4"><span class="Apple-converted-space">    </span>UNUserNotificationCenter* current = [UNUserNotificationCenter currentNotificationCenter];</p>
+<p class="p4"><span class="Apple-converted-space">    </span>[current requestAuthorizationWithOptions:(UNAuthorizationOptionBadge | UNAuthorizationOptionSound | UNAuthorizationOptionAlert )</p>
+<p class="p4"><span class="Apple-converted-space">                           </span>completionHandler:^(BOOL granted, NSError * _Nullable error) {</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-converted-space">        </span>NSLog(@"comp! granted:%d error%@:", granted, error );</p>
+<p class="p4"><span class="Apple-converted-space">        </span>if (granted) {</p>
+<p class="p4"><span class="Apple-converted-space">            </span>dispatch_async(dispatch_get_main_queue(), ^{</p>
+<p class="p4"><span class="Apple-converted-space">                </span>[[UIApplication sharedApplication] registerForRemoteNotifications];// このメソッドはメインスレッドでしか実行できないのでこの書き方が必須</p>
+<p class="p4"><span class="Apple-converted-space">            </span>});</p>
+<p class="p4"><span class="Apple-converted-space">        </span>}</p>
+<p class="p5"><span class="Apple-converted-space">        </span></p>
+<p class="p4"><span class="Apple-converted-space">    </span>}];</p>
+<p class="p4"><span class="Apple-converted-space">    </span>....</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>その上で、Xcodeで実行する環境をdev向けにすることでtokenが取得できた。通常はrelease向けになっていて、Edit Schemeからdev向けに設定できた。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>他の方法あったっけ、、、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>この操作をやらないと、ユーザーが通知をOKしても、didRegisterやfailなどのdeviceToken受け取りのメソッドが一切着火しない。つら。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>そんで当然、iOSのビルド設定をReleaseからDebugに変更しないとtoken取得に失敗するのは、作成済みのSSL証明書がsandboxのものだったからに他ならない。はい。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>結果</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>iOS実機から取得できたtest app dev環境のデバイストークン 64文字。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これをPusher.appに渡して実行してみたところ、問題なく実機にpushが届いた。一発で動くのやばない。素敵。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ここまでのRTAは30分。調べながら書くのしんど。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>なんらかのAPNsをぶっ叩くサービスを使うのが普通なので、ぶっちゃけ概念の説明などに大変な労力を割くべきだな。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>来年見て覚えてるかどうか果てしなく怪しい。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+</body>
+</html>
