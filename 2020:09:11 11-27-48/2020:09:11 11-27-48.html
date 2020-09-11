@@ -1,0 +1,299 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1894.4">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Sans'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px Menlo; color: #000000}
+    span.s1 {font: 12.0px Helvetica}
+    span.s2 {font-variant-ligatures: no-common-ligatures}
+    span.s3 {font: 12.0px 'Hiragino Sans'; color: #000000}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>Unity CCDを触ってみる</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これ</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://blogs.unity3d.com/2020/09/10/enterprise-gaming-cdn-get-started-in-an-hour-with-unitys-cloud-content-delivery">https://blogs.unity3d.com/2020/09/10/enterprise-gaming-cdn-get-started-in-an-hour-with-unitys-cloud-content-delivery</a></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>記事内では略してUCCDと呼ぶ。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>サービスの概要をウルトラかんたんにまとめると、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・Unityアカウントを持っていてもいなくてもUnity使っていてもいなくても使える</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・月50GBまでは無料な</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・CDN</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>運用的にまとめると</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・これはCDN on Rails。 めんどくさいところは全部Unityまかせにできる</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・手元のフォルダをそのままuploadしてパブリッシュできるが、ファイルの削除は伝搬しない</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・bucket、entry単位でのdeleteがあるがすごくクセが強い</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・人力でinvalidate(キャッシュさせ直す処理)はない。キャッシュのTTLは1W</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・データは1Wキャッシュされ同じURL上に残るが、badge経由のURLのみを公開するのであれば即時消せる(ただしentry単位かbucket単位のみ)</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・課金アラートや現在どの程度ギガを消費したかを確認できる画面はない</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>おことわり</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>自分はUnityの中の人ではないので色々試した結果を乗っけている + テスト時に作ったいろいろはだいたい既に削除済みだが、見れるものもあると思う。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>この記事中のサンプルファイルのURLにアクセスしても404だよ～とかのご連絡は不要だが、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ここミスってない？とかは是非 <a href="https://twitter.com/toru_inoue">https://twitter.com/toru_inoue</a> まで。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>チュートリアル</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ステップバイステップ操作でコマンドラインから操作できる。すっげー親切。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>ファイルのアップロード方法</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>フォルダに好きなものを入れる</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>-&gt; フォルダをsync</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>-&gt; web UIかコマンドラインかweb APIから、アップ済みで未releaseな変更群(= latest)をrelease化</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>latest -&gt; releaseのこの工程なんか覚えがあるなーと思ったんだけど、思いあたった、gitじゃん。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・ある時点のローカルなフォルダの内容/構成をそのままlatestとしてupしてくれて(commit)</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・変更点をまとめて一つのreleaseとして公開できる(push)</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、一個明確にgitではないポイントがあって、ファイルsyncで発生させられる変更のなかで、ファイルの削除に関する事象が無い。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これは例えばローカルにあったaというファイルをリネームしてbにしてsyncすると、aとb両方のファイルがlatestに残る。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>そのままreleaseすると、releaseされるのも当然aとbで、ファイルsyncからはweb上のstageに該当するような要素を消す方法がない。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>つまりファイルsyncした時点でファイルがアップロードされていて、それがそのままreleaseへと昇格していくイメージ。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、ファイルってどうやって消すの?っていうと、syncでもweb UIからも消せないが、web APIからは消せる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>当然それも変更なので、次回releaseを行なって初めて削除が適応される。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>project、bucket、entry、release、badgeの概念</b></p>
+<p class="p4"><span class="Apple-tab-span">	</span><img src="Paper.%E3%82%A2%E3%82%A4%E3%83%86%E3%82%99%E3%82%A2.793%203.png" alt="Paper.アイデア.793 3.png"></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>project</span>を幹として、<span class="s1">bucket</span>を幾つでも作ることができる。<span class="s1">bucket</span>名は公開されず、bucketに自動的に振られたidを元にアクセスを行ったりする。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>bucketにはentryと呼ばれるファイルを持たせることができ、ファイル名ごとにentryが生成される。ファイル名は公開されないが、ファイル名を使ってアクセスする方法が提供される。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>entryの集合 entriesからは、releaseを作成することができる。releaseには番号、idが振られる。最新のreleaseには自動的にlatest badgeがつく。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>なんでかっていうと、UCCDはbadgeというエイリアスを作ることで、「releaseとか何もわからんけどファイル名がわかればファイルにアクセスできる仕掛け」を提供しているため。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>これがファイル=entryの削除の概念にも深く関係している。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>releaseに対して自由にbadgeを追加したり削除したりすることができる。latestは例外的に勝手に最新についてくる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>画像だと、まあちょっと嘘をついている(一番右のReleaseにlatestがついてこないという状態はありえない)</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Addressables URL はbucket と badge と ファイル名 を組み合わせてURLを生成する機能で、releaseを足すたびにURLが変わることがない。</p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>例えば<span class="s1">release2</span>にあったファイルaを<span class="s1">release3</span>で更新した、という場合、Addressables URL経由では、bucket/latest?path=a で更新されたrelease3状態のファイルaへとアクセスできる。</p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>例えば<span class="s1">release2</span>まではあったファイルaを<span class="s1">release3</span>で消した、という場合、Addressables URL経由では、bucket/latest?path=a へのアクセスで404が発生する。</p>
+<p class="p5"><span class="Apple-tab-span">	</span></p>
+<p class="p4"><span class="Apple-tab-span">	</span><img src="Paper.%E3%82%A2%E3%82%A4%E3%83%86%E3%82%99%E3%82%A2.794%203.png" alt="Paper.アイデア.794 3.png"></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>もう一個おまけでpromotoという仕組みがあり、あるbucket Aの特定のreleaseを別のbucket Bへと「Bの新規releaseとして」発生させることができる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ちなみにbadgeはbucketを跨がない。entryも。それはそう。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ここまでに紹介した要素をパズルのように用いて、運用に都合がいいようにCDNとして利用しよう！、というのが、UCCDの提供してくれるもの。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>UCCDが発行するURLについて</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>次の3つのURLはすべて同一のデータを指すが、それぞれ価値が違っている。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>次のパラメータがあったとき</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>1bfcb5bc-f825-4496-b0a8-fa05de8602bc : バケットid</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>latest : latestバッジ</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>logo.png : ファイル名</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>1. badge経由でのデータアクセスを提供するURL</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>https://787e3749-f29e-48d5-ba4a-d5fd3ca60935.client-api.unity3dusercontent.com/client_api/v1/buckets/1bfcb5bc-f825-4496-b0a8-fa05de8602bc/release_by_badge/<b>latest</b>/entry_by_path/content/?path=logo.png</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>これはbucketかentryを消すことで即時アクセス不可になる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>キャッシュする関係上でoriginを指してるわけではないが、bucket/entry自体が消えるのでbucket/entryに紐づくbadgeも消えて、経路ごとふっとぶみたいな感じだろうか。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>2. ファイル単体のURL</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>https://787e3749-f29e-48d5-ba4a-d5fd3ca60935.client-api.unity3dusercontent.com/client_api/v1/buckets/1bfcb5bc-f825-4496-b0a8-fa05de8602bc/entries/bca891e4-5425-468b-90cb-c831ce5c86ac/versions/4fb4f9db-544b-4a37-abfc-0f8dbd268719/content/</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>このURLはoriginをダイレクトに指しているため、origin置き場 = bucket/entryの存在と完全に同期して消えるっぽい。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>3. リダイレクト先URL</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>https://787e3749-f29e-48d5-ba4a-d5fd3ca60935.cloudcontent.unity3dusercontent.com/bd562994ee34eb410064276a2ea436ba</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>このURLは、1,2を経由してリダイレクトされるURLで、これはbucketを消してもentryを消しても残ってる。TTLを見れる機会があったんで1Wくらいはこのままだと思う、</p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>とおもったが、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>projectをアーカイブしたら流石に即時で消えた。unarchしても戻らなかったので、最終手段としてのアーカイブという手はアリなのかもしれない(まあ課金とかadも即死するので絶対に選べないが)</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>web APIとドキュメント一覧</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>web API</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://content-api.cloud.unity3d.com/doc/?_ga=2.3423414.709552200.1599716565-337588898.1599383967#/">https://content-api.cloud.unity3d.com/doc/?_ga=2.3423414.709552200.1599716565-337588898.1599383967#/</a></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ドキュメント</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://docs.unity3d.com/Manual/UnityCCDCLIWalkthrough.html?_ga=2.104094982.709552200.1599716565-337588898.1599383967">https://docs.unity3d.com/Manual/UnityCCDCLIWalkthrough.html?_ga=2.104094982.709552200.1599716565-337588898.1599383967</a><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3">ここまでがウォーミングアップだ。ここから先が知りたかったこと。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>invalidate(キャッシュの削除)どうやるの？</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>badgeを駆使すればアクセス先が存在しないという状態にはできるが、badgeを使ってURLを変える、という発想が必須</p>
+<p class="p3"><span class="Apple-tab-span">	</span>badgeを変えずにCDNにキャッシュされた情報をinvalidateする手段は無い。というかオリジンのファイル自体を更新できない。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>アクセス制御とか、ユーザー単位の認証とかできるの？</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>むりそう。現状そういう機能は備わっていなそう。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>bucketに対してmetadataをセットするとかができるようになるとアクセス制御ができるんでは？ というのがあるが、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>現状だとmodelにもそういう表記はないんで、どうやって何を入れたもんだか。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>swaggar上のサンプルレスポンスだとなんかそういう「設定できてるmetadata」が返ってきてそうな、まあ空のmetadataの表示があるんだけど、実際のレスポンスにはmetadata自体がない。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>一応この記事の末尾にreq/resを書いた。まあ所詮swaggarだしなあ。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>課金アラートってないの？</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>冒頭の通り、月50GBまでは無課金でいける。が、さて？ それを超えたらどうなっちゃうの？</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>アラートの類が一切ないのと、今何GB使ったかとかどこでみんのコレ、、、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Unity Dashboardとかで表示されるのこんな画面なんで、、、</p>
+<p class="p4"><span class="Apple-tab-span">	</span><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202020-09-12%205.56.11.png" alt="スクリーンショット 2020-09-12 5.56.11.png"></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ちょっと全くわからなかったので問い合わせしてみようかな。ここで見れたよとかあったら教えて欲しい。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>流石にクレジットカード設定なしで使われるとサービス提供側だけがものすごい損だけをするのでカード設定必須ってのはわかるんだけど、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>アクセス制御もなし、ワンタイムURLみたいな構造もなし、その上でアラートがないと、ノーガードで破産するまで殴られそうな気がするが、、、</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>HTTP/2使える？</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>つかえない。disableしてある。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>まとめ</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>調査を手伝ってくれた友人の言葉を借りるとまさに「CDN on Rails」。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ファイルsyncで消えたファイルに対してdelete走らせてくれないと直感と反してファイルが増えまくることが無限に起きて辛いというのはあるが、まあAPIも難しくないし、、、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>CLIを使う旨味がほぼチュートリアル専用という感じ。でも体験すごく良かった。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Addressablesに無理に寄せることもなく、アクセス制御以外の物事はそつなくだいたい大まかにフワッと叶えられると思う。素敵。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>おかげで運用における自由度もそれなりに稼げる。そして何より安い！！ すごくやすい。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ただめちゃくちゃ「貧者のCDN」なので、個人開発者にお勧めするが課金は気にした方がいいと思った。アラートないので個人ほど死にそうな気はするが、まあうん、、困ったら即bucketを消すんだ、、、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>逆に、企業がこのサービスを使うには、存在しないアクセス制御の時点でほぼ詰みつつ、クセがあるbadge運用、ちょっと脳味噌が痛くなるpromoteとかを使いまくるのが正しいとは思う。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>最後に、とにかく「何を消したらどのURLがどうなるのか」は実体験をして知っておいたほうがいい。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>UCCDについては、とにかくbadgeを信じろと言い換えてもいい。<span class="Apple-converted-space"> </span></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>間違ったURLを公開したり、appが改正されてURLが露出した時とかに、1W程度の間CDN上のURLを自前で消せないパターンがあり、その間どうなっちゃうのかすごく興味がある。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>自分？ 自分は怖いから実験に使ったURLとかはbucketどころかprojectごと消したさ。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>今後はUnity関連のOSSで静的ファイルをホストするときに是非使わせてもらう。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>以下メモ</b></p>
+<p class="p2"><br></p>
+<p class="p3">curl -X GET "https://content-api.cloud.unity3d.com/api/v1/buckets/948b1e2c-6ad8-4bf3-8d11-3e9f9faeeb32/" -H "accept: application/json" -u:YOUR_API_KEY</p>
+<p class="p3">{</p>
+<p class="p3"><span class="Apple-tab-span">	</span>"id": "948b1e2c-6ad8-4bf3-8d11-3e9f9faeeb32",</p>
+<p class="p3"><span class="Apple-tab-span">	</span>"name": "testdata",</p>
+<p class="p3"><span class="Apple-tab-span">	</span>"projectguid": "787e3749-f29e-48d5-ba4a-d5fd3ca60935",</p>
+<p class="p3"><span class="Apple-tab-span">	</span>"description": "the bucket for test data",</p>
+<p class="p3"><span class="Apple-tab-span">	</span>"changes": {</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"unchanged": 2,</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"add": 0,</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"update": 0,</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"delete": 0</p>
+<p class="p3"><span class="Apple-tab-span">	</span>},</p>
+<p class="p3"><span class="Apple-tab-span">	</span>"last_release": {</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"releaseid": "a97d449c-80b6-4222-ac9c-379bbb70927e",</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"releasenum": 5,</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"created": "2020-09-11T18:27:21.811Z",</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"created_by": "39597",</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"created_by_name": "sassembla",</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"notes": "5th, remove unnecessary",</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"entries_link": "/api/v1/buckets/948b1e2c-6ad8-4bf3-8d11-3e9f9faeeb32/releases/a97d449c-80b6-4222-ac9c-379bbb70927e/entries/",</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"content_hash": "8f50d37f7fe37160beea060743f17b59",</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"content_size": 1136480,</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"badges": [{</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"name": "latest",</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"releaseid": "a97d449c-80b6-4222-ac9c-379bbb70927e",</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"created": "2020-09-11T18:27:21.811Z",</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"created_by": "39597",</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"created_by_name": "sassembla",</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"releasenum": 5</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}],</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"changes": {</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"unchanged": 1,</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"add": 1,</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"update": 0,</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"delete": 0,</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"last_modified": "2020-09-11T18:24:46.937Z",</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"last_modified_by": "39597",</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"last_modified_by_name": "sassembla"</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}</p>
+<p class="p3"><span class="Apple-tab-span">	</span>}</p>
+<p class="p3">}</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p6"><span class="s2">curl -X DELETE "https://content-api.cloud.unity3d.com/api/v1/buckets/948b1e2c-6ad8-4bf3-8d11-3e9f9faeeb32/entries/8d83ae5d-9d72-4539-9239-b7dbb55380f0/" -H "accept: application/json" -u: </span><span class="s3">YOUR_API_KEY</span></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3">curl -X GET "https://content-api.cloud.unity3d.com/api/v1/projects/787e3749-f29e-48d5-ba4a-d5fd3ca60935/buckets/?page=0&amp;per_page=10" -H "accept: application/json" -u: YOUR_API_KEY</p>
+<p class="p3">[{</p>
+<p class="p3"><span class="Apple-tab-span">	</span>"id": "948b1e2c-6ad8-4bf3-8d11-3e9f9faeeb32",</p>
+<p class="p3"><span class="Apple-tab-span">	</span>"name": "testdata",</p>
+<p class="p3"><span class="Apple-tab-span">	</span>"projectguid": "787e3749-f29e-48d5-ba4a-d5fd3ca60935",</p>
+<p class="p3"><span class="Apple-tab-span">	</span>"description": "the bucket for test data",</p>
+<p class="p3"><span class="Apple-tab-span">	</span>"changes": {</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"unchanged": 1,</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"add": 0,</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"update": 0,</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"delete": 0</p>
+<p class="p3"><span class="Apple-tab-span">	</span>},</p>
+<p class="p3"><span class="Apple-tab-span">	</span>"last_release": {</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"releaseid": "9f68afd7-0fe6-4b2a-b677-bee97142fb4b",</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"releasenum": 6,</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"created": "2020-09-11T19:55:50.100Z",</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"created_by": "39597",</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"created_by_name": "sassembla",</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"notes": "6th, truly deleted.",</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"entries_link": "/api/v1/buckets/948b1e2c-6ad8-4bf3-8d11-3e9f9faeeb32/releases/9f68afd7-0fe6-4b2a-b677-bee97142fb4b/entries/",</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"content_hash": "b2a23ed64584de6f8cb31dca2658ba84",</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"content_size": 601354,</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"badges": [{</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"name": "latest",</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"releaseid": "9f68afd7-0fe6-4b2a-b677-bee97142fb4b",</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"created": "2020-09-11T19:55:50.100Z",</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"created_by": "39597",</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"created_by_name": "sassembla",</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"releasenum": 6</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}],</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"changes": {</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"unchanged": 1,</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"add": 0,</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"update": 0,</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"delete": 1,</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"last_modified": "2020-09-11T19:47:10.262Z",</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"last_modified_by": "39597",</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"last_modified_by_name": "sassembla"</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}</p>
+<p class="p3"><span class="Apple-tab-span">	</span>}</p>
+<p class="p3">}]</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+</body>
+</html>
