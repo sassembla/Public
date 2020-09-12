@@ -92,8 +92,11 @@
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>bucketにはentryと呼ばれるファイルを持たせることができ、ファイル名ごとにentryが生成される。ファイル名は公開されないが、ファイル名を使ってアクセスする方法が提供される。</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>entryの集合 entriesからは、release = その瞬間のentryを集めたスナップショット を作成することができる。releaseには番号、idが振られる。最新のreleaseには自動的にlatest badgeがつく。</p>
-<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>なんでかっていうと、UCCDはbadgeというエイリアスを作ることで、「releaseとか何もわからんけどファイル名がわかればファイルにアクセスできる仕掛け」を提供しているため。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>entryの集合 entriesからは、release = その瞬間のentryを集めたスナップショット を作成することができる。releaseには番号、idが振られる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>この時点でreleaseに含まれるentry = ファイルがWebへと公開され、外部からアクセスすることが可能になる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>そんで、最新のreleaseには自動的にlatest badgeがつく。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>これは、UCCDがbadgeというエイリアスを使って「releaseが何番とか何もわからんけどファイル名がわかればファイルにアクセスできるAddressables URLという仕掛け」を提供しているため。</p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>これがファイル=entryの削除の概念にも深く関係している。</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>releaseに対して自由にbadgeを追加したり削除したりすることができる。latestは例外的に勝手に最新についてくる。</p>
@@ -102,6 +105,8 @@
 <p class="p3"><span class="Apple-tab-span">	</span>Addressables URL はbucket と badge と ファイル名 を組み合わせてURLを生成する機能で、releaseを足すたびにURLが変わることがない。</p>
 <p class="p3"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>例えば<span class="s1">release2</span>にあったファイルaを<span class="s1">release3</span>で更新した、という場合、Addressables URL経由では、bucket/latest?path=a で更新されたrelease3状態のファイルaへとアクセスできる。</p>
 <p class="p3"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>例えば<span class="s1">release2</span>まではあったファイルaを<span class="s1">release3</span>で消した、という場合、Addressables URL経由では、bucket/latest?path=a へのアクセスで404が発生する。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>具体的なURL例は <b>UCCDが発行するURLについて</b> に書いたから参考にするといい。</p>
 <p class="p5"><span class="Apple-tab-span">	</span></p>
 <p class="p4"><span class="Apple-tab-span">	</span><img src="Paper.%E3%82%A2%E3%82%A4%E3%83%86%E3%82%99%E3%82%A2.794%203.png" alt="Paper.アイデア.794 3.png"></p>
 <p class="p2"><br></p>
@@ -325,6 +330,18 @@
 <p class="p3">}]</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
+<p class="p3">URLの組み合わせ詳解</p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>1. badge経由でのデータアクセスを提供するURL</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>https://<b>PROJECT_ID</b>.client-api.unity3dusercontent.com/client_api/v1/buckets/<b>BUCKET_ID</b>/release_by_badge/<b>BADGE_NAME</b>/entry_by_path/content/?path=<b>ORIGINAL_FILE_NAME</b></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>2. ファイル単体のURL</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>https://<b>PROJECT_ID</b>.client-api.unity3dusercontent.com/client_api/v1/buckets/<b>BUCKET_ID</b>/entries/<b>ENTRY_ID</b>/versions/<b>ENTRY_VERSION</b>/content/</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>3. リダイレクト先URL</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>https://<b>PROJECT_ID</b>.cloudcontent.unity3dusercontent.com/<b>個別のFILE_ID</b></p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
