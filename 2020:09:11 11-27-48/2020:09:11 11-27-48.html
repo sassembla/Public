@@ -40,7 +40,7 @@
 <p class="p3"><span class="Apple-tab-span">	</span>・手元のフォルダをそのままuploadしてパブリッシュできるが、ファイルの削除は伝搬しない</p>
 <p class="p3"><span class="Apple-tab-span">	</span>・bucket、entry単位でのdeleteがあるがすごくクセが強い</p>
 <p class="p3"><span class="Apple-tab-span">	</span>・人力でinvalidate(キャッシュさせ直す処理)はない。キャッシュのTTLは1W</p>
-<p class="p3"><span class="Apple-tab-span">	</span>・データは1Wキャッシュされ同じURL上に残るが、badge経由のURLのみを公開するのであれば即時消せる(ただしentry単位かbucket単位のみ)</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・データは1Wキャッシュされ同じURL上に残るが、badge経由のURLのみを公開するのであれば即時消せる(ただしrelease単位かbucket単位のみ)</p>
 <p class="p3"><span class="Apple-tab-span">	</span>・課金アラートや現在どの程度ギガを消費したかを確認できる画面はない</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p2"><br></p>
@@ -52,6 +52,17 @@
 <p class="p2"><br></p>
 <p class="p3"><b>チュートリアル</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>ステップバイステップ操作でコマンドラインから操作できる。すっげー親切。</p>
+<p class="p4"><span class="Apple-tab-span">	</span><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202020-09-12%201.32.37.png" alt="スクリーンショット 2020-09-12 1.32.37.png"></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ただCDNのチュートリアルの開始までにちょっとステップがある。</p>
+<p class="p5"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・unity Dashboardへのログイン = Unityアカウント作る</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・プロジェクト作る</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>このへんの画面で Cloud Content Delivery のGet Startedボタンを押す</p>
+<p class="p4"><span class="Apple-tab-span">	</span><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202020-09-12%2012.13.24.png" alt="スクリーンショット 2020-09-12 12.13.24.png"></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・クレジットカード情報をセットすると、UCCDに関する項目がUnity Developersの画面に出てくる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>そこでUCCD関連の全ての操作が行える。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>ファイルのアップロード方法</b></p>
@@ -95,7 +106,7 @@
 <p class="p4"><span class="Apple-tab-span">	</span><img src="Paper.%E3%82%A2%E3%82%A4%E3%83%86%E3%82%99%E3%82%A2.794%203.png" alt="Paper.アイデア.794 3.png"></p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>もう一個おまけでpromotoという仕組みがあり、あるbucket Aの特定のreleaseを別のbucket Bへと「Bの新規releaseとして」発生させることができる。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>ちなみにbadgeはbucketを跨がない。entryも。それはそう。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ちなみにbadgeはbucketを跨がない。entry、releaseも。それはそう。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>ここまでに紹介した要素をパズルのように用いて、運用に都合がいいようにCDNとして利用しよう！、というのが、UCCDの提供してくれるもの。</p>
@@ -150,6 +161,13 @@
 <p class="p3"><span class="Apple-tab-span">	</span>badgeを変えずにCDNにキャッシュされた情報をinvalidateする手段は無い。というかオリジンのファイル自体を更新できない。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
+<p class="p3"><b>じゃあファイルの削除ってどうすればいいの？</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>そのファイルが含まれないreleaseを作ってbadgeをそのreleaseにつける。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>か、bucket自体を削除する。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>前者が常套手段、後者はbadgeコントロールでどうしようもないURLを発行して使われてしまった場合には本当にどうしようもないけど使える手段。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
 <p class="p3"><b>アクセス制御とか、ユーザー単位の認証とかできるの？</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>むりそう。現状そういう機能は備わっていなそう。</p>
 <p class="p3"><span class="Apple-tab-span">	</span>bucketに対してmetadataをセットするとかができるようになるとアクセス制御ができるんでは？ というのがあるが、</p>
@@ -180,15 +198,30 @@
 <p class="p3"><b>まとめ</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>調査を手伝ってくれた友人の言葉を借りるとまさに「CDN on Rails」。</p>
 <p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ファイルの追加や更新はものすごく簡単にできる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>反面、間違ったファイルの削除をするには、releaseとbadgeの組み合わせなければいけないのがちょっと難しい。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>releaseの単位のデザインを守るために個別削除がない、という風に見える。</p>
+<p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>ファイルsyncで消えたファイルに対してdelete走らせてくれないと直感と反してファイルが増えまくることが無限に起きて辛いというのはあるが、まあAPIも難しくないし、、、</p>
 <p class="p3"><span class="Apple-tab-span">	</span>CLIを使う旨味がほぼチュートリアル専用という感じ。でも体験すごく良かった。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>各ツールでできることを表にするとだいたいこんな感じで、</p>
+<p class="p4"><span class="Apple-tab-span">	</span><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202020-09-12%2012.35.56.png" alt="スクリーンショット 2020-09-12 12.35.56.png"></p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>いろんなツールでいろんなことができるが、CLIはsync = add entryしかしないupload専用、あとはwebUIとwebAPIでやるといいと思う。認証も難しくないし。</p>
+<p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>Addressablesに無理に寄せることもなく、アクセス制御以外の物事はそつなくだいたい大まかにフワッと叶えられると思う。素敵。</p>
 <p class="p3"><span class="Apple-tab-span">	</span>おかげで運用における自由度もそれなりに稼げる。そして何より安い！！ すごくやすい。</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>ただめちゃくちゃ「貧者のCDN」なので、個人開発者にお勧めするが課金は気にした方がいいと思った。アラートないので個人ほど死にそうな気はするが、まあうん、、困ったら即bucketを消すんだ、、、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ただめちゃくちゃ「貧者のCDN」なので、個人開発者にお勧めするが課金は気にした方がいいと思った。アラートないので個人ほど死にそうな気はするが、まあうん、、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>困ったら即、空のreleaseを作って該当のbadgeをつけるか、最後の手段としてはbucketを消すんだ、、、</p>
+<p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>逆に、企業がこのサービスを使うには、存在しないアクセス制御の時点でほぼ詰みつつ、クセがあるbadge運用、ちょっと脳味噌が痛くなるpromoteとかを使いまくるのが正しいとは思う。</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>最後に、とにかく「何を消したらどのURLがどうなるのか」は実体験をして知っておいたほうがいい。</p>
 <p class="p3"><span class="Apple-tab-span">	</span>UCCDについては、とにかくbadgeを信じろと言い換えてもいい。<span class="Apple-converted-space"> </span></p>
 <p class="p2"><br></p>
