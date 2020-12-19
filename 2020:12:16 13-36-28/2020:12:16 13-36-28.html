@@ -36,15 +36,17 @@
 <p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p3"><span class="Apple-tab-span">	</span>こういう仮想コードを考えてる。</p>
 <p class="p4">[Blockable]// この関数でblockしても困んない用のUnity Attribute</p>
-<p class="p4">void Something () {</p>
-<p class="p4"><span class="Apple-converted-space">  </span>var cor = IEnumerator a () {</p>
+<p class="p4">void Something ()<span class="Apple-converted-space"> </span></p>
+<p class="p4">{</p>
+<p class="p4"><span class="Apple-converted-space">  </span>var cor = IEnumerator a ()<span class="Apple-converted-space"> </span></p>
+<p class="p4"><span class="Apple-converted-space">  </span>{</p>
 <p class="p4"><span class="Apple-converted-space">    </span>yield return null;</p>
 <p class="p4"><span class="Apple-converted-space">  </span>}</p>
 <p class="p5"><br></p>
-<p class="p4"><span class="Apple-converted-space">  </span>// これが、まあ、ほしいやつ。</p>
+<p class="p4"><span class="Apple-converted-space">  </span>// これが、まあ、ほしいやつ。渡した処理が完了するまでブロックする。</p>
 <p class="p4"><span class="Apple-converted-space">  </span><b>StartBlocking</b>(cor());</p>
 <p class="p5"><br></p>
-<p class="p4"><span class="Apple-converted-space">  </span>// 上記の<b>StartBlockable</b>メソッドの中身はなんかこういうやつ</p>
+<p class="p4"><span class="Apple-converted-space">  </span>// 上記の<b>StartBlocking</b>メソッドの中身はなんかこういうやつ</p>
 <p class="p4"><span class="Apple-converted-space">  </span>// var c = cor();</p>
 <p class="p4"><span class="Apple-converted-space">  </span>// while (c.MoveNext()){ }// この行でブロックするが、ブロックの待ちとか実行スレッドをUnityがマネージしてくれる。</p>
 <p class="p5"><br></p>
