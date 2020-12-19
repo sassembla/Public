@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2022.1">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Sans'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; background-color: #e6e6e6}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; background-color: #e6e6e6; min-height: 18.0px}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>個人的にUnity C#に積みたいもの</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>超絶端的にいうと、C#のasync/awaitはUnityやゲームで使うには不便すぎるので、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>(中略)</p>
+<p class="p3"><span class="Apple-tab-span">	</span>メインスレッドをブロックできる機能が欲しい</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>思考実験</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>適当な思考実験、async yieldみたいなのをUnity C#でUnityが提供する関数での始動で実現できればそれでいいのでは、、？ というのがある。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>これは果たせると嬉しいポイントとして、「goのいいといころをパクりたい」というのがある。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>StartCoroutine(IEnumerator i)関数はC#には存在しないがUnity C#には存在する関数で、これは「Unityのメインスレッドのどこかでiを実行する」というもの。で、当然ブロックしない。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、これの非同期版が作れると、go 関数 かつ、 次の行でメインスレッドをブロックする、というのが実現できるのでは？っていう。</p>
+<p class="p2"><br></p>
+<p class="p4">[Yieldable]</p>
+<p class="p4">void Something () {</p>
+<p class="p4"><span class="Apple-converted-space">  </span>var cor = IEnumerator a () {</p>
+<p class="p4"><span class="Apple-converted-space">    </span>yield return null;</p>
+<p class="p4"><span class="Apple-converted-space">  </span>}</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-converted-space">  </span>while YieldCoroutine(cor(), n);// この行でブロックするが、ブロック自体もUnityがマネージしてくれる</p>
+<p class="p4"><span class="Apple-converted-space">  </span>// 終わったらここにくる</p>
+<p class="p4">}</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>みたいな書き方ができて、なおかつYieldableアトリビュートがついてる関数がブロックしても問題ない感じにUnityがコンパイルしてくれる、とかがあると、成立する気がする。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>記法としてはSwiftのasync/awaitのproposalに近い。もっとgoに寄せるとすごく、「呼ぶ側にコントロール権がガンガン残せる」のでいいな～というのがある。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>YieldCoroutine関数は名前が適当だが、SomethingをUnity Managedな別スレッドでn並列で実行してくれる関数。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>単純にYieldableがついてる関数を特別扱いしてくれれば(while条件待ちをしてもブロックしないで最終的にメインスレッド収束をやってくれれば)それで済むという気はしている</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これだと、Taskとかの中に成功失敗を封入せずに済む、っていうのがある。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>結局やりたいことは非同期なので、直列待ちとかはどうでもいいんだよな、、、メインスレッドをブロックしても固まらなくしたい、っていうのがでかい。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>これができると、非同期を待つ側をガチで同期にできる。<span class="Apple-converted-space"> </span></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>通常の言語の発想は逆で、非同期を待つ側が非同期になり、非同期の先が同期になる。<span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>なので、待つ側は非同期に待てるようなスタイルを要求される。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>が、Goはトチ狂っていて、非同期を待つ側はブロックしても問題がないデザインになっている。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>そんで非同期処理自体は同期、なので、待つ側も動く側も全員同期、っていう。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>もともとどこでだって同期的な書き方で待てるんだから、それでいいんじゃねえ？っていう。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>これができると、async汚染とか、非同期に特別な型が必要なのとかを破壊できる。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>特別なスタートポイントと特性自体は必要なんだけど、こう、まあ、そういうかんじ。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Unityの場合はC#という土壌がmanagedなので腐っていて、こういうのがあると楽だなー感がある。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>どうせC#のasyncやawaitはUnity上でnativeなみになることはないという読みがあるんで、こういうのに投資するのはアリかもなー。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>(XNAを思い出す。スレッドが全部nativeと同等になるのは、結局ローレイヤーがC#で書かれてないから無理だし無駄、っていう話。)</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Unity社にこういう話するのは面白いかもなー</p>
+<p class="p2"><br></p>
+</body>
+</html>
