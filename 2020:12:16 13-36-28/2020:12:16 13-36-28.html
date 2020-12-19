@@ -27,23 +27,25 @@
 <p class="p2"><br></p>
 <p class="p3"><b>思考実験</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>適当な思考実験、ブロック可能性みたいなのをUnity C#でUnityが提供する関数での始動で実現できればそれでいいのでは、、？ というのがある。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>これは果たせると嬉しいポイントとして、「goのいいといころをパクりたい」というのがある。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>これは果たせると嬉しいポイントとして、「go言語のいいところをパクりたい」というのがある。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>StartCoroutine(IEnumerator i)関数はC#には存在しないがUnity C#には存在する関数で、これは「Unityのメインスレッドのどこかでiを実行する」というもの。で、当然ブロックしない。</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>で、「これに近い手段」で、「同期性を保ったまま」、「メインスレッドをブロックする」、というのが実現できると、go言語の go 関数に近いことができて楽しいのでは？っていう。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、「これに近い手段」で、「メインスレッドでできる機能特性を保ったまま、workerスレッドで」、「メインスレッドをブロックする」、というのが実現できると、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>go言語の go 関数に近いことができて楽しいのでは？っていう。</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p3"><span class="Apple-tab-span">	</span>こういう仮想コードを考えてる。</p>
+<p class="p4">// 呼ばれる側</p>
 <p class="p4">[Blockable]// この関数でblockしても困んない用のUnity Attribute</p>
-<p class="p4">void Something ()<span class="Apple-converted-space"> </span></p>
+<p class="p4">int Something ()<span class="Apple-converted-space"> </span></p>
 <p class="p4">{</p>
 <p class="p4"><span class="Apple-converted-space">  </span>var cor = IEnumerator a ()<span class="Apple-converted-space"> </span></p>
 <p class="p4"><span class="Apple-converted-space">  </span>{</p>
 <p class="p4"><span class="Apple-converted-space">    </span>yield return null;</p>
 <p class="p4"><span class="Apple-converted-space">  </span>}</p>
 <p class="p5"><br></p>
-<p class="p4"><span class="Apple-converted-space">  </span>// これが、まあ、ほしいやつ。渡した処理が完了するまでブロックする。</p>
+<p class="p4"><span class="Apple-converted-space">  </span>// これが、まあ、ほしいやつ。渡した処理が完了するまでブロックする。実行コンテキストはworker threadとかそういうやつ。</p>
 <p class="p4"><span class="Apple-converted-space">  </span><b>StartBlocking</b>(cor());</p>
 <p class="p5"><br></p>
 <p class="p4"><span class="Apple-converted-space">  </span>// 上記の<b>StartBlocking</b>メソッドの中身はなんかこういうやつ</p>
@@ -51,10 +53,16 @@
 <p class="p4"><span class="Apple-converted-space">  </span>// while (c.MoveNext()){ }// この行でブロックするが、ブロックの待ちとか実行スレッドをUnityがマネージしてくれる。</p>
 <p class="p5"><br></p>
 <p class="p4"><span class="Apple-converted-space">  </span>// 上の行が終わったらここにくる</p>
+<p class="p4"><span class="Apple-converted-space">  </span>return 0;</p>
 <p class="p4">}</p>
+<p class="p5"><br></p>
+<p class="p4">// 呼ぶ側</p>
+<p class="p4">var result = Something();// この関数にBlockableが付いてるのでブロックする。</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>みたいな書き方ができて、なおかつBlockableアトリビュートがついてる関数がブロックしても問題ない感じにUnityがコンパイルしてくれる、とかがあると、成立する気がする。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>実際にブロックを行える関数の実行自体はUnityがworker threadに対して振ってくれるとうれしい。そしたらUnity APIを呼ぶのもかなり自由度が稼げる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>StartBlocking関数の中身の実行自体はUnityがworker threadに対して振ってくれるとうれしい。そしたらUnity APIを呼ぶのもかなり自由度が稼げる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>あとはアレなー、軽量スレッドの仕組みをパクって欲しいんだよな。worker threadをそのままStartBlockingコールと1:1で使うんではなく、ある程度の抽象性みたいなやつを組ませたい。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>これは余談だが、別にUnityが提供している今のままのPlayerLoopとかに対してどんだけasyncしようが、特に性能的な価値はない、というのがある。</p>
@@ -65,22 +73,28 @@
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>現在の仮想コードのやつは、記法としてはSwiftのasync/awaitのproposalにちょっとだけ近い。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>もっとgoに寄せるとすごく、「呼ぶ側にコントロール権がガンガン残せる」のでいいな～というのがある。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>StartBlocking関数は名前が適当だが、IEnumerator a をUnity ManagedなNativeスレッドで実行してくれる関数。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>もっとGoな手法に寄せるとすごく、「StartBlocking関数を呼ぶ側にコントロール権がガンガン残せる」のでいいな～というのがある。例えばタイムアウトとかね。</p>
 <p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>StartBlocking関数は名前が適当だが、IEnumerator a をUnity ManagedなNativeスレッドで実行してくれる関数なので、</p>
 <p class="p3"><span class="Apple-tab-span">	</span>単純にBlockableがついてる関数を特別扱いしてくれれば(while条件待ちをしてもブロックしないで最終的にメインスレッド収束をやってくれれば)それで済むのでは、という気はしている。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>これだと、Taskとかのwrap型の中に成功失敗をパラメータとして封入せずに済む、とか、コード読まなくても済むとかがある。あとキャンセルとかエラーな。</p>
 <p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>あとは関数の切れ目、どこを関数として切り出すか、とかは、まだまだデザイン的な考慮の猶予がある。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>根本的に現在の仮想コードは、まだまだC#に近くて、ノイズが多い。もっと簡単に書けるようにできるはずだ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>AsyncOperationがかなりまあそういう系統の理想系なんだよな～～あれを満たすものを自作しないで済むようにできれば。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>async/awaitをUnity mainthreadと没交渉なC#の言語機能だとするなら、今考えてるやつはUnityにしか関係ない言語機能であって欲しい。</p>
 <p class="p2"><br></p>
-<p class="p3"><b>根本的なアイデア</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>現時点での仮想コードの根本的なアイデア</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>Unity C#は通常のC#とは違い、Main関数起点ではなくMonoBehaviourの各種メソッドを起点として実行されている。</p>
 <p class="p3"><span class="Apple-tab-span">	</span>これは裏を返せば、全ての関数の起点はUnityのMonoBehaviourであって例外はないので、普通に呼び出しても特殊なAttrで特殊な挙動をする関数、とかも結局果たせるんじゃねえの？って思っている。</p>
 <p class="p3"><span class="Apple-tab-span">	</span>まあリフレクションとかも結局実行コンテキストはあるんでアレだが、そもそもIL2CPPがある時点でEmitとかすら効かないので、C#Runtimeとしての厳密性みたいなのはわりかしどうでもいい感じ。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>結局やりたいことは非同期による分散処理や計算資源を最大限活用することなので、記法として直列待ちとかはどうでもいいんだよな、、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>結局やりたいことは非同期による分散処理や計算資源を最大限活用することなので、記法として直列待ちかどうかとかはどうでもいいんだよな、、</p>
 <p class="p3"><span class="Apple-tab-span">	</span>メインスレッドをブロックしても固まらなくしたい、っていうのがまあ上記のような形である。</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>これができると、非同期を待つ側を、そこに全てを記述した上で、ガチで同期なスタイルで記述できる。<span class="Apple-converted-space"> </span></p>
@@ -95,9 +109,11 @@
 <p class="p3"><span class="Apple-tab-span">	</span>for無限ループやselectでコンテキスト自体の進行をブロックすることに一切の躊躇がない。</p>
 <p class="p3"><span class="Apple-tab-span">	</span>そんで非同期処理自体はgo 関数 という形で記述できて、向こう側の書き方も同期スタイル、、なので、待つ側も動く側も全員同期スタイルで書ける、っていうのを果たしている。</p>
 <p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>あれは軽量スレッドだからできてるﾜｯｻﾞという認識なんだけど、まあつまり、workerに対して実行する対象を抽象化～とかすると、だいたいフィーリングで=になるんじゃねえかなーって思っている。</p>
+<p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>もともとどこでだって同期的な書き方で待てるんだから、それでいいんじゃねえ？っていう。</p>
 <p class="p3"><span class="Apple-tab-span">	</span>これができると、まあぶっちゃけてasync汚染とか、非同期に特別なwrap型が必要なのとか、それらを扱うためのinterface実装が必要な前提をガンガン破壊できる。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>無駄な努力を消せる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>無駄な努力を生まれる前に消せる。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>goから学べるデザインにはさらに利点があり、「限界ギリギリまで非同期にするかどうかを悩める」というのがあって、あのへん参考にならんかなーというのも面白そう。</p>
@@ -109,11 +125,11 @@
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>色々見てるところ</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>特別なスタートポイントと特性自体は必要なんだけど、こう、まあ、そういうかんじ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>特別なエントリーポイントと特性自体は必要なんだけど、こう、まあ、そういうかんじ。</p>
 <p class="p3"><span class="Apple-tab-span">	</span>実際色んな言語をつらつら見てウンウンいってる段階。</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>Unityの場合はC#という土壌がmanagedレイヤなのと、JobSystemとかでnativeレイヤに処理を渡すことで最大限のプラットフォーム火力を出していて、こういうのがあると楽だなー感がある。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>どうせC# async/awaitはその価値がUnity上でnative並みになることは未来永劫無限に無い、という読みがあるんで、こういうのに投資するのはアリかもなー。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>どうせC# async/awaitはその価値がUnity上でnative並みになることは未来永劫無限に無い、という読みがあるんで、こういうのに投資するのはアリかもなー。単純に難しい。</p>
 <p class="p3"><span class="Apple-tab-span">	</span>(XNAを思い出す。C#でのマルチスレッドがnativeと同等になるのは、結局ローレイヤーがC#で書かれてないから無理だし無駄、っていう話。)</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
