@@ -13,30 +13,27 @@
     p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; background-color: #cdcdcd}
     p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; background-color: #cdcdcd; min-height: 18.0px}
     p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
-    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; line-height: 18.0px; font: 12.0px Menlo; color: #8cd3fe; -webkit-text-stroke: #8cd3fe; background-color: #000000}
-    p.p8 {margin: 0.0px 0.0px 0.0px 0.0px; line-height: 18.0px; font: 12.0px Menlo; color: #c27e65; -webkit-text-stroke: #c27e65; background-color: #000000}
-    p.p9 {margin: 0.0px 0.0px 0.0px 0.0px; line-height: 18.0px; font: 12.0px Menlo; color: #cacaca; -webkit-text-stroke: #cacaca; background-color: #000000}
-    p.p10 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; -webkit-text-stroke: #cacaca; min-height: 18.0px}
-    p.p11 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; -webkit-text-stroke: #cacaca}
-    p.p12 {margin: 0.0px 0.0px 0.0px 0.0px; line-height: 18.0px; font: 12.0px Menlo; color: #d4d69a; -webkit-text-stroke: #d4d69a; background-color: #000000}
-    p.p13 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; -webkit-text-stroke: #cacaca}
-    p.p14 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; -webkit-text-stroke: #cacaca; min-height: 14.0px}
+    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; line-height: 18.0px; font: 12.0px Menlo; color: #8cd3fe; background-color: #000000}
+    p.p8 {margin: 0.0px 0.0px 0.0px 0.0px; line-height: 18.0px; font: 12.0px Menlo; color: #c27e65; background-color: #000000}
+    p.p9 {margin: 0.0px 0.0px 0.0px 0.0px; line-height: 18.0px; font: 12.0px Menlo; color: #cacaca; background-color: #000000}
+    p.p10 {margin: 0.0px 0.0px 0.0px 0.0px; line-height: 18.0px; font: 12.0px Menlo; color: #d4d69a; background-color: #000000}
+    p.p11 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
     span.s1 {font: 12.0px Helvetica}
     span.s2 {font-kerning: none}
-    span.s3 {font-kerning: none; color: #cacaca; -webkit-text-stroke: 0px #cacaca}
-    span.s4 {font-kerning: none; color: #d4d69a; -webkit-text-stroke: 0px #d4d69a}
-    span.s5 {font-kerning: none; color: #b76fb3; -webkit-text-stroke: 0px #b76fb3}
-    span.s6 {font-kerning: none; color: #4689cc; -webkit-text-stroke: 0px #4689cc}
-    span.s7 {font-kerning: none; color: #43c0a0; -webkit-text-stroke: 0px #43c0a0}
-    span.s8 {font-kerning: none; color: #c27e65; -webkit-text-stroke: 0px #c27e65}
-    span.s9 {font-kerning: none; color: #a7c598; -webkit-text-stroke: 0px #a7c598}
-    span.s10 {font-kerning: none; color: #8cd3fe; -webkit-text-stroke: 0px #8cd3fe}
+    span.s3 {font-kerning: none; color: #cacaca}
+    span.s4 {font-kerning: none; color: #d4d69a}
+    span.s5 {font-kerning: none; color: #b76fb3}
+    span.s6 {font-kerning: none; color: #4689cc}
+    span.s7 {font-kerning: none; color: #43c0a0}
+    span.s8 {font-kerning: none; color: #c27e65}
+    span.s9 {font-kerning: none; color: #a7c598}
+    span.s10 {font-kerning: none; color: #8cd3fe}
     span.s11 {font: 12.0px 'Hiragino Sans'}
     span.Apple-tab-span {white-space:pre}
   </style>
 </head>
 <body>
-<p class="p1"><b>ZuKitでinfluxdbをUnity Editorと繋いでデータをビジュアライズをする</b></p>
+<p class="p1"><b>ZuKitでInfluxDBをUnity Editorと繋いでデータをビジュアライズをする</b></p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>概要</b></p>
@@ -86,7 +83,9 @@
 <p class="p4"><span class="Apple-converted-space">  </span>influxdb:</p>
 <p class="p4"><span class="Apple-converted-space">  </span>chronograf:</p>
 <p class="p2"><br></p>
-<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>んでlocalhost:8888にアクセスするとChronografのUIが表示できるんだけど、localhost~って書いてあるところをindluxdbに書き換えないとchronograf-&gt;influxdbへの接続ができない。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>これどうやって解決したっけな、、忘れた。</p>
+<p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>使い方</b></p>
 <p class="p3"><b>1. InfluxDBにmyZuDBとか適当な名前でDBを作る</b></p>
@@ -112,30 +111,33 @@
 <p class="p9"><span class="s2"><span class="Apple-converted-space">        </span>);</span></p>
 <p class="p9"><span class="s2"><span class="Apple-converted-space">    </span>}</span></p>
 <p class="p9"><span class="s2">);</span></p>
-<p class="p10"><span class="Apple-tab-span">	</span></p>
-<p class="p11"><span class="Apple-tab-span">	</span>一応同時にOnApplicationQuitとかにZuKitの終了メソッドを書いておくと良い</p>
-<p class="p12"><span class="s6">void</span><span class="s3"> </span><span class="s2">OnApplicationQuit</span><span class="s3">()</span></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>一応同時にOnApplicationQuitとかにZuKitの終了メソッドを書いておくと良い</p>
+<p class="p10"><span class="s6">void</span><span class="s3"> </span><span class="s2">OnApplicationQuit</span><span class="s3">()</span></p>
 <p class="p9"><span class="s2">{</span></p>
 <p class="p9"><span class="s2"><span class="Apple-converted-space">    </span></span><span class="s10">ZuKit</span><span class="s2">.</span><span class="s4">Teardown</span><span class="s2">();</span></p>
 <p class="p9"><span class="s2">}</span></p>
-<p class="p10"><span class="Apple-tab-span">	</span></p>
-<p class="p10"><br></p>
-<p class="p11"><b>3. UnityでPlayすると後は勝手にフレーム単位でデータがInfluxDBに届いてビジュアライズできるぞ</b></p>
-<p class="p10"><br></p>
-<p class="p11"><span class="Apple-tab-span">	</span>こうなる。myZuDBにUnityでセットしたkey、index値、temp(追加した適当なキー)で値が入る。</p>
-<p class="p13"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202020-12-27%2022.04.30.png" alt="スクリーンショット 2020-12-27 22.04.30.png"></p>
-<p class="p11"><span class="s1"><span class="Apple-tab-span">	</span></span>そのまま<span class="s1">UnityEditor</span>を<span class="s1">Play</span>させとくと、こんな感じになる。5sで自動updateとかにするといい感じに推移が</p>
-<p class="p13"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202020-12-27%2022.05.45.png" alt="スクリーンショット 2020-12-27 22.05.45.png"></p>
-<p class="p11"><span class="s1"><span class="Apple-tab-span">	</span></span>やったぜ！</p>
-<p class="p14"><br></p>
-<p class="p14"><br></p>
-<p class="p11"><b>余談</b></p>
-<p class="p11"><span class="s1"><span class="Apple-tab-span">	</span>C#</span>には<span class="s1">Unix Time(<a href="https://en.wikipedia.org/wiki/Unix_time"><span class="s11">https://en.wikipedia.org/wiki/Unix_time</span></a>)</span>を算出できる関数も<span class="s1">RFC3339</span>を取得できる関数もない。<span class="Apple-tab-span">	</span><span class="s1">ms</span>が欠けた状態の<span class="s1">RFC3339</span>を得ることはできるが本当にとても微妙なので、そのへんで無駄な努力を強いられて辛かった。</p>
-<p class="p10"><br></p>
-<p class="p11"><span class="Apple-tab-span">	</span>なんとかTimeとかのバカでっかいライブラリで取得できるっちゃあできるんだが、オーバーヘッドが凄まじい。</p>
-<p class="p11"><span class="Apple-tab-span">	</span>まあC#のdate系は閏秒すらなかったのがここ最近の話なので、スッと諦めて別の手を試した。</p>
-<p class="p10"><br></p>
-<p class="p11"><span class="Apple-tab-span">	</span>こういうので苦労しないようにRFCをガンガン実装したC++実装作ってUnityからぶっ叩けるようにしようかな～って思ってちょいちょいやってる。</p>
-<p class="p14"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>3. UnityでPlayすると後は勝手にフレーム単位でデータがInfluxDBに届いてビジュアライズできるぞ</b></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>こうなる。myZuDBにUnityでセットしたkey、index値、temp(追加した適当なキー)で値が入る。</p>
+<p class="p6"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202020-12-27%2022.04.30.png" alt="スクリーンショット 2020-12-27 22.04.30.png"></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span></span>そのまま<span class="s1">UnityEditor</span>を<span class="s1">Play</span>させとくと、こんな感じになる。5sで自動updateとかにするといい感じに推移が</p>
+<p class="p6"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202020-12-27%2022.05.45.png" alt="スクリーンショット 2020-12-27 22.05.45.png"></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span></span>やったぜ！</p>
+<p class="p11"><br></p>
+<p class="p11"><br></p>
+<p class="p3"><b>余談</b></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>InfluxDB</span>はデータの送り手側が精度を指定できる。</p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span></span>で、精度指定のためのフォーマットとして<span class="s1">RFC3339</span>とかがあるんだけど、ここで問題が出た。</p>
+<p class="p11"><br></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>C#</span>には<span class="s1">Unix Time(<a href="https://en.wikipedia.org/wiki/Unix_time"><span class="s11">https://en.wikipedia.org/wiki/Unix_time</span></a>)</span>を算出できる関数も<span class="s1">RFC3339</span>を取得できる関数もない。<span class="Apple-tab-span">	</span><span class="s1">ms</span>が欠けた状態の<span class="s1">RFC3339</span>を得ることはできるが本当にとても微妙なので、そのへんで無駄な努力を強いられて辛かった。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>なんとかTimeとかのバカでっかいライブラリで取得できるっちゃあできるんだが、オーバーヘッドが凄まじい。というか言語がいい仕掛け持っててくれ、、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>まあC#のdate系は閏秒すらなかったのがここ最近の話なので、スッと諦めて別の手を試した。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>こういうので苦労しないようにRFCをガンガン実装したC++実装作ってUnityからぶっ叩けるようにしようかな～って思ってちょいちょいやってる。</p>
+<p class="p11"><br></p>
 </body>
 </html>
