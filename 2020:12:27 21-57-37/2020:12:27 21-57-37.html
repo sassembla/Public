@@ -1,0 +1,141 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2022.1">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Sans'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; background-color: #cdcdcd}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; background-color: #cdcdcd; min-height: 18.0px}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; line-height: 18.0px; font: 12.0px Menlo; color: #8cd3fe; -webkit-text-stroke: #8cd3fe; background-color: #000000}
+    p.p8 {margin: 0.0px 0.0px 0.0px 0.0px; line-height: 18.0px; font: 12.0px Menlo; color: #c27e65; -webkit-text-stroke: #c27e65; background-color: #000000}
+    p.p9 {margin: 0.0px 0.0px 0.0px 0.0px; line-height: 18.0px; font: 12.0px Menlo; color: #cacaca; -webkit-text-stroke: #cacaca; background-color: #000000}
+    p.p10 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; -webkit-text-stroke: #cacaca; min-height: 18.0px}
+    p.p11 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; -webkit-text-stroke: #cacaca}
+    p.p12 {margin: 0.0px 0.0px 0.0px 0.0px; line-height: 18.0px; font: 12.0px Menlo; color: #d4d69a; -webkit-text-stroke: #d4d69a; background-color: #000000}
+    p.p13 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; -webkit-text-stroke: #cacaca}
+    p.p14 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; -webkit-text-stroke: #cacaca; min-height: 14.0px}
+    span.s1 {font: 12.0px Helvetica}
+    span.s2 {font-kerning: none}
+    span.s3 {font-kerning: none; color: #cacaca; -webkit-text-stroke: 0px #cacaca}
+    span.s4 {font-kerning: none; color: #d4d69a; -webkit-text-stroke: 0px #d4d69a}
+    span.s5 {font-kerning: none; color: #b76fb3; -webkit-text-stroke: 0px #b76fb3}
+    span.s6 {font-kerning: none; color: #4689cc; -webkit-text-stroke: 0px #4689cc}
+    span.s7 {font-kerning: none; color: #43c0a0; -webkit-text-stroke: 0px #43c0a0}
+    span.s8 {font-kerning: none; color: #c27e65; -webkit-text-stroke: 0px #c27e65}
+    span.s9 {font-kerning: none; color: #a7c598; -webkit-text-stroke: 0px #a7c598}
+    span.s10 {font-kerning: none; color: #8cd3fe; -webkit-text-stroke: 0px #8cd3fe}
+    span.s11 {font: 12.0px 'Hiragino Sans'}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>ZuKitでinfluxdbをUnity Editorと繋いでデータをビジュアライズをする</b></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>大量のデータの時系列での変化をグラフにしたかったんだけど面倒くさかったのでinfluxDBに丸投げビジュアライズできるようにした。</p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>ZuKit</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>これ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/ZuKit">https://github.com/sassembla/ZuKit</a></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>influxDBとChronografのセットアップについてはこの辺を参考にする。</p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>「InfluxDB + Chronograf 」をDocker Composeで動かす</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://zutech.netlify.app/posts/20200613/">https://zutech.netlify.app/posts/20200613/</a></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>どういうことがしたかったか</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Unity Editor上でフレームごとに出る大量のデータがあり、そのデータのフレーム単位での推移をグラフ化したかった。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>データの非可逆な圧縮と展開を行う必要があり、それらの再現度もチェックしたかったので、同時に多量のデータを1つの図に載っけないといけない、という需要があり、とにかく辛かったので作った。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ZuKit側がInfluxDBへとprecision(精度) nsでデータを送りつけている。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>今回使うInfluxDBのdocker-composeと起動</b></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>こんな感じ。</p>
+<p class="p4">version: '3.1'</p>
+<p class="p4">services:</p>
+<p class="p4"><span class="Apple-converted-space">  </span>influxdb:</p>
+<p class="p4"><span class="Apple-converted-space">    </span>container_name: influxdb</p>
+<p class="p4"><span class="Apple-converted-space">    </span>image: influxdb</p>
+<p class="p4"><span class="Apple-converted-space">    </span>ports:</p>
+<p class="p4"><span class="Apple-converted-space">      </span>- "8086:8086"</p>
+<p class="p4"><span class="Apple-converted-space">    </span>volumes:</p>
+<p class="p4"><span class="Apple-converted-space">      </span>- influxdb:/var/lib/influxdb</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-converted-space">  </span>chronograf:</p>
+<p class="p4"><span class="Apple-converted-space">    </span>container_name: chronograf</p>
+<p class="p4"><span class="Apple-converted-space">    </span>image: chronograf</p>
+<p class="p4"><span class="Apple-converted-space">    </span>ports:</p>
+<p class="p4"><span class="Apple-converted-space">      </span>- "8888:8888"</p>
+<p class="p4"><span class="Apple-converted-space">    </span>links:</p>
+<p class="p4"><span class="Apple-converted-space">      </span>- influxdb</p>
+<p class="p4"><span class="Apple-converted-space">    </span>volumes:</p>
+<p class="p4"><span class="Apple-converted-space">      </span>- chronograf:/var/lib/chronograf</p>
+<p class="p5"><br></p>
+<p class="p4">volumes:</p>
+<p class="p4"><span class="Apple-converted-space">  </span>influxdb:</p>
+<p class="p4"><span class="Apple-converted-space">  </span>chronograf:</p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>使い方</b></p>
+<p class="p3"><b>1. InfluxDBにmyZuDBとか適当な名前でDBを作る</b></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これに</p>
+<p class="p6"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202020-12-27%2021.57.08.png" alt="スクリーンショット 2020-12-27 21.57.08.png"></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span></span>こう。</p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span></span>名前は適当でいいんだけど、<span class="s1">Unity</span>側からも指定する必要がある。</p>
+<p class="p6"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202020-12-27%2022.14.33.png" alt="スクリーンショット 2020-12-27 22.14.33.png"></p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><b></b><br></p>
+<p class="p3"><b>2. UnityのStart関数とかにZuKitのSetupコードを書く</b></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>こんな感じ</p>
+<p class="p7"><span class="s2">ZuKit</span><span class="s3">.</span><span class="s4">Setup</span><span class="s3">(</span></p>
+<p class="p8"><span class="s3"><span class="Apple-converted-space">    </span></span><span class="s2">"http://localhost:8086"</span><span class="s3">,</span></p>
+<p class="p8"><span class="s3"><span class="Apple-converted-space">    </span></span><span class="s2">"myZuDB"</span><span class="s3">,</span></p>
+<p class="p9"><span class="s2"><span class="Apple-converted-space">    </span>() =&gt;</span></p>
+<p class="p9"><span class="s2"><span class="Apple-converted-space">    </span>{</span></p>
+<p class="p9"><span class="s2"><span class="Apple-converted-space">        </span></span><span class="s5">return</span><span class="s2"> </span><span class="s6">new</span><span class="s2"> </span><span class="s7">ZuValues</span><span class="s2">(</span></p>
+<p class="p9"><span class="s2"><span class="Apple-converted-space">            </span>(</span><span class="s6">new</span><span class="s2"> </span><span class="s7">ZuKey</span><span class="s2">(</span><span class="s8">"key"</span><span class="s2">, (</span><span class="s8">"index"</span><span class="s2">, </span><span class="s9">0</span><span class="s2">), (</span><span class="s8">"temp"</span><span class="s2">, </span><span class="s9">1</span><span class="s2">)), </span><span class="s10">Time</span><span class="s2">.</span><span class="s10">frameCount</span><span class="s2">),</span></p>
+<p class="p9"><span class="s2"><span class="Apple-converted-space">            </span>(</span><span class="s6">new</span><span class="s2"> </span><span class="s7">ZuKey</span><span class="s2">(</span><span class="s8">"key"</span><span class="s2">, (</span><span class="s8">"index"</span><span class="s2">, </span><span class="s9">1</span><span class="s2">), (</span><span class="s8">"temp"</span><span class="s2">, </span><span class="s9">2</span><span class="s2">)), </span><span class="s10">Random</span><span class="s2">.</span><span class="s4">Range</span><span class="s2">(-</span><span class="s9">100</span><span class="s2"> * </span><span class="s10">Time</span><span class="s2">.</span><span class="s10">frameCount</span><span class="s2">, </span><span class="s9">100</span><span class="s2"> * </span><span class="s10">Time</span><span class="s2">.</span><span class="s10">frameCount</span><span class="s2">))</span></p>
+<p class="p9"><span class="s2"><span class="Apple-converted-space">        </span>);</span></p>
+<p class="p9"><span class="s2"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p9"><span class="s2">);</span></p>
+<p class="p10"><span class="Apple-tab-span">	</span></p>
+<p class="p11"><span class="Apple-tab-span">	</span>一応同時にOnApplicationQuitとかにZuKitの終了メソッドを書いておくと良い</p>
+<p class="p12"><span class="s6">void</span><span class="s3"> </span><span class="s2">OnApplicationQuit</span><span class="s3">()</span></p>
+<p class="p9"><span class="s2">{</span></p>
+<p class="p9"><span class="s2"><span class="Apple-converted-space">    </span></span><span class="s10">ZuKit</span><span class="s2">.</span><span class="s4">Teardown</span><span class="s2">();</span></p>
+<p class="p9"><span class="s2">}</span></p>
+<p class="p10"><span class="Apple-tab-span">	</span></p>
+<p class="p10"><br></p>
+<p class="p11"><b>3. UnityでPlayすると後は勝手にフレーム単位でデータがInfluxDBに届いてビジュアライズできるぞ</b></p>
+<p class="p10"><br></p>
+<p class="p11"><span class="Apple-tab-span">	</span>こうなる。myZuDBにUnityでセットしたkey、index値、temp(追加した適当なキー)で値が入る。</p>
+<p class="p13"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202020-12-27%2022.04.30.png" alt="スクリーンショット 2020-12-27 22.04.30.png"></p>
+<p class="p11"><span class="s1"><span class="Apple-tab-span">	</span></span>そのまま<span class="s1">UnityEditor</span>を<span class="s1">Play</span>させとくと、こんな感じになる。5sで自動updateとかにするといい感じに推移が</p>
+<p class="p13"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202020-12-27%2022.05.45.png" alt="スクリーンショット 2020-12-27 22.05.45.png"></p>
+<p class="p11"><span class="s1"><span class="Apple-tab-span">	</span></span>やったぜ！</p>
+<p class="p14"><br></p>
+<p class="p14"><br></p>
+<p class="p11"><b>余談</b></p>
+<p class="p11"><span class="s1"><span class="Apple-tab-span">	</span>C#</span>には<span class="s1">Unix Time(<a href="https://en.wikipedia.org/wiki/Unix_time"><span class="s11">https://en.wikipedia.org/wiki/Unix_time</span></a>)</span>を算出できる関数も<span class="s1">RFC3339</span>を取得できる関数もない。<span class="Apple-tab-span">	</span><span class="s1">ms</span>が欠けた状態の<span class="s1">RFC3339</span>を得ることはできるが本当にとても微妙なので、そのへんで無駄な努力を強いられて辛かった。</p>
+<p class="p10"><br></p>
+<p class="p11"><span class="Apple-tab-span">	</span>なんとかTimeとかのバカでっかいライブラリで取得できるっちゃあできるんだが、オーバーヘッドが凄まじい。</p>
+<p class="p11"><span class="Apple-tab-span">	</span>まあC#のdate系は閏秒すらなかったのがここ最近の話なので、スッと諦めて別の手を試した。</p>
+<p class="p10"><br></p>
+<p class="p11"><span class="Apple-tab-span">	</span>こういうので苦労しないようにRFCをガンガン実装したC++実装作ってUnityからぶっ叩けるようにしようかな～って思ってちょいちょいやってる。</p>
+<p class="p14"><br></p>
+</body>
+</html>
