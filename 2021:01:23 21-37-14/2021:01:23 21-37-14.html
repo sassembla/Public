@@ -1,0 +1,510 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2022.2">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Sans'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; background-color: #e6e6e6}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; background-color: #e6e6e6; min-height: 18.0px}
+    span.s1 {font: 12.0px 'Apple Color Emoji'}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>async await in swift 6</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://speakerdeck.com/koher/await">https://speakerdeck.com/koher/await</a></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3">以下書き下し。</p>
+<p class="p2"><br></p>
+<p class="p3">今年の秋にはリリースされそうとのこと。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3">コールバック関数がasync/awaitが入るとこうなるよと。</p>
+<p class="p4">func download(from url: URL, completion: @escaping (Data) -&gt; Void)</p>
+<p class="p5"><br></p>
+<p class="p4">download(from: url) { data in<span class="Apple-converted-space"> </span></p>
+<p class="p4"><span class="Apple-tab-span">	</span>// trailing closureっていう名前だったんだなこれ</p>
+<p class="p4">}</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p4">func download(from url: URL) async -&gt; Data</p>
+<p class="p5"><br></p>
+<p class="p4">let data = await donwload(from: url)</p>
+<p class="p4">// ここで非同期を受け取れる</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3">tryとthrowsの関係ににているねーっていう。</p>
+<p class="p4">func foo() throws {}</p>
+<p class="p5"><br></p>
+<p class="p4">func bar() {</p>
+<p class="p4"><span class="Apple-tab-span">	</span>try foo() // これはおこられる、検査例外なのかな</p>
+<p class="p4">}</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3">Potential Suspension Point(って何 -&gt; スレッドが占有された状態が解放される可能性があるポイント</p>
+<p class="p2"><br></p>
+<p class="p4">func donwload(from url: URL) async -&gt; Data</p>
+<p class="p5"><br></p>
+<p class="p4">func downloadImage(from url: URL) async -&gt; UIImage {</p>
+<p class="p4"><span class="Apple-tab-span">	</span>// <b>Potential Suspension Point</b></p>
+<p class="p4"><span class="Apple-tab-span">	</span>let data = await download(from: url)// スレッドが占有された状態が解放される可能性があるポイント、なるほど</p>
+<p class="p5"><span class="Apple-tab-span">	</span></p>
+<p class="p4"><span class="Apple-tab-span">	</span>// ここから先はぜんぜん別のスレッドで実行される可能性がある</p>
+<p class="p4"><span class="Apple-tab-span">	</span>let image = UIImage(data: data)!</p>
+<p class="p4"><span class="Apple-tab-span">	</span>return image</p>
+<p class="p4">}</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-converted-space"> </span>UIスレッドへと反映させるには別の手法を組み合わせるんだろうな、GCDかな。今までできてたことだし。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>PromiseやFutureを返さないのか？</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>出てこない。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>一番近いのはKotlinのSuspendFunc// これはちょっと気になる</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>asyncとawaitは別の型を返している。</p>
+<p class="p4">func foo() {</p>
+<p class="p4"><span class="Apple-converted-space">    </span>var a:() async -&gt; Int = {42}</p>
+<p class="p4"><span class="Apple-converted-space">    </span>var b:() -&gt; Int = {42}</p>
+<p class="p4"><span class="Apple-converted-space">    </span>a = b// これはコンパイル通るが、逆は無理</p>
+<p class="p5"><span class="Apple-converted-space">    </span></p>
+<p class="p4"><span class="Apple-converted-space">    </span>var c = await a()</p>
+<p class="p4"><span class="Apple-converted-space">    </span>print(c)</p>
+<p class="p4">}</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>// いいな～～～これ～～～これUnityでもやりたいな～～～。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>同期関数は非同期のサブタイプ、みたいな関係がある。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3">コールバック版</p>
+<p class="p4">// サーバーから JSON を取得し、</p>
+<p class="p4">// User インスタンスをデコードする</p>
+<p class="p4">// 非同期関数 fetchUser を完成させて下さい。</p>
+<p class="p4">//</p>
+<p class="p4">// サーバーから JSON を取得するには</p>
+<p class="p4">// download 関数を用います。</p>
+<p class="p4">// download の実装は擬似的なものですが</p>
+<p class="p4">// 変更せずにそのまま利用して下さい。</p>
+<p class="p4">//</p>
+<p class="p4">// なお、通信やデコードに起因するエラーは</p>
+<p class="p4">// 起こらないものとします。</p>
+<p class="p5"><br></p>
+<p class="p4">import Foundation</p>
+<p class="p4">import FoundationNetworking</p>
+<p class="p5"><br></p>
+<p class="p4">struct User: Identifiable, Codable {</p>
+<p class="p4"><span class="Apple-converted-space">    </span>typealias ID = Int</p>
+<p class="p4"><span class="Apple-converted-space">    </span>let id: ID</p>
+<p class="p4"><span class="Apple-converted-space">    </span>var name: String</p>
+<p class="p4"><span class="Apple-converted-space">    </span>var thumbnailURL: URL</p>
+<p class="p4">}</p>
+<p class="p4">func download(from url: URL, completion: @escaping (Data) -&gt; Void) {</p>
+<p class="p4"><span class="Apple-converted-space">    </span>let data: Data = try! Data(contentsOf: url)</p>
+<p class="p4"><span class="Apple-converted-space">    </span>completion(data)</p>
+<p class="p4">}</p>
+<p class="p5"><br></p>
+<p class="p4">func fetchUser(for id: User.ID, completion: @escaping (User) -&gt; Void) {</p>
+<p class="p4"><span class="Apple-converted-space">    </span>let url: URL = URL(string: "https://koherent.org/async-await-challenge/api/user?id=\(id.description)")!</p>
+<p class="p4"><span class="Apple-converted-space">    </span>// <span class="s1">🚧</span> ここを実装する</p>
+<p class="p4"><span class="Apple-converted-space">    </span>download(from: url) { data in</p>
+<p class="p4"><span class="Apple-converted-space">        </span>let user = try! JSONDecoder().decode(User.self, from:data)</p>
+<p class="p4"><span class="Apple-converted-space">        </span>completion(user)</p>
+<p class="p4"><span class="Apple-converted-space">    </span>}</p>
+<p class="p4">}</p>
+<p class="p5"><br></p>
+<p class="p4">fetchUser(for: 123) { user in</p>
+<p class="p4"><span class="Apple-converted-space">    </span>print(user.name)</p>
+<p class="p4">}</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3">asyncによる非同期版</p>
+<p class="p4">// サーバーから JSON を取得し、</p>
+<p class="p4">// User インスタンスをデコードする</p>
+<p class="p4">// 非同期関数 fetchUser を完成させて下さい。</p>
+<p class="p4">//</p>
+<p class="p4">// サーバーから JSON を取得するには</p>
+<p class="p4">// download 関数を用います。</p>
+<p class="p4">// download の実装は擬似的なものですが</p>
+<p class="p4">// 変更せずにそのまま利用して下さい。</p>
+<p class="p4">//</p>
+<p class="p4">// なお、通信やデコードに起因するエラーは</p>
+<p class="p4">// 起こらないものとします。</p>
+<p class="p5"><br></p>
+<p class="p4">import Foundation</p>
+<p class="p4">import FoundationNetworking</p>
+<p class="p5"><br></p>
+<p class="p4">struct User: Identifiable, Codable {</p>
+<p class="p4"><span class="Apple-converted-space">    </span>typealias ID = Int</p>
+<p class="p4"><span class="Apple-converted-space">    </span>let id: ID</p>
+<p class="p4"><span class="Apple-converted-space">    </span>var name: String</p>
+<p class="p4"><span class="Apple-converted-space">    </span>var thumbnailURL: URL</p>
+<p class="p4">}</p>
+<p class="p4">func download(from url: URL) async -&gt; Data {</p>
+<p class="p4"><span class="Apple-converted-space">    </span>let data: Data = try! Data(contentsOf: url)</p>
+<p class="p4"><span class="Apple-converted-space">    </span>return data</p>
+<p class="p4">}</p>
+<p class="p5"><br></p>
+<p class="p4">func fetchUser(for id: User.ID) async -&gt; User {</p>
+<p class="p4"><span class="Apple-converted-space">    </span>let url: URL = URL(string: "https://koherent.org/async-await-challenge/api/user?id=\(id.description)")!</p>
+<p class="p4"><span class="Apple-converted-space">    </span>// <span class="s1">🚧</span> ここを実装する</p>
+<p class="p5"><span class="Apple-converted-space">    </span></p>
+<p class="p4"><span class="Apple-converted-space">    </span>let data = await download(from: url)</p>
+<p class="p4"><span class="Apple-converted-space">    </span>let user = try! JSONDecoder().decode(User.self, from:data)</p>
+<p class="p4"><span class="Apple-converted-space">    </span>return user</p>
+<p class="p4">}</p>
+<p class="p5"><br></p>
+<p class="p4">// func foo() {</p>
+<p class="p4">// <span class="Apple-converted-space">    </span>var a:() async -&gt; Int = {42}</p>
+<p class="p4">// <span class="Apple-converted-space">    </span>// var b:() -&gt; Int = {42}</p>
+<p class="p4">// <span class="Apple-converted-space">    </span>// a = b// これはなんかsyncがasyncのサブタイプであることをコンパイルが通るから証明できてるねみたいな例。逆 b = aはコンパイルエラー。</p>
+<p class="p5"><span class="Apple-converted-space">    </span></p>
+<p class="p4">// <span class="Apple-converted-space">    </span>var c = await a()</p>
+<p class="p4">// <span class="Apple-converted-space">    </span>print(c)</p>
+<p class="p4">// }</p>
+<p class="p5"><br></p>
+<p class="p4">runAsyncAndBlock {</p>
+<p class="p4"><span class="Apple-converted-space">    </span>// foo()</p>
+<p class="p4"><span class="Apple-converted-space">    </span>let user = await fetchUser(for: 123)</p>
+<p class="p4"><span class="Apple-converted-space">    </span>print(user.name)</p>
+<p class="p4">}</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3">エラーが起こり得る場合</p>
+<p class="p4">func download(from url: URL) <b>async throws</b> -&gt; Data<span class="Apple-converted-space"> </span></p>
+<p class="p5"><br></p>
+<p class="p4">do {</p>
+<p class="p4"><span class="Apple-tab-span">	</span>let data = <b>try await </b>download(from: url)</p>
+<p class="p4"><span class="Apple-tab-span">	</span>// ここでdataを使う</p>
+<p class="p4">} catch {</p>
+<p class="p4"><span class="Apple-tab-span">	</span>// ここでエラー処理を行う</p>
+<p class="p4">}</p>
+<p class="p2"><br></p>
+<p class="p3">先にawaitが行われてtryが行われるので、キーワードはasync throws という順番になる。これは固定。</p>
+<p class="p2"><br></p>
+<p class="p3">めちゃくちゃ合理的。</p>
+<p class="p2"><br></p>
+<p class="p3">catchを合成できる -&gt; 複数のエラーを同じcatchで扱える / 扱わないといけなくなるので、うーん一長一短</p>
+<p class="p2"><br></p>
+<p class="p3">ネストが解消できる + エラーハンドリングが収束される</p>
+<p class="p3"><span class="Apple-tab-span">	</span>pros-consあるけど比較しづらいなー。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3">並行処理をどうすればいいか</p>
+<p class="p3"><span class="Apple-tab-span">	</span>複数のgo 関数みたいなやつ</p>
+<p class="p2"><br></p>
+<p class="p3">関数aとbを並行に実行したい = 同時に待ちたい、みたいなケースをどうするか</p>
+<p class="p2"><br></p>
+<p class="p3">async let a = foo()// awaitをつける必要がない</p>
+<p class="p3">async let b = bar()// awaitをつける必要がない</p>
+<p class="p2"><br></p>
+<p class="p3">print(await a + b)// まとめてawaitする</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>JSの場合は、asyncな関数は必ずpromiseを返してくるので、個々にawaitで剥がす形になる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>print(await a + await b)とかになる。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3">JSの場合はpromise型を返すので、promise型を露出させることができてしまうが、</p>
+<p class="p3">swiftの場合はそういうことが起きないため、promise汚染が起こせない。いい話。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3">structured concurrency というコンセプトに基づいて作られてて、Kotlinに使われている。</p>
+<p class="p3">swiftもこれを採用。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>-&gt; これを追うと面白そう。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3">task.withgroupみたいなのもあるらしい。async letで書ける範囲ならそれで書くとすごく楽</p>
+<p class="p3">ただし宣言的なので、可変性を持たせるような書き方はできない。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3">同時に走らせるver</p>
+<p class="p4">// サーバーから User とその Article 最新 10 件の JSON を取得し、</p>
+<p class="p4">// それらを返す非同期関数 fetchUserWithArticles を実装して下さい。</p>
+<p class="p4">// ただし、 User と Article の JSON は並行して取得するものとし、</p>
+<p class="p4">// User と Artcile の取得には fetchUser および</p>
+<p class="p4">// fetchArticles を用いるものとします。</p>
+<p class="p5"><br></p>
+<p class="p4">import Foundation</p>
+<p class="p4">import FoundationNetworking</p>
+<p class="p5"><br></p>
+<p class="p4">struct User: Identifiable, Codable {</p>
+<p class="p4"><span class="Apple-converted-space">    </span>typealias ID = Int</p>
+<p class="p4"><span class="Apple-converted-space">    </span>let id: ID</p>
+<p class="p4"><span class="Apple-converted-space">    </span>var name: String</p>
+<p class="p4"><span class="Apple-converted-space">    </span>var thumbnailURL: URL</p>
+<p class="p4">}</p>
+<p class="p4">struct Article: Identifiable, Codable {</p>
+<p class="p4"><span class="Apple-converted-space">    </span>typealias ID = Int</p>
+<p class="p4"><span class="Apple-converted-space">    </span>let id: ID</p>
+<p class="p4"><span class="Apple-converted-space">    </span>var title: String</p>
+<p class="p4">}</p>
+<p class="p4">func fetchUser(for id: User.ID) async throws -&gt; User {</p>
+<p class="p4"><span class="Apple-converted-space">    </span>let url: URL = URL(string: "https://koherent.org/async-await-challenge/api/user?id=\(id.description)")!</p>
+<p class="p4"><span class="Apple-converted-space">    </span>let data: Data = try Data(contentsOf: url)</p>
+<p class="p4"><span class="Apple-converted-space">    </span>let user: User = try JSONDecoder().decode(User.self, from: data)</p>
+<p class="p4"><span class="Apple-converted-space">    </span>return user</p>
+<p class="p4">}</p>
+<p class="p4">func fetchArticles(for userID: User.ID, limit: Int) async throws -&gt; [Article] {</p>
+<p class="p4"><span class="Apple-converted-space">    </span>let url: URL = URL(string: "https://koherent.org/async-await-challenge/api/articles?userID=\(userID.description)")!</p>
+<p class="p4"><span class="Apple-converted-space">    </span>let data: Data = try Data(contentsOf: url)</p>
+<p class="p4"><span class="Apple-converted-space">    </span>let articles: [Article] = try JSONDecoder().decode([Article].self, from: data)</p>
+<p class="p4"><span class="Apple-converted-space">    </span>return articles</p>
+<p class="p4">}</p>
+<p class="p5"><br></p>
+<p class="p4">func fetchUserWithArticles(for id: User.ID, limit: Int) async throws -&gt; (user: User, articles: [Article]) {</p>
+<p class="p4"><span class="Apple-converted-space">    </span>// <span class="s1">🚧</span> ここを実装する</p>
+<p class="p5"><span class="Apple-converted-space">    </span></p>
+<p class="p4"><span class="Apple-converted-space">    </span>async let user =<span class="Apple-converted-space">  </span>fetchUser(for:id)// ここにawaitをつけると代入前にfetchUserが終わる、なるほど</p>
+<p class="p4"><span class="Apple-converted-space">    </span>async let articles =<span class="Apple-converted-space">  </span>fetchArticles(for: id, limit:limit)</p>
+<p class="p5"><span class="Apple-converted-space">    </span></p>
+<p class="p4"><span class="Apple-converted-space">    </span>let result = try await(user, articles)// ここでまとめてawaitで剥がして、</p>
+<p class="p4"><span class="Apple-converted-space">    </span>return result</p>
+<p class="p4">}</p>
+<p class="p5"><br></p>
+<p class="p4">// そのままトップレベルには書けない。runAsyncAndBlockを使っている。</p>
+<p class="p4">runAsyncAndBlock {</p>
+<p class="p4"><span class="Apple-converted-space">    </span>do {</p>
+<p class="p4"><span class="Apple-converted-space">        </span>let (user, articles) = try await fetchUserWithArticles(for: 123, limit: 10)</p>
+<p class="p4"><span class="Apple-converted-space">        </span>print(user, articles)</p>
+<p class="p4"><span class="Apple-converted-space">    </span>} catch {</p>
+<p class="p4"><span class="Apple-converted-space">        </span>print(error)</p>
+<p class="p4"><span class="Apple-converted-space">    </span>}</p>
+<p class="p4">}</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p4">@asyncHandler</p>
+<p class="p4">func bar() {</p>
+<p class="p4"><span class="Apple-tab-span">	</span>print(2)</p>
+<p class="p4"><span class="Apple-tab-span">	</span>await foo1()</p>
+<p class="p4"><span class="Apple-tab-span">	</span>print(4)</p>
+<p class="p4"><span class="Apple-tab-span">	</span>await foo2()</p>
+<p class="p4"><span class="Apple-tab-span">	</span>print(5)</p>
+<p class="p4">}</p>
+<p class="p5"><br></p>
+<p class="p4">print(1)</p>
+<p class="p4">bar()</p>
+<p class="p4">print(3)</p>
+<p class="p2"><br></p>
+<p class="p3">これは1,2,3,4,5を出力する</p>
+<p class="p2"><br></p>
+<p class="p3">asyncをつけるとこうなる</p>
+<p class="p4">func bar() async {</p>
+<p class="p4"><span class="Apple-tab-span">	</span>print(2)</p>
+<p class="p4"><span class="Apple-tab-span">	</span>await foo1()</p>
+<p class="p4"><span class="Apple-tab-span">	</span>print(3)</p>
+<p class="p4"><span class="Apple-tab-span">	</span>await foo2()</p>
+<p class="p4"><span class="Apple-tab-span">	</span>print(4)</p>
+<p class="p4">}</p>
+<p class="p5"><br></p>
+<p class="p4">print(1)</p>
+<p class="p4">await bar()</p>
+<p class="p4">print(5)</p>
+<p class="p2"><br></p>
+<p class="p3">1,2,3,4,5を出力する。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3">asyncの根っこになれるものが4つある</p>
+<p class="p3"><span class="Apple-tab-span">	</span>トップレベル</p>
+<p class="p3"><span class="Apple-tab-span">	</span>@main</p>
+<p class="p3"><span class="Apple-tab-span">	</span>@asyncHandler</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Task.runDetached</p>
+<p class="p3"><span class="Apple-tab-span">	</span>(runAsyncAndBlock)// トップレベルで書けるようになるまでの暫定的な手段が用意されてるんだってさ。</p>
+<p class="p3">これらを利用して無限async汚染問題に対処ができる。</p>
+<p class="p2"><br></p>
+<p class="p4">// ViewController の reloadUserButton が押されたときに</p>
+<p class="p4">// fetchUser 関数を使ってサーバーから User を取得し、</p>
+<p class="p4">// userNameLabel.text に取得したユーザーの name を設定するように</p>
+<p class="p4">// onReloadUserButtonPressed メソッドを完成させて下さい。</p>
+<p class="p5"><br></p>
+<p class="p4">import Foundation</p>
+<p class="p4">import FoundationNetworking</p>
+<p class="p5"><br></p>
+<p class="p4">class UIViewController {}</p>
+<p class="p4">final class UIButton {}</p>
+<p class="p4">final class UILabel {</p>
+<p class="p4"><span class="Apple-converted-space">    </span>var text: String?</p>
+<p class="p4">}</p>
+<p class="p5"><br></p>
+<p class="p4">struct User: Identifiable, Codable {</p>
+<p class="p4"><span class="Apple-converted-space">    </span>typealias ID = Int</p>
+<p class="p4"><span class="Apple-converted-space">    </span>let id: ID</p>
+<p class="p4"><span class="Apple-converted-space">    </span>var name: String</p>
+<p class="p4"><span class="Apple-converted-space">    </span>var thumbnailURL: URL</p>
+<p class="p4">}</p>
+<p class="p4">func fetchUser(for id: User.ID) async throws -&gt; User {</p>
+<p class="p4"><span class="Apple-converted-space">    </span>let url: URL = URL(string: "https://koherent.org/async-await-challenge/api/user?id=\(id.description)")!</p>
+<p class="p4"><span class="Apple-converted-space">    </span>let data: Data = try Data(contentsOf: url)</p>
+<p class="p4"><span class="Apple-converted-space">    </span>let user: User = try JSONDecoder().decode(User.self, from: data)</p>
+<p class="p4"><span class="Apple-converted-space">    </span>return user</p>
+<p class="p4">}</p>
+<p class="p5"><br></p>
+<p class="p4">final class ViewController: UIViewController {</p>
+<p class="p4"><span class="Apple-converted-space">    </span>let reloadUserButton: UIButton = .init()</p>
+<p class="p4"><span class="Apple-converted-space">    </span>let userNameLabel: UILabel = .init()</p>
+<p class="p4"><span class="Apple-converted-space">    </span>let userID: User.ID = 123</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-converted-space">    </span>// <span class="s1">🚧</span> このメソッドを完成させる</p>
+<p class="p4"><span class="Apple-converted-space">    </span>@asyncHandler</p>
+<p class="p4"><span class="Apple-converted-space">    </span>func onReloadUserButtonPressed(_ sender: UIButton) {</p>
+<p class="p4"><span class="Apple-converted-space">        </span>if let user = try? await fetchUser(for: userID) {// この関数にasyncがついてないけど@asyncHandlerがあるのでawaitが書ける</p>
+<p class="p5"><span class="Apple-converted-space">        </span></p>
+<p class="p4"><span class="Apple-converted-space">            </span>userNameLabel.text = user.name</p>
+<p class="p4"><span class="Apple-converted-space">        </span>}</p>
+<p class="p4"><span class="Apple-converted-space">    </span>}</p>
+<p class="p4">}</p>
+<p class="p5"><br></p>
+<p class="p4">let viewController: ViewController = .init()</p>
+<p class="p4">viewController.onReloadUserButtonPressed(viewController.reloadUserButton)</p>
+<p class="p2"><br></p>
+<p class="p3">別スレッド実行の起点になるだけなので、ストップせずに実行される。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3">Taskはasync関数にとってのスレッドのような物で、</p>
+<p class="p3">async関数の中でawaitから帰ってきたら別のスレッドになるが、Taskという概念は継続して同じものが使われる。</p>
+<p class="p2"><br></p>
+<p class="p3">async1つに対してTask1つが継続性を維持するために生成されるようなイメージ。</p>
+<p class="p2"><br></p>
+<p class="p3">で、async letすると、その実行はchild taskが生成されて実行される。</p>
+<p class="p3">で、runDetached関数は.cancel()関数を実装しているので、上位から丸ごとキャンセルができる。</p>
+<p class="p2"><br></p>
+<p class="p3">うーんこれは便利。goのcontextだ。kotlinでもできるんだろうか?とのこと</p>
+<p class="p2"><br></p>
+<p class="p4">// ViewController の cancelReloadingUser ボタンを押すと</p>
+<p class="p4">// reloadUser ボタンで実行されている User のリロードを</p>
+<p class="p4">// キャンセルするように ViewController の実装を完成させて下さい。</p>
+<p class="p5"><br></p>
+<p class="p4">import Foundation</p>
+<p class="p4">import FoundationNetworking</p>
+<p class="p5"><br></p>
+<p class="p4">class UIViewController {}</p>
+<p class="p4">final class UIButton {}</p>
+<p class="p4">final class UILabel {</p>
+<p class="p4"><span class="Apple-converted-space">    </span>var text: String?</p>
+<p class="p4">}</p>
+<p class="p5"><br></p>
+<p class="p4">struct User: Identifiable, Codable {</p>
+<p class="p4"><span class="Apple-converted-space">    </span>typealias ID = Int</p>
+<p class="p4"><span class="Apple-converted-space">    </span>let id: ID</p>
+<p class="p4"><span class="Apple-converted-space">    </span>var name: String</p>
+<p class="p4"><span class="Apple-converted-space">    </span>var thumbnailURL: URL</p>
+<p class="p4">}</p>
+<p class="p5"><br></p>
+<p class="p4">func fetchUser(for id: User.ID) async throws -&gt; User {</p>
+<p class="p4"><span class="Apple-converted-space">    </span>let url: URL = URL(string: "https://koherent.org/async-await-challenge/api/user?id=\(id.description)")!</p>
+<p class="p4"><span class="Apple-converted-space">    </span>let data: Data = try Data(contentsOf: url)</p>
+<p class="p4"><span class="Apple-converted-space">    </span>let user: User = try JSONDecoder().decode(User.self, from: data)</p>
+<p class="p4"><span class="Apple-converted-space">    </span>return user</p>
+<p class="p4">}</p>
+<p class="p5"><br></p>
+<p class="p4">// <span class="s1">🚧</span> このクラスを完成させる</p>
+<p class="p4">final class ViewController: UIViewController {</p>
+<p class="p4"><span class="Apple-converted-space">    </span>let reloadUserButton: UIButton = .init()</p>
+<p class="p4"><span class="Apple-converted-space">    </span>let cancelReloadingUserButton: UIButton = .init()</p>
+<p class="p4"><span class="Apple-converted-space">    </span>let userNameLabel: UILabel = .init()</p>
+<p class="p4"><span class="Apple-converted-space">    </span>var handle:Task.Handle&lt;Void&gt;?</p>
+<p class="p5"><span class="Apple-converted-space">    </span></p>
+<p class="p4"><span class="Apple-converted-space">    </span>func onReloadUserButtonPressed(_ sender: UIButton) {</p>
+<p class="p4"><span class="Apple-converted-space">        </span>handle = Task.runDetached { [self] in</p>
+<p class="p4"><span class="Apple-converted-space">            </span>if let user = try? await fetchUser(for: 123) {</p>
+<p class="p4"><span class="Apple-converted-space">                </span>userNameLabel.text = user.name</p>
+<p class="p4"><span class="Apple-converted-space">            </span>}</p>
+<p class="p4"><span class="Apple-converted-space">        </span>}</p>
+<p class="p4"><span class="Apple-converted-space">    </span>}</p>
+<p class="p5"><br></p>
+<p class="p4"><span class="Apple-converted-space">    </span>func onCancelReloadingUserButtonPressed(_ sender: UIButton) {</p>
+<p class="p4"><span class="Apple-converted-space">        </span>handle?.cancel()</p>
+<p class="p4"><span class="Apple-converted-space">    </span>}</p>
+<p class="p4">}</p>
+<p class="p5"><br></p>
+<p class="p4">let viewController: ViewController = .init()</p>
+<p class="p4">viewController.onReloadUserButtonPressed(viewController.reloadUserButton)</p>
+<p class="p4">viewController.onCancelReloadingUserButtonPressed(viewController.cancelReloadingUserButton)</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3">メモ</p>
+<p class="p3"><span class="Apple-tab-span">	</span>callback -&gt; 関数を呼び出したスレッドで</p>
+<p class="p3"><span class="Apple-tab-span">	</span>dispatchqueue.async() でどこかに投げ込む</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・taskがexecutorみたいなのを持てるようになってる</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・awaitから戻ってきた時にcontinuationするスレッドをどうするかみたいなのはexecutorの責務になっている。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・どのスレッドに戻るかを設定することができる</p>
+<p class="p2"><span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>actorまわりと関連してるらしい、、わかんね。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>actorは自身のメソッドが必ずそこで直列化される？</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3">関数をasync化してみよう</p>
+<p class="p3">func foo(completion: @escaping) ~ みたいなのがあった時に、</p>
+<p class="p2"><br></p>
+<p class="p3">withUnsafeContinuation { continuation in を使って</p>
+<p class="p3"><span class="Apple-tab-span">	</span>foo {</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>continuation.resume(returning: value)</p>
+<p class="p3"><span class="Apple-tab-span">	</span>}</p>
+<p class="p3">}</p>
+<p class="p2"><br></p>
+<p class="p3">unsafeとcheckedがある。checkedをつけるとcontinuation.resumeの呼び忘れをエラーにできる。</p>
+<p class="p3">当然checkedのほうがいろんなコストがあるとのこと。</p>
+<p class="p2"><br></p>
+<p class="p3">コールバック関数をasyncでラップしてasync化しよう</p>
+<p class="p4">// コールバックで結果を受け取る非同期関数 download を使って、</p>
+<p class="p4">// async で結果を返す非同期関数 download を実装して下さい。</p>
+<p class="p5"><br></p>
+<p class="p4">import Foundation</p>
+<p class="p4">import FoundationNetworking</p>
+<p class="p5"><br></p>
+<p class="p4">func download(from url: URL, completion: @escaping (Result&lt;Data, Error&gt;) -&gt; Void) {</p>
+<p class="p4"><span class="Apple-converted-space">    </span>do {</p>
+<p class="p4"><span class="Apple-converted-space">        </span>let data: Data = try Data(contentsOf: url)</p>
+<p class="p4"><span class="Apple-converted-space">        </span>completion(.success(data))</p>
+<p class="p4"><span class="Apple-converted-space">    </span>} catch {</p>
+<p class="p4"><span class="Apple-converted-space">        </span>completion(.failure(error))</p>
+<p class="p4"><span class="Apple-converted-space">    </span>}</p>
+<p class="p4">}</p>
+<p class="p5"><br></p>
+<p class="p4">// <span class="s1">🚧</span> ここを実装する</p>
+<p class="p4">func download(from url: URL) async throws -&gt; Data {</p>
+<p class="p4"><span class="Apple-converted-space">    </span>try await withUnsafeThrowingContinuation { continuation in</p>
+<p class="p4"><span class="Apple-converted-space">        </span>download(from: url) { result in<span class="Apple-converted-space"> </span></p>
+<p class="p4"><span class="Apple-converted-space">            </span>continuation.resume(with: result)</p>
+<p class="p4"><span class="Apple-converted-space">        </span>}</p>
+<p class="p4"><span class="Apple-converted-space">    </span>}</p>
+<p class="p4">}</p>
+<p class="p5"><br></p>
+<p class="p4">runAsyncAndBlock {</p>
+<p class="p4"><span class="Apple-converted-space">    </span>do {</p>
+<p class="p4"><span class="Apple-converted-space">        </span>let url: URL = URL(string: "https://koherent.org/async-await-challenge/api/user?id=123")!</p>
+<p class="p4"><span class="Apple-converted-space">        </span>let data: Data = try await download(from: url)</p>
+<p class="p4"><span class="Apple-converted-space">        </span>print(String(data: data, encoding: .utf8)!)</p>
+<p class="p4"><span class="Apple-converted-space">    </span>} catch {</p>
+<p class="p4"><span class="Apple-converted-space">        </span>print(error)</p>
+<p class="p4"><span class="Apple-converted-space">    </span>}</p>
+<p class="p4">}</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3">戻りスレッドとかはどうなっちゃうんだろう</p>
+<p class="p3"><span class="Apple-tab-span">	</span>UIスレッドに指定したい、とかはありそうだけど、それはどうやるんだろう。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>-&gt; GDCではい。まああれスッゲー便利だもんな</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+</body>
+</html>
