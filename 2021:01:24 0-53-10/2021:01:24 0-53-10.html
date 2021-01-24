@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2022.2">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Sans'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; background-color: #e6e6e6}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; background-color: #e6e6e6; min-height: 18.0px}
+    span.s1 {font: 12.0px Helvetica}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>UnityでWebAssemblyを動かす</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>いいガイドがあった。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://edom18.hateblo.jp/entry/2021/01/23/203757">https://edom18.hateblo.jp/entry/2021/01/23/203757</a></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>見ながらやってく、ほぼただのメモだよ。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>まずこのサイトでCを書きます</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><a href="https://mbebenita.github.io/WasmExplorer/">https://mbebenita.github.io/WasmExplorer/</a></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>適当にCで関数を書いて、wasmにコンパイルする。</p>
+<p class="p4"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202021-01-24%201.02.54.png" alt="スクリーンショット 2021-01-24 1.02.54.png"></p>
+<p class="p3"><span class="Apple-tab-span">	</span>こんな感じの<span class="s1">c</span>のコードを書いて</p>
+<p class="p2"><br></p>
+<p class="p5">int Something(int input)</p>
+<p class="p5">{</p>
+<p class="p5"><span class="Apple-converted-space">  </span>return input + 19423;</p>
+<p class="p5">}</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>んでコンパイルするとこんな感じのがダウンロードできる。</p>
+<p class="p2"><br></p>
+<p class="p3">something.wasm</p>
+<p class="p5">0061 736d 0100 0000 0186 8080 8000 0160</p>
+<p class="p5">017f 017f 0382 8080 8000 0100 0484 8080</p>
+<p class="p5">8000 0170 0000 0583 8080 8000 0100 0106</p>
+<p class="p5">8180 8080 0000 0796 8080 8000 0206 6d65</p>
+<p class="p5">6d6f 7279 0200 0953 6f6d 6574 6869 6e67</p>
+<p class="p5">0000 0a8f 8080 8000 0189 8080 8000 0020</p>
+<p class="p5">0041 df97 016a 0b</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>んでこれを動かすUnity側をセットアップしていく。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>c側で関数定義をして呼び出して、Unity側で同名の関数定義を書いて呼び出す～とかも自然にできる(コード無くした)</p>
+<p class="p2"><br></p>
+<p class="p5">int GetParam();</p>
+<p class="p6"><br></p>
+<p class="p5">int Something(int input)</p>
+<p class="p5">{</p>
+<p class="p5"><span class="Apple-converted-space">  </span>int s = GetParam();</p>
+<p class="p5"><span class="Apple-converted-space">  </span>return input + 19423 + s;</p>
+<p class="p5">}</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ここまでやった上で、だいたいどんな感じかはわかったので、実現方法をよーくみてたら、まあ書いてある通りC#で書かれてるwasm executorだったんだな。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・wasmで書かれたプラットフォームフリーなRFCライブラリをUnityから呼びたい</p>
+<p class="p3"><span class="Apple-tab-span">	</span>というニーズを自分は抱えていて、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>まあその、C#でRFCを満たしてないものが多すぎて最低な目に遭ってるからそれを金輪際さけたいという需要なんだけど、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これは次の需要を叶える必要がある。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・ゲーム用なので、ある程度高速にwasmを実行する(この時点でUnityだとNativeごとに実装を選べるといいな～ってなるからC#ではないほうがいい)</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>なので、そのへんも探してこないとな～と思った。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+</body>
+</html>
