@@ -39,10 +39,7 @@
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>Catalogって何個も同時読みできるの？</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>-&gt; できないぽい。<span class="Apple-converted-space">  </span>Ultimately Addressables only uses one of these catalogs. と資料にあった。</p>
-<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>これによって、Catalogを生成する際に制約が生まれる。常に一つのCatalogを真なものとしてあつかわないといけない。でっかいグループを振り回す話になる。</p>
-<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Catalogの制約はそのまま運用の制約になる。</p>
-<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>制約を説明できないと、やりたい運用ができるかどうか確認ができないんだけど、Catalogの制約はUnityEditorのGUIなので、これわかるかしら？</p>
+<p class="p3"><span class="Apple-tab-span">	</span>-&gt; Local/Remote Catalogsってあるから、内部にCatalog x Nを持ってて個別で更新できるんだろうと思うけれど、どうなんだろう。多分できるんだろう。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>Catalog更新する時、既にロードされてるAssetはどうなるの？</b><span class="Apple-tab-span">	</span>-&gt; 高度なモード、としてなんかオプショナルなのが用意してある。</p>
@@ -63,7 +60,6 @@
 <p class="p3"><b>想定されている運用</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>Addressablesは、今のところは、やっぱり簡易的なゲームで次のような運用スタイルを想定して作られているなーって思った。</p>
 <p class="p3"><span class="Apple-tab-span">	</span>・Address(スロット)を元に、そこに何かをロードする、スロットありきのシステム</p>
-<p class="p3"><span class="Apple-tab-span">	</span>・1Catalogで完結する、シンプルな運用でまわる範囲</p>
 <p class="p3"><span class="Apple-tab-span">	</span>・データ取得URLがUnityEditor込みでbindされてるのに精神が耐えられる人向け</p>
 <p class="p3"><span class="Apple-tab-span">	</span>・いざとなったらリソース更新のためだけにアプデ版をしれっとApple審査とかに通すメンタル</p>
 <p class="p2"><br></p>
@@ -72,14 +68,21 @@
 <p class="p2"><br></p>
 <p class="p3"><b>じゃあ俺は使うのか</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>ホビーであれば使うことがあるかもしれないが、ヘビーに、となると、求める運用スタイルが合わない。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>そんでこの世界、こと運用において、運用自由度の大は小を兼ねる。なので使わない。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>そんでこの世界、こと運用において、<b>運用自由度の大は小を兼ねる</b>。なので使わない。</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
-<p class="p3"><span class="Apple-tab-span">	</span>これは明確にドキュメントに書いてあった「Ultimately Addressables only uses one of these catalogs.」が答えになっている。</p>
-<p class="p2"><b></b><br></p>
-<p class="p3"><b><span class="Apple-tab-span">	</span></b>同時に複数のCatalogを扱いたい(分野ごとにCatalogを分けた方が運用が死ぬほど楽、例えばLangとBasicとか)が、できないって書いてあるからできないんだろうなと思う。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>なので自分は選べない。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>これは、「いつCatalogが更新されるかを毎度書かないといけない」「Catalog取得URLを変更できない」「UnityEditorに凝集しすぎ」というのに起因する。</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>これは作っているものにあんまり依存しない話だと思うが、開発者が楽をするためのAutomationと、運用が素敵になるためのOperatabilityは両立しないといけない。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>結局、自動的に通信に介入して「リソース更新があったらやるよ」を意識せずに扱えるフレームワークがあれば、Addressablesはそれに食われた方が使いやすい。で、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>もう一つでかい理由があって、AddressablesはとにかくすべてをUnityEditorでやらせすぎる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・ネットワークに干渉する機能はなく</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・アップデートは自分で予定したコードを書かねばならず</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・UnityEditorでそれらをセットするという見通しの悪さがある</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>こうなっちゃってる。Unityとしては正しいんだけどさ、俯瞰とかお手軽からは遠い。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これは作っているものにあんまり依存しない話だと思うが、開発者が楽をするためのAutomationと、運用が素敵になるためのOperationalityは両立しないといけない。</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>んでこれを、どんな運用する想定でゲーム作ってます！っていう情報を受けてからモノを作るわけでもない、固定の機構(Addressables)が叶えてくれると思う方がおかしい。</p>
 <p class="p3"><span class="Apple-tab-span">	</span>ただ、Addressablesは2018WIPと比べれば、そりゃもうよくなっている。</p>
@@ -88,22 +91,25 @@
 <p class="p2"><br></p>
 <p class="p3"><b>感想</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>UnityのAssetBundleは、なんか個人的にはギリギリの「こうする人もいますので、、」という線をだいたい全部超えた機構になっていて、あれがベースラインなのはとてもいい。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>が、そこから上に、AutomationとOperatabilityを両立した番人向けのものが作れるのか、というと、うへえーー難しそう、、ってなってしまう。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>が、そこから上に、AutomationとOperationalityを両立した万人向けのものが作れるのか、というと、うへえーー難しそう、、ってなってしまう。</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>Addressablesはそれに挑んでいる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Addressablesはそれに挑んでる。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>UCCD(Unity CloudContentDelivery)はこの辺めちゃくちゃ割り切っていて、</p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://sassembla.github.io/Public/2020:09:11%2011-27-48/2020:09:11%2011-27-48.html">https://sassembla.github.io/Public/2020:09:11%2011-27-48/2020:09:11%2011-27-48.html</a></p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>Web上でセットアップするGUI込みで大変よくできている、CDNのRailsという感想がぴったりな感じで、Webでセットアップから運用までが完結している。ファイルに触れもしねえ。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>AddressablesもAddressables on Railsみたいな感じで、ブラウザでセットアップできるといいんじゃあねーの？って思ったりしている。</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>これは単純に、UnityEditorに何かやらせる量が多ければ多いほど、運用制約がコードとして凝集されてしまって、それの説明を探すのがしんどすぎるというのがあって、</p>
-<p class="p3"><span class="Apple-tab-span">	</span>ぶっちゃけAddressanbles on Railsみたいな、セットアップをブラウザでやる簡単版として設定をWebとEditorに分散すればいいんじゃあねーの？とか妄想している。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ぶっちゃけAddressanbles on Railsみたいな、セットアップをブラウザでやる簡単版として設定をWebとEditorに分散すればいいんじゃあねーの？とか妄想している。(二度目)</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>どちらにしても「難しいのはAssetBundleではなく運用」な感じで、Appのを更新せずデータを更新するのを人間がどーやるかというところなので、</p>
 <p class="p3"><span class="Apple-tab-span">	</span>運用側をRailsにしていかないとパッとは使いにくかろうな～というところがある。</p>
+<p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 </body>
