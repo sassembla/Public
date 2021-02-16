@@ -20,13 +20,14 @@
 <p class="p3"><span class="Apple-tab-span">	</span>そろそろこういうのをすべきタイミングだという感じになった。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
-<p class="p3"><b>公式資料</b></p>
+<p class="p3"><b>参考にした公式資料</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span><a href="https://docs.unity3d.com/Packages/com.unity.addressables@1.16/manual/ContentUpdateWorkflow.html">https://docs.unity3d.com/Packages/com.unity.addressables@1.16/manual/ContentUpdateWorkflow.html</a></p>
 <p class="p3"><span class="Apple-tab-span">	</span>ほか</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>宿題</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>こういうのがあったんだわ。 2018年の俺の記事。</p>
+<p class="p2"><br></p>
 <p class="p3"><b><span class="Apple-tab-span">	</span>Real World Addressables(WIP)</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://sassembla.github.io/Public/2018:07:10%2010-43-10/2018:07:10%2010-43-10.html">https://sassembla.github.io/Public/2018:07:10%2010-43-10/2018:07:10%2010-43-10.html</a></p>
 <p class="p2"><br></p>
@@ -34,17 +35,20 @@
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>CatalogのDLに失敗したらどうなるの?</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>-&gt; 自前で好きなタイミングで更新できるようになった、以前のように起動時に無理くりCatalogを取得しにいって、私通信に全く失敗しないので、、みたいなことはなくなった、、のか？</p>
-<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ローカルからデフォルトカタログを見出して云々ができてるので、平和な感じがある。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>-&gt; 自前で好きなタイミングでCatalogを更新できるようになった。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>以前のように起動時に無理くりCatalogを取得しにいって、私通信に全く失敗しないので、、みたいなことはなくなった、、のか？</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ローカルからデフォルトカタログを見出して云々ができてるので、そもそも平和な感じがある。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>Catalogって何個も同時読みできるの？</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>-&gt; Local/Remote Catalogsってあるから、内部にCatalog x Nを持ってて個別で更新できるんだろうと思うけれど、どうなんだろう。多分できるんだろう。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>-&gt; Local/Remote Catalogsってあるから、内部にCatalog x Nを持ってて個別で更新できるんだろうと思っていたが、そうでもなかった。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>やっぱ基本的には単一Catalogで、複数のプロジェクトからCatalogを持ち寄って(!!!!!)マルチカタログを実現しているっぽい。そんな暴力的な、、、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>それはできるとは言わない、やらない方がいい。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>Catalog更新する時、既にロードされてるAssetはどうなるの？</b><span class="Apple-tab-span">	</span>-&gt; 高度なモード、としてなんかオプショナルなのが用意してある。</p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://docs.unity3d.com/Packages/com.unity.addressables@1.16/manual/ContentUpdateWorkflow.html">https://docs.unity3d.com/Packages/com.unity.addressables@1.16/manual/ContentUpdateWorkflow.html</a> の、Unique Bundle IDs ってのに書いてある。</p>
-<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>これは設定をいじるとABの名前自体に細工をしたりするんだと思うが、まあ、なんかそういう再生性処理が必要。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>これは設定をいじるとABの名前自体に細工をしたりするんだと思うが、まあ、なんかそういう再生成処理が必要。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>新規に生まれている制約</b></p>
@@ -53,27 +57,36 @@
 <p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p3"><span class="Apple-tab-span">	</span>パッとみた感じだが、次の疑問がある。</p>
 <p class="p3"><span class="Apple-tab-span">	</span>1. AAS上で、Catalogを更新すべきタイミングとはいつなのか、なんかこういうシーンを用意して更新するといいよ、とかがあると良さそうだがさて？</p>
-<p class="p3"><span class="Apple-tab-span">	</span>2. CatalogのIDをクライアントが得るのはどういう方法がいいと思う？などのサジェストがない(ここになんらか運用まで影響を与える制約がありそうな気はする)</p>
+<p class="p3"><span class="Apple-tab-span">	</span>2. CatalogのIDをクライアントが得るのはどこからどういう方法がいいと思う？などのサジェストがない(ここになんらか運用まで影響を与える制約がありそうな気はする)</p>
 <p class="p3"><span class="Apple-tab-span">	</span>3. データ取得元のURLってまだUnityEditor経由のGUIにバインドされてるんだろうか？ ちょっとよくわからんかった。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>んでこれを知るには結構旅が必要で、UnityEditorのウィンドウでその旅の全てが行われるかと思うと、辛い。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>なんでもEditorでやりすぎてる気がする。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>想定されている運用</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>Addressablesは、今のところは、やっぱり簡易的なゲームで次のような運用スタイルを想定して作られているなーって思った。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>・Address(スロット)を元に、そこに何かをロードする、スロットありきのシステム</p>
-<p class="p3"><span class="Apple-tab-span">	</span>・データ取得URLがUnityEditor込みでbindされてるのに精神が耐えられる人向け</p>
-<p class="p3"><span class="Apple-tab-span">	</span>・いざとなったらリソース更新のためだけにアプデ版をしれっとApple審査とかに通すメンタル</p>
+<p class="p3"><span class="Apple-tab-span">	</span>1. Address(スロット)を元に、そこに何かをロードする、スロット or インデックスありきのシステム</p>
+<p class="p3"><span class="Apple-tab-span">	</span>2. 基本的には1つのカタログでやる、というオールオアナッシング方式、ちっさな変更でかい更新単位は辛い</p>
+<p class="p3"><span class="Apple-tab-span">	</span>3. データ取得URLがUnityEditor込みでbindされてるのに精神が耐えられる人向け</p>
+<p class="p3"><span class="Apple-tab-span">	</span>4. いざとなったらリソース更新のためだけにアプデ版をしれっとApple審査とかに通すメンタル</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>Autoyaの機能の7割くらいまではカバーできてる感じになった。</p>
 <p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>あとやっぱAddress機能のアンバランスさが目立つようになってきたなー。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>名前の元になっている要素ではあるんだけど、Addressは正直どうでもいいというか、存在しようがしなかろうが嬉しさも悲しさも増減しない仕組みな気がする。</p>
+<p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>じゃあ俺は使うのか</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>ホビーであれば使うことがあるかもしれないが、ヘビーに、となると、求める運用スタイルが合わない。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ホビーであれば使うことがあるかもしれないが、ヘビーに、となると、求める運用スタイルが合わない。足りない上に、複雑。</p>
 <p class="p3"><span class="Apple-tab-span">	</span>そんでこの世界、こと運用において、<b>運用自由度の大は小を兼ねる</b>。なので使わない。</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
-<p class="p3"><span class="Apple-tab-span">	</span>これは、「いつCatalogが更新されるかを毎度書かないといけない」「Catalog取得URLを変更できない」「UnityEditorに凝集しすぎ」というのに起因する。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>これは、「いつCatalogが更新されるかを毎度書かないといけない」「Catalogが基本やっぱ一個」「UnityEditorに凝集しすぎ」というのに起因する。</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>結局、自動的に通信に介入して「リソース更新があったらやるよ」を意識せずに扱えるフレームワークがあれば、Addressablesはそれに食われた方が使いやすい。で、</p>
-<p class="p3"><span class="Apple-tab-span">	</span>もう一つでかい理由があって、AddressablesはとにかくすべてをUnityEditorでやらせすぎる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>特にCatalogが1プロジェクトあたり1個が辛いなあ、、、無理、、、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>あと、自動的に通信に介入して「リソース更新があったらやるよ」を意識せずに扱えるフレームワークがあれば、Addressablesはそれに食われた方が使いやすい。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>そして、AddressablesはとにかくすべてをUnityEditorでやらせすぎる。</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>・ネットワークに干渉する機能はなく</p>
 <p class="p3"><span class="Apple-tab-span">	</span>・アップデートは自分で予定したコードを書かねばならず</p>
@@ -82,11 +95,15 @@
 <p class="p3"><span class="Apple-tab-span">	</span>こうなっちゃってる。Unityとしては正しいんだけどさ、俯瞰とかお手軽からは遠い。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>結局リソース更新とはゲームやAppの運用なのだけれど、それを俯瞰的にこなすにはUnityEditorは狭すぎる気がする。みんなで見るとかも出来ないし。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>これは作っているものにあんまり依存しない話だと思うが、開発者が楽をするためのAutomationと、運用が素敵になるためのOperationalityは両立しないといけない。</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>んでこれを、どんな運用する想定でゲーム作ってます！っていう情報を受けてからモノを作るわけでもない、固定の機構(Addressables)が叶えてくれると思う方がおかしい。</p>
+<p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>ただ、Addressablesは2018WIPと比べれば、そりゃもうよくなっている。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>が、反面全体像を把握するのが難しくなってんなーとも思った。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>反面、機能の増加や責任の増加から、それを俯瞰するための窓の小ささがつっかえになっていて、全体像を把握するのが難しくなってんなーとも思った。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>感想</b></p>
@@ -107,8 +124,12 @@
 <p class="p3"><span class="Apple-tab-span">	</span>これは単純に、UnityEditorに何かやらせる量が多ければ多いほど、運用制約がコードとして凝集されてしまって、それの説明を探すのがしんどすぎるというのがあって、</p>
 <p class="p3"><span class="Apple-tab-span">	</span>ぶっちゃけAddressanbles on Railsみたいな、セットアップをブラウザでやる簡単版として設定をWebとEditorに分散すればいいんじゃあねーの？とか妄想している。(二度目)</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>どちらにしても「難しいのはAssetBundleではなく運用」な感じで、Appのを更新せずデータを更新するのを人間がどーやるかというところなので、</p>
-<p class="p3"><span class="Apple-tab-span">	</span>運用側をRailsにしていかないとパッとは使いにくかろうな～というところがある。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>だってWebから「はいこのバージョン解放～」とかやりたくない？ そんでそのためのカタログとかはUnityEditor関係なくProjectから作って欲しいな、Web上で。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ABもそこでビルドしちゃいなよ。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>どちらにしても「難しいのはAssetBundleではなく運用」な感じで、Appのを更新せずデータを更新するのを人間がどーやるかなので、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>運用側をRailsにしていかないとパッともガッとも使いにくかろうな～というところがある。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
