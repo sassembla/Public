@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2022.2">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Sans'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+    span.s1 {font: 12.0px Helvetica}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>Openに研究中ないろいろ</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>知りたいこと、やりたいことがいっぱいあって、せっかくなんかリモートが発達したので、「こういう話題をなんかでやる」というのをやっていきたい。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>どうするか</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>どんなテーマがあるか、は以下に描く。が、まず、「どうしようとしてるか」、手段の方を書く。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>「思考の過程が残るように」</p>
+<p class="p3"><span class="Apple-tab-span">	</span>「コラボレーティブなお絵かきツールの上で」</p>
+<p class="p3"><span class="Apple-tab-span">	</span>「適当にうだうだやる」</p>
+<p class="p3"><span class="Apple-tab-span">	</span>みたいなのをやってみたいと思っている。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>以下、現在俺が保持しているテーマ。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>1. UnityにおいてArchtectureを構築するために使えるGood Parts集めてみたくない？</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>2. まともな非同期 in Unityの研究</b></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これらを、適当に人を募って話したり試したり発展させたり壊したりしていきたい。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>具体的にはclubhouseとかになっちゃう気はするんだよなー、編集権渡すんで喋りながらなんかやろうぜ的な。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Twitter Spacesが来たらそっちで。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>1. UnityにおいてArchtectureを構築するために使えるGood Parts集めてみたくない？</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>3rdパーティには本当に色々あるが、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>そういえばUnity自体が備え付けで持ってる機能、性質を利用してArchを作ることはできないことなのか？ という疑問がある。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>図にするとこういう感じ。</p>
+<p class="p4"><img src="twitter_Eutyy3DUYAQSj6c.jpg" alt="twitter_Eutyy3DUYAQSj6c.jpg"></p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p3"><b>2. まともな非同期 in Unityの研究</b></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>Unity</span>では<span class="s1">C#</span>がスクリプト言語として使えるんだけど、それがまあかなり、クライアントサイドで使うべき言語としては微妙な非同期の仕様をしている。</p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span></span>これは単に言語とドメインが「だんだん合わなくなってきてる」のだと思っていて、それを直視したい。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、まずは現状の解析から。ちょうどこういうのが必要な別のやりたいこともあったので、ちょうど良い。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Unityを、特にcaller / callee的な区分けで考えると、だいたいこんな感じの関係がある。</p>
+<p class="p4"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202021-02-21%2014.46.01.png" alt="スクリーンショット 2021-02-21 14.46.01.png"></p>
+<p class="p3"><span class="Apple-tab-span">	</span>最初の一つのGameObjectはSerializeされた何かから～とか、そういうのは書いてない。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>RuntimeInitializeOnLoadとかも例外として扱っている。いや便利なんだけどさ、あとでね。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、じゃあどういうのを考えると「Unityにおける非同期」において有効なことができるんだろう、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>などが、知りたいこと、深掘りしてみたいこと、になっている。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>非同期、というトピックにしたが、実際には、分散や並列などを広く含んだ、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>「1フレームあたりの計算量を爆上げするには？」</p>
+<p class="p3"><span class="Apple-tab-span">	</span>「ユーザー操作がブロックされないようにするには？」</p>
+<p class="p3"><span class="Apple-tab-span">	</span>「書きやすくてメンテしやすくて、async汚染などが発生しない方法がつくれないか」</p>
+<p class="p3"><span class="Apple-tab-span">	</span>などがある。で、JobSystemやそれを含むDOTSがAnswerとなっているケースもかなりある。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>が、模索したいのは「それ以外になにかないか？」なんだよね。あとasync/awaitも、期待してない。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>残念なことに、Unityでのasync/awaitは、というかC#でのスレッディングは、基本的に本気で呪われている。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>じゃあスレッディングではない場合はなんなんだ？でいうと、それはそれで全く意味がない。本気で意味がない。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>そうそう、根本的に、呪いがどうなっていくんだろう、とかも知りたいことではある。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>呪いを解くことができるのか、それとも、真面目に戦って勝つことができるのか。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>まあ、真面目に戦って勝つべきだ。</p>
+<p class="p2"><br></p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+</body>
+</html>
