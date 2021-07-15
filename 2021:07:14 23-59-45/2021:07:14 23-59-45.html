@@ -25,6 +25,9 @@
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>ちなみに負荷がすげーーー高いので原因を探していてこの記事を書く羽目になっている。</p>
 <p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>結論から書くと、ARFoundationに書いてあるコードはサンプルコードだ、あれをそのまま使って快適さを得られるケースは多分存在しない。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>理解して分解して手で再構成すると本当に欲しい機能だけの低負荷なセットが作れる。</p>
+<p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>全体像が見えないシステム&amp;サブシステム達、、、</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>具体例としてARFoundationを使ったAR空間上でのFaceTrackingをあげようと思う。</p>
@@ -103,11 +106,11 @@
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>そんなあ、、、ってくらい面倒臭い。</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ちなみにこの機能は端末のAR空間上の位置と回転の両方を取得できない場合はなんとデバイスの取得を諦めるため、</p>
-<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ARSessionの「何をTrackするか」設定、requestedTrackingMode がRotationOnlyとかだと見事にデバイスの取得に失敗する。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ARSessionの「何をTrackするか」設定、<b>requestedTrackingMode</b> がRotationOnlyとかだと見事にデバイスの取得に失敗する。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>そんなバカな。</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>おまけで、</p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ARPoseDriverかTrackedPoseDriverのどちらかがARSessionOriginについてるCameraから発見できないと、ARSessionOriginはwarningを吐いてくる。</p>
-<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>なるほど？</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>TrackedPoseDriverってやつを代わりに使えば回転だけとか取得できたりする？ そう思って試してみたが、、、(続く)、、結論から言うとだめだった。</p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ちなみにARPoseDriverのほうが後発です。</p>
@@ -117,6 +120,20 @@
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>カメラ経由の情報取得をfrontからやるかbackからやるかを指定したりする。</p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>これまたなんか大変そうだなあ、、、、</p>
 <p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>使わない機能がオンになっても無視すればいいんじゃない？に対してペナルティがある</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これはものすごい不満なんだけど、ARFoundationがデフォルトで用意してくれているComponentは、痒いところに対して手が届くものではない。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・ARPoseDriverとかはARSesionの設定によってなんと起動しないので位置や回転が取れなくなる、つまり使わないという選択肢が取れない。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・使わない機能を使わないまま放置すると、なんと毎秒warningがOS側から出たりする</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・当然負荷もすごい。最小機能とデフォルトでCPU usageが倍くらい違う。具体的には30%ですむところが60%以上食ったりする。やってられねえ。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ということで最小構成を探究する羽目になった。うーーーーーん、、、、、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Componentが相互に依存する形になっていてしかも関係性を俯瞰できる図がないので、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>トライアンドエラー on 実機が最悪の体験をもたらしてくれたのは根に持っている。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>でも使うんでしょ？</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>使う。Unity標準使ってた方が楽なので、、、</p>
 <p class="p2"><br></p>
 </body>
 </html>
