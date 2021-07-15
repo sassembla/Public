@@ -1,0 +1,122 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2022.3">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Sans'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>ARFoundationを腑分ける</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>すげーーーでっかい上に邪魔な処理が多すぎる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>OnEnableに依存した処理が書かれまくっている。やめてくれ。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>というわけで、ARFoundationをデフォルトで使うとどんなふうな構成になっているのか、を書く。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>いや抽象化は大事なんすけど、抽象化の手段がピタゴラスイッチってのは勘弁してくれ、っていう話。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ちなみに負荷がすげーーー高いので原因を探していてこの記事を書く羽目になっている。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>全体像が見えないシステム&amp;サブシステム達、、、</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>具体例としてARFoundationを使ったAR空間上でのFaceTrackingをあげようと思う。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>なんでAR空間上ってのが付くかって？ デフォルトで生成できるFaceTrackingにはなんでかAR空間上の位置をトラックする機能がデフォでついてるんだよ。なんでだよ。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Hierarchy上で次のような構成になる。GameObject多いな～～Componentすげーー多いな～～～w</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>GO1</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>∟ ARSession</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>∟ ARInputManager</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>GO2</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>∟ ARSessionOrigin</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>∟ Camera参照</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>∟ ARFaceManager</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>∟ FacePrefab</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>GO3</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>∟ Camera</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>∟ ARPoseDriver</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>∟ ARCameraManager</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>だいたいこんな感じで書くと構成が伝わるかなあ、、、いやまああとでmiroとかで図を書く、、、、</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ARFoundationは複数のComponentがそれぞれ独立して順不同に起動することでネットワークを形成して動きますっていうタイプのプロダクトで、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>いろんなパーツがあるがそれらが好き勝手に初期化されて動作し全体像としてAR機能を形作っていく。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ARFoundationは端末の機能をSystem/Subsystemという「機能単位に構成された実機端末の各featureへのアクセッサ」を介して起動したり終了したりしており、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>具体的には次のようなものがある。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・端末の回転やAR空間上での位置はXRInputSystem</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・FaceTrackingはARKitFaceSubsystem</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、厄介なことに、じゃあXRInputSystemを起動すれば端末の回転とか位置が取れるんすよね？っていうと、そうなってない。なんでだよ。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>端末の回転や位置を取るには、次の操作が次の順で必要。</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>1. XRInputSystemを端末から取得するためにOSごとの設定ファイルを書き、Assets以下に置く<span class="Apple-tab-span">	</span>2. XRInputSystemを起動する</p>
+<p class="p3"><span class="Apple-tab-span">	</span>3. ARSessionを起動する</p>
+<p class="p3"><span class="Apple-tab-span">	</span>4. ARSessionのstateがReadyになったら、実際の値を取得するDeviceをOSから取得する(InputDevices.GetDevicesWithCharacteristics)</p>
+<p class="p3"><span class="Apple-tab-span">	</span>5. Deviceから好きなタイミングで回転や位置を取得する</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>えーざっくりいうと、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・~InputSystemはOS側の「機能」を使うための前準備(な場合がある、全てのSystemに該当するわけではない)</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・実際に~InputSystemから値を得ることはできず、ARSessionを起動したのち、Deviceを得ることができるタイミングが存在する</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これはつまり</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・ARジャイロ機能(適当)の有無を確認し、取得可能かチェックしたり取得可能状態になったりする</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・ARSessionが各Systemの実際の動作の起点になっていて、ARSessionを起動しないと実際にARジャイロ機構取得機能がオンにならず、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・機能がオンにならないと値を吐き出すDevice = ARジャイロ機能が取得できない</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>という感じになっている。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、Systemごとにデバイスを取得する方法も異なり、たとえば端末のAR位置 + 回転を取得する機能は、onChangedイベントと同期的な取得の2種があるが、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>FaceTrackingとかにはそういうのはない。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>抽象化するにしてもいろんなOSのいろんな端末側の都合をいい感じに抽象化できなかったんだろうなあ、、、って感じがすげーある。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>実際にARFoundationに用意されている端末の位置+回転を取得する場合、</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・ARSessionがactiveだったらARFoundationの機能全体を起動する</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>これが最終的なオンオフになっている。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・ARInputManagerがactiveだったらXRInputSystemを起動する</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>XRInputSystemは端末の回転やAR空間での移動を把握するためのシステムになっている。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・ARSessionOriginがactiveだったら、セットされているCameraの参照、、、（続く)</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・ARFaceManagerがactiveだったら、ARSessionOrigin経由で、、、(続く)</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・ARPoseDriverがactiveだったら、AR空間ないでの位置取得やカメラ</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>実際にはXRInputSystemがStartしている + ARSession(元締め)がactiveであり、そのstateが一定の域を超えたときに</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>端末の回転やAR空間での移動値を取得するためのデバイスの参照を取り出し、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>現在このコンポーネントがついているオブジェクト = カメラのtransforn(posやrot)をいじっている。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>そんなあ、、、ってくらい面倒臭い。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ちなみにこの機能は端末のAR空間上の位置と回転の両方を取得できない場合はなんとデバイスの取得を諦めるため、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ARSessionの「何をTrackするか」設定、requestedTrackingMode がRotationOnlyとかだと見事にデバイスの取得に失敗する。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>おまけで、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ARPoseDriverかTrackedPoseDriverのどちらかがARSessionOriginについてるCameraから発見できないと、ARSessionOriginはwarningを吐いてくる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>なるほど？</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>TrackedPoseDriverってやつを代わりに使えば回転だけとか取得できたりする？ そう思って試してみたが、、、(続く)、、結論から言うとだめだった。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ちなみにARPoseDriverのほうが後発です。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・ARCameraManagerは、、、(続く)</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>カメラ経由の情報取得をfrontからやるかbackからやるかを指定したりする。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>これまたなんか大変そうだなあ、、、、</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+</body>
+</html>
