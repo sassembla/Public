@@ -65,7 +65,8 @@
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b><span class="Apple-tab-span">	</span>端末の回転や位置を取るには、次の操作が次の順で必要。</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>1. XRInputSystemを端末から取得するためにOSごとの設定ファイルを書き、Assets以下に置く<span class="Apple-tab-span">	</span>2. XRInputSystemを起動する</p>
+<p class="p3"><span class="Apple-tab-span">	</span>1. XRInputSystemを端末から取得するためにOSごとの設定ファイルを書き、Assets以下に置く</p>
+<p class="p3"><span class="Apple-tab-span">	</span>2. XRInputSystemを起動する</p>
 <p class="p3"><span class="Apple-tab-span">	</span>3. ARSessionを起動する</p>
 <p class="p3"><span class="Apple-tab-span">	</span>4. ARSessionのstateがReadyになったら、実際の値を取得するDeviceをOSから取得する(InputDevices.GetDevicesWithCharacteristics)</p>
 <p class="p3"><span class="Apple-tab-span">	</span>5. Deviceから好きなタイミングで回転や位置を取得する</p>
@@ -85,8 +86,11 @@
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>抽象化するにしてもいろんなOSのいろんな端末側の都合をいい感じに抽象化できなかったんだろうなあ、、、って感じがすげーある。</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>実際にARFoundationに用意されている端末の位置+回転を取得する場合、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>実際にARFoundationに用意されている端末の位置+回転を取得する場合、(続く)、、、</p>
 <p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>それぞれのComponentについて</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ARFoundationパッケージに含まれているものを書いていく。</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>・ARSessionがactiveだったらARFoundationの機能全体を起動する</p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>これが最終的なオンオフになっている。</p>
