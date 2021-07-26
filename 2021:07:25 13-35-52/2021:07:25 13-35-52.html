@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2022.5">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Sans'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+    span.s1 {font: 12.0px Helvetica}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>UIElementsについて</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>やっと触るタイミングができた</p>
+<p class="p3"><span class="Apple-tab-span">	</span>感想:宣言的な感じでもなく、ベターデフォルトではあるかもしれないが、うーん、、、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>単なるベターuGUIのラッパーっぽい。嬉しいか？というと、うーん、、、</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>どのへんがベターか</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>uGUIをそのまま使うとヤバいUIが出来上がるが、特にタッチ入力に対していろんな閾値を、uGUI以上にデフォルトで頑張っていそう。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>例えばスライダーとかは、マウスについてくる感触がちょっと綺麗な滑らかさがある状態になっており、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>要するにわざと遅延している。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>同じような入力に対する要素はリストにもある感じ。このへんは画面外に行ったらどうこうとかも頑張って書くんだろうか。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>-&gt; ちょっとよくわからん感じはあるが、画面外の概念はあるんだけどな、、、要素が画面に入ったら、みたいな、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>セルありビューに該当するようなものは不明だった。まあいいか、、とりあえず使える、ヘルパー色々書くけど、、、</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>困</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>デバッガー相当のUIToolkitDebuggerで、テキストサイズを変更するとバグりまくることがあり、再現性もあるのでしんどい。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ここでデザインを考える、、とかではなく、決まったデザインの値を試行錯誤 + 作業的にアタッチする場所っぽい。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>そんなつまらないところまでCSSに似ないでも、、、<span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>何ができるか</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>・Unity Editorの画面をC#コードでGUIWindowのOnEnableでガリガリ書ける</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・actionとかもセットできるし解除できる(ただactionの有無で見た目が変わんなそう)</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>メモ</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>UXMLに対してどんなプロパティを書くとどうなるかは、次の方法で試すと全体像がわかりやすい。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>1. UI Builder(これ書いてる時はpreview)パッケージを入れて、適当にuxmlを吐き出す</p>
+<p class="p3"><span class="Apple-tab-span">	</span>2. uxmlを手で編集し、プレビューが見たくなったらUI Builderのウィンドウを開く</p>
+<p class="p3"><span class="Apple-tab-span">	</span>3. これってどういう文字列入れるとこうなるの？とかがあったらUI Builderから要素を選択して適当にいじり、保存してuxmlを見て理解する</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>UIBuilder自体はpreviewだけあって一ミクロンも信頼できない挙動をしている。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>とりあえず操作を行なったその一瞬だけはなんとなくマトモそうな挙動をしているので、そこだけを信じよう。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span></span>というかWIndow &gt; UIToolKit &gt; Samples ってとこから開くウィンドウからも、「こんなの書いたらこんなの出るよ」はみれるんだね。</p>
+<p class="p4"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202021-07-26%2017.14.52.png" alt="スクリーンショット 2021-07-26 17.14.52.png"></p>
+<p class="p3"><span class="Apple-tab-span">	</span>いやレイアウト関連は虚無なんだけどさ、、参考になった。</p>
+<p class="p5"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>感想</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Unityゲームプログラミングバイブルにちょっと書いてあったので読むついでにやるかーってなってやっと重い腰を上げた感じなんだけど、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>初期化タイミングが一発で済んでいる + IMGUIでぶち当たりがちだったEditor UIでの随時更新系のエラーが出ないだけでもとても好印象。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>だめだ、つまりUIに関する生活が貧しすぎる。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>いろいろなエディタ系のUIを刷新していくにあたっては有効そう、だがussとかを独自に触りたいかというとノーサンクユーという感じで、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>C#をガリガリ書いてUIツリーを作ったり自動生成したりするのには楽そうだなあと思った。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>さよならOnGUIみたいな。そんだけの価値はありそう。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+</body>
+</html>
