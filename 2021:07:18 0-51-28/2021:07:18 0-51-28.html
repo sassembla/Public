@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2022.5">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Sans'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>Flutterまわりのメモ</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>UIまわりちょっとやる</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>インストール</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>このへんからSDKを入れる</p>
+<p class="p3"><span class="Apple-tab-span">	</span><a href="https://flutter.dev/docs/get-started/install">https://flutter.dev/docs/get-started/install</a></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>flutter/binにパスを通すとflutter コマンドが使えるようになる。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>flutter make app_name でappが作られ、flutter runでprojectがビルド、実行される。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>WidgetとState</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>~WidgetとState&lt;T&gt;型 があり、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Widgetで画面のレイアウト情報やカラーなどviewの見た目を、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>State&lt;T&gt;でWidgetに対して保持するデータを扱う。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>State&lt;T&gt;に入るT型はWidget系をとっていて、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Widgetを生成する際、Widgetの型を持つStateが探され、更新が走る、、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>とかをやってそう。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>-&gt; StatefulWidgetにはState&lt;T&gt;を拡張した型を返すcreateState関数があり、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Widgetを生成 -&gt; 内部でcreateStateが叩かれる -&gt; State&lt;T&gt;のインスタンスが生成される、ってだけだねこれ。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>State&lt;T&gt;はStatefulWidgetに紐づいて生成されるのがわかった。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これはなんかどういうツールチェインになっているかをみてみるべきか？</p>
+<p class="p3"><span class="Apple-tab-span">	</span>本買ったので読んでみる</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>正直FlutterのUIそれ自体には魅力を感じなくなってきた</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これはSkia(OpenGL、Vulkan、ほかを抽象化したレイヤー)を通じて何を描画するかをDartで書いてあるだけのプラットフォームだ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>欲しかったレベルの抽象化をしていない。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ただ、プラットフォーム固有の機能を使うために、プラグインを作って呼び出せる機能があるっぽい。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>FlutterUI内に特にPf Viewを表示する機能があると。なるほど？どうやってるんだそれ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>-&gt; VirtualDisplayとHybridCompositionの2種があり、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>VDは単純にサーフェスを提供してそこに描画させる、という感じだった。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>描画結果を最終的にFlutter側で合成してレンダリングする形で行っており、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>パフォーマンスは出るがUI操作をいい感じに追うのは無理。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ちなみに古い手法。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>HCはFlutterとOSそれぞれで描画し、描画結果を組み合わせている、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>つまりOSに画面の一定範囲を描かせている。</p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b>Viewという言葉を使わず、RenderObjectとかを使っているのちょっと面白い</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Viewって言うとどうしても見た目になってしまうんだけど、描画対象の話をするときはこういう語彙の方がいい気がする。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+</body>
+</html>
