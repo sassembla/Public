@@ -155,7 +155,7 @@
 <p class="p3"><span class="Apple-tab-span">	</span>Q1. BMPはなんて名前でBLE接続に表示されるの？</p>
 <p class="p3"><span class="Apple-tab-span">	</span>A.1 (BMP)ble_micro_pro です(undocumented)</p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>このへんはトラブルシュートに直結した。</p>
-<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>どんなスイッチを入れたらBMPがBLEのアドバタイズをするのか、てっきり電源が入ったら自動的にやるもんだと思い込んでいた。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>どんなスイッチを入れたらBMPがBLEのアドバタイズをするのか、てっきり一つも登録がない状態で電源が入ったら自動的にやるもんだと思い込んでいた。</p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>iOSとかAndroidでBLEに触れてたから尚更「基盤になんもスイッチとかついてないけどどうやってアドバタイズ開始すんのこれ」ってなってた。</p>
 <p class="p4"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>BMPが何したらBLE接続のアドバタイズをするのかが、事前情報として全くわからなかった。これは後述で解決される。</p>
@@ -174,7 +174,7 @@
 <p class="p4"><span class="Apple-tab-span">	</span></p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>基礎編まわりザーッとみてもわかんねーなー～～ってなったのでCLIに書いてあるコマンドをとりあえず一通り実行してみようとなって、発見した。</p>
 <p class="p4"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>CLI以外の手段として「BMPのコントロールをキーに割り当てられます」というのもあったが、そのコントロール一覧にBLE adv開始みたいなのがあるのを見つけられなかった。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>CLI以外の手段として「BMPのコントロールをキーに割り当てられます」というのもあったが、そのコントロール一覧に含まれていたBLE adv開始みたいなのがあるのをパッとは見つけられなかった。</p>
 <p class="p4"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>いや見つけててもえーー1キーそれに潰すのー？ってなってたと思うけど。実際そうなりかけたが。</p>
 <p class="p4"><br></p>
@@ -261,6 +261,9 @@
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>-&gt; 出してみた(2022/04/02 早朝)</p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>-&gt; マージされた！！ わーい(2022/04/02 夕方)</p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>-&gt; 内容適当すぎたので再度出し直し、、すいません、、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>-&gt; fix typoしたのもマージしていただいた、感謝。(2022/04/02 夕方)</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>というわけで今は公式ドキュメントの方にもconfig.jsonのパラメータ一覧にstartupの項目が生えた！ ちょー嬉しい。</p>
 <p class="p4"><br></p>
 <p class="p4"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>Q4. meishi2用のconfig.jsonの書き方がマジでわからんかった。</p>
