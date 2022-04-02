@@ -1,0 +1,846 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2113.4">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; min-height: 18.0px}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; background-color: #e6e6e6}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px Menlo; color: #000000; background-color: #e6e6e6}
+    p.p8 {margin: 0.0px 0.0px 0.0px 0.0px; font: 17.0px 'Hiragino Sans'}
+    p.p9 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Courier; -webkit-text-stroke: #000000; background-color: #e6e6e6}
+    p.p10 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Courier; -webkit-text-stroke: #000000; background-color: #e6e6e6; min-height: 16.0px}
+    p.p11 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; -webkit-text-stroke: #000000; min-height: 18.0px}
+    p.p12 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; -webkit-text-stroke: #000000}
+    span.s1 {font: 22.0px 'Hiragino Sans'}
+    span.s2 {font: 12.0px Helvetica}
+    span.s3 {font-variant-ligatures: no-common-ligatures}
+    span.s4 {font-kerning: none}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>BMP(BLE Micro Pro)</b><span class="s1"><b>を使って</b></span><b>meishi2</b><span class="s1"><b>を無線化したメモ</b></span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>タイトルそのまんま。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>まず一言言わせてほしい。無線化自作キーボード、体験的に最高。沼だなあ、、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>が、BMP関連は名前が分かりづらい、ググラビリティが低い。googleくんはおっ画像か？ってなってしまう。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>この名前になった理由は理解できるんだけど、ううん、、周辺の色々と相まって、めちゃくちゃとっつきづらかった。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>でもBPMだったらもっと最悪だったと思うのでいろんな葛藤があったんだろうか。邪推するより聞いてみるか。</p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p3"><b>謝辞</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>まず謝辞から始めよ、みたいな感じなので、この場を借りて。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>meishi2を開発/販売してくださっているbiacco42さん、素敵な製品をありがとうございます。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>おかげさまで最高のお絵描き生活をしてます。ありがとう小さいキーボード、、</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>BMPを開発/販売してくださっているsekigonさん、素晴らしい製品をありがとうございます。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>BMPのおかげでmeishi2の無線化に成功し、QoLが10段階ほど上がりました。荒廃した人生に光が差した感じです。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>えーそんであの、Aくん、見てるー？ できたよーわーい、色々ありがとう。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>身近な先駆者である君がいなければ絶対にのたれ死んでいた。何度世を呪おうと思ったかわからない。</p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p3"><b>meishi2って？</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これ</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://shop.yushakobo.jp/products/834">https://shop.yushakobo.jp/products/834</a></p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>4キーの内容を自分で変更、調整できる自作キーボード</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ハンダづけの数も大したことないし作る = USB-micro経由でPCに繋いで動かすまではすごく簡単、、</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>そして物理キーは便利だ、、特に、特定のショートカットだけを超高速に扱いたい場合。</p>
+<p class="p4"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ProMicroというブレッドボード = 基盤がセットになっている。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ProMicroはmeishi2においては次のような性能を持っていた。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>1. USB-microでPCと接続できる</p>
+<p class="p3"><span class="Apple-tab-span">	</span>2. 4キーを入力機器として配置できる</p>
+<p class="p3"><span class="Apple-tab-span">	</span>3. 4キーの内容を自由に設定できる</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>特にChromeブラウザを使ってWebUSB経由でmeishi2に対してダイレクトにキーアサインをセットできる機能があって、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>キーの割り当て変更、調整がめちゃくちゃ楽だった。</p>
+<p class="p4"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b>ProMicroって？</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Arduino互換な基盤。いやマジでこう書いてあるインターネットしかみたことねえわ。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Arduino互換 is 何？っていう問いにmeishi2に関連する範囲で書くと、</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>要するに</p>
+<p class="p3"><span class="Apple-tab-span">	</span>USB-micro端子がついてて、ヒューマンインターフェースデバイス(キーボードとか)をこの基盤に接続した上でPCとUSBで接続できて、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>PCからはキーボードとして認識されたりするよ、っていう性能を持っている基盤のこと。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>めちゃくちゃかいつまむとこう。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これだけのことが知りたかったが「って何？」が無限に出てくる世界ぽくて心理的3歳児になることしかできなかった。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>具体的には ProMicro &lt;- ProMini &lt;- Arduino &lt;- … と「あれと一緒です」「互換です」で紹介されまくってて、、</p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>どうもこの世界、みなさん性能や要件ではなく~互換という記法で書こうとする。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>理由は単純で、そうでも書かないと正確な記述や説明が大変すぎるからと理解したが。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>開発の歴史の階段に乗り損ねるとめちゃくちゃ経緯の階段を上から降りていかないと「で、何？」が分かりづらい。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>知りたいのは <b>what for </b>や <b>why developed </b>であって what is the different between ~ ではない、、、</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>厄介なのが、「わかった、で、何？は諦める、ところでこれ(要件)って実現できる？」「~互換なのでできる」「oh,, how?」「~について調べて」となるところ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>結局互換を辿っていく羽目になるんじゃねーか。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これは結局正当で、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>方法が多種かつ多様だからこうなっているという理解をしている。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>互換性という、知識の体系的な構造をかなり読み込まないとcan I do this? が確認できねえ。 なるほどね！</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>多種多様な理由は簡単で、~ってできますか、に対して関連/関与/応答/協調動作するレイヤーが単純にめっちゃ多い。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・ハードウェア種/パーツ種</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・ソフトウェア/関連ソフトウェア/簡便化するために生まれたツール/時代による積層</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>それぞれに~互換、という言葉が山ほど使われているのを知った時、かなり絶望したが？</p>
+<p class="p3"><span class="Apple-tab-span">	</span>いやまあニーズがあれば人間は困難を越えるさ、それはそうだけどさ。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これ師匠が居なかったらほんとに詰んでた。</p>
+<p class="p4"><span class="Apple-tab-span">	</span></p>
+<p class="p4"><br></p>
+<p class="p3"><b>BMPって？</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これ</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><b>Pro MicroサイズのUSB対応nRF52マイコンボード(のぎけす屋)</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://booth.pm/ja/items/1177319">https://booth.pm/ja/items/1177319</a></p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>開発者のsekigonさんが詳細な資料を公開してくれている。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://sekigon-gonnoc.github.io/BLE-Micro-Pro/#/">https://sekigon-gonnoc.github.io/BLE-Micro-Pro/#/</a></p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>今回meishi2を無線化する用途で、嬉しかったBMPの性能はこの辺。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>1. 電池を繋ぐ or USB-Cからの給電でBluetooth LowEnergyでPCと接続できる</p>
+<p class="p3"><span class="Apple-tab-span">	</span>2. 電源が入ったらその時にBLE接続登録済みの機器と接続される設定が可能</p>
+<p class="p3"><span class="Apple-tab-span">	</span>3. USB-CでPCと繋ぐと、BMP用のWebConfigurator(sekigonさん作)からコマンドラインを叩き込め、ここでBLEの接続設定ができる</p>
+<p class="p3"><span class="Apple-tab-span">	</span>4. USB-CでPCと繋ぐと設定ファイルなどがUSBストレージの形で表示されるのでゴリゴリ編集しながらキーを試せる</p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p3"><b>互換がある、の互換って何</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Pro Microと互換性を意識～～と紹介されていて、互換とは、、ってなったけど買ってみて、ああなるほど互換ってこういうことかとなった。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>いや必要な要件だけを学びたかったが、まあ、ニーズが自分の腕 = 知識に対して釣り合ってないから苦労した。</p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p3"><b>わかったこと from meishi2無線化</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>使ってみるまで知らなかった業界の常識みたいなのが多すぎて、互換とは？？というあたりで無限に宇宙猫になったが、今回知ったのはこの辺。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ブレッドボードごとの互換性がある、とは次の要素のことを言う</p>
+<p class="p3"><span class="Apple-tab-span">	</span>1. pin番号/位置の一致を<b>含まない</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>2. RESETとBOOTとか、互換があるという割には違うが -&gt; なんとなく察しろ、<b>用語が違っても用途は一緒な部分がある</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>3. <b>互換があるという言葉を気にするな、ひたすらドキュメントを読め、察しろ、探せ、試せ</b></p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>何を当たり前のことを、と思ったひと、たぶんあなたが正しい。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ただ、互換がある、とだけ言われた時、自分には、「それってどこまで一緒ってこと、、？」ってのがマジでわからんかった。</p>
+<p class="p4"><span class="Apple-tab-span">	</span></p>
+<p class="p4"><br></p>
+<p class="p3"><b>こうするにはどうすればいいの？ 自分用FAQ</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>先に書いておくとdocumentを読めば書いてあることがほとんど。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>経験値不足によって「こういうことはdocumentに書いてあるはず」というのが、まあ「読んだが、、こういう意味だったのか、、」になかなかならなかった。</p>
+<p class="p4"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>書いてあることを実際に動作させまくることで、観測/仮説/検証しまくった。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>醍醐味、、かなあ、面白かった。</p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Q1. BMPはなんて名前でBLE接続に表示されるの？</p>
+<p class="p3"><span class="Apple-tab-span">	</span>A.1 (BMP)ble_micro_pro です(undocumented)</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>このへんはトラブルシュートに直結した。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>どんなスイッチを入れたらBMPがBLEのアドバタイズをするのか、てっきり電源が入ったら自動的にやるもんだと思い込んでいた。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>iOSとかAndroidでBLEに触れてたから尚更「基盤になんもスイッチとかついてないけどどうやってアドバタイズ開始すんのこれ」ってなってた。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>BMPが何したらBLE接続のアドバタイズをするのかが、事前情報として全くわからなかった。これは後述で解決される。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>いやおうちの近辺無限にBLEのアドバタイズ出ててさあ、、なんもせんでもぺこぺこ増えたり減ったりするのよ、BLEのadvが。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>山か。山に行けばよかったか？</p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Q2. BMPはどうやったらBLEのアドバタイズを開始するの？</p>
+<p class="p3"><span class="Apple-tab-span">	</span>A2. CLIからBLEのアドバタイズを実行するコマンドが用意されててそれ叩くと起動 or キー割り当てして押せ。それ以外の方法はdocで紹介されてない。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>これはなんかまあきっと常識というか「考えたら自明だからこうです」なんだろうね～～～ってなった。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>document曰く、CLIの情報が「発展編」っていう基礎編とは切り離されたコーナーにあったんで、あ～～まあきっと発展以外の手段もあるんだろう、と思いこんだのが行けなかった。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>起動 = 通電したらそのままBLEの登録を発行するのかなって思い込んでたのも行けなかった。初期設定だとBLEのadvはしてませんとも書いてなかったんだが、まあ想定しないんだよなきっと。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>思い込みがよくねー。</p>
+<p class="p4"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>基礎編まわりザーッとみてもわかんねーなー～～ってなったのでCLIに書いてあるコマンドをとりあえず一通り実行してみようとなって、発見した。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>CLI以外の手段として「BMPのコントロールをキーに割り当てられます」というのもあったが、そのコントロール一覧にBLE adv開始みたいなのがあるのを見つけられなかった。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>いや見つけててもえーー1キーそれに潰すのー？ってなってたと思うけど。実際そうなりかけたが。</p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Q3. 電源をつけた状態のBMPに対して、BLEの登録も済んでて、それなのにPC側からBLEで接続しにいくと蹴られるんだけど。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>A3. PC側からは接続できません。configにstartupっていう項目があって、それの初期値が0なところを1に書き換えて電源を繋ぐとBMPが接続してきます。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>このへんは実はdocumentの中でも「古い資料」っていうコーナーに情報があって、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>古い資料</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://sekigon-gonnoc.github.io/BLE-Micro-Pro/#/deprecated/README?id=%e4%bd%bf%e3%81%84%e6%96%b9%e3%82%bd%e3%83%95%e3%83%88%e3%82%a6%e3%82%a7%e3%82%a2">https://sekigon-gonnoc.github.io/BLE-Micro-Pro/#/deprecated/README?id=%e4%bd%bf%e3%81%84%e6%96%b9%e3%82%bd%e3%83%95%e3%83%88%e3%82%a6%e3%82%a7%e3%82%a2</a></p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>この古い情報の中に、startup_~みたいな関数の記述があって、おや、、？ってなって、そういや最新verのconfigファイルにもstartupの文字があったな、、となり、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>0だったので1にしてから電源を入れると無事電源投入時にPCへと接続された。やったね！！</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ちなみに電源を入れる = <b>USB-CでPCと接続する</b> or <b>BMPに電池を繋ぐ</b>、だよ。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>あとはロータリーエンコーダ(クルクル回せるツマミスイッチ)のコーナーに、startupの項目を1にしてるconfigが載ってたりする。</p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>太字のとこがstartupの設定。</b></p>
+<p class="p5">{</p>
+<p class="p5"><span class="Apple-tab-span">	</span>"config": {</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"version": 2,</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"device_info": {</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"vid": "0x0000",</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"pid": "0x0000",</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"name": "ble_micro_pro",</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"manufacture": "sekigon-gonnoc",</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"description": "A development board for wireless split keyboards"</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>},</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"matrix": {</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"rows": 1,</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"cols": 19,</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"device_rows": 1,</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"device_cols": 19,</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"debounce": 1,</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"is_left_hand": 1,</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"diode_direction": 0,</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"row_pins": [33],</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"col_pins": [1, 2, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 22],</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"layout": [</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>]</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>},</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"mode": "SINGLE",</p>
+<p class="p5"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"startup": 1,</b></p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"peripheral": {</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"max_interval": 60,</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"min_interval": 30,</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"slave_latency": 7</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>},</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"central": {</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"max_interval": 60,</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"min_interval": 30,</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"slave_latency": 7</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>},</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"led": {</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"pin": 255,</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"num": 128</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>},</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"keymap": {</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"locale": "US",</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"use_ascii": 0</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>},</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"reserved": [0, 0, 0, 0, 0, 0, 0, 0]</p>
+<p class="p5"><span class="Apple-tab-span">	</span>}</p>
+<p class="p5">}</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>うまく行ったので文句はないけど、これを発見しなかったら次のようになっていた。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>・BLEのアドバタイズをCLI or キー入力から実行できる(documented)</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>・なので1キーを接続のために潰して、押したら接続 or いちいちUSB-Cで繋いでChromeとかからCLIでBLE adv起動、、にしてた</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>meishi2は4キーなので1キーこれに使うとしたら投げ捨てていたし、いちいちPCに接続してBLE起動もやばすぎる。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>備忘録として機能するように、Q3については「BMPで起動時にBLEのアドバタイズを行うには」「BMP 起動 BLE」とかも一応文字として書いておく。</p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>書いてて思ったけど、これ意図せずstartupの項目についての説明がconfigの項目一覧から抜けてる感じなのかな、、</p>
+<p class="p4"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>config.jsonの説明</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://sekigon-gonnoc.github.io/BLE-Micro-Pro/#/edit_config_file?id=configjson%e3%81%ae%e8%aa%ac%e6%98%8e">https://sekigon-gonnoc.github.io/BLE-Micro-Pro/#/edit_config_file?id=configjson%e3%81%ae%e8%aa%ac%e6%98%8e</a></p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>やっぱ意図的とは思えないや、githubで公開されてるんだしPR出してみるか。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>-&gt; 出してみた(2022/04/02 早朝)</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>-&gt; マージされた！！ わーい(2022/04/02 夕方)</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>-&gt; 内容適当すぎたので再度出し直し、、すいません、、</p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Q4. meishi2用のconfig.jsonの書き方がマジでわからんかった。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>A4. なんとかなった。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>4キーしかないキーボードなんだけどconfigのmatrixやlayoutをどういじっても反応しなかった。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>試行経路を書いておく。</p>
+<p class="p4"><br></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>meishi2でのキーとProMicroの接続</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>pin &lt;- キー</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>6 &lt;- 最左</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>7 &lt;- 左</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>A2 &lt;- 右</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>A1 &lt;~ 最右</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>なのでこれをBMPに対応させると、</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>BMP vs PM</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>9 &lt;- 6</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>10 &lt;- 7</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>19 &lt;- A2</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>18 &lt;- A1</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>というピン番号になるんだけど、</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>どうconfig.jsonを書いたらいいかわからん問題</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>とにかくいろいろ試したがわからなかった。rows 1でcols 4とか、逆とか。</p>
+<p class="p4"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>で、正解は以下</p>
+<p class="p5">{"config":{"version":2,</p>
+<p class="p5">"device_info":{"vid":"0x0000","pid":"0x0000","name":"ble_micro_pro","manufacture":"sekigon-gonnoc","description":"A development board for wireless split keyboards"},</p>
+<p class="p5"><b>"matrix":{"rows":2,"cols":2,"device_rows":2,"device_cols":2,"debounce":1,"is_left_hand":1,"diode_direction":0,"row_pins":[9,10],"col_pins":[19,18],</b></p>
+<p class="p5"><b>"layout":[</b></p>
+<p class="p5"><b><span class="Apple-converted-space">  </span>1,<span class="Apple-converted-space">  </span>2,<span class="Apple-converted-space">  </span>3,<span class="Apple-converted-space">  </span>4]},</b></p>
+<p class="p5">"mode":"SINGLE","startup":1,</p>
+<p class="p5">"peripheral":{"max_interval":60,"min_interval":30,"slave_latency":7},</p>
+<p class="p5">"central":{"max_interval":60,"min_interval":30,"slave_latency":7},</p>
+<p class="p5">"led":{"pin":255,"num":128},</p>
+<p class="p5">"keymap":{"locale":"US","use_ascii":0},</p>
+<p class="p5">"reserved":[0,0,0,0,0,0,0,0]}}</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>太字の部分が設定。いや～～4キーに対してこれはわからんて、、</p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>どうやってこの正解に辿り着いたかというと、ドキュメントにある通り、QMK用の設定からconfig.jsonを出力するスクリプトが用意されていて、</p>
+<p class="p4"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>qmk用の設定から変換する</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://sekigon-gonnoc.github.io/BLE-Micro-Pro/#/edit_config_file?id=qmk%E7%94%A8%E3%81%AE%E8%A8%AD%E5%AE%9A%E3%81%8B%E3%82%89%E5%A4%89%E6%8F%9B%E3%81%99%E3%82%8B">https://sekigon-gonnoc.github.io/BLE-Micro-Pro/#/edit_config_file?id=qmk用の設定から変換する</a></p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>で、QMK用の設定 is 何、って思ったんだけど、これはQMKのリポジトリのコンパイル前のキーボードごとの.cとか.hとかを</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>フォルダごとBMPのドキュメントにあるスクリプトに食わせればいいという意味だった。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>meishi2はQMKのリポジトリにファームウェアのビルド内容が含まれていたのを見つけて対応した。</p>
+<p class="p3"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>meishi2のファームのビルドとかは必要ない。(どこまで何がいるのかわからんかったが闇雲に試したら行けた)</b></p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>対応した/試した is 下記。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>1. QMKのリポジトリをcloneするとかしてkeyboardsフォルダをゲットする。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/qmk/qmk_firmware">https://github.com/qmk/qmk_firmware</a></p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>より具体的には <a href="https://github.com/qmk/qmk_firmware/tree/master/keyboards/biacco42/meishi2">https://github.com/qmk/qmk_firmware/tree/master/keyboards/biacco42/meishi2</a> のkeyboardsフォルダ含めたmeishi2フォルダの一式だけがあればいい。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>biacco42というmeishi2の作者さんのフォルダはあってもなくても行けた。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>こんな感じ。</p>
+<p class="p6"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202022-04-02%2016.27.19.png" alt="スクリーンショット 2022-04-02 16.27.19.png"></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>2. pythonスクリプトをkeyboards/meishi2フォルダに対して実行</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>で、↑だとconv.pyの中身がドキュメントのスクリプトにしてあって、次のコマンドで<b>meishi2_config.json</b>が出力される。(画像だと生成済み)</p>
+<p class="p7"><span class="s3">python3 conv.py ./keyboards/meishi2</span></p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>生成されたmeishi2_config.jsonは以下の内容になっているはず。</p>
+<p class="p4"><br></p>
+<p class="p5">{"config":</p>
+<p class="p5"><span class="Apple-tab-span">	</span>{</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"version":2,</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"device_info":{"vid":"0xBC42","pid":"0x0003",</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"name":"meishi2","manufacture":"Biacco42","description":""},</p>
+<p class="p5"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"matrix":{"rows":2,"cols":2,"device_rows":2, "device_cols":2,</b></p>
+<p class="p5"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"debounce":1,"is_left_hand":1,"diode_direction":0,</b></p>
+<p class="p5"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"row_pins":[9, 10],</b></p>
+<p class="p5"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"col_pins":[19, 18],</b></p>
+<p class="p5"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"layout":[1, 2, 3, 4]},</b></p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"mode":"SINGLE","startup":1,</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"peripheral":{"max_interval":60,"min_interval":30,"slave_latency":7},</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"central":{"max_interval":60,"min_interval":30,"slave_latency":0},</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"led":{"pin":255, "num":0},</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>"keymap":{"locale":"US","use_ascii":0}</p>
+<p class="p5">}}</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>正直2x2になってるのとかマジでなんもわからんかったが、これをCONFIG.JSNというファイル名にして放り込むとmeishi2のキーボードが効いた！！</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>という感じで優勝してendです。対戦ありした。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>上述されてるstartupの項目も1になったものが吐かれていてうん、、いいね、、うん、、</p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p3"><b>以下はオマケのQ&amp;A</b></p>
+<p class="p4"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Q. BMPにバッテリーや電源だけを接続してBTキーボードとして使用することは可能か?</p>
+<p class="p3"><span class="Apple-tab-span">	</span>A. 可能。<span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>USB-C電源だろうがモバイルバッテリーだろうが動作した。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>直接接続先がPCの場合でも、BT接続側があとであればそちらが優先されるようで、BTキーボードとして見えている側への入力が可能。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>このため、旅先とかでボタン電池が切れちゃったーとなっても、モバイルバッテリーを接続してBTキーボードとして使うことは可能。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>接続された電源とUSB-Cからの給電のどちらを優先するかはドキュメントに書いてある。</p>
+<p class="p4"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Q. USBストレージとして表示されるコンフィグファイルをmacで開くと空文字がガンガン入ったりバイナリとして表示されたりするんだけど</p>
+<p class="p3"><span class="Apple-tab-span">	</span>A. 実際にファイルが壊れている場合と、USBストレージとして接続した時にバグってる場合の2系統があるっぽく、だいたいストレージを取り出すと即自動接続され直して、そこから開くとファイルが直ってる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>かなり悩んだんだけど、うーん、ひたすらファイルが壊れやすい印象。なので自分は次のような操作だけをするように心がけた。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>1. デスクトップに表示されるストレージをデスクトップに丸コピ</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>2. 丸コピしたフォルダの方をテキストエディタで編集</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>この時点でエディタで開いて文字がバグってるとかがあればストレージを取り出し -&gt; 自動再接続で1からやり直し</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>3. 編集が終わったらストレージにファイルを放り込む</p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Q. ドキュメントからリンクされてるBMP用のQMK ConfiguratorでChrome経由でkeymap書き換えるとぶっちぎれない？</p>
+<p class="p3"><span class="Apple-tab-span">	</span>A. ぶっちぎれますね、、なんでだろう、、jsonファイルとしてDLして手で書いてたよ自分は。</p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Q. なんかconfigファイルとかがおかしくなったんですけど。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>A. 困りましたね！ 自分は面倒臭くなったらドキュメント -&gt; ブートローダー書き直し -&gt; Application書き直し ってやって何も無かったことにしたよ。</p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Q. BMPに繋げるそれっぽい電池ボックス大体売り切れだと思うけどどこでどうしたの。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>A. どこかのストアでBMP化用の既存のキーボード拡張(キーボード自体は終売)というのを見かけて寸法や構成見た感じいけそうだったんで買った。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>これ <a href="https://shop.dailycraft.jp/products/ext3_bmp_set">https://shop.dailycraft.jp/products/ext3_bmp_set</a></p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p8"><b>以下メモ</b></p>
+<p class="p4"><br></p>
+<p class="p3"><b>meishi2でのキーとProMicroの接続</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>pin &lt;- キー</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>6 &lt;- 最左</p>
+<p class="p3"><span class="Apple-tab-span">	</span>7 &lt;- 左</p>
+<p class="p3"><span class="Apple-tab-span">	</span>A2 &lt;- 右</p>
+<p class="p3"><span class="Apple-tab-span">	</span>A1 &lt;~ 最右</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>なのでこれをBMPに対応させると、</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>BMP vs PM</p>
+<p class="p3"><span class="Apple-tab-span">	</span>9 &lt;- 6</p>
+<p class="p3"><span class="Apple-tab-span">	</span>10 &lt;- 7</p>
+<p class="p3"><span class="Apple-tab-span">	</span>19 &lt;- A2</p>
+<p class="p3"><span class="Apple-tab-span">	</span>18 &lt;- A1</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>みたいになるんだけど、BMPのコンフィグ上でこれらのセッティングを行ってもキーが効かないような、、</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>-&gt; やっぱなんか勘違いしてそう。うーん。</p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p3"><b>次のスクリプトでQMK用のmeishi2のやつをコンフィグファイルに変換ってのをやってみるか、、頭動いてる時に。</b></p>
+<p class="p9"><span class="s4">#!/usr/bin/env python</span></p>
+<p class="p9"><span class="s4"># -*- coding:utf-8 -*-</span></p>
+<p class="p10"><span class="s4"></span><br></p>
+<p class="p9"><span class="s4">import os</span></p>
+<p class="p9"><span class="s4">import sys</span></p>
+<p class="p9"><span class="s4">import re</span></p>
+<p class="p10"><span class="s4"></span><br></p>
+<p class="p10"><span class="s4"></span><br></p>
+<p class="p9"><span class="s4">def red(string):</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">    </span>return '\033[31m' + string + '\033[0m'</span></p>
+<p class="p10"><span class="s4"></span><br></p>
+<p class="p10"><span class="s4"></span><br></p>
+<p class="p9"><span class="s4">def yellow(string):</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">    </span>return '\033[33m' + string + '\033[0m'</span></p>
+<p class="p10"><span class="s4"></span><br></p>
+<p class="p10"><span class="s4"></span><br></p>
+<p class="p9"><span class="s4">def green(string):</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">    </span>return '\033[32m' + string + '\033[0m'</span></p>
+<p class="p10"><span class="s4"></span><br></p>
+<p class="p10"><span class="s4"></span><br></p>
+<p class="p9"><span class="s4">class ConfigConverter:</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">    </span>PIN_TABLE = {'D3': 1, 'D2': 2, 'D1': 5, 'D0': 6, 'D4': 7, 'C6': 8, 'D7': 9, 'E6': 10, 'B4': 11,</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">                 </span>'B5': 12, 'B6': 13, 'B2': 14, 'B3': 15, 'B1': 16, 'F7': 17, 'F6': 18, 'F5': 19, 'F4': 20}</span></p>
+<p class="p10"><span class="s4"></span><br></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">    </span>def __init__(self):</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">        </span>self.is_split = False</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">        </span>self.vid = ''</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">        </span>self.pid = ''</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">        </span>self.name = ''</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">        </span>self.manufacture = ''</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">        </span>self.description = ''</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">        </span>self.row_num = ''</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">        </span>self.col_num = ''</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">        </span>self.row_pins = ''</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">        </span>self.col_pins = ''</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">        </span>self.row_pins_right = ''</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">        </span>self.col_pins_right = ''</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">        </span>self.layout = ''</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">        </span>self.led_pin = ''</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">        </span>self.led_num = ''</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">        </span>self.diode_direction = ''</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">        </span>self.mode = ''</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">        </span>self.layout_macro = []</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">        </span>self.search_layout = ''</span></p>
+<p class="p10"><span class="s4"></span><br></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">    </span>def find_layout_macro(self, f):</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">        </span>lines = f.readlines()</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">        </span>layout_detect = False</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">        </span>layout_str = ''</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">        </span>line = 1</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">        </span>for string in lines:</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">            </span>string = self.remove_comment(string)</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">            </span>layout_name = re.match(</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">                </span>r'^\s*#\s*define\s+LAYOUT[^\r\n\t\f\v \\]*\s*', string)</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">            </span>if layout_name is not None:</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">                </span>layout_name = layout_name.group().split("#define")[1]</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">                </span>layout_name = layout_name.replace('(', '')</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">                </span>layout_name = layout_name.strip()</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">                </span>file_name = f.name</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">                </span>if 'keyboards/' in file_name:</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">                    </span>file_name = file_name.split('keyboards/')[1]</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">                </span>self.layout_macro.append(</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">                    </span>{"name": layout_name, "file": file_name, "line": line})</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">            </span>line = line + 1</span></p>
+<p class="p10"><span class="s4"></span><br></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">    </span>def set_layout_index(self, idx):</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">        </span>idx = int(idx)</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">        </span>if idx &gt;= len(self.layout_macro):</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">            </span>raise ValueError</span></p>
+<p class="p10"><span class="s4"></span><br></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">        </span>self.search_layout = self.layout_macro[idx]["name"]</span></p>
+<p class="p10"><span class="s4"></span><br></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">    </span>def print_layout_list(self):</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">        </span>index = 0</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">        </span>for layout in self.layout_macro:</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">            </span>print(</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">                </span>f'{index}: {layout["name"]}\t\t{layout["file"]}:{layout["line"]}')</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">            </span>index = index + 1</span></p>
+<p class="p10"><span class="s4"></span><br></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">    </span>def convert_pindef(self, arg):</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">        </span>str2 = arg.split('{')[1]</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">        </span>str2 = re.sub(r'(\(|{|})', '', str2)</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">        </span>str2 = str2.replace(' ', '')</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">        </span>str2 = str2.replace('\n', '')</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">        </span>str2 = str2.replace('\r', '')</span></p>
+<p class="p10"><span class="s4"></span><br></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">        </span>pin_array = []</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">        </span>for pin in str2.split(','):</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">            </span>if pin == '':</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">                </span>continue</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">            </span>if 'PIN' in pin:</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">                </span>pin_array.append(pin.replace('PIN', ''))</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">            </span>else:</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">                </span>pin_array.append(self.PIN_TABLE[pin])</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">        </span>pin_str = str(pin_array)</span></p>
+<p class="p10"><span class="s4"></span><br></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">        </span>return pin_str</span></p>
+<p class="p10"><span class="s4"></span><br></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">    </span>def convert_layout(self, arg):</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">        </span># remove "#define LAYOUTxxx(" from arg</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">        </span>str2 = re.sub(r'(\(|{|})', '', arg)</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">        </span>str2 = str2.replace('#define', '')</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">        </span>str2 = str2.replace(self.search_layout, '')</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">        </span>str2 = str2.replace(' ', '')</span></p>
+<p class="p10"><span class="s4"></span><br></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">        </span># split layout macro to "LAYOUT macro" arguments and array definition</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">        </span># place = "R00, R01\nL01, L00"</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">        </span># array = "R00, R01, L00, L01"</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">        </span>[place, array] = str2.split(')')</span></p>
+<p class="p10"><span class="s4"></span><br></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">        </span># remove spaces</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">        </span>array = array.replace('\n', '')</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">        </span>array = array.replace('\r', '')</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">        </span>array = array.replace('\t', '')</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">        </span>array = array.replace('\\', '')</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">        </span>place = place.replace('\r', '')</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">        </span>place = place.replace('\t', '')</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">        </span>place = place.replace('\\', '')</span></p>
+<p class="p10"><span class="s4"></span><br></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">        </span>array = array.split(',')</span></p>
+<p class="p10"><span class="s4"></span><br></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">        </span># pick up a element from LAYOUT macro arguments and find it from array</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">        </span>layout = []</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">        </span>for row in place.split('\n'):</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">            </span>if row == '':</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">                </span>continue</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">            </span>for key in row.split(','):</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">                </span>if key == '':</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">                    </span>continue</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">                </span>idx = array.index(key)</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">                </span>layout.append(idx + 1)</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">            </span>layout.append(0)</span></p>
+<p class="p10"><span class="s4"></span><br></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">        </span>layout_str = str(layout)</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">        </span>layout_str = layout_str.replace(' 0,', ' 0,\n')</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">        </span>layout_str = layout_str.replace(', 0]', ']')</span></p>
+<p class="p10"><span class="s4"></span><br></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">        </span>return layout_str</span></p>
+<p class="p10"><span class="s4"></span><br></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">    </span>def waring_multiple_definition(self, symbol, f, line):</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">        </span>print(yellow('warning') +</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">              </span>f': multiple definition of {symbol} in {f.name}:{line}. Previous definition is used.')</span></p>
+<p class="p10"><span class="s4"></span><br></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">    </span>def remove_comment(self, arg):</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">        </span>return arg.split('//')[0]</span></p>
+<p class="p10"><span class="s4"></span><br></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">    </span>def parse_file(self, f):</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">        </span>cform = f.readlines()</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">        </span>layout_detect = False</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">        </span>layout_str = ''</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">        </span>line = 0</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">        </span>for string in cform:</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">            </span>line = line + 1</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">            </span>string = self.remove_comment(string)</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">            </span>if 'VENDOR_ID' in string:</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">                </span>self.vid = string.split('VENDOR_ID')[</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">                    </span>1].replace('\n', '').strip()</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">            </span>elif 'PRODUCT_ID' in string:</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">                </span>self.pid = string.split('PRODUCT_ID')[</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">                    </span>1].replace('\n', '').strip()</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">            </span>elif 'MANUFACTURER' in string:</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">                </span>self.manufacture = string.split('MANUFACTURER')[</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">                    </span>1].replace('\n', '').strip()</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">            </span>elif 'PRODUCT' in string:</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">                </span>self.name = string.split('PRODUCT')[</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">                    </span>1].replace('\n', '').strip()</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">            </span>elif 'DESCRIPTION' in string:</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">                </span>self.description = string.split('DESCRIPTION')[</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">                    </span>1].replace('\n', '').strip()</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">            </span>elif re.match(r'\s*#\s*define\s+MATRIX_ROWS\s', string):</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">                </span>if self.row_num != '':</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">                    </span>self.waring_multiple_definition('MATRIX_ROWS', f, line)</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">                </span>else:</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">                    </span>self.row_num = string.split('MATRIX_ROWS')[</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">                        </span>1].replace('\n', '').strip()</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">            </span>elif re.match(r'\s*#\s*define\s+MATRIX_COLS\s', string):</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">                </span>if self.col_num != '':</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">                    </span>self.waring_multiple_definition('MATRIX_COLS', f, line)</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">                </span>else:</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">                    </span>self.col_num = string.split('MATRIX_COLS')[</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">                        </span>1].replace('\n', '').strip()</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">            </span>elif re.match(r'\s*#\s*define\s+MATRIX_ROW_PINS\s', string):</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">                </span>if self.row_pins != '':</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">                    </span>self.waring_multiple_definition('MATRIX_ROW_PINS', f, line)</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">                </span>else:</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">                    </span>self.row_pins = self.convert_pindef(string)</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">            </span>elif re.match(r'\s*#\s*define\s+MATRIX_COL_PINS\s', string):</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">                </span>if self.col_pins != '':</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">                    </span>self.waring_multiple_definition('MATRIX_COL_PINS', f, line)</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">                </span>else:</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">                    </span>self.col_pins = self.convert_pindef(string)</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">            </span>elif re.match(r'\s*#\s*define\s+MATRIX_ROW_PINS_RIGHT\s', string):</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">                </span>if self.row_pins_right != '':</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">                    </span>self.waring_multiple_definition(</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">                        </span>'MATRIX_ROW_PINS_RIGHT', f, line)</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">                </span>else:</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">                    </span>self.row_pins_right = self.convert_pindef(string)</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">            </span>elif re.match(r'\s*#\s*define\s+MATRIX_COL_PINS_RIGHT\s', string):</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">                </span>if self.col_pins_right != '':</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">                    </span>self.waring_multiple_definition(</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">                        </span>'MATRIX_COL_PINS_RIGHT', f, line)</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">                </span>else:</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">                    </span>self.col_pins_right = self.convert_pindef(string)</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">            </span>elif re.match(r'\s*#\s*define\s+DIODE_DIRECTION\s', string):</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">                </span>if self.diode_direction != '':</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">                    </span>self.waring_multiple_definition('DIODE_DIRECTION', f, line)</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">                </span>else:</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">                    </span>direction = string.split('DIODE_DIRECTION')[</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">                        </span>1].replace('\n', '').strip()</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">                    </span>if direction == 'ROW2COL':</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">                        </span>self.diode_direction = 1</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">                    </span>else:</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">                        </span>self.diode_direction = 0</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">            </span>elif re.match(r'\s*#\s*define\s+RGB_DI_PIN\s', string):</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">                </span>if self.led_pin != '':</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">                    </span>self.waring_multiple_definition('RGB_DI_PIN', f, line)</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">                </span>else:</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">                    </span>pin = string.split('RGB_DI_PIN')[</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">                        </span>1].replace('\n', '').strip()</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">                    </span>self.led_pin = self.PIN_TABLE[pin]</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">            </span>elif re.match(r'\s*#\s*define\s+RGBLED_NUM\s', string):</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">                </span>if self.led_num != '':</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">                    </span>self.waring_multiple_definition('RGBLED_NUM', f, line)</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">                </span>else:</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">                    </span>self.led_num = string.split('RGBLED_NUM')[</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">                        </span>1].replace('\n', '').strip()</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">            </span>elif '#define ' + self.search_layout + '(' in string:</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">                </span>if self.layout != '':</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">                    </span>self.waring_multiple_definition(</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">                        </span>self.search_layout, f, line)</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">                </span>else:</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">                    </span>layout_detect = True</span></p>
+<p class="p10"><span class="s4"></span><br></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">            </span>if layout_detect:</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">                </span>layout_str = layout_str + string</span></p>
+<p class="p10"><span class="s4"></span><br></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">            </span>if '}\n' in string and layout_detect:</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">                </span>layout_detect = False</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">                </span>self.layout = self.convert_layout(layout_str)</span></p>
+<p class="p10"><span class="s4"></span><br></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">        </span>return</span></p>
+<p class="p10"><span class="s4"></span><br></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">    </span>def assertion(self):</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">        </span>res = True</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">        </span>if self.layout == '':</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">            </span>print(red('ERROR') + ': Failed to find LAYOUT')</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">            </span>res = False</span></p>
+<p class="p10"><span class="s4"></span><br></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">        </span>if self.col_pins == '':</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">            </span>print(red('ERROR') + ': Failed to find MATRIX_COL_PINS')</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">            </span>res = False</span></p>
+<p class="p10"><span class="s4"></span><br></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">        </span>if self.row_pins == '':</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">            </span>print(red('ERROR') + ': Failed to find MATRIX_ROW_PINS')</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">            </span>res = False</span></p>
+<p class="p10"><span class="s4"></span><br></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">        </span>if self.col_num == '':</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">            </span>print(red('ERROR') + ': Failed to find MATRIX_COLS')</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">            </span>res = False</span></p>
+<p class="p10"><span class="s4"></span><br></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">        </span>if self.row_num == '':</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">            </span>print(red('ERROR') + ': Failed to find MATRIX_ROWS')</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">            </span>res = False</span></p>
+<p class="p10"><span class="s4"></span><br></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">        </span>if (int(self.col_num) != len(self.col_pins.split(',')) or int(self.row_num) != len(self.row_pins.split(','))):</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">            </span>self.is_split = True</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">            </span>print('This keyboard is split keyboard')</span></p>
+<p class="p10"><span class="s4"></span><br></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">        </span>if (int(self.col_num) != len(self.col_pins.split(',')) and int(self.row_num) != len(self.row_pins.split(','))):</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">            </span>print(yellow('warning') +</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">                  </span>': MATRIX len and PINS len do not match in both row and col.')</span></p>
+<p class="p10"><span class="s4"></span><br></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">        </span>return res</span></p>
+<p class="p10"><span class="s4"></span><br></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">    </span>def apply_default(self):</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">        </span>if self.diode_direction == '':</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">            </span>print('DIODE_DIRECTION is not found. Apply ROW2COL.')</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">            </span>self.diode_direction = '0'</span></p>
+<p class="p10"><span class="s4"></span><br></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">        </span>if self.led_pin == '':</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">            </span>print('RGB_DI_PIN is not found. Apply 255(not used)')</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">            </span>self.led_pin = '255'</span></p>
+<p class="p10"><span class="s4"></span><br></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">        </span>if self.led_num == '':</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">            </span>print('RGBLED_NUM is not found. Apply 0(not used)')</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">            </span>self.led_num = '0'</span></p>
+<p class="p10"><span class="s4"></span><br></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">        </span>if self.is_split:</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">            </span>if self.col_pins_right == '':</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">                </span>self.col_pins_right = self.col_pins</span></p>
+<p class="p10"><span class="s4"></span><br></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">            </span>if self.row_pins_right == '':</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">                </span>self.row_pins_right = self.row_pins</span></p>
+<p class="p10"><span class="s4"></span><br></p>
+<p class="p10"><span class="s4"></span><br></p>
+<p class="p9"><span class="s4">if __name__ == '__main__':</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">    </span>args = sys.argv</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">    </span>if len(args) == 1:</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">        </span>print(</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">            </span>('Usage : config_converter.py [TARGET]\n' ' ex: ./config_covnerte.py ~/qmk_firmware/keyboards/helix/rev2\n'))</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">        </span>sys.exit()</span></p>
+<p class="p10"><span class="s4"></span><br></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">    </span>config = ConfigConverter()</span></p>
+<p class="p10"><span class="s4"></span><br></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">    </span>dirc = args[1]</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">    </span>files = os.listdir(dirc)</span></p>
+<p class="p10"><span class="s4"></span><br></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">    </span>print(f' ** Making config.json from {dirc} ** ')</span></p>
+<p class="p10"><span class="s4"></span><br></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">    </span>for fname in files:</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">        </span>path = os.path.join(dirc, fname)</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">        </span>if not '.h' in path:</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">            </span>continue</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">        </span>with open(path) as f:</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">            </span>config.find_layout_macro(f)</span></p>
+<p class="p10"><span class="s4"></span><br></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">    </span>config.print_layout_list()</span></p>
+<p class="p10"><span class="s4"></span><br></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">    </span>if len(config.layout_macro) == 1:</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">        </span>layout_idx = 0</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">    </span>else:</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">        </span>print('')</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">        </span>layout_idx = input('Use layout: ')</span></p>
+<p class="p10"><span class="s4"></span><br></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">    </span>try:</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">        </span>config.set_layout_index(layout_idx)</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">    </span>except:</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">        </span>print('invalid input')</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">        </span>sys.exit()</span></p>
+<p class="p10"><span class="s4"></span><br></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">    </span>for fname in files:</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">        </span>path = os.path.join(dirc, fname)</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">        </span>if not '.h' in path:</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">            </span>continue</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">        </span>with open(path) as f:</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">            </span>config.parse_file(f)</span></p>
+<p class="p10"><span class="s4"></span><br></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">    </span>if not config.assertion():</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">        </span>sys.exit()</span></p>
+<p class="p10"><span class="s4"></span><br></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">    </span>config.apply_default()</span></p>
+<p class="p10"><span class="s4"></span><br></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">    </span>config_name = dirc.split('keyboards/')[1]</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">    </span>if '/' in config_name:</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">        </span>config_name = config_name.replace('/', '_')</span></p>
+<p class="p10"><span class="s4"></span><br></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">    </span>if config_name[-1] != '_':</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">        </span>config_name = config_name + '_'</span></p>
+<p class="p10"><span class="s4"></span><br></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">    </span>if config.search_layout != 'LAYOUT':</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">        </span>config_name = config_name + config.search_layout.lower() + '_'</span></p>
+<p class="p10"><span class="s4"></span><br></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">    </span>mode = 'SINGLE'</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">    </span>if config.is_split:</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">        </span>config_name = config_name + 'master_left_'</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">        </span>mode = 'SPLIT_MASTER'</span></p>
+<p class="p10"><span class="s4"></span><br></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">    </span>config_name = config_name + 'config.json'</span></p>
+<p class="p10"><span class="s4"></span><br></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">    </span>config_file_format = (</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">        </span>'{{"config":\n\t{{\n\t\t"version":2,\n\t\t"device_info":{{"vid":"{0}","pid":"{1}",\n\t\t\t"name":"{2}","manufacture":"{3}","description":"{4}"}},\n'</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">        </span>'\t\t"matrix":{{"rows":{5},"cols":{6},"device_rows":{7}, "device_cols":{8},\n\t\t\t"debounce":1,"is_left_hand":1,"diode_direction":{9},\n\t\t\t"row_pins":{10},\n\t\t\t"col_pins":{11},\n'</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">        </span>'\t\t"layout":{12}}},\n\t\t"mode":"{13}","startup":1,\n\t\t"peripheral":{{"max_interval":60,"min_interval":30,"slave_latency":7}},\n'</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">        </span>'\t\t"central":{{"max_interval":60,"min_interval":30,"slave_latency":0}},\n'</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">        </span>'\t\t"led":{{"pin":{14}, "num":{15}}},\n\t\t"keymap":{{"locale":"US","use_ascii":0}}\n}}}}'</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">    </span>)</span></p>
+<p class="p10"><span class="s4"></span><br></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">    </span>with open(config_name, 'w') as f:</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">        </span>f.write(</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">            </span>config_file_format.format(</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">                </span>config.vid, config.pid, config.name, config.manufacture, config.description, config.row_num, config.col_num, len(</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">                    </span>config.row_pins.split(',')), len(config.col_pins.split(',')), config.diode_direction, config.row_pins, config.col_pins,</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">                </span>config.layout.replace(</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">                    </span>'\n', '\n\t\t\t'), mode, config.led_pin, config.led_num</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">            </span>)</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">        </span>)</span></p>
+<p class="p10"><span class="s4"></span><br></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">    </span>print(f' ** Output to {config_name} ** \n')</span></p>
+<p class="p10"><span class="s4"></span><br></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">    </span>if not config.is_split:</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">        </span>sys.exit()</span></p>
+<p class="p10"><span class="s4"></span><br></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">    </span>config_name = config_name.replace('master_left_', 'slave_right_')</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">    </span>mode = 'SPLIT_SLAVE'</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">    </span>with open(config_name, 'w') as f:</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">        </span>f.write(</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">            </span>config_file_format.replace('"is_left_hand":1', '"is_left_hand":0').format(</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">                </span>config.vid, config.pid, config.name, config.manufacture, config.description, config.row_num, config.col_num, len(</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">                    </span>config.row_pins_right.split(',')), len(config.col_pins_right.split(',')), config.diode_direction, config.row_pins_right,</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">                </span>config.col_pins_right, config.layout.replace(</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">                    </span>'\n', '\n\t\t\t'), mode, config.led_pin, config.led_num</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">            </span>)</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">        </span>)</span></p>
+<p class="p10"><span class="s4"></span><br></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">    </span>print(f' ** Output to {config_name} ** \n')</span></p>
+<p class="p10"><span class="s4"></span><br></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">    </span>config_name = config_name.replace('slave_right_', 'lpme_left_')</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">    </span>lpme_row = ([int(r) for r in config.row_pins.strip('[]').split(',')])</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">    </span>lpme_row.extend([int(r)</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">                     </span>for r in config.row_pins_right.strip('[]').split(',')])</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">    </span>lpme_col = ([int(r) for r in config.col_pins.strip('[]').split(',')])</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">    </span>lpme_col.extend([int(r)</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">                     </span>for r in config.col_pins_right.strip('[]').split(',')])</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">    </span>mode = 'SINGLE'</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">    </span>with open(config_name, 'w') as f:</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">        </span>f.write(</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">            </span>config_file_format.format(</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">                </span>config.vid, config.pid, config.name, config.manufacture,</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">                </span>config.description, config.row_num, config.col_num,</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">                </span>len(config.row_pins.split(',')), len(</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">                    </span>config.col_pins.split(',')),</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">                </span>str(int(config.diode_direction) + 2),</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">                </span>str(lpme_row),</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">                </span>str(lpme_col),</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">                </span>config.layout.replace('\n', '\n\t\t\t'),</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">                </span>mode,</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">                </span>config.led_pin, config.led_num</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">            </span>)</span></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">        </span>)</span></p>
+<p class="p10"><span class="s4"></span><br></p>
+<p class="p9"><span class="s4"><span class="Apple-converted-space">    </span>print(f' ** Output to {config_name} ** \n')</span></p>
+<p class="p11"><br></p>
+<p class="p11"><br></p>
+<p class="p12">このスクリプトにQMK Firmware内のmeishi2のフォルダを食わせればいいかんじのconfig.jsonを出力した。なるほど！？</p>
+<p class="p11"><br></p>
+<p class="p11"><br></p>
+</body>
+</html>
