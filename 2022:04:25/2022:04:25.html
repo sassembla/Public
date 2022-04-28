@@ -1,0 +1,113 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2113.4">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Sans'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; min-height: 18.0px}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    span.s1 {font: 12.0px Helvetica}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>Meishi2にロータリーエンコーダつけたい、、つけたくない？</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span></span>無線<span class="s1"> + </span>電池化した<span class="s1">meishi2</span>を使って遊んでいる。で、ロータリーエンコーダを一基つけたくなった。</p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span></span>そしたら便利が加速して嬉しいんだわ。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>やりたいこと</b></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span>Meishi2</span>がそのままデフォで利用している4つのキーに繋がってるBMP上のピン<span class="s1"> 9,10,19,18</span>以外を使ってロータリーエンコーダをセットしたい。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ロータリーエンコーダを使える設定ファイルやらがBMPに用意してあって、神、、！</p>
+<p class="p3"><span class="Apple-tab-span">	</span>その設定ファイルであるencoder.jsnが、以前いじったconfig.jsnとは別ファイルなのでそのまま動いてほしい、、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>頼む、、もうkeymapをいじりたくない、、</p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p3"><b>以下メモ(つまり全然うまく行ってない)</b></p>
+<p class="p4"><br></p>
+<p class="p3">16, 20番のピンでチャレンジしてみる。</p>
+<p class="p4"><br></p>
+<p class="p3">encoder.jsnを書き換えて、実際に接続をチャレンジ。</p>
+<p class="p4"><br></p>
+<p class="p3">-&gt; ロータリーエンコーダのA、Bを設定した端子に繋いで回して反応しねー、なんだろう。</p>
+<p class="p4"><br></p>
+<p class="p3">この時の設定ファイルは以下</p>
+<p class="p3"><span class="Apple-tab-span">	</span>完全にBMPの話だが、まあうまくいかない、トラブルシュート力が低すぎる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>このあたりでブレッドボードを購入。</p>
+<p class="p4"><br></p>
+<p class="p3">{"encoder":</p>
+<p class="p3">{"enabled":1,</p>
+<p class="p3">"definition":[</p>
+<p class="p3">{"pin":[16,20],"step":1,"action":[["KC_LBRC","KC_RBRC"], ["KC_NO","KC_NO"], ["KC_NO","KC_NO"], ["KC_NO","KC_NO"], ["KC_NO","KC_NO"]]}</p>
+<p class="p3">]}}</p>
+<p class="p4"><br></p>
+<p class="p3">一日寝かせればなんとかなるか？と思ったが何ともならず、なんかいろんなサイトのロータリーエンコーダの記事みてるとプルアップ抵抗ってのが出てくる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>BMPにプルアップ抵抗は入ってるのか? 情報が特にないので入ってないものとしてまずブレッドボード上で組み立ててみる。</p>
+<p class="p4"><span class="Apple-tab-span">	</span></p>
+<p class="p4"><br></p>
+<p class="p3">あとは</p>
+<p class="p3">・ダイオードとかで整流？</p>
+<p class="p3"><span class="Apple-tab-span">	</span>いやボタンと違うし要らんのでは、、？ 要るのか、、？</p>
+<p class="p4"><br></p>
+<p class="p3">・ロータリーエンコーダのGND繋がないとダメ？</p>
+<p class="p3"><span class="Apple-tab-span">	</span>多分ダメ、電気流れるんだぞなんで要らんと思った。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>-&gt; ちゃんと繋いだらとりあえず流れるようになったけど、うーん、、</p>
+<p class="p4"><br></p>
+<p class="p3">・抵抗がないとpull upできないからダメ？</p>
+<p class="p3"><span class="Apple-tab-span">	</span>とりあえず適当な抵抗を買ってぶっ刺してみたが、まあ勘でやっていいことではないよな、、なので、BMPの中の人に質問投げた &lt;- 今ここ</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ちなみに勘でいろいろ繋いでみたが、正常に動く組み合わせは特にない。まだ。よくわかってないからほんと電子機器で素人の勘は微妙。</p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p3"><b>気になってること</b></p>
+<p class="p4"><br></p>
+<p class="p3">やっとテスターを買った。 むしろ今までテスターなしで動いてたのすごくない？ いや何もわからないが動くことがあるっていう、、怖いね、、</p>
+<p class="p4"><br></p>
+<p class="p3">テスターでBMPのGNDと繋ぐと電気出てるやんってなるピンが何個かあって、うーん謎、なんだけど、該当するのは</p>
+<p class="p3">実機上での0, 16, 18, 46番のピン。 きっちり電源と同じ電圧が出てる</p>
+<p class="p4"><br></p>
+<p class="p3">これはBMP側でデフォで流れてる感じなのか、それとも設定ファイルをいじった結果必要だから流れてるのかの区別がついてないが、</p>
+<p class="p3">電流が流れてるピンx2 -&gt; ロータリーエンコーダ &lt;- GND みたいに接続すると、ロータリーエンコーダは反応するというのがわかった。が、1ツマミ動かすと左右に割り当てたアクションが両方発生する。なんでやねん。</p>
+<p class="p4"><br></p>
+<p class="p3">電流が流れていないピンでは事象が発生しない。うーん、、あ、、もしかして、、わかった気がする、、うっすら思っていたことだが、、、B</p>
+<p class="p4"><br></p>
+<p class="p3">BMPの基盤に書いてあるピン番号と実際のconfig上でのpin番号、マッチしてないんじゃね、、？</p>
+<p class="p3">ずーっと違和感あったんだけど、meishi2が固定で繋ぎにくるピン番号と、configに書いたpin番号 = BMPのpin番号が一致してないんだよな。</p>
+<p class="p4"><br></p>
+<p class="p3">んでBMPのサイトに載ってる基盤のピン番号入ってる画像と、手元にあるBMPの基盤に書いてあるピン番号もこれ一致してねーんだよな。</p>
+<p class="p4"><br></p>
+<p class="p3">何が正しいんだ。サイトな気がする。現物に書いてあるピン番号、まちがってるんじゃね？これ。</p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p3">サイトのやつ <a href="https://github.com/sekigon-gonnoc/BLE-Micro-Pro/blob/master/docs/design_guide.md">https://github.com/sekigon-gonnoc/BLE-Micro-Pro/blob/master/docs/design_guide.md</a></p>
+<p class="p3">表から見た時のピン番号の画像がある。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3">手元のやつ(裏なのでサイト画像と見比べるなら、左右反転する前提)</p>
+<p class="p5"><img src="a.jpg" alt="a.jpg"></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3">サイトの数字や記号を、裏表合うように実物写真に振ってみると、、</p>
+<p class="p5"><img src="1__%23$!@%25!%23__a.jpg" alt="1__#$!@%!#__a.jpg"></p>
+<p class="p3">あっなんかもう全然違う。こういうもん？</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3">そんで<span class="s1">meishi2</span>みてるとわかるんだけど、今4キー繋いでて、うち2つが9,10ってconfigに書いてて、それが繋がってるの、実写の右列の下から3,4番目なんだよな、、、</p>
+<p class="p3">つまりconfigに書いてあるやつと実際に対応してるのは、サイト上の画像の数値で、、ええと、、つまり物理上の表記と関係ないわけで、、そういうもん、、？</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+</body>
+</html>
