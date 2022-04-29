@@ -32,8 +32,49 @@
 <p class="p3"><span class="Apple-tab-span">	</span>頼む、、もうkeymapをいじりたくない、、</p>
 <p class="p4"><br></p>
 <p class="p4"><br></p>
+<p class="p3"><b>できた</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>できたぞ＝～～</p>
+<p class="p3"><span class="Apple-tab-span">	</span>meishi2にロータリーエンコーダが！</p>
+<p class="p5"><img src="twitter_rBqOQD1g.jpg" alt="twitter_rBqOQD1g.jpg"></p>
 <p class="p4"><br></p>
-<p class="p3"><b>以下メモ(つまり全然うまく行ってない)</b></p>
+<p class="p4"><br></p>
+<p class="p3"><b>つまづいてたところ</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>BMPでロータリーエンコーダを使う場合、ロータリーエンコーダのA、BとC相、左右と真ん中の端子をそれぞれ</p>
+<p class="p3"><span class="Apple-tab-span">	</span>encoder.jsnで指定したピン + GNDのどれかに繋げばいいだけだった。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、なんでつまづいたかっていうと、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><b>BMPの基板に書いてあるピン番号を見てたんですよねえ俺は。</b></p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>以下は界隈では常識的なことなのだそう。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・同じマイコンでも、そのマイコンが持っているすべてのピンがボードに開けてあるわけではない</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・限定されたピンの何番をどこに開けるかとかは開発者次第</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・そのため、基板に印刷されているピン番号とかは誰も見ねえ(どうして、、)</p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>前回の記事でmeishi2のレイアウトに対応するのがなんでか2x2かつ数字も出鱈目だなーって思ってたんだけど、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>その原因がしっくりきた。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>サイト上のピン番号の数値表</p>
+<p class="p3"><span class="Apple-tab-span">	</span>これ</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>サイトのやつ <a href="https://github.com/sekigon-gonnoc/BLE-Micro-Pro/blob/master/docs/design_guide.md">https://github.com/sekigon-gonnoc/BLE-Micro-Pro/blob/master/docs/design_guide.md</a></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>表から見た時のピン番号の画像がある。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>が正しくて、これ以外は物理だろうが写真だろうが全部正しくない。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ということがわかると、それに合わせてencoder.jsnのパラメータを調整して結線すると、、まあ普通に動いた。すごい。</p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p3"><b>教訓</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>想像もつかない要素、マジわかんねえ、、いっそ書かないでくれないか、、、意図的に違うの書いてたりするんだろうけど、、、</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>とりあえずめちゃくちゃ便利に使えるようになった。</p>
+<p class="p4"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>無線で電池式でロータリーエンコーダが生えたmeishi2、とてもべんり。</p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p4"><br></p>
+<p class="p3"><b>以下メモ(つまり全然うまく行ってない)(完了済み)</b></p>
 <p class="p4"><br></p>
 <p class="p3">16, 20番のピンでチャレンジしてみる。</p>
 <p class="p4"><br></p>
