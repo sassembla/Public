@@ -1,0 +1,220 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2113.4">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Sans'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>Soerudake keyboard</b></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>左手を添えるだけの名刺サイズの無線キーボードを自作中。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>一個めはmeishi2を魔改造して作ったがまあめちゃくちゃやったので不安定すぎる。よくショートしてる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、基板から作ればショートせんでいいじゃん？って感じでやっていく。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>キットとかを作って売る気はない。メンテできん。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>パーツ周り</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>単純に魔改造版の再現になる。ただ、いろんなキットの違法建築建て増しと違って2枚の基板上に置くので、フットプリントとかがとにかくない。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>そういう意味で色々探したりフットプリントを自作したりしないといけないのがまあ地獄、、</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>コンデンサ</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>https://akizukidenshi.com/catalog/g/gP-06041/</p>
+<p class="p3"><span class="Apple-tab-span">	</span>チップ積層セラミックコンデンサー　100μＦ6.3v X5R 3216</p>
+<p class="p3"><span class="Apple-tab-span">	</span>購入完了</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>ダイオード</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>購入完了、dailycraftkeyboard。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>1N4148 SMD</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>全長が4mm x 1.5mmだったらよさそう。フットプリントだと5.5mmくらいありそう。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>結局追加変更部分はD_SMFっていうフットプリントを使うことにした。下が電源なので穴を開けたくないという感じ。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>電池金具</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>BK869</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>対応するkicadの何かないかな～！！</p>
+<p class="p3"><span class="Apple-tab-span">	</span>https://github.com/ashtonchase/Battery_Holders.pretty</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>modファイルがいっぱいある、mod、、読み込めるっぽいな。下にまとめよう。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>-&gt; 必要なのはkicad_modファイルだった。残念。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>-&gt; 最終的にはtestpointを知ったのでなんとかなりそう。穴と面がそれぞれ必要。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>-&gt; component search engineってところで検索したら「なかったら作るで」ってボタンがあって、？？ってなりながらぽちぽちしてたら</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>翌日にはデータが、、何、、<span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>https://rs.componentsearchengine.com/part.php?partID=955890</p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>めっちゃ便利、、、</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>スライドスイッチ</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>daily craft keyboardで買ったBMP用バッテリー拡張セットに入ってたスイッチが結構よかったので同じのが欲しくて、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>型番がわからなかったので似たようなやつを。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>9mm x 4mm x 4mm</p>
+<p class="p3"><span class="Apple-tab-span">	</span>3端子</p>
+<p class="p3"><span class="Apple-tab-span">	</span>https://akizukidenshi.com/catalog/g/gP-15370/</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ISH-1260-HA-G</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>買った。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>-&gt; 届いた、ドンピシャで同じやつだった。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>-&gt; フットプリントとかはkicadには入ってなかったんで、同じ穴サイズ/穴位置のもので代用。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>スイッチ向き、スイッチの軸の長さ含めて確認したので、大丈夫そう。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>TODO:</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>バッテリー置く層のスイッチ、電池ボックスを繋ぐ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>スイッチはなんかとりあえずを見つけたが、秋月から届くのでそれをもとに採寸する、とかecadデータを探すとよさそう。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>-&gt; done</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>スイッチもpdfがあるからpdfからなんかしたほうがいいな～。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>-&gt; やらなかった。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>Kicad操作メモ</b></p>
+<p class="p2"><br></p>
+<p class="p3">eschemeとpcbnewを同期させるボタンが出ない</p>
+<p class="p3"><span class="Apple-tab-span">	</span>-&gt; .kicadってファイルがあってそこからkicad.appを起動してその経路でes~とpc~を起動してないと出ない。似たような役割の別のボタンが出る！！</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>頼む単体でも開けてしまうからドキュメントにも書いてくれ、、それか押せない状態で配置してくれ、、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ボタンを入れ替えられてると条件満たせば変わるのかver違いで変わったのかがわかんねえ。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>と思ったのでうーんこれはkicad自体がオープンソースなので何か。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3">フットプリントとかの読み込み</p>
+<p class="p3"><span class="Apple-tab-span">	</span>使いたいパーツが決まっているがkicadのライブラリ上にない。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>https://www.rs-online.com/designspark/samacsys-part-finder-jp</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ここからいろんなパーツのデータがDL出来て、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>それをkicadに読み込むには、、、なんかすげえ大変だなこれ</p>
+<p class="p3"><span class="Apple-tab-span">	</span>https://qiita.com/takeru0x5569/items/3bd647ae2712650b7883</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>1. パーツ名フォルダを用意する？</p>
+<p class="p3"><span class="Apple-tab-span">	</span>2. libとdcmを移す？</p>
+<p class="p3"><span class="Apple-tab-span">	</span>3. パーツ名.prettyフォルダを用意する？</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ためしにlibとdcmが入ってるフォルダを用意してやってみよう。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>-&gt; 最終的にはkicad_modとlibがあれば事足りた。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>1. シンボルライブラリエディタにシンボルを登録する</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>実際はSymbolEditor、Kicad.appの窓から起動</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>import symbol～ボタンがどこか上位のほうのUIとかメニューにあるんだと思うが、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ちょっとわからんかった。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>適当にジャンルを選んでその中を右クリック -&gt; import symbol で.libファイルを追加できる。</p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>このままだとfootprintが探せない状態になるので、footprintを登録する。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>2. フットプリントエディタにフットプリントを登録する</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>FootprintEditor、Kicad.appの窓から起動</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Button_Switch_SMDあたりに足したいな～って思ったので、ウィンドウの中で適当に右クリック</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Import Footprint で.kicad_modファイルを追加</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>3. escheme上で配置してフットプリントを割り付け～ってやったらpcb上でも無事表示された。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ここからわかることとしては、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・.libファイルがあれば図面と情報が入る</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・.kicad_modファイルがあればfootprintが入る</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・.libと.kicad_modは独立してるのでどんなフォルダ名でも別にいい</p>
+<p class="p3"><span class="Apple-tab-span">	</span>・footprintの形状はどこかでエディットできるっぽい</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>なので、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>1. 適当な図面上の要素と形状が欲しい場合、libとkicad_modがあれば良い</p>
+<p class="p3"><span class="Apple-tab-span">	</span>2. 探してきてimportすればeschemeやpcbnewで連携して使える</p>
+<p class="p3"><span class="Apple-tab-span">	</span>という感じか。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>さてということは、まず対象のlibやkicad_modを世界中から探そう。あるだろ、、、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>とおもったらちょいちょいあってちょいちょい無い。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>BK869はsamacsys-part-finder-jpに画像だけはあって、なんかリクエスト投げることができたので投げてみたが、これ図面はあるから2端子の物体としてなんとかできるのはあるな、、とりあえずなんとかしてみるか。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>端子を露出させるにはどうすればいいの？</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>電池カバーは電池の+面に接するやつを買っていて、電池の-面は基板に剥き出しになっている、というのを見かけて、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>あっこれだと高さ嵩張らないでいいな～ってなってパクりたい。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>んでこれはフットプリントなんだろうか？</p>
+<p class="p3"><span class="Apple-tab-span">	</span>-&gt; チュートリアルでやったU1みたいなやつが似たようなことをフットプリントでやってるな、みてみよう。コピればよさそうな気がする。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>-&gt; Package_SO:SOIC-8-1EP_3.9x4.9mm_P1.27mm_EP2.29x3mm ってやつらしい。これの元ファイルを持ってきて色々やるとよさそう。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>-&gt; 結局escheme上でなんとかなってないと接続できないのがわかった。なるほどーー。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>-&gt; eschemeでスルーホールpadだけのパーツが欲しいぞ、、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>-&gt; eschemeで表面接続のpadが欲しいぞ、、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>-&gt; 図面上はpinになるっぽい、これならありそう。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>-&gt; そんでpinに対してスルーホールを割り当てればOK的な？</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>-&gt; testpointってのがあって、それでいけそう。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://forum.kicad.info/t/how-to-create-through-holes/31204/2">https://forum.kicad.info/t/how-to-create-through-holes/31204/2</a><span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>この辺が参考になった。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>フットプリントエディターでのあれこれ</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>courtyardってのが最外郭。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>そこから中にシルクスクリーンとかをはるっぽい。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>そうしないとパーツが色々貫通してボードと同じ扱いになるっぽい。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>TODO</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ダイオードが表面実装版になってない、smtってやつを選べばよさそう。 Surface mount tech~って感じらしい。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>kicad上ではsmd。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>キーボード上面のほとんどmeishi2なところは貫通型を使っているのでは、、？</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>-&gt; 確かにー、、うーん、まあ表面だから貫通の方がいいと思うけど足つきのやつは数が足りない気がする、表面実装に変えてみるか。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>-&gt; 変えちゃおう。参照変えればいいだけ</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>-&gt; 既存のやつは貫通する前提で組まれてたから変更できなかった、新規分のみ変更した。これで貫通ダイオードを消費しない形になった。ちょっと無理してる箇所があるが、、さて、、？</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>-&gt; サイズがもうちょっと違いそう、、怖、、まあいけると思うが、、？とりあえずちゃんとしたやつを選びたい。今勘でやってる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>-&gt; サイズを見てやってみよう。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>-&gt; やった、結果的にD_SMFっていうやつにした。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>done</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>スイッチの図面が全く合ってる気がしないがさて？</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>-&gt; どっかにpdfあったから読み込んでみるか、、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>-&gt; とりあえずスイッチ高さ見て壁から4.6mm以上は確保した。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>-&gt; 穴の位置は？ 間隔は2.5mmだが？</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>-&gt; 計測した、OK</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>-&gt; ピンの太さは？</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>-&gt; 0.9とのことなんでいけそうな気がする。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>done</p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>電池ボックスだいたいできてきた～～わーい！！</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>-&gt; 8x8padでよさそう！</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>-&gt; 穴は2mmでよさそう！</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>done</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>出荷</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>いろいろやって出荷する、具体的には</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>1. Plotボタンを押して出力</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>2. ドリルファイルの生成ボタンを押してデータ吐き出し</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>3. あとはzipしてpcbgogoにアップ！！</p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>ベタグラウンドがよくわかってない</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>なんか消すと色々言われてしまう。meishi2のころからある穴なんで何かあるのかな、、まあベタグラウンド周りなんだろう、いっぺん調べてみるか。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>-&gt; パーツの中に一つでもGNDがしていてあるものがあればベタグラウンドが貼られるということがわかった。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>たまたま一個もGNDが存在しないボードがあったんだけど、実際にはスイッチとかでGNDがあって、それを足したらベタグラウンドが出たのでOK。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+</body>
+</html>
