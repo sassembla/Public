@@ -1,0 +1,108 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2113.4">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Sans'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px 'Hiragino Sans'; color: #000000; background-color: #e6e6e6}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px 'Hiragino Sans'; color: #000000; min-height: 17.0px}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px 'Hiragino Sans'; color: #000000}
+    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    span.s1 {font-variant-ligatures: no-common-ligatures}
+    span.s2 {font-variant-ligatures: no-common-ligatures; background-color: transparent}
+    span.s3 {font: 12.0px Helvetica; color: #000000}
+    span.s4 {font: 12.0px Helvetica}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>KiCad入門する</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>自作キーボード沼にハマって作ったキーボードを使い倒している。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>んだけどこれ壊れたら直すのしんどいんだよな、基板にないパーツをブッ刺してるので。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>んで絶対壊れるしな。工業製品でない物体は壊れる。そんで直せるのは自分だけ、そんなのは嫌だ、、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>なので、量産することにした。正確には予備を作りやすくしておく。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>具体的には基板を作っておいて、ぶっ壊れたらもう一個瞬殺で作って使う。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>販売とかは考えない。ちょっと同人自作デバイスのサポートは無理。</p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b>KiCadの参考資料</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>「KiCad 6 入門実習テキスト『KiCad Basics for 6』」</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://booth.pm/ja/items/3544989">https://booth.pm/ja/items/3544989</a></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>KiCadのインストール</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><a href="https://www.kicad.org/download/macos/">https://www.kicad.org/download/macos/</a></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>Freeroutingのインストール</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><a href="https://freerouting.mihosoft.eu">https://freerouting.mihosoft.eu</a></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3">まず入門</p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b>最初にSchematic Editorでファイルを編集する</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>いきなりPCBじゃないのね。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Schematic EditorのほうでPCBに乗っかる回路を設計し、設計した回路をPCB上に配置、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>配線ルートやビア(パーツの足が刺さる穴)とかを開けていって、、という手順ぽい。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>それぞれの段階でエラーチェックができて、合理的～～</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>FreeRoutingがmacで起動しようとするとぶっ壊れてるって言われる話</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>次のコマンドを打てば実行権限を与えられるよ的な話。</p>
+<p class="p4"><span class="s1">sudo xattr -cr /Applications/Freerouting.app</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p6"><span class="s1"><span class="Apple-tab-span">	</span>これやらん場合の選択肢がJava版のfreeroutingをJava Runtimeと同時にぶち込むとかなので、絶対に嫌だ、、ってなってコマンド実行した。</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p6"><span class="s1"><b>PCBGoGo</b></span></p>
+<p class="p6"><span class="s1"><span class="Apple-tab-span">	</span>今回の基板制作発注先。</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p6"><span class="s1"><span class="Apple-tab-span">	</span>ここ</span></p>
+<p class="p6"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://member.pcbgogo.jp"><span class="s2">https://member.pcbgogo.jp</span></a></span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p6"><span class="s1"><span class="Apple-tab-span">	</span>に、こんな感じでデータを入れて、</span><span class="s3"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202022-05-18%2016.05.17.png" alt="スクリーンショット 2022-05-18 16.05.17.png"></span></p>
+<p class="p6"><span class="s1"><span class="Apple-tab-span">	</span>このあとガーバーデータが丸っと入ったzipを投げて待つ、、</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p6"><span class="s1"><span class="Apple-tab-span">	</span>データ確認中</span></p>
+<p class="p7"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202022-05-18%2016.12.43.png" alt="スクリーンショット 2022-05-18 16.12.43.png"></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p6"><span class="s1"><span class="Apple-tab-span">	</span>しばらく待つとメールでもくるんだろうか。</span></p>
+<p class="p6"><span class="s1"><span class="Apple-tab-span">	</span>試しに注文してみたい。</span></p>
+<p class="p6"><span class="s1"><span class="Apple-tab-span">	</span>-&gt; データチェック完了のメールがすぐきた。わーい。</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p6"><span class="s1"><span class="Apple-tab-span">	</span>paypal支払いでgo~、さて注文できたが？</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p7"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202022-05-18%2016.21.42.png" alt="スクリーンショット 2022-05-18 16.21.42.png"></p>
+<p class="p3"><span class="s4"><span class="Apple-tab-span">	</span></span>できてるっぽい、さて、<span class="s4">1W</span>時間ができた、作ろう。</p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p6"><span class="s1">-&gt; 表記されてる日数よりだいぶ早く届いた。具体的には</span></p>
+<p class="p6"><span class="s1"><span class="Apple-tab-span">	</span>・データ投入</span></p>
+<p class="p6"><span class="s1"><span class="Apple-tab-span">	</span>・制作完了(ここまで1日)</span></p>
+<p class="p6"><span class="s1"><span class="Apple-tab-span">	</span>・発送(この時点であと10日とか出る、DHLがめちゃくちゃ余裕をもった日付ぶち込んでくる）<span class="Apple-tab-span">	</span>・翌日昼頃到着(は？)</span></p>
+<p class="p5"><span class="s1"><span class="Apple-tab-span">	</span></span></p>
+<p class="p6"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>DHLの日付読みが最高にガバい。<span class="Apple-converted-space"> </span></span></p>
+<p class="p6"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>税関とかあるもんね、そうだよね、って思ってたけど、このあと3回注文して何れもデータ投入から3日でおうちに着弾している。</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p6"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>なので便利です。わーい。</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p5"><span class="s1"><span class="Apple-tab-span">	</span></span></p>
+</body>
+</html>
