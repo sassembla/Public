@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2113.6">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Sans'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; min-height: 18.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    span.s1 {font: 12.0px Helvetica}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>表面実装ジョイスティックとかマジすか</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>自作キーボードはめちゃくちゃ活用していてそろそろ2/3 yearくらいになる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>タクトスイッチ一つをmeishi2から継いでいて、それをリセットではないとこに繋いでBMPに対応させてProcreateのQuick Menuを開いたりしていた。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>していたんだけど、ペンと消しゴムを確実にシュッと切り替える手段が欲しくなった。</p>
+<p class="p4"><img src="IMG_0139.heic" alt="IMG_0139.heic"></p>
+<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span></span>先見せ、タクトスイッチの上にあるのが表面実装ジョイスティック。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>まずトグルスイッチを見てみる</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ばちーんって切り替わるレバーとかで、右に倒したらペン、左に倒したら消しゴム、とかがよかったんだけど、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>いわゆる自作キーボードの文脈で手に入るトグルスイッチははオンオフを切り替える形になってて欲しいものと違った。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>次点、押すたびに入力内容が切り替わるボタンは、BMPの範疇から外れる + やろうとしてもProcreate側が変な制約を負うのがわかったので却下。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>なによりばちーんと切り替わらない。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ということでインターネットを徘徊していたところ、ジョイスティックを見つける。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>左右で振り分ければ、やりたいことができるのでは？となって、試しにDIP化ありのものを秋月で発注。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://akizukidenshi.com/catalog/g/gK-10263/">https://akizukidenshi.com/catalog/g/gK-10263/</a></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>試してみた感じ結構良さそう。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ただ秋月のものはプッシュがなかったので、色々探した。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>結果表面実装でプッシュがあるという魔界みたいなジョイスティック？を発見。</p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>アルプスでプッシュ付きボスありジョイスティックをみっける。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>5ポジションスイッチなのでアナログではない！今回の用途には最高かも。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://tech.alpsalpine.com/j/products/detail/SKRHABE010">https://tech.alpsalpine.com/j/products/detail/SKRHABE010</a></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>えっ、、SMD(表面実装)？ ジョイスティックなのに、、、なんで？ まあいいか、、タクトスイッチのサイズに5ボタンが入る計算になる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>上下左右 + センタープッシュって。すっげえな。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>というわけでSMDジョイスティックを購入</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>アルプスのサイトから、国内業者で取り扱いがあるストアとしてコアスタッフさんに注文。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>午後2時までに注文すると翌日届く狂気。便利。ボスあり版を注文。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ボスなし版は国内取扱業者がなくて、、って思ったんだけど、今日ふと秋月を見たらDIP化キットと一緒にあるじゃん。どういう、、まあいいか、、ボス付きのほうが欲しいし、、</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>そんな秋月 ボス無し SMDジョイスティック DIP化キット</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://akizukidenshi.com/catalog/g/gK-15233/">https://akizukidenshi.com/catalog/g/gK-15233/</a></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>そして基板をね</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>欲しいのはSMDな実装なので、ええと、フットプリントがあればいい。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>回路図とかは当然アルプスに。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://tech.alpsalpine.com/j/products/detail/SKRHABE010/#ancFig3">https://tech.alpsalpine.com/j/products/detail/SKRHABE010/#ancFig3</a></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>フットプリント自体はRSに登録ドンピシャがあったので平気だった。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://rs.componentsearchengine.com/part.php?partID=729334">https://rs.componentsearchengine.com/part.php?partID=729334</a></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>これのSKRHABE010.kicad_modをkicadに読み込ませて登録。うーーーん便利。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>今回の回路図</b></p>
+<p class="p4"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202022-09-25%2011.42.50.png" alt="スクリーンショット 2022-09-25 11.42.50.png"></p>
+<p class="p3"><span class="Apple-tab-span">	</span>BMPと使いたいのでキーコンフィグに紛れ込ませるためにマトリクスへと編入。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>あってるんじゃないかなあ。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>基板を発注して待つ。まあ急いでないし、ダメだったら今までのを使えばいいや。そもそも中指で触る位置にくるわけだけど、、操作的になんとかなるのこれ。<span class="s1"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202022-09-25%2010.47.21.png" alt="スクリーンショット 2022-09-25 10.47.21.png"></span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>適当な配線。このあとrow0に向かうラインに一応ダイオードを足して発注。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3">つづく</p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+</body>
+</html>
