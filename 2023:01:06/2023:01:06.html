@@ -12,8 +12,10 @@
     p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'}
     p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px '.AppleSystemUIFontMonospaced'; color: #1a1c1f; background-color: #f4f4f4}
     p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px '.AppleSystemUIFontMonospaced'; color: #1a1c1f}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 16.0px Helvetica; color: #343434}
     span.s1 {font-kerning: none}
     span.s2 {font-kerning: none; background-color: #f4f4f4}
+    span.s3 {font: 14.4px Menlo; font-kerning: none; color: #b80e3d; background-color: #f7eef1}
     span.Apple-tab-span {white-space:pre}
   </style>
 </head>
@@ -31,6 +33,14 @@
 <p class="p3"><span class="Apple-tab-span">	</span><a href="https://github.com/golang/vscode-go/issues/2509">https://github.com/golang/vscode-go/issues/2509</a></p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>goplsに対してリクエストが出ていて、それをなんとか待つ、のがいいんだけど、まあかかりそうなんで適当に作ろう。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>リポジトリ</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これ。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/zanthoxylum">https://github.com/sassembla/zanthoxylum</a></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>zan、、何とかって何？</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>山椒だよ。</p>
 <p class="p2"><br></p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p3"><b>VSCode extension 開発</b></p>
@@ -59,20 +69,57 @@
 <p class="p2"><br></p>
 <p class="p3"><b>参考になりそうなPR</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>code lenseの位置になんか出す、というextensionがあったので参考にする。</p>
-<p class="p3"><span class="Apple-tab-span">	</span><a href="https://github.com/golang/vscode-go/pull/2109/files">https://github.com/golang/vscode-go/pull/2109/files</a><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><a href="https://github.com/golang/vscode-go/pull/2109/files">https://github.com/golang/vscode-go/pull/2109/files</a><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>参考になった。</p>
+<p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>TODO</b></p>
-<p class="p3">1. VSCodeの適当なイベントを把握する</p>
-<p class="p3">2. goファイルを開いたら、そのファイルのASTを取り出し、関数の記述位置に対する情報を得る</p>
-<p class="p3">3. VSCodeの標準が持っている Find All Referencesの 内容を非同期で呼び出しまくる</p>
-<p class="p3">4. 結果をコード上に反映していく</p>
+<p class="p3"><span class="Apple-tab-span">	</span>1. VSCodeの適当なイベントを把握する</p>
+<p class="p3"><span class="Apple-tab-span">	</span>2. goファイルを開いたら、そのファイルのASTを取り出し、関数の記述位置に対する情報を得る</p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>3. VSCodeの標準が持っている Find All References(FAR)の 内容を非同期で呼び出しまくる done.</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>4. 結果をコード上に反映していく done.</b></p>
+<p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>こんな感じにすると幸せになれる気がする。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>今ここ</b></p>
 <p class="p3">1。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>package.jsonの"activationEvents" に "onLanguage:go" とかを足すと、goのファイルを開いた時にextension.tsのactivate関数が呼ばれるようになる。一度だけ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ここをExtensionのentry pointとして扱って良さそう。このタイミングでref center desc machine(仮)を起動しよう。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、次にgoのファイルを開くたびにそのファイルのASTを取って、関数の位置を全部 FARに放り込みたいので、on open go fileなイベントを探す。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
+<p class="p3">4。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>code lenseを出す仕掛け自体は作れた。で、これを更新したいわけなんだけど。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>挟み込むようなことが可能になるのがあって、適当にリロードを行うようにしたら平和になった。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>コードが切り替わった時にリセットする、とかをやらないといけないのはあるが、大筋は終わった。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-converted-space"> </span></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>疑問</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Q. FARはコードから呼び出せるのか？</p>
+<p class="p3"><span class="Apple-tab-span">	</span>A. この辺読むと良さそう。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><a href="https://code.visualstudio.com/api/references/commands">https://code.visualstudio.com/api/references/commands</a></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>試しに呼ぶコードを書いてみるか。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>goを開いてる時にcontext menuに現れるやつなので、適切なパラメータを与えればガンガン呼べると思ってるが。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>何ならその内容を実行できればいいのはあるので、見ておくと良さそう。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>とおもったら</p>
+<p class="p6"><span class="s3">vscode.executeReferenceProvider</span><span class="s1"> - Execute all reference providers.</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>なんつう、バリバリそれじゃん、ってのが見つかった。これの中身を追いたい。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>実行するにあたって一個注意点があって、goのExtensionが起動した後でないと、find all reference自体を呼び出しても何もヒットしないのがわかった。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>デバッグコンソールに毎回go extの起動ログが出て鬱陶しかったんでオフってたら、なんとずーっと0件だったので、code pointの指定にミスったのかと思っていろいろやったが、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>遅延させたら上手くいったので合点がいった。依存してるわけね。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>go Extension &lt;- VSCode find all reference、、 という依存がある。へえ、、、なんで、、？</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>まあいいんだけどさ。目的は叶えられそう。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>-&gt; 叶えられた。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 </body>
