@@ -42,6 +42,11 @@
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>zan、、何とかって何？</p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>山椒だよ。</p>
 <p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>releases</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/zanthoxylum/releases/tag/0.5.1">https://github.com/sassembla/zanthoxylum/releases/tag/0.5.</a>2</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>どうせそのうちgoplsに該当機能が入ると思うし、ストアに上げる気はないので、自分でvsixを読み込ませたりしてね！！</p>
+<p class="p2"><br></p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p3"><b>VSCode extension 開発</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span><a href="https://dev.classmethod.jp/articles/easy-vs-code-extension-development/">https://dev.classmethod.jp/articles/easy-vs-code-extension-development/</a></p>
@@ -73,8 +78,8 @@
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>TODO</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>1. VSCodeの適当なイベントを把握する</p>
-<p class="p3"><span class="Apple-tab-span">	</span>2. goファイルを開いたら、そのファイルのASTを取り出し、関数の記述位置に対する情報を得る</p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>1. VSCodeの適当なイベントを把握する</b></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>2. goファイルを開いたら、そのファイルのASTを取り出し、関数の記述位置に対する情報を得る done</b></p>
 <p class="p3"><b><span class="Apple-tab-span">	</span>3. VSCodeの標準が持っている Find All References(FAR)の 内容を非同期で呼び出しまくる done.</b></p>
 <p class="p3"><b><span class="Apple-tab-span">	</span>4. 結果をコード上に反映していく done.</b></p>
 <p class="p2"><br></p>
@@ -87,6 +92,21 @@
 <p class="p3"><span class="Apple-tab-span">	</span>ここをExtensionのentry pointとして扱って良さそう。このタイミングでref center desc machine(仮)を起動しよう。</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>で、次にgoのファイルを開くたびにそのファイルのASTを取って、関数の位置を全部 FARに放り込みたいので、on open go fileなイベントを探す。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>-&gt; できた。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3">2。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>AST読むまで行ってないけど適当にやった、func A() には対応してる、 func () A() には対応してない。今度。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>-&gt; VSCodeからちゃんとしたASTもどきが取れるのがわかったので、対応。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/zanthoxylum/blob/main/src/extension.ts#L57">https://github.com/sassembla/zanthoxylum/blob/main/src/extension.ts#L57</a></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>変数とか構造体に対しても出せそうだね。気が向いたらやる。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3">3。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>done。find all~自体をLSPの実装として呼び出してると思うので、そこを何とかするといい気はする。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>一点心残りというか、FARを呼び出す際、おそらくカーソルのselectionを関数名の位置に動かさないとちゃんとFARが起動しない。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>今は「手でカーソルを関数名に持って行ってからref countをクリックするとFARがちゃんと起動する」ようになってる。ちょっと残念。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3">4。</p>
@@ -94,9 +114,9 @@
 <p class="p3"><span class="Apple-tab-span">	</span>挟み込むようなことが可能になるのがあって、適当にリロードを行うようにしたら平和になった。</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="Apple-tab-span">	</span>コードが切り替わった時にリセットする、とかをやらないといけないのはあるが、大筋は終わった。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>-&gt; できた。</p>
 <p class="p2"><br></p>
-<p class="p2"><br></p>
-<p class="p2"><span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>キャッシュのような仕掛けを一切持たないでやってるので、うーん、規模が嵩むと重たいのでは、と思っている。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>疑問</b></p>
