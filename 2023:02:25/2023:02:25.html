@@ -1,0 +1,207 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2113.6">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; min-height: 18.0px}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; background-color: #e6e6e6}
+    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Menlo; color: #43c0a0; background-color: #000000}
+    p.p8 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Menlo; color: #cacaca; background-color: #000000; min-height: 14.0px}
+    p.p9 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Menlo; color: #4689cc; background-color: #000000}
+    p.p10 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Menlo; color: #cacaca; background-color: #000000}
+    p.p11 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Menlo; color: #8cd3fe; background-color: #000000}
+    p.p12 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Menlo; color: #598a43; background-color: #000000}
+    span.s1 {font: 22.0px 'Hiragino Sans'}
+    span.s2 {font: 12.0px 'Hiragino Sans'}
+    span.s3 {font: 12.0px Helvetica}
+    span.s4 {background-color: #e6e6e6}
+    span.s5 {font-kerning: none; color: #b76fb3}
+    span.s6 {font-kerning: none; color: #cacaca}
+    span.s7 {font-kerning: none}
+    span.s8 {font-kerning: none; color: #4689cc}
+    span.s9 {font-kerning: none; color: #8cd3fe}
+    span.s10 {font-kerning: none; color: #c27e65}
+    span.s11 {font-kerning: none; color: #d4d69a}
+    span.s12 {font-kerning: none; color: #43c0a0}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>Unity IAP</b><span class="s1"><b>と</b></span><b>Unity Analytics</b><span class="s1"><b>と</b></span><b> UnityGameService</b><span class="s1"><b>、</b></span><b>IAP</b><span class="s1"><b>だけ使いたい</b></span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p4"><span class="Apple-tab-span">	</span>IAP<span class="s2">のいつの</span>ver<span class="s2">からか、</span>UGS(UnityGameService)<span class="s2">を</span>Initialize<span class="s2">してから</span>IAP<span class="s2">を初期化しないと</span>warning<span class="s2">が出るようになった。</span></p>
+<p class="p3"><span class="s3"><span class="Apple-tab-span">	</span></span>んでこれがまたいつの<span class="s3">ver</span>からか、UGSを初期化してからIAPを初期化しないと、なんとExceptionが出るようになった。</p>
+<p class="p5"><span class="Apple-tab-span">	</span></p>
+<p class="p6"><b>ServicesInitializationException: The Analytics service has not been initialized. Please initialize Unity Services.</b></p>
+<p class="p6">Unity.Services.Analytics.AnalyticsService.get_Instance () (at Library/PackageCache/com.unity.services.analytics@4.3.0/Runtime/AnalyticsService.cs:19)</p>
+<p class="p6">UnityEngine.Purchasing.UnityPurchasing.GenerateUnityAnalytics (UnityEngine.ILogger logger) (at Library/PackageCache/com.unity.purchasing@4.5.2/Runtime/Purchasing/UnityPurchasing.cs:34)</p>
+<p class="p6">UnityEngine.Purchasing.UnityPurchasing.Initialize (UnityEngine.Purchasing.IStoreListener listener, UnityEngine.Purchasing.ConfigurationBuilder builder) (at Library/PackageCache/com.unity.purchasing@4.5.2/Runtime/Purchasing/UnityPurchasing.cs:24)</p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、これと戦って勝った話。</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p3"><b>結論</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>DISABLE_RUNTIME_IAP_ANALYTICS を使おう。以上。</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p3"><b>経緯</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>AutoyaをUnity2021.3の最新に追随させないとなーとなっていた。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>これ　</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/Autoya">https://github.com/sassembla/Autoya</a></p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で、Unity2021.3.19にしたところで、テストがこける。課金関連のテストだけがコケる。</p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>なんで？ ってなって見てみると、</p>
+<p class="p4"><span class="s4"><b>ServicesInitializationException: The Analytics service has not been initialized. Please initialize Unity Services.</b></span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>の文字が。</p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>あれ、以前はwarningじゃなかったっけ？って思ってみると、フォーラムにはこうあった。</p>
+<p class="p5"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b><span class="Apple-tab-span">	</span>Question IAP requires UGS to be initialized?</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><a href="https://forum.unity.com/threads/iap-requires-ugs-to-be-initialized.1321560/">https://forum.unity.com/threads/iap-requires-ugs-to-be-initialized.1321560/</a><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>JeffDというアカウントがUnity IAPのフォーラムの大体どこにでも出てくるUnityのIAPのすごい方で、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>「warn出るんですけど」</p>
+<p class="p3"><span class="Apple-tab-span">	</span>「気にしないでくれ、やらないでも動くから」</p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ということだったのだが、どうも去年の8月くらいからUnity Analyticsの挙動が変わり、</p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>IAPからAnalyticsを呼ぼうとする</p>
+<p class="p3"><span class="Apple-tab-span">	</span> ↓</p>
+<p class="p3"><span class="Apple-tab-span">	</span>UnityGameServiceに含まれるAnalytics側の初期化コードでnullなのに呼ばれると<b>上記のエラーを吐く</b></p>
+<p class="p5"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>となったっぽい。で、つまりこの時点で、主観的にはこうなる。</p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>1. Unity IAPのアプデをしたら、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>2. IAPの起動時に、「先にUGSを起動してね」というエラーが出るようになる</p>
+<p class="p3"><span class="Apple-tab-span">	</span>3. UGSってIAP使う時にも必須なんですね、、、</p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>フォーラムみててもな～～なんか使って当たり前！みたいに書いてあるんだよな～。</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>で～～～こっからがいろいろあって。</p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>UGSが使えるとこんなに便利！ってのもあると思うんだけど、いらん場合は要らんわけだ。</p>
+<p class="p5"><br></p>
+<p class="p5"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>いろいろ理由があるが、、、</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p3"><b>1. 初期化コードがまさかの生Taskを返してくる</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これが結構びっくりした。</p>
+<p class="p5"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><a href="https://docs.unity.com/ugs-overview/en/manual/services-core-api#InitializationExample">https://docs.unity.com/ugs-overview/en/manual/services-core-api#InitializationExample</a></p>
+<p class="p7"><span class="s5">using</span><span class="s6"> </span><span class="s7">System</span><span class="s6">;</span></p>
+<p class="p7"><span class="s5">using</span><span class="s6"> </span><span class="s7">Unity</span><span class="s6">.</span><span class="s7">Services</span><span class="s6">.</span><span class="s7">Core</span><span class="s6">;</span></p>
+<p class="p7"><span class="s5">using</span><span class="s6"> </span><span class="s7">Unity</span><span class="s6">.</span><span class="s7">Services</span><span class="s6">.</span><span class="s7">Core</span><span class="s6">.</span><span class="s7">Environments</span><span class="s6">;</span></p>
+<p class="p7"><span class="s5">using</span><span class="s6"> </span><span class="s7">UnityEngine</span><span class="s6">;</span></p>
+<p class="p8"><span class="s7"><span class="Apple-converted-space"> </span></span></p>
+<p class="p7"><span class="s8">public</span><span class="s6"> </span><span class="s8">class</span><span class="s6"> </span><span class="s7">InitializeUGS</span><span class="s6"> : </span><span class="s7">MonoBehaviour</span><span class="s6"> {</span></p>
+<p class="p8"><span class="s7"><span class="Apple-converted-space">    </span></span></p>
+<p class="p9"><span class="s6"><span class="Apple-converted-space">    </span></span><span class="s7">public</span><span class="s6"> </span><span class="s7">string</span><span class="s6"> </span><span class="s9">environment</span><span class="s6"> = </span><span class="s10">"production"</span><span class="s6">;</span></p>
+<p class="p8"><span class="s7"><span class="Apple-converted-space"> </span></span></p>
+<p class="p10"><span class="s7"><span class="Apple-converted-space">    </span></span><span class="s8">async</span><span class="s7"> </span><span class="s8">void</span><span class="s7"> </span><span class="s11">Start</span><span class="s7">() {</span></p>
+<p class="p10"><span class="s7"><span class="Apple-converted-space">        </span></span><span class="s5">try</span><span class="s7"> {</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">            </span></span><span class="s8">var</span><span class="s6"> </span><span class="s9">options</span><span class="s6"> = </span><span class="s8">new</span><span class="s6"> </span><span class="s7">InitializationOptions</span><span class="s6">()</span></p>
+<p class="p10"><span class="s7"><span class="Apple-converted-space">                </span>.</span><span class="s11">SetEnvironmentName</span><span class="s7">(</span><span class="s9">environment</span><span class="s7">);</span></p>
+<p class="p8"><span class="s7"><span class="Apple-converted-space"> </span></span></p>
+<p class="p11"><span class="s6"><span class="Apple-converted-space">            </span></span><span class="s8">await</span><span class="s6"> </span><span class="s7">UnityServices</span><span class="s6">.</span><span class="s11">InitializeAsync</span><span class="s6">(</span><span class="s7">options</span><span class="s6">);</span></p>
+<p class="p10"><span class="s7"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p10"><span class="s7"><span class="Apple-converted-space">        </span></span><span class="s5">catch</span><span class="s7"> (</span><span class="s12">Exception</span><span class="s7"> </span><span class="s9">exception</span><span class="s7">) {</span></p>
+<p class="p12"><span class="s6"><span class="Apple-converted-space">            </span></span><span class="s7">// An error occurred during initialization.</span></p>
+<p class="p10"><span class="s7"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p10"><span class="s7"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p10"><span class="s7">}</span></p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>この時点でかなりUGSをやる気が削がれてくる。</p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>UnityServices.InitializeAsync関数はTaskを返してくる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>いや、Task&lt;void&gt;みたいなのが嫌って言ってるんじゃなくて、Taskが嫌、って言ってるの。</p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>何が悲しゅうてこんな実行時エラーバリバリ起こしそうな物体の処理をわざわざTaskで、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>しかもresultも適当な定義しかされてないものでやらにゃいかんの、、、</p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>(状態としてInitialized, Uninitialized, Initializingがあります！ うーん、、)</p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>しかも面白いのが、、いや面白くないけどさあ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>この関数、UnityのMainThread以外でぶっ放すと、mainThreadでパナしてね！ってエラーを吐く。</p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>つまり「マジでこの書き方しかできない」。 ええ、、、MB一個ささげてやることがこれ？</p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>例えばRuntimeInitializeOnLoadでFrameworkとしてpurchase周りの管理もやってるAutoyaみたいなやつは辛い。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>MB持ってないから。あるけど、このためにStartとかを潰したいかっていうとさあ。</p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>いや～～コーナーケースだと思う。うん。でもさー。</p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これ実行するためにMBやらMainThreadDispatcherを使えってことでしょー、嫌だよ。</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p3"><b>2. 必要ない</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>根本的にはこれ。</p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>IAPを制御可能な課金機構のためのライブラリとして使えればそれでよくて、Analyticsは要らんし、Unityの提供してくれているダッシュボードで何かを見たいと思わない場合。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>Adsが関わってくるとGDPRとかが出てくるわけですけども、それすら関係ない、Adsを使わない場合。</p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>IAPだけを起動できると嬉しい。ログとかは自前のサーバでやるので、はい、、みたいなケース。</p>
+<p class="p5"><br></p>
+<p class="p5"><br></p>
+<p class="p3"><b>3. テストできない</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>UnityEditorでのあらゆるテストに対して、これエラー吐いてくる、、</p>
+<p class="p5"><b><span class="Apple-tab-span">	</span></b></p>
+<p class="p5"><b></b><br></p>
+<p class="p3"><b>で</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>いろいろ試してたんだけど、手を咥えようにもIAPもUGSもPackageの中身なので、いやーー触りたくねえ。</p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>というわけでIAPのコードを読んでいたら、</p>
+<p class="p3"><span class="Apple-tab-span">	</span><a href="https://github.com/needle-mirror/com.unity.purchasing/blob/3f872364c823b765a711f7b79007bd6b66dcf51d/Runtime/Purchasing/UnityPurchasing.cs#L32">https://github.com/needle-mirror/com.unity.purchasing/blob/3f872364c823b765a711f7b79007bd6b66dcf51d/Runtime/Purchasing/UnityPurchasing.cs#L32</a></p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>あるね～～。面白そうなsymbolが。</p>
+<p class="p5"><br></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">        </span></span><span class="s8">private</span><span class="s6"> </span><span class="s8">static</span><span class="s6"> </span><span class="s7">IAnalyticsAdapter</span><span class="s6"> </span><span class="s11">GenerateUnityAnalytics</span><span class="s6">(</span><span class="s7">ILogger</span><span class="s6"> </span><span class="s9">logger</span><span class="s6">)</span></p>
+<p class="p10"><span class="s7"><span class="Apple-converted-space">        </span>{</span></p>
+<p class="p11"><span class="s8">#if </span><span class="s7">DISABLE_RUNTIME_IAP_ANALYTICS</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">            </span></span><span class="s5">return</span><span class="s6"> </span><span class="s8">new</span><span class="s6"> </span><span class="s7">EmptyAnalyticsAdapter</span><span class="s6">();</span></p>
+<p class="p9"><span class="s7">#else</span></p>
+<p class="p10"><span class="s7"><span class="Apple-converted-space">            </span></span><span class="s5">try</span></p>
+<p class="p10"><span class="s7"><span class="Apple-converted-space">            </span>{</span></p>
+<p class="p11"><span class="s6"><span class="Apple-converted-space">                </span></span><span class="s5">return</span><span class="s6"> </span><span class="s8">new</span><span class="s6"> </span><span class="s12">AnalyticsAdapter</span><span class="s6">(</span><span class="s7">AnalyticsService</span><span class="s6">.</span><span class="s7">Instance</span><span class="s6">, </span><span class="s7">logger</span><span class="s6">);</span></p>
+<p class="p10"><span class="s7"><span class="Apple-converted-space">            </span>}</span></p>
+<p class="p7"><span class="s6"><span class="Apple-converted-space">            </span></span><span class="s5">catch</span><span class="s6"> (</span><span class="s7">ServicesInitializationException</span><span class="s6">)</span></p>
+<p class="p10"><span class="s7"><span class="Apple-converted-space">            </span>{</span></p>
+<p class="p10"><span class="s7"><span class="Apple-converted-space">                </span></span><span class="s5">return</span><span class="s7"> </span><span class="s8">new</span><span class="s7"> </span><span class="s12">EmptyAnalyticsAdapter</span><span class="s7">();</span></p>
+<p class="p10"><span class="s7"><span class="Apple-converted-space">            </span>}</span></p>
+<p class="p9"><span class="s7">#endif</span></p>
+<p class="p10"><span class="s7"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>というわけでDISABLEを発見したので、つけたところ、Analyticsが要求されなくなるため、UGSがないと～的なエラーも起きなくなる。</p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>実機テストとかこれからやるけど、一応。ちなみにググって見たけど</p>
+<p class="p4"><span class="s2"><span class="Apple-tab-span">	</span></span><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202023-02-25%2015.24.01.png" alt="スクリーンショット 2023-02-25 15.24.01.png"></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="s3"><span class="Apple-tab-span">	</span></span>無いな～～</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="s3"><span class="Apple-tab-span">	</span>github</span>も検索して見たけど、<span class="s3">UnityPurchasing</span>を<span class="s3">Library</span>フォルダごとアップしてるのが引っかかるのみだった。</p>
+<p class="p3"><span class="s3"><span class="Apple-tab-span">	</span></span>面白いっすね。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>やったか！？</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>そもそもIAPだけ使いたい、それにまつわる情報は全て自社のサーバとかで扱いたい、というrequirementに対して、IAPがどんな拘束力を持つんだろう、というのはあって、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>今回DISABLEをみっけたので使って見ているわけですけども、</p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>もしそれはダメだよ～ってなった場合はIAPの代わりを探せばいいだけなので、それはそれ。</p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Unityからしたら、せっかく作ったIAPをもとに自社のゲームエンジンを使ってるユーザーの云々は見たいだろうし。<span class="Apple-tab-span">	</span>そのためにこの手段が適格か？というのは思うが。</p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ま、選択肢がいっぱい選べるといいすね。</p>
+<p class="p5"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>怒られたら消えます。</p>
+</body>
+</html>
