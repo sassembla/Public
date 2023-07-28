@@ -9,86 +9,91 @@
   <style type="text/css">
     p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px Helvetica}
     p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
-    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
-    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; background-color: #e6e6e6}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; background-color: #e6e6e6}
+    span.s1 {font: 22.0px 'Hiragino Sans'}
+    span.s2 {font: 12.0px Helvetica}
+    span.s3 {font: 12.0px 'Hiragino Sans'}
+    span.s4 {font: 12.0px 'Lucida Grande'}
     span.Apple-tab-span {white-space:pre}
   </style>
 </head>
 <body>
-<p class="p1"><b>swiftでformat on save</b></p>
+<p class="p1"><b>Xcode</b><span class="s1"><b>で</b></span><b>format on save</b></p>
 <p class="p2"><br></p>
 <p class="p3"><b>概要</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>タイトルのまんま</p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>タイトルのまんま</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>結局Xcodeでなんとかするのがまー体験としてかなりマシなわけじゃん、コードエディタとしてはまじで進歩してなくて辛いんだけど。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>ルックアンドフィールはすごく良いんだよな、、Nativeの力というか、、、</p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>結局<span class="s2">Xcode</span>でなんとかするのがまー体験としてかなりマシなわけじゃん、コードエディタとしてはまじで進歩してなくて辛いんだけど。</p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>ルックアンドフィールはすごく良いんだよな、、<span class="s2">Native</span>の力というか、、、</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>で、できるようにした。</p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>で、できるようにした。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>手順</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>1. brewでswiftformatと swiftformat-for-xcodeを入れて</p>
-<p class="p3"><span class="Apple-tab-span">	</span>2. swiftformat-for-xcodeの設定をして</p>
-<p class="p3"><span class="Apple-tab-span">	</span>3. Xcodeでインストール状態を確認して</p>
-<p class="p3"><span class="Apple-tab-span">	</span>4. Macのシステム設定.appで「Xcodeで保存したら特定のメニューを実行する」セッティングする</p>
-<p class="p3"><span class="Apple-tab-span">	</span>5. 開いてるファイル単位で⌘ + sを押したら、そのファイルが保存される + formatされる</p>
+<p class="p4"><span class="Apple-tab-span">	</span>1. brew<span class="s3">で</span>swiftformat<span class="s3">と</span> swiftformat-for-xcode<span class="s3">を入れて</span></p>
+<p class="p4"><span class="Apple-tab-span">	</span>2. swiftformat-for-xcode<span class="s3">の設定をして</span></p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span>3. Xcode</span>でインストール状態を確認して</p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span>4. Mac</span>のシステム設定<span class="s2">.app</span>で「<span class="s2">Xcode</span>で保存したら特定のメニューを実行する」セッティングする</p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span>5. </span>開いてるファイル単位で⌘<span class="s2"> + s</span>を押したら、そのファイルが保存される<span class="s2"> + format</span>される</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>でOK。この概略の時点で「それはちょっと、、」ってなる場合、not for you. 自分はかなりギリギリ感を感じる。めんどくさい。</p>
-<p class="p2"><br></p>
-<p class="p2"><br></p>
-<p class="p3"><b>1. brewで色々インストール。</b></p>
-<p class="p4">brew install swiftformat</p>
-<p class="p4">brew install --cask swiftformat-for-xcode</p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>で<span class="s2">OK</span>。この概略の時点で「それはちょっと、、」ってなる場合、<span class="s2">not for you. </span>自分はかなりギリギリ感を感じる。めんどくさい。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
-<p class="p3"><b>2. swiftformat-for-xcodeの設定</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>で、ApplicationsフォルダにSwiftFormat for Xcode.appができてるはずで、実行、なんもせず終了する。</p>
-<p class="p3"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202023-07-29%203.50.25.png" alt="スクリーンショット 2023-07-29 3.50.25.png"></p>
+<p class="p3"><span class="s2"><b>1. brew</b></span><b>で色々インストール。</b></p>
+<p class="p5">brew install swiftformat</p>
+<p class="p5">brew install --cask swiftformat-for-xcode</p>
 <p class="p2"><br></p>
-<p class="p3"><b>3. システム設定.appでXcodeに対してswiftformat-for-xcode機能拡張をオンにする</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>なんのこっちゃわからん。説明しよう。</p>
+<p class="p2"><br></p>
+<p class="p4"><b>2. swiftformat-for-xcode</b><span class="s3"><b>の設定</b></span></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="s3">で、</span>Applications<span class="s3">フォルダに</span>SwiftFormat for Xcode.app<span class="s3">ができてるはずで、実行、なんもせず終了する。</span></p>
+<p class="p4"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202023-07-29%203.50.25.png" alt="スクリーンショット 2023-07-29 3.50.25.png"></p>
+<p class="p2"><br></p>
+<p class="p4"><b>3. </b><span class="s3"><b>システム設定</b></span><b>.app</b><span class="s3"><b>で</b></span><b>Xcode</b><span class="s3"><b>に対して</b></span><b>swiftformat-for-xcode</b><span class="s3"><b>機能拡張をオンにする</b></span></p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>なんのこっちゃわからん。説明しよう。</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
-<p class="p3"><span class="Apple-tab-span">	</span>システム設定.appのプライバシーとセキュリティにいくじゃん？</p>
-<p class="p3"><span class="Apple-tab-span">	</span>さっき起動したswiftformat-for-xcodeくんが全然違う名前でいるんすよ。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>んでそれを押して、チェックつける。以上。</p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>システム設定<span class="s2">.app</span>のプライバシーとセキュリティにいくじゃん？</p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>さっき起動した<span class="s2">swiftformat-for-xcode</span>くんが全然違う名前でいるんすよ。</p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>んでそれを押して、チェックつける。以上。</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>これでXcodeにある劇的な変化が、、！！</p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>これで<span class="s2">Xcode</span>にある劇的な変化が、、！！</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
-<p class="p3"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202023-07-29%204.02.07.png" alt="スクリーンショット 2023-07-29 4.02.07.png"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202023-07-29%204.02.34.png" alt="スクリーンショット 2023-07-29 4.02.34.png"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202023-07-29%204.02.57.png" alt="スクリーンショット 2023-07-29 4.02.57.png"></p>
+<p class="p4"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202023-07-29%204.02.07.png" alt="スクリーンショット 2023-07-29 4.02.07.png"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202023-07-29%204.02.34.png" alt="スクリーンショット 2023-07-29 4.02.34.png"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202023-07-29%204.02.57.png" alt="スクリーンショット 2023-07-29 4.02.57.png"></p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
-<p class="p3"><b>4. Xcodeで確認</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>3の操作をしたあと、おもむろにXcode再起動。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>コードを開いた状態で、Xcodeのメニューの下の方に</p>
-<p class="p3"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202023-07-29%203.52.18.png" alt="スクリーンショット 2023-07-29 3.52.18.png"></p>
-<p class="p3"><span class="Apple-tab-span">	</span>SwiftFormatの項目があり</p>
-<p class="p3"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202023-07-29%203.52.25.png" alt="スクリーンショット 2023-07-29 3.52.25.png"></p>
-<p class="p3"><span class="Apple-tab-span">	</span>こんな感じに出てればここまではOK。</p>
+<p class="p4"><b>4. Xcode</b><span class="s3"><b>で確認</b></span></p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span>3</span>の操作をしたあと、おもむろに<span class="s2">Xcode</span>再起動。</p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>コードを開いた状態で、<span class="s2">Xcode</span>のメニューの下の方に</p>
+<p class="p4"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202023-07-29%203.52.18.png" alt="スクリーンショット 2023-07-29 3.52.18.png"></p>
+<p class="p4"><span class="Apple-tab-span">	</span>SwiftFormat<span class="s3">の項目があり</span></p>
+<p class="p4"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202023-07-29%203.52.25.png" alt="スクリーンショット 2023-07-29 3.52.25.png"></p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>こんな感じに出てればここまでは<span class="s2">OK</span>。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
-<p class="p3"><b>5. システム設定.appで保存キーショートカットとXcodeでのSwiftFormatを紐づける</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>知らなかったんだけど、</p>
-<p class="p3"><span class="Apple-tab-span">	</span>Macは特定のAppの特定のメニュー項目の実行を特定のショートカットコマンドと連携できる。</p>
+<p class="p3"><span class="s2"><b>5. </b></span><b>システム設定</b><span class="s2"><b>.app</b></span><b>で保存キーショートカットと</b><span class="s2"><b>Xcode</b></span><b>での</b><span class="s2"><b>SwiftFormat</b></span><b>を紐づける</b></p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>知らなかったんだけど、</p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span>Mac</span>は特定の<span class="s2">App</span>の特定のメニュー項目の実行を特定のショートカットコマンドと連携できる。</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
-<p class="p3"><span class="Apple-tab-span">	</span>で、ええと、ショートカットで4のメニューを実行すると良いわけですよ。</p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>で、ええと、ショートカットで<span class="s2">4</span>のメニューを実行すると良いわけですよ。</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>システム設定.appのキーボードに行くじゃん、キーボードショートカット… みたいなの押す。</p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>システム設定<span class="s2">.app</span>のキーボードに行くじゃん、キーボードショートカット<span class="s2">… </span>みたいなの押す。</p>
 <p class="p2"><br></p>
-<p class="p3"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202023-07-29%204.10.05.png" alt="スクリーンショット 2023-07-29 4.10.05.png"></p>
-<p class="p3"><span class="Apple-tab-span">	</span>アプリケーションの項があるので+を押す</p>
-<p class="p3"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202023-07-29%204.10.12.png" alt="スクリーンショット 2023-07-29 4.10.12.png"></p>
-<p class="p3"><span class="Apple-tab-span">	</span>アプリケーションで 好きなXcodeを選んで、</p>
-<p class="p3"><span class="Apple-tab-span">	</span>メニュータイトル、って書いてあるところに Editor-&gt;SwiftFormat-&gt;Format File ってガンバって手打ちすると良い。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>この画面で保存ショートカット ⌘ + sを押すと、キーボードショートカットのところに⌘Sが入ってくれる。</p>
-<p class="p3"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202023-07-29%204.11.42.png" alt="スクリーンショット 2023-07-29 4.11.42.png"></p>
+<p class="p4"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202023-07-29%204.10.05.png" alt="スクリーンショット 2023-07-29 4.10.05.png"></p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>アプリケーションの項があるので<span class="s2">+</span>を押す</p>
+<p class="p4"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202023-07-29%204.10.12.png" alt="スクリーンショット 2023-07-29 4.10.12.png"></p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>アプリケーションで<span class="s2"> </span>好きな<span class="s2">Xcode</span>を選んで、</p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>メニュータイトル、って書いてあるところに<span class="s2"> Editor-&gt;SwiftFormat-&gt;Format File </span>ってガンバって手打ちすると良い。</p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>この画面で保存ショートカット<span class="s2"> </span><span class="s4">⌘</span><span class="s2"> + s</span>を押すと、キーボードショートカットのところに⌘<span class="s2">S</span>が入ってくれる。</p>
+<p class="p4"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202023-07-29%204.11.42.png" alt="スクリーンショット 2023-07-29 4.11.42.png"></p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>良さげ、ってなったら完了で、Xcodeにいってコード編集中に⌘ + Sでフォーマットされたら優勝。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>ファイル単位。保存時。フォーマット。優勝。</p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>良さげ、ってなったら完了で、<span class="s2">Xcode</span>にいってコード編集中に⌘<span class="s2"> + S</span>でフォーマットされたら優勝。</p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>ファイル単位。保存時。フォーマット。優勝。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>swift-formatくんはgofmtか君は、ってくらい厳格なのがデフォなのでめっちゃ好き。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>デフォのAppDelegateまで書き換えるのに狂気を感じるが。</p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span>swift-format</span>くんは<span class="s2">gofmt</span>か君は、ってくらい厳格なのがデフォなのでめっちゃ好き。</p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>デフォの<span class="s2">AppDelegate</span>まで書き換えるのに狂気を感じるが。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 </body>
