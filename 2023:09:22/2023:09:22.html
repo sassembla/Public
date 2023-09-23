@@ -9,80 +9,85 @@
   <style type="text/css">
     p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px Helvetica}
     p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
-    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
-    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px Menlo; color: #000000; background-color: #e6e6e6}
-    span.s1 {font-variant-ligatures: no-common-ligatures}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px Menlo; color: #000000; background-color: #e6e6e6}
+    span.s1 {font: 22.0px 'Hiragino Sans'}
+    span.s2 {font: 12.0px Helvetica}
+    span.s3 {font: 12.0px 'Lucida Grande'}
+    span.s4 {font-variant-ligatures: no-common-ligatures}
+    span.s5 {font: 12.0px 'Hiragino Sans'}
     span.Apple-tab-span {white-space:pre}
   </style>
 </head>
 <body>
-<p class="p1"><b>iPadOS17 + Xcode15にしたら辛かったので戻した</b></p>
+<p class="p1"><b>iPadOS17 + Xcode15</b><span class="s1"><b>にしたら辛かったので戻した</b></span></p>
 <p class="p2"><br></p>
 <p class="p3"><b>概要</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>タイトルの通り。久しぶりにiPadOSをダウングレードしたので、その記録まで。</p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>タイトルの通り。久しぶりに<span class="s2">iPadOS</span>をダウングレードしたので、その記録まで。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>やったこと</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>DFUモードに持っていって復元ボタンをoption押しながら押してipswを指定して更新。</p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span>DFU</span>モードに持っていって復元ボタンを<span class="s2">option</span>押しながら押して<span class="s2">ipsw</span>を指定して更新。</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>イメージはここからDLする。<span class="Apple-converted-space"> </span></p>
-<p class="p3"><span class="Apple-tab-span">	</span><a href="https://developer.apple.com/download/#ios-restore-images-ipad-new">https://developer.apple.com/download/#ios-restore-images-ipad-new</a></p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>イメージはここから<span class="s2">DL</span>する。<span class="s2"><span class="Apple-converted-space"> </span></span></p>
+<p class="p4"><span class="Apple-tab-span">	</span><a href="https://developer.apple.com/download/#ios-restore-images-ipad-new">https://developer.apple.com/download/#ios-restore-images-ipad-new</a></p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>今回はこれを使用。</p>
-<p class="p3"><span class="Apple-tab-span">	</span><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202023-09-22%2010.32.55.png" alt="スクリーンショット 2023-09-22 10.32.55.png"></p>
-<p class="p2"><br></p>
-<p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>→ 確かこれでやり方あってるよなー、、と思ってやってみるも、</p>
-<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>iPadを待っています、という表示が長時間出た後にコード4042で失敗</p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>今回はこれを使用。</p>
+<p class="p4"><span class="Apple-tab-span">	</span><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202023-09-22%2010.32.55.png" alt="スクリーンショット 2023-09-22 10.32.55.png"></p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>やり直しとして、更新ボタンを押したあと、</p>
-<p class="p3"><span class="Apple-tab-span">	</span><b>iPadを待っています表示のタイミングでiPad側の電源ボタンを長押ししたら</b>なんとうまく行った。</p>
-<p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>写真のタイミング以降でiPad側の電源を長押しする。当然iPad側は起動するんだけど、なんかうまくいった。こわ。</p>
-<p class="p3"><span class="Apple-tab-span">	</span><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202023-09-22%2011.09.08.png" alt="スクリーンショット 2023-09-22 11.09.08.png"></p>
-<p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>マジで情報が無いな、、ある？ 自分は変な業者たちと古い情報しか見つけられなかった。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>んでダウングレードは大体どのツールでも年額5000円くらいの有償verじゃないと使えない上に、いや〜〜あやしいw 金を払わない方がいい。</p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span><span class="s3">→</span><span class="s2"> </span>確かこれでやり方あってるよなー、、と思ってやってみるも、</p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>iPad</span>を待っています、という表示が長時間出た後にコード<span class="s2">4042</span>で失敗</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>あと、そのうち16.6のipswは公式から取得できなくなるのがあるはずで、</p>
-<p class="p3"><span class="Apple-tab-span">	</span>野良で落ちてるipswを絶対に触らない方がいいと思うが、万が一の参考までにMD5を載せておく。</p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>やり直しとして、更新ボタンを押したあと、</p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span><b>iPad</b></span><b>を待っています表示のタイミングで</b><span class="s2"><b>iPad</b></span><b>側の電源ボタンを長押ししたら</b>なんとうまく行った。</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>iPad14,3,iPad14,4,iPad14,5,iPad14,6_16.6.1_20G81_Restore.ipsw</p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>写真のタイミング以降で<span class="s2">iPad</span>側の電源を長押しする。当然<span class="s2">iPad</span>側は起動するんだけど、なんかうまくいった。こわ。</p>
+<p class="p4"><span class="Apple-tab-span">	</span><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202023-09-22%2011.09.08.png" alt="スクリーンショット 2023-09-22 11.09.08.png"></p>
 <p class="p2"><br></p>
-<p class="p4"><span class="s1">md5 /Users/sassembla/Desktop/iPad14\,3\,iPad14\,4\,iPad14\,5\,iPad14\,6_16.6.1_20G81_Restore.ipsw<span class="Apple-converted-space"> </span></span></p>
-<p class="p4"><span class="s1">MD5 (/Users/aimer/Desktop/iPad14,3,iPad14,4,iPad14,5,iPad14,6_16.6.1_20G81_Restore.ipsw) = 2a034cb68e190da71af1e8e92bdf2680</span></p>
-<p class="p2"><br></p>
-<p class="p2"><br></p>
-<p class="p3"><b>Xcode15とiPadOS17で起きたこと</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>以下は記録。</p>
-<p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>まず大前提、俺は寛容なのでやり直す方を選ぶのに躊躇がないし、他人の失敗にも優しくしたい。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>なのでまあ15.1とか17.1とかが出たらまた試そうと思う。実験大事。</p>
-<p class="p2"><br></p>
-<p class="p2"><span class="Apple-tab-span">	</span></p>
-<p class="p3"><b>1. GPUのプロファイルが出たり出なかったりする</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>困る</p>
-<p class="p2"><span class="Apple-tab-span">	</span></p>
-<p class="p2"><br></p>
-<p class="p3"><b>2. ペンタッチをしていると画面上の別のビューに置いてあるボタンイベントが着火する</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>困る。そんでその時1秒くらいのハングが発生する。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>こうなるとペンタッチを受け付けなくなって、指でタッチすると状態異常を回復するのか触れるようになるが、</p>
-<p class="p3"><span class="Apple-tab-span">	</span>発生タイミングがボタン、ペン、タッチなどのI/Oに依存してるっぽく、なんとプロファイラにはハングとしか現れないため詰んだ。</p>
-<p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>iPadOS16.6.1 + Xcode14.3系では発生しなかったので、iPadOS17~ 17.0.1とXcode15に関連する問題っぽい。</p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>マジで情報が無いな、、ある？<span class="s2"> </span>自分は変な業者たちと古い情報しか見つけられなかった。</p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>んでダウングレードは大体どのツールでも年額<span class="s2">5000</span>円くらいの有償<span class="s2">ver</span>じゃないと使えない上に、いや～～あやしい<span class="s2">w </span>金を払わない方がいい。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
-<p class="p3">1と2の合わせ技で一本。デグレード模索となった。</p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>あと、そのうち<span class="s2">16.6</span>の<span class="s2">ipsw</span>は公式から取得できなくなるのがあるはずで、</p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>野良で落ちてる<span class="s2">ipsw</span>を絶対に触らない方がいいと思うが、万が一の参考までに<span class="s2">MD5</span>を載せておく。</p>
 <p class="p2"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>iPad14,3,iPad14,4,iPad14,5,iPad14,6_16.6.1_20G81_Restore.ipsw</p>
+<p class="p2"><br></p>
+<p class="p5"><span class="s4">md5 /Users/sassembla/Desktop/iPad14\,3\,iPad14\,4\,iPad14\,5\,iPad14\,6_16.6.1_20G81_Restore.ipsw<span class="Apple-converted-space"> </span></span></p>
+<p class="p5"><span class="s4">MD5 (/Users/sassembla/Desktop/iPad14,3,iPad14,4,iPad14,5,iPad14,6_16.6.1_20G81_Restore.ipsw) = 2a034cb68e190da71af1e8e92bdf2680</span></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p4"><b>Xcode15</b><span class="s5"><b>と</b></span><b>iPadOS17</b><span class="s5"><b>で起きたこと</b></span></p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>以下は記録。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>まず大前提、俺は寛容なのでやり直す方を選ぶのに躊躇がないし、他人の失敗にも優しくしたい。</p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>なのでまあ<span class="s2">15.1</span>とか<span class="s2">17.1</span>とかが出たらまた試そうと思う。実験大事。</p>
 <p class="p2"><br></p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
-<p class="p3"><b>そもそもなんでiPadOS17に急にしたの？</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>使いたいプラグインがあったんだけど、そのプラグインがXcodeリリース前からswift toolsの5.9(Xcode15！)に依存してて、別に書き換えても動いたんだろうけど、試したかった。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>いや〜〜〜swift5.9とかもあってすごくいいんすけどねXcode15。</p>
+<p class="p3"><span class="s2"><b>1. GPU</b></span><b>のプロファイルが出たり出なかったりする</b></p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>困る</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>安定するのを待つ。</p>
+<p class="p3"><span class="s2"><b>2. </b></span><b>ペンタッチをしていると画面上の別のビューに置いてあるボタンイベントが着火する</b></p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>困る。そんでその時<span class="s2">1</span>秒くらいのハングが発生する。</p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>こうなるとペンタッチを受け付けなくなって、指でタッチすると状態異常を回復するのか触れるようになるが、</p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>発生タイミングがボタン、ペン、タッチなどの<span class="s2">I/O</span>に依存してるっぽく、なんとプロファイラにはハングとしか現れないため詰んだ。</p>
+<p class="p2"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>iPadOS16.6.1 + Xcode14.3<span class="s5">系では発生しなかったので、</span>iPadOS17~ 17.0.1<span class="s5">と</span>Xcode15<span class="s5">に関連する問題っぽい。</span></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="s2">1</span>と<span class="s2">2</span>の合わせ技で一本。デグレード模索となった。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><b>そもそもなんで</b><span class="s2"><b>iPadOS17</b></span><b>に急にしたの？</b></p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>使いたいプラグインがあったんだけど、そのプラグインが<span class="s2">Xcode</span>リリース前から<span class="s2">swift tools</span>の<span class="s2">5.9(Xcode15</span>！<span class="s2">)</span>に依存してて、別に書き換えても動いたんだろうけど、試したかった。</p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>いや～～～<span class="s2">swift5.9</span>とかもあってすごくいいんすけどね<span class="s2">Xcode15</span>。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>安定するのを待つ。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 </body>
