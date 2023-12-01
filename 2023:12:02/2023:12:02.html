@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2299.7">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; background-color: #e6e6e6}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>Barrierの設定する</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>UniversalControlで入れないマシンがあるのでそういうのと手元のマシンを繋ぐ。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>インストール</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>brew install barrier</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>依存としてOpenSSLがあるので、必要ならそちらも。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>Pemの作成</b></p>
+<p class="p4">openssl genrsa -out Barrier.key 2048</p>
+<p class="p4">openssl req -new -key Barrier.key -out Barrier.csr</p>
+<p class="p4">openssl req -x509 -days 1825 -key Barrier.key -in Barrier.csr -out Barrier.crt</p>
+<p class="p4">cat Barrier.crt Barrier.key &gt; Barrier.pem</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>作ったpemを、/Users/ユーザー名/Library/Application Support/barrier/SSL/ に配置。そっからBarrierを起動してサーバにしたりクライアントにしたり。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>画面のエッジにマウス持ってくとそのまま行けて便利。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ただ一つ、macの画面ズーム系のオプションと併用すると、画面が固まってやばってなるのと、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>あ、もう一つあった、macのステータスバーからアイコンが隠せない。ダサい。</p>
+<p class="p2"><br></p>
+</body>
+</html>
