@@ -5,28 +5,26 @@
   <meta http-equiv="Content-Style-Type" content="text/css">
   <title></title>
   <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="2113.4">
+  <meta name="CocoaVersion" content="2299.7">
   <style type="text/css">
     p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Sans'}
     p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; min-height: 18.0px}
     p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'}
     p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
     p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; background-color: #e6e6e6}
-    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Menlo; color: #cacaca; -webkit-text-stroke: #cacaca; background-color: #000000}
-    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Menlo; color: #8cd3fe; -webkit-text-stroke: #8cd3fe; background-color: #000000}
-    p.p8 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Menlo; color: #c27e65; -webkit-text-stroke: #c27e65; background-color: #000000}
-    p.p9 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; -webkit-text-stroke: #cacaca; min-height: 18.0px}
-    p.p10 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'; -webkit-text-stroke: #cacaca}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Menlo; color: #cacaca; background-color: #000000}
+    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Menlo; color: #8cd3fe; background-color: #000000}
+    p.p8 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Menlo; color: #c27e65; background-color: #000000}
     span.s1 {font-kerning: none}
-    span.s2 {font-kerning: none; color: #cacaca; -webkit-text-stroke: 0px #cacaca}
-    span.s3 {font-kerning: none; color: #4689cc; -webkit-text-stroke: 0px #4689cc}
-    span.s4 {font-kerning: none; color: #c27e65; -webkit-text-stroke: 0px #c27e65}
-    span.s5 {font-kerning: none; color: #8cd3fe; -webkit-text-stroke: 0px #8cd3fe}
+    span.s2 {font-kerning: none; color: #cacaca}
+    span.s3 {font-kerning: none; color: #4689cc}
+    span.s4 {font-kerning: none; color: #c27e65}
+    span.s5 {font-kerning: none; color: #8cd3fe}
     span.Apple-tab-span {white-space:pre}
   </style>
 </head>
 <body>
-<p class="p1"><b>令和最新版(2022) ARM系Mac + VSCodeでUnityの補完を行う</b></p>
+<p class="p1"><b>令和最新版(2022) ARM系Mac + VSCodeでUnityの補完を行う(2023更新)</b></p>
 <p class="p2"><br></p>
 <p class="p3"><b>概要</b></p>
 <p class="p3"><span class="Apple-tab-span">	</span>軽量かつ機能が少ないエディタで開発がしたいのでVSCodeでUnityコードも書いてるけど</p>
@@ -86,11 +84,48 @@
 <p class="p7"><span class="s2"><b><span class="Apple-converted-space">    </span></b></span><span class="s1"><b>"omnisharp.useGlobalMono"</b></span><span class="s2"><b>: </b></span><span class="s4"><b>"always"</b></span><span class="s2"><b>,</b></span></p>
 <p class="p8"><span class="s2"><b><span class="Apple-converted-space">    </span></b></span><span class="s5"><b>"omnisharp.monoPath"</b></span><span class="s2"><b>: </b></span><span class="s1"><b>"/Library/Frameworks/Mono.framework/Versions/Current"</b></span></p>
 <p class="p6"><span class="s1">}</span></p>
-<p class="p9"><br></p>
-<p class="p10"><span class="Apple-tab-span">	</span>この状態でrestart omnisharp とかを実行すれば問題なく動くはず。<span class="Apple-tab-span">	</span></p>
-<p class="p9"><br></p>
-<p class="p10"><span class="Apple-tab-span">	</span>繰り返すけどdotnet sdkやらcliを入れる必要はない。</p>
-<p class="p10"><span class="Apple-tab-span">	</span>homebrewから入れられて便利だけど、あれほんと意味ない。</p>
-<p class="p9"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>この状態でrestart omnisharp とかを実行すれば問題なく動くはず。<span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>繰り返すけどdotnet sdkやらcliを入れる必要はない。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>homebrewから入れられて便利だけど、あれほんと意味ない。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>以下追記 in 2023</b></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>MSくんは必ず環境を壊すことでしかなにかができないんか？ってくらい微妙なアプデを突っ込んでくるのがあって、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>今に至ってもMacでUnity用のC#を書く時のベストな体験はVSCode + C# extensionオンリーっすね。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>MSくんはC# DevKitと、あともう一つくらい、さらにC# extensionを含む合計3つのextensionの協調動作でなんとかしようとしてくるんだけど、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>そんな難しいことユーザーの手元でやらせるな、失敗するに決まってるだろ。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>というわけでVSCodeのC# extensionも、バージョンを固定して過ごしている。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これがまあアプデオフにしてないと壊れる上に、一度でもアプデでぶっ壊れると、↑の複数extension協調なのが必須な理由で、</p>
+<p class="p3"><span class="Apple-tab-span">	</span>ユーザーの手元でextension間の関係がぶっ壊れて、extensionのダウングレードでも解決できなくなる。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>方法としてはextensionの削除でもまだ無理で、VSCode自体を入れ直す + 特定verのC# extensionをダイレクトにvsix経由でインストールすると解決する。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>いやほんと、C#なんてコンパイルできてエラー表示できて補完表示できて参照数表示できて、あとはcopilotあたりがVSCode自体の経由で使えりゃ満足なんだわ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>素晴らしい体験。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>というわけで方法 in 2023。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>1. VSCodeをクリーンインストールします</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>a. ApplicationsフォルダからVSCode.appを消す</p>
+<p class="p3"><span class="Apple-tab-span">	</span>b. <a href="https://logsuke.com/app/vscode/vscode-uninstall">https://logsuke.com/app/vscode/vscode-uninstall</a> この辺を参考に隠しファイルとかも消す。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>c. <a href="https://code.visualstudio.com/docs/?dv=osx">https://code.visualstudio.com/docs/?dv=osx</a> からDLしてインストール</p>
+<p class="p2"><br></p>
+<p class="p3"><b>2. C# extensionをバージョン指定してvsixファイルをダウンロード</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>a. <a href="https://github.com/dotnet/vscode-csharp/releases/tag/v1.24.1">https://github.com/dotnet/vscode-csharp/releases/tag/v1.24.1</a> このバージョンが比較的まともに動き続けることができる。vsixファイルをDLする。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>b. VSCodeのExtensionsペインの三点マーク → Install from VSIX で2-aでDLしたファイルを指定、あとは↑の、2022記事の通りにすると動作する。</p>
+<p class="p2"><br></p>
+<p class="p3">2-aのURLを確保するためだけに追記している。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>これから</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Unity2022.3くらいまで行くと重くなるのがあるぽいのでそのうち解決しよう。</p>
+<p class="p2"><br></p>
 </body>
 </html>
