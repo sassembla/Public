@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2299.7">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>10FPSくらいの簡易な動画配信システムを作ってみる</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>アプリのスクショを定期的に作り、それを元にHLSのデータを作成、配布することで簡単な動画配信サービスが作れそう。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>構造自体が簡単なので、できればffmpegに依存したくないが、それは流石に面倒臭いので後で。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>使用技術</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>github.com/u2takey/ffmpeg-go</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>goからffmpegを叩くラッパー。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>以上。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>想定構成</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>1. アプリケーションがスクショを送りつけてくる</p>
+<p class="p3"><span class="Apple-tab-span">	</span>2. サーバがそれを受け取り、動画ファイルとして吐き出す</p>
+<p class="p3"><span class="Apple-tab-span">	</span>3. HLSサーバがブラウザクライアントへと配信</p>
+<p class="p3"><span class="Apple-tab-span">	</span>4. ブラウザはHLS.jsとかで視聴</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>公開</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ngrokを入れて公開したら無事に表示できた、よし。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>すでに公開停止済みだけどこういうURLが作れる、嬉しい。</p>
+<p class="p3"><span class="Apple-tab-span">	</span><a href="https://6489-113-43-253-49.ngrok-free.app/player.html">https://6489-113-43-253-49.ngrok-free.app/</a></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3">ChatGPTとgoとかの組み合わせでマジで1日かからずにHLSサーバができた。たのし〜〜</p>
+</body>
+</html>
