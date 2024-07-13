@@ -7,88 +7,93 @@
   <meta name="Generator" content="Cocoa HTML Writer">
   <meta name="CocoaVersion" content="2487.6">
   <style type="text/css">
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 23.0px Helvetica}
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px Helvetica}
     p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
-    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    span.s1 {font: 22.0px 'Hiragino Sans'}
+    span.s2 {font: 12.0px Helvetica}
+    span.s3 {font: 12.0px 'Hiragino Sans'}
+    span.s4 {font: 12.0px 'Lucida Grande'}
     span.Apple-tab-span {white-space:pre}
   </style>
 </head>
 <body>
-<p class="p1"><b>macOS sonomaのWidgetを真面目に作ることにした</b></p>
+<p class="p1"><b>macOS sonoma</b><span class="s1"><b>の</b></span><b>Widget</b><span class="s1"><b>を真面目に作ることにした</b></span></p>
 <p class="p2"><br></p>
 <p class="p3"><b>概要</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>んで資料がAppleの公式資料とかなのでチラ見しつつ大半はChatGPTに聞く。</p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>んで資料が<span class="s2">Apple</span>の公式資料とかなのでチラ見しつつ大半は<span class="s2">ChatGPT</span>に聞く。</p>
 <p class="p2"><br></p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p2"><br></p>
-<p class="p3"><b>ざっくり</b><span class="Apple-tab-span">	</span></p>
-<p class="p3"><span class="Apple-tab-span">	</span>widgetとAppの間のやり取りはuserPrefsを使うと楽で、それ以外をやるとすごいしんどい。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>widgetの要素で個々にインタラクティブな要素を入れようとすると、Link要素に操作したいUI要素を入れると大体何とかなる。</p>
+<p class="p3"><b>ざっくり</b><span class="s2"><span class="Apple-tab-span">	</span></span></p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span>widget</span>と<span class="s2">App</span>の間のやり取りは<span class="s2">userPrefs</span>を使うと楽で、それ以外をやるとすごいしんどい。</p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span>widget</span>の要素で個々にインタラクティブな要素を入れようとすると、<span class="s2">Link</span>要素に操作したい<span class="s2">UI</span>要素を入れると大体何とかなる。</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p2"><br></p>
 <p class="p3"><b>やりたいこと</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>widget上にスイッチボタンを置いて、押すたびに切り替わる。付随してエアコン制御APIとかを叩きたい。</p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span>widget</span>上にスイッチボタンを置いて、押すたびに切り替わる。付随してエアコン制御<span class="s2">API</span>とかを叩きたい。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>実例</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/Timer2/pull/2">https://github.com/sassembla/Timer2</a></p>
+<p class="p4"><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/Timer2/pull/2">https://github.com/sassembla/Timer2</a></p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>はまりどころ</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>ライフタイムとデータ伝達とエラーハンドリングが難しい。特に難しかったところを列挙する。</p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>ライフタイムとデータ伝達とエラーハンドリングが難しい。特に難しかったところを列挙する。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
-<p class="p3"><b>Widget Appの作り方</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>Projectを新規作成し、さらにnew→Target→Widget Extensionを作成する。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>この時macOSだけにしてAppを作るとまずは簡単で、そうしないと「macOS sonoma上だと、何しても表示が<b>こまった状態で固定</b>される」プロジェクトになる。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>たぶん後で切り替える方式だとどこかにバグが残るのか、延々と更新されない。</p>
+<p class="p4"><b>Widget App</b><span class="s3"><b>の作り方</b></span></p>
+<p class="p4"><span class="Apple-tab-span">	</span>Project<span class="s3">を新規作成し、さらに</span>new<span class="s4">→</span>Target<span class="s4">→</span>Widget Extension<span class="s3">を作成する。</span></p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>この時<span class="s2">macOS</span>だけにして<span class="s2">App</span>を作るとまずは簡単で、そうしないと「<span class="s2">macOS sonoma</span>上だと、何しても表示が<b>こまった状態で固定</b>される」プロジェクトになる。</p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>たぶん後で切り替える方式だとどこかにバグが残るのか、延々と更新されない。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
-<p class="p3"><b>Link要素がXcodeでのplay時に動作しない</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>これは実際にデスクトップに置くと動作するが、Play時に表示される画面ではなんとどれだけ正しく作っても動作しない気がする。</p>
+<p class="p4"><b>Link</b><span class="s3"><b>要素が</b></span><b>Xcode</b><span class="s3"><b>での</b></span><b>play</b><span class="s3"><b>時に動作しない</b></span></p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>これは実際にデスクトップに置くと動作するが、<span class="s2">Play</span>時に表示される画面ではなんとどれだけ正しく作っても動作しない気がする。</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
-<p class="p3"><span class="Apple-tab-span">	</span>これによって、UserPrefsを用いたWidget-App間の疎通 以外の手段は極端に難しくなっている。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>面倒くさくなったのと、XcodeでPlay時に出るWidgetKit自体が気に食わなかったので、独自にログシステムを構築して対応した。</p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>これによって、<span class="s2">UserPrefs</span>を用いた<span class="s2">Widget-App</span>間の疎通<span class="s2"> </span>以外の手段は極端に難しくなっている。</p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>面倒くさくなったのと、<span class="s2">Xcode</span>で<span class="s2">Play</span>時に出る<span class="s2">WidgetKit</span>自体が気に食わなかったので、独自にログシステムを構築して対応した。</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>、、のが、Timer2の一部としてgithubに上がっている。</p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>、、のが、<span class="s2">Timer2</span>の一部として<span class="s2">github</span>に上がっている。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
-<p class="p3"><b>ファイルのI/Oがめちゃくちゃ厳しく制御されている</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>Sandbox関係なく、AppGroupで指定したドメインにUserPrefsを置く以外にはファイルを置けない/書けないと思っていい。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>いろいろ回避策はあるけどほんとガッチガチだ。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>OSが用意している正しい手続きを踏めば色々できそうなのでいいと思うけど、この制約を外部から知るのは骨が折れた。</p>
+<p class="p3"><b>ファイルの</b><span class="s2"><b>I/O</b></span><b>がめちゃくちゃ厳しく制御されている</b></p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span>Sandbox</span>関係なく、<span class="s2">AppGroup</span>で指定したドメインに<span class="s2">UserPrefs</span>を置く以外にはファイルを置けない<span class="s2">/</span>書けないと思っていい。</p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>いろいろ回避策はあるけどほんとガッチガチだ。</p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span>OS</span>が用意している正しい手続きを踏めば色々できそうなのでいいと思うけど、この制約を外部から知るのは骨が折れた。</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p2"><br></p>
-<p class="p3"><b>Widgetの不安定性について</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>ぶっちゃけ稼働し出したWidgetはとても安定するが、開発中はXcodeでbuildコマンドを実行しただけで結構な回数の各種ハンドラが呼ばれており、カオス。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>把握するにはpythonで簡易なログサーバを立てて見てみるのが一番良かった。で、AppやWidget側からHTTPを飛ばすコードは適当に挟んで実行できるので、ログが残って良い。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>これ以外の方法でまともにログを見ることはできなかった。</p>
+<p class="p3"><span class="s2"><b>Widget</b></span><b>の不安定性について</b></p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>ぶっちゃけ稼働し出した<span class="s2">Widget</span>はとても安定するが、開発中は<span class="s2">Xcode</span>で<span class="s2">build</span>コマンドを実行しただけで結構な回数の各種ハンドラが呼ばれており、カオス。</p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>把握するには<span class="s2">python</span>で簡易なログサーバを立てて見てみるのが一番良かった。で、<span class="s2">App</span>や<span class="s2">Widget</span>側から<span class="s2">HTTP</span>を飛ばすコードは適当に挟んで実行できるので、ログが残って良い。</p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>これ以外の方法でまともにログを見ることはできなかった。</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>Widgetがいつのまにか画面から消えていて、一覧から追加しようにも出なくなる、ということがあり得て、そうなったらclean buildをするとしれっと復活する。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>壊れ方にも何段階かあるようで、見えてないだけで存在するのかその場所に新たなwidgetが置けなくなる、とかがあった。</p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span>Widget</span>がいつのまにか画面から消えていて、一覧から追加しようにも出なくなる、ということがあり得て、そうなったら<span class="s2">clean build</span>をするとしれっと復活する。</p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>壊れ方にも何段階かあるようで、見えてないだけで存在するのかその場所に新たな<span class="s2">widget</span>が置けなくなる、とかがあった。</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>こまったらclean build folder でもう一度ビルドすると良い。</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="s3">こまったら</span>clean build folder <span class="s3">でもう一度ビルドすると良い。</span></p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>エラーハンドリング</b></p>
-<p class="p3"><span class="Apple-tab-span">	</span>ミスるとよく無音で即死する。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>widgetの更新とかは特に、<span class="Apple-tab-span">	</span>OSが管理してくれているEntryの更新などの完全に見えないところで即死するので、ログを出すようにしないとマジできつかった。</p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>ミスるとよく無音で即死する。</p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span>widget</span>の更新とかは特に、<span class="s2"><span class="Apple-tab-span">	</span>OS</span>が管理してくれている<span class="s2">Entry</span>の更新などの完全に見えないところで即死するので、ログを出すようにしないとマジできつかった。</p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>WidgetへのインプットがAppに届くのをアップストリーム、逆をダウンストリームとすると、</p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span>Widget</span>へのインプットが<span class="s2">App</span>に届くのをアップストリーム、逆をダウンストリームとすると、</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
-<p class="p3"><span class="Apple-tab-span">	</span>アップストリームは次のパターンがある</p>
-<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>なんでもいいから触った</p>
-<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Linkが関わっているボタンを押した</p>
-<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>UserPrefsの中身を書き換えるボタンを押した</p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>アップストリームは次のパターンがある</p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>なんでもいいから触った</p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Link</span>が関わっているボタンを押した</p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>UserPrefs</span>の中身を書き換えるボタンを押した</p>
 <p class="p2"><br></p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
-<p class="p3"><span class="Apple-tab-span">	</span>ダウンストリームは次のパターンがある</p>
-<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>(URL Schemeが来たとか何かがあったので)reloadAllTimelines関数をぶっ叩く→WidgetのgetTimeline関数がぶっ叩かれる</p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>ダウンストリームは次のパターンがある</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>(URL Scheme<span class="s3">が来たとか何かがあったので</span>)reloadAllTimelines<span class="s3">関数をぶっ叩く→</span>Widget<span class="s3">の</span>getTimeline<span class="s3">関数がぶっ叩かれる</span></p>
 <p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
 <p class="p2"><br></p>
-<p class="p3"><span class="Apple-tab-span">	</span>ダウンが厄介で、Entry更新メソッドはreloadしかしてくれないので、特に情報を付与できない。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>App側でUserPrefsに何かを書き込み、書き込んだ後でEntry更新メソッドをぶっ叩く、という形にすると何とかなる。</p>
-<p class="p3"><span class="Apple-tab-span">	</span>というかこれ以外の方法がないのでは、、、?</p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>ダウンが厄介で、<span class="s2">Entry</span>更新メソッドは<span class="s2">reload</span>しかしてくれないので、特に情報を付与できない。</p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span>App</span>側で<span class="s2">UserPrefs</span>に何かを書き込み、書き込んだ後で<span class="s2">Entry</span>更新メソッドをぶっ叩く、という形にすると何とかなる。</p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>というかこれ以外の方法がないのでは、、、<span class="s2">?</span></p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
