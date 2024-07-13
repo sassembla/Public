@@ -1,0 +1,100 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2487.6">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 23.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><b>macOS sonomaのWidgetを真面目に作ることにした</b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>んで資料がAppleの公式資料とかなのでチラ見しつつ大半はChatGPTに聞く。</p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>ざっくり</b><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>widgetとAppの間のやり取りはuserPrefsを使うと楽で、それ以外をやるとすごいしんどい。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>widgetの要素で個々にインタラクティブな要素を入れようとすると、Link要素に操作したいUI要素を入れると大体何とかなる。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>やりたいこと</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>widget上にスイッチボタンを置いて、押すたびに切り替わる。付随してエアコン制御APIとかを叩きたい。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>実例</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span><a href="https://github.com/sassembla/Timer2/pull/2">https://github.com/sassembla/Timer2</a></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>はまりどころ</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ライフタイムとデータ伝達とエラーハンドリングが難しい。特に難しかったところを列挙する。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>Widget Appの作り方</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Projectを新規作成し、さらにnew→Target→Widget Extensionを作成する。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>この時macOSだけにしてAppを作るとまずは簡単で、そうしないと「macOS sonoma上だと、何しても表示が<b>こまった状態で固定</b>される」プロジェクトになる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>たぶん後で切り替える方式だとどこかにバグが残るのか、延々と更新されない。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>Link要素がXcodeでのplay時に動作しない</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これは実際にデスクトップに置くと動作するが、Play時に表示される画面ではなんとどれだけ正しく作っても動作しない気がする。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>これによって、UserPrefsを用いたWidget-App間の疎通 以外の手段は極端に難しくなっている。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>面倒くさくなったのと、XcodeでPlay時に出るWidgetKit自体が気に食わなかったので、独自にログシステムを構築して対応した。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>、、のが、Timer2の一部としてgithubに上がっている。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>ファイルのI/Oがめちゃくちゃ厳しく制御されている</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Sandbox関係なく、AppGroupで指定したドメインにUserPrefsを置く以外にはファイルを置けない/書けないと思っていい。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>いろいろ回避策はあるけどほんとガッチガチだ。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>OSが用意している正しい手続きを踏めば色々できそうなのでいいと思うけど、この制約を外部から知るのは骨が折れた。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><b>Widgetの不安定性について</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ぶっちゃけ稼働し出したWidgetはとても安定するが、開発中はXcodeでbuildコマンドを実行しただけで結構な回数の各種ハンドラが呼ばれており、カオス。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>把握するにはpythonで簡易なログサーバを立てて見てみるのが一番良かった。で、AppやWidget側からHTTPを飛ばすコードは適当に挟んで実行できるので、ログが残って良い。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>これ以外の方法でまともにログを見ることはできなかった。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>Widgetがいつのまにか画面から消えていて、一覧から追加しようにも出なくなる、ということがあり得て、そうなったらclean buildをするとしれっと復活する。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>壊れ方にも何段階かあるようで、見えてないだけで存在するのかその場所に新たなwidgetが置けなくなる、とかがあった。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>こまったらclean build folder でもう一度ビルドすると良い。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>エラーハンドリング</b></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ミスるとよく無音で即死する。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>widgetの更新とかは特に、<span class="Apple-tab-span">	</span>OSが管理してくれているEntryの更新などの完全に見えないところで即死するので、ログを出すようにしないとマジできつかった。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>WidgetへのインプットがAppに届くのをアップストリーム、逆をダウンストリームとすると、</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>アップストリームは次のパターンがある</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>なんでもいいから触った</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Linkが関わっているボタンを押した</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>UserPrefsの中身を書き換えるボタンを押した</p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ダウンストリームは次のパターンがある</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>(URL Schemeが来たとか何かがあったので)reloadAllTimelines関数をぶっ叩く→WidgetのgetTimeline関数がぶっ叩かれる</p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-tab-span">	</span>ダウンが厄介で、Entry更新メソッドはreloadしかしてくれないので、特に情報を付与できない。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>App側でUserPrefsに何かを書き込み、書き込んだ後でEntry更新メソッドをぶっ叩く、という形にすると何とかなる。</p>
+<p class="p3"><span class="Apple-tab-span">	</span>というかこれ以外の方法がないのでは、、、?</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3">とりあえずざっくりと。これで自由にデスクトップに家のスイッチが置ける。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+</body>
+</html>
