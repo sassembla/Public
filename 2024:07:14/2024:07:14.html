@@ -27,7 +27,7 @@
 <p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p2"><br></p>
 <p class="p3"><b>ざっくり</b><span class="s2"><span class="Apple-tab-span">	</span></span></p>
-<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span>widget</span>と<span class="s2">App</span>の間のやり取りは<span class="s2">userPrefs</span>を使うと楽で、それ以外をやるとすごいしんどい。</p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span>widget</span>と<span class="s2">App</span>の間のやり取りは<span class="s2">s</span>を使うと楽で、それ以外をやるとすごいしんどい。</p>
 <p class="p3"><span class="s2"><span class="Apple-tab-span">	</span>widget</span>の要素で個々にインタラクティブな要素を入れようとすると、<span class="s2">Link</span>要素に操作したい<span class="s2">UI</span>要素を入れると大体何とかなる。</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p2"><br></p>
@@ -52,14 +52,14 @@
 <p class="p4"><b>Link</b><span class="s3"><b>要素が</b></span><b>Xcode</b><span class="s3"><b>での</b></span><b>play</b><span class="s3"><b>時に動作しない</b></span></p>
 <p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>これは実際にデスクトップに置くと動作するが、<span class="s2">Play</span>時に表示される画面ではなんとどれだけ正しく作っても動作しない気がする。</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
-<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>これによって、<span class="s2">UserPrefs</span>を用いた<span class="s2">Widget-App</span>間の疎通<span class="s2"> </span>以外の手段は極端に難しくなっている。</p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>これによって、<span class="s2">userDefaults</span>を用いた<span class="s2">Widget-App</span>間の疎通<span class="s2"> </span>以外の手段は極端に難しくなっている。</p>
 <p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>面倒くさくなったのと、<span class="s2">Xcode</span>で<span class="s2">Play</span>時に出る<span class="s2">WidgetKit</span>自体が気に食わなかったので、独自にログシステムを構築して対応した。</p>
 <p class="p2"><br></p>
 <p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>、、のが、<span class="s2">Timer2</span>の一部として<span class="s2">github</span>に上がっている。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3"><b>ファイルの</b><span class="s2"><b>I/O</b></span><b>がめちゃくちゃ厳しく制御されている</b></p>
-<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span>Sandbox</span>関係なく、<span class="s2">AppGroup</span>で指定したドメインに<span class="s2">UserPrefs</span>を置く以外にはファイルを置けない<span class="s2">/</span>書けないと思っていい。</p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span>Sandbox</span>関係なく、<span class="s2">AppGroup</span>で指定したドメインに<span class="s2">userDefaults</span>を置く以外にはファイルを置けない<span class="s2">/</span>書けないと思っていい。</p>
 <p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>いろいろ回避策はあるけどほんとガッチガチだ。</p>
 <p class="p3"><span class="s2"><span class="Apple-tab-span">	</span>OS</span>が用意している正しい手続きを踏めば色々できそうなのでいいと思うけど、この制約を外部から知るのは骨が折れた。</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
@@ -84,7 +84,7 @@
 <p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>アップストリームは次のパターンがある</p>
 <p class="p3"><span class="s2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>なんでもいいから触った</p>
 <p class="p3"><span class="s2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Link</span>が関わっているボタンを押した</p>
-<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>UserPrefs</span>の中身を書き換えるボタンを押した</p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>userDefaults</span>の中身を書き換えるボタンを押した</p>
 <p class="p2"><br></p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
 <p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>ダウンストリームは次のパターンがある</p>
@@ -92,24 +92,35 @@
 <p class="p2"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
 <p class="p2"><br></p>
 <p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>ダウンが厄介で、<span class="s2">Entry</span>更新メソッドは<span class="s2">reload</span>しかしてくれないので、特に情報を付与できない。</p>
-<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span>App</span>側で<span class="s2">UserPrefs</span>に何かを書き込み、書き込んだ後で<span class="s2">Entry</span>更新メソッドをぶっ叩く、という形にすると何とかなる。</p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span>App</span>側で<span class="s2">userDefaults</span>に何かを書き込み、書き込んだ後で<span class="s2">Entry</span>更新メソッドをぶっ叩く、という形にすると何とかなる。</p>
 <p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>というかこれ以外の方法がないのでは、、、<span class="s2">?</span></p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
-<p class="p4"><b>UserPrefsが読めるけど取得できる値が間違っている</b></p>
-<p class="p4"><span class="Apple-tab-span">	</span>例えばbool値でtrueを書き込んだはずが、falseしか取得できない。</p>
-<p class="p4"><span class="Apple-tab-span">	</span>ファイル読み込みに対してエラーが出ているわけでもない。</p>
+<p class="p3"><span class="s2"><b>userDefaults</b></span><b>が読めるけど取得できる値が間違っている</b></p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>例えば<span class="s2">bool</span>値で<span class="s2">true</span>を書き込んだはずが、<span class="s2">false</span>しか取得できない。</p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>ファイル読み込みに対してエラーが出ているわけでもない。</p>
 <p class="p2"><br></p>
-<p class="p4"><span class="Apple-tab-span">	</span>こういう時に疑うといいのは、<b>「UserPrefsに干渉したいすべてのTargetに対して、AppGroupが個別に登録されているかどうか」</b></p>
-<p class="p4"><span class="Apple-tab-span">	</span>なんと、どれか一つにだけついてない、とかが発生すると、<b>アクセスはでき、Readもエラーなくできるが、正しい値を読めない</b>という特殊な状態がある。</p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>こういう時に疑うといいのは、<b>「</b><span class="s2"><b>userDefaults</b></span><b>に干渉したいすべての</b><span class="s2"><b>Target</b></span><b>に対して、</b><span class="s2"><b>AppGroup</b></span><b>が個別に登録されているかどうか」</b></p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>なんと、どれか一つにだけついてない、とかが発生すると、<b>アクセスはでき、</b><span class="s2"><b>Read</b></span><b>もエラーなくできるが、正しい値を読めない</b>という特殊な状態がある。</p>
 <p class="p2"><br></p>
-<p class="p4"><span class="Apple-tab-span">	</span>AppとWidgetを横断するデータに対して、AppからUserPrefに書き込んで、読めてるはずだし書き込めてないのか？と思ったら、書いた側でreadしたら正しい値が入っている。</p>
-<p class="p4"><span class="Apple-tab-span">	</span>で、Widget側でreadすると、read時のファイルアクセスエラーは出ていないし、キーもあるから値が読めるが、肝心の値が常にfalseになる。</p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span>App</span>と<span class="s2">Widget</span>を横断するデータに対して、<span class="s2">App</span>から<span class="s2">userDefaults</span>に書き込んで、読めてるはずだし書き込めてないのか？と思ったら、書いた側で<span class="s2">read</span>したら正しい値が入っている。</p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>で、<span class="s2">Widget</span>側で<span class="s2">read</span>すると、<span class="s2">read</span>時のファイルアクセスエラーは出ていないし、キーもあるから値が読めるが、肝心の値が常に<span class="s2">false</span>になる。</p>
 <p class="p2"><br></p>
-<p class="p4"><span class="Apple-tab-span">	</span>ということで、もしかして？ってなって確認したら、ビンゴだった。</p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>ということで、もしかして？ってなって確認したら、ビンゴだった。</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
-<p class="p4"><span class="Apple-tab-span">	</span>いやー、油断した。</p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>いやー、油断した。</p>
 <p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
+<p class="p4"><b>getTimelineが発生するタイミングがカオス</b></p>
+<p class="p4"><span class="Apple-tab-span">	</span>これはまだ規則性の全てを見切っているわけではないが、どうやらAppでreloadAllTimelinesを実行した後、即座にwidget側のgetTimelineが呼ばれる、というのは確定していない。</p>
+<p class="p2"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>App側の起動のトリガーになった場合はreloadAllTimelines→ getTimelineの時間差がほぼないが、</p>
+<p class="p4"><span class="Apple-tab-span">	</span>そうでない場合=Appが開いてからApp側でreloadAllTimelinesをやってから、widget側のgetTimelineの実行までにはかなり個性的な時間差がある。2秒からそれ以上になることもある。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p4"><span class="Apple-tab-span">	</span>おそらくgetTimeline関数の実行はOS側によってスケジュールされていて、reloadAllTimelinesが予約に過ぎないんだろうと思う。</p>
+<p class="p2"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>で、これは「Appを起動する初回については常に最速」なのだけれど、実際にはAppを「アクティブにした」実績があれば最速っぽく、</p>
+<p class="p4"><span class="Apple-tab-span">	</span>Appをhideしてから再度widgetからAppを呼び出し、reloadAllTimelinesをじっこうすると、最速でgetTimelineが発生するのを確認した。面白い。</p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3">とりあえずざっくりと。これで自由にデスクトップに家のスイッチが置ける。</p>
