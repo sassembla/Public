@@ -96,6 +96,21 @@
 <p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>というかこれ以外の方法がないのでは、、、<span class="s2">?</span></p>
 <p class="p2"><br></p>
 <p class="p2"><br></p>
+<p class="p4"><b>UserPrefsが読めるけど取得できる値が間違っている</b></p>
+<p class="p4"><span class="Apple-tab-span">	</span>例えばbool値でtrueを書き込んだはずが、falseしか取得できない。</p>
+<p class="p4"><span class="Apple-tab-span">	</span>ファイル読み込みに対してエラーが出ているわけでもない。</p>
+<p class="p2"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>こういう時に疑うといいのは、<b>「UserPrefsに干渉したいすべてのTargetに対して、AppGroupが個別に登録されているかどうか」</b></p>
+<p class="p4"><span class="Apple-tab-span">	</span>なんと、どれか一つにだけついてない、とかが発生すると、<b>アクセスはでき、Readもエラーなくできるが、正しい値を読めない</b>という特殊な状態がある。</p>
+<p class="p2"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>AppとWidgetを横断するデータに対して、AppからUserPrefに書き込んで、読めてるはずだし書き込めてないのか？と思ったら、書いた側でreadしたら正しい値が入っている。</p>
+<p class="p4"><span class="Apple-tab-span">	</span>で、Widget側でreadすると、read時のファイルアクセスエラーは出ていないし、キーもあるから値が読めるが、肝心の値が常にfalseになる。</p>
+<p class="p2"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>ということで、もしかして？ってなって確認したら、ビンゴだった。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p4"><span class="Apple-tab-span">	</span>いやー、油断した。</p>
+<p class="p2"><span class="Apple-tab-span">	</span></p>
+<p class="p2"><br></p>
 <p class="p2"><br></p>
 <p class="p3">とりあえずざっくりと。これで自由にデスクトップに家のスイッチが置ける。</p>
 <p class="p2"><br></p>
