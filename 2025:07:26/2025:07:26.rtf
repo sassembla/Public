@@ -1,0 +1,44 @@
+{\rtf1\ansi\ansicpg932\cocoartf2822
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica-Bold;\f1\fswiss\fcharset0 Helvetica;\f2\fnil\fcharset0 Menlo-Regular;
+}
+{\colortbl;\red255\green255\blue255;\red193\green193\blue193;\red0\green0\blue0;\red89\green138\blue67;
+\red140\green211\blue254;\red202\green202\blue202;\red212\green214\blue154;\red194\green126\blue101;}
+{\*\expandedcolortbl;;\cssrgb\c80000\c80000\c80000;\cssrgb\c0\c0\c0;\cssrgb\c41569\c60000\c33333;
+\cssrgb\c61176\c86275\c99608;\cssrgb\c83137\c83137\c83137;\cssrgb\c86275\c86275\c66667;\cssrgb\c80784\c56863\c47059;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww13580\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\b\fs44 \cf0 ngrok\uc0\u12391 gRPC\u25509 \u32154 \u12434 \u21463 \u12369 \u12427 
+\f1\b0\fs24 \
+\
+
+\f0\b \uc0\u27010 \u35201 
+\f1\b0 \
+	\uc0\u12414 \u12435 \u12414 tcp\u25201 \u12356 \u12391 \u12356 \u12369 \u12383 \u12290 tls endpoint\u12392 \u12375 \u12390 \u12418 \u21205 \u20316 \u12375 \u12390 \u12367 \u12428 \u12427 \u12290 \
+	\uc0\u28961 \u26009 \u12450 \u12459 \u12454 \u12531 \u12488 \u12391 tcp reserved\u12434 \u20351 \u12431 \u12394 \u12356 \u12392 \u27598 \u22238 \u12509 \u12540 \u12488 \u12364 \u22793 \u12431 \u12427 \u12364 \u12289 \u12381 \u12428 \u12399 \u12381 \u12428 \u12391 \u12475 \u12461 \u12517 \u12450 \u12391 \u12356 \u12356 \u12394 \u12290 \
+\
+\
+
+\f0\b \uc0\u23455 \u38555 
+\f1\b0 \
+	\uc0\u38627 \u12375 \u12363 \u12387 \u12383 \u12398 \u12399 ngrok\u12398 go sdk 2.0\u12398 \u20351 \u12356 \u26041 \u12391 \u12289 \u12525 \u12540 \u12459 \u12523 \u12391 \u21205 \u12367 gRPC\u12469 \u12540 \u12496 \u12398 8080\u30058 \u12395 \u23550 \u12375 \u12390 \u12289 \
+	ngrok\uc0\u12391 tcp\u12434 \u21463 \u12369 \u20184 \u12369 \u12427 \u25509 \u32154 \u12434 \u31435 \u12390 \u12427 \u12395 \u12399 \u20197 \u19979 \u12398 \u24863 \u12376 \u12384 \u12387 \u12383 \u12290 \
+\
+\
+\pard\pardeftab720\partightenfactor0
+
+\f2 \cf2 \cb3 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2     \cf4 \strokec4 // ngrok\uc0\u12398 \u12475 \u12483 \u12488 \u12450 \u12483 \u12503 \cf2 \strokec2 \
+    \cf5 \strokec5 authToken\cf2 \strokec2  \cf6 \strokec6 :=\cf2 \strokec2  \cf5 \strokec5 os\cf2 \strokec2 .\cf7 \strokec7 Getenv\cf2 \strokec2 (\cf8 \strokec8 "NGROK_AUTHTOKEN"\cf2 \strokec2 )\
+    \cf4 \strokec4 // ngrok\uc0\u12398 \u25509 \u32154 \u12434 \u34892 \u12358 \cf2 \strokec2 \
+    \cf5 \strokec5 l\cf2 \strokec2 , \cf5 \strokec5 err\cf2 \strokec2  \cf6 \strokec6 :=\cf2 \strokec2  \cf5 \strokec5 ngrok\cf2 \strokec2 .\cf7 \strokec7 Forward\cf2 \strokec2 (\
+        \cf5 \strokec5 context\cf2 \strokec2 .\cf7 \strokec7 Background\cf2 \strokec2 (),\
+        \cf5 \strokec5 ngrok\cf2 \strokec2 .\cf7 \strokec7 WithUpstream\cf2 \strokec2 (\cf8 \strokec8 "tcp://localhost:8080"\cf2 \strokec2 ),\
+        \cf5 \strokec5 ngrok\cf2 \strokec2 .\cf7 \strokec7 WithURL\cf2 \strokec2 (\cf8 \strokec8 "tcp://"\cf2 \strokec2 ),\
+    )\
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb1 \
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f1 \cf0 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 	\uc0\u21069 \u25552 \u12392 \u12375 \u12390 ngrok\u12398 agent\u12364 \u12452 \u12531 \u12473 \u12488 \u12540 \u12523 \u12375 \u12390 \u12354 \u12426 \u12289 \u29872 \u22659 \u12395 NGROK_AUTHTOKEN\u12364 \u12475 \u12483 \u12488 \u12373 \u12428 \u12390 \u12356 \u12427 \u24517 \u35201 \u12364 \u12354 \u12427 \u12290 }
