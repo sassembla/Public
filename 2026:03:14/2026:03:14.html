@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><link rel="stylesheet" type="text/less" href="../stylesheets/less/default.less"/><script type="text/javascript" src="../javascripts/less-1.3.0.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2685.4">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Hiragino Sans'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Sans'}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; background-color: #e6e6e6}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; background-color: #e6e6e6; min-height: 14.0px}
+    span.s1 {font: 22.0px Helvetica}
+    span.s2 {font: 12.0px Helvetica}
+    span.s3 {font: 12.0px 'Hiragino Sans'}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><span class="s1"><b>Codex.App</b></span><b>から</b><span class="s1"><b>Unity MCP</b></span><b>で開発→スクショにして見る、、あたりをやっていきたい</b><b></b></p>
+<p class="p2"><br></p>
+<p class="p3"><b>概要</b><b></b></p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span>Web</span>と同じような高速さで開発したいな～という気持ち。</p>
+<p class="p4"><span class="Apple-tab-span">	</span>assistant<span class="s3">自体は</span>6000.0.60f1<span class="s3">から</span>OK<span class="s3">なのだそうけれど、</span>6.3<span class="s3">で試す。</span></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><b>参考資料</b><b></b></p>
+<p class="p4"><span class="Apple-tab-span">	</span><a href="https://note.com/npaka/n/n19e5132847c6">https://note.com/npaka/n/n19e5132847c6</a></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span><a href="https://qiita.com/kumi0708/items/e4e5d864219d1693d0d2">https://qiita.com/kumi0708/items/e4e5d864219d1693d0d2</a></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p4"><span class="s3"><b>まず</b></span><b>Unity MCP</b><span class="s3"><b>を入れる</b><b></b></span></p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>参考資料を元に、まずは<span class="s2">Unity MCP</span>を起動している状態にする。</p>
+<p class="p2"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span>package manager<span class="s3">で</span>ai assistant<span class="s3">を入れれば、勝手に</span>running<span class="s3">状態になっているので</span></p>
+<p class="p4"><span class="Apple-tab-span">	</span>Edit &gt; Project Settings &gt; AI &gt; Unity MCP <span class="s3">で確認。</span></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p4"><b>Codex App</b><span class="s3"><b>から触れるように</b></span><b>Unity MCP</b><span class="s3"><b>の設定を</b></span><b>codex</b><span class="s3"><b>にセット</b><b></b></span></p>
+<p class="p4"><span class="Apple-tab-span">	</span>codex app<span class="s3">でも</span>codex cli<span class="s3">でも、</span>~/.codex/config.toml<span class="s3">があると思うので、それを開いて内容を編集する。</span></p>
+<p class="p2"><br></p>
+<p class="p5">personality = "pragmatic"</p>
+<p class="p6"><br></p>
+<p class="p5">[mcp_servers.unity-mcp]</p>
+<p class="p5">command = "/Users/USER_NAME/.unity/relay/relay_mac_arm64.app/Contents/MacOS/relay_mac_arm64"</p>
+<p class="p5">args = ["--mcp"]</p>
+<p class="p2"><b></b><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>ユーザー名のところには自分の<span class="s2">mac</span>の名前を入れる。</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p4"><b>Codex.app</b><span class="s3"><b>を再起動して</b></span><b>MCP</b><span class="s3"><b>の状態を見る</b><b></b></span></p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span>/mcp </span>を実行、こんな見た目になっていれば<span class="s2">OK</span></p>
+<p class="p4"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202026-03-14%2014.24.19.png" alt="スクリーンショット 2026-03-14 14.24.19.png"></p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="s2"><b>UnityEditor</b></span><b>で対象のプロジェクトの</b><span class="s2"><b>play</b></span><b>時のゲームビューのスクリーンショットを撮る、と云うのをやってみる</b><b></b></p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>依頼したらそのままできた。</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>コツは以下。</p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>「<span class="s2">UnityEditor</span>にスクリプトをコンパイルさせる際は、<span class="s2">UnityEditor</span>に<span class="s2">Mac</span>のフォーカスを移動してください」</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>出来上がったスクショがこれ</p>
+<p class="p4"><img src="%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202026-03-14%2014.28.48.png" alt="スクリーンショット 2026-03-14 14.28.48.png"></p>
+<p class="p2"><br></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="s3">これで、</span>codex<span class="s3">で</span></p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span>1. </span>変更を加えてスクショして見せて</p>
+<p class="p3"><span class="s2"><span class="Apple-tab-span">	</span></span>が叶うようになった。</p>
+</body>
+</html>
